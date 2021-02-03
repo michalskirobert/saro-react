@@ -1,0 +1,47 @@
+.btn {
+  outline: none;
+  border: none;
+  background-color: $crl-primary;
+  padding: 0.7rem 3.5rem 0.7rem;
+  color: $crl-basic;
+  border-radius: 1.5rem;
+  width: fit-content;
+  font-weight: bold;
+  transition: background-color 0.6s ease-out;
+  cursor: pointer;
+  &:hover {
+    background-color: $crl-light;
+    color: $crl-darkin;
+  }
+}
+
+.btn.join-us {
+  margin: 2rem auto;
+  margin-bottom: auto;
+  align-self: flex-end;
+}
+
+.btn.viewAll {
+  background-color: transparent;
+  color: $crl-special;
+  font-size: 1.4rem;
+  transition: filter ease-in 0.5s;
+  display: block;
+  margin: 0 auto;
+  &:hover {
+    filter: brightness(50%);
+  }
+}
+
+.btn.read-more {
+  display: inline;
+  background-color: transparent;
+  color: $crl-primary;
+  font-size: 1rem;
+  transition: filter ease-in 0.5s;
+  padding: 0;
+  margin: 0;
+  &:hover {
+    filter: brightness(50%);
+  }
+}

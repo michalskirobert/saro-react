@@ -1,0 +1,114 @@
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
+  padding-top: 100px;
+  min-height: calc(100vh - 201px);
+}
+
+section.home {
+  article.news {
+    display: flex;
+    flex-flow: column wrap;
+    .news__item {
+      margin: 1rem 0;
+      border-bottom: 2px solid $crl-line;
+
+      .news__box {
+        display: flex;
+        justify-content: center;
+        flex-flow: column wrap;
+        & img {
+          max-width: 400px;
+          float: left;
+          padding: 22px;
+        }
+      }
+    }
+  }
+}
+
+.events,
+.blog {
+  .event-slider,
+  .posts-slider {
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    .event,
+    .last-posts {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      background: #dadada;
+      min-width: 280px;
+      max-width: 300px;
+      margin: 10px 15px 10px;
+      padding-bottom: 25px;
+      & img {
+        width: 100%;
+      }
+      .event-box,
+      .last-posts-box {
+        padding: 1rem;
+        border-bottom: 2px solid $crl-line;
+        margin-bottom: 1rem;
+      }
+      .event-info,
+      .post-info {
+        padding: 0 1rem;
+        .event-control,
+        .post-control {
+          line-height: 25px;
+          border-bottom: 2px solid $crl-line;
+          text-align: center;
+          width: 200px;
+          margin: 0 auto;
+          padding: 8px 0;
+        }
+      }
+    }
+  }
+}
+
+.blog.author__info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  & > img {
+    width: 25px;
+    border-radius: 100%;
+    padding: 0 !important;
+  }
+}
+
+.blog.date {
+  i {
+    font-size: 0.8rem;
+    color: $crl-darkin;
+    font-style: italic;
+    font-weight: 600;
+  }
+}
+
+.blog.content {
+  margin: 1rem auto;
+  display: block;
+}
+
+@media only screen and (min-width: 1200px) {
+  .events,
+  .blog {
+    .event-slider,
+    .posts-slider {
+      overflow: hidden;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+}

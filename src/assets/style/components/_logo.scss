@@ -1,0 +1,15 @@
+.logo {
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  color: $crl-primary;
+  align-items: center;
+  position: relative;
+  z-index: 255;
+  p {
+    margin-left: 0.5rem;
+    color: $crl-basic;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}

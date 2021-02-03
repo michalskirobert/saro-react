@@ -1,0 +1,101 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  nav {
+    ul.nav-links {
+      li {
+        display: none;
+      }
+    }
+    ul.nav-links.active {
+      height: auto !important;
+      overflow: hidden;
+      margin-left: auto;
+      transition: all 0.5s ease;
+      position: fixed;
+      background-color: $crl-default;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      li {
+        display: flex;
+        position: relative;
+        top: 80px;
+        a {
+          color: $crl-primary;
+          font-size: 1.3rem;
+          text-transform: capitalize;
+          letter-spacing: 0.5rem;
+          display: block;
+          padding: 0.5rem 1rem;
+          transition: all 0.5s ease;
+          &:hover {
+            background: $crl-alert;
+            color: $crl-basic;
+            padding-left: 1.5rem;
+          }
+        }
+      }
+    }
+    .hamburger {
+      display: block;
+      position: relative;
+      color: $crl-basic;
+      font-size: 2rem;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      z-index: 255;
+      &:hover,
+      &:focus {
+        color: $crl-special;
+      }
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    nav {
+      .hamburger {
+        display: none;
+      }
+      ul.nav-links {
+        li {
+          display: inline-block;
+          padding: 0 20px;
+          & > a {
+            color: $crl-basic;
+            transition: color 0.5s ease;
+            &:hover {
+              color: $crl-primary;
+            }
+          }
+        }
+        a.sign-in {
+          color: $crl-basic;
+          background-color: $crl-primary;
+          padding: 0.5rem 1.5rem 0.5rem;
+          font-size: 1rem;
+          transition: background-color 0.5s ease-in;
+          &:hover {
+            background-color: $crl-special;
+            color: $crl-basic;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  header {
+    padding: 30px 10%;
+  }
+}

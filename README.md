@@ -1,3 +1,24 @@
+# SARO - about
+
+- Saro is a website for people who are currently studying Polish.
+- Design, Frontend && backend has been created by Robert Michalski.
+
+## Technologies:
+
+- React.js, Redux && React-router.
+- Firebase
+- SASS
+- Webpack
+
+### Features
+
+- Auth with log-in and sign-up
+- Own CMS (created by Robert Michalski with React.js/reudx && firebase)
+- Aviable to find an exchange language partner
+- Develop own profiles by users
+- Studying with lessons, blog(curiosities about Poland etc), games and own API
+- Report bugs
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

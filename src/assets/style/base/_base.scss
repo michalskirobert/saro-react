@@ -1,0 +1,93 @@
+@import "./colors";
+@import "./fonts";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+section {
+  padding: 0 2rem;
+}
+
+main {
+  section:nth-child(odd) {
+    background-color: $crl-secondary;
+  }
+}
+
+html:lang(en) {
+  body {
+    font-family: $family-en;
+    line-height: normal;
+  }
+}
+
+p,
+b,
+a,
+i,
+u,
+strong,
+h5,
+label {
+  font-size: 1rem;
+  color: $crl-default;
+}
+
+p,
+u {
+  font-weight: normal;
+}
+
+strong,
+label,
+h5 {
+  font-weight: 900;
+}
+
+i {
+  font-weight: 300;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin: 10px auto;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+h3,
+h4,
+h5 {
+  text-align: left;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+h4 {
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+a {
+  color: $crl-primary;
+  font-weight: bold;
+  transition: color 0.5s ease;
+  &:hover {
+    color: $crl-darkin;
+  }
+}
