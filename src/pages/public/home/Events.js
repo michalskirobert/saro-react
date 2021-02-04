@@ -22,7 +22,6 @@ const Event = () => {
           };
         });
         dispatch({ type: "FETCH_EVENTS", payload: data });
-        console.log(events);
         dispatch({ type: "STOP_LOADING" });
       });
     return () => {

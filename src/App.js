@@ -1,5 +1,6 @@
 // Components:
-import React from "react";
+import React, { useEffect } from "react";
+import { auth, firestore } from "./components/feature/firebase";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
@@ -7,6 +8,12 @@ import Footer from "./components/layout/footer/Footer";
 import { PrivateRoute } from "./router/PrivateRoute";
 import { SaroRoute } from "./router/SaroRoute";
 import History from "./router/history";
+import SignIn from "./components/feature/auth/login/Login";
+import SignUp from "./components/feature/auth/signup/SignUp";
+import {
+  authHeader,
+  saveAuthHeader,
+} from "./components/feature/auth/login/authHeader";
 
 // Pages
 
@@ -33,8 +40,32 @@ import AdminAddArticle from "./pages/special/add/AddArticle";
 import AdminAddContent from "./pages/special/add/AddContent";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
+import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.currentUser);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        firestore
+          .collection("users")
+          .doc(user.uid)
+          .onSnapshot((user) => {
+            if (user.exists) {
+              dispatch({ type: "SIGN_IN", payload: user.data() });
+            }
+          });
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  console.log(user);
+
   return (
     <Router>
       <History>
@@ -44,6 +75,8 @@ const App = () => {
           {/* Public Router */}
           <Route path="/" component={Home} exact />
           <Route path="/about" component={About} />
+          <Route path="/sign-in" component={SignIn} />
+          <Route path="/sign-up" component={SignUp} />
           <Route path="/lessons" component={Lessons} />
           <Route exact path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />

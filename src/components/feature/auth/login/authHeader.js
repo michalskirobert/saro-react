@@ -1,4 +1,4 @@
-export function authHeader() {
+export const authHeader = () => {
   let user = JSON.parse(localStorage.getItem("user"));
 
   if (user && user.token) {
@@ -6,4 +6,8 @@ export function authHeader() {
   } else {
     return {};
   }
-}
+};
+
+export const saveAuthHeader = (user) => {
+  return localStorage.setItem("user", JSON.stringify(user));
+};
