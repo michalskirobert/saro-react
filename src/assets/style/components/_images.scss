@@ -1,0 +1,15 @@
+.news-image {
+  display: inline;
+  max-width: 300px !important;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1000px) {
+  .news-image {
+    float: left;
+    max-width: 500px;
+    justify-content: flex-start;
+    margin: 0;
+  }
+}

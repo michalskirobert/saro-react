@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { firestore } from "./../../../components/feature/firestore";
+import { firestore } from "./../../../components/feature/firebase";
 
 const News = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,15 @@ const News = () => {
         <article className="news">
           {news
             .map((article) => {
-              const { title, author, avatarURL, date, content, id } = article;
+              const {
+                title,
+                author,
+                avatarURL,
+                date,
+                content,
+                id,
+                imageURL,
+              } = article;
               return (
                 <div className="news__item" key={id}>
                   <div className="news__box">
@@ -53,19 +61,18 @@ const News = () => {
                       <a href="#" style={{ marginRight: "10px" }}>
                         {author}
                       </a>
-                      <img
-                        src={avatarURL}
-                        alt={author}
-                        style={{ maxWidth: "300px" }}
-                      />
+                      <img src={avatarURL} alt={author} />
                     </div>
                     <div className="blog date">
                       <i>{date}</i>
                     </div>
-                    <div
-                      className="blog content"
-                      dangerouslySetInnerHTML={{ __html: content }}
-                    ></div>
+                    <div className="news-content">
+                      <img src={imageURL} alt={title} className="news-image" />
+                      <div
+                        className="blog content"
+                        dangerouslySetInnerHTML={{ __html: content }}
+                      ></div>
+                    </div>
                   </div>
                 </div>
               );

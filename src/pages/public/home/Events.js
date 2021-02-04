@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { firestore } from "./../../../components/feature/firestore";
+import { firestore } from "./../../../components/feature/firebase";
 
 const Event = () => {
   const dispatch = useDispatch();
