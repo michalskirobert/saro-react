@@ -7,14 +7,10 @@ import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
 import { PrivateRoute } from "./router/PrivateRoute";
 import { SaroRoute } from "./router/SaroRoute";
-import History from "./router/history";
+import Unlisten from "./router/Unlisten";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import {
-  authHeader,
-  saveAuthHeader,
-} from "./components/feature/auth/login/authHeader";
-
+import { authHeader } from "./components/feature/auth/login/authHeader";
 // Pages
 
 //Public
@@ -64,11 +60,13 @@ const App = () => {
     };
   }, []);
 
-  console.log(user);
+  useEffect(() => {
+    authHeader();
+  }, []);
 
   return (
     <Router>
-      <History>
+      <Unlisten>
         <Nav />
         <Sidebar />
         <Switch>
@@ -83,10 +81,9 @@ const App = () => {
           <Route path="/about/profile/:id" children={<Profile />} />
           <Route path="/lessons/:id/:title" children={<Lesson />} />
           <Route path="/blog/article/:id/:title" children={<SingleArticle />} />
-          <Route path="*" component={Error} />
           {/* User route */}
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={User} />
           <PrivateRoute path="/profile/progress" component={ProfileProgress} />
           <PrivateRoute path="/profile/settings" component={ProfileSettings} />
           <PrivateRoute path="/profile/:id" children={<User />} />
@@ -96,9 +93,10 @@ const App = () => {
           <SaroRoute path="/panel/add-content" component={AdminAddContent} />
           <SaroRoute path="/panel/edit" component={AdminEdit} />
           <SaroRoute path="/panel/translate" component={AdminTranslate} />
+          <Route path="*" component={Error} />
         </Switch>
         <Footer />
-      </History>
+      </Unlisten>
     </Router>
   );
 };

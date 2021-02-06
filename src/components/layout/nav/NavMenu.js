@@ -1,44 +1,74 @@
-import React, { useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useRef, useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const navData = [
+const nav = [
   {
     title: "Home",
     path: "/",
     classLink: "",
-    icon: "",
+    isLogged: true,
   },
   {
     title: "About",
     path: "/about",
     classLink: "",
-    icon: "",
+    isLogged: true,
   },
   {
     title: "Lessons",
     path: "/lessons",
     classLink: "",
-    icon: "",
+    isLogged: true,
   },
   {
     title: "Contact",
     path: "/contact",
     classLink: "",
-    icon: "",
+    isLogged: true,
   },
   {
     title: "Sign-up",
     path: "/sign-up",
-    classLink: "",
-    icon: "",
+    isLogged: false,
   },
 
   {
     title: "Sign-in",
     path: "/sign-in",
     classLink: "sign-in",
-    icon: "",
+    isLogged: false,
+  },
+];
+
+const panel = [
+  {
+    title: "My page",
+    path: "/profile",
+  },
+  {
+    title: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    title: "Messages",
+    path: "/user/messages",
+  },
+  {
+    title: "Friends",
+    path: "/user/friends",
+  },
+  {
+    title: "Notifications",
+    path: "/user/notifications",
+  },
+  {
+    title: "Settings",
+    path: "/settings",
+  },
+  {
+    title: "logout",
+    path: "/sign-in",
   },
 ];
 
@@ -46,6 +76,9 @@ const NavMenu = ({ classRemover }) => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const isNavOpen = useSelector((state) => state.isNavOpen);
+  const user = useSelector((state) => state.currentUser);
+  const dispatch = useDispatch();
+  const seeMore = useSelector((state) => state.default.seeMore);
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -56,19 +89,59 @@ const NavMenu = ({ classRemover }) => {
     }
   }, [isNavOpen]);
 
+  const loggedMap = nav.filter((item) => {
+    return item.isLogged !== false;
+  });
+
+  let navData = user.isLogged ? loggedMap : nav;
+
   return (
-    <ul className={`nav-links ${isNavOpen && "active"}`} ref={linksRef}>
-      {navData.map((link, index) => {
-        const { title, path, classLink, icon } = link;
-        return (
-          <li key={index} ref={linksContainerRef}>
-            <Link to={path} className={`${classRemover || classLink}`}>
-              {icon} {title}
-            </Link>
+    <div
+      className={`nav-container ${isNavOpen && "active"}`}
+      ref={linksContainerRef}
+    >
+      <ul className="nav-links" ref={linksRef}>
+        {navData.map((link, index) => {
+          const { title, path, classLink } = link;
+          return (
+            <li key={index}>
+              <Link to={path} className={`${classRemover || classLink}`}>
+                {title}
+              </Link>
+            </li>
+          );
+        })}
+        {user.isLogged && (
+          <li>
+            <button
+              onClick={() => dispatch({ type: "SEE_MORE" })}
+              className="btn nav-btn"
+            >
+              Profile
+            </button>
           </li>
-        );
-      })}
-    </ul>
+        )}
+      </ul>
+      {seeMore && (
+        <ul className="nav-links nav-links--user">
+          <li>
+            <img
+              src="https://via.placeholder.com/100px"
+              alt="profile"
+              className="profile-picture"
+            />
+          </li>
+          {panel.map((item, index) => {
+            const { title, path } = item;
+            return (
+              <li key={index}>
+                <Link to={path}>{title}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
 };
 

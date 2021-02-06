@@ -1,13 +1,18 @@
 export const authHeader = () => {
-  let user = JSON.parse(localStorage.getItem("user"));
-
-  if (user && user.token) {
-    return { Authorization: "Bearer " + user.token };
+  if (localStorage.getItem("user").isLogged === false) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ isLogged: false, profile: {} })
+    );
   } else {
-    return {};
+    JSON.parse(localStorage.getItem("user"));
   }
 };
 
 export const saveAuthHeader = (user) => {
-  return localStorage.setItem("user", JSON.stringify(user));
+  if (user.isLogged != false) {
+    localStorage.setItem("user", JSON.stringify(user));
+  } else {
+    localStorage.setItem("user", JSON.stringify([]));
+  }
 };

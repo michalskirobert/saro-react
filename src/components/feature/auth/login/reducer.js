@@ -1,20 +1,18 @@
-export const isLoggedReducer = (state = false, action) => {
-  switch (action.type) {
-    case "SIGN_IN":
-      return !state;
-    case "SIGN_UP":
-      return !state;
-    case "LOG_OUT":
-      return state;
-    default:
-      return false;
-  }
+const userState = {
+  isLogged: false,
 };
 
-export const currentUserReducer = (state = {}, action) => {
+export const currentUserReducer = (state = userState, action) => {
   switch (action.type) {
     case "SIGN_IN":
-      return action.payload;
+      return {
+        ...action.payload,
+        isLogged: true,
+      };
+    case "LOG_OUT":
+      return {
+        isLogged: false,
+      };
     default:
       return state;
   }

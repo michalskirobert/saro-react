@@ -18,7 +18,7 @@ const Nav = () => {
 
   useEffect(() => {
     if (location === "/") {
-      document.title = "Welcome to Saro! - home";
+      document.title = "Welcome to Saro! - Home";
       changeBackground.current.style.backgroundColor = "transparent";
       document.addEventListener("scroll", changeColor);
     } else {

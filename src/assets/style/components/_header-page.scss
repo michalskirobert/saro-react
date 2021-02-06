@@ -7,41 +7,46 @@ header {
   position: fixed;
   z-index: 2;
   nav {
-    ul.nav-links {
-      li {
+    .nav-container {
+      ul {
         display: none;
       }
     }
-    ul.nav-links.active {
-      height: auto !important;
+    div.nav-container.active {
+      height: 100% !important;
       overflow: hidden;
       margin-left: auto;
       transition: all 0.5s ease;
       position: fixed;
-      background-color: $crl-default;
+      background-color: #2d2b2a;
       top: 0;
       left: 0;
       right: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      li {
+      ul {
         display: flex;
-        position: relative;
-        top: 80px;
-        a {
-          color: $crl-primary;
-          font-size: 1.3rem;
-          text-transform: capitalize;
-          letter-spacing: 0.5rem;
-          display: block;
-          padding: 0.5rem 1rem;
-          transition: all 0.5s ease;
-          &:hover {
-            background: $crl-alert;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+        li {
+          display: flex;
+          position: relative;
+          top: 80px;
+          a,
+          button {
             color: $crl-basic;
-            padding-left: 1.5rem;
+            font-size: 1rem;
+            text-transform: capitalize;
+            display: block;
+            padding: 0.5rem 1rem;
+            transition: all 0.5s ease;
+            font-weight: bold;
+            &:hover {
+              background: $crl-alert;
+              color: $crl-basic;
+              padding-left: 1.5rem;
+            }
           }
         }
       }
@@ -66,16 +71,32 @@ header {
       .hamburger {
         display: none;
       }
-      ul.nav-links {
-        li {
-          display: inline-block;
-          padding: 0 20px;
-          & > a {
-            color: $crl-basic;
-            transition: color 0.5s ease;
-            &:hover {
-              color: $crl-primary;
+      .nav-container {
+        ul.nav-links {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          li {
+            display: inline-block;
+            padding: 0 20px;
+            & > a,
+            button {
+              color: $crl-basic;
+              transition: color 0.5s ease;
+              &:hover {
+                color: $crl-primary;
+              }
             }
+          }
+          &--user {
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            left: 78%;
+            background-color: $crl-default;
+            height: auto;
+            width: auto;
+            padding: 25px;
           }
         }
         a.sign-in {

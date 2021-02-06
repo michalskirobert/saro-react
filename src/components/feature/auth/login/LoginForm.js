@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { auth } from "./../../firebase";
+import { saveAuthHeader } from "./../../../feature/auth/login/authHeader";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  const signin = (email, password) => {
+  const signin = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
   const handleSubmit = async (e) => {
-    e.prevent.default();
+    e.preventDefault();
     if (email && password) {
       try {
         await signin(email, password);
+        saveAuthHeader({ isLogged: true });
         history.push("/dashboard");
       } catch (error) {
         console.log(error);
@@ -47,6 +49,7 @@ const LoginForm = () => {
           required
         />
       </div>
+
       <button>Sign-in</button>
     </form>
   );

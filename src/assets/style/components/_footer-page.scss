@@ -39,6 +39,9 @@ footer {
   padding: 30px 10%;
   width: 100%;
   background-color: #111;
+  .logo {
+    z-index: 1;
+  }
   .nav-links {
     display: flex;
     flex-flow: row wrap;
