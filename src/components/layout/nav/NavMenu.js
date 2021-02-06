@@ -115,9 +115,17 @@ const NavMenu = ({ classRemover }) => {
           <li>
             <button
               onClick={() => dispatch({ type: "SEE_MORE" })}
-              className="btn nav-btn"
+              className="btn profile-btn"
             >
-              Profile
+               <img
+              src="https://via.placeholder.com/40px"
+              alt="profile"
+              className="profile-picture profile-picture-nav"
+            />
+              Kacper
+               <span>▼</span>
+
+             
             </button>
           </li>
         )}
