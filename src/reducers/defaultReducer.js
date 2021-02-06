@@ -17,6 +17,11 @@ export const defaultReducer = (state = defaultState, action) => {
         ...state,
         seeMore: !state.seeMore,
       };
+    case "SEE_LESS":
+      return {
+        ...state,
+        seeMore: false,
+      };
     default:
       return state;
   }

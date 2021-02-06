@@ -14,7 +14,7 @@ const Login = () => {
   useEffect(() => {
     logout();
     dispatch({ type: "LOG_OUT" });
-    dispatch({ type: "SEE_MORE" });
+    dispatch({ type: "SEE_LESS" });
   }, []);
 
   return (
