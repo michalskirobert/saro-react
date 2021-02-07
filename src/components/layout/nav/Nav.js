@@ -4,7 +4,7 @@ import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 import { FaBars } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { navToggle } from "./../../../actions/navActions";
+import { navToggle } from "../../../_actions/nav.actions";
 
 const Nav = () => {
   const changeBackground = useRef(null);

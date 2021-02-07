@@ -1,0 +1,35 @@
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 50px;
+  width: 100%;
+  max-height: 250px;
+  padding: 1rem;
+  p {
+    color: $crl-basic;
+  }
+  .close {
+    font-size: 1rem;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: none;
+    transition: 0.5s color ease;
+    &:hover {
+      color: $crl-default;
+      background-color: transparent;
+    }
+  }
+}
+
+.alert.dangerous {
+  background-color: $crl-alert;
+}
+
+.alert.success {
+  background-color: $crl-positive;
+}

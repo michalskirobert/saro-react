@@ -5,12 +5,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
-import { PrivateRoute } from "./router/PrivateRoute";
-import { SaroRoute } from "./router/SaroRoute";
-import Unlisten from "./router/Unlisten";
+import { PrivateRoute } from "./_router/PrivateRoute";
+import { SaroRoute } from "./_router/SaroRoute";
+import Unlisten from "./_router/Unlisten";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import { authHeader } from "./components/feature/auth/login/authHeader";
+import { userConstants } from "./_constants/user.constants";
+
 // Pages
 
 //Public
@@ -36,11 +37,10 @@ import AdminAddArticle from "./pages/special/add/AddArticle";
 import AdminAddContent from "./pages/special/add/AddContent";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.currentUser);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -48,20 +48,21 @@ const App = () => {
         firestore
           .collection("users")
           .doc(user.uid)
-          .onSnapshot((user) => {
-            if (user.exists) {
-              dispatch({ type: "SIGN_IN", payload: user.data() });
+          .onSnapshot((currentUser) => {
+            if (currentUser.exists) {
+              dispatch({
+                type: userConstants.LOGIN_SUCCESS,
+                payload: currentUser.data(),
+              });
             }
           });
+      } else {
+        dispatch({ type: userConstants.LOGOUT });
       }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
-
-  useEffect(() => {
-    authHeader();
   }, []);
 
   return (

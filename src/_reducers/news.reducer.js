@@ -1,4 +1,10 @@
-export const homePageReducer = (state = {}, action) => {
+const initialState = {
+  newsData: [],
+  lastPosts: [],
+  isLoading: true,
+};
+
+export const newsReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_NEWS":
       return {
@@ -14,7 +20,7 @@ export const homePageReducer = (state = {}, action) => {
       return {
         ...state,
         lastPosts: action.payload,
-      }
+      };
     case "LOADING":
       return {
         ...state,

@@ -52,19 +52,19 @@ const panel = [
   },
   {
     title: "Messages",
-    path: "/user/messages",
+    path: "/profile/messages",
   },
   {
     title: "Friends",
-    path: "/user/friends",
+    path: "/profile/friends",
   },
   {
     title: "Notifications",
-    path: "/user/notifications",
+    path: "/profile/notifications",
   },
   {
     title: "Settings",
-    path: "/settings",
+    path: "/profile/settings",
   },
   {
     title: "logout",
@@ -72,7 +72,7 @@ const panel = [
   },
 ];
 
-const NavMenu = ({ classRemover }) => {
+const NavMenu = () => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const isNavOpen = useSelector((state) => state.isNavOpen);
@@ -105,7 +105,7 @@ const NavMenu = ({ classRemover }) => {
           const { title, path, classLink } = link;
           return (
             <li key={index}>
-              <Link to={path} className={`${classRemover || classLink}`}>
+              <Link to={path} className={`${classLink || "links"}`}>
                 {title}
               </Link>
             </li>

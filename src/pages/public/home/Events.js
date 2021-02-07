@@ -5,11 +5,10 @@ import { firestore } from "./../../../components/feature/firebase";
 
 const Event = () => {
   const dispatch = useDispatch();
-  const events = useSelector((state) => state.homePage.eventsData || []);
+  const events = useSelector((state) => state.homePage.eventsData);
   const isLoading = useSelector((state) => state.homePage.isLoading);
 
   useEffect(() => {
-    dispatch({ type: "LOADING" });
     const unsubscribe = firestore
       .collection("language")
       .doc("en")

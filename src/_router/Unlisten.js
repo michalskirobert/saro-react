@@ -9,7 +9,7 @@ function Unlisten({ history, children }) {
     const unlisten = history.listen(() => {
       window.scrollTo(0, 0);
       dispatch({ type: "CLOSE_NAV" });
-      dispatch({ type: "CLEAN_ALERTS" });
+      dispatch({ type: "ALERT_CLEAR" });
     });
     return () => {
       unlisten();

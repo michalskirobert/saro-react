@@ -1,12 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { auth } from "./../../../components/feature/firebase";
 
 const Dashboard = () => {
-  const user = useSelector((state) => state.currentUser);
   return (
     <section className="section dashboard">
       <h2>Welcome!</h2>
-      <p>{user.email}</p>
+      <img src={auth.currentUser.photoURL} alt={auth.currentUser.displayName} />
+      <p>{auth.currentUser.email}</p>
+      <p>{auth.currentUser.displayName}</p>
     </section>
   );
 };

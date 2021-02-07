@@ -1,0 +1,77 @@
+form.auth-form {
+  background: #fff;
+  padding: 2rem 2rem 1rem;
+  max-width: 400px;
+  margin: 10px auto 25px;
+  box-shadow: 0 0 1em #222;
+  border-radius: 2px;
+  h2 {
+    margin: 0 0 50px 0;
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+    color: darken(#e5e5e5, 50%);
+    border-bottom: solid 1px #e5e5e5;
+  }
+  .form-control {
+    margin: 0 0 3em 0;
+    position: relative;
+  }
+  input {
+    display: block;
+    width: 100%;
+    outline: none;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    font-size: 1.3rem;
+    padding: 0.8rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  input:focus {
+    background: #fff;
+  }
+  button {
+    background: $crl-primary;
+    box-shadow: 0 3px 0 0 darken($crl-basic, 10%);
+    border-radius: 2px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1.6em;
+    margin: 2em 0 0;
+    outline: none;
+    padding: 0.8em 2rem;
+    text-shadow: 0 1px #68b25b;
+    margin: 0 auto;
+    &:hover {
+      background: rgba(148, 175, 101, 1);
+      text-shadow: 0 1px 3px darken($crl-basic, 30%);
+    }
+  }
+  label {
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    color: #999;
+    font-size: 16px;
+    display: inline-block;
+    padding: 4px 10px;
+    font-weight: 400;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.5s ease;
+    &.floatLabel {
+      top: -11px;
+      background-color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+    }
+  }
+  .auth-control {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+  }
+}

@@ -5,7 +5,7 @@ import second from "./../../../assets/images/components/hero/christmas-hero.jpg"
 import third from "./../../../assets/images/components/hero/header-banner.jpg";
 import another from "./../../../assets/images/components/hero/dialogue.jpg";
 import { useSelector, useDispatch } from "react-redux";
-import { hero } from "./../../../actions/heroActions";
+import { hero } from "../../../_actions/hero.actions";
 
 const heroData = [
   {
