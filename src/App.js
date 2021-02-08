@@ -5,15 +5,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
-import { PrivateRoute } from "./router/PrivateRoute";
-import { SaroRoute } from "./router/SaroRoute";
-import History from "./router/history";
+import { PrivateRoute } from "./_router/PrivateRoute";
+import { SaroRoute } from "./_router/SaroRoute";
+import Unlisten from "./_router/Unlisten";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import {
-  authHeader,
-  saveAuthHeader,
-} from "./components/feature/auth/login/authHeader";
+import { userConstants } from "./_constants/user.constants";
 
 // Pages
 
@@ -40,11 +37,10 @@ import AdminAddArticle from "./pages/special/add/AddArticle";
 import AdminAddContent from "./pages/special/add/AddContent";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.currentUser);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -52,11 +48,16 @@ const App = () => {
         firestore
           .collection("users")
           .doc(user.uid)
-          .onSnapshot((user) => {
-            if (user.exists) {
-              dispatch({ type: "SIGN_IN", payload: user.data() });
+          .onSnapshot((currentUser) => {
+            if (currentUser.exists) {
+              dispatch({
+                type: userConstants.LOGIN_SUCCESS,
+                payload: currentUser.data(),
+              });
             }
           });
+      } else {
+        dispatch({ type: userConstants.LOGOUT });
       }
     });
     return () => {
@@ -64,11 +65,9 @@ const App = () => {
     };
   }, []);
 
-  console.log(user);
-
   return (
     <Router>
-      <History>
+      <Unlisten>
         <Nav />
         <Sidebar />
         <Switch>
@@ -83,10 +82,9 @@ const App = () => {
           <Route path="/about/profile/:id" children={<Profile />} />
           <Route path="/lessons/:id/:title" children={<Lesson />} />
           <Route path="/blog/article/:id/:title" children={<SingleArticle />} />
-          <Route path="*" component={Error} />
           {/* User route */}
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={User} />
           <PrivateRoute path="/profile/progress" component={ProfileProgress} />
           <PrivateRoute path="/profile/settings" component={ProfileSettings} />
           <PrivateRoute path="/profile/:id" children={<User />} />
@@ -96,9 +94,10 @@ const App = () => {
           <SaroRoute path="/panel/add-content" component={AdminAddContent} />
           <SaroRoute path="/panel/edit" component={AdminEdit} />
           <SaroRoute path="/panel/translate" component={AdminTranslate} />
+          <Route path="*" component={Error} />
         </Switch>
         <Footer />
-      </History>
+      </Unlisten>
     </Router>
   );
 };

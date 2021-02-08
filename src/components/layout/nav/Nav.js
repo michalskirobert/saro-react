@@ -4,7 +4,7 @@ import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 import { FaBars } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { navToggle } from "./../../../actions/navActions";
+import { navToggle } from "../../../_actions/nav.actions";
 
 const Nav = () => {
   const changeBackground = useRef(null);
@@ -18,7 +18,7 @@ const Nav = () => {
 
   useEffect(() => {
     if (location === "/") {
-      document.title = "Welcome to Saro! - home";
+      document.title = "Welcome to Saro! - Home";
       changeBackground.current.style.backgroundColor = "transparent";
       document.addEventListener("scroll", changeColor);
     } else {

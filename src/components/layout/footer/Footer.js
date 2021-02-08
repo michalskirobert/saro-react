@@ -14,7 +14,6 @@ const Footer = () => {
       </div>
       <footer>
         <Logo />
-        <NavMenu classRemover="link" />
       </footer>
     </>
   );
