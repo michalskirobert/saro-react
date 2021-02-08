@@ -33,14 +33,15 @@ section.home {
 .section.contact-page {
   padding-left: 0;
   h1 {
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     color: #1a1a1a;
   }
   .contact-page-content {
     display: flex;
     justify-content: center;
     padding-left: 80px;
+    flex-wrap: wrap;
     form {
       width: 40%;
       margin-right: 30px;
@@ -52,7 +53,7 @@ section.home {
         input {
           width: 100%;
           border: none;
-          border-bottom: 1px solid rgb(196, 196, 196);
+          border-bottom: 1px solid rgb(223, 223, 223);
           outline: none;
           color: #5e5e5e;
         }
@@ -76,6 +77,8 @@ section.home {
     .contact-page-text {
       width: 48%;
       height: 100%;
+      min-width: 300px;
+      max-width: 600px;
       max-height: 350px;
 
       p {
