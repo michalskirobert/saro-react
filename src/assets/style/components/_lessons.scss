@@ -33,6 +33,7 @@
         min-height: 200px;
         margin: 0 auto;
         margin-bottom: 40px;
+       
 
 
         .img-container{
@@ -40,6 +41,9 @@
             height: 100px;
             background-color: #fff;
             border-radius: 50%;
+            background-image: url(https://via.placeholder.com/50px);
+            background-repeat: no-repeat;
+            background-size: contain;
         }
 
         .name{
@@ -86,6 +90,10 @@
             align-items: center;
             justify-content: center;
             background-color: $crl-primary;
+            background-image: url(https://via.placeholder.com/50px);
+            background-repeat: no-repeat;
+            background-size: contain;
+
             max-width: 280px;
             height: 280px;
             margin: 10px auto;
