@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
-import { saveAuthHeader } from "./../../../feature/auth/login/authHeader";
+import { userConstants } from "./../../../../_constants/user.constants";
+import { alertConstants } from "./../../../../_constants/alert.constants";
+import Alert from "./../../../shared/alerts";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const alert = useSelector((state) => state.alert.alert);
 
   const signin = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
@@ -14,43 +19,49 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email && password) {
+    dispatch({ type: "ALERT_CLEAR" });
+    if (emailRef.current.value && passwordRef.current.value) {
       try {
-        await signin(email, password);
-        saveAuthHeader({ isLogged: true });
+        dispatch({ type: userConstants.LOGIN_SUCCESS });
+        await signin(emailRef.current.value, passwordRef.current.value);
         history.push("/dashboard");
       } catch (error) {
-        console.log(error);
+        dispatch({ type: alertConstants.ERROR, payload: error.message });
       }
     } else {
-      console.log("type some value");
+      return dispatch({
+        type: "ALERT_ERROR",
+        payload: "We need your email and password",
+      });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit}>
+      {alert && <Alert />}
+      <h2>Sign-in</h2>
       <div className="form-control">
-        <label htmlFor="email">Email :</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <label htmlFor="email" className="floatLabel">
+          Email :
+        </label>
+        <input type="email" id="email" ref={emailRef} required />
       </div>
       <div className="form-control">
-        <label htmlFor="password">Password :</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <label htmlFor="password" className="floatLabel">
+          Password :
+        </label>
+        <input type="password" id="password" ref={passwordRef} required />
       </div>
-
-      <button>Sign-in</button>
+      <button type="submit">Sign-in</button>
+      <div className="auth-control">
+        <p style={{ display: "inline" }}>Don't have an account?</p>
+        <Link to="/sign-up"> Create</Link>
+        <p style={{ display: "inline" }}>
+          {" "}
+          or did you forget your password?
+        </p>{" "}
+        <Link to="/reset">Reset your password</Link>
+      </div>
     </form>
   );
 };

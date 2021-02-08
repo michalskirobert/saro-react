@@ -6,10 +6,9 @@ const News = () => {
   const dispatch = useDispatch();
   const isRead = useSelector((state) => state.default.readMore);
   const isLoading = useSelector((state) => state.homePage.isLoading);
-  const news = useSelector((state) => state.homePage.newsData || []);
+  const news = useSelector((state) => state.homePage.newsData);
 
   useEffect(() => {
-    dispatch({ type: "LOADING" });
     const unsubscribe = firestore
       .collection("language")
       .doc("en")

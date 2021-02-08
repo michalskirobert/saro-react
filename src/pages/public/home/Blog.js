@@ -5,7 +5,7 @@ import { firestore } from "./../../../components/feature/firebase";
 
 const Blog = () => {
   const dispatch = useDispatch();
-  const lastPosts = useSelector((state) => state.homePage.lastPosts || []);
+  const lastPosts = useSelector((state) => state.homePage.lastPosts);
   useEffect(() => {
     const unsubscribe = firestore
       .collection("language")
@@ -14,6 +14,7 @@ const Blog = () => {
       .onSnapshot((doc) => {
         let data = doc.docs.map((item) => item.data());
         dispatch({ type: "FETCH_POSTS", payload: data });
+        dispatch({ type: "STOP_LOADING" });
       });
     return () => {
       unsubscribe();

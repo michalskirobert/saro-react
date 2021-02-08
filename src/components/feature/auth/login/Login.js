@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
 import { auth } from "./../../firebase";
-import { saveAuthHeader } from "./authHeader";
+import { userConstants } from "./../../../../_constants/user.constants";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,17 +13,13 @@ const Login = () => {
 
   useEffect(() => {
     logout();
-    dispatch({ type: "LOG_OUT" });
+    dispatch({ type: userConstants.LOGOUT });
     dispatch({ type: "SEE_LESS" });
   }, []);
 
   return (
     <section className="section login">
-      <h1>Sign-in</h1>
       <LoginForm />
-      <div className="auth-control">
-        <p>Do you have an account?</p>
-      </div>
     </section>
   );
 };
