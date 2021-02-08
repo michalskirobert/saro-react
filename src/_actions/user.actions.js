@@ -6,17 +6,17 @@ const signUp = () => {
   };
 };
 
-const signIn = (user) => {
+const signIn = (data, user) => {
   return {
     type: userConstants.LOGIN_SUCCESS,
-    payload: user,
+    payload: data,
+    user: user,
   };
 };
 
-const request = (user) => {
+const request = () => {
   return {
     type: userConstants.LOGIN_REQUEST,
-    payload: user,
   };
 };
 

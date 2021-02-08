@@ -22,17 +22,16 @@ const LoginForm = () => {
     dispatch(alertActions.clear());
     if (emailRef.current.value && passwordRef.current.value) {
       try {
-        dispatch(userActions.checkSignIn());
+        dispatch(userActions.request());
         await signin(emailRef.current.value, passwordRef.current.value);
         history.push("/dashboard");
       } catch (error) {
         dispatch(alertActions.error(error.message));
       }
     } else {
-      return dispatch({
-        type: "ALERT_ERROR",
-        payload: "We need your email and password",
-      });
+      return dispatch(
+        alertActions.error("Please type email and password to sign-in")
+      );
     }
   };
 

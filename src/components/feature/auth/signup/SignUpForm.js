@@ -69,13 +69,7 @@ const SignUpForm = () => {
         <label htmlFor="email" className="floatLabel">
           Email :
         </label>
-        <input
-          type="email"
-          id="email"
-          value={auth.currentUser.email}
-          ref={emailRef}
-          required
-        />
+        <input type="email" id="email" ref={emailRef} required />
       </div>
       <div className="form-control">
         <label htmlFor="password" className="floatLabel">

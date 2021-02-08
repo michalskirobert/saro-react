@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./../../../components/feature/firebase";
+import navActions from "./../../../_actions/nav.actions";
 
 const nav = [
   {
@@ -79,7 +80,7 @@ const NavMenu = () => {
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const user = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
-  const seeMore = useSelector((state) => state.default.seeMore);
+  const seeMore = useSelector((state) => state.default.profileToggle);
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -117,7 +118,7 @@ const NavMenu = () => {
         {user.isLogged && (
           <li>
             <button
-              onClick={() => dispatch({ type: "SEE_MORE" })}
+              onClick={() => dispatch(navActions.profileToggle())}
               className="btn profile-btn"
             >
               <img

@@ -2,19 +2,22 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
 import { auth } from "./../../firebase";
-import { userConstants } from "./../../../../_constants/user.constants";
+import userActions from "./../../../../_actions/user.actions";
 
 const Login = () => {
   const dispatch = useDispatch();
 
   const logout = async () => {
-    return await auth.signOut();
+    try {
+      dispatch(userActions.logout());
+      await auth.signOut();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     logout();
-    dispatch({ type: userConstants.LOGOUT });
-    dispatch({ type: "SEE_LESS" });
   }, []);
 
   return (

@@ -50,9 +50,7 @@ const App = () => {
           .collection("users")
           .doc(user.uid)
           .onSnapshot((currentUser) => {
-            if (currentUser.exists) {
-              dispatch(userActions.signIn(currentUser.data()));
-            }
+            dispatch(userActions.signIn(currentUser.data(), user.providerData));
           });
       } else {
         dispatch(userActions.logout());

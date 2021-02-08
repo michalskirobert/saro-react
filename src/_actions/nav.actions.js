@@ -1,11 +1,32 @@
-export const navToggle = () => {
+const navToggle = () => {
   return {
     type: "NAV_TOGGLE",
   };
 };
 
-export const logout = () => {
+const closeNav = () => {
   return {
-    type: "LOG_OUT",
+    type: "CLOSE_NAV",
   };
 };
+
+const profileToggle = () => {
+  return {
+    type: "NAV_PROFILE_TOGGLE",
+  };
+};
+
+const closeProfile = () => {
+  return {
+    type: "NAV_CLOSE_PROFILE",
+  };
+};
+
+const navActions = {
+  navToggle,
+  closeNav,
+  profileToggle,
+  closeProfile,
+};
+
+export default navActions;

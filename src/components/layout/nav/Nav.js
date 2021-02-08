@@ -4,7 +4,7 @@ import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 import { FaBars } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { navToggle } from "../../../_actions/nav.actions";
+import navActions from "../../../_actions/nav.actions";
 
 const Nav = () => {
   const changeBackground = useRef(null);
@@ -35,7 +35,10 @@ const Nav = () => {
     <header ref={changeBackground}>
       <Logo />
       <nav>
-        <button className="hamburger" onClick={() => dispatch(navToggle())}>
+        <button
+          className="hamburger"
+          onClick={() => dispatch(navActions.navToggle())}
+        >
           <FaBars />
         </button>
         <NavMenu />

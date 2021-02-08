@@ -22,8 +22,17 @@ export const currentUserReducer = (state = userState, action) => {
       };
     case userConstants.LOGIN_SUCCESS:
       const data = action.payload;
+      const user = action.user;
       return {
-        ...data,
+        uid: user.uid,
+        username: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        hobbies: data.hobbies,
+        firstName: data.lastName,
+        nativeLang: data.nativeLang,
+        studyingLang: data.studyingLang,
+        about: data.about,
         isLogged: true,
       };
     case userConstants.REGISTER_SUCCESS:
@@ -32,9 +41,7 @@ export const currentUserReducer = (state = userState, action) => {
         isLogged: true,
       };
     case userConstants.LOGOUT:
-      return {
-        isLogged: false,
-      };
+      return userState;
     case userConstants.DELETE_SUCCESS:
       return {
         isLogged: false,

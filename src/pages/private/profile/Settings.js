@@ -41,7 +41,6 @@ const Settings = () => {
     let promises = [];
 
     e.preventDefault();
-    dispatch({ type: "LOADING" });
     if (hobbiesRef.current.value !== currentUser.hobbies) {
       promises.push(updateHobbies(hobbiesRef.current.value));
     }

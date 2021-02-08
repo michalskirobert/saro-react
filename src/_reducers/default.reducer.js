@@ -2,25 +2,36 @@ const defaultState = {
   readMore: false,
   isRead: false,
   isLoading: true,
-  seeMore: false,
+  viewMore: false,
+  profileToggle: false,
 };
 
 export const defaultReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "READ_MORE":
+    case "BLOG_READ_MORE":
       return {
         ...state,
         readMore: !state.readMore,
       };
-    case "SEE_MORE":
+    case "BLOG_SEE_MORE":
       return {
         ...state,
         seeMore: !state.seeMore,
       };
-    case "SEE_LESS":
+    case "BLOG_VIEW_LESS":
       return {
         ...state,
         seeMore: false,
+      };
+    case "NAV_PROFILE_TOGGLE":
+      return {
+        ...state,
+        profileToggle: !state.profileToggle,
+      };
+    case "NAV_CLOSE_PROFILE":
+      return {
+        ...state,
+        profileToggle: false,
       };
     default:
       return state;
