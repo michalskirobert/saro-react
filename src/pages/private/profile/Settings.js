@@ -54,6 +54,7 @@ const Settings = () => {
     if (studyingRef.current.value !== currentUser.studyingLang) {
       promises.push(updateLang(studyingRef.current.value));
     }
+
     Promise.all(promises)
       .then(() => {
         history.push("/settings");
@@ -78,6 +79,12 @@ const Settings = () => {
     if (usernameRef.current.value !== currentUser.email) {
       promises.push(usernameRef.current.value);
     }
+    firestore
+      .collection("users")
+      .doc(currentUser.uid)
+      .update({
+        ...currentUser,
+      });
   };
 
   const removeAccount = async () => {
@@ -112,19 +119,17 @@ const Settings = () => {
             <label htmlFor="native" className="floatLabel">
               Mother language :{" "}
             </label>
-            <select
-              onChange={(e) => console.log(e.target.value)}
-              id="native"
-            ></select>
+            <select ref={nativeRef} id="native">
+              <option value="english">English</option>
+            </select>
           </div>
           <div className="form-control">
             <label htmlFor="studying" className="floatLabel">
               Studying language :{" "}
             </label>
-            <select
-              onChange={(e) => console.log(e.target.value)}
-              id="studying"
-            ></select>
+            <select ref={studyingRef} id="studying">
+              <option value="english">English</option>
+            </select>
           </div>
           <button>Update</button>
         </form>

@@ -1,11 +1,10 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { auth } from "./../../firebase";
-import { userConstants } from "./../../../../_constants/user.constants";
-import { alertConstants } from "./../../../../_constants/alert.constants";
+import { auth, firestore } from "./../../firebase";
+import userActions from "./../../../../_actions/user.actions";
+import alertActions from "./../../../../_actions/alert.actions";
 import Alert from "./../../../shared/alerts";
-import { alertActions } from "./.../../../../../../_actions";
 
 const SignUpForm = () => {
   const emailRef = useRef(null);
@@ -14,37 +13,69 @@ const SignUpForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const alert = useSelector((state) => state.alert.alert);
+
   const signup = async (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(alertActions.clear());
     if (!emailRef.current.value) {
-      dispatch({ type: alertConstants.ERROR, payload: "Please type an email" });
+      dispatch(alertActions.error("Please type an email"));
     } else if (!passwordRef.current.value) {
-      dispatch({ type: alertConstants.ERROR, payload: "Please type an email" });
+      dispatch(alertActions.error("Please type your password"));
     } else if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      console.log("password need to be same with conf-password");
+      dispatch(
+        alertActions.error(
+          "Your confirming password is different with the current password"
+        )
+      );
     } else {
-      try {
-        await signup(emailRef.current.value, passwordRef.current.value);
-        dispatch({ type: userConstants.REGISTER_SUCCESS });
-        history.push("/profile/settings");
-      } catch (error) {
-        console.log(error);
-      }
+      signup(emailRef.current.value, passwordRef.current.value).then((req) => {
+        firestore
+          .collection("users")
+          .doc(req.user.uid)
+          .set({
+            uid: req.user.uid,
+            username: req.user.displayName,
+            email: req.user.email,
+            hobbies: "",
+            firstName: "",
+            lastName: "",
+            nativeLang: "",
+            studyingLang: "",
+            about: "",
+            createdAccount: new Date(),
+            lastLogin: new Date(),
+          })
+          .catch((error) => {
+            dispatch(alertActions.error(error.message));
+          })
+          .finally(() => {
+            dispatch(userActions.signUp());
+            history.push("/profile/settings");
+          });
+      });
     }
   };
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
+      {alert && <Alert />}
       <h2>Sign-up</h2>
       <div className="form-control">
         <label htmlFor="email" className="floatLabel">
           Email :
         </label>
-        <input type="email" id="email" ref={emailRef} required />
+        <input
+          type="email"
+          id="email"
+          value={auth.currentUser.email}
+          ref={emailRef}
+          required
+        />
       </div>
       <div className="form-control">
         <label htmlFor="password" className="floatLabel">

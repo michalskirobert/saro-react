@@ -1,26 +1,51 @@
-import { userConstants } from "../constants/user.constants";
+import { userConstants } from "./../_constants/user.constants";
 
-export const signUp = () => {
+const signUp = () => {
   return {
     type: userConstants.REGISTER_REQUEST,
   };
 };
 
-export const signIn = (user) => {
+const signIn = (user) => {
+  return {
+    type: userConstants.LOGIN_SUCCESS,
+    payload: user,
+  };
+};
+
+const request = (user) => {
   return {
     type: userConstants.LOGIN_REQUEST,
     payload: user,
   };
 };
 
-export const logout = () => {
+const failure = (error) => {
+  return {
+    type: userConstants.LOGIN_FAILURE,
+    payload: error,
+  };
+};
+
+const logout = () => {
   return {
     type: userConstants.LOGOUT,
   };
 };
 
-export const removeUser = () => {
+const removeUser = () => {
   return {
     type: userConstants.DELETE_REQUEST,
   };
 };
+
+const userActions = {
+  signIn,
+  signUp,
+  logout,
+  removeUser,
+  failure,
+  request,
+};
+
+export default userActions;

@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { auth } from "./../../../components/feature/firebase";
 
 const nav = [
   {
@@ -93,6 +94,8 @@ const NavMenu = () => {
     return item.isLogged !== false;
   });
 
+  const emptyPicture = "https://via.placeholder.com/50px";
+
   let navData = user.isLogged ? loggedMap : nav;
 
   return (
@@ -117,15 +120,15 @@ const NavMenu = () => {
               onClick={() => dispatch({ type: "SEE_MORE" })}
               className="btn profile-btn"
             >
-               <img
-              src="https://via.placeholder.com/40px"
-              alt="profile"
-              className="profile-picture profile-picture-nav"
-            />
-              Kacper
-               <span>▼</span>
-
-             
+              <img
+                src={
+                  auth.currentUser ? auth.currentUser.photoURL : emptyPicture
+                }
+                alt="profile"
+                className="profile-picture profile-picture-nav"
+              />
+              {auth.currentUser ? auth.currentUser.displayName : "uknown"}
+              <span>▼</span>
             </button>
           </li>
         )}
@@ -134,7 +137,7 @@ const NavMenu = () => {
         <ul className="nav-links nav-links--user">
           <li>
             <img
-              src="https://via.placeholder.com/100px"
+              src={auth.currentUser ? auth.currentUser.photoURL : emptyPicture}
               alt="profile"
               className="profile-picture"
             />

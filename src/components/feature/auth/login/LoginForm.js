@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
-import { userConstants } from "./../../../../_constants/user.constants";
-import { alertConstants } from "./../../../../_constants/alert.constants";
+import userActions from "./../../../../_actions/user.actions";
+import alertActions from "./../../../../_actions/alert.actions";
 import Alert from "./../../../shared/alerts";
 
 const LoginForm = () => {
@@ -19,14 +19,14 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({ type: "ALERT_CLEAR" });
+    dispatch(alertActions.clear());
     if (emailRef.current.value && passwordRef.current.value) {
       try {
-        dispatch({ type: userConstants.LOGIN_SUCCESS });
+        dispatch(userActions.checkSignIn());
         await signin(emailRef.current.value, passwordRef.current.value);
         history.push("/dashboard");
       } catch (error) {
-        dispatch({ type: alertConstants.ERROR, payload: error.message });
+        dispatch(alertActions.error(error.message));
       }
     } else {
       return dispatch({

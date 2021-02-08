@@ -11,6 +11,7 @@ import Unlisten from "./_router/Unlisten";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { userConstants } from "./_constants/user.constants";
+import userActions from "./_actions/user.actions";
 
 // Pages
 
@@ -50,14 +51,11 @@ const App = () => {
           .doc(user.uid)
           .onSnapshot((currentUser) => {
             if (currentUser.exists) {
-              dispatch({
-                type: userConstants.LOGIN_SUCCESS,
-                payload: currentUser.data(),
-              });
+              dispatch(userActions.signIn(currentUser.data()));
             }
           });
       } else {
-        dispatch({ type: userConstants.LOGOUT });
+        dispatch(userActions.logout());
       }
     });
     return () => {
