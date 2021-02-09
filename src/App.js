@@ -10,7 +10,6 @@ import { SaroRoute } from "./_router/SaroRoute";
 import Unlisten from "./_router/Unlisten";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import { userConstants } from "./_constants/user.constants";
 import userActions from "./_actions/user.actions";
 
 // Pages
@@ -50,7 +49,7 @@ const App = () => {
           .collection("users")
           .doc(user.uid)
           .onSnapshot((currentUser) => {
-            dispatch(userActions.signIn(currentUser.data(), user.providerData));
+            dispatch(userActions.signIn(currentUser.data()));
           });
       } else {
         dispatch(userActions.logout());

@@ -1,72 +1,118 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "./../../../components/feature/firebase";
+import Alert from "./../../../components/shared/alerts";
+import alertActions from "./../../../_actions/alert.actions";
+import userActions from "./../../../_actions/user.actions";
 
 const Settings = () => {
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentUser = auth.currentUser;
+  const profile = useSelector((state) => state.currentUser);
+  const alert = useSelector((state) => state.alert.alert);
   const history = useHistory();
   const dispatch = useDispatch();
-  const usernameRef = useRef(null);
-  const hobbiesRef = useRef(null);
-  const aboutRef = useRef(null);
-  const nativeRef = useRef(null);
-  const studyingRef = useRef(null);
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [username, setUsername] = useState("");
+  const [hobbies, setHobbies] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [about, setAbout] = useState("");
+  const [nativeLang, setNativeLang] = useState("African");
+  const [studyingLang, setStudyingLang] = useState("African");
 
   const updateHobbies = (hobbies) => {
-    return firestore.collection("users").doc(currentUser.id).update({
+    return firestore.collection("users").doc(currentUser.uid).update({
       hobbies: hobbies,
     });
   };
 
   const updateAbout = (about) => {
-    return firestore.collection("users").doc(currentUser.id).update({
-      aboutMe: about,
+    return firestore.collection("users").doc(currentUser.uid).update({
+      about: about,
     });
   };
 
   const updateNative = (lang) => {
-    return firestore.collection("users").doc(currentUser.id).update({
+    return firestore.collection("users").doc(currentUser.uid).update({
       nativeLang: lang,
     });
   };
 
   const updateLang = (lang) => {
-    return firestore.collection("users").doc(currentUser.id).update({
+    return firestore.collection("users").doc(currentUser.uid).update({
       studyingLang: lang,
+    });
+  };
+
+  const updateFirstName = (name) => {
+    return firestore.collection("users").doc(currentUser.uid).update({
+      firstName: name,
+    });
+  };
+
+  const updateSurname = (name) => {
+    return firestore.collection("users").doc(currentUser.uid).update({
+      name,
+    });
+  };
+
+  const updateUsername = async (username) => {
+    return auth.currentUser
+      .updateProfile({
+        displayName: username,
+      })
+      .then(() => {
+        firestore.collection("users").doc(auth.currentUser.uid).update({
+          username: username,
+        });
+      });
+  };
+
+  const updatePassword = (password) => {
+    return auth.currentUser.updatePassword(password);
+  };
+
+  const updateEmail = async (email) => {
+    return auth.currentUser.updateEmail(email).then(() => {
+      firestore.collection("users").doc(auth.currentUser.uid).update({
+        email: email,
+      });
     });
   };
 
   const handleSubmit = (e) => {
     let promises = [];
-
     e.preventDefault();
-    if (hobbiesRef.current.value !== currentUser.hobbies) {
-      promises.push(updateHobbies(hobbiesRef.current.value));
+    dispatch({ type: "LOADING" });
+
+    if (firstName !== profile.firstName) {
+      promises.push(updateFirstName(firstName));
     }
-    if (aboutRef.current.value !== currentUser.about) {
-      promises.push(updateAbout(aboutRef.current.value));
+    if (surname !== profile.surname) {
+      promises.push(updateSurname(surname));
     }
-    if (nativeRef.current.value !== currentUser.nativeLang) {
-      promises.push(updateNative(nativeRef.current.value));
+    if (hobbies !== profile.hobbies) {
+      promises.push(updateHobbies(hobbies));
     }
-    if (studyingRef.current.value !== currentUser.studyingLang) {
-      promises.push(updateLang(studyingRef.current.value));
+    if (about !== profile.about) {
+      promises.push(updateAbout(about));
+    }
+    if (nativeLang !== profile.nativeLang) {
+      promises.push(updateNative(nativeLang));
+    }
+    if (studyingLang !== profile.studyingLang) {
+      promises.push(updateLang(studyingLang));
     }
 
     Promise.all(promises)
       .then(() => {
-        history.push("/settings");
-        dispatch({
-          type: "ALERT_SUCCESS",
-          payload: "Profile has been updated",
-        });
+        dispatch(alertActions.success("Profile has been updated"));
       })
       .catch(() => {
-        dispatch({
-          type: "ALERT_ERROR",
-          payload: "Failed to update an account",
-        });
+        dispatch(alertActions.error("Profile could not be updated"));
       })
       .finally(() => {
         dispatch({ type: "STOP_LOADING" });
@@ -75,58 +121,111 @@ const Settings = () => {
   const updateSettings = (e) => {
     e.preventDefault();
     let promises = [];
-    if (usernameRef.current.value !== currentUser.email) {
-      promises.push(usernameRef.current.value);
+    dispatch({ type: "LOADING" });
+
+    if (username !== currentUser.displayName) {
+      promises.push(updateUsername(username));
     }
-    firestore
-      .collection("users")
-      .doc(currentUser.uid)
-      .update({
-        ...currentUser,
+    if (password !== confPassword) {
+      dispatch(alertActions.error("Passwords have to be same"));
+    }
+    if (email !== currentUser.email) {
+      promises.push(updateEmail(email));
+    }
+    if (password) {
+      promises.push(updatePassword(password));
+    }
+    Promise.all(promises)
+      .then(() => {
+        dispatch(alertActions.success("Profile has been updated"));
+      })
+      .catch(() => {
+        dispatch(alertActions.error("Profile could not be updated"));
+      })
+      .finally(() => {
+        dispatch({ type: "STOP_LOADING" });
       });
   };
 
   const removeAccount = async () => {
     try {
-      await firestore.collection("users").doc(auth.currentUser.uid).delete();
+      await firestore.collection("users").doc(currentUser.uid).delete();
       await auth.currentUser.delete();
-      dispatch({ type: "LOG_OUT" });
+      dispatch(userActions.logout());
       history.push("/sign-up");
+      dispatch(alertActions.success("Your profile has been removed"));
     } catch (error) {
-      console.log(error);
+      dispatch(alertActions.error("Something went wrong"));
     }
   };
 
   return (
     <main>
       <section className="section profile-update">
+        {alert && <Alert />}
         <h1>Profile update</h1>
         <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-control">
+            <label htmlFor="firstName" className="floatLabel">
+              First name :{" "}
+            </label>
+            <input
+              type="text"
+              value={firstName}
+              placeholder={profile.firstName || "Your firstname"}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="displayName" className="floatLabel">
+              Surname :{" "}
+            </label>
+            <input
+              type="text"
+              value={surname}
+              placeholder={profile.surname || "Your surname"}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </div>
           <div className="form-control">
             <label htmlFor="displayName" className="floatLabel">
               Hobbies :{" "}
             </label>
-            <input type="text" ref={hobbiesRef} required />
+            <input
+              type="text"
+              value={hobbies}
+              placeholder={profile.hobbies || "Your hobbies"}
+              onChange={(e) => setHobbies(e.target.value)}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="about" className="floatLabel">
               About me :{" "}
             </label>
-            <input type="text" id="about" required />
+            <textarea
+              type="text"
+              id="about"
+              value={about}
+              placeholder={profile.about || "About you"}
+              onChange={(e) => setAbout(e.target.value)}
+            ></textarea>
           </div>
-          <div className="form-control">
-            <label htmlFor="native" className="floatLabel">
-              Mother language :{" "}
+          <div className="form-control--lang">
+            <label htmlFor="native" className="lang">
+              Native language :{" "}
             </label>
-            <select ref={nativeRef} id="native">
+            <select onChange={(e) => setNativeLang(e.target.value)} id="native">
               <option value="english">English</option>
             </select>
           </div>
-          <div className="form-control">
-            <label htmlFor="studying" className="floatLabel">
-              Studying language :{" "}
+          <div className="form-control--lang">
+            <label htmlFor="studying" className="lang">
+              Studying language :
             </label>
-            <select ref={studyingRef} id="studying">
+            <select
+              onChange={(e) => setStudyingLang(e.target.value)}
+              id="studying"
+            >
               <option value="english">English</option>
             </select>
           </div>
@@ -140,31 +239,55 @@ const Settings = () => {
             <label htmlFor="displayName" className="floatLabel">
               Username :{" "}
             </label>
-            <input type="text" id="displayName" ref={usernameRef} required />
+            <input
+              type="text"
+              id="displayName"
+              placeholder={currentUser.displayName}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="profilePicture" className="floatLabel">
               Profile picture :{" "}
             </label>
-            <input type="file" id="profilePicture" required />
+            <input type="file" id="profilePicture" />
           </div>
           <div className="form-control">
-            <label htmlFor="displayName" className="floatLabel">
+            <label htmlFor="email" className="floatLabel">
               Email :
             </label>
-            <input type="text" required />
+            <input
+              placeholder={currentUser.email}
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="form-control">
-            <label htmlFor="displayName" className="floatLabel">
+            <label htmlFor="password" className="floatLabel">
               Password :
             </label>
-            <input type="text" required />
+            <input
+              placeholder="leave blank to keep same password"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <div className="form-control">
-            <label htmlFor="displayName" className="floatLabel">
+            <label htmlFor="conf-password" className="floatLabel">
               Confirm password :
             </label>
-            <input type="text" required />
+            <input
+              placeholder="leave blank to keep same password"
+              type="password"
+              id="conf-password"
+              value={confPassword}
+              onChange={(e) => setConfPassword(e.target.value)}
+            />
           </div>
           <button type="submit">Update</button>
         </form>

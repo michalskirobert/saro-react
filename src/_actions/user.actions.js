@@ -2,15 +2,14 @@ import { userConstants } from "./../_constants/user.constants";
 
 const signUp = () => {
   return {
-    type: userConstants.REGISTER_REQUEST,
+    type: userConstants.REGISTER_SUCCESS,
   };
 };
 
-const signIn = (data, user) => {
+const signIn = (data) => {
   return {
     type: userConstants.LOGIN_SUCCESS,
     payload: data,
-    user: user,
   };
 };
 

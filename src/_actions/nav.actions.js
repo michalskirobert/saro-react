@@ -1,24 +1,26 @@
+import { navConstants } from "./../_constants/nav.constants";
+
 const navToggle = () => {
   return {
-    type: "NAV_TOGGLE",
+    type: navConstants.TOGGLE,
   };
 };
 
 const closeNav = () => {
   return {
-    type: "CLOSE_NAV",
+    type: navConstants.CLOSE,
   };
 };
 
 const profileToggle = () => {
   return {
-    type: "NAV_PROFILE_TOGGLE",
+    type: navConstants.PROFILE_TOGGLE,
   };
 };
 
 const closeProfile = () => {
   return {
-    type: "NAV_CLOSE_PROFILE",
+    type: navConstants.CLOSE_PROFILE,
   };
 };
 

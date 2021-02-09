@@ -1,6 +1,8 @@
+import { fetchConstants } from "./../_constants/fetch.constants";
+
 export const fetchNews = (data) => {
   return {
-    type: "FETCH_NEWS",
+    type: fetchConstants.NEWS,
     payload: data,
   };
 };

@@ -1,6 +1,8 @@
+import { heroConstants } from "./../_constants/hero.constants";
+
 export const hero = (index) => {
   return {
-    type: "JUMP_TO",
+    type: heroConstants.JUMP,
     payload: index,
   };
 };

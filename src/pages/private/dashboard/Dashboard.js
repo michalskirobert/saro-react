@@ -5,9 +5,9 @@ const Dashboard = () => {
   return (
     <section className="section dashboard">
       <h2>Welcome!</h2>
-      <img src={auth.currentUser.photoURL} alt={auth.currentUser.displayName} />
-      <p>{auth.currentUser.email}</p>
+      <img src={auth.currentUser.photoURL} alt={auth.currentUser.displayName}/>
       <p>{auth.currentUser.displayName}</p>
+      <a href={`mailto: ${auth.currentUser.email}`}>{auth.currentUser.email}</a>
     </section>
   );
 };

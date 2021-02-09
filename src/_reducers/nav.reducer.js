@@ -1,8 +1,10 @@
+import { navConstants } from "./../_constants/nav.constants";
+
 export const navReducer = (state = false, action) => {
   switch (action.type) {
-    case "NAV_TOGGLE":
+    case navConstants.TOGGLE:
       return !state;
-    case "CLOSE_NAV":
+    case navConstants.CLOSE:
       return false;
     default:
       return state;
@@ -11,7 +13,7 @@ export const navReducer = (state = false, action) => {
 
 export const isScrolled = (state = "transparent", action) => {
   switch (action.type) {
-    case "NAV_SCROLLED":
+    case navConstants.SCROLLED:
       return action.payload;
     default:
       return state;

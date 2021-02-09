@@ -22,17 +22,9 @@ export const currentUserReducer = (state = userState, action) => {
       };
     case userConstants.LOGIN_SUCCESS:
       const data = action.payload;
-      const user = action.user;
+
       return {
-        uid: user.uid,
-        username: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        hobbies: data.hobbies,
-        firstName: data.lastName,
-        nativeLang: data.nativeLang,
-        studyingLang: data.studyingLang,
-        about: data.about,
+        ...data,
         isLogged: true,
       };
     case userConstants.REGISTER_SUCCESS:

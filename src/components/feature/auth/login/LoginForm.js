@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
@@ -7,11 +7,11 @@ import alertActions from "./../../../../_actions/alert.actions";
 import Alert from "./../../../shared/alerts";
 
 const LoginForm = () => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
   const history = useHistory();
   const dispatch = useDispatch();
   const alert = useSelector((state) => state.alert.alert);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const signin = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
@@ -20,10 +20,10 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(alertActions.clear());
-    if (emailRef.current.value && passwordRef.current.value) {
+    if (email && password) {
       try {
+        await signin(email, password);
         dispatch(userActions.request());
-        await signin(emailRef.current.value, passwordRef.current.value);
         history.push("/dashboard");
       } catch (error) {
         dispatch(alertActions.error(error.message));
@@ -43,13 +43,25 @@ const LoginForm = () => {
         <label htmlFor="email" className="floatLabel">
           Email :
         </label>
-        <input type="email" id="email" ref={emailRef} required />
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
       </div>
       <div className="form-control">
         <label htmlFor="password" className="floatLabel">
           Password :
         </label>
-        <input type="password" id="password" ref={passwordRef} required />
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
       </div>
       <button type="submit">Sign-in</button>
       <div className="auth-control">
