@@ -176,6 +176,28 @@ section.home {
   display: block;
 }
 
+@media (max-width: 670px) {
+  .section.contact-page {
+    text-align: center;
+    padding-right: 0;
+
+    h1 {
+      margin-bottom: 40px;
+    }
+    .contact-page-content {
+      padding-left: 0;
+      form {
+        margin-right: 0;
+
+        button.btn.send {
+          margin: 0 auto;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .events,
   .blog {
