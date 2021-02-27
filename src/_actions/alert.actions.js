@@ -12,10 +12,8 @@ function clear() {
   return { type: alertConstants.CLEAR };
 }
 
-const alertActions = {
+export const alertActions = {
   success,
   error,
   clear,
 };
-
-export default alertActions;

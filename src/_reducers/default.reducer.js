@@ -4,6 +4,7 @@ const defaultState = {
   isLoading: true,
   viewMore: false,
   profileToggle: false,
+  language: "en",
 };
 
 export const defaultReducer = (state = defaultState, action) => {

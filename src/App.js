@@ -10,7 +10,7 @@ import { SaroRoute } from "./_router/SaroRoute";
 import Unlisten from "./_router/Unlisten";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import userActions from "./_actions/user.actions";
+import { userActions } from "./_actions";
 
 // Pages
 

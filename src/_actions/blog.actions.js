@@ -12,9 +12,22 @@ const viewLess = () => {
   };
 };
 
-const blogActions = {
-  readMore,
-  viewLess,
+const getPostsRequest = () => {
+  return {
+    type: blogConstants.GET_POSTS_REQ,
+  };
 };
 
-export default blogActions;
+const getPosts = (posts) => {
+  return {
+    type: blogConstants.GET_POSTS_SUCCESS,
+    payload: posts,
+  };
+};
+
+export const blogActions = {
+  readMore,
+  viewLess,
+  getPostsRequest,
+  getPosts,
+};

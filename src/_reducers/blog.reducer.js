@@ -1,18 +1,18 @@
-import { newsConstants } from "./../_constants";
+import { blogConstants } from "./../_constants";
 
-const initialState = {
-  posts: [],
+const defaultState = {
   isLoading: true,
+  posts: [],
 };
 
-export const newsReducer = (state = initialState, action) => {
+export const blogReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case newsConstants.GET_NEWS_REQ:
+    case blogConstants.GET_POSTS_REQ:
       return {
         ...state,
         isLoading: true,
       };
-    case newsConstants.GET_NEWS_SUCCESS:
+    case blogConstants.GET_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload,

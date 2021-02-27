@@ -38,7 +38,7 @@ const removeUser = () => {
   };
 };
 
-const userActions = {
+export const userActions = {
   signIn,
   signUp,
   logout,
@@ -46,5 +46,3 @@ const userActions = {
   failure,
   request,
 };
-
-export default userActions;

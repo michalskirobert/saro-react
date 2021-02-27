@@ -1,0 +1,4 @@
+export const eventsConstants = {
+  GET_EVENTS_SUCCESS: "FETCH_EVENTS_SUCCESS",
+  GET_EVENTS_REQ: "FETCH_EVENTS_REQUEST",
+};

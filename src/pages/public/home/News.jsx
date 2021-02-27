@@ -1,32 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { firestore } from "./../../../components/feature/firebase";
+import { useContainer } from "./useContainer";
 
 const News = () => {
   const dispatch = useDispatch();
   const isRead = useSelector((state) => state.default.readMore);
-  const isLoading = useSelector((state) => state.homePage.isLoading);
-  const news = useSelector((state) => state.homePage.newsData);
+  const isLoading = useSelector((state) => state.news.isLoading);
+  const news = useSelector((state) => state.news.posts);
+
+  const {getNews} = useContainer();
 
   useEffect(() => {
-    const unsubscribe = firestore
-      .collection("language")
-      .doc("en")
-      .collection("news")
-      .onSnapshot((doc) => {
-        let data = doc.docs.map((item) => {
-          return {
-            id: item.id,
-            ...item.data(),
-          };
-        });
-        dispatch({ type: "FETCH_NEWS", payload: data });
-        dispatch({ type: "STOP_LOADING" });
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+   getNews();
+  }, [])
 
   if (isLoading) {
     return (

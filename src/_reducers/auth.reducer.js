@@ -21,16 +21,19 @@ export const currentUserReducer = (state = userState, action) => {
         isLogged: true,
       };
     case userConstants.LOGIN_SUCCESS:
-      const data = action.payload;
-
       return {
-        ...data,
+        ...action.payload,
         isLogged: true,
+      };
+    case userConstants.REGISTER_REQUEST:
+      return {
+        ...state,
+        isLogged: false,
       };
     case userConstants.REGISTER_SUCCESS:
       return {
-        ...state,
-        isLogged: true,
+        ...action.payload,
+        isLogged: false,
       };
     case userConstants.LOGOUT:
       return userState;

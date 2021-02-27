@@ -1,8 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import alertActions from "./../_actions/alert.actions";
-import navActions from "./../_actions/nav.actions";
+import { alertActions, navActions } from "./../_actions";
 
 function Unlisten({ history, children }) {
   const dispatch = useDispatch();

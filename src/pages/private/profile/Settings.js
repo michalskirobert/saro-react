@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "./../../../components/feature/firebase";
 import Alert from "./../../../components/shared/alerts";
-import alertActions from "./../../../_actions/alert.actions";
-import userActions from "./../../../_actions/user.actions";
+import { alertActions, userActions } from "./../../../_actions";
 
 const Settings = () => {
   const currentUser = auth.currentUser;

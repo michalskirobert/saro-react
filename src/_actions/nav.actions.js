@@ -24,11 +24,9 @@ const closeProfile = () => {
   };
 };
 
-const navActions = {
+export const navActions = {
   navToggle,
   closeNav,
   profileToggle,
   closeProfile,
 };
-
-export default navActions;

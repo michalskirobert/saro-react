@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
-import userActions from "./../../../../_actions/user.actions";
-import alertActions from "./../../../../_actions/alert.actions";
+import { userActions, alertActions } from "./../../../../_actions";
 import Alert from "./../../../shared/alerts";
 
 const LoginForm = () => {

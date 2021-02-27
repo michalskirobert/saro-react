@@ -1,25 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { firestore } from "./../../../components/feature/firebase";
+import { useContainer } from "./useContainer";
 
 const Blog = () => {
   const dispatch = useDispatch();
-  const lastPosts = useSelector((state) => state.homePage.lastPosts);
+  const lastPosts = useSelector((state) => state.blog.posts);
+  const isLoading = useSelector((state) => state.blog.isLoading);
+  const {getPosts} = useContainer();
+
   useEffect(() => {
-    const unsubscribe = firestore
-      .collection("language")
-      .doc("en")
-      .collection("blog")
-      .onSnapshot((doc) => {
-        let data = doc.docs.map((item) => item.data());
-        dispatch({ type: "FETCH_POSTS", payload: data });
-        dispatch({ type: "STOP_LOADING" });
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+   getPosts();
+  }, [])
+  if (isLoading) {
+    return (
+      <div className="loading-page">
+        <h2>Loading..</h2>
+      </div>
+    );
+  }
   return (
     <section className="blog" style={{ padding: "0" }}>
       <h1 style={{ width: "100%" }}>Blog last posts</h1>

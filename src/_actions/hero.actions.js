@@ -6,3 +6,7 @@ export const hero = (index) => {
     payload: index,
   };
 };
+
+export const heroActions = {
+  hero,
+};
