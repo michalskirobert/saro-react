@@ -35,6 +35,7 @@ import User from "./pages/private/profile/User";
 import AdminEdit from "./pages/special/edit/Edit";
 import AdminAddArticle from "./pages/special/add/AddArticle";
 import AdminAddContent from "./pages/special/add/AddContent";
+import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
 import { useDispatch } from "react-redux";
@@ -83,10 +84,11 @@ const App = () => {
           <PrivateRoute path="/profile/progress" component={ProfileProgress} />
           <PrivateRoute path="/profile/settings" component={ProfileSettings} />
           <PrivateRoute path="/profile/:id" children={<User />} />
-          {/* Special route */}
+          {/* CMS SARO 1.0.0 */}
           <SaroRoute exact path="/panel" component={AdminDashboard} />
-          <SaroRoute path="/panel/add-article" component={AdminAddArticle} />
-          <SaroRoute path="/panel/add-content" component={AdminAddContent} />
+          <SaroRoute path="/panel/add/article" component={AdminAddArticle} />
+          <SaroRoute path="/panel/add/post" component={AdminAddContent} />
+          <SaroRoute path="/panel/add/news-content" component={AdminAddNews} />
           <SaroRoute path="/panel/edit" component={AdminEdit} />
           <SaroRoute path="/panel/translate" component={AdminTranslate} />
           <Route path="*" component={Error} />

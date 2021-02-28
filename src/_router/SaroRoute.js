@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const SaroRoute = ({ component: Component, ...rest }) => {
   const currentUser = true;
@@ -7,10 +8,10 @@ export const SaroRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        return currentUser.role === "saro-crew" ? (
+        return currentUser ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/sign-in" />
         );
       }}
     ></Route>

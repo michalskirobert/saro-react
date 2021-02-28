@@ -2,14 +2,15 @@ import { userConstants } from "../_constants/user.constants";
 
 const userState = {
   uid: 0,
-  username: "",
-  email: "",
+  username: "anonymous",
+  email: "anonymous",
   hobbies: "",
   firstName: "",
   lastName: "",
   nativeLang: "",
   studyingLang: "",
   about: "",
+  role: "user",
   isLogged: false,
   isLoading: false,
 };

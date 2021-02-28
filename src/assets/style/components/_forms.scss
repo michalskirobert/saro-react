@@ -74,7 +74,7 @@ form.auth-form {
       text-shadow: 0 1px 3px darken($crl-basic, 30%);
     }
   }
-  label {
+  & > label {
     position: absolute;
     left: 8px;
     top: 12px;
@@ -96,12 +96,4 @@ form.auth-form {
     margin-top: 25px;
     text-align: center;
   }
-}
-
-form {
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
 }

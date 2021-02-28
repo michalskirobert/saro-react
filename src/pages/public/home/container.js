@@ -14,7 +14,12 @@ export const useContainer = () => {
       .doc(lang)
       .collection(generalConstants.NEWS)
       .onSnapshot((resp) => {
-        const newsData = resp.docs.map((item) => item.data());
+        const newsData = resp.docs.map((item) => {
+          return {
+            id: item.id,
+            ...item.data(),
+          };
+        });
         dispatch(fetchActions.fetchNews(newsData));
       });
   };
