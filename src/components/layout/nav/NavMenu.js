@@ -80,7 +80,7 @@ const NavMenu = () => {
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const user = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
-  const seeMore = useSelector((state) => state.default.profileToggle);
+  const seeMore = useSelector((state) => state.general.profileToggle);
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;

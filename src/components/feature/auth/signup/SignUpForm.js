@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import { auth, firestore } from "./../../firebase";
 import { userActions, alertActions } from "./../../../../_actions";
 import Alert from "./../../../shared/alerts";
+import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const SignUpForm = () => {
   const [studyingLang, setStudyingLang] = useState("Polish");
   const history = useHistory();
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.currentUser.isLoading);
 
   const alert = useSelector((state) => state.alert.alert);
 
@@ -69,6 +71,10 @@ const SignUpForm = () => {
       }
     }
   };
+
+  if (isLoading) {
+    return <DefaultLoader />;
+  }
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>

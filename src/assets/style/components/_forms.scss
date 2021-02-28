@@ -97,3 +97,11 @@ form.auth-form {
     text-align: center;
   }
 }
+
+form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}

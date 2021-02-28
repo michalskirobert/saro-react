@@ -1,6 +1,6 @@
 import { heroReducer } from "./hero.reducer";
 import { navReducer, isScrolled } from "./nav.reducer";
-import { defaultReducer } from "./default.reducer";
+import { generalReducer } from "./general.reducer";
 import { newsReducer } from "./news.reducer";
 import { currentUserReducer } from "./auth.reducer";
 import { alertsReducer } from "./alerts.reducer";
@@ -10,7 +10,7 @@ import { blogReducer } from "./blog.reducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  default: defaultReducer,
+  general: generalReducer,
   currentUser: currentUserReducer,
   hero: heroReducer,
   isNavOpen: navReducer,

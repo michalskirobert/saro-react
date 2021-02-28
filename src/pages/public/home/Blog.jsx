@@ -1,27 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useContainer } from "./useContainer";
+import { useContainer } from "./container";
+import { DefaultLoader } from "./../../../components/shared/loadings/DefaultLoader";
 
 const Blog = () => {
   const dispatch = useDispatch();
   const lastPosts = useSelector((state) => state.blog.posts);
   const isLoading = useSelector((state) => state.blog.isLoading);
-  const {getPosts} = useContainer();
+  const { getPosts } = useContainer();
 
   useEffect(() => {
-   getPosts();
-  }, [])
+    getPosts();
+  }, []);
+
   if (isLoading) {
-    return (
-      <div className="loading-page">
-        <h2>Loading..</h2>
-      </div>
-    );
+    return <DefaultLoader />;
   }
   return (
     <section className="blog" style={{ padding: "0" }}>
-      <h1 style={{ width: "100%" }}>Blog last posts</h1>
+      {lastPosts && <h1 style={{ width: "100%" }}>Blog last posts</h1>}
       <div className="posts-slider">
         {lastPosts
           .map((event, index) => {

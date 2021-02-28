@@ -7,7 +7,7 @@ const defaultState = {
   language: "en",
 };
 
-export const defaultReducer = (state = defaultState, action) => {
+export const generalReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "BLOG_READ_MORE":
       return {

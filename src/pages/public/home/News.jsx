@@ -1,31 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useContainer } from "./useContainer";
+import { useContainer } from "./container";
+import { DefaultLoader } from "./../../../components/shared/loadings/DefaultLoader";
 
 const News = () => {
   const dispatch = useDispatch();
-  const isRead = useSelector((state) => state.default.readMore);
+  const isRead = useSelector((state) => state.general.readMore);
   const isLoading = useSelector((state) => state.news.isLoading);
   const news = useSelector((state) => state.news.posts);
 
-  const {getNews} = useContainer();
+  const { getNews } = useContainer();
 
   useEffect(() => {
-   getNews();
-  }, [])
+    getNews();
+  }, []);
 
   if (isLoading) {
-    return (
-      <div className="loading-page">
-        <h2>Loading..</h2>
-      </div>
-    );
+    return <DefaultLoader />;
   }
 
   return (
     <section className="section home" style={{ paddingTop: "35px" }}>
       <div className="wrapper">
-        <h2 style={{ width: "100%", fontSize: "1.9rem" }}>News</h2>
+        {news && <h2 style={{ width: "100%", fontSize: "1.9rem" }}>News</h2>}
         <article className="news">
           {news
             .map((article) => {

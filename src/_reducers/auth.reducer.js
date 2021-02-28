@@ -11,6 +11,7 @@ const userState = {
   studyingLang: "",
   about: "",
   isLogged: false,
+  isLoading: false,
 };
 
 export const currentUserReducer = (state = userState, action) => {
@@ -19,21 +20,25 @@ export const currentUserReducer = (state = userState, action) => {
       return {
         ...state,
         isLogged: true,
+        isLoading: true,
       };
     case userConstants.LOGIN_SUCCESS:
       return {
         ...action.payload,
         isLogged: true,
+        isLoading: false,
       };
     case userConstants.REGISTER_REQUEST:
       return {
         ...state,
+        isLoading: true,
         isLogged: false,
       };
     case userConstants.REGISTER_SUCCESS:
       return {
         ...action.payload,
-        isLogged: false,
+        isLogged: true,
+        isLoading: false,
       };
     case userConstants.LOGOUT:
       return userState;

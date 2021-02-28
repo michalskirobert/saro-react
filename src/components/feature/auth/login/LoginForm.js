@@ -4,11 +4,13 @@ import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
 import { userActions, alertActions } from "./../../../../_actions";
 import Alert from "./../../../shared/alerts";
+import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
 
 const LoginForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const alert = useSelector((state) => state.alert.alert);
+  const isLoading = useSelector((state) => state.currentUser.isLoading);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +35,10 @@ const LoginForm = () => {
       );
     }
   };
+
+  if (isLoading) {
+    return <DefaultLoader />;
+  }
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>

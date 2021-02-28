@@ -1,5 +1,5 @@
 import React from "react";
-import { auth } from "./../../../components/feature/firebase";
+import { auth } from "../../../components/feature/firebase";
 
 const Dashboard = () => {
   return (

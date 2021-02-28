@@ -1,30 +1,27 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useContainer } from "./useContainer";
+import { useContainer } from "./container";
+import { DefaultLoader } from "./../../../components/shared/loadings/DefaultLoader";
 
 const Event = () => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events.events);
   const isLoading = useSelector((state) => state.events.isLoading);
 
-  const {getEvents} = useContainer();
+  const { getEvents } = useContainer();
 
   useEffect(() => {
-   getEvents();
-  }, [])
+    getEvents();
+  }, []);
 
   if (isLoading) {
-    return (
-      <div className="loading-page">
-        <h2>Loading..</h2>
-      </div>
-    );
+    return <DefaultLoader />;
   }
 
   return (
     <section className="events" style={{ padding: "0" }}>
-      <h1 style={{ width: "100%" }}>Upcoming events</h1>
+      {events && <h1 style={{ width: "100%" }}>Upcoming events</h1>}
       <div className="event-slider">
         {events
           .map((event) => {
