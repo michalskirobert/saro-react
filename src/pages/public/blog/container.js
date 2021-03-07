@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const useContainer = () => {
   const dispatch = useDispatch();
-  const lang = useSelector((state) => state.default.language);
+  const lang = useSelector((state) => state.general.language);
+  const article = useSelector((state) => state.blog.posts);
 
   const getPosts = async () => {
-    dispatch(blogActions.getPostsRequest);
+    dispatch(blogActions.getPostsRequest());
     firestore
       .collection(generalConstants.LANG)
       .doc(lang)
@@ -21,5 +22,6 @@ export const useContainer = () => {
 
   return {
     getPosts,
+    article,
   };
 };

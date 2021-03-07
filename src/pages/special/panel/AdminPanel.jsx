@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
-import { useContainer } from "./../../public/home/container";
-import { firestore } from "./../../../components/feature/firebase";
+import { useContainer } from "../../public/home/container";
+import { firestore } from "../../../components/feature/firebase";
 
 const AdminPanel = () => {
   const { getNews } = useContainer();

@@ -47,7 +47,7 @@ const News = () => {
                       <img src={avatarURL} alt={author} />
                     </div>
                     <div className="blog date">
-                      <i>{date}</i>
+                      <i>{new Date(date).toLocaleString()}</i>
                     </div>
                     <div className="news-content">
                       <img src={imageURL} alt={title} className="news-image" />

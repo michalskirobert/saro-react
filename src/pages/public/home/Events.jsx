@@ -47,7 +47,9 @@ const Event = () => {
                 <div className="event-info">
                   <div className="event-control">
                     <strong>Time:</strong>{" "}
-                    <p style={{ display: "inline" }}>{time}</p>
+                    <p style={{ display: "inline" }}>
+                      {new Date(time).toLocalString}
+                    </p>
                   </div>
                   <div className="event-control">
                     <strong>Place:</strong> <p>{place} in</p>{" "}
