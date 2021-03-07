@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "react-bootstrap";
 import { firestore } from "../../../components/feature/firebase";
+import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
+import { useSelector, useDispatch } from "react-redux";
+import { cmsActions } from "./../../../_actions";
 
 const lang = [
   {
@@ -26,8 +29,15 @@ const crew = [
 const AddNews = () => {
   const [query, setQuery] = useState("Simple text");
   const [title, setTitle] = useState("Title");
+<<<<<<< HEAD
   const [language, setLanguage] = useState("");
 d
+=======
+  const isAlert = useSelector((state) => state.CMS.alert);
+  const isLoading = useSelector((state) => state.CMS.isLoading);
+  const dispatch = useDispatch();
+
+>>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
   const handleEdtiorChange = (e) => {
     setQuery(e.target.getContent());
   };
@@ -35,17 +45,37 @@ d
   const handlerSubmit = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       await firestore.collection("language").doc("en").collection("blog").add({
         type: query,
       });
     } catch (error) {
 
     }
+=======
+      dispatch(cmsActions.addNewsReq());
+      await firestore.collection("language").doc("en").collection("news").add({
+        title: title,
+        author: "test",
+        avatarURL: "https://via.placeholder.com/50px",
+        date: new Date().toLocaleString(),
+        content: query,
+        id: 1,
+        imageURL: "https://via.placeholder.com/50px",
+      });
+      dispatch(cmsActions.addNewsSuccess());
+    } catch (error) {
+      dispatch(cmsActions.addNewsFailure());
+    }
+    setQuery("");
+>>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
   };
 
   return (
     <section className="section add-news">
+      {isAlert && <CmsAlert />}
       <form onSubmit={handlerSubmit}>
+<<<<<<< HEAD
         <input
           type="text"
           value={title}
@@ -69,6 +99,9 @@ d
             );
           })}
         </select>
+=======
+        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+>>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
         <Editor
           apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
           initialValue={query}
@@ -99,6 +132,12 @@ d
           }}
           onChange={handleEdtiorChange}
         />
+<<<<<<< HEAD
+=======
+        <Button type="submit" disabled={isLoading && true}>
+          Send
+        </Button>
+>>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
       </form>
       <Button type="submit">Add</Button>
     </section>

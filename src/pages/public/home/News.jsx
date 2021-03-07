@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useContainer } from "./container";
 import { DefaultLoader } from "./../../../components/shared/loadings/DefaultLoader";
+import { newsActions } from "../../../_actions";
 
 const News = () => {
   const dispatch = useDispatch();
-  const isRead = useSelector((state) => state.general.readMore);
+  const isRead = useSelector((state) => state.news.viewMore);
   const isLoading = useSelector((state) => state.news.isLoading);
   const news = useSelector((state) => state.news.posts);
 
@@ -63,7 +64,7 @@ const News = () => {
           {news.length > 2 && (
             <button
               className="btn viewAll"
-              onClick={() => dispatch({ type: "READ_MORE" })}
+              onClick={() => dispatch(newsActions.viewMore())}
             >
               {isRead ? "See less" : "See more"}
             </button>

@@ -5,3 +5,5 @@ export { fetchActions } from "./fetch.actions";
 export { heroActions } from "./hero.actions";
 export { userActions } from "./user.actions";
 export { eventsActions } from "./events.actions";
+export { cmsActions } from "./cms.actions";
+export { newsActions } from "./news.actions";
