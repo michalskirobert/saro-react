@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
+import React from "react";
 import { Button } from "react-bootstrap";
-import { firestore } from "../../../components/feature/firebase";
+
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
-import { useSelector, useDispatch } from "react-redux";
-import { cmsActions } from "./../../../_actions";
+import { useContainer } from "./container";
+
+import { Editor } from "@tinymce/tinymce-react";
 
 const lang = [
   {
@@ -15,7 +15,7 @@ const lang = [
   },
 ];
 
-const crew = [
+const people = [
   {
     id: 1,
     name: "Robert",
@@ -26,63 +26,46 @@ const crew = [
   },
 ];
 
+const categories = [
+  {
+    id: 1,
+    name: "Events",
+  },
+  {
+    id: 2,
+    name: "Food",
+  },
+  {
+    id: 3,
+    name: "Traditions",
+  },
+];
+
 const AddNews = () => {
-  const [query, setQuery] = useState("Simple text");
-  const [title, setTitle] = useState("Title");
-<<<<<<< HEAD
-  const [language, setLanguage] = useState("");
-d
-=======
-  const isAlert = useSelector((state) => state.CMS.alert);
-  const isLoading = useSelector((state) => state.CMS.isLoading);
-  const dispatch = useDispatch();
-
->>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
-  const handleEdtiorChange = (e) => {
-    setQuery(e.target.getContent());
-  };
-
-  const handlerSubmit = async (e) => {
-    e.preventDefault();
-    try {
-<<<<<<< HEAD
-      await firestore.collection("language").doc("en").collection("blog").add({
-        type: query,
-      });
-    } catch (error) {
-
-    }
-=======
-      dispatch(cmsActions.addNewsReq());
-      await firestore.collection("language").doc("en").collection("news").add({
-        title: title,
-        author: "test",
-        avatarURL: "https://via.placeholder.com/50px",
-        date: new Date().toLocaleString(),
-        content: query,
-        id: 1,
-        imageURL: "https://via.placeholder.com/50px",
-      });
-      dispatch(cmsActions.addNewsSuccess());
-    } catch (error) {
-      dispatch(cmsActions.addNewsFailure());
-    }
-    setQuery("");
->>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
-  };
+  const {
+    handlerSubmit,
+    handleEdtiorChange,
+    query,
+    title,
+    setTitle,
+    setCurrLanguage,
+    setCurrCrew,
+    setCurrCategory,
+    alert,
+    isLoading,
+  } = useContainer();
 
   return (
     <section className="section add-news">
-      {isAlert && <CmsAlert />}
+      {alert && <CmsAlert />}
       <form onSubmit={handlerSubmit}>
-<<<<<<< HEAD
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <select onChange={(e => setCrew(e.target.value)}>
-          {crew.map(({ name, id }) => {
+        <select onChange={(e) => setCurrCrew(e.target.value)}>
+          {people.map(({ name, id }) => {
             return (
               <option key={id} value={name}>
                 {name}
@@ -90,7 +73,16 @@ d
             );
           })}
         </select>
-        <select onChange={(e) => setLanguage(e.target.value)}>
+        <select onChange={(e) => setCurrCategory(e.target.value)}>
+          {categories.map(({ name, id }) => {
+            return (
+              <option key={id} value={name}>
+                {name}
+              </option>
+            );
+          })}
+        </select>
+        <select onChange={(e) => setCurrLanguage(e.target.value)}>
           {lang.map((item, index) => {
             return (
               <option key={index} value={item.lang}>
@@ -99,14 +91,10 @@ d
             );
           })}
         </select>
-=======
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
->>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
         <Editor
           apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
           initialValue={query}
           init={{
-            width: "100vw",
             plugins: [
               "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
               " lists link linkchecker media mediaembed noneditable powerpaste preview",
@@ -132,14 +120,10 @@ d
           }}
           onChange={handleEdtiorChange}
         />
-<<<<<<< HEAD
-=======
-        <Button type="submit" disabled={isLoading && true}>
-          Send
+        <Button type="submit" disabled={isLoading}>
+          Add
         </Button>
->>>>>>> 81ce04801dd6e44f495d48fbbc1ac126bf8c00d9
       </form>
-      <Button type="submit">Add</Button>
     </section>
   );
 };

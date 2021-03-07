@@ -34,7 +34,7 @@ import User from "./pages/private/profile/User";
 //Special
 import AdminEdit from "./pages/special/edit/Edit";
 import AdminAddArticle from "./pages/special/add/AddArticle";
-import AdminAddContent from "./pages/special/add/AddContent";
+import AdminAddEvents from "./pages/special/add/AddEvents";
 import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
@@ -87,7 +87,7 @@ const App = () => {
           {/* CMS SARO 1.0.0 */}
           <SaroRoute exact path="/panel" component={AdminDashboard} />
           <SaroRoute path="/panel/add/article" component={AdminAddArticle} />
-          <SaroRoute path="/panel/add/post" component={AdminAddContent} />
+          <SaroRoute path="/panel/add/events" component={AdminAddEvents} />
           <SaroRoute path="/panel/add/news-content" component={AdminAddNews} />
           <SaroRoute path="/panel/edit" component={AdminEdit} />
           <SaroRoute path="/panel/translate" component={AdminTranslate} />
