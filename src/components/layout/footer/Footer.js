@@ -1,6 +1,8 @@
 import React from "react";
 import NavMenu from "./../../../components/layout/nav/NavMenu.js";
 import Logo from "./../../../components/layout/nav/Logo";
+import { withRouter } from "react-router";
+
 
 const Footer = () => {
   return (
@@ -14,6 +16,7 @@ const Footer = () => {
       </div>
       <footer>
         <Logo />
+        <NavMenu />
       </footer>
     </>
   );
