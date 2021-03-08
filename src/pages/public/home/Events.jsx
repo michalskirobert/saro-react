@@ -30,7 +30,7 @@ const Event = () => {
               title,
               imageURL,
               info,
-              time,
+              date,
               place,
               city,
               link,
@@ -48,7 +48,7 @@ const Event = () => {
                   <div className="event-control">
                     <strong>Time:</strong>{" "}
                     <p style={{ display: "inline" }}>
-                      {new Date(time).toLocalString()}
+                      {new Date(date).toLocalString()}
                     </p>
                   </div>
                   <div className="event-control">
