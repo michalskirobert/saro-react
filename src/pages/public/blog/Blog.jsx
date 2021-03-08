@@ -1,9 +1,10 @@
 import React from "react";
+import SingleArticle from "./SingleArticle";
 
 const Blog = () => {
   return (
     <section className="section blog">
-      <h1>test blog</h1>
+      <SingleArticle />
     </section>
   );
 };

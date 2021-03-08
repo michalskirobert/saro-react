@@ -97,3 +97,32 @@ form.auth-form {
     text-align: center;
   }
 }
+
+form.cms {
+  .form-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+    justify-content: center;
+    align-items: center;
+
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100px;
+      input {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+    textarea {
+      height: 60px;
+      width: 100%;
+    }
+  }
+  button {
+    display: block;
+    margin: 10px auto;
+    width: 100px;
+  }
+}

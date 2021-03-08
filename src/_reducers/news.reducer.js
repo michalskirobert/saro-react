@@ -3,6 +3,7 @@ import { newsConstants } from "./../_constants";
 const initialState = {
   posts: [],
   isLoading: true,
+  viewMore: false,
 };
 
 export const newsReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ export const newsReducer = (state = initialState, action) => {
         ...state,
         posts: action.payload,
         isLoading: false,
+      };
+    case newsConstants.NEWS_VIEW_MORE:
+      return {
+        ...state,
+        viewMore: !state.viewMore,
       };
     default:
       return state;

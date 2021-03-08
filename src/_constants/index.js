@@ -7,3 +7,4 @@ export { heroConstants } from "./hero.constants";
 export { userConstants } from "./user.constants";
 export { newsConstants } from "./news.constants";
 export { generalConstants } from "./general.constants";
+export { cmsConstants } from "./cms.constants";
