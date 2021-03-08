@@ -1,6 +1,7 @@
 import React from "react";
-import NavMenu from "./../../../components/layout/nav/NavMenu";
 import Logo from "./../../../components/layout/nav/Logo";
+import { withRouter } from "react-router";
+
 
 const Footer = () => {
   return (

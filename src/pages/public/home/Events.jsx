@@ -30,10 +30,10 @@ const Event = () => {
               title,
               imageURL,
               info,
-              time,
               place,
               city,
               link,
+              time,
             } = event;
             return (
               <article className="event" key={id}>
@@ -48,7 +48,7 @@ const Event = () => {
                   <div className="event-control">
                     <strong>Time:</strong>{" "}
                     <p style={{ display: "inline" }}>
-                      {new Date(time).toLocalString}
+                      {time}
                     </p>
                   </div>
                   <div className="event-control">

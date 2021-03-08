@@ -2,4 +2,8 @@ export const alertConstants = {
   SUCCESS: "ALERT_SUCCESS",
   ERROR: "ALERT_ERROR",
   CLEAR: "ALERT_CLEAR",
+  STATUS_CLEAR: "",
+  STATUS_SUCCESS: "SUCCESS",
+  STATUS_ERROR: "ERROR",
+  MESSAGE_CLEAR: "",
 };

@@ -12,19 +12,19 @@ export const alertsReducer = (state = initialState, action) => {
       return {
         alert: true,
         message: action.message,
-        status: "success",
+        status: alertConstants.STATUS_SUCCESS,
       };
     case alertConstants.ERROR:
       return {
         alert: true,
         message: action.message,
-        status: "dangerous",
+        status: alertConstants.STATUS_ERROR,
       };
     case alertConstants.CLEAR:
       return {
         alert: false,
-        message: "",
-        status: "",
+        message: alertConstants.MESSAGE_CLEAR,
+        status: alertConstants.STATUS_CLEAR,
       };
     default:
       return state;
