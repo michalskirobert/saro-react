@@ -82,14 +82,14 @@ const NavMenu = () => {
   const dispatch = useDispatch();
   const seeMore = useSelector((state) => state.general.profileToggle);
 
-  useEffect(() => {
-    const linksHeight = linksRef.current.getBoundingClientRect().height;
-    if (isNavOpen) {
-      linksContainerRef.current.style.height = `${linksHeight}px`;
-    } else {
-      linksContainerRef.current.style.height = "0px";
-    }
-  }, [isNavOpen]);
+  // useEffect(() => {
+  //   const linksHeight = linksRef.current.getBoundingClientRect().height;
+  //   if (isNavOpen) {
+  //     linksContainerRef.current.style.height = `${linksHeight}px`;
+  //   } else {
+  //     linksContainerRef.current.style.height = "0px";
+  //   }
+  // }, [isNavOpen]);
 
   const loggedMap = nav.filter((item) => {
     return item.isLogged !== false;
