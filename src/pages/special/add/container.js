@@ -97,7 +97,7 @@ export const useContainer = () => {
         id: id,
         title: title,
         imageURL: currImg,
-        content: currContent,
+        content: query,
         author: currCrew,
         category: currCategory,
         published: new Date(),
