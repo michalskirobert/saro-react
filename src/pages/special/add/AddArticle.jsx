@@ -1,6 +1,4 @@
 import React from "react";
-
-import React from "react";
 import { Button } from "react-bootstrap";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
