@@ -46,7 +46,6 @@ const AddArticle = () => {
     handlerArticle,
     handleEdtiorChange,
     query,
-    setQuery,
     title,
     setTitle,
     setCurrLanguage,
