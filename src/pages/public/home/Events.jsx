@@ -33,6 +33,7 @@ const Event = () => {
               place,
               city,
               link,
+              time,
             } = event;
             return (
               <article className="event" key={id}>
@@ -47,7 +48,7 @@ const Event = () => {
                   <div className="event-control">
                     <strong>Time:</strong>{" "}
                     <p style={{ display: "inline" }}>
-                      Empty :)
+                      {time}
                     </p>
                   </div>
                   <div className="event-control">
