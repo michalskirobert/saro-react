@@ -34,6 +34,12 @@ const AdminPanel = () => {
             <Nav.Link href="/panel/add/event" disabled>
               Add new event
             </Nav.Link>
+            <Nav.Link href="/panel/add/events">
+              Add new event
+            </Nav.Link>
+            <Nav.Link href="/panel/add/article">
+              Add new article
+            </Nav.Link>
           </Nav>
         </Tab>
         <Tab eventKey="menagment" title="Menage content">
