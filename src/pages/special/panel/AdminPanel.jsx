@@ -28,11 +28,8 @@ const AdminPanel = () => {
         <Tab eventKey="newContent" title="Add new content">
           <Nav className="flex-column">
             <Nav.Link href="/panel/add/news-content">Add news</Nav.Link>
-            <Nav.Link href="/panel/add/post" disabled>
+            <Nav.Link href="/panel/add/post">
               Add new blog post
-            </Nav.Link>
-            <Nav.Link href="/panel/add/event" disabled>
-              Add new event
             </Nav.Link>
             <Nav.Link href="/panel/add/events">
               Add new event

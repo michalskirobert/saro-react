@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useContainer } from "./container";
 import { DefaultLoader } from "./../../../components/shared/loadings/DefaultLoader";
 
 const Event = () => {
-  const dispatch = useDispatch();
   const events = useSelector((state) => state.events.events);
   const isLoading = useSelector((state) => state.events.isLoading);
 
@@ -47,9 +46,7 @@ const Event = () => {
                 <div className="event-info">
                   <div className="event-control">
                     <strong>Time:</strong>{" "}
-                    <p style={{ display: "inline" }}>
-                      {time}
-                    </p>
+                    <p style={{ display: "inline" }}>{time}</p>
                   </div>
                   <div className="event-control">
                     <strong>Place:</strong> <p>{place} in</p>{" "}

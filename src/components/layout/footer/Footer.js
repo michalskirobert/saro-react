@@ -1,7 +1,5 @@
 import React from "react";
 import Logo from "./../../../components/layout/nav/Logo";
-import { withRouter } from "react-router";
-
 
 const Footer = () => {
   return (
