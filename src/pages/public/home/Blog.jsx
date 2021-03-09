@@ -46,7 +46,10 @@ const Blog = () => {
                   <div className="post-info">
                     <div className="post-control">
                       <strong>Published:</strong>
-                      <p style={{ display: "inline" }}> {date}</p>
+                      <p style={{ display: "inline" }}>
+                        {" "}
+                        {new Date(date).toLocaleString() | ""}
+                      </p>
                     </div>
                     <div className="post-control">
                       <strong>Author:</strong>
