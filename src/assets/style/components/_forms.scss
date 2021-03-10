@@ -101,7 +101,7 @@ form.auth-form {
 $light-gray: #fafafa;
 
 form.cms {
-  .event-title {
+  .main-title {
     width: 90%;
     max-width: 500px;
     border-bottom: 1px solid black;
@@ -116,7 +116,9 @@ form.cms {
     grid-gap: 10px;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
+    margin: auto {
+      bottom: 20px;
+    };
   }
   .form-control {
     background: $light-gray;
@@ -207,5 +209,8 @@ form.cms {
       color: black;
       font-weight: bold;
     }
+  }
+  .editor {
+    max-width: 1200px;
   }
 }

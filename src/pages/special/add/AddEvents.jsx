@@ -62,7 +62,7 @@ const AddEvents = () => {
       {alert && <CmsAlert />}
       
       <form className="cms" onSubmit={handlerEvents}>
-      <h2 class="event-title">Add event</h2>
+      <h2 class="main-title">Add event</h2>
         <section className="form-container">
           <div className="form-control">
             <label htmlFor="title">Title</label>
