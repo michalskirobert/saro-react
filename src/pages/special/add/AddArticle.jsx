@@ -58,12 +58,13 @@ const AddArticle = () => {
     <section className="section add-article">
       {alert && <CmsAlert />}
       <form className="cms" onSubmit={handlerArticle}>
-        <h2 class="main-title">Add event</h2>
+        <h2 class="main-title">Add Article</h2>
         <section className="form-container">
           <div className="form-control">
             <label htmlFor="title">Title</label>
             <input
               id="title"
+              placeholder="add title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
