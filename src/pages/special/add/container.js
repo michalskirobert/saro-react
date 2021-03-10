@@ -63,6 +63,8 @@ export const useContainer = () => {
       });
   };
 
+  // why don't we set the eventTime and currLanguage along with other info? 
+
   const handlerSubmit = (e) => {
     e.preventDefault();
     dispatch(cmsActions.clear());
