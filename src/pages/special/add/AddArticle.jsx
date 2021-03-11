@@ -48,9 +48,9 @@ const AddArticle = () => {
     query,
     title,
     setTitle,
-    setCurrLanguage,
-    setCurrCrew,
-    setCurrCategory,
+    setLanguage,
+    setCrew,
+    setCategory,
     alert,
     isLoading,
   } = useContainer();
@@ -72,7 +72,7 @@ const AddArticle = () => {
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setCurrCrew(e.target.value)}>
+            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
               {people.map(({ name, id }) => {
                 return (
                   <option key={id} value={name}>
@@ -86,7 +86,7 @@ const AddArticle = () => {
             <label htmlFor="category">Category</label>
             <select
               id="category"
-              onChange={(e) => setCurrCategory(e.target.value)}
+              onChange={(e) => setCategory(e.target.value)}
             >
               {categories.map(({ name, id }) => {
                 return (
@@ -101,7 +101,7 @@ const AddArticle = () => {
             <label htmlFor="language">Language</label>
             <select
               id="language"
-              onChange={(e) => setCurrLanguage(e.target.value)}
+              onChange={(e) => setLanguage(e.target.value)}
             >
               {lang.map((item, index) => {
                 return (
