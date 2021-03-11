@@ -48,29 +48,42 @@ const people = [
 ];
 
 const Edit = () => {
-
-  useEffect(()=>{
-    getEvent()
-  }, [])
-
   const {
+    getNews,
+    handlerNews,
+    getArticle,
+    handlerArticle,
     handleEdtiorChange,
     handlerSubmit,
     getEvent,
+    handlerEvents,
     alert,
-    title, setTitle,
-    imgURL, setImgURL,
+    title,
+    setTitle,
+    imgURL,
+    setImgURL,
     query,
-    eventDate, setEventDate,
+    eventDate,
+    setEventDate,
     setCrew,
     setEventCity,
-    eventPlace, setEventPlace,
-    link, setLink,
-    eventTime, setEventTime,
+    eventPlace,
+    setEventPlace,
+    link,
+    setLink,
+    eventTime,
+    setEventTime,
     setLanguage,
-    info, setInfo,
+    info,
+    setInfo,
     setCategory,
   } = useContainer();
+
+  useEffect(() => {
+    getEvent();
+    getArticle();
+    getNews();
+  }, []);
 
   return (
     <section className="section add-news">
@@ -163,10 +176,7 @@ const Edit = () => {
           </div>
           <div className="form-control">
             <label htmlFor="category">Category</label>
-            <select
-              id="category"
-              onChange={(e) => setCategory(e.target.value)}
-            >
+            <select id="category" onChange={(e) => setCategory(e.target.value)}>
               {categories.map(({ name, id }) => {
                 return (
                   <option key={id} value={name}>
@@ -203,21 +213,19 @@ const Edit = () => {
         </section>
 
         <div className="form-control form-info">
-            <label htmlFor="info">Info</label>
-            <textarea
-              id="info"
-              placeholder="add event details"
-              value={info}
-              onChange={(e) => {
-                setInfo(e.target.value);
-              }}
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
+          <label htmlFor="info">Info</label>
+          <textarea
+            id="info"
+            placeholder="add event details"
+            value={info}
+            onChange={(e) => {
+              setInfo(e.target.value);
+            }}
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
         <section className="editor">
-
-
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
             initialValue={query}

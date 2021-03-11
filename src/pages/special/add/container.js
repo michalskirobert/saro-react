@@ -17,7 +17,7 @@ export const useContainer = () => {
   const [eventPlace, setEventPlace] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [link, setLink] = useState("");
-  const [info, setInfo] = useState("");   
+  const [info, setInfo] = useState("");
   const [category, setCategory] = useState("");
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
@@ -39,6 +39,8 @@ export const useContainer = () => {
         date: new Date(),
         author: crew,
         category: category,
+        language: language,
+        published: new Date(),
       });
   };
 
@@ -63,7 +65,6 @@ export const useContainer = () => {
         published: new Date(),
       });
   };
-
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -102,6 +103,7 @@ export const useContainer = () => {
         content: query,
         author: crew,
         category: category,
+        language: language,
         published: new Date(),
       });
   };
