@@ -98,8 +98,6 @@ form.auth-form {
   }
 }
 
-$light-gray: #fafafa;
-
 form.cms {
   .main-title {
     width: 90%;
@@ -121,7 +119,7 @@ form.cms {
     };
   }
   .form-control {
-    background: $light-gray;
+    background: $crl-light-gray;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -134,9 +132,7 @@ form.cms {
     }
   }
   .form-info {
-    margin: auto {
-      top: 25px;
-    }
+    margin: 25px auto 0 auto;
     height: 200px;
     display: block;
     width: 90%;
@@ -158,7 +154,7 @@ form.cms {
   textarea {
     height: 150px;
     width: 100%;
-    background: $light-gray;
+    background: $crl-light-gray;
     border-radius: 10px;
     padding: 5px 10px;
     outline: none;
@@ -175,12 +171,12 @@ form.cms {
     border: none;
     border-bottom: 1px solid black;
     border-radius: 8px 8px 0 0;
-    background: $light-gray;
+    background: $crl-light-gray;
     padding: 5px 10px;
     outline: none;
   }
   select option {
-    background: $light-gray;
+    background: $crl-light-gray;
     font-style: italic;
   }
 
@@ -200,7 +196,7 @@ form.cms {
     &:hover {
       border: 1px solid black;
       font-weight: bold;
-      background: $light-gray;
+      background: $crl-light-gray;
       color: black;
       outline-offset: 2px;
     }
