@@ -21,6 +21,20 @@ const lang = [
     lang: "ja",
   },
 ];
+const categories = [
+  {
+    id: 1,
+    name: "Events",
+  },
+  {
+    id: 2,
+    name: "Food",
+  },
+  {
+    id: 3,
+    name: "Traditions",
+  },
+];
 
 const people = [
   {
@@ -44,22 +58,18 @@ const Edit = () => {
     handlerSubmit,
     getEvent,
     alert,
-    newTitle,
-    setNewTitle,
-    newImgURL,
-    setNewImgURL,
-    newQuery,
-    newEventDate,
-    setNewEventDate,
-    setNewCrew,
-    setNewEventCity,
-    newPlace,
-    setNewPlace,
-    newLink,
-    setNewLink,
-    newEventTime,
-    setNewEventTime,
-    setNewLanguage,
+    title, setTitle,
+    imgURL, setImgURL,
+    query,
+    eventDate, setEventDate,
+    setCrew,
+    setEventCity,
+    eventPlace, setEventPlace,
+    link, setLink,
+    eventTime, setEventTime,
+    setLanguage,
+    info, setInfo,
+    setCategory,
   } = useContainer();
 
   return (
@@ -72,15 +82,15 @@ const Edit = () => {
             <label htmlFor="title">Title</label>
             <input
               id="title"
-              placeholder={newTitle}
+              placeholder={title}
               type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="form-control">
             <label htmlFor="city">City</label>
-            <select id="city" onChange={(e) => setNewEventCity(e.target.value)}>
+            <select id="city" onChange={(e) => setEventCity(e.target.value)}>
               {cities &&
                 cities.map((item, index) => {
                   const { city } = item;
@@ -96,11 +106,11 @@ const Edit = () => {
             <label htmlFor="place">Place</label>
             <input
               id="place"
-              placeholder={newPlace}
+              placeholder={eventPlace}
               type="text"
-              value={newPlace}
+              value={eventPlace}
               onChange={(e) => {
-                setNewPlace(e.target.value);
+                setEventPlace(e.target.value);
               }}
             />
           </div>
@@ -110,9 +120,9 @@ const Edit = () => {
             <input
               id="date"
               type="date"
-              value={newEventDate}
+              value={eventDate}
               onChange={(e) => {
-                setNewEventDate(e.target.value);
+                setEventDate(e.target.value);
               }}
             />
           </div>
@@ -121,9 +131,9 @@ const Edit = () => {
             <input
               id="time"
               type="time"
-              value={newEventTime}
+              value={eventTime}
               onChange={(e) => {
-                setNewEventTime(e.target.value);
+                setEventTime(e.target.value);
               }}
             />
           </div>
@@ -131,11 +141,11 @@ const Edit = () => {
             <label htmlFor="imgURL">Img URL</label>
             <input
               id="imgURL"
-              placeholder={newImgURL}
+              placeholder={imgURL}
               type="text"
-              value={newImgURL}
+              value={imgURL}
               onChange={(e) => {
-                setNewImgURL(e.target.value);
+                setImgURL(e.target.value);
               }}
             />
           </div>
@@ -143,17 +153,32 @@ const Edit = () => {
             <label htmlFor="link">Link</label>
             <input
               id="link"
-              placeholder={newLink}
+              placeholder={link}
               type="text"
-              value={newLink}
+              value={link}
               onChange={(e) => {
-                setNewLink(e.target.value);
+                setLink(e.target.value);
               }}
             />
           </div>
           <div className="form-control">
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {categories.map(({ name, id }) => {
+                return (
+                  <option key={id} value={name}>
+                    {name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-control">
             <label htmlFor="lang">Lang</label>
-            <select id="lang" onChange={(e) => setNewLanguage(e.target.value)}>
+            <select id="lang" onChange={(e) => setLanguage(e.target.value)}>
               {lang.map((item, index) => {
                 return (
                   <option key={index} value={item.lang}>
@@ -165,7 +190,7 @@ const Edit = () => {
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setNewCrew(e.target.value)}>
+            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
               {people.map(({ name, id }) => {
                 return (
                   <option key={id} value={name}>
@@ -176,10 +201,26 @@ const Edit = () => {
             </select>
           </div>
         </section>
+
+        <div className="form-control form-info">
+            <label htmlFor="info">Info</label>
+            <textarea
+              id="info"
+              placeholder="add event details"
+              value={info}
+              onChange={(e) => {
+                setInfo(e.target.value);
+              }}
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
         <section className="editor">
+
+
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={newQuery}
+            initialValue={query}
             init={{
               width: "100vw",
               plugins: [

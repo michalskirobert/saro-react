@@ -52,17 +52,18 @@ export const useContainer = () => {
         id,
         title: title,
         imageURL: imgURL,
-        info: query,
+        info: info,
         date: eventDate,
+        time: eventTime,
         author: crew,
         city: eventCity,
         place: eventPlace,
         link: link,
+        language: language,
         published: new Date(),
       });
   };
 
-  // why don't we set the eventTime and language along with other info? 
 
   const handlerSubmit = (e) => {
     e.preventDefault();
