@@ -9,17 +9,16 @@ import { firestore } from "../../../components/feature/firebase";
 export const useContainer = () => {
   const [query, setQuery] = useState("");
   const [title, setTitle] = useState("");
-  const [currLanguage, setCurrLanguage] = useState("");
+  const [language, setLanguage] = useState("");
+  const [crew, setCrew] = useState("");
   const [eventTime, setEventTime] = useState(null);
   const [eventDate, setEventDate] = useState(null);
   const [eventCity, setEventCity] = useState(null);
-  const [info, setInfo] = useState("");
+  const [eventPlace, setEventPlace] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [link, setLink] = useState("");
-  const [eventPlace, setEventPlace] = useState("");
-  const [currCrew, setCurrCrew] = useState("");
-  const [currCategory, setCurrCategory] = useState("");
-  const [currImg, setCurrImg] = useState(null);
+  const [info, setInfo] = useState("");   
+  const [category, setCategory] = useState("");
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
 
@@ -35,11 +34,11 @@ export const useContainer = () => {
       .set({
         id,
         title: title,
-        imageURL: currImg,
+        imageURL: imgURL,
         content: query,
         date: new Date(),
-        author: currCrew,
-        category: currCategory,
+        author: crew,
+        category: category,
       });
   };
 
@@ -52,16 +51,19 @@ export const useContainer = () => {
       .set({
         id,
         title: title,
-        imageURL: currImg,
-        info: query,
+        imageURL: imgURL,
+        info: info,
         date: eventDate,
-        author: currCrew,
+        time: eventTime,
+        author: crew,
         city: eventCity,
         place: eventPlace,
         link: link,
+        language: language,
         published: new Date(),
       });
   };
+
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -96,10 +98,10 @@ export const useContainer = () => {
       .set({
         id: id,
         title: title,
-        imageURL: currImg,
+        imageURL: imgURL,
         content: query,
-        author: currCrew,
-        category: currCategory,
+        author: crew,
+        category: category,
         published: new Date(),
       });
   };
@@ -128,12 +130,12 @@ export const useContainer = () => {
     setQuery,
     title,
     setTitle,
-    currLanguage,
-    setCurrLanguage,
-    currCrew,
-    setCurrCrew,
-    currCategory,
-    setCurrCategory,
+    language,
+    setLanguage,
+    crew,
+    setCrew,
+    category,
+    setCategory,
     alert,
     isLoading,
     eventTime,

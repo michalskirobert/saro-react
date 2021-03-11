@@ -37,8 +37,8 @@ const AddEvents = () => {
   const {
     title,
     setTitle,
-    setCurrLanguage,
-    setCurrCrew,
+    setLanguage,
+    setCrew,
     alert,
     isLoading,
     eventTime,
@@ -62,7 +62,7 @@ const AddEvents = () => {
       {alert && <CmsAlert />}
       
       <form className="cms" onSubmit={handlerEvents}>
-      <h2 class="event-title">Add event</h2>
+      <h2 class="main-title">Add event</h2>
         <section className="form-container">
           <div className="form-control">
             <label htmlFor="title">Title</label>
@@ -153,7 +153,7 @@ const AddEvents = () => {
           </div>
           <div className="form-control">
             <label htmlFor="lang">Lang</label>
-            <select id="lang" onChange={(e) => setCurrLanguage(e.target.value)}>
+            <select id="lang" onChange={(e) => setLanguage(e.target.value)}>
               {lang.map((item, index) => {
                 return (
                   <option key={index} value={item.lang}>
@@ -165,7 +165,7 @@ const AddEvents = () => {
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setCurrCrew(e.target.value)}>
+            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
               {people.map(({ name, id }) => {
                 return (
                   <option key={id} value={name}>
