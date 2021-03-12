@@ -1,18 +1,23 @@
 {
-    "compilerOptions": {
-      "module": "system",
-      "noImplicitAny": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "outFile": "../../built/local/tsc.js",
-      "sourceMap": true,
-      "allowJs": true,
-      "baseUrl": ".",
-      "paths": {
-        "@actions/*": ["src/utils/actions/*"],
-        "@constants*": ["src/utils/constants/*"]
-      }
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "**/*.spec.ts"]
-    }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "jsx": "react",
+    "typeRoots": ["node_modules/@types"],
+  },
+  "include": ["src", "src/core/typings/cypress-types/index.d.ts"],
+  "extends": "./tsconfig.paths.json"
+}
