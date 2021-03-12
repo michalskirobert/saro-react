@@ -37,8 +37,8 @@ const AddEvents = () => {
   const {
     title,
     setTitle,
-    setCurrLanguage,
-    setCurrCrew,
+    setLanguage,
+    setCrew,
     alert,
     isLoading,
     eventTime,
@@ -60,7 +60,9 @@ const AddEvents = () => {
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
+      
       <form className="cms" onSubmit={handlerEvents}>
+      <h2 class="main-title">Add event</h2>
         <section className="form-container">
           <div className="form-control">
             <label htmlFor="title">Title</label>
@@ -68,22 +70,11 @@ const AddEvents = () => {
               id="title"
               type="text"
               value={title}
-              placeholder="Title"
+              placeholder="add title"
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          <div className="form-control">
-            <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setCurrCrew(e.target.value)}>
-              {people.map(({ name, id }) => {
-                return (
-                  <option key={id} value={name}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          
 
           <div className="form-control">
             <label htmlFor="city">City</label>
@@ -112,18 +103,7 @@ const AddEvents = () => {
               }}
             />
           </div>
-          <div className="form-control">
-            <label htmlFor="lang">Lang</label>
-            <select id="lang" onChange={(e) => setCurrLanguage(e.target.value)}>
-              {lang.map((item, index) => {
-                return (
-                  <option key={index} value={item.lang}>
-                    {item.lang}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+       
 
           <div className="form-control">
             <label htmlFor="date">Date</label>
@@ -148,10 +128,10 @@ const AddEvents = () => {
             />
           </div>
           <div className="form-control">
-            <label htmlFor="imgURL">img URL</label>
+            <label htmlFor="imgURL">Img URL</label>
             <input
               id="imgURL"
-              placeholder="img URL"
+              placeholder=" add img URL"
               type="text"
               value={imgURL}
               onChange={(e) => {
@@ -163,7 +143,7 @@ const AddEvents = () => {
             <label htmlFor="link">Link</label>
             <input
               id="link"
-              placeholder="link"
+              placeholder="add link"
               type="text"
               value={link}
               onChange={(e) => {
@@ -171,8 +151,34 @@ const AddEvents = () => {
               }}
             />
           </div>
-
           <div className="form-control">
+            <label htmlFor="lang">Lang</label>
+            <select id="lang" onChange={(e) => setLanguage(e.target.value)}>
+              {lang.map((item, index) => {
+                return (
+                  <option key={index} value={item.lang}>
+                    {item.lang}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className="form-control">
+            <label htmlFor="crew">Crew</label>
+            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
+              {people.map(({ name, id }) => {
+                return (
+                  <option key={id} value={name}>
+                    {name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
+         
+        </section>
+        <div className="form-control form-info">
             <label htmlFor="info">Info</label>
             <textarea
               id="info"
@@ -185,7 +191,6 @@ const AddEvents = () => {
               rows="10"
             ></textarea>
           </div>
-        </section>
 
         <Button type="submit" disabled={isLoading}>
           Add

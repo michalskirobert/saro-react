@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@actions/*": ["src/utils/actions/*"],
+        "@constants*": ["src/utils/constants/*"]
+      }
+    },
+    "include": ["src"]
+  }

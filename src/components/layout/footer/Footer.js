@@ -1,5 +1,4 @@
 import React from "react";
-import NavMenu from "./../../../components/layout/nav/NavMenu.js";
 import Logo from "./../../../components/layout/nav/Logo";
 
 const Footer = () => {
