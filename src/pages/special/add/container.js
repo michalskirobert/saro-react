@@ -33,12 +33,13 @@ export const useContainer = () => {
       .doc(id)
       .set({
         id,
+        type: generalConstants.NEWS,
         title: title,
         imageURL: imgURL,
         content: query,
-        date: new Date(),
         author: crew,
         category: category,
+        published: new Date(),
       });
   };
 
@@ -51,6 +52,7 @@ export const useContainer = () => {
       .set({
         id,
         title,
+        type: generalConstants.EVENTS,
         imageURL: imgURL,
         info,
         date: eventDate,
@@ -96,6 +98,7 @@ export const useContainer = () => {
       .doc(id)
       .set({
         id: id,
+        type: generalConstants.BLOG_POSTS,
         title: title,
         imageURL: imgURL,
         content: query,
