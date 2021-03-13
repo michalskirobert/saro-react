@@ -17,11 +17,8 @@
     }
     input {
       margin: 10px;
-<<<<<<< HEAD
-      padding: 8px;
-=======
       padding: 10px;
->>>>>>> f6eb1c4768be2539a55f14ccbc666d6d289b818b
+      width: 200px;
       text-align: center;
       border: none;
       outline: none;
@@ -34,10 +31,6 @@
       &:focus {
         color: $crl-special;
       }
-    }
-    button {
-      background-color: $crl-primary;
-      color: #111;
     }
   }
 }

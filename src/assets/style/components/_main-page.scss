@@ -113,8 +113,8 @@ section.home {
     overflow-x: scroll;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     .event,
     .last-posts {
       display: flex;
