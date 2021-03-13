@@ -77,21 +77,18 @@ const AddEvents = () => {
 
           <div className="form-control">
             <label htmlFor="city">City</label>
-            <select
-              id="city"
-              onChange={(e) => setEventCity(e.target.value)}
-              defaultValue={cities[0]}
-            >
-              {cities &&
-                cities.map((item, index) => {
-                  const { city } = item;
-                  return (
-                    <option key={index} value={city}>
-                      {city}
-                    </option>
-                  );
-                })}
-            </select>
+            <Select
+              {...{
+                id: "city",
+                name: "city",
+                defaultValue: cities[0],
+                options: cities.map((item) => ({
+                  label: item.city,
+                  value: item.city,
+                })),
+                onChange: (options) => setEventCity(options),
+              }}
+            />
           </div>
 
           <div className="form-control">
@@ -159,7 +156,7 @@ const AddEvents = () => {
               {...{
                 id: "lang",
                 name: "lang",
-                defaultValue: "ja",
+                defaultValue: lang[0],
                 options: lang.map((item) => ({
                   label: item.lang,
                   value: item.lang,
@@ -170,15 +167,18 @@ const AddEvents = () => {
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
-              {people.map(({ name, id }) => {
-                return (
-                  <option key={id} value={name}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "crew",
+                name: "crew",
+                defaultValue: people[0],
+                options: people.map((item) => ({
+                  label: item.name,
+                  value: item.name,
+                })),
+                onChange: (options) => setCrew(options),
+              }}
+            />
           </div>
         </section>
         <div className="form-control form-info">

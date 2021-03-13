@@ -1,4 +1,5 @@
 import React from "react";
+import Select from "react-select";
 import { Button } from "react-bootstrap";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
@@ -72,39 +73,48 @@ const AddArticle = () => {
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
-              {people.map(({ name, id }) => {
-                return (
-                  <option key={id} value={name}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "crew",
+                name: "crew",
+                defaultValue: people[0],
+                options: people.map((item) => ({
+                  label: item.name,
+                  value: item.name,
+                })),
+                onChange: (options) => setCrew(options),
+              }}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="category">Category</label>
-            <select id="category" onChange={(e) => setCategory(e.target.value)}>
-              {categories.map(({ name, id }) => {
-                return (
-                  <option key={id} value={name}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "category",
+                name: "category",
+                defaultValue: categories[0],
+                options: categories.map((item) => ({
+                  label: item.name,
+                  value: item.name,
+                })),
+                onChange: (options) => setCategory(options),
+              }}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="language">Language</label>
-            <select id="language" onChange={(e) => setLanguage(e.target.value)}>
-              {lang.map((item, index) => {
-                return (
-                  <option key={index} value={item.lang}>
-                    {item.lang}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "lang",
+                name: "lang",
+                defaultValue: lang[0],
+                options: lang.map((item) => ({
+                  label: item.lang,
+                  value: item.lang,
+                })),
+                onChange: (options) => setLanguage(options),
+              }}
+            />
           </div>
         </section>
 
