@@ -156,7 +156,7 @@ const AddEvents = () => {
               {...{
                 id: "lang",
                 name: "lang",
-                defaultValue: "ja",
+                defaultValue: lang[0],
                 options: lang.map((item) => ({
                   label: item.lang,
                   value: item.lang,
