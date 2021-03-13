@@ -1,25 +1,35 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "target": "esnext",
-      "lib": ["dom", "dom.iterable", "esnext"],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "experimentalDecorators": true,
-      "strictPropertyInitialization": false,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "forceConsistentCasingInFileNames": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": false,
-      "noImplicitAny": false,
-      "noEmit": true,
-      "jsx": "react",
-      "typeRoots": ["node_modules/@types"],
-    },
-    "include": ["src", "src/core/typings/cypress-types/index.d.ts"],
-    "extends": "./tsconfig.paths.json"
-  }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "src",
+    "src/core/typings/cypress-types/index.d.ts"
+  ],
+  "extends": "./tsconfig.paths.json"
+}
