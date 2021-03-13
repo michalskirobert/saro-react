@@ -17,7 +17,7 @@
     }
     input {
       margin: 10px;
-      padding: 180px;
+      padding: 8px;
       text-align: center;
       border: none;
       outline: none;
@@ -30,6 +30,10 @@
       &:focus {
         color: $crl-special;
       }
+    }
+    button {
+      background-color: $crl-primary;
+      color: #111;
     }
   }
 }

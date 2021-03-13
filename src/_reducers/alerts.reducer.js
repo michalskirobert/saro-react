@@ -1,4 +1,4 @@
-import { alertConstants } from "../_constants/alert.constants";
+import { alertConstants } from "../utils/_constants/alert.constants";
 
 const initialState = {
   alert: false,

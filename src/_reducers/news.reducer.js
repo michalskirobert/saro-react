@@ -1,4 +1,4 @@
-import { newsConstants } from "./../_constants";
+import { newsConstants } from "../utils/_constants";
 
 const initialState = {
   posts: [],

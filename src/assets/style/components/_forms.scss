@@ -110,14 +110,15 @@ form.cms {
   .form-container {
     max-width: 1200px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+    grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     justify-content: center;
     align-items: center;
     margin: auto {
       bottom: 20px;
-    };
+    }
   }
+
   .form-control {
     background: $crl-light-gray;
     display: flex;
@@ -207,7 +208,13 @@ form.cms {
     }
   }
   .editor {
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
+  }
+  @media (min-width: 540px) {
+    .form-container {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+    }
   }
 }

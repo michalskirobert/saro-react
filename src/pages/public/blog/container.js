@@ -1,5 +1,9 @@
-import { fetchActions, blogActions, eventsActions } from "../../../_actions";
-import { generalConstants } from "../../../_constants";
+import {
+  fetchActions,
+  blogActions,
+  eventsActions,
+} from "../../../utils/_actions";
+import { generalConstants } from "../../../utils/_constants";
 import { firestore } from "../../../components/feature/firebase";
 import { useDispatch, useSelector } from "react-redux";
 

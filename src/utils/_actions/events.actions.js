@@ -1,4 +1,4 @@
-import { eventsConstants } from "./../_constants";
+import { eventsConstants } from "../_constants";
 
 const getEventsRequest = () => {
   return {

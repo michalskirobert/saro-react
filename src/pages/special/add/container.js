@@ -2,22 +2,22 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { cmsActions } from "../../../_actions";
-import { generalConstants } from "../../../_constants";
+import { cmsActions } from "../../../utils/_actions";
+import { generalConstants } from "../../../utils/_constants";
 import { firestore } from "../../../components/feature/firebase";
 
 export const useContainer = () => {
   const [query, setQuery] = useState("");
   const [title, setTitle] = useState("");
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState();
   const [crew, setCrew] = useState("");
-  const [eventTime, setEventTime] = useState(null);
-  const [eventDate, setEventDate] = useState(null);
-  const [eventCity, setEventCity] = useState(null);
+  const [eventTime, setEventTime] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventCity, setEventCity] = useState("");
   const [eventPlace, setEventPlace] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [link, setLink] = useState("");
-  const [info, setInfo] = useState("");   
+  const [info, setInfo] = useState("");
   const [category, setCategory] = useState("");
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
@@ -50,20 +50,19 @@ export const useContainer = () => {
       .doc(id)
       .set({
         id,
-        title: title,
+        title,
         imageURL: imgURL,
-        info: info,
+        info,
         date: eventDate,
         time: eventTime,
         author: crew,
         city: eventCity,
         place: eventPlace,
-        link: link,
-        language: language,
+        link,
+        language: language.value,
         published: new Date(),
       });
   };
-
 
   const handlerSubmit = (e) => {
     e.preventDefault();

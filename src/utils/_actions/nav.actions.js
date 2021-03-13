@@ -1,4 +1,4 @@
-import { navConstants } from "./../_constants/nav.constants";
+import { navConstants } from "../_constants/nav.constants";
 
 const navToggle = () => {
   return {

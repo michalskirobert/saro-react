@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { auth } from "./../../firebase";
-import { userActions, alertActions } from "./../../../../_actions";
+import { userActions, alertActions } from "../../../../utils/_actions";
 import Alert from "./../../../shared/alerts";
 import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
 

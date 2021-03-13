@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useContainer } from "./container";
 import { DefaultLoader } from "./../../../components/shared/loadings/DefaultLoader";
-import { newsActions } from "../../../_actions";
+import { newsActions } from "../../../utils/_actions";
 
 const News = () => {
   const dispatch = useDispatch();

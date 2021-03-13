@@ -1,4 +1,4 @@
-import { newsConstants } from "./../_constants";
+import { newsConstants } from "../_constants";
 
 const viewMore = () => {
   return {

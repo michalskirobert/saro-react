@@ -1,4 +1,4 @@
-import { eventsConstants } from "./../_constants";
+import { eventsConstants } from "../utils/_constants";
 
 const defaultState = {
   isLoading: true,

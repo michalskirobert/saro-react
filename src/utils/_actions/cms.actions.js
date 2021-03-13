@@ -1,4 +1,4 @@
-import { cmsConstants } from "./../_constants";
+import { cmsConstants } from "../_constants";
 
 const addNewsReq = () => {
   return {

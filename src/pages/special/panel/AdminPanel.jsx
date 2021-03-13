@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
 import { useContainer } from "../../public/home/container";
+import { useEdit } from "../../special/edit/container";
 import { firestore } from "../../../components/feature/firebase";
 
 const AdminPanel = () => {
   const { getNews } = useContainer();
+  const { handleEdit } = useEdit();
   const newsItems = useSelector((state) => state.news.posts);
 
   const removeItem = async (id) => {
@@ -28,29 +30,12 @@ const AdminPanel = () => {
         <Tab eventKey="newContent" title="Add new content">
           <Nav className="flex-column">
             <Nav.Link href="/panel/add/news-content">Add news</Nav.Link>
-            <Nav.Link href="/panel/add/post">
-              Add new blog post
-            </Nav.Link>
-            <Nav.Link href="/panel/add/events">
-              Add new event
-            </Nav.Link>
-            <Nav.Link href="/panel/add/article">
-              Add new article
-            </Nav.Link>
+            <Nav.Link href="/panel/add/post">Add new blog post</Nav.Link>
+            <Nav.Link href="/panel/add/events">Add new event</Nav.Link>
+            <Nav.Link href="/panel/add/article">Add new article</Nav.Link>
           </Nav>
         </Tab>
         <Tab eventKey="menagment" title="Menage content">
-          <Nav className="flex-row" eventKey="news">
-            <Nav.Link eventKey="news" title="Edit news">
-              Edit navgation
-            </Nav.Link>
-            <Nav.Link href="/panel/edit/nav" disabled>
-              Edit navgation
-            </Nav.Link>
-            <Nav.Link href="/panel/edit/general" disabled>
-              Edit general stuff
-            </Nav.Link>
-          </Nav>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -62,7 +47,7 @@ const AdminPanel = () => {
               </tr>
             </thead>
             {newsItems.map((post, index) => {
-              const { author, title, date, id } = post;
+              const { author, title, date, id, type } = post;
               return (
                 <tbody key={id}>
                   <tr>
@@ -71,7 +56,7 @@ const AdminPanel = () => {
                     <td>{date}</td>
                     <td>{author}</td>
                     <td>
-                      <Button variant="primary" disabled>
+                      <Button variant="primary" onClick={() => handleEdit(id)}>
                         Edit
                       </Button>
                       <Button variant="danger" onClick={() => removeItem(id)}>

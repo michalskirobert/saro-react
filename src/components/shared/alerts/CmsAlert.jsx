@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { cmsActions } from "./../../../_actions";
+import { cmsActions } from "../../../utils/_actions";
 
 const CmsAlert = () => {
   const dispatch = useDispatch();

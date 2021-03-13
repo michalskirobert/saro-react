@@ -1,4 +1,4 @@
-import { userConstants } from "../_constants/user.constants";
+import { userConstants } from "../utils/_constants/user.constants";
 
 const userState = {
   uid: 0,

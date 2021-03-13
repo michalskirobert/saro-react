@@ -1,4 +1,4 @@
-import { heroConstants } from "./../_constants/hero.constants";
+import { heroConstants } from "../utils/_constants/hero.constants";
 
 export const heroReducer = (state = 0, action) => {
   switch (action.type) {

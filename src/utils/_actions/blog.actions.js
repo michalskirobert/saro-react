@@ -1,4 +1,4 @@
-import { blogConstants } from "./../_constants/blog.constants";
+import { blogConstants } from "../_constants/blog.constants";
 
 const readMore = () => {
   return {

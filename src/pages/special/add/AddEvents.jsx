@@ -1,4 +1,5 @@
 import React from "react";
+import Select from "react-select";
 import { Button } from "react-bootstrap";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
@@ -56,13 +57,12 @@ const AddEvents = () => {
     link,
     setLink,
   } = useContainer();
-
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
-      
+
       <form className="cms" onSubmit={handlerEvents}>
-      <h2 class="main-title">Add event</h2>
+        <h2 className="main-title">Add event</h2>
         <section className="form-container">
           <div className="form-control">
             <label htmlFor="title">Title</label>
@@ -74,11 +74,14 @@ const AddEvents = () => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          
 
           <div className="form-control">
             <label htmlFor="city">City</label>
-            <select id="city" onChange={(e) => setEventCity(e.target.value)}>
+            <select
+              id="city"
+              onChange={(e) => setEventCity(e.target.value)}
+              defaultValue={cities[0]}
+            >
               {cities &&
                 cities.map((item, index) => {
                   const { city } = item;
@@ -103,7 +106,6 @@ const AddEvents = () => {
               }}
             />
           </div>
-       
 
           <div className="form-control">
             <label htmlFor="date">Date</label>
@@ -153,15 +155,18 @@ const AddEvents = () => {
           </div>
           <div className="form-control">
             <label htmlFor="lang">Lang</label>
-            <select id="lang" onChange={(e) => setLanguage(e.target.value)}>
-              {lang.map((item, index) => {
-                return (
-                  <option key={index} value={item.lang}>
-                    {item.lang}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "lang",
+                name: "lang",
+                defaultValue: "ja",
+                options: lang.map((item) => ({
+                  label: item.lang,
+                  value: item.lang,
+                })),
+                onChange: (options) => setLanguage(options),
+              }}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
@@ -175,22 +180,20 @@ const AddEvents = () => {
               })}
             </select>
           </div>
-
-         
         </section>
         <div className="form-control form-info">
-            <label htmlFor="info">Info</label>
-            <textarea
-              id="info"
-              placeholder="add event details"
-              value={info}
-              onChange={(e) => {
-                setInfo(e.target.value);
-              }}
-              cols="30"
-              rows="10"
-            ></textarea>
-          </div>
+          <label htmlFor="info">Info</label>
+          <textarea
+            id="info"
+            placeholder="add event details"
+            value={info}
+            onChange={(e) => {
+              setInfo(e.target.value);
+            }}
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
 
         <Button type="submit" disabled={isLoading}>
           Add

@@ -59,7 +59,7 @@ const AddNews = () => {
     <section className="section add-news">
       {alert && <CmsAlert />}
       <form className="cms" onSubmit={handlerSubmit}>
-        <h2 class="main-title">Add News</h2>
+        <h2 className="main-title">Add News</h2>
         <section className="form-container">
           <div className="form-control">
             <label htmlFor="title">Title</label>

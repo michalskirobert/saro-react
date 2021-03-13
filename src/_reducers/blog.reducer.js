@@ -1,4 +1,4 @@
-import { blogConstants } from "./../_constants";
+import { blogConstants } from "../utils/_constants";
 
 const defaultState = {
   isLoading: true,

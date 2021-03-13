@@ -1,4 +1,4 @@
-import { navConstants } from "./../_constants/nav.constants";
+import { navConstants } from "../utils/_constants/nav.constants";
 
 export const navReducer = (state = false, action) => {
   switch (action.type) {

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
 import { auth } from "../../firebase";
-import { userActions } from "../../../../_actions";
+import { userActions } from "../../../../utils/_actions";
 
 const Login = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./../../../components/feature/firebase";
-import { navActions } from "./../../../_actions";
+import { navActions } from "../../../utils/_actions";
 
 const nav = [
   {
