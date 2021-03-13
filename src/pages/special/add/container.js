@@ -35,10 +35,10 @@ export const useContainer = () => {
         id,
         type: generalConstants.NEWS,
         title: title,
-        imageURL: imgURL,
         content: query,
         author: crew,
         category: category,
+        language: language,
         published: new Date(),
       });
   };
@@ -104,6 +104,7 @@ export const useContainer = () => {
         content: query,
         author: crew,
         category: category,
+        language: language,
         published: new Date(),
       });
   };

@@ -188,8 +188,8 @@ export const useEdit = () => {
       default:
         return
     }
+  };
 
-  }
 
   return {
     handleEdtiorChange,

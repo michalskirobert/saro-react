@@ -48,14 +48,16 @@ const people = [
 ];
 
 const Edit = () => {
-  useEffect(() => {
-    getEvent();
-  }, []);
-
+ 
   const {
+    getNews,
+    handlerNews,
+    getArticle,
+    handlerArticle,
     handleEdtiorChange,
     handlerSubmit,
     getEvent,
+    handlerEvents,
     alert,
     title,
     setTitle,
@@ -77,6 +79,10 @@ const Edit = () => {
     setInfo,
     setCategory,
   } = useEdit();
+
+  useEffect(() => {
+    getEvent();
+  }, [getEvent]);
 
   return (
     <section className="section add-news">
