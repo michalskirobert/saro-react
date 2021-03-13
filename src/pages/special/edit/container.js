@@ -77,16 +77,16 @@ export const useEdit = () => {
       .set({
         id,
         type: generalConstants.EVENTS,
-        title: title,
+        title,
         imageURL: imgURL,
-        info: info,
+        info,
         date: eventDate,
         time: eventTime,
         author: crew,
         city: eventCity,
         place: eventPlace,
-        link: link,
-        language: language,
+        link,
+        language,
         published: new Date(),
       });
   };
@@ -109,11 +109,11 @@ export const useEdit = () => {
       .set({
         id,
         type: generalConstants.NEWS,
-        title: title,
-        query: query,
+        title,
+        query,
         author: crew,
-        language: language,
-        category: category,
+        language,
+        category,
         published: new Date(),
       });
   };
@@ -136,11 +136,11 @@ export const useEdit = () => {
       .set({
         id,
         type: generalConstants.BLOG_POSTS,
-        title: title,
-        query: query,
+        title,
+        query,
         author: crew,
-        language: language,
-        category: category,
+        language,
+        category,
         published: new Date(),
       });
   };

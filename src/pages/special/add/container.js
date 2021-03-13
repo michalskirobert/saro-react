@@ -34,11 +34,11 @@ export const useContainer = () => {
       .set({
         id,
         type: generalConstants.NEWS,
-        title: title,
+        title,
         content: query,
         author: crew,
-        category: category,
-        language: language,
+        category,
+        language,
         published: new Date(),
       });
   };
@@ -99,12 +99,12 @@ export const useContainer = () => {
       .set({
         id: id,
         type: generalConstants.BLOG_POSTS,
-        title: title,
+        title,
         imageURL: imgURL,
         content: query,
         author: crew,
-        category: category,
-        language: language,
+        category,
+        language,
         published: new Date(),
       });
   };
