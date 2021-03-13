@@ -50,14 +50,9 @@ const people = [
 const Edit = () => {
  
   const {
-    getNews,
-    handlerNews,
-    getArticle,
-    handlerArticle,
     handleEdtiorChange,
     handlerSubmit,
     getEvent,
-    handlerEvents,
     alert,
     title,
     setTitle,
