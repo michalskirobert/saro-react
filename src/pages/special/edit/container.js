@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { cmsActions } from "../../../utils/_actions";
 import { generalConstants } from "../../../utils/_constants";
@@ -8,7 +8,7 @@ import { idText } from "typescript";
 
 export const useEdit = () => {
   const alert = useSelector((state) => state.CMS.alert);
-  const [setId] = useState("");
+  const [id, setId] = useState("");
   const [query, setQuery] = useState("");
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState("");
@@ -23,6 +23,7 @@ export const useEdit = () => {
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
 
+  const dispatch = useDispatch()
   const lang = useSelector((state) => state.general.language);
 
   const getEvent = async (id, type) => {
@@ -76,16 +77,16 @@ export const useEdit = () => {
       .set({
         id,
         type: generalConstants.EVENTS,
-        title: title,
+        title,
         imageURL: imgURL,
-        info: info,
+        info,
         date: eventDate,
         time: eventTime,
         author: crew,
         city: eventCity,
         place: eventPlace,
-        link: link,
-        language: language,
+        link,
+        language,
         published: new Date(),
       });
   };
@@ -103,21 +104,43 @@ export const useEdit = () => {
     return await firestore
       .collection(generalConstants.LANG)
       .doc(lang)
-      .collection(generalConstants.EVENTS)
+      .collection(generalConstants.NEWS)
       .doc(id)
       .set({
         id,
-        type: generalConstants.EVENTS,
-        title: title,
-        imageURL: imgURL,
-        info: info,
-        date: eventDate,
-        time: eventTime,
+        type: generalConstants.NEWS,
+        title,
+        query,
         author: crew,
-        city: eventCity,
-        place: eventPlace,
-        link: link,
-        language: language,
+        language,
+        category,
+        published: new Date(),
+      });
+  };
+
+  const getArticle = (id, type) => {
+    firestore
+      .collection(generalConstants.LANG)
+      .doc(lang)
+      .collection(generalConstants.BLOG_POSTS)
+      .doc(id)
+      .onSnapshot((doc) => console.log(doc.data()));
+  };
+
+  const updateArticle = async (id) => {
+    return await firestore
+      .collection(generalConstants.LANG)
+      .doc(lang)
+      .collection(generalConstants.BLOG_POSTS)
+      .doc(id)
+      .set({
+        id,
+        type: generalConstants.BLOG_POSTS,
+        title,
+        query,
+        author: crew,
+        language,
+        category,
         published: new Date(),
       });
   };
@@ -130,18 +153,53 @@ export const useEdit = () => {
     setQuery(e.target.getContent());
   };
 
+
   const handlerSubmit = async (e) => {
     e.preventDefault();
-    await firestore.collection("language").doc("en").collection("blog").add({
-      type: query,
-    });
+    dispatch(cmsActions.clear());
+    switch (type) {
+      case generalConstants.BLOG_POSTS:
+        try {
+          dispatch(cmsActions.addArticleReq());
+          updateArticle(id);
+          dispatch(cmsActions.addArticleSuccess());
+        } catch (error) {
+          dispatch(cmsActions.addArticleFailure());
+        }
+        break;
+      case generalConstants.NEWS:
+        try {
+          dispatch(cmsActions.addNewsReq());
+          updateNews(id);
+          dispatch(cmsActions.addNewsSuccess());
+        } catch (error) {
+          dispatch(cmsActions.addNewsFailure());
+        }
+        break;
+      case generalConstants.EVENTS:
+        try {
+          dispatch(cmsActions.addEventsReq());
+          updateEvent(id);
+          dispatch(cmsActions.addEventsSuccess());
+        } catch (error) {
+          dispatch(cmsActions.addEventsFailure());
+        }
+        break;
+      default:
+        return
+    }
   };
+
 
   return {
     handleEdtiorChange,
     handlerSubmit,
     getEvent,
     updateEvent,
+    getArticle,
+    updateArticle,
+    getNews,
+    updateNews,
     alert,
     title,
     setTitle,
