@@ -49,7 +49,6 @@ const people = [
 ];
 
 const Edit = () => {
- 
   const {
     handleEdtiorChange,
     handlerSubmit,
@@ -74,11 +73,12 @@ const Edit = () => {
     info,
     setInfo,
     setCategory,
+    editable,
   } = useEdit();
 
   useEffect(() => {
     getEvent();
-  }, [getEvent]);
+  }, []);
 
   return (
     <section className="section add-news">
@@ -90,7 +90,7 @@ const Edit = () => {
             <label htmlFor="title">Title</label>
             <input
               id="title"
-              placeholder={title}
+              placeholder={editable ? editable.title : "null"}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}

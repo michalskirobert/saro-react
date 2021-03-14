@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { cmsActions } from "../../../utils/_actions";
 import { generalConstants } from "../../../utils/_constants";
 import { firestore } from "../../../components/feature/firebase";
-import { idText } from "typescript";
+import { useHistory } from "react-router";
 
 export const useEdit = () => {
   const alert = useSelector((state) => state.CMS.alert);
@@ -22,9 +22,11 @@ export const useEdit = () => {
   const [info, setInfo] = useState("");
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
+  const history = useHistory();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
+  const editable = useSelector((state) => state.CMS.edit);
 
   const getEvent = async (id, type) => {
     return await firestore
@@ -48,17 +50,6 @@ export const useEdit = () => {
             link,
             language,
           } = doc.data();
-          setId(id);
-          setTitle(title);
-          setImgURL(imageURL);
-          setInfo(info);
-          setEventDate(date);
-          setEventTime(time);
-          setCrew(author);
-          setEventCity(city);
-          setEventPlace(place);
-          setLink(link);
-          setLanguage(language);
         } else {
           console.log("Document not found");
         }
@@ -91,13 +82,13 @@ export const useEdit = () => {
       });
   };
 
-  const getNews = (id, type) => {
+  const getNews = async (id, type) => {
     firestore
       .collection("language")
       .doc("en")
       .collection("news")
       .doc(id)
-      .onSnapshot((doc) => console.log(doc.data()));
+      .onSnapshot((doc) => dispatch(cmsActions.edit({ ...doc.data(), type })));
   };
 
   const updateNews = async (id) => {
@@ -118,7 +109,7 @@ export const useEdit = () => {
       });
   };
 
-  const getArticle = (id, type) => {
+  const getArticle = async (id, type) => {
     firestore
       .collection(generalConstants.LANG)
       .doc(lang)
@@ -145,14 +136,14 @@ export const useEdit = () => {
       });
   };
 
-  const handleEdit = async (id) => {
-    console.log(getNews(id));
+  const handleEdit = async (id, type) => {
+    await getNews(id, type);
+    history.push("/panel/edit");
   };
 
   const handleEdtiorChange = (e) => {
     setQuery(e.target.getContent());
   };
-
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
@@ -186,10 +177,9 @@ export const useEdit = () => {
         }
         break;
       default:
-        return
+        return;
     }
   };
-
 
   return {
     handleEdtiorChange,
@@ -226,5 +216,6 @@ export const useEdit = () => {
     category,
     setCategory,
     handleEdit,
+    editable,
   };
 };
