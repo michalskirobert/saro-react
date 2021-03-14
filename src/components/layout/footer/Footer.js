@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "./../../../components/layout/nav/Logo";
-
 const Footer = () => {
   return (
     <>

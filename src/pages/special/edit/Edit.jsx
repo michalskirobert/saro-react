@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Select from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "react-bootstrap";
 
@@ -48,10 +49,6 @@ const people = [
 ];
 
 const Edit = () => {
-  useEffect(() => {
-    getEvent();
-  }, []);
-
   const {
     handleEdtiorChange,
     handlerSubmit,
@@ -76,11 +73,17 @@ const Edit = () => {
     info,
     setInfo,
     setCategory,
+    editable,
   } = useEdit();
+
+  useEffect(() => {
+    getEvent();
+  }, []);
 
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
+      
       <form className="cms" onSubmit={handlerSubmit}>
         <h2 className="main-title">Edit element</h2>
         <section className="form-container">
@@ -88,7 +91,7 @@ const Edit = () => {
             <label htmlFor="title">Title</label>
             <input
               id="title"
-              placeholder={title}
+              placeholder={editable ? editable.title : "null"}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -96,17 +99,18 @@ const Edit = () => {
           </div>
           <div className="form-control">
             <label htmlFor="city">City</label>
-            <select id="city" onChange={(e) => setEventCity(e.target.value)}>
-              {cities &&
-                cities.map((item, index) => {
-                  const { city } = item;
-                  return (
-                    <option key={index} value={city}>
-                      {city}
-                    </option>
-                  );
-                })}
-            </select>
+            <Select
+              {...{
+                id: "city",
+                name: "city",
+                defaultValue: cities[0],
+                options: cities.map((item) => ({
+                  label: item.city,
+                  value: item.city,
+                })),
+                onChange: (options) => setEventCity(options),
+              }}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="place">Place</label>
@@ -169,39 +173,48 @@ const Edit = () => {
           </div>
           <div className="form-control">
             <label htmlFor="category">Category</label>
-            <select id="category" onChange={(e) => setCategory(e.target.value)}>
-              {categories.map(({ name, id }) => {
-                return (
-                  <option key={id} value={name}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "category",
+                name: "category",
+                defaultValue: categories[0],
+                options: categories.map((item) => ({
+                  label: item.name,
+                  value: item.name,
+                })),
+                onChange: (options) => setCategory(options),
+              }}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="lang">Lang</label>
-            <select id="lang" onChange={(e) => setLanguage(e.target.value)}>
-              {lang.map((item, index) => {
-                return (
-                  <option key={index} value={item.lang}>
-                    {item.lang}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "lang",
+                name: "lang",
+                defaultValue: lang[0],
+                options: lang.map((item) => ({
+                  label: item.lang,
+                  value: item.lang,
+                })),
+                onChange: (options) => setLanguage(options),
+              }}
+            />
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
-            <select id="crew" onChange={(e) => setCrew(e.target.value)}>
-              {people.map(({ name, id }) => {
-                return (
-                  <option key={id} value={name}>
-                    {name}
-                  </option>
-                );
-              })}
-            </select>
+            <Select
+              {...{
+                id: "crew",
+                name: "crew",
+                defaultValue: people[0],
+                options: people.map((item) => ({
+                  label: item.name,
+                  value: item.name,
+                })),
+                onChange: (options) => setCrew(options),
+              }}
+            />
           </div>
         </section>
 

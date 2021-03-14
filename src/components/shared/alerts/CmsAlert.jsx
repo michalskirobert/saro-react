@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaRegTimesCircle, FaRegCheckCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { cmsActions } from "../../../utils/_actions";
+import { alertConstants } from "../../../utils/_constants";
 
 const CmsAlert = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,11 @@ const CmsAlert = () => {
   }, []);
   return (
     <div className={`alert ${alert.type}`}>
+      {alert.type === alertConstants.SUCCESS ? (
+        <FaRegCheckCircle className="icon" />
+      ) : (
+        <FaRegTimesCircle className="icon" />
+      )}
       <p>{alert.message}</p>
       <button className="close" onClick={() => dispatch(cmsActions.clear())}>
         <FaTimes />

@@ -60,6 +60,13 @@ const addArticleFailure = () => {
   };
 };
 
+const edit = (params) => {
+  return {
+    type: cmsConstants.EDIT,
+    payload: params,
+  };
+};
+
 export const cmsActions = {
   addNewsReq,
   addNewsSuccess,
@@ -71,4 +78,5 @@ export const cmsActions = {
   addArticleReq,
   addArticleSuccess,
   clear,
+  edit,
 };

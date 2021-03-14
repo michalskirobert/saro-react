@@ -1,35 +1,53 @@
 .alert {
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: relative;
   min-height: 50px;
-  width: 100%;
-  max-height: 250px;
+  min-width: 50%;
   padding: 1rem;
+  position: fixed;
+  top: 25%;
+  transform: translateY(-50%);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  box-shadow: 0 4px 1rem 0 $crl-shadow-gray;
+  animation: slide-in 0.5s ease-in-out;
   p {
     color: $crl-basic;
+    font-weight: 600;
   }
   .close {
-    font-size: 1rem;
+    font-size: 1.2rem;
     background-color: transparent;
     padding: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
+    margin-left: auto;
     box-shadow: none;
     transition: 0.5s color ease;
     &:hover {
       color: $crl-default;
-      background-color: transparent;
     }
+  }
+  .icon {
+    color: white;
+    margin-right: 10px;
   }
 }
 
-.alert.dangerous {
-  background-color: $crl-alert;
+.alert.danger {
+  background-color: $crl-alert-error;
 }
 
 .alert.success {
-  background-color: $crl-positive;
+  background-color: $crl-alert-success;
+}
+
+@keyframes slide-in {
+  0% {
+    top: 10%;
+    opacity: 0.5;
+  }
+  100% {
+    top: 25%;
+    opacity: 1;
+  }
 }

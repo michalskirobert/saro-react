@@ -5,6 +5,7 @@ const defaultState = {
   alert: false,
   alertMsg: "",
   alertType: "",
+  edit: null,
 };
 
 export const cmsReducer = (state = defaultState, action) => {
@@ -71,6 +72,11 @@ export const cmsReducer = (state = defaultState, action) => {
         alert: true,
         alertMsg: "We had a problem... Please try again...",
         alertType: "danger",
+      };
+    case cmsConstants.EDIT:
+      return {
+        ...state,
+        edit: action.payload,
       };
     case cmsConstants.CLEAR:
       return {

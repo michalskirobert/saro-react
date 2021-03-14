@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { cmsActions } from "../../../utils/_actions";
 import { generalConstants } from "../../../utils/_constants";
 import { firestore } from "../../../components/feature/firebase";
-import { idText } from "typescript";
+import { useHistory } from "react-router";
 
 export const useEdit = () => {
   const alert = useSelector((state) => state.CMS.alert);
-  const [setId] = useState("");
+  const [id, setId] = useState("");
   const [query, setQuery] = useState("");
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState("");
@@ -22,8 +22,11 @@ export const useEdit = () => {
   const [info, setInfo] = useState("");
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
+  const history = useHistory();
 
+  const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
+  const editable = useSelector((state) => state.CMS.edit);
 
   const getEvent = async (id, type) => {
     return await firestore
@@ -47,17 +50,6 @@ export const useEdit = () => {
             link,
             language,
           } = doc.data();
-          setId(id);
-          setTitle(title);
-          setImgURL(imageURL);
-          setInfo(info);
-          setEventDate(date);
-          setEventTime(time);
-          setCrew(author);
-          setEventCity(city);
-          setEventPlace(place);
-          setLink(link);
-          setLanguage(language);
         } else {
           console.log("Document not found");
         }
@@ -76,54 +68,77 @@ export const useEdit = () => {
       .set({
         id,
         type: generalConstants.EVENTS,
-        title: title,
+        title,
         imageURL: imgURL,
-        info: info,
+        info,
         date: eventDate,
         time: eventTime,
         author: crew,
         city: eventCity,
         place: eventPlace,
-        link: link,
-        language: language,
+        link,
+        language,
         published: new Date(),
       });
   };
 
-  const getNews = (id, type) => {
+  const getNews = async (id, type) => {
     firestore
       .collection("language")
       .doc("en")
       .collection("news")
       .doc(id)
-      .onSnapshot((doc) => console.log(doc.data()));
+      .onSnapshot((doc) => dispatch(cmsActions.edit({ ...doc.data(), type })));
   };
 
   const updateNews = async (id) => {
     return await firestore
       .collection(generalConstants.LANG)
       .doc(lang)
-      .collection(generalConstants.EVENTS)
+      .collection(generalConstants.NEWS)
       .doc(id)
       .set({
         id,
-        type: generalConstants.EVENTS,
-        title: title,
-        imageURL: imgURL,
-        info: info,
-        date: eventDate,
-        time: eventTime,
+        type: generalConstants.NEWS,
+        title,
+        query,
         author: crew,
-        city: eventCity,
-        place: eventPlace,
-        link: link,
-        language: language,
+        language,
+        category,
         published: new Date(),
       });
   };
 
-  const handleEdit = async (id) => {
-    console.log(getNews(id));
+  const getArticle = async (id, type) => {
+    firestore
+      .collection(generalConstants.LANG)
+      .doc(lang)
+      .collection(generalConstants.BLOG_POSTS)
+      .doc(id)
+      .onSnapshot((doc) => console.log(doc.data()));
+  };
+
+  const updateArticle = async (id) => {
+    return await firestore
+      .collection(generalConstants.LANG)
+      .doc(lang)
+      .collection(generalConstants.BLOG_POSTS)
+      .doc(id)
+      .set({
+        id,
+        type: generalConstants.BLOG_POSTS,
+        title,
+        query,
+        author: crew,
+        language,
+        category,
+        published: new Date(),
+      });
+  };
+
+  const handleEdit = async (id, type) => {
+    await getNews(id, type);
+    history.push("/panel/edit");
   };
 
   const handleEdtiorChange = (e) => {
@@ -132,9 +147,38 @@ export const useEdit = () => {
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
-    await firestore.collection("language").doc("en").collection("blog").add({
-      type: query,
-    });
+    dispatch(cmsActions.clear());
+    switch (type) {
+      case generalConstants.BLOG_POSTS:
+        try {
+          dispatch(cmsActions.addArticleReq());
+          updateArticle(id);
+          dispatch(cmsActions.addArticleSuccess());
+        } catch (error) {
+          dispatch(cmsActions.addArticleFailure());
+        }
+        break;
+      case generalConstants.NEWS:
+        try {
+          dispatch(cmsActions.addNewsReq());
+          updateNews(id);
+          dispatch(cmsActions.addNewsSuccess());
+        } catch (error) {
+          dispatch(cmsActions.addNewsFailure());
+        }
+        break;
+      case generalConstants.EVENTS:
+        try {
+          dispatch(cmsActions.addEventsReq());
+          updateEvent(id);
+          dispatch(cmsActions.addEventsSuccess());
+        } catch (error) {
+          dispatch(cmsActions.addEventsFailure());
+        }
+        break;
+      default:
+        return;
+    }
   };
 
   return {
@@ -142,6 +186,10 @@ export const useEdit = () => {
     handlerSubmit,
     getEvent,
     updateEvent,
+    getArticle,
+    updateArticle,
+    getNews,
+    updateNews,
     alert,
     title,
     setTitle,
@@ -168,5 +216,6 @@ export const useEdit = () => {
     category,
     setCategory,
     handleEdit,
+    editable,
   };
 };
