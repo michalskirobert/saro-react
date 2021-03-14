@@ -46,7 +46,7 @@ const AddArticle = () => {
   const {
     handlerArticle,
     handleEdtiorChange,
-    query,
+    content,
     title,
     setTitle,
     setLanguage,
@@ -121,7 +121,7 @@ const AddArticle = () => {
         <section className="editor">
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={query}
+            initialValue={content}
             init={{
               plugins: [
                 "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",

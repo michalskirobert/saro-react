@@ -5,22 +5,24 @@ import { v4 as uuidv4 } from "uuid";
 import { cmsActions } from "../../../utils/_actions";
 import { generalConstants } from "../../../utils/_constants";
 import { firestore } from "../../../components/feature/firebase";
+import { useHistory } from "react-router";
 
 export const useContainer = () => {
-  const [query, setQuery] = useState("");
+  const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState();
   const [crew, setCrew] = useState("");
-  const [eventTime, setEventTime] = useState("");
-  const [eventDate, setEventDate] = useState("");
-  const [eventCity, setEventCity] = useState("");
-  const [eventPlace, setEventPlace] = useState("");
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [city, setCity] = useState("");
+  const [place, setPlace] = useState("");
   const [imgURL, setImgURL] = useState("");
   const [link, setLink] = useState("");
-  const [info, setInfo] = useState("");
   const [category, setCategory] = useState("");
+  const [avatarURL, setAvatarURL] = useState("https://via.placeholder.com/50");
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
+  const history = useHistory();
 
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
@@ -32,14 +34,15 @@ export const useContainer = () => {
       .collection(generalConstants.NEWS)
       .doc(id)
       .set({
-        id,
         type: generalConstants.NEWS,
+        published: new Date().toLocaleString(),
+        id,
         title,
-        content: query,
-        author: crew,
+        content,
+        crew,
         category,
         language,
-        published: new Date(),
+        avatarURL,
       });
   };
 
@@ -53,16 +56,16 @@ export const useContainer = () => {
         id,
         title,
         type: generalConstants.EVENTS,
-        imageURL: imgURL,
-        info,
-        date: eventDate,
-        time: eventTime,
-        author: crew,
-        city: eventCity,
-        place: eventPlace,
+        imgURL: imgURL || "https://via.placeholder.com/50",
+        content,
+        date,
+        time,
+        crew,
+        city,
+        place,
         link,
-        language: language.value,
-        published: new Date(),
+        language,
+        published: new Date().toLocaleString(),
       });
   };
 
@@ -73,6 +76,7 @@ export const useContainer = () => {
       dispatch(cmsActions.addNewsReq());
       addNews(uuidv4());
       dispatch(cmsActions.addNewsSuccess());
+      history.push("/panel");
     } catch (error) {
       dispatch(cmsActions.addNewsFailure());
     }
@@ -85,6 +89,7 @@ export const useContainer = () => {
       dispatch(cmsActions.addEventsReq());
       addEvents(uuidv4());
       dispatch(cmsActions.addEventsSuccess());
+      history.push("/panel");
     } catch (error) {
       dispatch(cmsActions.addEventsFailure());
     }
@@ -97,15 +102,15 @@ export const useContainer = () => {
       .collection(generalConstants.BLOG_POSTS)
       .doc(id)
       .set({
-        id: id,
+        id,
         type: generalConstants.BLOG_POSTS,
         title,
-        imageURL: imgURL,
-        content: query,
-        author: crew,
+        imgURL: imgURL || "https://via.placeholder.com/50",
+        content,
+        crew,
         category,
         language,
-        published: new Date(),
+        published: new Date().toLocaleString(),
       });
   };
 
@@ -116,21 +121,22 @@ export const useContainer = () => {
       dispatch(cmsActions.addArticleReq());
       addArticle(uuidv4());
       dispatch(cmsActions.addArticleSuccess());
+      history.push("/panel");
     } catch (error) {
       dispatch(cmsActions.addArticleFailure());
     }
   };
 
   const handleEdtiorChange = (e) => {
-    setQuery(e.target.getContent());
+    setContent(e.target.getContent());
   };
 
   return {
     addNews,
     handlerSubmit,
     handleEdtiorChange,
-    query,
-    setQuery,
+    content,
+    setContent,
     title,
     setTitle,
     language,
@@ -141,22 +147,21 @@ export const useContainer = () => {
     setCategory,
     alert,
     isLoading,
-    eventTime,
-    setEventTime,
-    eventDate,
-    setEventDate,
-    info,
-    setInfo,
-    eventPlace,
-    setEventPlace,
+    time,
+    setTime,
+    date,
+    setDate,
+    place,
+    setPlace,
     handlerEvents,
-    eventCity,
-    setEventCity,
+    city,
+    setCity,
     imgURL,
     setImgURL,
     link,
     setLink,
     handlerArticle,
     addArticle,
+    setAvatarURL,
   };
 };

@@ -86,7 +86,7 @@ const AddEvents = () => {
                   label: item.city,
                   value: item.city,
                 })),
-                onChange: (options) => setEventCity(options),
+                onChange: (options) => setEventCity(options.value),
               }}
             />
           </div>
@@ -161,7 +161,7 @@ const AddEvents = () => {
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange: (options) => setLanguage(options),
+                onChange: (options) => setLanguage(options.value),
               }}
             />
           </div>
@@ -176,7 +176,7 @@ const AddEvents = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCrew(options),
+                onChange: (options) => setCrew(options.value),
               }}
             />
           </div>

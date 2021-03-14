@@ -46,7 +46,7 @@ const AddNews = () => {
   const {
     handlerSubmit,
     handleEdtiorChange,
-    query,
+    content,
     title,
     setTitle,
     setLanguage,
@@ -83,10 +83,9 @@ const AddNews = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCrew(options),
+                onChange: (options) => setCrew(options.value),
               }}
             />
-           
           </div>
           <div className="form-control">
             <label htmlFor="category">Category</label>
@@ -99,7 +98,7 @@ const AddNews = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCategory(options),
+                onChange: (options) => setCategory(options.value),
               }}
             />
           </div>
@@ -114,7 +113,7 @@ const AddNews = () => {
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange: (options) => setLanguage(options),
+                onChange: (options) => setLanguage(options.value),
               }}
             />
           </div>
@@ -122,7 +121,7 @@ const AddNews = () => {
         <section className="editor">
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={query}
+            initialValue={content}
             init={{
               plugins: [
                 "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",

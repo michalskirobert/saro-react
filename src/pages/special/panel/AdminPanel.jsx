@@ -4,13 +4,14 @@ import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
 import { firestore } from "../../../components/feature/firebase";
+import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 
 const AdminPanel = () => {
   const { getNews, getEvents } = useContainer();
   const { handleEdit } = useEdit();
   const newsItems = useSelector((state) => state.news.posts);
   const newsEvents = useSelector((state) => state.events.events);
-
+  const alert = useSelector((state) => state.CMS.alert);
   const removeItem = async (id) => {
     return await firestore
       .collection("language")
@@ -27,6 +28,7 @@ const AdminPanel = () => {
 
   return (
     <section className="section saro-panel">
+      {alert && <CmsAlert />}
       <h1>Saro CMS 1.0.0</h1>
       <Tabs defaultActiveKey="newContent" id="uncontrolled-tab-example">
         <Tab eventKey="newContent" title="Add new content">
@@ -51,14 +53,14 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 {newsItems.map((post, index) => {
-                  const { author, title, date, id, type } = post;
+                  const { crew, title, date, id, type } = post;
                   return (
                     <tbody key={id}>
                       <tr>
                         <td>{index}</td>
                         <td>{title}</td>
                         <td>{date}</td>
-                        <td>{author}</td>
+                        <td>{crew}</td>
                         <td>
                           <Button
                             {...{
@@ -95,14 +97,14 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 {newsEvents.map((post, index) => {
-                  const { author, title, date, id, type } = post;
+                  const { crew, title, date, id, type } = post;
                   return (
                     <tbody key={id}>
                       <tr>
                         <td>{index}</td>
                         <td>{title}</td>
                         <td>{date}</td>
-                        <td>{author}</td>
+                        <td>{crew}</td>
                         <td>
                           <Button
                             {...{

@@ -27,8 +27,8 @@ const Event = () => {
             const {
               id,
               title,
-              imageURL,
-              info,
+              imgURL,
+              content,
               place,
               city,
               link,
@@ -36,11 +36,13 @@ const Event = () => {
             } = event;
             return (
               <article className="event" key={id}>
-                <img src={imageURL} alt={title} />
+                <img src={imgURL} alt={title} />
                 <div className="event-box">
                   <h2 style={{ textAlign: "left" }}>{title}</h2>
                   <p style={{ display: "inline" }}>
-                    {info.length > 90 ? `${info.substring(0, 90)}...` : info}
+                    {content && content.length > 90
+                      ? `${content.substring(0, 90)}...`
+                      : content}
                   </p>
                 </div>
                 <div className="event-info">

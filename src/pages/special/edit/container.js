@@ -24,6 +24,19 @@ export const useEdit = () => {
   const [type, setType] = useState("");
   const history = useHistory();
 
+  const [editableContainer, setEditableContainer] = useState({
+    id: "",
+    title: "",
+    date: "",
+    time: "",
+    city: "",
+    crew: "",
+    imgURL: "",
+    link: "",
+    content: "",
+    category: "",
+  }); //zróbcie pod to, za dużo wprowadzania... po co marnować czas ;) nałóżcie name dla inputów itd..
+
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
   const editable = useSelector((state) => state.CMS.edit);

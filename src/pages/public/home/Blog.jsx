@@ -25,16 +25,16 @@ const Blog = () => {
             .map((event, index) => {
               const {
                 title,
-                imageURL,
+                imgURL,
                 content,
-                date,
+                published,
                 readMore,
                 author,
                 category,
               } = event;
               return (
                 <article className="last-posts" key={index}>
-                  <img src={imageURL} alt={title} />
+                  <img src={imgURL} alt={title} />
                   <div className="last-posts-box">
                     <h2 style={{ textAlign: "left" }}>{title}</h2>
                     <p style={{ display: "inline" }}>
@@ -46,7 +46,9 @@ const Blog = () => {
                   <div className="post-info">
                     <div className="post-control">
                       <strong>Published:</strong>
-                      <p style={{ display: "inline" }}></p>
+                      <p style={{ display: "inline" }}>
+                        {published && published}
+                      </p>
                     </div>
                     <div className="post-control">
                       <strong>Author:</strong>

@@ -29,24 +29,26 @@ const News = () => {
             .map((article) => {
               const {
                 title,
-                author,
+                crew,
                 avatarURL,
-                date,
                 content,
                 id,
                 imageURL,
+                published,
               } = article;
               return (
                 <div className="news__item" key={id}>
                   <div className="news__box">
                     <h2>{title}</h2>
-                    <div className="blog author__info">
+                    <div className="blog crew__info">
                       <a href="#" style={{ marginRight: "10px" }}>
-                        {author}
+                        {crew}
                       </a>
-                      <img src={avatarURL} alt={author} />
+                      <img src={avatarURL} alt={crew} />
                     </div>
-                    <div className="blog date"></div>
+                    <div className="blog date">
+                      <p>{published}</p>
+                    </div>
                     <div className="news-content">
                       <img src={imageURL} alt={title} className="news-image" />
                       <div
