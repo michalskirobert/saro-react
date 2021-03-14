@@ -83,6 +83,7 @@ const Edit = () => {
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
+      
       <form className="cms" onSubmit={handlerSubmit}>
         <h2 className="main-title">Edit element</h2>
         <section className="form-container">
@@ -98,17 +99,6 @@ const Edit = () => {
           </div>
           <div className="form-control">
             <label htmlFor="city">City</label>
-            <select id="city" onChange={(e) => setEventCity(e.target.value)}>
-              {cities &&
-                cities.map((item, index) => {
-                  const { city } = item;
-                  return (
-                    <option key={index} value={city}>
-                      {city}
-                    </option>
-                  );
-                })}
-            </select>
             <Select
               {...{
                 id: "city",
