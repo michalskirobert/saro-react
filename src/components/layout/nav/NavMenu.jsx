@@ -3,84 +3,127 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./../../../components/feature/firebase";
 import { navActions } from "../../../utils/_actions";
+import { FaAngleLeft } from "react-icons/fa";
 
 const nav = [
   {
     title: "Home",
     path: "/",
     classLink: "",
-    isLogged: true,
-  },
-  {
-    title: "About",
-    path: "/about",
-    classLink: "",
-    isLogged: true,
+    isLogged: false,
   },
   {
     title: "Lessons",
     path: "/lessons",
     classLink: "",
     isLogged: true,
-  },
+    content: [
+      {
+        title: "Begginer",
+        path: "/lessons",
+      },
+      {
+        title: "Elementary",
+        path: "lessons/",
+      },
+      {
+        title: "Pre-intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Low Intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Upper Intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Pre-advanced",
+        path: "/lessons",
+      },
+      {
+        title: "Advanced",
+        path: "/lessons",
+      },
+      {
+        title: "Very Advanced",
+        path: "/lessons",
+      },
+    ]
+  }, 
   {
-    title: "Contact",
-    path: "/contact",
+    title: "Tests",
+    path: "/tests",
     classLink: "",
     isLogged: true,
   },
   {
-    title: "Sign-up",
-    path: "/sign-up",
+    title: "Stuff",
+    path: "/stuff",
+    classLink: "",
+    isLogged: true,
+    content: [
+      {
+        title: "Foods",
+        path: "",
+      },
+      {
+        title: "Curiosities",
+        path: "",
+      },
+      {
+        title: "Traditions",
+        path: "",
+      },
+      {
+        title: "Media",
+        path: "",
+      },
+      {
+        title: "Tools",
+        path: "",
+      },
+      {
+        title: "Quiz",
+        path: "",
+      },
+      {
+        title: "Dialogue",
+        path: "",
+      },
+      {
+        title: "Beauty",
+        path: "",
+      },
+    ]
+  },
+  {
+    title: "Community",
+    path: "/community",
+    classLink: "",
     isLogged: false,
   },
-
   {
-    title: "Sign-in",
-    path: "/sign-in",
-    classLink: "sign-in",
+    title: "About Us",
+    path: "/about",
+    classLink: "",
     isLogged: false,
   },
 ];
 
-const panel = [
-  {
-    title: "My page",
-    path: "/profile",
-  },
-  {
-    title: "Dashboard",
-    path: "/dashboard",
-  },
-  {
-    title: "Messages",
-    path: "/profile/messages",
-  },
-  {
-    title: "Friends",
-    path: "/profile/friends",
-  },
-  {
-    title: "Notifications",
-    path: "/profile/notifications",
-  },
-  {
-    title: "Settings",
-    path: "/profile/settings",
-  },
-  {
-    title: "logout",
-    path: "/sign-in",
-  },
-];
+
 
 const NavMenu = () => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
-  const isNavOpen = useSelector((state) => state.isNavOpen);
-  const user = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
-  const seeMore = useSelector((state) => state.general.profileToggle);
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const user = useSelector((state) => state.currentUser);  
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -91,13 +134,15 @@ const NavMenu = () => {
     }
   }, [isNavOpen]);
 
-  const loggedMap = nav.filter((item) => {
-    return item.isLogged !== false;
+  const publicMap = nav.filter((item) => {
+    return item.isLogged === false;
   });
-
-  const emptyPicture = "https://via.placeholder.com/50px";
-
-  let navData = user.isLogged ? loggedMap : nav;
+const toggleInnerMenu = () => {
+  
+}
+ 
+  // let navData = user.isLogged ? loggedMap : nav;
+  let navData = true ? nav : publicMap;
 
   return (
     <div
@@ -106,53 +151,35 @@ const NavMenu = () => {
     >
       <ul className="nav-links" ref={linksRef}>
         {navData.map((link, index) => {
-          const { title, path, classLink } = link;
+          const { title, path, content } = link;
           return (
-            <li key={index}>
-              <Link to={path} className={`${classLink || "links"}`}>
-                {title}
-              </Link>
+            <li key={index} className="nav-link"> 
+            <Link to={path}>              
+                <FaAngleLeft className="icon" onClick={toggleInnerMenu}/>
+                {title}               
+              </Link> 
+              {
+                content && 
+                <div className="nav-links-inner">
+                {content.map((link, index)=> {
+                  const {title, path} = link;
+                  return (
+                    <ul>
+                      <li>
+                      <Link to={path} className="nav-link-inner">
+                      {title}
+                      </Link>                        
+                      </li>
+                    </ul>
+                  )
+                })}
+              </div> 
+              }
+                    
             </li>
           );
-        })}
-        {user.isLogged && (
-          <li>
-            <button
-              onClick={() => dispatch(navActions.profileToggle())}
-              className="btn profile-btn"
-            >
-              <img
-                src={
-                  auth.currentUser ? auth.currentUser.photoURL : emptyPicture
-                }
-                alt="profile"
-                className="profile-picture profile-picture-nav"
-              />
-              {auth.currentUser ? auth.currentUser.displayName : "uknown"}
-              <span>▼</span>
-            </button>
-          </li>
-        )}
-      </ul>
-      {seeMore && (
-        <ul className="nav-links nav-links--user">
-          <li>
-            <img
-              src={auth.currentUser ? auth.currentUser.photoURL : emptyPicture}
-              alt="profile"
-              className="profile-picture"
-            />
-          </li>
-          {panel.map((item, index) => {
-            const { title, path } = item;
-            return (
-              <li key={index}>
-                <Link to={path}>{title}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+        })}        
+      </ul>      
     </div>
   );
 };
