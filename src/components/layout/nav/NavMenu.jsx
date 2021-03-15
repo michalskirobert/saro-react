@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./../../../components/feature/firebase";
 import { navActions } from "../../../utils/_actions";
+import { FaAngleLeft } from "react-icons/fa";
 
 const nav = [
   {
@@ -17,18 +18,6 @@ const nav = [
     classLink: "",
     isLogged: true,
   }, 
-  // {
-  //   title: "Sign-up",
-  //   path: "/sign-up",
-  //   isLogged: false,
-  // },
-
-  // {
-  //   title: "Sign-in",
-  //   path: "/sign-in",
-  //   classLink: "sign-in",
-  //   isLogged: false,
-  // },
   {
     title: "Tests",
     path: "/tests",
@@ -37,19 +26,13 @@ const nav = [
   },
   {
     title: "Stuff",
-    path: "/stuff",
+    path: "",
     classLink: "",
     isLogged: true,
   },
   {
     title: "Community",
-    path: "/community",
-    classLink: "",
-    isLogged: true,
-  },
-  {
-    title: "Contact",
-    path: "/contact",
+    path: "",
     classLink: "",
     isLogged: false,
   },
@@ -135,36 +118,6 @@ const stuff = [
  
 ]
 
-const panel = [
-  {
-    title: "My page",
-    path: "/profile",
-  },
-  {
-    title: "Dashboard",
-    path: "/dashboard",
-  },
-  {
-    title: "Messages",
-    path: "/profile/messages",
-  },
-  {
-    title: "Friends",
-    path: "/profile/friends",
-  },
-  {
-    title: "Notifications",
-    path: "/profile/notifications",
-  },
-  {
-    title: "Settings",
-    path: "/profile/settings",
-  },
-  {
-    title: "logout",
-    path: "/sign-in",
-  },
-];
 
 const NavMenu = () => {
   const linksContainerRef = useRef(null);
@@ -172,7 +125,6 @@ const NavMenu = () => {
   const dispatch = useDispatch();
   const isNavOpen = useSelector((state) => state.isNavOpen);
   const user = useSelector((state) => state.currentUser);  
-  const seeMore = useSelector((state) => state.general.profileToggle);
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -187,66 +139,29 @@ const NavMenu = () => {
     return item.isLogged === false;
   });
 
-  const emptyPicture = "https://via.placeholder.com/50px";
 
   // let navData = user.isLogged ? loggedMap : nav;
   let navData = true ? nav : publicMap;
 
   return (
     <div
-      // className={`nav-container ${isNavOpen && "active"}`}
-      className={`nav-container active `}
+      className={`nav-container ${isNavOpen && "active"}`}
+      // className={`nav-container active `}
       ref={linksContainerRef}
     >
       <ul className="nav-links" ref={linksRef}>
         {navData.map((link, index) => {
-          const { title, path, classLink } = link;
+          const { title, path } = link;
           return (
-            <li key={index} className="nav-link">
-              <Link to={path} className={`${classLink || "link"}`}>
-                {title}
-              </Link>
+            <li key={index} className="nav-link">              
+              <Link to={path}>              
+                <FaAngleLeft className="icon"/>
+                {title}               
+              </Link> 
             </li>
           );
-        })}
-        {user.isLogged && (
-          <li className="nav-link">
-            <button
-              onClick={() => dispatch(navActions.profileToggle())}
-              className="btn profile-btn"
-            >
-              <img
-                src={
-                  auth.currentUser ? auth.currentUser.photoURL : emptyPicture
-                }
-                alt="profile"
-                className="profile-picture profile-picture-nav"
-              />
-              {auth.currentUser ? auth.currentUser.displayName : "Unknown"}
-              <span>▼</span>
-            </button>
-          </li>
-        )}
-      </ul>
-      {seeMore && (
-        <ul className="nav-links nav-links--user">
-          <li className="nav-link">
-            <img
-              src={auth.currentUser ? auth.currentUser.photoURL : emptyPicture}
-              alt="profile"
-              className="profile-picture"
-            />
-          </li>
-          {panel.map((item, index) => {
-            const { title, path } = item;
-            return (
-              <li key={index}>
-                <Link to={path}>{title}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+        })}        
+      </ul>      
     </div>
   );
 };

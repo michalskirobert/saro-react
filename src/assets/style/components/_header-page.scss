@@ -8,37 +8,37 @@ header {
   z-index: 2;
   nav {
     .nav-container {
+      z-index: 300;
       height: 100% !important;
+      min-width: 250px;
+      width: 70%;
+      max-width: 400px;
       overflow: hidden;
+      background-color: $crl-main-blue;      
+      transform: translateX(-100%);
       transition: all 0.5s ease;
-      position: fixed;
-      background-color: $crl-blue;
+      position: fixed;      
       top: 0;
+      bottom: 0;
       left: 0;
-      right: 0;
-      ul {
+      .nav-links {        
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin-bottom: 1rem;
-        li {
-          display: flex;
+        align-items: flex-end;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 1rem;          
+        .nav-link {
+          width: 100%;
           position: relative;
-          top: 80px;
+          padding: 20px;
           a,
           button {
-            color: $crl-basic;
-            font-size: 1rem;
-            text-transform: capitalize;
-            display: block;
-            padding: 0.5rem 1rem;
-            transition: all 0.5s ease;
-            font-weight: bold;
-            &:hover {
-              background: $crl-alert;
-              color: $crl-basic;
-              padding-left: 1.5rem;
-            }
+            width: 100%;
+            color: $crl-base;
+            display: flex;
+            justify-content: space-between;  
+            font-size: 1.5rem;    
           }
         }
       }
@@ -59,68 +59,69 @@ header {
       transition: all 0.5s ease-in-out;
       &:hover,
       &:focus {
-        color: $crl-special;
         transform: scaleX(1.1);
       }
     }
   }
   
-  @media screen and (min-width: 1000px) {
-    nav {
-      .nav-container {
-        ul.nav-links {
-          display: flex;
-          align-items: center;
-          height: 100%;
-          li {
-            display: inline-block;
-            padding: 0 20px;
-            & > a,
-            button {
-              color: $crl-basic;
-              transition: color 0.5s ease;
-              &:hover {
-                color: $crl-primary;
-              }
-            }
-          }
-          &--user {
-            flex-direction: column;
-            position: absolute;
-            top: 75px;
-            left: 78%;
-            background-color: $crl-default;
-            height: auto;
-            width: auto;
-            padding: 25px;
-            border-radius: 20px;
-            transition: 0.5s;
-            li {
-              margin: 5px 0px;
-              a {
-                font-size: 15px;
-              }
-            }
-          }
-        }
-        a.sign-in {
-          color: $crl-basic;
-          background-color: $crl-primary;
-          padding: 0.5rem 1.5rem 0.5rem;
-          font-size: 1rem;
-          transition: background-color 0.5s ease-in;
-          &:hover {
-            background-color: $crl-special;
-            color: $crl-basic;
-          }
-        }
-      }
-    }
-  }
+ 
 }
 
-@media only screen and (min-width: 1200px) {
-  header {
-    padding: 30px 10%;
-  }
-}
+// @media only screen and (min-width: 1200px) {
+//   header {
+//     padding: 30px 10%;
+//   }
+// }
+
+// @media screen and (min-width: 1000px) {
+//   nav {
+//     .nav-container {
+//       ul.nav-links {
+//         display: flex;
+//         align-items: center;
+//         height: 100%;
+//         li {
+//           display: inline-block;
+//           padding: 0 20px;
+//           & > a,
+//           button {
+//             color: $crl-basic;
+//             transition: color 0.5s ease;
+//             &:hover {
+//               color: $crl-primary;
+//             }
+//           }
+//         }
+//         &--user {
+//           flex-direction: column;
+//           position: absolute;
+//           top: 75px;
+//           left: 78%;
+//           background-color: $crl-default;
+//           height: auto;
+//           width: auto;
+//           padding: 25px;
+//           border-radius: 20px;
+//           transition: 0.5s;
+//           li {
+//             margin: 5px 0px;
+//             a {
+//               font-size: 15px;
+//             }
+//           }
+//         }
+//       }
+//       a.sign-in {
+//         color: $crl-basic;
+//         background-color: $crl-primary;
+//         padding: 0.5rem 1.5rem 0.5rem;
+//         font-size: 1rem;
+//         transition: background-color 0.5s ease-in;
+//         &:hover {
+//           background-color: $crl-special;
+//           color: $crl-basic;
+//         }
+//       }
+//     }
+//   }
+// }
