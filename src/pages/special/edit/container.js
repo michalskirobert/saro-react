@@ -8,33 +8,23 @@ import { useHistory } from "react-router";
 
 export const useEdit = () => {
   const alert = useSelector((state) => state.CMS.alert);
-  const [id, setId] = useState("");
-  const [query, setQuery] = useState("");
-  const [title, setTitle] = useState("");
-  const [language, setLanguage] = useState("");
-  const [crew, setCrew] = useState("");
-  const [eventTime, setEventTime] = useState(null);
-  const [eventDate, setEventDate] = useState(null);
-  const [eventCity, setEventCity] = useState(null);
-  const [eventPlace, setEventPlace] = useState("");
-  const [imgURL, setImgURL] = useState("");
-  const [link, setLink] = useState("");
-  const [info, setInfo] = useState("");
-  const [category, setCategory] = useState("");
   const [type, setType] = useState("");
   const history = useHistory();
 
   const [editableContainer, setEditableContainer] = useState({
     id: "",
     title: "",
-    date: "",
-    time: "",
     city: "",
-    crew: "",
+    place: "",
+    date: "",
+    time: "",   
     imgURL: "",
     link: "",
+    crew: "",   
+    language: "",   
+    category: "", 
     content: "",
-    category: "",
+    
   }); //zróbcie pod to, za dużo wprowadzania... po co marnować czas ;) nałóżcie name dla inputów itd..
 
   const dispatch = useDispatch();
@@ -50,19 +40,11 @@ export const useEdit = () => {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          const {
-            id,
-            title,
-            imageURL,
-            info,
-            date,
-            time,
-            author,
-            city,
-            place,
-            link,
-            language,
-          } = doc.data();
+          setType(type)
+          const { id, title, city, place, date, time, imgURL, link, crew, language, content} = doc.data();
+          setEditableContainer(prevState => {
+            return {...prevState, id, title, city, place, date, time, imgURL, link, crew, language, content}
+          })
         } else {
           console.log("Document not found");
         }
@@ -81,109 +63,41 @@ export const useEdit = () => {
       .set({
         id,
         type: generalConstants.EVENTS,
-        title,
-        imageURL: imgURL,
-        info,
-        date: eventDate,
-        time: eventTime,
-        author: crew,
-        city: eventCity,
-        place: eventPlace,
-        link,
-        language,
+        title: editableContainer.title,
+        imageURL: editableContainer.imgURL,
+        content: editableContainer.content,
+        date: editableContainer.date,
+        time: editableContainer.time,
+        crew: editableContainer.crew,
+        city: editableContainer.city,
+        place: editableContainer.place,
+        link: editableContainer.link,
+        language: editableContainer.language,
         published: new Date(),
       });
   };
 
-  const getNews = async (id, type) => {
-    firestore
-      .collection("language")
-      .doc("en")
-      .collection("news")
-      .doc(id)
-      .onSnapshot((doc) => dispatch(cmsActions.edit({ ...doc.data(), type })));
-  };
-
-  const updateNews = async (id) => {
-    return await firestore
-      .collection(generalConstants.LANG)
-      .doc(lang)
-      .collection(generalConstants.NEWS)
-      .doc(id)
-      .set({
-        id,
-        type: generalConstants.NEWS,
-        title,
-        query,
-        author: crew,
-        language,
-        category,
-        published: new Date(),
-      });
-  };
-
-  const getArticle = async (id, type) => {
-    firestore
-      .collection(generalConstants.LANG)
-      .doc(lang)
-      .collection(generalConstants.BLOG_POSTS)
-      .doc(id)
-      .onSnapshot((doc) => console.log(doc.data()));
-  };
-
-  const updateArticle = async (id) => {
-    return await firestore
-      .collection(generalConstants.LANG)
-      .doc(lang)
-      .collection(generalConstants.BLOG_POSTS)
-      .doc(id)
-      .set({
-        id,
-        type: generalConstants.BLOG_POSTS,
-        title,
-        query,
-        author: crew,
-        language,
-        category,
-        published: new Date(),
-      });
-  };
 
   const handleEdit = async (id, type) => {
-    await getNews(id, type);
+    await getEvent(id, type);
     history.push("/panel/edit");
   };
 
   const handleEdtiorChange = (e) => {
-    setQuery(e.target.getContent());
+    const value = e.target.getContent()
+    setEditableContainer(prevState=> {
+      return {...prevState, content: value}
+    });
   };
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
     dispatch(cmsActions.clear());
     switch (type) {
-      case generalConstants.BLOG_POSTS:
-        try {
-          dispatch(cmsActions.addArticleReq());
-          updateArticle(id);
-          dispatch(cmsActions.addArticleSuccess());
-        } catch (error) {
-          dispatch(cmsActions.addArticleFailure());
-        }
-        break;
-      case generalConstants.NEWS:
-        try {
-          dispatch(cmsActions.addNewsReq());
-          updateNews(id);
-          dispatch(cmsActions.addNewsSuccess());
-        } catch (error) {
-          dispatch(cmsActions.addNewsFailure());
-        }
-        break;
       case generalConstants.EVENTS:
         try {
           dispatch(cmsActions.addEventsReq());
-          updateEvent(id);
+          updateEvent(editableContainer.id);
           dispatch(cmsActions.addEventsSuccess());
         } catch (error) {
           dispatch(cmsActions.addEventsFailure());
@@ -195,40 +109,13 @@ export const useEdit = () => {
   };
 
   return {
+    alert,
     handleEdtiorChange,
     handlerSubmit,
     getEvent,
-    updateEvent,
-    getArticle,
-    updateArticle,
-    getNews,
-    updateNews,
-    alert,
-    title,
-    setTitle,
-    imgURL,
-    setImgURL,
-    query,
-    setQuery,
-    eventDate,
-    setEventDate,
-    crew,
-    setCrew,
-    eventCity,
-    setEventCity,
-    eventPlace,
-    setEventPlace,
-    link,
-    setLink,
-    eventTime,
-    setEventTime,
-    language,
-    setLanguage,
-    info,
-    setInfo,
-    category,
-    setCategory,
     handleEdit,
+    editableContainer,
+    setEditableContainer,
     editable,
   };
 };
