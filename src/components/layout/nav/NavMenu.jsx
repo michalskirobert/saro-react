@@ -17,6 +17,44 @@ const nav = [
     path: "/lessons",
     classLink: "",
     isLogged: true,
+    content: [
+      {
+        title: "Begginer",
+        path: "/lessons",
+      },
+      {
+        title: "Elementary",
+        path: "lessons/",
+      },
+      {
+        title: "Pre-intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Low Intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Upper Intermediate",
+        path: "/lessons",
+      },
+      {
+        title: "Pre-advanced",
+        path: "/lessons",
+      },
+      {
+        title: "Advanced",
+        path: "/lessons",
+      },
+      {
+        title: "Very Advanced",
+        path: "/lessons",
+      },
+    ]
   }, 
   {
     title: "Tests",
@@ -26,13 +64,47 @@ const nav = [
   },
   {
     title: "Stuff",
-    path: "",
+    path: "/stuff",
     classLink: "",
     isLogged: true,
+    content: [
+      {
+        title: "Foods",
+        path: "",
+      },
+      {
+        title: "Curiosities",
+        path: "",
+      },
+      {
+        title: "Traditions",
+        path: "",
+      },
+      {
+        title: "Media",
+        path: "",
+      },
+      {
+        title: "Tools",
+        path: "",
+      },
+      {
+        title: "Quiz",
+        path: "",
+      },
+      {
+        title: "Dialogue",
+        path: "",
+      },
+      {
+        title: "Beauty",
+        path: "",
+      },
+    ]
   },
   {
     title: "Community",
-    path: "",
+    path: "/community",
     classLink: "",
     isLogged: false,
   },
@@ -43,80 +115,7 @@ const nav = [
     isLogged: false,
   },
 ];
-const levels = [
-  {
-    title: "Begginer",
-    path: "",
-  },
-  {
-    title: "Elementary",
-    path: "",
-  },
-  {
-    title: "Pre-intermediate",
-    path: "",
-  },
-  {
-    title: "Low Intermediate",
-    path: "",
-  },
-  {
-    title: "Intermediate",
-    path: "",
-  },
-  {
-    title: "Upper Intermediate",
-    path: "",
-  },
-  {
-    title: "Pre-advanced",
-    path: "",
-  },
-  {
-    title: "Advanced",
-    path: "",
-  },
-  {
-    title: "Very Advanced",
-    path: "",
-  },
-]
 
-const stuff = [
-  {
-    title: "Foods",
-    path: "",
-  },
-  {
-    title: "Curiosities",
-    path: "",
-  },
-  {
-    title: "Traditions",
-    path: "",
-  },
-  {
-    title: "Media",
-    path: "",
-  },
-  {
-    title: "Tools",
-    path: "",
-  },
-  {
-    title: "Quiz",
-    path: "",
-  },
-  {
-    title: "Dialogue",
-    path: "",
-  },
-  {
-    title: "Beauty",
-    path: "",
-  },
- 
-]
 
 
 const NavMenu = () => {
@@ -138,26 +137,45 @@ const NavMenu = () => {
   const publicMap = nav.filter((item) => {
     return item.isLogged === false;
   });
-
-
+const toggleInnerMenu = () => {
+  
+}
+ 
   // let navData = user.isLogged ? loggedMap : nav;
   let navData = true ? nav : publicMap;
 
   return (
     <div
       className={`nav-container ${isNavOpen && "active"}`}
-      // className={`nav-container active `}
       ref={linksContainerRef}
     >
       <ul className="nav-links" ref={linksRef}>
         {navData.map((link, index) => {
-          const { title, path } = link;
+          const { title, path, content } = link;
           return (
-            <li key={index} className="nav-link">              
-              <Link to={path}>              
-                <FaAngleLeft className="icon"/>
+            <li key={index} className="nav-link"> 
+            <Link to={path}>              
+                <FaAngleLeft className="icon" onClick={toggleInnerMenu}/>
                 {title}               
               </Link> 
+              {
+                content && 
+                <div className="nav-links-inner">
+                {content.map((link, index)=> {
+                  const {title, path} = link;
+                  return (
+                    <ul>
+                      <li>
+                      <Link to={path} className="nav-link-inner">
+                      {title}
+                      </Link>                        
+                      </li>
+                    </ul>
+                  )
+                })}
+              </div> 
+              }
+                    
             </li>
           );
         })}        
