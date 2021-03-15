@@ -10,16 +10,12 @@ header {
     .nav-container {
       height: 100% !important;
       overflow: hidden;
-      margin-left: auto;
       transition: all 0.5s ease;
       position: fixed;
-      background-color: #2d2b2a;
+      background-color: $crl-blue;
       top: 0;
       left: 0;
       right: 0;
-      display: flex;
-      flex-direction: column;
-      transform: translateX(100%);
       ul {
         display: flex;
         flex-direction: column;
@@ -49,7 +45,7 @@ header {
     }
     div.nav-container.active {
       transform: translateX(0);
-      transition: all 0.5s ease;
+      transition: all 0.5s ease-in-out;
     }
     .hamburger {
       display: block;
@@ -60,17 +56,17 @@ header {
       border: none;
       outline: none;
       z-index: 255;
+      transition: all 0.5s ease-in-out;
       &:hover,
       &:focus {
         color: $crl-special;
+        transform: scaleX(1.1);
       }
     }
   }
+  
   @media screen and (min-width: 1000px) {
     nav {
-      .hamburger {
-        display: none;
-      }
       .nav-container {
         ul.nav-links {
           display: flex;

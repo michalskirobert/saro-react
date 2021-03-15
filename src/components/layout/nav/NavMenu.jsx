@@ -9,17 +9,41 @@ const nav = [
     title: "Home",
     path: "/",
     classLink: "",
-    isLogged: true,
-  },
-  {
-    title: "About",
-    path: "/about",
-    classLink: "",
-    isLogged: true,
+    isLogged: false,
   },
   {
     title: "Lessons",
     path: "/lessons",
+    classLink: "",
+    isLogged: true,
+  }, 
+  // {
+  //   title: "Sign-up",
+  //   path: "/sign-up",
+  //   isLogged: false,
+  // },
+
+  // {
+  //   title: "Sign-in",
+  //   path: "/sign-in",
+  //   classLink: "sign-in",
+  //   isLogged: false,
+  // },
+  {
+    title: "Tests",
+    path: "/tests",
+    classLink: "",
+    isLogged: true,
+  },
+  {
+    title: "Stuff",
+    path: "/stuff",
+    classLink: "",
+    isLogged: true,
+  },
+  {
+    title: "Community",
+    path: "/community",
     classLink: "",
     isLogged: true,
   },
@@ -27,21 +51,89 @@ const nav = [
     title: "Contact",
     path: "/contact",
     classLink: "",
-    isLogged: true,
-  },
-  {
-    title: "Sign-up",
-    path: "/sign-up",
     isLogged: false,
   },
-
   {
-    title: "Sign-in",
-    path: "/sign-in",
-    classLink: "sign-in",
+    title: "About Us",
+    path: "/about",
+    classLink: "",
     isLogged: false,
   },
 ];
+const levels = [
+  {
+    title: "Begginer",
+    path: "",
+  },
+  {
+    title: "Elementary",
+    path: "",
+  },
+  {
+    title: "Pre-intermediate",
+    path: "",
+  },
+  {
+    title: "Low Intermediate",
+    path: "",
+  },
+  {
+    title: "Intermediate",
+    path: "",
+  },
+  {
+    title: "Upper Intermediate",
+    path: "",
+  },
+  {
+    title: "Pre-advanced",
+    path: "",
+  },
+  {
+    title: "Advanced",
+    path: "",
+  },
+  {
+    title: "Very Advanced",
+    path: "",
+  },
+]
+
+const stuff = [
+  {
+    title: "Foods",
+    path: "",
+  },
+  {
+    title: "Curiosities",
+    path: "",
+  },
+  {
+    title: "Traditions",
+    path: "",
+  },
+  {
+    title: "Media",
+    path: "",
+  },
+  {
+    title: "Tools",
+    path: "",
+  },
+  {
+    title: "Quiz",
+    path: "",
+  },
+  {
+    title: "Dialogue",
+    path: "",
+  },
+  {
+    title: "Beauty",
+    path: "",
+  },
+ 
+]
 
 const panel = [
   {
@@ -77,9 +169,9 @@ const panel = [
 const NavMenu = () => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
-  const isNavOpen = useSelector((state) => state.isNavOpen);
-  const user = useSelector((state) => state.currentUser);
   const dispatch = useDispatch();
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const user = useSelector((state) => state.currentUser);  
   const seeMore = useSelector((state) => state.general.profileToggle);
 
   useEffect(() => {
@@ -91,32 +183,34 @@ const NavMenu = () => {
     }
   }, [isNavOpen]);
 
-  const loggedMap = nav.filter((item) => {
-    return item.isLogged !== false;
+  const publicMap = nav.filter((item) => {
+    return item.isLogged === false;
   });
 
   const emptyPicture = "https://via.placeholder.com/50px";
 
-  let navData = user.isLogged ? loggedMap : nav;
+  // let navData = user.isLogged ? loggedMap : nav;
+  let navData = true ? nav : publicMap;
 
   return (
     <div
-      className={`nav-container ${isNavOpen && "active"}`}
+      // className={`nav-container ${isNavOpen && "active"}`}
+      className={`nav-container active `}
       ref={linksContainerRef}
     >
       <ul className="nav-links" ref={linksRef}>
         {navData.map((link, index) => {
           const { title, path, classLink } = link;
           return (
-            <li key={index}>
-              <Link to={path} className={`${classLink || "links"}`}>
+            <li key={index} className="nav-link">
+              <Link to={path} className={`${classLink || "link"}`}>
                 {title}
               </Link>
             </li>
           );
         })}
         {user.isLogged && (
-          <li>
+          <li className="nav-link">
             <button
               onClick={() => dispatch(navActions.profileToggle())}
               className="btn profile-btn"
@@ -128,7 +222,7 @@ const NavMenu = () => {
                 alt="profile"
                 className="profile-picture profile-picture-nav"
               />
-              {auth.currentUser ? auth.currentUser.displayName : "uknown"}
+              {auth.currentUser ? auth.currentUser.displayName : "Unknown"}
               <span>▼</span>
             </button>
           </li>
@@ -136,7 +230,7 @@ const NavMenu = () => {
       </ul>
       {seeMore && (
         <ul className="nav-links nav-links--user">
-          <li>
+          <li className="nav-link">
             <img
               src={auth.currentUser ? auth.currentUser.photoURL : emptyPicture}
               alt="profile"
