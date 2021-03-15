@@ -50,30 +50,12 @@ const people = [
 
 const Edit = () => {
   const {
+    alert,
     handleEdtiorChange,
     handlerSubmit,
     getEvent,
-    alert,
-    title,
-    setTitle,
-    imgURL,
-    setImgURL,
-    query,
-    eventDate,
-    setEventDate,
-    setCrew,
-    setEventCity,
-    eventPlace,
-    setEventPlace,
-    link,
-    setLink,
-    eventTime,
-    setEventTime,
-    setLanguage,
-    info,
-    setInfo,
-    setCategory,
-    editable,
+    editableContainer,
+    setEditableContainer,
   } = useEdit();
 
   useEffect(() => {
@@ -91,10 +73,13 @@ const Edit = () => {
             <label htmlFor="title">Title</label>
             <input
               id="title"
-              placeholder={editable ? editable.title : "null"}
+              placeholder={editableContainer ? editableContainer.title : "add title..."}
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={editableContainer.title}
+              onChange={(e) => {
+              const value = e.target.value;
+              setEditableContainer(prevState => {return {...prevState, title: value}})
+              }}
             />
           </div>
           <div className="form-control">
@@ -108,7 +93,9 @@ const Edit = () => {
                   label: item.city,
                   value: item.city,
                 })),
-                onChange: (options) => setEventCity(options),
+                onChange: (options) => {
+                  setEditableContainer(prevState => {return {...prevState, city: options}})
+                },
               }}
             />
           </div>
@@ -116,11 +103,12 @@ const Edit = () => {
             <label htmlFor="place">Place</label>
             <input
               id="place"
-              placeholder={eventPlace}
+              placeholder={editableContainer ? editableContainer.place : "add place..."}
               type="text"
-              value={eventPlace}
+              value={editableContainer.place}
               onChange={(e) => {
-                setEventPlace(e.target.value);
+                const value = e.target.value;
+              setEditableContainer(prevState => {return {...prevState, place: value}})
               }}
             />
           </div>
@@ -130,9 +118,11 @@ const Edit = () => {
             <input
               id="date"
               type="date"
-              value={eventDate}
+              placeholder={editableContainer ? editableContainer.date : null}
+              value={editableContainer.date}
               onChange={(e) => {
-                setEventDate(e.target.value);
+                const value = e.target.value;
+              setEditableContainer(prevState => {return {...prevState, date: value}})
               }}
             />
           </div>
@@ -141,9 +131,11 @@ const Edit = () => {
             <input
               id="time"
               type="time"
-              value={eventTime}
+              placeholder={editableContainer ? editableContainer.time : null}
+              value={editableContainer.time}
               onChange={(e) => {
-                setEventTime(e.target.value);
+                const value = e.target.value;
+              setEditableContainer(prevState => {return {...prevState, time: value}})
               }}
             />
           </div>
@@ -151,11 +143,12 @@ const Edit = () => {
             <label htmlFor="imgURL">Img URL</label>
             <input
               id="imgURL"
-              placeholder={imgURL}
+              placeholder={editableContainer ? editableContainer.imgURL : "add img URL..."}
               type="text"
-              value={imgURL}
+              value={editableContainer.imgURL}
               onChange={(e) => {
-                setImgURL(e.target.value);
+                const value = e.target.value;
+              setEditableContainer(prevState => {return {...prevState, imgURL: value}})
               }}
             />
           </div>
@@ -163,11 +156,12 @@ const Edit = () => {
             <label htmlFor="link">Link</label>
             <input
               id="link"
-              placeholder={link}
+              placeholder={editableContainer ? editableContainer.link : "add link..."}
               type="text"
-              value={link}
+              value={editableContainer.link}
               onChange={(e) => {
-                setLink(e.target.value);
+                const value = e.target.value;
+                setEditableContainer(prevState => {return {...prevState, link: value}})
               }}
             />
           </div>
@@ -182,7 +176,9 @@ const Edit = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCategory(options),
+                onChange: (options) => {
+                  setEditableContainer(prevState => {return {...prevState, category: options}})
+                },
               }}
             />
           </div>
@@ -197,7 +193,8 @@ const Edit = () => {
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange: (options) => setLanguage(options),
+                onChange: (options) => {
+                  setEditableContainer(prevState => {return {...prevState, language: options}})},
               }}
             />
           </div>
@@ -212,20 +209,21 @@ const Edit = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCrew(options),
+                onChange: (options) => {setEditableContainer(prevState => {return {...prevState, crew: options}})},
               }}
             />
           </div>
         </section>
 
         <div className="form-control form-info">
-          <label htmlFor="info">Info</label>
+          <label htmlFor="content">Info</label>
           <textarea
-            id="info"
-            placeholder="add event details"
-            value={info}
+            id="content"
+            placeholder={editableContainer ? editableContainer.content : "add description..."}
+            value={editableContainer.content}
             onChange={(e) => {
-              setInfo(e.target.value);
+              const value = e.target.value;
+                setEditableContainer(prevState => {return {...prevState, content: value}})
             }}
             cols="30"
             rows="10"
@@ -234,7 +232,7 @@ const Edit = () => {
         <section className="editor">
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={query}
+            initialValue={editableContainer.content}
             init={{
               plugins: [
                 "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
