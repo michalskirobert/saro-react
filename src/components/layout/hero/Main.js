@@ -37,7 +37,7 @@ const heroData = [
 
 const heroInfoData = {
   title: "Polish learning online",
-  subtitle: ['A customised online course design for you.' , <br/>,'W Available 24 hours a day. 7 days a week', <br/>, 'A community to help you find a partner' , <br/>,' Related content to help you explore not only the language but also the Polish culture'],
+  subtitle: 'A customised online course design for you. W Available 24 hours a day. 7 days a week A community to help you find a partner Related content to help you explore not only the language but also the Polish culture',
 }
 
 const Main = () => {
@@ -77,7 +77,6 @@ const Main = () => {
                className={`${index === currentId ? "active" : "remove"}`}></img>
             )
           })}
-        {/* <img src={imageURL} alt="Saro free Polish lessons" /> */}
         </div>
         <div className="hero__content">
           <div className="hero__item">
@@ -102,7 +101,7 @@ const Main = () => {
         </div>
         <div className={'hero__info'}>
           <h2 className={"title"}>{heroInfoData.title}</h2>
-          <p className={"subtitle"}>{heroInfoData.subtitle}</p>
+          <p className={"subtitle"} >{heroInfoData.subtitle}</p>
           <button className={"btn find-out-btn"}>Find out more</button>
         </div>
       </div>
