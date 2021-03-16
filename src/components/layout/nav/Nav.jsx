@@ -3,14 +3,16 @@ import { useLocation } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 import { FaBars } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "../../../utils/_actions";
 
 const Nav = () => {
   const changeBackground = useRef(null);
   const dispatch = useDispatch();
   const location = useLocation().pathname;
+  const isNavOpen = useSelector((state) => state.isNavOpen);
 
   const changeColor = () => {
     changeBackground.current.style.backgroundColor =
@@ -40,7 +42,7 @@ const Nav = () => {
           className="hamburger"
           onClick={() => dispatch(navActions.navToggle())}
         >
-          <FaBars />
+          {isNavOpen ? <ImCross style={{height: "25px"}} /> : <FaBars />}
         </button>
         <NavMenu />
       </nav>

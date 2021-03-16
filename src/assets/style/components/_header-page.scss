@@ -22,7 +22,7 @@ header {
       left: 0;
       padding: 10px 0;
       overflow-x: hidden;
-      overflow-y: scroll;
+
       .nav-links {
         display: flex;
         flex-direction: column;
@@ -47,9 +47,11 @@ header {
             outline: none;
             background: transparent;
             cursor: pointer;
+            text-decoration: none;
           }
           .icon {
             margin-right: auto;
+            transition: all 0.5s ease-in-out;
           }
           .nav-inner-container {
             background: $crl-main-teal;
@@ -78,6 +80,9 @@ header {
             height: auto;
             max-height: 700px;
             transition: all 0.5s ease-in-out;
+          }
+          .rotate {
+            transform: rotate(-90deg);
           }
         }
       }
