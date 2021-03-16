@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { auth } from "./../../../components/feature/firebase";
-import { navActions } from "../../../utils/_actions";
+import { useSelector } from "react-redux";
 import { FaAngleLeft } from "react-icons/fa";
 
 const nav = [
@@ -16,7 +14,7 @@ const nav = [
     title: "Lessons",
     path: "/lessons",
     classLink: "",
-    isLogged: true,
+    isLogged: false,
     content: [
       {
         title: "Begginer",
@@ -60,13 +58,13 @@ const nav = [
     title: "Tests",
     path: "/tests",
     classLink: "",
-    isLogged: true,
+    isLogged: false,
   },
   {
     title: "Stuff",
     path: "/stuff",
     classLink: "",
-    isLogged: true,
+    isLogged: false,
     content: [
       {
         title: "Foods",
@@ -144,8 +142,7 @@ const NavMenu = () => {
     }
   };
 
-  // let navData = user.isLogged ? loggedMap : nav;
-  let navData = true ? nav : publicMap;
+  let navData = user.isLogged ? nav : publicMap;
 
   return (
     <div
