@@ -51,6 +51,7 @@ header {
           }
           .icon {
             margin-right: auto;
+            transition: all 0.5s ease-in-out;
           }
           .nav-inner-container {
             background: $crl-main-teal;
@@ -79,6 +80,9 @@ header {
             height: auto;
             max-height: 700px;
             transition: all 0.5s ease-in-out;
+          }
+          .rotate {
+            transform: rotate(-90deg);
           }
         }
       }

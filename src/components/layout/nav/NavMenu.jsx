@@ -161,7 +161,9 @@ const NavMenu = () => {
                       toggleInnerMenu(index);
                     }}
                   >
-                    <FaAngleLeft className="icon" />
+                    <FaAngleLeft
+                      className={selected === index ? "icon rotate" : "icon"}
+                    />
                     {title}
                   </button>
 
