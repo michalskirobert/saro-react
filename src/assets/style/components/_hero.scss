@@ -2,25 +2,69 @@
   position: relative;
   overflow-x: hidden;
   transition: opacity 2s ease;
-  img {
-    width: 100%;
-    height: calc(100vh - 225px);
-    object-fit: cover;
-    object-position: center center;
-  }
+  .hero__container {
+    .hero__info{
+      width: 100%;
+      color: $crl-main-blue;
+      background-color: $crl-base;
+      padding: 14px 25px 10px 20px;
+      .title{
+        text-transform: uppercase;
+      }
+      .subtitle {
+        color: $crl-main-blue;
+        margin: 25px 0;
+        text-align: left;
+      }
+      .find-out-btn {
+        width: 160px;
+        height: 30px;
+        background:$crl-main-blue;
+        border-radius: 60px;
+        color: $crl-base;
+        font-weight: 500;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.02em;
+        text-decoration: underline;
+      }
+    }
+    .img__container  {  
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 225px);
+      overflow: hidden;
+      background-color: transparent;
+        img {
+          position: absolute;
+        width: 100%;
+        height: calc(100vh - 225px);
+        object-fit: cover;
+        object-position: center center;
+        transform: translateX(100%);
+        &.active {
+          animation: slide 1s  linear  forwards;
+        }
+        &.remove{
+          animation: remove 1s  linear  forwards;
+        }
+        }
+        
+      }
   .hero__content {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: calc(100vh - 225px);
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     color: $crl-basic;
+    padding-top: 69px;
     .hero__item {
       height: 100%;
       width: 100%;
@@ -48,13 +92,13 @@
           height: 15px;
           width: 15px;
           margin: 0 5px;
-          background-color: transparent;
+          background-color:$crl-main-blue ;
           border-radius: 50%;
           display: inline-block;
-          border: 1px solid $crl-primary;
+          border: 1px solid $crl-base ;
           transition: background-color 0.6s ease;
           &.active {
-            background-color: $crl-primary;
+            background-color: $crl-base ;
           }
         }
         @media screen and (min-width: 1200px) {
@@ -65,4 +109,20 @@
       }
     }
   }
+}
+}
+
+
+@keyframes slide {
+  0% {transform: translateX(100%);}
+  25% {transform: translateX(0);}
+  100% {transform: translateX(0);}
+ 
+}
+
+@keyframes remove {
+  0% {transform: translateX(0);}
+  25% {transform: translateX(-100%);}
+  100% {transform: translateX(-100%);}
+ 
 }

@@ -35,13 +35,18 @@ const heroData = [
   },
 ];
 
+const heroInfoData = {
+  title: "Polish learning online",
+  subtitle: 'A customised online course design for you. W Available 24 hours a day. 7 days a week A community to help you find a partner Related content to help you explore not only the language but also the Polish culture',
+}
+
 const Main = () => {
   const index = useSelector((state) => state.hero);
   const dispatch = useDispatch();
 
   const checkNumber = (number) => {
     if (number > heroData.length - 1) {
-      dispatch(hero(0));
+      dispatch(hero(0));  
     } else {
       return dispatch(hero(number));
     }
@@ -65,7 +70,14 @@ const Main = () => {
   return (
     <section className={`hero`} style={{ padding: "0" }}>
       <div className="hero__container">
-        <img src={imageURL} alt="Saro free Polish lessons" />
+        <div className="img__container">
+          {heroData.map((item, currentId) => {
+            return (
+              <img src={item.imageURL} alt={"img"} key={currentId}
+               className={`${index === currentId ? "active" : "remove"}`}></img>
+            )
+          })}
+        </div>
         <div className="hero__content">
           <div className="hero__item">
             <h2 style={{ color: "#deb887" }}>{title}</h2>
@@ -86,6 +98,11 @@ const Main = () => {
               })}
             </div>
           </div>
+        </div>
+        <div className={'hero__info'}>
+          <h2 className={"title"}>{heroInfoData.title}</h2>
+          <p className={"subtitle"} >{heroInfoData.subtitle}</p>
+          <button className={"btn find-out-btn"}>Find out more</button>
         </div>
       </div>
     </section>
