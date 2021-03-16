@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 import { FaBars } from "react-icons/fa";
+
 import { useDispatch } from "react-redux";
 import { navActions } from "../../../utils/_actions";
 

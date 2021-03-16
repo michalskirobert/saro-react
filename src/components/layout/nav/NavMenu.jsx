@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "./../../../components/feature/firebase";
@@ -54,8 +54,8 @@ const nav = [
         title: "Very Advanced",
         path: "/lessons",
       },
-    ]
-  }, 
+    ],
+  },
   {
     title: "Tests",
     path: "/tests",
@@ -100,7 +100,7 @@ const nav = [
         title: "Beauty",
         path: "",
       },
-    ]
+    ],
   },
   {
     title: "Community",
@@ -116,14 +116,15 @@ const nav = [
   },
 ];
 
-
-
 const NavMenu = () => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const dispatch = useDispatch();
   const isNavOpen = useSelector((state) => state.isNavOpen);
-  const user = useSelector((state) => state.currentUser);  
+  const [isInnerOpen, setIsInnerOpen] = useState(false);
+  const contentRef = useRef(null);
+  const contentContainerRef = useRef(null);
+  const user = useSelector((state) => state.currentUser);
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -134,52 +135,73 @@ const NavMenu = () => {
     }
   }, [isNavOpen]);
 
+  useEffect(() => {
+    if (isInnerOpen) {
+      contentContainerRef.current.style.display = "block";
+    } else {
+      contentContainerRef.current.style.display = "none";
+    }
+  }, [isInnerOpen]);
+
   const publicMap = nav.filter((item) => {
     return item.isLogged === false;
   });
-const toggleInnerMenu = () => {
-  
-}
- 
+  const toggleInnerMenu = () => {
+    setIsInnerOpen(!isInnerOpen);
+  };
+
   // let navData = user.isLogged ? loggedMap : nav;
   let navData = true ? nav : publicMap;
 
   return (
     <div
       className={`nav-container ${isNavOpen && "active"}`}
+      // className="nav-container active"
       ref={linksContainerRef}
     >
       <ul className="nav-links" ref={linksRef}>
         {navData.map((link, index) => {
           const { title, path, content } = link;
           return (
-            <li key={index} className="nav-link"> 
-            <Link to={path}>              
-                <FaAngleLeft className="icon" onClick={toggleInnerMenu}/>
-                {title}               
-              </Link> 
-              {
-                content && 
-                <div className="nav-links-inner">
-                {content.map((link, index)=> {
-                  const {title, path} = link;
-                  return (
-                    <ul>
-                      <li>
-                      <Link to={path} className="nav-link-inner">
-                      {title}
-                      </Link>                        
-                      </li>
-                    </ul>
-                  )
-                })}
-              </div> 
-              }
-                    
+            <li key={index} className="nav-link">
+              {content ? (
+                <>
+                  <button onClick={toggleInnerMenu}>
+                    <FaAngleLeft className="icon" />
+                    {title}
+                  </button>
+
+                  <div
+                    ref={contentContainerRef}
+                    style={{ display: "none" }}
+                    className={`nav-inner-container`}
+                  >
+                    {content?.map((link, index) => {
+                      const { title, path } = link;
+                      return (
+                        <ul
+                          className="nav-links-inner"
+                          ref={contentRef}
+                          key={index}
+                        >
+                          <li className="nav-link-inner">
+                            <Link to={path}>{title}</Link>
+                          </li>
+                        </ul>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                <Link to={path}>
+                  <FaAngleLeft className="icon" />
+                  {title}
+                </Link>
+              )}
             </li>
           );
-        })}        
-      </ul>      
+        })}
+      </ul>
     </div>
   );
 };
