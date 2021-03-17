@@ -66,8 +66,6 @@ const Main = () => {
     return dispatch(hero(id));
   };
 
-  const { imageURL, title, subtitle, button, click } = heroData[index];
-
   return (
     <section className={`hero`} style={{ padding: "0" }}>
       <div className="hero__container">
@@ -88,9 +86,9 @@ const Main = () => {
                 >
                   <h2 style={{ color: "#deb887" }}>{item.title}</h2>
                   <h3>{item.subtitle}</h3>
-                  {button && (
+                  {item.button && (
                     <Link className="btn hero-btn" to={item.click}>
-                      {button}
+                      {item.button}
                     </Link>
                   )}
                 </div>
