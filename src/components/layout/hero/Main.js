@@ -110,10 +110,10 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className={"hero__info"}>
-          <h2 className={"title"}>{heroInfoData.title}</h2>
-          <p className={"subtitle"}>{heroInfoData.subtitle}</p>
-          <button className={"btn find-out-btn"}>Find out more</button>
+        <div className="hero__info">
+          <h2 className="title">{heroInfoData.title}</h2>
+          <p className="subtitle">{heroInfoData.subtitle}</p>
+          <button className="btn find-out-btn">Find out more</button>
         </div>
       </div>
     </section>
