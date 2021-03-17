@@ -23,7 +23,6 @@ const Nav = () => {
         <Logo className="header-logo" />
         <section className="user">
         <img src={UserIcon} alt="User"/>
-        {/* add ternary userLogged ? userIcon : singUpBtn */}
         </section>
        
       </section>
