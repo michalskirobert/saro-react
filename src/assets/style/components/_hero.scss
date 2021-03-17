@@ -98,7 +98,7 @@
           position: absolute;
           top: 90%;
           align-self: center;
-          z-index: 2;
+          z-index: 1;
           .dot {
             cursor: pointer;
             height: 15px;
@@ -115,7 +115,7 @@
           }
           @media screen and (min-width: 1200px) {
             .dot:hover {
-              background-color: $crl-primary;
+              background-color: $crl-base;
             }
           }
         }
