@@ -1,18 +1,21 @@
 import React from "react";
-import Logo from "./../../../components/layout/nav/Logo";
+
+
+
+
+
 const Footer = () => {
   return (
     <>
       <div className="newsletter">
         <form onClick={(e) => e.preventDefault()}>
-          <label htmlFor="email">Sign up to newsletter</label>
-          <input type="email" placeholder="your address email here" />
-          <button className="btn newsletter-btn">Sign up</button>
+          <button className="newsletter__language">English</button>
+          <h2 className="newsletter__contact">Contact us</h2>
+          <p className="newsletter__description">You can contact us anytime through the Contact Form.
+          You can use Japanese, Korean, English or even  Polsih or you can write to us by your own contact@saro.website</p>
+          <h2 className="newsletter__follow">Follow us</h2>
         </form>
       </div>
-      <footer>
-        <Logo />
-      </footer>
     </>
   );
 };

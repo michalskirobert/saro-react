@@ -1,58 +1,69 @@
 .newsletter {
-  background-image: url("./../../images/components/footer/newsletter.jpg");
-  background-position: center;
   padding: 30px 10%;
-  background-blend-mode: multiply;
-  background-color: rgba(0, 0, 0, 0.6);
-  form {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    label {
-      color: $crl-basic;
-      margin: 10px;
-      font-size: 1.3rem;
-      align-self: center;
-    }
-    input {
-      margin: 10px;
-      padding: 10px;
-      text-align: center;
-      border: none;
-      outline: none;
-      border-bottom: 2px solid #ffff;
-      background-color: transparent;
-      color: $crl-primary;
-      &::placeholder {
-        color: $crl-light;
-      }
-      &:focus {
-        color: $crl-special;
-      }
-    }
-    button {
-      background-color: $crl-primary;
-      color: #111;
-    }
-  }
-}
-
-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 10%;
+  background-color: rgba(46, 70, 96, 0.8);
+  left: 0px;
+  top: 1995px;
   width: 100%;
-  background-color: #111;
-  .logo {
-    z-index: 1;
-  }
-  .nav-links {
+
+  .newsletter__language {
     display: flex;
-    flex-flow: row wrap;
-    & li {
-      margin-left: 15px;
-    }
+    align-items: center;
+    background: rgba(147, 149, 151, 0.8);
+    width: 110px;
+    height: 40px;
+    left: 20px;
+    top: 2060px;
+    border: 1px solid #2e4660;
+    border-radius: 5px 0px 0px 5px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #f5e5d5;
+    text-align: center;
+  }
+
+  .newsletter__contact,
+  .newsletter__follow {
+    display: flex;
+    align-items: center;
+    color: #f5e5d5;
+    padding: 20px 0 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 18px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .newsletter__description {
+    display: flex;
+    color: #f5e5d5;
+    align-items: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 20px;
+  }
+
+  .newsletter__links {
+    display: flex;
+    align-items: center;
+    color: #f5e5d5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.2rem;
+    line-height: 20px;
+  }
+
+  .newsletter__facebook {
+    text-decoration: none;
+    list-style-image: url();
   }
 }
