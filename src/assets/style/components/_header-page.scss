@@ -1,11 +1,47 @@
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
+  color: $crl-base;
+  background: rgba(46, 70, 96, 0.8);  
   width: 100%;
-  position: fixed;
+  position: sticky;
   z-index: 2;
+  
+.header-upper, .header-lower, .user{
+  padding: 0;
+  display: flex;
+}
+.header-upper {  
+  padding: 0 5%;
+  align-items: center;
+  justify-content: space-between;
+  height: 67px;
+  .user {
+    align-items: center;
+    justify-content: center;
+  }  
+}
+.header-lower {
+  height: 50px;  
+  .header-home {
+    border: 1px solid $crl-base;
+  }
+  .header-search, .header-home, .header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid $crl-base;
+    border-bottom: 1px solid $crl-base;
+    width: calc(100% /3);
+    img {
+      max-height: 35px;
+    }
+    button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+  }
+  
+}
   nav {
     .nav-container {
       z-index: 900;
@@ -101,10 +137,7 @@ header {
       outline: none;
       z-index: 255;
       transition: all 0.5s ease-in-out;
-      &:hover,
-      &:focus {
-        transform: scaleX(1.1);
-      }
+      
     }
   }
 }
