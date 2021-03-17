@@ -137,10 +137,7 @@ header {
       outline: none;
       z-index: 255;
       transition: all 0.5s ease-in-out;
-      &:hover,
-      &:focus {
-        transform: scaleX(1.1);
-      }
+      
     }
   }
 }

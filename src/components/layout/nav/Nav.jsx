@@ -1,6 +1,8 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "../../../utils/_actions";
+import { Link } from "react-router-dom";
 
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
@@ -27,7 +29,7 @@ const Nav = () => {
       </section>
       <section className="header-lower">
         <div className="header-search"><img src={MagnifyingGlass} alt="Search"/></div>
-        <div className="header-home"><img src={House} alt="Home"/></div>
+        <div className="header-home"><Link to="/"><img src={House} alt="Home"/></Link></div>
         <nav className="header-nav">
           <button
             className="hamburger"
