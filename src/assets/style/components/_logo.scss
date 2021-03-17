@@ -1,15 +1,15 @@
 .logo {
   cursor: pointer;
-  font-size: 1.5rem;
-  display: flex;
-  color: $crl-primary;
-  align-items: center;
-  position: relative;
-  z-index: 255;
+  padding: 0;
+  margin: 0;
   p {
-    margin-left: 0.5rem;
-    color: $crl-basic;
-    font-weight: 700;
-    font-size: 1.5rem;
+    color: $crl-base;
+    font-family: "Encode Sans Semi Condensed";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 60px;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
   }
 }
