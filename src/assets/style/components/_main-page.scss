@@ -198,6 +198,88 @@ section.home {
   }
 }
 
+section.introduction {
+  color: $crl-main-blue;
+  .introduction__welcome,
+  .introduction__cards {
+    position: relative;
+    padding: 14px 0 0 0;
+    margin: 25px 0;
+  }
+  .introduction__welcome {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    h2 {
+      width: 100%;
+      text-align: start;
+      margin: 14px 0;
+    }
+    p {
+      width: 100%;
+      text-align: start;
+      max-width: 550px;
+      color: $crl-main-blue;
+    }
+  }
+  .introduction__cards {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .card {
+      position: relative;
+      width: 290px;
+      height: 165px;
+      margin: 20px 0 20px 0;
+      border: none;
+      .icon {
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        left: 50%;
+        top: 0;
+        transform: translate(-50%);
+        background-color: $crl-main-blue;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .text {
+        position: absolute;
+        width: 290px;
+        height: 130px;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        background-color: $crl-base;
+        border-radius: 30px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        p {
+          font-size: 12px;
+          color: $crl-main-blue;
+        }
+      }
+    }
+  }
+  .introduction__welcome::before,
+  .introduction__cards::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 4px;
+    background-color: $crl-main-blue;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   .events,
   .blog {
