@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import throttle from 'lodash.throttle'
 
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "../../../utils/_actions";
@@ -7,34 +8,64 @@ import { Link } from "react-router-dom";
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 
-import UserIcon from '../../../assets/images/components/nav/UserIcon.svg'
-import Hamburger from '../../../assets/images/components/nav/Hamburger.svg'
-import House from '../../../assets/images/components/nav/House.svg'
-import Cross from '../../../assets/images/components/nav/Cross.svg'
-import MagnifyingGlass from '../../../assets/images/components/nav/MagnifyingGlass.svg'
+import UserIcon from "../../../assets/images/components/nav/UserIcon.svg";
+import Hamburger from "../../../assets/images/components/nav/Hamburger.svg";
+import House from "../../../assets/images/components/nav/House.svg";
+import Cross from "../../../assets/images/components/nav/Cross.svg";
+import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGlass.svg";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const userName = useSelector((state) => state.currentUser.name);
+  const isNavOpen = useSelector((state) => state.isNavOpen); 
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    let prevPosition = window.pageYOffset;
+
+    const handleScroll = throttle(() => {
+      let currPosition = window.pageYOffset;
+      if (prevPosition > currPosition) {
+        setScrolled(false)
+      } else {
+        setScrolled(true)
+      }
+      prevPosition = currPosition;
+    }, 750)
+
+    window.addEventListener("scroll", handleScroll);
+    
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header>
+    <header style={scrolled ? {transform: "translateY(-100%)"} : {transform: "translateY(0)"}}>
       <section className="header-upper">
         <Logo className="header-logo" />
         <section className="user">
-        <img src={UserIcon} alt="User"/>
+          <img src={UserIcon} alt={userName} />
         </section>
-       
       </section>
       <section className="header-lower">
-        <div className="header-search"><img src={MagnifyingGlass} alt="Search"/></div>
-        <div className="header-home"><Link to="/"><img src={House} alt="Home"/></Link></div>
+        <div className="header-search">
+          <img src={MagnifyingGlass} alt="Search" />
+        </div>
+        <div className="header-home">
+          <Link to="/">
+            <img src={House} alt="Home" />
+          </Link>
+        </div>
         <nav className="header-nav">
           <button
             className="hamburger"
             onClick={() => dispatch(navActions.navToggle())}
           >
-            {isNavOpen ? <img src={Cross} alt="Close"/> : <img src={Hamburger} alt="Menu"/> }
+            {isNavOpen ? (
+              <img src={Cross} alt="Close" />
+            ) : (
+              <img src={Hamburger} alt="Menu" />
+            )}
           </button>
           <NavMenu />
         </nav>

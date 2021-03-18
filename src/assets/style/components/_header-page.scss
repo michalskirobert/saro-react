@@ -4,6 +4,9 @@ header {
   width: 100%;
   position: sticky;
   z-index: 2;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+  
   
 .header-upper, .header-lower, .user{
   padding: 0;
