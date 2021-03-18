@@ -247,6 +247,15 @@ section.introduction {
         display: flex;
         align-items: center;
         justify-content: center;
+        &.one {
+          background-color: $crl-main-teal;
+        }
+        &.two {
+          background-color: $crl-main-purple;
+        }
+        &.three {
+          background-color: $crl-main-light;
+        }
       }
       .text {
         position: absolute;
@@ -264,6 +273,18 @@ section.introduction {
         p {
           font-size: 12px;
           color: $crl-main-blue;
+        }
+        p.one,
+        h2.one {
+          color: $crl-main-teal;
+        }
+        p.two,
+        h2.two {
+          color: $crl-main-purple;
+        }
+        p.three,
+        h2.three {
+          color: $crl-main-light;
         }
       }
     }

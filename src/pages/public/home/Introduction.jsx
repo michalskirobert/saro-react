@@ -16,19 +16,19 @@ const Introduction = () => {
       svg: <IconBook />,
       title: "Polish Practices",
       subtitle: "Grammar. Vocabulary. Pronounciation.",
-      color: "#2F6E6D",
+      color: "one",
     },
     {
       svg: <IconNotePencil />,
       title: "Polish tests",
       subtitle: "Do your remember what you have learn?",
-      color: "#322f6e",
+      color: "two",
     },
     {
       svg: <IconBird />,
       title: "Polish culture",
       subtitle: "Learn more about the country and the people",
-      color: "#346778",
+      color: "three",
     },
   ];
 
@@ -48,12 +48,10 @@ const Introduction = () => {
           return (
             <div className="card" key={index}>
               <div className="text">
-                <h2 style={{ color: card.color }}>{card.title} </h2>
-                <p style={{ color: card.color }}>{card.subtitle}</p>
+                <h2 className={card.color}>{card.title} </h2>
+                <p className={card.color}>{card.subtitle}</p>
               </div>
-              <div className="icon" style={{ backgroundColor: card.color }}>
-                {card.svg}
-              </div>
+              <div className={`icon ${card.color}`}>{card.svg}</div>
             </div>
           );
         })}
