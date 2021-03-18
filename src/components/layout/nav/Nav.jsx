@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import throttle from 'lodash.throttle'
 
 import { useDispatch, useSelector } from "react-redux";
@@ -16,8 +16,9 @@ import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGla
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const isNavOpen = useSelector((state) => state.isNavOpen);
-  const headerRef = useRef(null);
+  const userName = useSelector((state) => state.currentUser.name);
+  const isNavOpen = useSelector((state) => state.isNavOpen); 
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     let prevPosition = window.pageYOffset;
@@ -25,14 +26,12 @@ const Nav = () => {
     const handleScroll = throttle(() => {
       let currPosition = window.pageYOffset;
       if (prevPosition > currPosition) {
-        headerRef.current.style.top = "0";
+        setScrolled(false)
       } else {
-        headerRef.current.style.top = "-120px";
+        setScrolled(true)
       }
       prevPosition = currPosition;
-      console.log(`prev ${prevPosition}`)
-    console.log(`curr ${currPosition}`)
-    }, 1000)
+    }, 750)
 
     window.addEventListener("scroll", handleScroll);
     
@@ -41,11 +40,11 @@ const Nav = () => {
   }, []);
 
   return (
-    <header ref={headerRef}>
+    <header style={scrolled ? {transform: "translateY(-100%)"} : {transform: "translateY(0)"}}>
       <section className="header-upper">
         <Logo className="header-logo" />
         <section className="user">
-          <img src={UserIcon} alt="User" />
+          <img src={UserIcon} alt={userName} />
         </section>
       </section>
       <section className="header-lower">

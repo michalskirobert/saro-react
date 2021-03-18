@@ -5,7 +5,8 @@ header {
   position: sticky;
   z-index: 2;
   top: 0;
-  transition: top 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  
   
 .header-upper, .header-lower, .user{
   padding: 0;
