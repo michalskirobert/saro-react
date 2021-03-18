@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import throttle from 'lodash.throttle'
 
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "../../../utils/_actions";
@@ -21,17 +22,20 @@ const Nav = () => {
   useEffect(() => {
     let prevPosition = window.pageYOffset;
 
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       let currPosition = window.pageYOffset;
       if (prevPosition > currPosition) {
-        headerRef.current.style.top = "0"; //show
+        headerRef.current.style.top = "0";
       } else {
-        headerRef.current.style.top = "-120px"; //hide
+        headerRef.current.style.top = "-120px";
       }
       prevPosition = currPosition;
-    };
+      console.log(`prev ${prevPosition}`)
+    console.log(`curr ${currPosition}`)
+    }, 1000)
 
     window.addEventListener("scroll", handleScroll);
+    
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
