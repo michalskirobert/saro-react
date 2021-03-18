@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import throttle from 'lodash.throttle'
+import throttle from "lodash.throttle";
 
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "../../../utils/_actions";
@@ -17,30 +17,40 @@ import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGla
 const Nav = () => {
   const dispatch = useDispatch();
   const userName = useSelector((state) => state.currentUser.name);
-  const isNavOpen = useSelector((state) => state.isNavOpen); 
-  const [scrolled, setScrolled] = useState(false)
+  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     let prevPosition = window.pageYOffset;
 
     const handleScroll = throttle(() => {
       let currPosition = window.pageYOffset;
-      if (prevPosition > currPosition) {
-        setScrolled(false)
+      if (currPosition > 400) {
+        if (prevPosition > currPosition) {
+          setScrolled(false);
+        } else {
+          setScrolled(true);
+        }
+        prevPosition = currPosition;
       } else {
-        setScrolled(true)
+        setScrolled(false);
       }
-      prevPosition = currPosition;
-    }, 750)
+    }, 200);
 
     window.addEventListener("scroll", handleScroll);
-    
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header style={scrolled ? {transform: "translateY(-100%)"} : {transform: "translateY(0)"}}>
+    <>
+    <header
+      style={
+        scrolled
+          ? { transform: "translateY(-100%)" }
+          : { transform: "translateY(0)" }
+      }
+    >
       <section className="header-upper">
         <Logo className="header-logo" />
         <section className="user">
@@ -67,10 +77,14 @@ const Nav = () => {
               <img src={Hamburger} alt="Menu" />
             )}
           </button>
-          <NavMenu />
+          
         </nav>
+        
       </section>
+      
     </header>
+    <NavMenu />
+    </>
   );
 };
 
