@@ -1,6 +1,6 @@
 header {
   color: $crl-base;
-  background: rgba(46, 70, 96, 0.8);
+  background: $crl-base-blue;
   width: 100%;
   position: sticky;
   z-index: 2;
@@ -21,6 +21,20 @@ header {
     .user {
       align-items: center;
       justify-content: center;
+      .sign-up-btn {
+        color: $crl-base-orange;
+        background: $crl-base;
+        padding: 12px 20px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 15px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border: 2px solid $crl-base-orange;
+        border-radius: 60px;
+      }
     }
   }
   .header-lower {
