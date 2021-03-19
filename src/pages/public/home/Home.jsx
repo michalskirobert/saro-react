@@ -1,16 +1,14 @@
 import React from "react";
 import Hero from "../../../components/layout/hero/Main";
-import News from "./News";
-import Blog from "./Blog";
 import Introduction from "./Introduction";
+import PartnerNearYou from "./PartnerNearYou";
 
 const Home = () => {
   return (
     <main>
       <Hero />
       <Introduction />
-      <News />
-      <Blog />
+      <PartnerNearYou />
     </main>
   );
 };
