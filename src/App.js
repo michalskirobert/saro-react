@@ -8,7 +8,6 @@ import Unlisten from "./routers/Unlisten";
 import { auth, firestore } from "./components/feature/firebase";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import LogIn from "./components/feature/auth/login/Login";
 import { userActions } from "./store/actions";
 
 import Nav from "./components/layout/nav/Nav";
@@ -78,7 +77,6 @@ const App = () => {
           <Route path="/about" component={About} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
-          <Route path="/log-in" component={LogIn} />
           <Route path="/lessons" component={Lessons} />
           <Route exact path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />

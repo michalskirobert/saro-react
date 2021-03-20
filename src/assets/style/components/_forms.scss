@@ -1,21 +1,37 @@
+.section.login {
+  position: relative;
+  padding: 30px 20px;
+  .arrow-back-icon {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+  }
+}
+
 form.auth-form {
-  background: #fff;
-  padding: 2rem 2rem 1rem;
-  max-width: 400px;
-  margin: 10px auto 25px;
-  box-shadow: 0 0 1em #222;
-  border-radius: 2px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   h2 {
-    margin: 0 0 50px 0;
-    padding: 10px;
-    text-align: center;
-    font-size: 30px;
-    color: darken(#e5e5e5, 50%);
-    border-bottom: solid 1px #e5e5e5;
+    font-size: 36px;
+    color: $crl-base-blue;
+    width: 100%;
+    margin-bottom: 32px;
   }
   .form-control {
-    margin: 0 0 3em 0;
     position: relative;
+    margin: 0 0 30px 0;
+    position: relative;
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     &--gender {
       margin: 35px 0;
       display: flex;
@@ -37,80 +53,84 @@ form.auth-form {
         top: 0;
       }
     }
-  }
-  input,
-  textarea {
-    display: block;
-    width: 100%;
-    outline: none;
-    margin: 0;
-    background: #fff;
-    border: 1px solid #dbdbdb;
-    font-size: 1.3rem;
-    padding: 0.8rem 0.5rem;
-    border-radius: 2px;
+    label {
+      position: absolute;
+      left: 8px;
+      top: 12px;
+      color: #999;
+      font-size: 16px;
+      display: inline-block;
+      padding: 4px 10px;
+      font-weight: 400;
+      background-color: rgba(255, 255, 255, 0);
+      transition: background-color 0.5s ease;
+      border: none;
+    }
+    input,
+    textarea {
+      display: block;
+      width: 343px;
+      height: 52px;
+      outline: none;
+      border: 2px solid $crl-base-blue;
+      font-size: 15px;
+      padding: 0.7rem 0.4rem;
+      border-radius: 2px;
+    }
+
+    input:focus {
+      background: #fff;
+    }
   }
 
-  input:focus {
-    background: #fff;
-  }
   button {
     background: $crl-base-blue;
-    box-shadow: 0 3px 0 0 darken($crl-base-blue, 10%);
-    border-radius: 2px;
+    border-radius: 8px;
+    color: white;
     border: none;
-    color: #fff;
     cursor: pointer;
     display: block;
-    font-size: 1.5rem;
-    line-height: 1.6em;
-    margin: 2em 0 0;
-    outline: none;
-    padding: 0.8em 2rem;
-    text-shadow: 0 1px #68b25b;
+    font-size: 13px;
+    font-weight: bold;
     margin: 0 auto;
+    width: 343px;
+    height: 52px;
+    transition: 0.2s linear;
     &:hover {
-      background: rgba(148, 175, 101, 1);
-      text-shadow: 0 1px 3px darken($crl-base-blue, 30%);
+      color: $crl-base-blue;
+      border: 2px solid $crl-base-blue;
+      background-color: white;
+      transition: 0.2s linear;
     }
   }
-  & > label {
-    position: absolute;
-    left: 8px;
-    top: 12px;
-    color: #999;
-    font-size: 16px;
-    display: inline-block;
-    padding: 4px 10px;
-    font-weight: 400;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.5s ease;
-    &.floatLabel {
-      top: -11px;
-      background-color: rgba(255, 255, 255, 0.8);
-      font-size: 14px;
-    }
-  }
+
   .auth-control {
     display: block;
     margin-top: 25px;
     text-align: center;
+    .create-account-link {
+      text-decoration: underline;
+      font-size: 15px;
+    }
   }
 }
 
 form.cms {
+    
   .main-title {
-    width: 90%;
+    width: 95%;
     max-width: 500px;
     border-bottom: 1px solid black;
-    padding-bottom: 10px;
-    margin: 30px auto;
+    margin: 0 auto;
+    margin-bottom: 50px;
     font-size: 1.3rem;
   }
   .form-container {
+    padding: 0 1%;
+    width: 100%;
     max-width: 1200px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     grid-gap: 10px;
     justify-content: center;
     align-items: center;
@@ -118,9 +138,8 @@ form.cms {
       bottom: 20px;
     }
   }
-
-  .form-control {
-    background: $crl-base-blue;
+   .form-control {
+    background: $crl-main-grey;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -136,7 +155,7 @@ form.cms {
     margin: 25px auto 0 auto;
     height: 200px;
     display: block;
-    width: 90%;
+    width: 100%;
     max-width: 600px;
   }
   input {
@@ -155,7 +174,7 @@ form.cms {
   textarea {
     height: 150px;
     width: 100%;
-    background: $crl-base-blue;
+    background: $crl-main-grey;
     border-radius: 10px;
     padding: 5px 10px;
     outline: none;
@@ -167,17 +186,18 @@ form.cms {
       color: rgb(187, 187, 187);
     }
   }
-  select,
+  select, .css-yk16xz-control,
   input {
     border: none;
     border-bottom: 1px solid black;
     border-radius: 8px 8px 0 0;
-    background: $crl-base-blue;
+    background: $crl-main-grey;
     padding: 5px 10px;
     outline: none;
   }
+ 
   select option {
-    background: $crl-base-blue;
+    background: $crl-main-grey;
     font-style: italic;
   }
 
@@ -189,7 +209,7 @@ form.cms {
     border: 1px solid black;
     outline: 1px solid black;
     outline-offset: -2px;
-    padding: 10px 25px;
+    padding: 10px 35px;
     margin: 25px auto;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
@@ -212,7 +232,7 @@ form.cms {
     max-width: 1200px;
     margin: 0 auto;
   }
-  @media (min-width: 540px) {
+  @media (min-width: 500px) {
     .form-container {
       grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
     }
