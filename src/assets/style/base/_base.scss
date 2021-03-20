@@ -12,15 +12,9 @@ section {
   padding: 0 2rem;
 }
 
-main {
-  section:nth-child(odd) {
-    background-color: $crl-secondary;
-  }
-}
-
 html:lang(en) {
   body {
-    font-family: $family-en;
+    font-family: $family-en-primary;
     line-height: normal;
   }
 }
@@ -34,7 +28,7 @@ strong,
 h5,
 label {
   font-size: 1rem;
-  color: $crl-default;
+  color: $crl-base-blue;
 }
 
 p,
@@ -84,10 +78,10 @@ h4 {
 }
 
 a {
-  color: $crl-primary;
+  color: $crl-base-blue;
   font-weight: bold;
   transition: color 0.5s ease;
   &:hover {
-    color: $crl-darkin;
+    color: $crl-main-green;
   }
 }

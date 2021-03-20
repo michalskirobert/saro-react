@@ -1,12 +1,11 @@
 import React from "react";
 import Select from "react-select";
+import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "react-bootstrap";
 
 import { BUTTONS_HELPER } from "./utils";
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-
-import { Editor } from "@tinymce/tinymce-react";
 
 const lang = [
   {

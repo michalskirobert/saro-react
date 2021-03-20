@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 import { FaAngleLeft } from "react-icons/fa";
 
 const nav = [
@@ -114,13 +115,11 @@ const nav = [
   },
 ];
 
-const NavMenu = () => {
+const NavMenu = ({ isNavOpen }) => {
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
-  const isNavOpen = useSelector((state) => state.isNavOpen);
   const [selected, setSelected] = useState(null);
   const user = useSelector((state) => state.currentUser);
-
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
     if (isNavOpen) {

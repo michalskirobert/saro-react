@@ -1,22 +1,25 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
+
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
 import { firestore } from "../../../components/feature/firebase";
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 
+import * as C from "./../../../utils/constants";
+
 const AdminPanel = () => {
   const { getNews, getEvents } = useContainer();
   const { handleEdit } = useEdit();
-  const newsItems = useSelector((state) => state.news.posts);
-  const newsEvents = useSelector((state) => state.events.events);
+  const newsItems = useSelector((state) => state.database.posts);
+  const newsEvents = useSelector((state) => state.database.events);
   const alert = useSelector((state) => state.CMS.alert);
   const removeItem = async (id) => {
     return await firestore
-      .collection("language")
-      .doc("en")
-      .collection("news")
+      .collection(C.generalConstants.LANG)
+      .doc(C.generalConstants.CHANGE_LANGUAGE_TO.ENGLISH)
+      .collection(C.generalConstants.EVENTS)
       .doc(id)
       .delete();
   };

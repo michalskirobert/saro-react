@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { hero } from "../../../store/actions/hero.actions";
+
 import main from "./../../../assets/images/components/hero/main.jpg";
 import second from "./../../../assets/images/components/hero/christmas-hero.jpg";
 import third from "./../../../assets/images/components/hero/header-banner.jpg";
 import another from "./../../../assets/images/components/hero/dialogue.jpg";
-import { useSelector, useDispatch } from "react-redux";
-import { hero } from "../../../utils/_actions/hero.actions";
 
 const heroData = [
   {
