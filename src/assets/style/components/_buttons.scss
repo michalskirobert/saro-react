@@ -7,7 +7,7 @@
 
 .btn.viewAll {
   background-color: transparent;
-  color: $crl-special;
+  color: $crl-base-blue;
   font-size: 1.4rem;
   transition: filter ease-in 0.5s;
   display: block;
@@ -20,7 +20,7 @@
 .btn.read-more {
   display: inline;
   background-color: transparent;
-  color: $crl-primary;
+  color: $crl-base-blue;
   font-size: 1rem;
   transition: filter ease-in 0.5s;
   padding: 0;

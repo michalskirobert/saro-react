@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import throttle from "lodash.throttle";
-
-import { useDispatch, useSelector } from "react-redux";
-import { navActions } from "../../../utils/_actions";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+import throttle from "lodash.throttle";
 
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
@@ -15,10 +14,9 @@ import Cross from "../../../assets/images/components/nav/Cross.svg";
 import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGlass.svg";
 
 const Nav = () => {
-  const dispatch = useDispatch();
   const userName = useSelector((state) => state.currentUser.name);
   const userIsLogged = useSelector((state) => state.currentUser.isLogged);
-  const isNavOpen = useSelector((state) => state.isNavOpen);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -78,7 +76,7 @@ const Nav = () => {
           <nav className="header-nav">
             <button
               className="hamburger"
-              onClick={() => dispatch(navActions.navToggle())}
+              onClick={() => setIsNavOpen(!isNavOpen)}
             >
               {isNavOpen ? (
                 <img src={Cross} alt="Close" />
@@ -89,7 +87,7 @@ const Nav = () => {
           </nav>
         </section>
       </header>
-      <NavMenu />
+      <NavMenu {...{ isNavOpen }} />
     </>
   );
 };

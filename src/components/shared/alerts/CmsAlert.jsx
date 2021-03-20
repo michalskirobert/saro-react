@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { FaTimes, FaRegTimesCircle, FaRegCheckCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { cmsActions } from "../../../utils/_actions";
-import { alertConstants } from "../../../utils/_constants";
+
+import { FaTimes, FaRegTimesCircle, FaRegCheckCircle } from "react-icons/fa";
+import { cmsActions } from "../../../store/actions";
+import { alertConstants } from "../../../utils/constants";
 
 const CmsAlert = () => {
   const dispatch = useDispatch();

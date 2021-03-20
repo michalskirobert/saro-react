@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
-
-import { cmsActions } from "../../../utils/_actions";
-import { generalConstants } from "../../../utils/_constants";
-import { firestore } from "../../../components/feature/firebase";
 import { useHistory } from "react-router";
+
+import { cmsActions } from "../../../store/actions";
+import { generalConstants } from "../../../utils/constants";
+import { firestore } from "../../../components/feature/firebase";
+
+import { v4 as uuidv4 } from "uuid";
 
 export const useContainer = () => {
   const [content, setContent] = useState("");

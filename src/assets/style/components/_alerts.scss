@@ -10,10 +10,10 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 99;
-  box-shadow: 0 4px 1rem 0 $crl-shadow-gray;
+  box-shadow: 0 4px 1rem 0 $crl-main-grey;
   animation: slide-in 0.5s ease-in-out;
   p {
-    color: $crl-basic;
+    color: white;
     font-weight: 600;
   }
   .close {
@@ -24,7 +24,7 @@
     box-shadow: none;
     transition: 0.5s color ease;
     &:hover {
-      color: $crl-default;
+      color: $crl-base-blue;
     }
   }
   .icon {

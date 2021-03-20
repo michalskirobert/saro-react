@@ -7,6 +7,10 @@
       color: $crl-main-blue;
       background-color: $crl-base;
       padding: 14px 25px 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
       .title {
         text-transform: uppercase;
       }
@@ -14,6 +18,7 @@
         color: $crl-main-blue;
         margin: 25px 0;
         text-align: left;
+        max-width: 550px;
       }
       .find-out-btn {
         width: 160px;
@@ -28,6 +33,7 @@
         justify-content: center;
         letter-spacing: 0.02em;
         text-decoration: underline;
+        margin-bottom: 10px;
       }
     }
     .img__container {
@@ -83,7 +89,7 @@
       top: 0;
       left: 0;
       background: rgba(0, 0, 0, 0.8);
-      color: $crl-basic;
+      color: $crl-base-blue;
       padding-top: 69px;
       .hero__item {
         height: 100%;

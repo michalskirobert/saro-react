@@ -1,7 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { auth } from "../../../components/feature/firebase";
 import { useSelector } from "react-redux";
+
+import { auth } from "../../../components/feature/firebase";
 
 const Dashboard = () => {
   const currentUser = useSelector((state) => state.currentUser);

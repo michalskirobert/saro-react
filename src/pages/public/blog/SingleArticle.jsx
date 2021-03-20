@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import { useContainer } from "./container";
 
 const SingleArticle = () => {
