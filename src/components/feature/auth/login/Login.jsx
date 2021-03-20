@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import LoginForm from "./LoginForm";
 import { auth } from "../../firebase";
 import { userActions } from "../../../../store/actions";
+import { ReactComponent as ArrowBack } from "../../../../assets/images/components/forms/arrowBack.svg";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,11 @@ const Login = () => {
 
   return (
     <section className="section login">
+      <button className="arrow-back-icon" type="button">
+        {" "}
+        <ArrowBack />
+      </button>
+
       <LoginForm />
     </section>
   );
