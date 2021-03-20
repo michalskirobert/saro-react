@@ -1,4 +1,4 @@
-export const fetchConstants = {
+export const FETCH_CONSTANTS = {
   NEWS: "FETCH_NEWS",
   REQUEST: "FETCH_NEWS_REQUEST",
 };

@@ -6,7 +6,7 @@ const defaultState = {
 
 export const generalReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case CONSTANTS.generalConstants.CHANGE_LANGUAGE_TO.ENGLISH:
+    case CONSTANTS.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.ENGLISH:
       return {
         ...state,
         language: "en",

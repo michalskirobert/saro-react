@@ -1,6 +1,7 @@
 // Components:
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
@@ -34,8 +35,6 @@ import ProfileSettings from "./pages/private/profile/Settings";
 import User from "./pages/private/profile/User";
 
 //Special
-import { useDispatch } from "react-redux";
-
 import AdminEdit from "./pages/special/edit/Edit";
 import AdminAddArticle from "./pages/special/add/AddArticle";
 import AdminAddEvents from "./pages/special/add/AddEvents";
@@ -43,14 +42,15 @@ import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
 
+import * as C from "./utils/constants";
+
 const App = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         firestore
-          .collection("users")
+          .collection(C.GENERAL_CONSTANTS.USERS)
           .doc(user.uid)
           .onSnapshot((currentUser) => {
             dispatch(userActions.signIn(currentUser.data()));
@@ -63,8 +63,6 @@ const App = () => {
       unsubscribe();
     };
   }, []);
-
-  console.log({ app: "/app" });
 
   return (
     <Router>
@@ -86,7 +84,6 @@ const App = () => {
           {/* User route */}
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/profile" component={User} />
-          <PrivateRoute path="/profile/progress" component={ProfileProgress} />
           <PrivateRoute path="/profile/settings" component={ProfileSettings} />
           <PrivateRoute path="/profile/:id" children={<User />} />
           {/* CMS SARO 1.0.0 */}
