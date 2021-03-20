@@ -1,4 +1,4 @@
-.newsletter {
+.footer-page {
   padding: 30px 10%;
   background-color: rgba(46, 70, 96, 0.8);
   left: 0px;
@@ -34,12 +34,12 @@
     }
   }
 
-  .newsletter__contact,
-  .newsletter__follow {
+  .footer-page__contact,
+  .footer-page__follow {
     display: flex;
     align-items: center;
     color: #f5e5d5;
-    padding: 20px 0 10px;
+    padding: 20px 0 5px;
     font-family: Roboto;
     font-style: normal;
     font-weight: 300;
@@ -48,7 +48,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
-  .newsletter__description {
+  .footer-page__description {
     display: flex;
     color: #f5e5d5;
     align-items: center;
@@ -57,9 +57,10 @@
     font-weight: 100;
     font-size: 1.2rem;
     line-height: 20px;
+    padding-bottom: 10px;
   }
 
-  .newsletter__links {
+  .footer-page__links {
     display: flex;
     align-items: center;
     color: #f5e5d5;
@@ -69,36 +70,37 @@
     font-size: 1.2rem;
     line-height: 20px;
   }
-
-  .newsletter__facebook {
-    text-decoration: none;
-    list-style-image: url();
-  }
-
-  .newsletter__socialMedia {
+  .footer-page__socialMedia {
     position: relative;
     display: flex;
     z-index: 2;
     text-decoration: none;
+
+    .footer-page__facebook,
+    .footer-page__instagram,
+    .footer-page__youtube {
+      display: flex;
+      flex-direction: row;
+      left: 0%;
+      right: 0%;
+      top: 0%;
+      bottom: 5%;
+      width: 60px;
+      height: 60px;
+      padding-right: 20px;
+    }
   }
 
-  .newsletter__facebook,
-  .newsletter__instagram,
-  .newsletter__youtube {
+  .footer-page__scrollUp {
     display: flex;
-    flex-direction: row;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    width: 60px;
-    height: 60px;
-    padding-right: 17px;
-  }
-
-  .newsletter__rectangle {
     position: relative;
-    display: flex;
-    flex-direction: row;
+    width: 200px;
+    height: 6px;
+    left: calc(50% - 200px / 2);
+    top: 15px;
+    bottom: 8px;
+    background: #000000;
+    border-radius: 10px;
+    border: 0.5px;
   }
 }
