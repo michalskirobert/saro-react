@@ -9,6 +9,7 @@ import rootReducer from "./_reducers";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
