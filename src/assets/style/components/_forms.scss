@@ -115,21 +115,22 @@ form.auth-form {
   }
 }
 
-////////////////////
-
 form.cms {
+    
   .main-title {
-    width: 90%;
+    width: 95%;
     max-width: 500px;
     border-bottom: 1px solid black;
-    padding-bottom: 10px;
-    margin: 30px auto;
+    margin: 0 auto;
+    margin-bottom: 50px;
     font-size: 1.3rem;
   }
   .form-container {
+    padding: 0 1%;
+    width: 100%;
     max-width: 1200px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     grid-gap: 10px;
     justify-content: center;
     align-items: center;
@@ -137,9 +138,8 @@ form.cms {
       bottom: 20px;
     }
   }
-
-  .form-control {
-    background: $crl-base-blue;
+   .form-control {
+    background: $crl-main-grey;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -155,7 +155,7 @@ form.cms {
     margin: 25px auto 0 auto;
     height: 200px;
     display: block;
-    width: 90%;
+    width: 100%;
     max-width: 600px;
   }
   input {
@@ -174,7 +174,7 @@ form.cms {
   textarea {
     height: 150px;
     width: 100%;
-    background: $crl-base-blue;
+    background: $crl-main-grey;
     border-radius: 10px;
     padding: 5px 10px;
     outline: none;
@@ -186,17 +186,18 @@ form.cms {
       color: rgb(187, 187, 187);
     }
   }
-  select,
+  select, .css-yk16xz-control,
   input {
     border: none;
     border-bottom: 1px solid black;
     border-radius: 8px 8px 0 0;
-    background: $crl-base-blue;
+    background: $crl-main-grey;
     padding: 5px 10px;
     outline: none;
   }
+ 
   select option {
-    background: $crl-base-blue;
+    background: $crl-main-grey;
     font-style: italic;
   }
 
@@ -208,7 +209,7 @@ form.cms {
     border: 1px solid black;
     outline: 1px solid black;
     outline-offset: -2px;
-    padding: 10px 25px;
+    padding: 10px 35px;
     margin: 25px auto;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
@@ -231,7 +232,7 @@ form.cms {
     max-width: 1200px;
     margin: 0 auto;
   }
-  @media (min-width: 540px) {
+  @media (min-width: 500px) {
     .form-container {
       grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
     }
