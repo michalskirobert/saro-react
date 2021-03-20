@@ -1,4 +1,4 @@
-export const cmsConstants = {
+export const CMS_CONSTANTS = {
   ADD_NEWS_REQUEST: "ADD_NEWS_REQUEST",
   ADD_NEWS_SUCCESS: "ADD_NEWS_SUCCESS",
   ADD_NEWS_FAILURE: "ADD_NEWS_FAILURE",

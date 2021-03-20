@@ -3,9 +3,12 @@ import Facebook from "../../../assets/images/components/footer/Facebook.svg";
 import Instagram from "../../../assets/images/components/footer/Instagram.svg";
 import Youtube from "../../../assets/images/components/footer/Youtube.svg";
 import Rectangle from "../../../assets/images/components/footer/Rectangle.svg";
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 306bc32a2a85ba6bcba67d76f271d1f1e9c34864
 
 
 

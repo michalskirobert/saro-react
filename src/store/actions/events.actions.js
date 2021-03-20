@@ -1,14 +1,14 @@
-import { eventsConstants } from "../../utils/constants";
+import { EVENTS_CONSTANTS } from "../../utils/constants";
 
 const getEventsRequest = () => {
   return {
-    type: eventsConstants.GET_EVENTS_REQ,
+    type: EVENTS_CONSTANTS.GET_EVENTS_REQ,
   };
 };
 
 const getEvents = (events) => {
   return {
-    type: eventsConstants.GET_EVENTS_SUCCESS,
+    type: EVENTS_CONSTANTS.GET_EVENTS_SUCCESS,
     payload: events,
   };
 };

@@ -1,4 +1,4 @@
-import { cmsConstants } from "../../../utils/constants";
+import { CMS_CONSTANTS } from "../../../utils/constants";
 
 const defaultState = {
   isLoading: false,
@@ -10,12 +10,12 @@ const defaultState = {
 
 export const cmsReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case cmsConstants.ADD_NEWS_REQUEST:
+    case CMS_CONSTANTS.ADD_NEWS_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case cmsConstants.ADD_NEWS_SUCCESS:
+    case CMS_CONSTANTS.ADD_NEWS_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -23,7 +23,7 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "Post has been published",
         alertType: "success",
       };
-    case cmsConstants.ADD_NEWS_FAILURE:
+    case CMS_CONSTANTS.ADD_NEWS_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -31,12 +31,12 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "We had a problem... Please try again...",
         alertType: "danger",
       };
-    case cmsConstants.ADD_EVENT_REQUEST:
+    case CMS_CONSTANTS.ADD_EVENT_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case cmsConstants.ADD_EVENT_SUCCESS:
+    case CMS_CONSTANTS.ADD_EVENT_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -44,7 +44,7 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "Event has been published",
         alertType: "success",
       };
-    case cmsConstants.ADD_EVENT_FAILURE:
+    case CMS_CONSTANTS.ADD_EVENT_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -52,12 +52,12 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "We had a problem... Please try again...",
         alertType: "danger",
       };
-    case cmsConstants.ADD_ARTICLE_REQUEST:
+    case CMS_CONSTANTS.ADD_ARTICLE_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case cmsConstants.ADD_ARTICLE_SUCCESS:
+    case CMS_CONSTANTS.ADD_ARTICLE_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -65,7 +65,7 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "Article has been published",
         alertType: "success",
       };
-    case cmsConstants.ADD_ARTICLE_FAILURE:
+    case CMS_CONSTANTS.ADD_ARTICLE_FAILURE:
       return {
         ...state,
         isLoading: false,
@@ -73,12 +73,12 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "We had a problem... Please try again...",
         alertType: "danger",
       };
-    case cmsConstants.EDIT:
+    case CMS_CONSTANTS.EDIT:
       return {
         ...state,
         edit: action.payload,
       };
-    case cmsConstants.CLEAR:
+    case CMS_CONSTANTS.CLEAR:
       return {
         ...state,
         alert: false,

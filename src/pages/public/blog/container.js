@@ -5,7 +5,7 @@ import {
   blogActions,
   eventsActions,
 } from "../../../store/actions";
-import { generalConstants } from "../../../utils/constants";
+import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
 export const useContainer = () => {
@@ -16,9 +16,9 @@ export const useContainer = () => {
   const getPosts = async () => {
     dispatch(blogActions.getPostsRequest());
     firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.BLOG_POSTS)
+      .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
         dispatch(blogActions.getPosts(newsData));

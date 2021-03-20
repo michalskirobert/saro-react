@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { cmsActions } from "../../../store/actions";
-import { generalConstants } from "../../../utils/constants";
+import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
 import { v4 as uuidv4 } from "uuid";
@@ -30,12 +30,12 @@ export const useContainer = () => {
 
   const addNews = async (id) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.NEWS)
+      .collection(GENERAL_CONSTANTS.NEWS)
       .doc(id)
       .set({
-        type: generalConstants.NEWS,
+        type: GENERAL_CONSTANTS.NEWS,
         published: new Date().toLocaleString(),
         id,
         title,
@@ -49,14 +49,14 @@ export const useContainer = () => {
 
   const addEvents = async (id) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.EVENTS)
+      .collection(GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .set({
         id,
         title,
-        type: generalConstants.EVENTS,
+        type: GENERAL_CONSTANTS.EVENTS,
         imgURL: imgURL || "https://via.placeholder.com/50",
         content,
         date,
@@ -98,13 +98,13 @@ export const useContainer = () => {
 
   const addArticle = async (id) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.BLOG_POSTS)
+      .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .doc(id)
       .set({
         id,
-        type: generalConstants.BLOG_POSTS,
+        type: GENERAL_CONSTANTS.BLOG_POSTS,
         title,
         imgURL: imgURL || "https://via.placeholder.com/50",
         content,
