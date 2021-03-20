@@ -55,8 +55,8 @@ form.auth-form {
     background: #fff;
   }
   button {
-    background: $crl-primary;
-    box-shadow: 0 3px 0 0 darken($crl-basic, 10%);
+    background: $crl-base-blue;
+    box-shadow: 0 3px 0 0 darken($crl-base-blue, 10%);
     border-radius: 2px;
     border: none;
     color: #fff;
@@ -71,7 +71,7 @@ form.auth-form {
     margin: 0 auto;
     &:hover {
       background: rgba(148, 175, 101, 1);
-      text-shadow: 0 1px 3px darken($crl-basic, 30%);
+      text-shadow: 0 1px 3px darken($crl-base-blue, 30%);
     }
   }
   & > label {
@@ -120,7 +120,7 @@ form.cms {
   }
 
   .form-control {
-    background: $crl-light-gray;
+    background: $crl-base-blue;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -155,7 +155,7 @@ form.cms {
   textarea {
     height: 150px;
     width: 100%;
-    background: $crl-light-gray;
+    background: $crl-base-blue;
     border-radius: 10px;
     padding: 5px 10px;
     outline: none;
@@ -172,12 +172,12 @@ form.cms {
     border: none;
     border-bottom: 1px solid black;
     border-radius: 8px 8px 0 0;
-    background: $crl-light-gray;
+    background: $crl-base-blue;
     padding: 5px 10px;
     outline: none;
   }
   select option {
-    background: $crl-light-gray;
+    background: $crl-base-blue;
     font-style: italic;
   }
 
@@ -197,7 +197,7 @@ form.cms {
     &:hover {
       border: 1px solid black;
       font-weight: bold;
-      background: $crl-light-gray;
+      background: $crl-base-blue;
       color: black;
       outline-offset: 2px;
     }

@@ -1,11 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   fetchActions,
   blogActions,
   eventsActions,
-} from "../../../utils/_actions";
-import { generalConstants } from "../../../utils/_constants";
+} from "../../../store/actions";
+import { generalConstants } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
-import { useDispatch, useSelector } from "react-redux";
 
 export const useContainer = () => {
   const dispatch = useDispatch();

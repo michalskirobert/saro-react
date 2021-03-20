@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+
 import { auth, firestore } from "../../../components/feature/firebase";
 import Alert from "../../../components/shared/alerts";
-import { alertActions, userActions } from "../../../utils/_actions";
+import { alertActions, userActions } from "../../../store/actions";
 
 const Settings = () => {
   const currentUser = auth.currentUser;

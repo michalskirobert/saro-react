@@ -1,16 +1,19 @@
 // Components:
 import React, { useEffect } from "react";
-import { auth, firestore } from "./components/feature/firebase";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import { PrivateRoute } from "./routers/PrivateRoute";
+import { SaroRoute } from "./routers/SaroRoute";
+import Unlisten from "./routers/Unlisten";
+import { auth, firestore } from "./components/feature/firebase";
+import SignIn from "./components/feature/auth/login/Login";
+import SignUp from "./components/feature/auth/signup/SignUp";
+import LogIn from "./components/feature/auth/login/Login";
+import { userActions } from "./store/actions";
+
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
-import { PrivateRoute } from "./_router/PrivateRoute";
-import { SaroRoute } from "./_router/SaroRoute";
-import Unlisten from "./_router/Unlisten";
-import SignIn from "./components/feature/auth/login/Login";
-import SignUp from "./components/feature/auth/signup/SignUp";
-import { userActions } from "./utils/_actions";
 
 // Pages
 
@@ -32,13 +35,14 @@ import ProfileSettings from "./pages/private/profile/Settings";
 import User from "./pages/private/profile/User";
 
 //Special
+import { useDispatch } from "react-redux";
+
 import AdminEdit from "./pages/special/edit/Edit";
 import AdminAddArticle from "./pages/special/add/AddArticle";
 import AdminAddEvents from "./pages/special/add/AddEvents";
 import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
-import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -61,6 +65,8 @@ const App = () => {
     };
   }, []);
 
+  console.log({ app: "/app" });
+
   return (
     <Router>
       <Unlisten>
@@ -72,6 +78,7 @@ const App = () => {
           <Route path="/about" component={About} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
+          <Route path="/log-in" component={LogIn} />
           <Route path="/lessons" component={Lessons} />
           <Route exact path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />

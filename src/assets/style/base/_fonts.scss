@@ -1,144 +1,76 @@
-$family-en: "Nuninto Sans", fallback, sans-serif;
-
-//EN
-
-/* nunito-sans-200italic - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: italic;
-  font-weight: 200;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-200italic.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-200italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-regular - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 400;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-regular.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-600 - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 600;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-600.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-600.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-700 - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 700;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-700.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-600italic - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: italic;
-  font-weight: 600;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-600italic.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-600italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-800 - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 800;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-800.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-800.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-800italic - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: italic;
-  font-weight: 800;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-800italic.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-800italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* nunito-sans-900 - latin-ext */
-@font-face {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 900;
-  src: local(""),
-    url("../../fonts/nunito-sans-v6-latin-ext-900.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("../../fonts/nunito-sans-v6-latin-ext-900.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-
-
-
+$family-en-primary: "Encode Sans Semi Condensed", fallback, sans-serif;
+$family-en-secondary: "Roboto", fallback, sans-serif;
 
 /* encode-sans-semi-condensed-regular - vietnamese_latin-ext_latin */
 @font-face {
-  font-family: 'Encode Sans Semi Condensed';
+  font-family: "Encode Sans Semi Condensed";
   font-style: normal;
   font-weight: 400;
-  src: local(''),
-       url('../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(""),
+    url("../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-regular.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-regular.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* encode-sans-semi-condensed-500 - vietnamese_latin-ext_latin */
 @font-face {
-  font-family: 'Encode Sans Semi Condensed';
+  font-family: "Encode Sans Semi Condensed";
   font-style: normal;
   font-weight: 500;
-  src: local(''),
-       url('../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(""),
+    url("../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-500.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-500.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* encode-sans-semi-condensed-600 - vietnamese_latin-ext_latin */
 @font-face {
-  font-family: 'Encode Sans Semi Condensed';
+  font-family: "Encode Sans Semi Condensed";
   font-style: normal;
   font-weight: 600;
-  src: local(''),
-       url('../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(""),
+    url("../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-600.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../../fonts/encode-sans-semi-condensed-v5-vietnamese_latin-ext_latin-600.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 /* roboto-regular - vietnamese_latin-ext_latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  src: local(''),
-       url('../../fonts/roboto-v20-vietnamese_latin-ext_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/roboto-v20-vietnamese_latin-ext_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(""),
+    url("../../fonts/roboto-v20-vietnamese_latin-ext_latin-regular.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../../fonts/roboto-v20-vietnamese_latin-ext_latin-regular.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-500 - vietnamese_latin-ext_latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
-  src: local(''),
-       url('../../fonts/roboto-v20-vietnamese_latin-ext_latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/roboto-v20-vietnamese_latin-ext_latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(""),
+    url("../../fonts/roboto-v20-vietnamese_latin-ext_latin-500.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../../fonts/roboto-v20-vietnamese_latin-ext_latin-500.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-700 - vietnamese_latin-ext_latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  src: local(''),
-       url('../../fonts/roboto-v20-vietnamese_latin-ext_latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('../../fonts/roboto-v20-vietnamese_latin-ext_latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local(""),
+    url("../../fonts/roboto-v20-vietnamese_latin-ext_latin-700.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../../fonts/roboto-v20-vietnamese_latin-ext_latin-700.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
