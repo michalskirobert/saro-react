@@ -5,10 +5,6 @@ import Youtube from "../../../assets/images/components/footer/Youtube.svg";
 import Rectangle from "../../../assets/images/components/footer/Rectangle.svg";
 
 
-
-
-
-
 const Footer = () => {
   return (
     <>
