@@ -1,52 +1,96 @@
-import React, { useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import NavMenu from "./NavMenu";
-import Logo from "./Logo";
-import { FaBars } from "react-icons/fa";
-import { ImCross } from "react-icons/im";
+import React, { useEffect, useState } from "react";
+import throttle from "lodash.throttle";
 
 import { useDispatch, useSelector } from "react-redux";
 import { navActions } from "../../../utils/_actions";
+import { Link } from "react-router-dom";
+
+import NavMenu from "./NavMenu";
+import Logo from "./Logo";
+
+import UserIcon from "../../../assets/images/components/nav/UserIcon.svg";
+import Hamburger from "../../../assets/images/components/nav/Hamburger.svg";
+import House from "../../../assets/images/components/nav/House.svg";
+import Cross from "../../../assets/images/components/nav/Cross.svg";
+import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGlass.svg";
 
 const Nav = () => {
-  const changeBackground = useRef(null);
   const dispatch = useDispatch();
-  const location = useLocation().pathname;
+  const userName = useSelector((state) => state.currentUser.name);
+  const userIsLogged = useSelector((state) => state.currentUser.isLogged);
   const isNavOpen = useSelector((state) => state.isNavOpen);
-
-  const changeColor = () => {
-    changeBackground.current.style.backgroundColor =
-      window.scrollY < 100 ? "transparent" : "#2d2b2a";
-  };
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (location === "/") {
-      document.title = "Welcome to Saro! - Home";
-      changeBackground.current.style.backgroundColor = "transparent";
-      document.addEventListener("scroll", changeColor);
-    } else {
-      document.title = `Welcome to Saro! ${location}`.replace("/", "- ");
-      document.removeEventListener("scroll", changeColor);
-      changeBackground.current.style.backgroundColor = "#2d2b2a";
-    }
-    return () => {
-      document.removeEventListener("scroll", changeColor);
-    };
-  }, [location]);
+    let prevPosition = window.pageYOffset;
+
+    const handleScroll = throttle(() => {
+      let currPosition = window.pageYOffset;
+      if (currPosition > 400) {
+        if (prevPosition > currPosition) {
+          setScrolled(false);
+        } else {
+          setScrolled(true);
+        }
+        prevPosition = currPosition;
+      } else {
+        setScrolled(false);
+      }
+    }, 200);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header ref={changeBackground}>
-      <Logo />
-      <nav>
-        <button
-          className="hamburger"
-          onClick={() => dispatch(navActions.navToggle())}
-        >
-          {isNavOpen ? <ImCross style={{height: "25px"}} /> : <FaBars />}
-        </button>
-        <NavMenu />
-      </nav>
-    </header>
+    <>
+      <header
+        style={
+          scrolled
+            ? { transform: "translateY(-100%)" }
+            : { transform: "translateY(0)" }
+        }
+      >
+        <section className="header-upper">
+          <Logo className="header-logo" />
+          <section className="user">
+            {userIsLogged ? (
+              <Link to="/dashboard">
+                <img src={UserIcon} alt={userName} />
+              </Link>
+            ) : (
+              <Link to="/sign-up">
+                <button className="sign-up-btn">Sign Up</button>
+              </Link>
+            )}
+          </section>
+        </section>
+        <section className="header-lower">
+          <div className="header-search">
+            <img src={MagnifyingGlass} alt="Search" />
+          </div>
+          <div className="header-home">
+            <Link to="/">
+              <img src={House} alt="Home" />
+            </Link>
+          </div>
+          <nav className="header-nav">
+            <button
+              className="hamburger"
+              onClick={() => dispatch(navActions.navToggle())}
+            >
+              {isNavOpen ? (
+                <img src={Cross} alt="Close" />
+              ) : (
+                <img src={Hamburger} alt="Menu" />
+              )}
+            </button>
+          </nav>
+        </section>
+      </header>
+      <NavMenu />
+    </>
   );
 };
 
