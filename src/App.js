@@ -10,27 +10,21 @@ import { auth, firestore } from "./components/feature/firebase";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { userActions } from "./store/actions";
-
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
-
 // Pages
 
 //Public
 import Home from "./pages/public/home/Home";
 import About from "./pages/public/about/About";
-import Profile from "./pages/public/about/Profile";
 import Lessons from "./pages/public/lessons/Lessons";
-import Lesson from "./pages/public/lessons/SIngleLesson";
 import Blog from "./pages/public/blog/Blog";
-import SingleArticle from "./pages/public/blog/SingleArticle";
 import Error from "./pages/public/404/Error";
 import Contact from "./pages/public/contact";
 
 //User
 import Dashboard from "./pages/private/dashboard/Dashboard";
-import ProfileProgress from "./pages/private/profile/Progress";
 import ProfileSettings from "./pages/private/profile/Settings";
 import User from "./pages/private/profile/User";
 
@@ -78,9 +72,6 @@ const App = () => {
           <Route path="/lessons" component={Lessons} />
           <Route exact path="/blog" component={Blog} />
           <Route path="/contact" component={Contact} />
-          <Route path="/about/profile/:id" children={<Profile />} />
-          <Route path="/lessons/:id/:title" children={<Lesson />} />
-          <Route path="/blog/article/:id/:title" children={<SingleArticle />} />
           {/* User route */}
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/profile" component={User} />

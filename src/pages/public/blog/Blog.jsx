@@ -1,5 +1,4 @@
 import React from "react";
-import * as A from "./../../../store/actions";
 
 import SingleArticle from "./SingleArticle";
 
