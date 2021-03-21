@@ -6,7 +6,7 @@ export const Overlay = styled.div`
   right: 0;
   top: 0;
   background: transparent;
-  z-index: 1;
+  z-index: 2;
   width: 100vw;
   height: 100vh;
 `;
