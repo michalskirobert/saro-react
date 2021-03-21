@@ -10,11 +10,9 @@ import { auth, firestore } from "./components/feature/firebase";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { userActions } from "./store/actions";
-
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
-
 // Pages
 
 //Public
