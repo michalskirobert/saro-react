@@ -9,15 +9,14 @@
 }
 .section.signup {
   padding: 30px 20px;
-  
-}
-.section.profile-update {
-  padding: 30px 20px;
   .arrow-back-icon {
     cursor: pointer;
     border: none;
     background-color: white;
   }
+}
+.section.profile-update {
+  padding: 30px 20px;
 }
 .section.change-settings {
   padding: 30px 20px;
@@ -48,7 +47,7 @@ form.auth-form {
     align-items: center;
     justify-content: center;
     &--gender {
-      margin: 25px 0;
+      margin: 35px 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -66,7 +65,6 @@ form.auth-form {
       .lang {
         position: relative;
         top: 0;
-        margin: 15px;
       }
     }
     label {

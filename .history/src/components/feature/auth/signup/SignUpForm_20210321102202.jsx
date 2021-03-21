@@ -83,6 +83,18 @@ const SignUpForm = () => {
       {alert && <Alert />}
       <h2>Register</h2>
       <div className="form-control">
+        <label htmlFor="username" className="floatLabel"></label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          placeholder="jane_example123"
+          tabindex="1"
+        />
+      </div>
+      <div className="form-control">
         <label htmlFor="email" className="floatLabel">
         </label>
         <input
@@ -92,8 +104,41 @@ const SignUpForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
           placeholder="jane@example.com"
-          tabindex="1"
+          tabindex="2"
         />
+      </div>
+      <div className="form-control--gender">
+        <label htmlFor="gender" className="gender">
+          Gender :
+        </label>
+        <select id="gender" 
+          onChange={(e) => setGender(e.target.value)} 
+          tabindex="3">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div className="form-control--lang">
+        <label htmlFor="nativeLang" className="lang">
+          Your native language
+        </label>
+        <select id="nativeLang" 
+          onChange={(e) => setNativeLang(e.target.value)} 
+          tabindex="4">
+          <option value="English">English</option>
+        </select>
+      </div>
+      <div className="form-control--lang">
+        <label htmlFor="studyingLang" className="lang">
+          Your studying language
+        </label>
+        <select
+          id="studyingLang"
+          onChange={(e) => setStudyingLang(e.target.value)}
+          tabindex="5"
+        >
+          <option value="Polish">Polish</option>
+        </select>
       </div>
       <div className="form-control">
         <label htmlFor="password" className="floatLabel"></label>
@@ -104,7 +149,7 @@ const SignUpForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder="••••••••••••"
-          tabindex="2"
+          tabindex="6"
         />
       </div>
       <div className="form-control">
@@ -116,12 +161,12 @@ const SignUpForm = () => {
           onChange={(e) => setConfPassword(e.target.value)}
           required
           placeholder="••••••••••••"
-          tabindex="3"
+          tabindex="7"
         />
       </div>
       <button 
         type="submit"
-        tabindex="4"
+        tabindex="8"
       >Next</button>
       <div className="auth-control">
         <p style={{ display: "inline" }}>Do you have an account?</p>{" "}

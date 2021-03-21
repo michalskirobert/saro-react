@@ -222,8 +222,7 @@ const Settings = () => {
           onChange={(e) => setGender(e.value)} 
           tabindex="3"
           placeholder="Gender"
-          options={genderOptions}
-          style={{minwidth: '343px'}}>
+          options={genderOptions}>
         </Select>
       </div>
           <div className="form-control--lang">

@@ -170,12 +170,13 @@ const Settings = () => {
   ]
   return (
     <main>
-      <section className="section profile-update">
       <Link to="/">
         <button className="arrow-back-icon" type="button">
           <ArrowBack />
         </button>
       </Link>
+
+      <section className="section profile-update">
         {alert && <Alert />}
         <h1>Register</h1>
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -217,13 +218,16 @@ const Settings = () => {
             ></textarea>
           </div>
           <div className="form-control--gender">
-        <label htmlFor="gender" className="gender"></label>
+        <label htmlFor="gender" className="gender">
+          Gender :
+        </label>
         <Select id="gender" 
-          onChange={(e) => setGender(e.value)} 
+          onChange={(e) => setGender(e.target.value)} 
           tabindex="3"
           placeholder="Gender"
           options={genderOptions}
-          style={{minwidth: '343px'}}>
+          defaultValue={genderOptions[0]}
+          width='343px'>
         </Select>
       </div>
           <div className="form-control--lang">
