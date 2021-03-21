@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "baseUrl": "src",
+        "paths": {
+            "@utils/*": ["src/utils/*"],
+            "@actions/*": ["src/store/actions/*"],
+        }
+    }
+}
