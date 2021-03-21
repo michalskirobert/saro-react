@@ -16,6 +16,7 @@ import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGla
 const Nav = () => {
   const userName = useSelector((state) => state.currentUser.name);
   const userIsLogged = useSelector((state) => state.currentUser.isLogged);
+
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -87,7 +88,7 @@ const Nav = () => {
           </nav>
         </section>
       </header>
-      <NavMenu {...{ isNavOpen }} />
+      <NavMenu {...{ isNavOpen, setIsNavOpen }} />
     </>
   );
 };

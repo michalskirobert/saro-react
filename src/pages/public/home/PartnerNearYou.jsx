@@ -15,10 +15,10 @@ const PartnerNearYou = () => {
               <h2>
                 Are you looking for a face-to-face Polish partner near you?
               </h2>
-              <select>
-                <option disabled selected>
-                  - Choose a country/territory -
-                </option>
+              <select
+                placeholder="- Choose a country/territory -"
+                defaultValue="example"
+              >
                 <option>- example -</option>
                 <option>- example -</option>
                 <option>- example -</option>
