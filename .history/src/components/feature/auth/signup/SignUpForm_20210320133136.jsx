@@ -81,9 +81,22 @@ const SignUpForm = () => {
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
       {alert && <Alert />}
-      <h2>Register</h2>
+      <h2>Sign-up</h2>
+      <div className="form-control">
+        <label htmlFor="username" className="floatLabel">
+          Username :
+        </label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+      </div>
       <div className="form-control">
         <label htmlFor="email" className="floatLabel">
+          Email :
         </label>
         <input
           type="email"
@@ -91,41 +104,64 @@ const SignUpForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          placeholder="jane@example.com"
-          tabindex="1"
         />
       </div>
+      <div className="form-control--gender">
+        <label htmlFor="gender" className="gender">
+          Gender :
+        </label>
+        <select id="gender" onChange={(e) => setGender(e.target.value)}>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div className="form-control--lang">
+        <label htmlFor="nativeLang" className="lang">
+          Your native language
+        </label>
+        <select id="nativeLang" onChange={(e) => setNativeLang(e.target.value)}>
+          <option value="English">English</option>
+        </select>
+      </div>
+      <div className="form-control--lang">
+        <label htmlFor="studyingLang" className="lang">
+          Your studying language
+        </label>
+        <select
+          id="studyingLang"
+          onChange={(e) => setStudyingLang(e.target.value)}
+        >
+          <option value="Polish">Polish</option>
+        </select>
+      </div>
       <div className="form-control">
-        <label htmlFor="password" className="floatLabel"></label>
+        <label htmlFor="password" className="floatLabel">
+          Password :
+        </label>
         <input
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          placeholder="••••••••••••"
-          tabindex="2"
         />
       </div>
       <div className="form-control">
-        <label htmlFor="conf-password" className="floatLabel"></label>
+        <label htmlFor="conf-password" className="floatLabel">
+          Confirm password :
+        </label>
         <input
           type="password"
           id="conf-password"
           value={confPassword}
           onChange={(e) => setConfPassword(e.target.value)}
           required
-          placeholder="••••••••••••"
-          tabindex="3"
         />
       </div>
-      <button 
-        type="submit"
-        tabindex="4"
-      >Next</button>
+      <button type="submit">Sign-in</button>
       <div className="auth-control">
         <p style={{ display: "inline" }}>Do you have an account?</p>{" "}
-        <Link to="/sign-in">Log-in</Link>
+        <Link to="/sign-in">Sign-in</Link>
       </div>
     </form>
   );

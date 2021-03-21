@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
-import Select from "react-select";
+import { useHistory } from "react-router-dom";
 
 import { auth, firestore } from "../../../components/feature/firebase";
 import Alert from "../../../components/shared/alerts";
 import { alertActions, userActions } from "../../../store/actions";
-import { ReactComponent as ArrowBack } from "../../../assets/images/components/forms/arrowBack.svg";
 
 const Settings = () => {
   const currentUser = auth.currentUser;
@@ -24,7 +22,6 @@ const Settings = () => {
   const [about, setAbout] = useState("");
   const [nativeLang, setNativeLang] = useState("African");
   const [studyingLang, setStudyingLang] = useState("African");
-  const [gender, setGender] = useState("");
 
   const updateHobbies = (hobbies) => {
     return firestore.collection("users").doc(currentUser.uid).update({
@@ -103,9 +100,6 @@ const Settings = () => {
     if (about !== profile.about) {
       promises.push(updateAbout(about));
     }
-    if (about !== profile.gender) {
-      promises.push(updateAbout(gender));
-    }
     if (nativeLang !== profile.nativeLang) {
       promises.push(updateNative(nativeLang));
     }
@@ -164,50 +158,50 @@ const Settings = () => {
       dispatch(alertActions.error("Something went wrong"));
     }
   };
-  const genderOptions = [
-    { value: "male", label: "Male"},
-    { value: "famale", label: "Famale"},
-  ]
+
   return (
     <main>
       <section className="section profile-update">
-      <Link to="/">
-        <button className="arrow-back-icon" type="button">
-          <ArrowBack />
-        </button>
-      </Link>
         {alert && <Alert />}
-        <h1>Register</h1>
+        <h1>Profile update</h1>
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-control">
-            <label htmlFor="firstName" className="floatLabel"></label>
+            <label htmlFor="firstName" className="floatLabel">
+              First name :{" "}
+            </label>
             <input
               type="text"
               value={firstName}
-              placeholder={profile.firstName || "Your Firstname"}
+              placeholder={profile.firstName || "Your firstname"}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="form-control">
-            <label htmlFor="displayName" className="floatLabel"></label>
+            <label htmlFor="displayName" className="floatLabel">
+              Surname :{" "}
+            </label>
             <input
               type="text"
               value={surname}
-              placeholder={profile.surname || "Your Surname"}
+              placeholder={profile.surname || "Your surname"}
               onChange={(e) => setSurname(e.target.value)}
             />
           </div>
           <div className="form-control">
-            <label htmlFor="displayName" className="floatLabel"></label>
+            <label htmlFor="displayName" className="floatLabel">
+              Hobbies :{" "}
+            </label>
             <input
               type="text"
               value={hobbies}
-              placeholder={profile.hobbies || "Your Hobbies"}
+              placeholder={profile.hobbies || "Your hobbies"}
               onChange={(e) => setHobbies(e.target.value)}
             />
           </div>
           <div className="form-control">
-            <label htmlFor="about" className="floatLabel"></label>
+            <label htmlFor="about" className="floatLabel">
+              About me :{" "}
+            </label>
             <textarea
               type="text"
               id="about"
@@ -216,16 +210,6 @@ const Settings = () => {
               onChange={(e) => setAbout(e.target.value)}
             ></textarea>
           </div>
-          <div className="form-control--gender">
-        <label htmlFor="gender" className="gender"></label>
-        <Select id="gender" 
-          onChange={(e) => setGender(e.value)} 
-          tabindex="3"
-          placeholder="Gender"
-          options={genderOptions}
-          style={{minwidth: '343px'}}>
-        </Select>
-      </div>
           <div className="form-control--lang">
             <label htmlFor="native" className="lang">
               Native language :{" "}
@@ -245,10 +229,10 @@ const Settings = () => {
               <option value="english">English</option>
             </select>
           </div>
-          <button>Register</button>
+          <button>Update</button>
         </form>
       </section>
-      <section className="section change-settings">
+      <section className="change-settings">
         <h2>Change settings</h2>
         <form className="auth-form" onSubmit={updateSettings}>
           <div className="form-control">

@@ -223,7 +223,7 @@ const Settings = () => {
           tabindex="3"
           placeholder="Gender"
           options={genderOptions}
-          style={{minwidth: '343px'}}>
+          width="auto">
         </Select>
       </div>
           <div className="form-control--lang">

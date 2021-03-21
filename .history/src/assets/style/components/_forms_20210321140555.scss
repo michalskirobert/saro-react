@@ -66,7 +66,6 @@ form.auth-form {
       .lang {
         position: relative;
         top: 0;
-        margin: 15px;
       }
     }
     label {
@@ -81,6 +80,7 @@ form.auth-form {
       background-color: rgba(255, 255, 255, 0);
       transition: background-color 0.5s ease;
       border: none;
+      margin-bottom: 10px;
     }
     input,
     textarea {
