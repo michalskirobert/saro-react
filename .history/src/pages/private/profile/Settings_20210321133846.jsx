@@ -217,13 +217,16 @@ const Settings = () => {
             ></textarea>
           </div>
           <div className="form-control--gender">
-        <label htmlFor="gender" className="gender"></label>
+        <label htmlFor="gender" className="gender">
+          Gender :
+        </label>
         <Select id="gender" 
-          onChange={(e) => setGender(e.value)} 
+          onChange={(e) => setGender(e.target.value)} 
           tabindex="3"
           placeholder="Gender"
           options={genderOptions}
-          style={{minwidth: '343px'}}>
+          defaultValue={genderOptions[0]}
+          width='343px'>
         </Select>
       </div>
           <div className="form-control--lang">
