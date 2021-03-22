@@ -16,13 +16,16 @@ const Footer = () => {
                   <select placeholder="Language">
                   <option>English</option>
                   <option>Japanese</option>
+                  <option>Korean</option>
+                  <option>Chinese</option>
+                  <option>Polish</option>
                   </select>
                
           </form>
-          <img src={Rectangle} className="language-button__rectangle" />
+          <img src={Rectangle} className="language-button__rectangle" alt="rectangle" />
           <div className="language-button__arrows">
-          <img src={ArrowUp}/>
-          <img src={ArrowDown}/>
+          <img src={ArrowUp} alt="arrowUp" />
+          <img src={ArrowDown} alt="arrowDown"/>
           </div>
           
         </div>

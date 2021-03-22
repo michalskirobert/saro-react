@@ -1,123 +1,111 @@
 .footer-page {
+  background-color: $crl-base-blue;
   font-family: $family-en-primary;
   color: $crl-base;
-  padding: 30px 10%;
-  background-color: $crl-base-blue;
+  width: 100%;
   left: 0px;
   top: 1995px;
-  width: 100%;
+  padding: 25px 20px 14px;
 
   .language-button__language {
     display: flex;
+    position: relative;
     align-items: center;
-    background: $crl-base-button-grey;
-    width: 124px;
-    height: 40px;
-    left: 20px;
-    top: 2060px;
-    border: 1px solid #2e4660;
-    border-radius: 5px 0px 0px 5px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 23px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: $crl-base;
-    margin: 0;
+    justify-content: center;
 
     select {
+      display: flex;
+      position: relative;
       align-items: center;
-      font-size: 24x;
-      line-height: 23px;
-      letter-spacing: -0.02em;
+      color: $crl-base;
+      background-color: $crl-main-grey-button;
+      width: 110px;
+      height: 40px;
+      margin: 0 4px 16px 0;
       font-style: normal;
       font-weight: bold;
       font-size: 17px;
-      margin-left: 5px;
-      color: $crl-base;
-      background-color: $crl-base-button-grey;
-      border: none;
+      line-height: 23px;
+      letter-spacing: -0.02em;
+      border: 1px solid $crl-main-blue;
+      border-radius: 5px 0px 0px 5px;
     }
 
     .language-button__rectangle {
       position: absolute;
       display: flex;
-      margin-left: 84px;
+      justify-content: center;
       height: 38px;
       width: 38px;
+      margin-left: 65px;
+      margin-bottom: 16px;
     }
 
     .language-button__arrows {
       display: flex;
       flex-direction: column;
       position: absolute;
-      align-items: flex-start;
-      width: 14px;
-      height: 14px;
-      margin-left: 98px;
-      justify-content: last baseline;
+      height: 16px;
+      width: 16px;
+      margin-left: 66px;
+      margin-bottom: 14px;
     }
   }
   .footer-page__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start;
+
     h2 {
       display: flex;
       align-items: center;
-      padding: 20px 0 5px;
+      justify-content: center;
+      margin: 15px auto 10px;
       font-style: normal;
       font-weight: 500;
       font-size: 1.4rem;
       line-height: 18px;
-      line-height: 18px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      text-align: left;
-      margin: 3px 0;
     }
+
     p {
       display: flex;
       color: $crl-base;
       align-items: center;
+      max-width: 550px;
+      margin: 10px 0;
       font-style: normal;
-      font-weight: 100;
-      font-size: 1.1rem;
+      font-weight: normal;
+      font-size: 1rem;
       line-height: 23px;
-      padding: 8px 0;
-      text-align: start;
-      left: 20px;
+      letter-spacing: -0.02em;
     }
   }
-}
-.footer-page__links {
-  display: flex;
-  align-items: center;
-  color: $crl-base;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.2rem;
-  line-height: 20px;
-}
 
-.footer-page__icons {
-  .footer-page__socialMedia {
-    position: relative;
+  .footer-page__icons {
     display: flex;
-    z-index: 2;
-    text-decoration: none;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
 
-    .footer-page__facebook,
-    .footer-page__instagram,
-    .footer-page__youtube {
+    .footer-page__socialMedia {
+      position: relative;
       display: flex;
-      flex-direction: row;
-      left: 0%;
-      right: 0%;
-      top: 0%;
-      bottom: 5%;
-      width: 60px;
-      height: 60px;
-      padding-right: 20px;
+      align-items: center;
+
+      .footer-page__facebook,
+      .footer-page__instagram,
+      .footer-page__youtube {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        width: 60px;
+        height: 60px;
+        padding: 0 10px 0;
+      }
     }
   }
 }

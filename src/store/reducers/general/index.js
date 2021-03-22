@@ -16,6 +16,16 @@ export const generalReducer = (state = defaultState, action) => {
         ...state,
         language: "ja",
       };
+      case CONSTANTS.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.KOREAN:
+      return {
+        ...state,
+        language: "ko",
+      };
+      case CONSTANTS.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.CHINESE:
+      return {
+        ...state,
+        language: "zh",
+      };
     default:
       return state;
   }
