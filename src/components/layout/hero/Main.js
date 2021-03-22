@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { hero } from "../../../store/actions/hero.actions";
@@ -62,7 +61,7 @@ const Main = () => {
     return () => {
       clearInterval(slider);
     };
-  }, [index]);
+  });
 
   const getBanner = (id) => {
     return dispatch(hero(id));
@@ -74,7 +73,7 @@ const Main = () => {
         <div className="img__container">
           {heroData.map((item, currentId) => {
             return (
-              <>
+              <div key={item.title}>
                 <img
                   src={item.imageURL}
                   alt={"img"}
@@ -89,12 +88,12 @@ const Main = () => {
                   <h2 style={{ color: "#deb887" }}>{item.title}</h2>
                   <h3>{item.subtitle}</h3>
                   {item.button && (
-                    <Link className="btn hero-btn" to={item.click}>
+                    <button className="btn hero-btn">
                       {item.button}
-                    </Link>
+                    </button>
                   )}
                 </div>
-              </>
+              </div>
             );
           })}
         </div>
@@ -104,6 +103,7 @@ const Main = () => {
               {heroData.map((item, id) => {
                 return (
                   <button
+                    key={item.title}
                     className={`dot ${index === id && "active"}`}
                     onClick={() => getBanner(id)}
                   ></button>

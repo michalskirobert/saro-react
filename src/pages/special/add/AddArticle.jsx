@@ -43,16 +43,12 @@ const categories = [
 
 const AddArticle = () => {
   const {
-    handlerArticle,
-    handleEdtiorChange,
-    content,
-    title,
-    setTitle,
-    setLanguage,
-    setCrew,
-    setCategory,
     alert,
     isLoading,
+    infoContainer,
+    setInfoContainer,
+    handleEdtiorChange,
+    handlerArticle,  
   } = useContainer();
   return (
     <section className="section add-article">
@@ -66,8 +62,13 @@ const AddArticle = () => {
               id="title"
               placeholder="add title"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={infoContainer.title}
+              onChange={(e) => {
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, title: value };
+                });
+              }}
             />
           </div>
           <div className="form-control">
@@ -81,7 +82,11 @@ const AddArticle = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCrew(options),
+                onChange: (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, crew: options };
+                  });
+                },
               }}
             />
           </div>
@@ -96,7 +101,11 @@ const AddArticle = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCategory(options),
+                onChange: (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, category: options };
+                  });
+                },
               }}
             />
           </div>
@@ -111,7 +120,11 @@ const AddArticle = () => {
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange: (options) => setLanguage(options),
+                onChange: (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, language: options };
+                  });
+                },
               }}
             />
           </div>
@@ -120,7 +133,7 @@ const AddArticle = () => {
         <section className="editor">
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={content}
+            initialValue={infoContainer.content}
             init={{
               plugins: [
                 "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",

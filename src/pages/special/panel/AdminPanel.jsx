@@ -27,7 +27,7 @@ const AdminPanel = () => {
   useEffect(() => {
     getNews();
     getEvents();
-  }, []);
+  });
 
   return (
     <section className="section saro-panel">
