@@ -10,10 +10,11 @@ import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import * as C from "./../../../utils/constants";
 
 const AdminPanel = () => {
-  const { getNews, getEvents } = useContainer();
+  const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
-  const newsItems = useSelector((state) => state.database.posts);
+  const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
+  const newsPosts = useSelector((state) => state.database.posts);
   const alert = useSelector((state) => state.CMS.alert);
   const removeItem = async (id) => {
     return await firestore
@@ -27,6 +28,7 @@ const AdminPanel = () => {
   useEffect(() => {
     getNews();
     getEvents();
+    getPosts();
   }, []);
 
   return (
@@ -100,6 +102,50 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 {newsEvents.map((post, index) => {
+                  const { crew, title, date, id, type } = post;
+                  return (
+                    <tbody key={id}>
+                      <tr>
+                        <td>{index}</td>
+                        <td>{title}</td>
+                        <td>{date}</td>
+                        <td>{crew}</td>
+                        <td>
+                          <Button
+                            {...{
+                              variant: "primary",
+                              onClick: () => handleEdit(id, type),
+                            }}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            {...{
+                              variant: "danger",
+                              onClick: () => removeItem(id, type),
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+              </Table>
+            </Tab>
+            <Tab eventKey="blogContent" title="Blog managment">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Published date</th>
+                    <th>Author</th>
+                    <th>Menagement</th>
+                  </tr>
+                </thead>
+                {newsPosts.map((post, index) => {
                   const { crew, title, date, id, type } = post;
                   return (
                     <tbody key={id}>
