@@ -34,12 +34,7 @@ export const database = (state = defaultState, action) => {
         events: action.payload,
         isLoading: false,
       };
-    case CONSTANTS.BLOG_CONSTANTS.GET_POSTS_REQ:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_REQ:
+      case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_REQ:
       return {
         ...state,
         isLoading: true,

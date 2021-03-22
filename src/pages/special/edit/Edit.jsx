@@ -61,7 +61,7 @@ const Edit = () => {
 
   useEffect(() => {
     getEvent();
-  }, []);
+  });
 
   return (
     <section className="section add-news">
