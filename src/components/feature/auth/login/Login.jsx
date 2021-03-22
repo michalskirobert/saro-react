@@ -21,7 +21,7 @@ const Login = () => {
 
   useEffect(() => {
     logout();
-  }, []);
+  });
 
   return (
     <section className="section login">

@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
 import { Formik } from "formik";
 
 import { FORM_HELPER } from "./utils";
 import { signUpValidationScheme } from "./validation";
-import { auth, firestore } from "./../../firebase";
+import { auth } from "./../../firebase";
 import { userActions } from "../../../../store/actions";
-import Alert from "./../../../shared/alerts";
 
-import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
 
 const SignUpForm = () => {
   const history = useHistory();

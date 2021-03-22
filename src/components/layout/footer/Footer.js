@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="footer-page_language-button">
           <form onClick={(e) => e.preventDefault()}>
             <button className="language-button__language">
-              <img src={Rectangle} className="language-button__rectangle" />
+              <img src={Rectangle} className="language-button__rectangle" alt=""/>
               English
             </button>
           </form>

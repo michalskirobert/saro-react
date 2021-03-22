@@ -19,7 +19,7 @@ const CmsAlert = () => {
       dispatch(cmsActions.clear());
     }, 3000);
     return () => clearTimeout(timeout);
-  }, []);
+  });
   return (
     <div className={`alert ${alert.type}`}>
       {alert.type === ALERT_CONSTANTS.SUCCESS ? (
