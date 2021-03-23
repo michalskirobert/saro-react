@@ -3,7 +3,6 @@ import Facebook from "../../../assets/images/components/footer/Facebook.svg";
 import Instagram from "../../../assets/images/components/footer/Instagram.svg";
 import Youtube from "../../../assets/images/components/footer/Youtube.svg";
 import Rectangle from "../../../assets/images/components/footer/Rectangle.svg";
-import ArrowUp from "../../../assets/images/components/footer/arrowUp.svg";
 import ArrowDown from "../../../assets/images/components/footer/ArrowDown.svg";
 
 const Footer = () => {
@@ -26,7 +25,6 @@ const Footer = () => {
             alt="rectangle"
           />
           <div className="language-button__arrows">
-            <img src={ArrowUp} alt="arrowUp" />
             <img src={ArrowDown} alt="arrowDown" />
           </div>
         </div>
