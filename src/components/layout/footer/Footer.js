@@ -3,31 +3,29 @@ import Facebook from "../../../assets/images/components/footer/Facebook.svg";
 import Instagram from "../../../assets/images/components/footer/Instagram.svg";
 import Youtube from "../../../assets/images/components/footer/Youtube.svg";
 import Rectangle from "../../../assets/images/components/footer/Rectangle.svg";
-import ArrowUp from "../../../assets/images/components/footer/arrowUp.svg";
 import ArrowDown from "../../../assets/images/components/footer/ArrowDown.svg";
 
 const Footer = () => {
   return (
     <>
       <div className="footer-page">
-        <div className="language-button__language">
-          <form onClick={(e) => e.preventDefault()}>
-            <select placeholder="Language">
+        <div className="footer-page__language-button">
+          
+            <select>
               <option>English</option>
               <option>Japanese</option>
               <option>Korean</option>
               <option>Chinese</option>
               <option>Polish</option>
             </select>
-          </form>
+          
           <img
             src={Rectangle}
             className="language-button__rectangle"
             alt="rectangle"
           />
           <div className="language-button__arrows">
-            <img src={ArrowUp} alt="arrowUp" />
-            <img src={ArrowDown} alt="arrowDown" />
+            <img src={ArrowDown} alt="arrowDown" className="arrows__ArrowDown" />
           </div>
         </div>
         <div className="footer-page__content">
@@ -42,20 +40,17 @@ const Footer = () => {
         <div className="footer-page__icons">
           <ul className="footer-page__socialMedia">
             <li>
-              <a href="https://facebook.com" className="footer-page__facebook">
+              <a href="#" className="footer-page__facebook">
                 <img src={Facebook} alt="facebook" />
               </a>
             </li>
             <li>
-              <a
-                href="https://instagram.com"
-                className="footer-page__instagram"
-              >
+              <a href="#" className="footer-page__instagram">
                 <img src={Instagram} alt="instagram" />
               </a>
             </li>
             <li>
-              <a href="https://youtube.com" className="footer-page__youtube">
+              <a href="#" className="footer-page__youtube">
                 <img src={Youtube} alt="youtube" />
               </a>
             </li>

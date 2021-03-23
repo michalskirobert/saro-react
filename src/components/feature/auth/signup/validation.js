@@ -1,4 +1,4 @@
-/* import * as yup from "yup";
+import * as yup from "yup";
 
 export const signUpValidationScheme = yup.object().shape({
   email: yup.string().required("").email(""),
@@ -7,4 +7,3 @@ export const signUpValidationScheme = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match"),
 });
- */
