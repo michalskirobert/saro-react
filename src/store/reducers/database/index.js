@@ -34,7 +34,7 @@ export const database = (state = defaultState, action) => {
         events: action.payload,
         isLoading: false,
       };
-      case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_REQ:
+    case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_REQ:
       return {
         ...state,
         isLoading: true,
@@ -42,7 +42,7 @@ export const database = (state = defaultState, action) => {
     case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_SUCCESS:
       return {
         ...state,
-        posts: action.payload,
+        news: action.payload,
         isLoading: false,
       };
     case CONSTANTS.NEWS_CONSTANTS.NEWS_VIEW_MORE:
