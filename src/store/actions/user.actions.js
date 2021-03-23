@@ -1,8 +1,21 @@
 import { userConstants } from "../../utils/constants/user.constants";
 
-const signUp = () => {
+const signUpRequest = () => {
+  return {
+    type: userConstants.REGISTER_REQUEST,
+  };
+};
+
+const signUp = (payload) => {
   return {
     type: userConstants.REGISTER_SUCCESS,
+    payload,
+  };
+};
+
+const signUpFailure = () => {
+  return {
+    type: userConstants.REGISTER_FAILURE,
   };
 };
 
@@ -13,13 +26,13 @@ const signIn = (data) => {
   };
 };
 
-const request = () => {
+const SignInRequest = () => {
   return {
     type: userConstants.LOGIN_REQUEST,
   };
 };
 
-const failure = (error) => {
+const SignInFailure = (error) => {
   return {
     type: userConstants.LOGIN_FAILURE,
     payload: error,
@@ -43,6 +56,8 @@ export const userActions = {
   signUp,
   logout,
   removeUser,
-  failure,
-  request,
+  SignInRequest,
+  SignInFailure,
+  signUpRequest,
+  signUpFailure,
 };

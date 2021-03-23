@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { FaTimes, FaRegTimesCircle, FaRegCheckCircle } from "react-icons/fa";
 import { cmsActions } from "../../../store/actions";
-import { alertConstants } from "../../../utils/constants";
+import { ALERT_CONSTANTS } from "../../../utils/constants";
 
 const CmsAlert = () => {
   const dispatch = useDispatch();
@@ -19,10 +19,10 @@ const CmsAlert = () => {
       dispatch(cmsActions.clear());
     }, 3000);
     return () => clearTimeout(timeout);
-  }, []);
+  });
   return (
     <div className={`alert ${alert.type}`}>
-      {alert.type === alertConstants.SUCCESS ? (
+      {alert.type === ALERT_CONSTANTS.SUCCESS ? (
         <FaRegCheckCircle className="icon" />
       ) : (
         <FaRegTimesCircle className="icon" />

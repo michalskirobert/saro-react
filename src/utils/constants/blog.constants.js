@@ -1,4 +1,4 @@
-export const blogConstants = {
+export const BLOG_CONSTANTS = {
   READ_MORE: "BLOG_READ_MORE",
   VIEW_LESS: "BLOG_VIEW_LESS",
   GET_POSTS_REQ: "GET_BLOG_POSTS_REQUEST",

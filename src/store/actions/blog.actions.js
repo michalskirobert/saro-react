@@ -1,26 +1,26 @@
-import { blogConstants } from "../../utils/constants/blog.constants";
+import { BLOG_CONSTANTS } from "../../utils/constants/blog.constants";
 
 const readMore = () => {
   return {
-    type: blogConstants.READ_MORE,
+    type: BLOG_CONSTANTS.READ_MORE,
   };
 };
 
 const viewLess = () => {
   return {
-    type: blogConstants.VIEW_LESS,
+    type: BLOG_CONSTANTS.VIEW_LESS,
   };
 };
 
 const getPostsRequest = () => {
   return {
-    type: blogConstants.GET_POSTS_REQ,
+    type: BLOG_CONSTANTS.GET_POSTS_REQ,
   };
 };
 
 const getPosts = (posts) => {
   return {
-    type: blogConstants.GET_POSTS_SUCCESS,
+    type: BLOG_CONSTANTS.GET_POSTS_SUCCESS,
     payload: posts,
   };
 };

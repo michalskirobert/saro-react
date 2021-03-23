@@ -7,7 +7,7 @@ const SingleArticle = () => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  });
 
   return (
     <article className="post">

@@ -1,68 +1,68 @@
-import { cmsConstants } from "../../utils/constants";
+import { CMS_CONSTANTS } from "../../utils/constants";
 
 const addNewsReq = () => {
   return {
-    type: cmsConstants.ADD_NEWS_REQUEST,
+    type: CMS_CONSTANTS.ADD_NEWS_REQUEST,
   };
 };
 
 const addNewsSuccess = () => {
   return {
-    type: cmsConstants.ADD_NEWS_SUCCESS,
+    type: CMS_CONSTANTS.ADD_NEWS_SUCCESS,
   };
 };
 
 const addNewsFailure = () => {
   return {
-    type: cmsConstants.ADD_NEWS_FAILURE,
+    type: CMS_CONSTANTS.ADD_NEWS_FAILURE,
   };
 };
 
 const clear = () => {
   return {
-    type: cmsConstants.CLEAR,
+    type: CMS_CONSTANTS.CLEAR,
   };
 };
 
 const addEventsSuccess = () => {
   return {
-    type: cmsConstants.ADD_EVENT_SUCCESS,
+    type: CMS_CONSTANTS.ADD_EVENT_SUCCESS,
   };
 };
 
 const addEventsReq = () => {
   return {
-    type: cmsConstants.ADD_EVENT_REQUEST,
+    type: CMS_CONSTANTS.ADD_EVENT_REQUEST,
   };
 };
 
 const addEventsFailure = () => {
   return {
-    type: cmsConstants.ADD_EVENT_FAILURE,
+    type: CMS_CONSTANTS.ADD_EVENT_FAILURE,
   };
 };
 
 const addArticleSuccess = () => {
   return {
-    type: cmsConstants.ADD_ARTICLE_SUCCESS,
+    type: CMS_CONSTANTS.ADD_ARTICLE_SUCCESS,
   };
 };
 
 const addArticleReq = () => {
   return {
-    type: cmsConstants.ADD_ARTICLE_REQUEST,
+    type: CMS_CONSTANTS.ADD_ARTICLE_REQUEST,
   };
 };
 
 const addArticleFailure = () => {
   return {
-    type: cmsConstants.ADD_ARTICLE_FAILURE,
+    type: CMS_CONSTANTS.ADD_ARTICLE_FAILURE,
   };
 };
 
 const edit = (params) => {
   return {
-    type: cmsConstants.EDIT,
+    type: CMS_CONSTANTS.EDIT,
     payload: params,
   };
 };

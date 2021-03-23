@@ -1,8 +1,10 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { FaAngleLeft } from "react-icons/fa";
+
+import * as S from "./style";
 
 const nav = [
   {
@@ -115,19 +117,10 @@ const nav = [
   },
 ];
 
-const NavMenu = ({ isNavOpen }) => {
-  const linksContainerRef = useRef(null);
+const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   const linksRef = useRef(null);
   const [selected, setSelected] = useState(null);
   const user = useSelector((state) => state.currentUser);
-  useEffect(() => {
-    const linksHeight = linksRef.current.getBoundingClientRect().height;
-    if (isNavOpen) {
-      linksContainerRef.current.style.height = `${linksHeight}px`;
-    } else {
-      linksContainerRef.current.style.height = "0px";
-    }
-  }, [isNavOpen]);
 
   const publicMap = nav.filter((item) => {
     return item.isLogged === false;
@@ -140,62 +133,65 @@ const NavMenu = ({ isNavOpen }) => {
       setSelected(index);
     }
   };
+  const handleClick = () => {
+    setIsNavOpen(!isNavOpen);
+  };
 
   let navData = user.isLogged ? nav : publicMap;
 
   return (
-    <div
-      className={`nav-container ${isNavOpen && "active"}`}
-      ref={linksContainerRef}
-    >
-      <ul className="nav-links" ref={linksRef}>
-        {navData.map((link, index) => {
-          const { title, path, content } = link;
-          return (
-            <li key={index} className="nav-link">
-              {content ? (
-                <>
-                  <button
-                    onClick={() => {
-                      toggleInnerMenu(index);
-                    }}
-                  >
-                    <FaAngleLeft
-                      className={selected === index ? "icon rotate" : "icon"}
-                    />
-                    {title}
-                  </button>
+    <>
+      <div className={`nav-container ${isNavOpen && "active"}`}>
+        <ul className="nav-links" ref={linksRef}>
+          {navData.map((link, index) => {
+            const { title, path, content } = link;
+            return (
+              <li key={index} className="nav-link">
+                {content ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        toggleInnerMenu(index);
+                      }}
+                    >
+                      <FaAngleLeft
+                        className={selected === index ? "icon rotate" : "icon"}
+                      />
+                      {title}
+                    </button>
 
-                  <div
-                    className={
-                      selected === index
-                        ? "nav-inner-container open"
-                        : "nav-inner-container"
-                    }
-                  >
-                    <ul className="nav-links-inner">
-                      {content?.map((link, index) => {
-                        const { title, path } = link;
-                        return (
-                          <li key={index} className="nav-link-inner">
-                            <Link to={path}>{title}</Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                </>
-              ) : (
-                <Link to={path}>
-                  <FaAngleLeft className="icon" />
-                  {title}
-                </Link>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+                    <div
+                      className={
+                        selected === index
+                          ? "nav-inner-container open"
+                          : "nav-inner-container"
+                      }
+                    >
+                      <ul className="nav-links-inner">
+                        {content?.map((link, index) => {
+                          const { title, path } = link;
+                          return (
+                            <li key={index} className="nav-link-inner">
+                              <Link to={path}>{title}</Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <Link to={path}>
+                    <FaAngleLeft className="icon" />
+                    {title}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {isNavOpen && <S.Overlay onClick={handleClick}></S.Overlay>}
+    </>
   );
 };
 

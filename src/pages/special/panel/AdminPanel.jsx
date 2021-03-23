@@ -18,9 +18,9 @@ const AdminPanel = () => {
   const alert = useSelector((state) => state.CMS.alert);
   const removeItem = async (id) => {
     return await firestore
-      .collection(C.generalConstants.LANG)
-      .doc(C.generalConstants.CHANGE_LANGUAGE_TO.ENGLISH)
-      .collection(C.generalConstants.EVENTS)
+      .collection(C.GENERAL_CONSTANTS.LANG)
+      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.ENGLISH)
+      .collection(C.GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .delete();
   };

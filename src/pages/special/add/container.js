@@ -3,74 +3,54 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { cmsActions } from "../../../store/actions";
-import { generalConstants } from "../../../utils/constants";
+import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
 import { v4 as uuidv4 } from "uuid";
 
 export const useContainer = () => {
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
-  const [language, setLanguage] = useState();
-  const [crew, setCrew] = useState("");
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState("");
-  const [city, setCity] = useState("");
-  const [place, setPlace] = useState("");
-  const [imgURL, setImgURL] = useState("");
-  const [link, setLink] = useState("");
-  const [category, setCategory] = useState("");
-  const [avatarURL, setAvatarURL] = useState("https://via.placeholder.com/50");
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
-  const history = useHistory();
-
-  const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
+  const history = useHistory();
+  const dispatch = useDispatch();  
+
+  const [infoContainer, setInfoContainer] = useState({
+    id: "",
+    title: "",
+    city: "",
+    place: "",
+    date: "",
+    time: "",
+    imgURL: "",
+    link: "",
+    crew: "",
+    language: "",
+    category: "",
+    content: "",
+  })
+ 
 
   const addNews = async (id) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.NEWS)
+      .collection(GENERAL_CONSTANTS.NEWS)
       .doc(id)
       .set({
-        type: generalConstants.NEWS,
+        type: GENERAL_CONSTANTS.NEWS,
         published: new Date().toLocaleString(),
         id,
-        title,
-        content,
-        crew,
-        category,
-        language,
-        avatarURL,
+        title: infoContainer.title,
+        imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
+        crew: infoContainer.crew,
+        language: infoContainer.language,
+        category: infoContainer.category,
+        content: infoContainer.content,
       });
   };
 
-  const addEvents = async (id) => {
-    return await firestore
-      .collection(generalConstants.LANG)
-      .doc(lang)
-      .collection(generalConstants.EVENTS)
-      .doc(id)
-      .set({
-        id,
-        title,
-        type: generalConstants.EVENTS,
-        imgURL: imgURL || "https://via.placeholder.com/50",
-        content,
-        date,
-        time,
-        crew,
-        city,
-        place,
-        link,
-        language,
-        published: new Date().toLocaleString(),
-      });
-  };
-
-  const handlerSubmit = (e) => {
+  const handlerNews = (e) => {
     e.preventDefault();
     dispatch(cmsActions.clear());
     try {
@@ -81,6 +61,29 @@ export const useContainer = () => {
     } catch (error) {
       dispatch(cmsActions.addNewsFailure());
     }
+  };
+
+  const addEvents = async (id) => {
+    return await firestore
+      .collection(GENERAL_CONSTANTS.LANG)
+      .doc(lang)
+      .collection(GENERAL_CONSTANTS.EVENTS)
+      .doc(id)
+      .set({
+        type: GENERAL_CONSTANTS.EVENTS,
+        published: new Date().toLocaleString(),
+        id,
+        title: infoContainer.title,  
+        city: infoContainer.city,
+        place: infoContainer.place,    
+        date: infoContainer.date,
+        time: infoContainer.time,  
+        imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
+        link: infoContainer.link,
+        crew: infoContainer.crew,
+        language: infoContainer.language,
+        content: infoContainer.content,        
+      });
   };
 
   const handlerEvents = (e) => {
@@ -98,20 +101,19 @@ export const useContainer = () => {
 
   const addArticle = async (id) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.BLOG_POSTS)
+      .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .doc(id)
       .set({
-        id,
-        type: generalConstants.BLOG_POSTS,
-        title,
-        imgURL: imgURL || "https://via.placeholder.com/50",
-        content,
-        crew,
-        category,
-        language,
+        type: GENERAL_CONSTANTS.BLOG_POSTS,
         published: new Date().toLocaleString(),
+        id,        
+        title: infoContainer.title,        
+        crew: infoContainer.crew,
+        language: infoContainer.language,
+        category: infoContainer.category,        
+        content: infoContainer.content,
       });
   };
 
@@ -129,40 +131,23 @@ export const useContainer = () => {
   };
 
   const handleEdtiorChange = (e) => {
-    setContent(e.target.getContent());
+    const value = e.target.getContent()
+    setInfoContainer((prevState)=> {
+      return { ...prevState, content: value}
+    });
   };
 
   return {
-    addNews,
-    handlerSubmit,
-    handleEdtiorChange,
-    content,
-    setContent,
-    title,
-    setTitle,
-    language,
-    setLanguage,
-    crew,
-    setCrew,
-    category,
-    setCategory,
     alert,
     isLoading,
-    time,
-    setTime,
-    date,
-    setDate,
-    place,
-    setPlace,
-    handlerEvents,
-    city,
-    setCity,
-    imgURL,
-    setImgURL,
-    link,
-    setLink,
-    handlerArticle,
+    infoContainer,
+    setInfoContainer,
+    addNews,
     addArticle,
-    setAvatarURL,
+    addEvents,
+    handleEdtiorChange,
+    handlerNews,
+    handlerEvents,
+    handlerArticle,    
   };
 };

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, alertActions } from "../../../store/actions";
-import { generalConstants } from "../../../utils/constants";
+import { cmsActions } from "../../../store/actions";
+import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
 export const useEdit = () => {
@@ -32,9 +32,9 @@ export const useEdit = () => {
 
   const getEvent = async (id, type) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.EVENTS)
+      .collection(GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .get()
       .then((doc) => {
@@ -76,13 +76,13 @@ export const useEdit = () => {
 
   const updateEvent = async (id) => {
     return await firestore
-      .collection(generalConstants.LANG)
+      .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(generalConstants.EVENTS)
+      .collection(GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .set({
         id,
-        type: generalConstants.EVENTS,
+        type: GENERAL_CONSTANTS.EVENTS,
         title: editableContainer.title,
         imageURL: editableContainer.imgURL,
         content: editableContainer.content,
@@ -113,7 +113,7 @@ export const useEdit = () => {
     e.preventDefault();
     dispatch(cmsActions.clear());
     switch (type) {
-      case generalConstants.EVENTS:
+      case GENERAL_CONSTANTS.EVENTS:
         try {
           dispatch(cmsActions.addEventsReq());
           updateEvent(editableContainer.id);

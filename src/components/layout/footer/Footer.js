@@ -3,30 +3,62 @@ import Facebook from "../../../assets/images/components/footer/Facebook.svg";
 import Instagram from "../../../assets/images/components/footer/Instagram.svg";
 import Youtube from "../../../assets/images/components/footer/Youtube.svg";
 import Rectangle from "../../../assets/images/components/footer/Rectangle.svg";
-
-
+import ArrowUp from "../../../assets/images/components/footer/arrowUp.svg";
+import ArrowDown from "../../../assets/images/components/footer/ArrowDown.svg";
 
 const Footer = () => {
   return (
     <>
       <div className="footer-page">
-      <div className="footer-page_language-button">
-        <form onClick={(e) => e.preventDefault()}>
-          <button className="language-button__language"><img src={Rectangle} className="language-button__rectangle"/>English</button>
-        </form></div>
-        <h2 className="footer-page__contact">Contact us</h2>
-        <p className="footer-page__description">You can contact us anytime through the Contact Form.
-        You can use Japanese, Korean, English or even  Polsih or you can write to us by your own contact@saro.website</p>
-        <h2 className="footer-page__follow">Follow us</h2>
-        <ul className="footer-page__socialMedia">
-        <li>
-        <a href="#" className="footer-page__facebook"><img src={Facebook} /></a></li>
-        <li><a href="#" className="footer-page__instagram"><img src={Instagram} /></a></li>
-        <li><a href="#" className="footer-page__youtube"><img src={Youtube} /></a></li>
-        </ul>
-        <div>
-        <form onClick={(e) => e.preventDefault()}><button className="footer-page__scrollUp"></button></form></div>
+        <div className="language-button__language">
+          <form onClick={(e) => e.preventDefault()}>
+            <select placeholder="Language">
+              <option>English</option>
+              <option>Japanese</option>
+              <option>Korean</option>
+              <option>Chinese</option>
+              <option>Polish</option>
+            </select>
+          </form>
+          <img
+            src={Rectangle}
+            className="language-button__rectangle"
+            alt="rectangle"
+          />
+          <div className="language-button__arrows">
+            <img src={ArrowUp} alt="arrowUp" />
+            <img src={ArrowDown} alt="arrowDown" />
+          </div>
         </div>
+        <div className="footer-page__content">
+          <h2>Contact us</h2>
+          <p>
+            You can contact us anytime through the Contact Form. You can use
+            Japanese, Korean, English or even Polsih or you can write to us by
+            your own contact@saro.website
+          </p>
+          <h2>Follow us</h2>
+        </div>
+        <div className="footer-page__icons">
+          <ul className="footer-page__socialMedia">
+            <li>
+              <a href="#" className="footer-page__facebook">
+                <img src={Facebook} alt="facebook" />
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer-page__instagram">
+                <img src={Instagram} alt="instagram" />
+              </a>
+            </li>
+            <li>
+              <a href="#" className="footer-page__youtube">
+                <img src={Youtube} alt="youtube" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 };

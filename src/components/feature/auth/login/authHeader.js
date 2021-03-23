@@ -1,7 +1,7 @@
 export const authHeader = () => {
   let user = JSON.parse(localStorage.getItem("user"));
   if (user === null) {
-    localStorage.setItem("user", JSON.stringify({ isLogged: false }));
+    localStorage.setItem("user", JSON.stringify({}));
   } else {
     JSON.parse(localStorage.getItem("user"));
   }

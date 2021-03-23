@@ -44,22 +44,18 @@ const categories = [
 
 const AddNews = () => {
   const {
-    handlerSubmit,
-    handleEdtiorChange,
-    content,
-    title,
-    setTitle,
-    setLanguage,
-    setCrew,
-    setCategory,
     alert,
     isLoading,
+    infoContainer,
+    setInfoContainer,
+    handleEdtiorChange,
+    handlerNews,  
   } = useContainer();
 
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
-      <form className="cms" onSubmit={handlerSubmit}>
+      <form className="cms" onSubmit={handlerNews}>
         <h2 className="main-title">Add News</h2>
         <section className="form-container">
           <div className="form-control">
@@ -68,8 +64,13 @@ const AddNews = () => {
               id="title"
               placeholder="add title"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={infoContainer.title}
+              onChange={(e) => {
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, title: value };
+                });
+              }}
             />
           </div>
           <div className="form-control">
@@ -83,7 +84,11 @@ const AddNews = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCrew(options.value),
+                onChange: (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, crew: options };
+                  });
+                },
               }}
             />
           </div>
@@ -98,7 +103,11 @@ const AddNews = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCategory(options.value),
+                onChange:  (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, category: options };
+                  });
+                },
               }}
             />
           </div>
@@ -113,7 +122,11 @@ const AddNews = () => {
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange: (options) => setLanguage(options.value),
+                onChange:  (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, language: options };
+                  });
+                },
               }}
             />
           </div>
@@ -121,7 +134,7 @@ const AddNews = () => {
         <section className="editor">
           <Editor
             apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={content}
+            initialValue={infoContainer.content}
             init={{
               plugins: [
                 "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",

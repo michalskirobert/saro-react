@@ -1,3 +1,3 @@
-export const heroConstants = {
+export const HERO_CONSTANTS = {
   JUMP: "JUMP_TO",
 };
