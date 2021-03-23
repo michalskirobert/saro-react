@@ -73,7 +73,8 @@ form.auth-form {
       width: 343px;
       height: 52px;
       outline: none;
-      border: 2px solid $crl-base-blue;
+      border: 2px solid;
+      border-color: $crl-base-blue;
       font-size: 15px;
       padding: 0.7rem 0.4rem;
       border-radius: 2px;
@@ -117,7 +118,6 @@ form.auth-form {
 }
 
 form.cms {
-    
   .main-title {
     width: 95%;
     max-width: 500px;
@@ -139,7 +139,7 @@ form.cms {
       bottom: 20px;
     }
   }
-   .form-control {
+  .form-control {
     background: $crl-main-grey;
     display: flex;
     flex-direction: column;
@@ -187,7 +187,8 @@ form.cms {
       color: rgb(187, 187, 187);
     }
   }
-  select, .css-yk16xz-control,
+  select,
+  .css-yk16xz-control,
   input {
     border: none;
     border-bottom: 1px solid black;
@@ -196,7 +197,7 @@ form.cms {
     padding: 5px 10px;
     outline: none;
   }
- 
+
   select option {
     background: $crl-main-grey;
     font-style: italic;

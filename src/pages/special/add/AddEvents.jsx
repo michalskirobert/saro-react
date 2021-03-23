@@ -36,26 +36,11 @@ const cities = [
 
 const AddEvents = () => {
   const {
-    title,
-    setTitle,
-    setLanguage,
-    setCrew,
     alert,
     isLoading,
-    eventTime,
-    setEventTime,
-    eventDate,
-    setEventDate,
-    info,
-    setInfo,
-    eventPlace,
-    setEventPlace,
+    infoContainer,
+    setInfoContainer,
     handlerEvents,
-    setEventCity,
-    imgURL,
-    setImgURL,
-    link,
-    setLink,
   } = useContainer();
   return (
     <section className="section add-news">
@@ -69,9 +54,14 @@ const AddEvents = () => {
             <input
               id="title"
               type="text"
-              value={title}
+              value={infoContainer.title}
               placeholder="add title"
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, title: value };
+                });
+              }}
             />
           </div>
 
@@ -86,7 +76,11 @@ const AddEvents = () => {
                   label: item.city,
                   value: item.city,
                 })),
-                onChange: (options) => setEventCity(options.value),
+                onChange: (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, city: options };
+                  });
+                },
               }}
             />
           </div>
@@ -97,9 +91,12 @@ const AddEvents = () => {
               id="place"
               placeholder="add place"
               type="text"
-              value={eventPlace}
+              value={infoContainer.place}
               onChange={(e) => {
-                setEventPlace(e.target.value);
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, place: value };
+                });
               }}
             />
           </div>
@@ -109,9 +106,12 @@ const AddEvents = () => {
             <input
               id="date"
               type="date"
-              value={eventDate}
+              value={infoContainer.date}
               onChange={(e) => {
-                setEventDate(e.target.value);
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, date: value };
+                });
               }}
             />
           </div>
@@ -120,9 +120,12 @@ const AddEvents = () => {
             <input
               id="time"
               type="time"
-              value={eventTime}
+              value={infoContainer.time}
               onChange={(e) => {
-                setEventTime(e.target.value);
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, time: value };
+                });
               }}
             />
           </div>
@@ -130,11 +133,14 @@ const AddEvents = () => {
             <label htmlFor="imgURL">Img URL</label>
             <input
               id="imgURL"
-              placeholder=" add img URL"
+              placeholder="add img URL"
               type="text"
-              value={imgURL}
+              value={infoContainer.imgURL}
               onChange={(e) => {
-                setImgURL(e.target.value);
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, imgURL: value };
+                });
               }}
             />
           </div>
@@ -144,9 +150,12 @@ const AddEvents = () => {
               id="link"
               placeholder="add link"
               type="text"
-              value={link}
+              value={infoContainer.link}
               onChange={(e) => {
-                setLink(e.target.value);
+                const value = e.target.value;
+                setInfoContainer((prevState) => {
+                  return { ...prevState, link: value };
+                });
               }}
             />
           </div>
@@ -161,7 +170,11 @@ const AddEvents = () => {
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange: (options) => setLanguage(options.value),
+                onChange:  (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, language: options };
+                  });
+                },
               }}
             />
           </div>
@@ -176,19 +189,26 @@ const AddEvents = () => {
                   label: item.name,
                   value: item.name,
                 })),
-                onChange: (options) => setCrew(options.value),
+                onChange: (options) => {
+                  setInfoContainer((prevState) => {
+                    return { ...prevState, crew: options };
+                  });
+                },
               }}
             />
           </div>
         </section>
         <div className="form-control form-info">
-          <label htmlFor="info">Info</label>
+          <label htmlFor="content">Info</label>
           <textarea
-            id="info"
+            id="content"
             placeholder="add event details"
-            value={info}
+            value={infoContainer.content}
             onChange={(e) => {
-              setInfo(e.target.value);
+              const value = e.target.value;
+              setInfoContainer((prevState) => {
+                return { ...prevState, content: value };
+              });
             }}
             cols="30"
             rows="10"

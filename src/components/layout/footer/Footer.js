@@ -3,32 +3,39 @@ import Facebook from "../../../assets/images/components/footer/Facebook.svg";
 import Instagram from "../../../assets/images/components/footer/Instagram.svg";
 import Youtube from "../../../assets/images/components/footer/Youtube.svg";
 import Rectangle from "../../../assets/images/components/footer/Rectangle.svg";
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 306bc32a2a85ba6bcba67d76f271d1f1e9c34864
 
 const Footer = () => {
   return (
     <>
       <div className="footer-page">
-        <div className="footer-page_language-button">
+        <div className="language-button__language">
           <form onClick={(e) => e.preventDefault()}>
-            <button className="language-button__language">
-              <img src={Rectangle} className="language-button__rectangle" />
-              English
-            </button>
+                  <select placeholder="Language">
+                  <option>English</option>
+                  <option>Japanese</option>
+                  <option>Korean</option>
+                  <option>Chinese</option>
+                  <option>Polish</option>
+                  </select>
+               
           </form>
+          <img src={Rectangle} className="language-button__rectangle" alt="rectangle" />
+          <div className="language-button__arrows">
+          <img src={ArrowUp} alt="arrowUp" />
+          <img src={ArrowDown} alt="arrowDown"/>
+          </div>
+          
         </div>
-        <h2 className="footer-page__contact">Contact us</h2>
-        <p className="footer-page__description">
+        <div className="footer-page__content">
+        <h2>Contact us</h2>
+        <p>
           You can contact us anytime through the Contact Form. You can use
-          Japanese, Korean, English or <a href="">even Polsih</a> or you can
+          Japanese, Korean, English or even Polsih or you can
           write to us by your own contact@saro.website
         </p>
-        <h2 className="footer-page__follow">Follow us</h2>
+        <h2>Follow us</h2>
+        </div>
+        <div className="footer-page__icons">
         <ul className="footer-page__socialMedia">
           <li>
             <a href="#" className="footer-page__facebook">
@@ -46,7 +53,7 @@ const Footer = () => {
             </a>
           </li>
         </ul>
-        <div></div>
+        </div>
       </div>
     </>
   );

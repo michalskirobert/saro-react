@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, alertActions } from "../../../store/actions";
+import { cmsActions } from "../../../store/actions";
 import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
