@@ -9,7 +9,6 @@ import { signUpValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { userActions } from "../../../../store/actions";
 
-
 const SignUpForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
