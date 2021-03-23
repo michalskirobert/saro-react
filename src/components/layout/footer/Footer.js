@@ -42,17 +42,20 @@ const Footer = () => {
         <div className="footer-page__icons">
           <ul className="footer-page__socialMedia">
             <li>
-              <a href="#" className="footer-page__facebook">
+              <a href="https://facebook.com" className="footer-page__facebook">
                 <img src={Facebook} alt="facebook" />
               </a>
             </li>
             <li>
-              <a href="#" className="footer-page__instagram">
+              <a
+                href="https://instagram.com"
+                className="footer-page__instagram"
+              >
                 <img src={Instagram} alt="instagram" />
               </a>
             </li>
             <li>
-              <a href="#" className="footer-page__youtube">
+              <a href="https://youtube.com" className="footer-page__youtube">
                 <img src={Youtube} alt="youtube" />
               </a>
             </li>
