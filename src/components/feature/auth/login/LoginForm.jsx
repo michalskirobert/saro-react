@@ -44,13 +44,18 @@ const LoginForm = () => {
         onSubmit: (values) => handleSubmit(values),
       }}
     >
-      {({ values, errors, isValid, handleChange, handleSubmit }) => (
+      {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
         <>
           {alert && <Alert />}
           <h2>Log in</h2>
           <div className="form-control">
-            <label htmlFor="email" className="floatLabel"></label>
+            <label htmlFor="email" className="label">
+              {errors.email && touched.email ? (
+                <div className="error__message">{errors.email}</div>
+              ) : null}
+            </label>
             <input
+              name="email"
               type="email"
               id="email"
               value={values[FORM_HELPER.EMAIL]}
@@ -60,7 +65,11 @@ const LoginForm = () => {
             />
           </div>
           <div className="form-control">
-            <label htmlFor="password" className="floatLabel"></label>
+            <label htmlFor="password" className="label">
+              {errors.password && touched.password ? (
+                <div>{errors.password}</div>
+              ) : null}
+            </label>
             <input
               type="password"
               id="password"
