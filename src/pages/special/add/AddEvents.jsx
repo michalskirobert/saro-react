@@ -78,7 +78,7 @@ const AddEvents = () => {
                 })),
                 onChange: (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, city: options };
+                    return { ...prevState, city: options.value };
                   });
                 },
               }}
@@ -172,7 +172,7 @@ const AddEvents = () => {
                 })),
                 onChange:  (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, language: options };
+                    return { ...prevState, language: options.value };
                   });
                 },
               }}
@@ -191,7 +191,7 @@ const AddEvents = () => {
                 })),
                 onChange: (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, crew: options };
+                    return { ...prevState, crew: options.value };
                   });
                 },
               }}

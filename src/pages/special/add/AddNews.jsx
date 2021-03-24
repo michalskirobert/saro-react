@@ -86,7 +86,7 @@ const AddNews = () => {
                 })),
                 onChange: (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, crew: options };
+                    return { ...prevState, crew: options.value };
                   });
                 },
               }}
@@ -105,7 +105,7 @@ const AddNews = () => {
                 })),
                 onChange:  (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, category: options };
+                    return { ...prevState, category: options.value };
                   });
                 },
               }}
@@ -124,7 +124,7 @@ const AddNews = () => {
                 })),
                 onChange:  (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, language: options };
+                    return { ...prevState, language: options.value };
                   });
                 },
               }}

@@ -100,7 +100,7 @@ const Edit = () => {
                 })),
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, city: options };
+                    return { ...prevState, city: options.value };
                   });
                 },
               }}
@@ -201,7 +201,7 @@ const Edit = () => {
                 })),
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, category: options };
+                    return { ...prevState, category: options.value };
                   });
                 },
               }}
@@ -220,7 +220,7 @@ const Edit = () => {
                 })),
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, language: options };
+                    return { ...prevState, language: options.value };
                   });
                 },
               }}
@@ -239,7 +239,7 @@ const Edit = () => {
                 })),
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, crew: options };
+                    return { ...prevState, crew: options.value };
                   });
                 },
               }}
