@@ -71,7 +71,7 @@ const AddEvents = () => {
               {...{
                 id: "city",
                 name: "city",
-                defaultValue: cities[0],
+                defaultValue: infoContainer ? infoContainer.city : cities[0],
                 options: cities.map((item) => ({
                   label: item.city,
                   value: item.city,
@@ -165,7 +165,7 @@ const AddEvents = () => {
               {...{
                 id: "lang",
                 name: "lang",
-                defaultValue: lang[0],
+                defaultValue: infoContainer ? infoContainer.language : lang[0],
                 options: lang.map((item) => ({
                   label: item.lang,
                   value: item.lang,
@@ -184,7 +184,7 @@ const AddEvents = () => {
               {...{
                 id: "crew",
                 name: "crew",
-                defaultValue: people[0],
+                defaultValue: infoContainer ? infoContainer.crew : people[0],
                 options: people.map((item) => ({
                   label: item.name,
                   value: item.name,
@@ -215,7 +215,7 @@ const AddEvents = () => {
           ></textarea>
         </div>
 
-        <Button type="submit" disabled={isLoading}>
+        <Button onClick={handlerEvents} type="submit" disabled={isLoading}>
           Add
         </Button>
       </form>
