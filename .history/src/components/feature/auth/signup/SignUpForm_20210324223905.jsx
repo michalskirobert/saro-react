@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ import { FirstStep } from "./FirstStep";
 import { SecondStep } from "./SecondStep";
 
 const SignUpForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = React.useState(1);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const SignUpForm = () => {
   return (
     <Formik
       {...{
-        initialValues: { gender: "male" },
+        initialValues: { mail: "", password: "", confPassword: "",gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "", about:"" },
         validateOnChange: true,
         validationSchema: signUpValidationScheme,
         onSubmit: (values) => handlerSubmit(values),
@@ -56,7 +56,7 @@ const SignUpForm = () => {
               <ArrowBack />
             </button>
           ) : null}
-          <h2>Sign Up</h2>
+          <h2>Register</h2>
           {step === 1 ? (
             <FirstStep
               handleChange={handleChange}

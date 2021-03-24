@@ -7,10 +7,4 @@ export const signUpValidationScheme = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match"),
   gender: yup.string().required("It's required"),
-  nativeLang: yup.string().required("It;s required"),
-  studyingLang: yup.string().required("It's required"),
-  hobbies: yup.string().required("It's required"),
-  about: yup.string().required("It's required"),
-
-
 });
