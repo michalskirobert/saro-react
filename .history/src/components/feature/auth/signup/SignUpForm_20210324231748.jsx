@@ -39,7 +39,7 @@ const SignUpForm = () => {
   return (
     <Formik
       {...{
-        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "", about:"" },
+        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish" },
         validateOnChange: true,
         validationSchema: signUpValidationScheme,
         onSubmit: (values) => handlerSubmit(values),
@@ -75,7 +75,7 @@ const SignUpForm = () => {
             type="submit"
             tabindex="4"
             onClick={handleSubmit}
-            disabled={!isValid}
+            
           >
             {step === 2 ? "Sign Up" : "Next"}
           </button>
