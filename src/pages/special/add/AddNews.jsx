@@ -79,14 +79,14 @@ const AddNews = () => {
               {...{
                 id: "crew",
                 name: "crew",
-                defaultValue: people[0],
+                defaultValue: infoContainer ? infoContainer.crew : people[0],
                 options: people.map((item) => ({
                   label: item.name,
                   value: item.name,
                 })),
                 onChange: (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, crew: options };
+                    return { ...prevState, crew: options.value };
                   });
                 },
               }}
@@ -98,14 +98,14 @@ const AddNews = () => {
               {...{
                 id: "category",
                 name: "category",
-                defaultValue: categories[0],
+                defaultValue: infoContainer ? infoContainer.category : categories[0],
                 options: categories.map((item) => ({
                   label: item.name,
                   value: item.name,
                 })),
                 onChange:  (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, category: options };
+                    return { ...prevState, category: options.value };
                   });
                 },
               }}
@@ -117,14 +117,14 @@ const AddNews = () => {
               {...{
                 id: "lang",
                 name: "lang",
-                defaultValue: lang[0],
+                defaultValue: infoContainer ? infoContainer.language : lang[0],
                 options: lang.map((item) => ({
                   label: item.lang,
                   value: item.lang,
                 })),
                 onChange:  (options) => {
                   setInfoContainer((prevState) => {
-                    return { ...prevState, language: options };
+                    return { ...prevState, language: options.value };
                   });
                 },
               }}
@@ -140,7 +140,7 @@ const AddNews = () => {
                 "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
                 " lists link linkchecker media mediaembed noneditable powerpaste preview",
                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "table emoticons template paste help",
+                "table emoticons template help",
               ],
               a_plugin_option: true,
               a_configuration_option: 400,
@@ -162,7 +162,7 @@ const AddNews = () => {
             onChange={handleEdtiorChange}
           />
         </section>
-        <Button type="submit" disabled={isLoading}>
+        <Button onClick={handlerNews} type="submit" disabled={isLoading}>
           Add
         </Button>
       </form>
