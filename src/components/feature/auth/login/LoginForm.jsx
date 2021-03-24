@@ -21,7 +21,6 @@ const LoginForm = () => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
     dispatch(alertActions.clear());
     try {
       await signin(values.email, values.password);
@@ -39,10 +38,7 @@ const LoginForm = () => {
   return (
     <Formik
       {...{
-        initialValues: {
-          email: "",
-          password: "",
-        },
+        initialValues: {},
         validateOnChange: true,
         validationSchema: loginValidationScheme,
         onSubmit: (values) => handleSubmit(values),
