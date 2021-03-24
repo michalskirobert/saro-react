@@ -111,15 +111,21 @@
     height: 52px;
     transition: 0.2s linear;
     &:disabled {
+      position: relative;
       opacity: 0.5;
       cursor: unset;
+      &:hover {
+        background: $crl-base-blue;
+        color: white;
+        border: none;
+      }
     }
-    // &:hover {
-    //   color: $crl-base-blue;
-    //   border: 2px solid $crl-base-blue;
-    //   background-color: white;
-    //   transition: 0.2s linear;
-    // }
+    &:hover {
+      color: $crl-base-blue;
+      border: 2px solid $crl-base-blue;
+      background-color: white;
+      transition: 0.2s linear;
+    }
   }
 
   .auth-control {
