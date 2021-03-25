@@ -25,7 +25,7 @@ export const useContainer = () => {
             ...item.data(),
           };
         });
-        dispatch(fetchActions.fetchNews(newsData));
+        // dispatch(fetchActions.fetchNews(newsData));
       });
   };
 

@@ -1,0 +1,20 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    a {
+        padding: 0 5px;
+        &:hover {
+            color: $crl-base-blue;
+        }
+    }
+    .pagination-link {
+        padding: 10px;
+    }
+    .pagination-active {
+        border-bottom: 1px solid $crl-base-blue;
+        
+    }
+    .pagination-disabled a {
+        color: $crl-main-grey-button;
+      }
+}
