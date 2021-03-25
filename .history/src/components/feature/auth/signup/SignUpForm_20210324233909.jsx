@@ -39,7 +39,7 @@ const SignUpForm = () => {
   return (
     <Formik
       {...{
-        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "", about:"" },
+        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "XX", about:"XX" },
         validateOnChange: true,
         validationSchema: signUpValidationScheme,
         onSubmit: (values) => handlerSubmit(values),
