@@ -1,8 +1,9 @@
 .alert {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   min-height: 50px;
-  min-width: 50%;
+  width: 70%;
   padding: 1rem;
   position: fixed;
   top: 25%;
@@ -17,13 +18,9 @@
     font-weight: 600;
   }
   .close {
-    font-size: 1.2rem;
-    background-color: transparent;
-    padding: 0;
-    margin-left: auto;
-    box-shadow: none;
-    transition: 0.5s color ease;
+    background-color: $crl-base-blue;
     &:hover {
+      background-color: white;
       color: $crl-base-blue;
     }
   }
@@ -33,11 +30,18 @@
   }
 }
 
-.alert.danger {
+.alert.ERROR {
   background-color: $crl-alert-error;
+  .close {
+    background-color: $crl-base-blue;
+    opacity: 1;
+    &:hover {
+      background-color: white;
+      color: $crl-base-blue;
+    }
+  }
 }
-
-.alert.success {
+.alert.SUCCESS {
   background-color: $crl-alert-success;
 }
 
