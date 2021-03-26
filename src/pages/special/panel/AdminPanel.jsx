@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
-import ReactPaginate from 'react-paginate'
+import ReactPaginate from "react-paginate";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
@@ -13,7 +13,7 @@ import * as C from "./../../../utils/constants";
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
- 
+
   const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
   const newsPosts = useSelector((state) => state.database.posts);
@@ -21,31 +21,40 @@ const AdminPanel = () => {
 
   const itemsPerPage = 10;
 
-  const [currentPageEvents, setCurrentPageEvents]=useState(0)  
-  const [currentPageNews, setCurrentPageNews]=useState(0)  
-  const [currentPagePosts, setCurrentPagePosts]=useState(0)  
+  const [currentPageEvents, setCurrentPageEvents] = useState(0);
+  const [currentPageNews, setCurrentPageNews] = useState(0);
+  const [currentPagePosts, setCurrentPagePosts] = useState(0);
 
   const offsetEvents = currentPageEvents * itemsPerPage;
   const offsetNews = currentPageNews * itemsPerPage;
   const offsetPosts = currentPagePosts * itemsPerPage;
 
-  const currentPageEventsItems = newsEvents.slice(offsetEvents, offsetEvents + itemsPerPage)
-  const currentPageNewsItems = newsItems.slice(offsetNews, offsetNews + itemsPerPage)
-  const currentPagePostsItems = newsPosts.slice(offsetPosts, offsetPosts + itemsPerPage)
+  const currentPageEventsItems = newsEvents.slice(
+    offsetEvents,
+    offsetEvents + itemsPerPage
+  );
+  const currentPageNewsItems = newsItems.slice(
+    offsetNews,
+    offsetNews + itemsPerPage
+  );
+  const currentPagePostsItems = newsPosts.slice(
+    offsetPosts,
+    offsetPosts + itemsPerPage
+  );
 
-  const pageCountEvents = Math.ceil(newsEvents.length/itemsPerPage)
-  const pageCountNews = Math.ceil(newsItems.length/itemsPerPage)
-  const pageCountPosts = Math.ceil(newsPosts.length/itemsPerPage)
+  const pageCountEvents = Math.ceil(newsEvents.length / itemsPerPage);
+  const pageCountNews = Math.ceil(newsItems.length / itemsPerPage);
+  const pageCountPosts = Math.ceil(newsPosts.length / itemsPerPage);
 
-  const handleEventsPageChange = ({selected: selectedPage}) => {
-    setCurrentPageEvents(selectedPage)
-  }
-  const handleNewsPageChange = ({selected: selectedPage}) => {
-    setCurrentPageNews(selectedPage)
-  }
-  const handlePostsPageChange = ({selected: selectedPage}) => {
-    setCurrentPagePosts(selectedPage)
-  }
+  const handleEventsPageChange = ({ selected: selectedPage }) => {
+    setCurrentPageEvents(selectedPage);
+  };
+  const handleNewsPageChange = ({ selected: selectedPage }) => {
+    setCurrentPageNews(selectedPage);
+  };
+  const handlePostsPageChange = ({ selected: selectedPage }) => {
+    setCurrentPagePosts(selectedPage);
+  };
 
   const removeItem = async (id) => {
     return await firestore
@@ -121,18 +130,18 @@ const AdminPanel = () => {
                 })}
               </Table>
               <ReactPaginate
-           previousLabel={'< Previous'}
-           nextLabel={'Next >'}
-           breakLabel={'...'}
-           breakClassName={'break'}
-           onPageChange={handleNewsPageChange}
-           pageCount={pageCountNews}
-           containerClassName={'pagination'}
-           previousLinkClassName={"pagination-link"}
-           disabledClassName={"pagination-disabled"}
-           nextLinkClassName={"pagination-link"}
-           activeClassName={"pagination-active"}
-        />
+                previousLabel={"< Previous"}
+                nextLabel={"Next >"}
+                breakLabel={"..."}
+                breakClassName={"break"}
+                onPageChange={handleNewsPageChange}
+                pageCount={pageCountNews}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination-link"}
+                disabledClassName={"pagination-disabled"}
+                nextLinkClassName={"pagination-link"}
+                activeClassName={"pagination-active"}
+              />
             </Tab>
             <Tab eventKey="eventsContent" title="Events menadżerrrooo">
               <Table striped bordered hover>
@@ -178,18 +187,18 @@ const AdminPanel = () => {
                 })}
               </Table>
               <ReactPaginate
-          previousLabel={'< Previous'}
-          nextLabel={'Next >'}
-          breakLabel={'...'}
-          breakClassName={'break'}
-          onPageChange={handleEventsPageChange}
-          pageCount={pageCountEvents}
-          containerClassName={'pagination'}
-          previousLinkClassName={"pagination-link"}
-          disabledClassName={"pagination-disabled"}
-          nextLinkClassName={"pagination-link"}
-          activeClassName={"pagination-active"}
-        />
+                previousLabel={"< Previous"}
+                nextLabel={"Next >"}
+                breakLabel={"..."}
+                breakClassName={"break"}
+                onPageChange={handleEventsPageChange}
+                pageCount={pageCountEvents}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination-link"}
+                disabledClassName={"pagination-disabled"}
+                nextLinkClassName={"pagination-link"}
+                activeClassName={"pagination-active"}
+              />
             </Tab>
             <Tab eventKey="blogContent" title="Blog managment">
               <Table striped bordered hover>
@@ -235,18 +244,18 @@ const AdminPanel = () => {
                 })}
               </Table>
               <ReactPaginate
-         previousLabel={'< Previous'}
-         nextLabel={'Next >'}
-         breakLabel={'...'}
-         breakClassName={'break'}
-         onPageChange={handlePostsPageChange}
-         pageCount={pageCountPosts}
-         containerClassName={'pagination'}
-         previousLinkClassName={"pagination-link"}
-         disabledClassName={"pagination-disabled"}
-         nextLinkClassName={"pagination-link"}
-         activeClassName={"pagination-active"}
-        />
+                previousLabel={"< Previous"}
+                nextLabel={"Next >"}
+                breakLabel={"..."}
+                breakClassName={"break"}
+                onPageChange={handlePostsPageChange}
+                pageCount={pageCountPosts}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination-link"}
+                disabledClassName={"pagination-disabled"}
+                nextLinkClassName={"pagination-link"}
+                activeClassName={"pagination-active"}
+              />
             </Tab>
           </Tabs>
         </Tab>

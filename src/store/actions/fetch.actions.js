@@ -6,10 +6,10 @@ const fetchNewsRequest = () => {
   };
 };
 
-const fetchNews = (data) => {
+const fetchNews = (payload) => {
   return {
     type: NEWS_CONSTANTS.GET_NEWS_SUCCESS,
-    payload: data,
+    payload,
   };
 };
 
