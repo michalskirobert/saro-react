@@ -22,7 +22,7 @@ const CmsAlert = () => {
   });
   return (
     <div className={`alert ${alert.type}`}>
-      {alert.type === ALERT_CONSTANTS.SUCCESS ? (
+      {alert.type === ALERT_CONSTANTS.STATUS_SUCCESS ? (
         <FaRegCheckCircle className="icon" />
       ) : (
         <FaRegTimesCircle className="icon" />

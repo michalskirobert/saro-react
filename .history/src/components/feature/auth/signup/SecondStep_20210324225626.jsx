@@ -11,19 +11,17 @@ export function SecondStep({ handleChange, values, errors }) {
   function onChange(value) {
     handleChange("gender", value);
   }
-  console.log(values);
+  values;
   return (
-  
-      <div className="form-control">
-        <Select
-          width="100%"
-          id="gender"
-          options={options}
-          // value={values[FORM_HELPER.GENDER]}
-          onChange={onChange}
-        />
-        <p>{errors[FORM_HELPER.GENDER]}</p>
-      </div>
-  
+    <div className="form-control">
+      <Select
+        width="100%"
+        id="gender"
+        options={options}
+        // value={values[FORM_HELPER.GENDER]}
+        onChange={onChange}
+      />
+      <p>{errors[FORM_HELPER.GENDER]}</p>
+    </div>
   );
 }

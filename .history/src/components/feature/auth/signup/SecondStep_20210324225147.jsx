@@ -11,7 +11,7 @@ export function SecondStep({ handleChange, values, errors }) {
   function onChange(value) {
     handleChange("gender", value);
   }
-  console.log(values);
+  values;
   return (
     <>
       <div className="form-control">

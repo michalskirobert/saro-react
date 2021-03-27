@@ -11,9 +11,9 @@ export function SecondStep({ handleChange, values, errors }) {
   function onChange(value) {
     handleChange("gender", value);
   }
-  console.log(values);
+  values;
   return (
-  <>
+    <>
       <div className="form-control">
         <Select
           width="100%"
@@ -25,49 +25,49 @@ export function SecondStep({ handleChange, values, errors }) {
         <p>{errors[FORM_HELPER.GENDER]}</p>
       </div>
       <div className="form-control">
-      <Select
-        width="100%"
-        id="nativeLang"
-        options={optionsNativeLang}
-        // value={values[FORM_HELPER.GENDER]}
-        onChange={onChangeNativeLang}
-      />
-      <p>{errors[FORM_HELPER.NATIVE_LANG]}</p>
-    </div>
-    <div className="form-control">
-      <Select
-        width="100%"
-        id="studyingLang"
-        options={optionsStudyingLang}
-        // value={values[FORM_HELPER.GENDER]}
-        onChange={onChangeStudyingLang}
-      />
-      <p>{errors[FORM_HELPER.STUDYING_LANG]}</p>
-    </div>
-    <div className="form-control">
-      <label htmlFor="hobbies" className="floatLabel"></label>
-      <input
-        type="text"
-        id="hobbies"
-        value={values[FORM_HELPER.HOBBIES]}
-        onChange={handleChange}
-        required
-        placeholder="Your hobbies"
-      />
-      <p>{errors[FORM_HELPER.HOBBIES]}</p>
+        <Select
+          width="100%"
+          id="nativeLang"
+          options={optionsNativeLang}
+          // value={values[FORM_HELPER.GENDER]}
+          onChange={onChangeNativeLang}
+        />
+        <p>{errors[FORM_HELPER.NATIVE_LANG]}</p>
       </div>
       <div className="form-control">
-      <label htmlFor="about" className="floatLabel"></label>
-      <input
-        type="text"
-        id="about"
-        value={values[FORM_HELPER.ABOUT]}
-        onChange={handleChange}
-        required
-        placeholder="About You"
-      />
-      <p>{errors[FORM_HELPER.ABOUT]}</p>
-    </div>
-  </>
+        <Select
+          width="100%"
+          id="studyingLang"
+          options={optionsStudyingLang}
+          // value={values[FORM_HELPER.GENDER]}
+          onChange={onChangeStudyingLang}
+        />
+        <p>{errors[FORM_HELPER.STUDYING_LANG]}</p>
+      </div>
+      <div className="form-control">
+        <label htmlFor="hobbies" className="floatLabel"></label>
+        <input
+          type="text"
+          id="hobbies"
+          value={values[FORM_HELPER.HOBBIES]}
+          onChange={handleChange}
+          required
+          placeholder="Your hobbies"
+        />
+        <p>{errors[FORM_HELPER.HOBBIES]}</p>
+      </div>
+      <div className="form-control">
+        <label htmlFor="about" className="floatLabel"></label>
+        <input
+          type="text"
+          id="about"
+          value={values[FORM_HELPER.ABOUT]}
+          onChange={handleChange}
+          required
+          placeholder="About You"
+        />
+        <p>{errors[FORM_HELPER.ABOUT]}</p>
+      </div>
+    </>
   );
 }

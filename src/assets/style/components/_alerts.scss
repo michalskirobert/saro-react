@@ -14,14 +14,14 @@
   box-shadow: 0 4px 1rem 0 $crl-main-grey;
   animation: slide-in 0.5s ease-in-out;
   p {
-    color: white;
+    color: black;
     font-weight: 600;
   }
   .close {
-    background-color: $crl-base-blue;
+    background-color: transparent;
+    color: $crl-base;
     &:hover {
-      background-color: white;
-      color: $crl-base-blue;
+      color: $crl-base-orange;
     }
   }
   .icon {
@@ -33,11 +33,9 @@
 .alert.ERROR {
   background-color: $crl-alert-error;
   .close {
-    background-color: $crl-base-blue;
-    opacity: 1;
+    background-color: $crl-base;
     &:hover {
-      background-color: white;
-      color: $crl-base-blue;
+      color: $crl-main-light;
     }
   }
 }

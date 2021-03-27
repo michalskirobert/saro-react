@@ -17,7 +17,7 @@ export function SecondStep({ handleChange, values, errors }) {
   function onChangeStudyingLang(value) {
     handleChange("gender", value);
   }
-  console.log(values);
+  values;
   return (
     <>
       <div className="form-control">
@@ -50,7 +50,6 @@ export function SecondStep({ handleChange, values, errors }) {
         />
         <p>{errors[FORM_HELPER.GENDER]}</p>
       </div>
-      
     </>
   );
 }
