@@ -121,7 +121,7 @@ const AdminPanel = () => {
                   );
                 })}
               </Table>
-              <div>
+              <div className="pagination">
                 <Pagination>
                   {pagination.map((number) => {
                     return (
