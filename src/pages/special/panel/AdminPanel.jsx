@@ -19,33 +19,57 @@ const AdminPanel = () => {
   const newsPosts = useSelector((state) => state.database.posts);
   const alert = useSelector((state) => state.CMS.alert);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 2;
+  const [lastVisible, setLastVisible]= useState(itemsPerPage)
+  const [currentPage, setCurrentPage]=useState(0) 
 
-  const [currentPageEvents, setCurrentPageEvents]=useState(0)  
-  const [currentPageNews, setCurrentPageNews]=useState(0)  
-  const [currentPagePosts, setCurrentPagePosts]=useState(0)  
+  console.log(currentPage) 
+  console.log(lastVisible)
+  
+  const pageCount = Math.ceil(newsEvents.length)
 
-  const offsetEvents = currentPageEvents * itemsPerPage;
-  const offsetNews = currentPageNews * itemsPerPage;
-  const offsetPosts = currentPagePosts * itemsPerPage;
 
-  const currentPageEventsItems = newsEvents.slice(offsetEvents, offsetEvents + itemsPerPage)
-  const currentPageNewsItems = newsItems.slice(offsetNews, offsetNews + itemsPerPage)
-  const currentPagePostsItems = newsPosts.slice(offsetPosts, offsetPosts + itemsPerPage)
-
-  const pageCountEvents = Math.ceil(newsEvents.length/itemsPerPage)
-  const pageCountNews = Math.ceil(newsItems.length/itemsPerPage)
-  const pageCountPosts = Math.ceil(newsPosts.length/itemsPerPage)
-
-  const handleEventsPageChange = ({selected: selectedPage}) => {
-    setCurrentPageEvents(selectedPage)
+  const handlePageChange = ({selected: selectedPage}) => {  
+    setCurrentPage(selectedPage)  
+    console.log(selectedPage)
+    const last = itemsPerPage * lastVisible + 1
+    setLastVisible(last)
+   
   }
-  const handleNewsPageChange = ({selected: selectedPage}) => {
-    setCurrentPageNews(selectedPage)
-  }
-  const handlePostsPageChange = ({selected: selectedPage}) => {
-    setCurrentPagePosts(selectedPage)
-  }
+
+//   let active = 2;
+// let items = [];
+// for (let number = 1; number <= 5; number++) {
+//   items.push(
+//     <Pagination.Item key={number} active={number === active}>
+//       {number}
+//     </Pagination.Item>,
+//   );
+// }
+
+// const paginationBasic = (
+//   <div>
+//     <Pagination>{items}</Pagination>
+//     <br />
+
+//     <Pagination size="lg">{items}</Pagination>
+//     <br />
+
+//     <Pagination size="sm">{items}</Pagination>
+//   </div>
+// );
+
+// render(paginationBasic);
+
+// pagination = []
+// totalCount: lenght;
+// currentPage: 1,
+// pageSize: [20,50],
+// for (let i of array){
+// push do pagination
+// }
+
+  
 
   const removeItem = async (id) => {
     return await firestore
@@ -57,9 +81,9 @@ const AdminPanel = () => {
   };
 
   useEffect(() => {
-    getNews();
+    // getNews();
     getEvents();
-    getPosts();
+    // getPosts();
   }, []);
 
   return (
@@ -88,7 +112,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {currentPageNewsItems.map((post, index) => {
+                {newsItems.map((post, index) => {
                   const { crew, title, published, id, type } = post;
                   return (
                     <tbody key={id}>
@@ -120,19 +144,7 @@ const AdminPanel = () => {
                   );
                 })}
               </Table>
-              <ReactPaginate
-           previousLabel={'< Previous'}
-           nextLabel={'Next >'}
-           breakLabel={'...'}
-           breakClassName={'break'}
-           onPageChange={handleNewsPageChange}
-           pageCount={pageCountNews}
-           containerClassName={'pagination'}
-           previousLinkClassName={"pagination-link"}
-           disabledClassName={"pagination-disabled"}
-           nextLinkClassName={"pagination-link"}
-           activeClassName={"pagination-active"}
-        />
+          
             </Tab>
             <Tab eventKey="eventsContent" title="Events menadżerrrooo">
               <Table striped bordered hover>
@@ -145,7 +157,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {currentPageEventsItems.map((post, index) => {
+                {newsEvents.map((post, index) => {
                   const { crew, title, published, id, type } = post;
                   return (
                     <tbody key={id}>
@@ -182,8 +194,8 @@ const AdminPanel = () => {
           nextLabel={'Next >'}
           breakLabel={'...'}
           breakClassName={'break'}
-          onPageChange={handleEventsPageChange}
-          pageCount={pageCountEvents}
+          onPageChange={handlePageChange}
+          pageCount={pageCount}
           containerClassName={'pagination'}
           previousLinkClassName={"pagination-link"}
           disabledClassName={"pagination-disabled"}
@@ -202,7 +214,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {currentPagePostsItems.map((post, index) => {
+                {newsPosts.map((post, index) => {
                   const { crew, title, published, id, type } = post;
                   return (
                     <tbody key={id}>
@@ -234,19 +246,7 @@ const AdminPanel = () => {
                   );
                 })}
               </Table>
-              <ReactPaginate
-         previousLabel={'< Previous'}
-         nextLabel={'Next >'}
-         breakLabel={'...'}
-         breakClassName={'break'}
-         onPageChange={handlePostsPageChange}
-         pageCount={pageCountPosts}
-         containerClassName={'pagination'}
-         previousLinkClassName={"pagination-link"}
-         disabledClassName={"pagination-disabled"}
-         nextLinkClassName={"pagination-link"}
-         activeClassName={"pagination-active"}
-        />
+             
             </Tab>
           </Tabs>
         </Tab>
