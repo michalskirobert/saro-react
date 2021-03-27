@@ -1,8 +1,9 @@
 .alert {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   min-height: 50px;
-  min-width: 50%;
+  width: 70%;
   padding: 1rem;
   position: fixed;
   top: 25%;
@@ -13,18 +14,14 @@
   box-shadow: 0 4px 1rem 0 $crl-main-grey;
   animation: slide-in 0.5s ease-in-out;
   p {
-    color: white;
+    color: black;
     font-weight: 600;
   }
   .close {
-    font-size: 1.2rem;
     background-color: transparent;
-    padding: 0;
-    margin-left: auto;
-    box-shadow: none;
-    transition: 0.5s color ease;
+    color: $crl-base;
     &:hover {
-      color: $crl-base-blue;
+      color: $crl-base-orange;
     }
   }
   .icon {
@@ -33,11 +30,16 @@
   }
 }
 
-.alert.danger {
+.alert.ERROR {
   background-color: $crl-alert-error;
+  .close {
+    background-color: $crl-base;
+    &:hover {
+      color: $crl-main-light;
+    }
+  }
 }
-
-.alert.success {
+.alert.SUCCESS {
   background-color: $crl-alert-success;
 }
 

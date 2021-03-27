@@ -53,8 +53,6 @@ export const useContainer = () => {
       });
   };
 
-  
-
   return {
     getNews,
     getEvents,

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
+import { Tabs, Tab, Nav, Table, Button, Pagination } from "react-bootstrap";
+import ReactPaginate from "react-paginate";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
@@ -12,15 +13,37 @@ import * as C from "./../../../utils/constants";
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
+
   const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
   const newsPosts = useSelector((state) => state.database.posts);
   const alert = useSelector((state) => state.CMS.alert);
-  const removeItem = async (id) => {
+
+  const pagination = [];
+  const itemsPerPage = 3;
+  let currentPage = 1;
+
+  const totalCount = newsEvents.length;
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+  const indexOfLastVisible = currentPage * itemsPerPage;
+  const indexOfFirstVisible = indexOfLastVisible - itemsPerPage;
+
+  const slicedNews = newsEvents.slice(indexOfFirstVisible, indexOfLastVisible);
+
+  for (let number = 1; number <= 5; number++) {
+    pagination.push(
+      <Pagination.Item key={number} active={number === currentPage}>
+        {number}
+      </Pagination.Item>
+    );
+  }
+
+  const removeItem = async (type, id) => {
     return await firestore
       .collection(C.GENERAL_CONSTANTS.LANG)
       .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.ENGLISH)
-      .collection(C.GENERAL_CONSTANTS.EVENTS)
+      .collection(type)
       .doc(id)
       .delete();
   };
@@ -57,14 +80,14 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {newsItems.map((post, index) => {
-                  const { crew, title, date, id, type } = post;
+                {slicedNews.map((post, index) => {
+                  const { crew, title, publishedDate, id, type } = post;
                   return (
                     <tbody key={id}>
                       <tr>
                         <td>{index}</td>
                         <td>{title}</td>
-                        <td>{date}</td>
+                        <td>{publishedDate}</td>
                         <td>{crew}</td>
                         <td>
                           <Button
@@ -78,7 +101,7 @@ const AdminPanel = () => {
                           <Button
                             {...{
                               variant: "danger",
-                              onClick: () => removeItem(id),
+                              onClick: () => removeItem(type, id),
                             }}
                           >
                             Remove
@@ -89,6 +112,9 @@ const AdminPanel = () => {
                   );
                 })}
               </Table>
+              <div>
+                <Pagination>{pagination}</Pagination>
+              </div>
             </Tab>
             <Tab eventKey="eventsContent" title="Events menadżerrrooo">
               <Table striped bordered hover>
@@ -102,13 +128,13 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 {newsEvents.map((post, index) => {
-                  const { crew, title, date, id, type } = post;
+                  const { crew, title, publishedDate, id, type } = post;
                   return (
                     <tbody key={id}>
                       <tr>
                         <td>{index}</td>
                         <td>{title}</td>
-                        <td>{date}</td>
+                        <td>{publishedDate}</td>
                         <td>{crew}</td>
                         <td>
                           <Button
@@ -122,7 +148,7 @@ const AdminPanel = () => {
                           <Button
                             {...{
                               variant: "danger",
-                              onClick: () => removeItem(id, type),
+                              onClick: () => removeItem(type, id),
                             }}
                           >
                             Remove
@@ -146,13 +172,13 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 {newsPosts.map((post, index) => {
-                  const { crew, title, date, id, type } = post;
+                  const { crew, title, published, id, type } = post;
                   return (
                     <tbody key={id}>
                       <tr>
                         <td>{index}</td>
                         <td>{title}</td>
-                        <td>{date}</td>
+                        <td>{new Date(published).toLocaleString()}</td>
                         <td>{crew}</td>
                         <td>
                           <Button
@@ -166,7 +192,7 @@ const AdminPanel = () => {
                           <Button
                             {...{
                               variant: "danger",
-                              onClick: () => removeItem(id, type),
+                              onClick: () => removeItem(type, id),
                             }}
                           >
                             Remove

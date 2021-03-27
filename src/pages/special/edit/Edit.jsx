@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Select from "react-select";
+
+import { firestore } from "../../../components/feature/firebase";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
 
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "react-bootstrap";
+
+import * as CONSTANTS from "./../../../utils/constants";
 
 const cities = [
   {
@@ -59,15 +64,19 @@ const Edit = () => {
     setEditableContainer,
   } = useEdit();
 
+  const query = new URLSearchParams(useLocation().search);
+  const type = query.get("type");
+  const id = query.get("id");
+
   useEffect(() => {
-    getEvent();
-  });
+    getEvent(id, type);
+  }, []);
 
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
 
-      <form className="cms" onSubmit={handlerSubmit}>
+      <form className="cms">
         <h2 className="main-title">Edit element</h2>
         <section className="form-container">
           <div className="form-control">
@@ -93,14 +102,15 @@ const Edit = () => {
               {...{
                 id: "city",
                 name: "city",
-                defaultValue: cities[0],
+                placeholder: editableContainer.city,
+                value: editableContainer.city,
                 options: cities.map((item) => ({
                   label: item.city,
                   value: item.city,
                 })),
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, city: options };
+                    return { ...prevState, city: options.value };
                   });
                 },
               }}
@@ -188,39 +198,43 @@ const Edit = () => {
               }}
             />
           </div>
-          <div className="form-control">
-            <label htmlFor="category">Category</label>
-            <Select
-              {...{
-                id: "category",
-                name: "category",
-                defaultValue: categories[0],
-                options: categories.map((item) => ({
-                  label: item.name,
-                  value: item.name,
-                })),
-                onChange: (options) => {
-                  setEditableContainer((prevState) => {
-                    return { ...prevState, category: options };
-                  });
-                },
-              }}
-            />
-          </div>
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? null : (
+            <div className="form-control">
+              <label htmlFor="category">Category</label>
+              <Select
+                {...{
+                  id: "category",
+                  name: "category",
+                  placeholder: editableContainer.category,
+                  value: editableContainer.category,
+                  options: categories.map((item) => ({
+                    label: item.name,
+                    value: item.name,
+                  })),
+                  onChange: (options) => {
+                    setEditableContainer((prevState) => {
+                      return { ...prevState, category: options.value };
+                    });
+                  },
+                }}
+              />
+            </div>
+          )}
           <div className="form-control">
             <label htmlFor="lang">Lang</label>
             <Select
               {...{
                 id: "lang",
                 name: "lang",
-                defaultValue: lang[0],
+                placeholder: editableContainer.language,
+                value: editableContainer.language,
                 options: lang.map((item) => ({
                   label: item.lang,
                   value: item.lang,
                 })),
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, language: options };
+                    return { ...prevState, language: options.value };
                   });
                 },
               }}
@@ -232,14 +246,16 @@ const Edit = () => {
               {...{
                 id: "crew",
                 name: "crew",
-                defaultValue: people[0],
+                placeholder: editableContainer.crew,
+                value: editableContainer.crew,
                 options: people.map((item) => ({
                   label: item.name,
                   value: item.name,
                 })),
+
                 onChange: (options) => {
                   setEditableContainer((prevState) => {
-                    return { ...prevState, crew: options };
+                    return { ...prevState, crew: options.value };
                   });
                 },
               }}
@@ -247,58 +263,63 @@ const Edit = () => {
           </div>
         </section>
 
-        <div className="form-control form-info">
-          <label htmlFor="content">Info</label>
-          <textarea
-            id="content"
-            placeholder={
-              editableContainer
-                ? editableContainer.content
-                : "add description..."
-            }
-            value={editableContainer.content}
-            onChange={(e) => {
-              const value = e.target.value;
-              setEditableContainer((prevState) => {
-                return { ...prevState, content: value };
-              });
-            }}
-            cols="30"
-            rows="10"
-          ></textarea>
-        </div>
-        <section className="editor">
-          <Editor
-            apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={editableContainer.content}
-            init={{
-              plugins: [
-                "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                " lists link linkchecker media mediaembed noneditable powerpaste preview",
-                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "table emoticons template paste help",
-              ],
-              a_plugin_option: true,
-              a_configuration_option: 400,
-              image_title: true,
-              automatic_uploads: true,
-              file_picker_types: "image",
-              toolbar:
-                "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-              menu: {
-                favs: {
-                  title: "Shortcut",
-                  items: "code visualaid | searchreplace | emoticons",
+        {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+          <div className="form-control form-info">
+            <label htmlFor="content">Info</label>
+            <textarea
+              id="content"
+              placeholder={
+                editableContainer
+                  ? editableContainer.content
+                  : "add description..."
+              }
+              value={editableContainer.content}
+              onChange={(e) => {
+                const value = e.target.value;
+                setEditableContainer((prevState) => {
+                  return { ...prevState, content: value };
+                });
+              }}
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
+        ) : (
+          <section className="editor">
+            <Editor
+              apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
+              initialValue={editableContainer.content}
+              init={{
+                plugins: [
+                  "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
+                  " lists link linkchecker media mediaembed noneditable powerpaste preview",
+                  "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                  "table emoticons template help",
+                ],
+                a_plugin_option: true,
+                a_configuration_option: 400,
+                image_title: true,
+                automatic_uploads: true,
+                file_picker_types: "image",
+                toolbar:
+                  "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+                menu: {
+                  favs: {
+                    title: "Shortcut",
+                    items: "code visualaid | searchreplace | emoticons",
+                  },
                 },
-              },
-              menubar: "favs file edit view insert format tools table help",
-              image_caption: true,
-              powerpaste_allow_local_images: true,
-            }}
-            onChange={handleEdtiorChange}
-          />
-        </section>
-        <Button type="submit">Send</Button>
+                menubar: "favs file edit view insert format tools table help",
+                image_caption: true,
+                powerpaste_allow_local_images: true,
+              }}
+              onChange={handleEdtiorChange}
+            />
+          </section>
+        )}
+        <Button type="button" onClick={() => handlerSubmit(type, id)}>
+          Send
+        </Button>
       </form>
     </section>
   );
