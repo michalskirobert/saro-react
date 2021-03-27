@@ -26,12 +26,10 @@ export const useEdit = () => {
         .doc(id)
         .onSnapshot((doc) => setEditableContainer(doc.data()));
     } catch (error) {
-      error;
     }
   };
 
   const updateEvent = async (id, type) => {
-    ({ editableContainer });
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)

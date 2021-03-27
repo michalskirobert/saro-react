@@ -52,7 +52,6 @@ export const useContainer = () => {
   const handlerNews = (e) => {
     e.preventDefault();
     dispatch(cmsActions.clear());
-    infoContainer;
     try {
       dispatch(cmsActions.addNewsReq());
       addNews(uuidv4());

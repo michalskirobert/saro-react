@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
 
-import { firestore } from "../../../components/feature/firebase";
-
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
 

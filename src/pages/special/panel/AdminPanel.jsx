@@ -18,6 +18,7 @@ const AdminPanel = () => {
   const newsEvents = useSelector((state) => state.database.events);
   const newsPosts = useSelector((state) => state.database.posts);
   const alert = useSelector((state) => state.CMS.alert);
+  
 
   const pagination = [];
   const itemsPerPage = 3;
@@ -49,9 +50,9 @@ const AdminPanel = () => {
   };
 
   useEffect(() => {
-    // getNews();
+    getNews();
     getEvents();
-    // getPosts();
+    getPosts();
   }, []);
 
   return (
@@ -80,7 +81,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {slicedNews.map((post, index) => {
+                {newsItems.map((post, index) => {
                   const { crew, title, publishedDate, id, type } = post;
                   return (
                     <tbody key={id}>
