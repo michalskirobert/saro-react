@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button, Pagination } from "react-bootstrap";
-import ReactPaginate from "react-paginate";
+import Select from "react-select";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
@@ -9,6 +9,7 @@ import { firestore } from "../../../components/feature/firebase";
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 
 import * as C from "./../../../utils/constants";
+import {pageSize} from './utils'
 
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
@@ -20,24 +21,46 @@ const AdminPanel = () => {
   const alert = useSelector((state) => state.CMS.alert);
 
   const pagination = [];
-  const itemsPerPage = 3;
-  let currentPage = 1;
-
-  const totalCount = newsEvents.length;
-  const totalPages = Math.ceil(totalCount / itemsPerPage);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [key, setKey] = useState("newsContent")
+  
+  const totalCountValue = (key) => {
+    if(key === "newsContent"){
+      return newsItems.length
+    }
+    if(key === "eventsContent"){
+      return newsEvents.length
+    }
+    if (key=== "blogContent") {
+      return newsPosts.length
+    }    
+  }
+  const totalCount = totalCountValue(key)
 
   const indexOfLastVisible = currentPage * itemsPerPage;
   const indexOfFirstVisible = indexOfLastVisible - itemsPerPage;
 
-  const slicedNews = newsEvents.slice(indexOfFirstVisible, indexOfLastVisible);
+  const slicedNews = newsItems.slice(indexOfFirstVisible, indexOfLastVisible);
+  const slicedEvents = newsEvents.slice(indexOfFirstVisible, indexOfLastVisible);
+  const slicedPosts = newsPosts.slice(indexOfFirstVisible, indexOfLastVisible);
 
-  for (let number = 1; number <= 5; number++) {
-    pagination.push(
-      <Pagination.Item key={number} active={number === currentPage}>
-        {number}
-      </Pagination.Item>
-    );
+  const paginate = (number) => {
+    setCurrentPage(number);
+  };
+  for (
+    let number = 1;
+    number <= Math.ceil(totalCount / itemsPerPage);
+    number++
+  ) {
+    pagination.push(number);
   }
+
+  useEffect(() => {
+    if (totalCount <= itemsPerPage) {
+      paginate(1);
+    }
+  }, [totalCount, itemsPerPage]);
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -58,8 +81,8 @@ const AdminPanel = () => {
     <section className="section saro-panel">
       {alert && <CmsAlert />}
       <h1>Saro CMS 1.0.0</h1>
-      <Tabs defaultActiveKey="newContent" id="uncontrolled-tab-example">
-        <Tab eventKey="newContent" title="Add new content">
+      <Tabs defaultActiveKey="newContent"  id="uncontrolled-tab-example">
+        <Tab eventKey="newContent" title="Add new content" >
           <Nav className="flex-column">
             <Nav.Link href="/panel/add/news-content">Add news</Nav.Link>
             <Nav.Link href="/panel/add/post">Add new blog post</Nav.Link>
@@ -68,8 +91,8 @@ const AdminPanel = () => {
           </Nav>
         </Tab>
         <Tab eventKey="menagment" title="Menage content">
-          <Tabs defaultActiveKey="newContent">
-            <Tab eventKey="newContent" title="News management">
+          <Tabs defaultActiveKey="newsContent" activeKey={key} onSelect={key=> { setKey(key); paginate(1)}}>
+            <Tab eventKey="newsContent" title="News management">
               <Table striped bordered hover>
                 <thead>
                   <tr>
@@ -111,10 +134,7 @@ const AdminPanel = () => {
                     </tbody>
                   );
                 })}
-              </Table>
-              <div>
-                <Pagination>{pagination}</Pagination>
-              </div>
+              </Table>              
             </Tab>
             <Tab eventKey="eventsContent" title="Events menadżerrrooo">
               <Table striped bordered hover>
@@ -127,7 +147,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {newsEvents.map((post, index) => {
+                {slicedEvents.map((post, index) => {
                   const { crew, title, publishedDate, id, type } = post;
                   return (
                     <tbody key={id}>
@@ -171,7 +191,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {newsPosts.map((post, index) => {
+                {slicedPosts.map((post, index) => {
                   const { crew, title, published, id, type } = post;
                   return (
                     <tbody key={id}>
@@ -204,7 +224,38 @@ const AdminPanel = () => {
                 })}
               </Table>
             </Tab>
+            
           </Tabs>
+          <div className="pagination">
+                <Pagination>
+                  {pagination.map((number) => {
+                    return (
+                      <Pagination.Item
+                        key={number}
+                        onClick={() => paginate(number)}
+                        active={number === currentPage}
+                      >
+                        {number}
+                      </Pagination.Item>
+                    );
+                  })}
+                </Pagination>
+                <Select
+              {...{
+                id: "pageSize",
+                name: "pageSize",
+                placeholder: itemsPerPage,
+                value: itemsPerPage,
+                options: pageSize.map((size) => ({
+                  label: size,
+                  value: size,
+                })),
+                onChange: (options) => {
+                  setItemsPerPage(options.value);
+                },
+              }}
+            />
+              </div>
         </Tab>
         <Tab eventKey="menagmentOfCrew" title="Menage your profile" disabled>
           2
@@ -212,7 +263,10 @@ const AdminPanel = () => {
         <Tab eventKey="menagmentOfPictrues" title="Menage pictrues" disabled>
           3
         </Tab>
+        
       </Tabs>
+      
+      
     </section>
   );
 };
