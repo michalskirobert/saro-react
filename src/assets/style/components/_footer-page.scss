@@ -7,7 +7,7 @@
   top: 1995px;
   padding: 25px 20px 14px;
 
-  .language-button__language {
+  .footer-page__language-button {
     display: flex;
     position: relative;
     align-items: center;
@@ -44,10 +44,15 @@
       display: flex;
       flex-direction: column;
       position: absolute;
-      height: 16px;
-      width: 16px;
+      height: 12px;
+      width: 12px;
       margin-left: 66px;
       margin-bottom: 14px;
+
+      .arrows__ArrowDown {
+        position: relative;
+        transform: translateY(15%);
+      }
     }
   }
   .footer-page__content {
