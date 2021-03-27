@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button } from "react-bootstrap";
-import ReactPaginate from 'react-paginate'
+import ReactPaginate from "react-paginate";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
@@ -13,7 +13,7 @@ import * as C from "./../../../utils/constants";
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
- 
+
   const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
   const newsPosts = useSelector((state) => state.database.posts);

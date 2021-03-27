@@ -25,7 +25,8 @@ export const useContainer = () => {
             ...item.data(),
           };
         });
-        // dispatch(fetchActions.fetchNews(newsData));
+        dispatch(fetchActions.fetchNews(newsData));
+        console.log({ newsData });
       });
   };
 
@@ -52,8 +53,6 @@ export const useContainer = () => {
         dispatch(blogActions.getPosts(newsData));
       });
   };
-
-  
 
   return {
     getNews,
