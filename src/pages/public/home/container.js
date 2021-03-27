@@ -18,7 +18,7 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .collection(GENERAL_CONSTANTS.NEWS)
-      .onSnapshot((resp) => {
+      .onSnapshot((resp) => {        
         const newsData = resp.docs.map((item) => {
           return {
             id: item.id,
@@ -26,6 +26,7 @@ export const useContainer = () => {
           };
         });
         dispatch(fetchActions.fetchNews(newsData));
+        
       });
   };
 
@@ -34,7 +35,7 @@ export const useContainer = () => {
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(GENERAL_CONSTANTS.EVENTS)
+      .collection(GENERAL_CONSTANTS.EVENTS)        
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
         dispatch(eventsActions.getEvents(newsData));
