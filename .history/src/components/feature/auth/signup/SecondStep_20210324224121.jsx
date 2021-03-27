@@ -15,7 +15,6 @@ const optionsStudyingLang = [
   { value: "polish", label: "polish" },
 ];
 
-
 export function SecondStep({ handleChange, values, errors }) {
   function onChangeGender(value) {
     handleChange("gender", value);
@@ -26,9 +25,9 @@ export function SecondStep({ handleChange, values, errors }) {
   function onChangeStudyingLang(value) {
     handleChange("studyingLang", value);
   }
-  console.log(values);
+  values;
   return (
-<>
+    <>
       <div className="form-control">
         <Select
           width="100%"
@@ -39,8 +38,6 @@ export function SecondStep({ handleChange, values, errors }) {
         />
         <p>{errors[FORM_HELPER.GENDER]}</p>
       </div>
-      
-      </>
-    
+    </>
   );
 }

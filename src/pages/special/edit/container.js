@@ -12,79 +12,36 @@ export const useEdit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [editableContainer, setEditableContainer] = useState({
-    id: "",
-    title: "",
-    city: "",
-    place: "",
-    date: "",
-    time: "",
-    imgURL: "",
-    link: "",
-    crew: "",
-    language: "",
-    category: "",
-    content: "",
-  });
+  const [editableContainer, setEditableContainer] = useState({});
 
   const lang = useSelector((state) => state.general.language);
   const editable = useSelector((state) => state.CMS.edit);
 
-  const getEvent = async (id, type) => {
-    return await firestore
-      .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
-      .collection(GENERAL_CONSTANTS.EVENTS)
-      .doc(id)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setType(type);
-          const {
-            id,
-            title,
-            city,
-            place,
-            date,
-            time,
-            imgURL,
-            link,
-            crew,
-            language,
-            content,
-          } = doc.data();
-          setEditableContainer((prevState) => {
-            return {
-              ...prevState,
-              id,
-              title,
-              city,
-              place,
-              date,
-              time,
-              imgURL,
-              link,
-              crew,
-              language,
-              content,
-            };
-          });
-        } else {
-        }
-      });
+  const getEvent = (id, type) => {
+    try {
+      firestore
+        .collection(GENERAL_CONSTANTS.LANG)
+        .doc(lang)
+        .collection(type)
+        .doc(id)
+        .onSnapshot((doc) => setEditableContainer(doc.data()));
+    } catch (error) {
+      error;
+    }
   };
 
-  const updateEvent = async (id) => {
+  const updateEvent = async (id, type) => {
+    ({ editableContainer });
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(GENERAL_CONSTANTS.EVENTS)
+      .collection(type)
       .doc(id)
-      .set({
+      .update({
         id,
         type: GENERAL_CONSTANTS.EVENTS,
         title: editableContainer.title,
-        imageURL: editableContainer.imgURL,
+        imgURL: editableContainer.imgURL || "https://via.placeholder.com/50",
         content: editableContainer.content,
         date: editableContainer.date,
         time: editableContainer.time,
@@ -94,12 +51,12 @@ export const useEdit = () => {
         link: editableContainer.link,
         language: editableContainer.language,
         published: new Date(),
+        publishedDate: new Date().toLocaleString(),
       });
   };
 
   const handleEdit = async (id, type) => {
-    await getEvent(id, type);
-    history.push("/panel/edit");
+    history.push(`/panel/edit?type=${type}&id=${id}`);
   };
 
   const handleEdtiorChange = (e) => {
@@ -109,15 +66,15 @@ export const useEdit = () => {
     });
   };
 
-  const handlerSubmit = async (e) => {
-    e.preventDefault();
+  const handlerSubmit = async (type, id) => {
     dispatch(cmsActions.clear());
     switch (type) {
       case GENERAL_CONSTANTS.EVENTS:
         try {
           dispatch(cmsActions.addEventsReq());
-          updateEvent(editableContainer.id);
+          updateEvent(id, type);
           dispatch(cmsActions.addEventsSuccess());
+          history.push(`/panel`);
         } catch (error) {
           dispatch(cmsActions.addEventsFailure());
         }

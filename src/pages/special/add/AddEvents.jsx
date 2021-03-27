@@ -71,7 +71,6 @@ const AddEvents = () => {
               {...{
                 id: "city",
                 name: "city",
-                defaultValue: infoContainer ? infoContainer.city : cities[0],
                 options: cities.map((item) => ({
                   label: item.city,
                   value: item.city,
@@ -165,12 +164,11 @@ const AddEvents = () => {
               {...{
                 id: "lang",
                 name: "lang",
-                defaultValue: infoContainer ? infoContainer.language : lang[0],
                 options: lang.map((item) => ({
                   label: item.lang,
                   value: item.lang,
                 })),
-                onChange:  (options) => {
+                onChange: (options) => {
                   setInfoContainer((prevState) => {
                     return { ...prevState, language: options.value };
                   });
@@ -184,7 +182,6 @@ const AddEvents = () => {
               {...{
                 id: "crew",
                 name: "crew",
-                defaultValue: infoContainer ? infoContainer.crew : people[0],
                 options: people.map((item) => ({
                   label: item.name,
                   value: item.name,

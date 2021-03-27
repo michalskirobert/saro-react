@@ -13,7 +13,7 @@ export const useContainer = () => {
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const history = useHistory();
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
 
   const [infoContainer, setInfoContainer] = useState({
     id: "",
@@ -28,8 +28,7 @@ export const useContainer = () => {
     language: "",
     category: "",
     content: "",
-  })
- 
+  });
 
   const addNews = async (id) => {
     return await firestore
@@ -39,7 +38,7 @@ export const useContainer = () => {
       .doc(id)
       .set({
         type: GENERAL_CONSTANTS.NEWS,
-        published: new Date().toLocaleString(),
+        published: new Date(),
         id,
         title: infoContainer.title,
         imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
@@ -53,7 +52,7 @@ export const useContainer = () => {
   const handlerNews = (e) => {
     e.preventDefault();
     dispatch(cmsActions.clear());
-    console.log(infoContainer)
+    infoContainer;
     try {
       dispatch(cmsActions.addNewsReq());
       addNews(uuidv4());
@@ -72,18 +71,19 @@ export const useContainer = () => {
       .doc(id)
       .set({
         type: GENERAL_CONSTANTS.EVENTS,
-        published: new Date().toLocaleString(),
+        published: new Date(),
+        publishedDate: new Date().toLocaleString(),
         id,
-        title: infoContainer.title,  
+        title: infoContainer.title,
         city: infoContainer.city,
-        place: infoContainer.place,    
+        place: infoContainer.place,
         date: infoContainer.date,
-        time: infoContainer.time,  
+        time: infoContainer.time,
         imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
         link: infoContainer.link,
         crew: infoContainer.crew,
         language: infoContainer.language,
-        content: infoContainer.content,        
+        content: infoContainer.content,
       });
   };
 
@@ -108,12 +108,12 @@ export const useContainer = () => {
       .doc(id)
       .set({
         type: GENERAL_CONSTANTS.BLOG_POSTS,
-        published: new Date().toLocaleString(),
-        id,        
-        title: infoContainer.title,        
+        published: new Date(),
+        id,
+        title: infoContainer.title,
         crew: infoContainer.crew,
         language: infoContainer.language,
-        category: infoContainer.category,        
+        category: infoContainer.category,
         content: infoContainer.content,
       });
   };
@@ -132,9 +132,9 @@ export const useContainer = () => {
   };
 
   const handleEdtiorChange = (e) => {
-    const value = e.target.getContent()
-    setInfoContainer((prevState)=> {
-      return { ...prevState, content: value}
+    const value = e.target.getContent();
+    setInfoContainer((prevState) => {
+      return { ...prevState, content: value };
     });
   };
 
@@ -149,6 +149,6 @@ export const useContainer = () => {
     handleEdtiorChange,
     handlerNews,
     handlerEvents,
-    handlerArticle,    
+    handlerArticle,
   };
 };
