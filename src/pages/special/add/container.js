@@ -21,6 +21,7 @@ export const useContainer = () => {
     city: "",
     place: "",
     date: "",
+    subtitle: "",
     time: "",
     imgURL: "",
     link: "",
@@ -33,12 +34,13 @@ export const useContainer = () => {
   const addNews = async (id) => {
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
+      .doc(infoContainer.language)
       .collection(GENERAL_CONSTANTS.NEWS)
       .doc(id)
       .set({
         type: GENERAL_CONSTANTS.NEWS,
         published: new Date(),
+        publishedDate: new Date().toLocaleString(),
         id,
         title: infoContainer.title,
         imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
@@ -65,7 +67,7 @@ export const useContainer = () => {
   const addEvents = async (id) => {
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
+      .doc(infoContainer.language)
       .collection(GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .set({
@@ -76,9 +78,10 @@ export const useContainer = () => {
         title: infoContainer.title,
         city: infoContainer.city,
         place: infoContainer.place,
+        subtitle: infoContainer.subtitle,
         date: infoContainer.date,
         time: infoContainer.time,
-        imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
+        imgURL: infoContainer.imgURL ?? "https://via.placeholder.com/50",
         link: infoContainer.link,
         crew: infoContainer.crew,
         language: infoContainer.language,
@@ -102,12 +105,13 @@ export const useContainer = () => {
   const addArticle = async (id) => {
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
+      .doc(infoContainer.language)
       .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .doc(id)
       .set({
         type: GENERAL_CONSTANTS.BLOG_POSTS,
         published: new Date(),
+        publishedDate: new Date().toLocaleString(),
         id,
         title: infoContainer.title,
         crew: infoContainer.crew,

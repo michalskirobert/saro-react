@@ -25,8 +25,7 @@ export const useEdit = () => {
         .collection(type)
         .doc(id)
         .onSnapshot((doc) => setEditableContainer(doc.data()));
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const updateEvent = async (id, type) => {

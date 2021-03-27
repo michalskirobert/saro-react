@@ -9,7 +9,7 @@ import { firestore } from "../../../components/feature/firebase";
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 
 import * as C from "./../../../utils/constants";
-import {pageSize} from './utils'
+import { pageSize } from "./utils";
 
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
@@ -23,26 +23,29 @@ const AdminPanel = () => {
   const pagination = [];
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [key, setKey] = useState("newsContent")
-  
+  const [key, setKey] = useState("newsContent");
+
   const totalCountValue = (key) => {
-    if(key === "newsContent"){
-      return newsItems.length
+    if (key === "newsContent") {
+      return newsItems.length;
     }
-    if(key === "eventsContent"){
-      return newsEvents.length
+    if (key === "eventsContent") {
+      return newsEvents.length;
     }
-    if (key=== "blogContent") {
-      return newsPosts.length
-    }    
-  }
-  const totalCount = totalCountValue(key)
+    if (key === "blogContent") {
+      return newsPosts.length;
+    }
+  };
+  const totalCount = totalCountValue(key);
 
   const indexOfLastVisible = currentPage * itemsPerPage;
   const indexOfFirstVisible = indexOfLastVisible - itemsPerPage;
 
   const slicedNews = newsItems.slice(indexOfFirstVisible, indexOfLastVisible);
-  const slicedEvents = newsEvents.slice(indexOfFirstVisible, indexOfLastVisible);
+  const slicedEvents = newsEvents.slice(
+    indexOfFirstVisible,
+    indexOfLastVisible
+  );
   const slicedPosts = newsPosts.slice(indexOfFirstVisible, indexOfLastVisible);
 
   const paginate = (number) => {
@@ -81,8 +84,8 @@ const AdminPanel = () => {
     <section className="section saro-panel">
       {alert && <CmsAlert />}
       <h1>Saro CMS 1.0.0</h1>
-      <Tabs defaultActiveKey="newContent"  id="uncontrolled-tab-example">
-        <Tab eventKey="newContent" title="Add new content" >
+      <Tabs defaultActiveKey="newContent" id="uncontrolled-tab-example">
+        <Tab eventKey="newContent" title="Add new content">
           <Nav className="flex-column">
             <Nav.Link href="/panel/add/news-content">Add news</Nav.Link>
             <Nav.Link href="/panel/add/post">Add new blog post</Nav.Link>
@@ -91,7 +94,14 @@ const AdminPanel = () => {
           </Nav>
         </Tab>
         <Tab eventKey="menagment" title="Menage content">
-          <Tabs defaultActiveKey="newsContent" activeKey={key} onSelect={key=> { setKey(key); paginate(1)}}>
+          <Tabs
+            defaultActiveKey="newsContent"
+            activeKey={key}
+            onSelect={(key) => {
+              setKey(key);
+              paginate(1);
+            }}
+          >
             <Tab eventKey="newsContent" title="News management">
               <Table striped bordered hover>
                 <thead>
@@ -134,7 +144,7 @@ const AdminPanel = () => {
                     </tbody>
                   );
                 })}
-              </Table>              
+              </Table>
             </Tab>
             <Tab eventKey="eventsContent" title="Events menadżerrrooo">
               <Table striped bordered hover>
@@ -224,23 +234,22 @@ const AdminPanel = () => {
                 })}
               </Table>
             </Tab>
-            
           </Tabs>
           <div className="pagination">
-                <Pagination>
-                  {pagination.map((number) => {
-                    return (
-                      <Pagination.Item
-                        key={number}
-                        onClick={() => paginate(number)}
-                        active={number === currentPage}
-                      >
-                        {number}
-                      </Pagination.Item>
-                    );
-                  })}
-                </Pagination>
-                <Select
+            <Pagination>
+              {pagination.map((number) => {
+                return (
+                  <Pagination.Item
+                    key={number}
+                    onClick={() => paginate(number)}
+                    active={number === currentPage}
+                  >
+                    {number}
+                  </Pagination.Item>
+                );
+              })}
+            </Pagination>
+            <Select
               {...{
                 id: "pageSize",
                 name: "pageSize",
@@ -255,7 +264,7 @@ const AdminPanel = () => {
                 },
               }}
             />
-              </div>
+          </div>
         </Tab>
         <Tab eventKey="menagmentOfCrew" title="Menage your profile" disabled>
           2
@@ -263,10 +272,7 @@ const AdminPanel = () => {
         <Tab eventKey="menagmentOfPictrues" title="Menage pictrues" disabled>
           3
         </Tab>
-        
       </Tabs>
-      
-      
     </section>
   );
 };
