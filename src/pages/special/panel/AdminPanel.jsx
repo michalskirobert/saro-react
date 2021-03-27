@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Tabs, Tab, Nav, Table, Button, Pagination } from "react-bootstrap";
-import ReactPaginate from "react-paginate";
+import Select from "react-select";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
@@ -18,27 +18,35 @@ const AdminPanel = () => {
   const newsEvents = useSelector((state) => state.database.events);
   const newsPosts = useSelector((state) => state.database.posts);
   const alert = useSelector((state) => state.CMS.alert);
-  
 
   const pagination = [];
-  const itemsPerPage = 3;
-  let currentPage = 1;
-
-  const totalCount = newsEvents.length;
-  const totalPages = Math.ceil(totalCount / itemsPerPage);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = [1, 2, 3, 5]
+  const totalCount = newsItems.length;
 
   const indexOfLastVisible = currentPage * itemsPerPage;
   const indexOfFirstVisible = indexOfLastVisible - itemsPerPage;
 
-  const slicedNews = newsEvents.slice(indexOfFirstVisible, indexOfLastVisible);
+  const slicedNews = newsItems.slice(indexOfFirstVisible, indexOfLastVisible);
 
-  for (let number = 1; number <= 5; number++) {
-    pagination.push(
-      <Pagination.Item key={number} active={number === currentPage}>
-        {number}
-      </Pagination.Item>
-    );
+  const paginate = (number) => {
+    setCurrentPage(number);
+  };
+
+  for (
+    let number = 1;
+    number <= Math.ceil(totalCount / itemsPerPage);
+    number++
+  ) {
+    pagination.push(number);
   }
+
+  useEffect(() => {
+    if (totalCount <= itemsPerPage) {
+      paginate(1);
+    }
+  }, [totalCount, itemsPerPage]);
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -81,7 +89,7 @@ const AdminPanel = () => {
                     <th>Menagement</th>
                   </tr>
                 </thead>
-                {newsItems.map((post, index) => {
+                {slicedNews.map((post, index) => {
                   const { crew, title, publishedDate, id, type } = post;
                   return (
                     <tbody key={id}>
@@ -114,7 +122,34 @@ const AdminPanel = () => {
                 })}
               </Table>
               <div>
-                <Pagination>{pagination}</Pagination>
+                <Pagination>
+                  {pagination.map((number) => {
+                    return (
+                      <Pagination.Item
+                        key={number}
+                        onClick={() => paginate(number)}
+                        active={number === currentPage}
+                      >
+                        {number}
+                      </Pagination.Item>
+                    );
+                  })}
+                </Pagination>
+                <Select
+              {...{
+                id: "pageSize",
+                name: "pageSize",
+                placeholder: itemsPerPage,
+                value: itemsPerPage,
+                options: pageSize.map((size) => ({
+                  label: size,
+                  value: size,
+                })),
+                onChange: (options) => {
+                  setItemsPerPage(options.value);
+                },
+              }}
+            />
               </div>
             </Tab>
             <Tab eventKey="eventsContent" title="Events menadżerrrooo">
