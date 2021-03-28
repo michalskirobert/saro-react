@@ -141,8 +141,13 @@ export const useContainer = () => {
     });
   };
 
+  const goBack = () => {
+    history.goBack()
+  }
+
   return {
     alert,
+    goBack,
     isLoading,
     infoContainer,
     setInfoContainer,
