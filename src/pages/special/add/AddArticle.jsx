@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
+import BackArrow from './../../../assets/images/components/forms/ArrowBendUpLeft.svg'
 
 const lang = [
   {
@@ -44,6 +45,7 @@ const categories = [
 const AddArticle = () => {
   const {
     alert,
+    goBack,
     isLoading,
     infoContainer,
     setInfoContainer,
@@ -53,6 +55,7 @@ const AddArticle = () => {
   return (
     <section className="section add-article">
       {alert && <CmsAlert />}
+      <button className="btn go-back" onClick={()=>goBack()}><img src={BackArrow} alt="Back"/></button>
       <form className="cms" onSubmit={handlerArticle}>
         <h2 className="main-title">Add Article</h2>
         <section className="form-container">

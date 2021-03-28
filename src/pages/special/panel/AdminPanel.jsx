@@ -13,7 +13,7 @@ import { pageSize } from "./utils";
 
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
-  const { handleEdit } = useEdit();
+  const { handleEdit} = useEdit();
 
   const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
@@ -78,7 +78,7 @@ const AdminPanel = () => {
     getNews();
     getEvents();
     getPosts();
-  }, []);
+  },[]);
 
   return (
     <section className="section saro-panel">

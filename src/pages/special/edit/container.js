@@ -81,8 +81,13 @@ export const useEdit = () => {
     }
   };
 
+  const goBack = () => {
+    history.goBack()
+  }
+
   return {
     alert,
+    goBack,
     handleEdtiorChange,
     handlerSubmit,
     getEvent,

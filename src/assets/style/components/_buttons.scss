@@ -17,6 +17,15 @@
   }
 }
 
+.btn.go-back {
+  margin-left: 10%;
+  display: block;
+  outline: none;
+  img {
+    max-height: 25px;
+  }
+}
+
 .btn.read-more {
   display: inline;
   background-color: transparent;

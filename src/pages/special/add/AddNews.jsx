@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { BUTTONS_HELPER } from "./utils";
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
+import BackArrow from './../../../assets/images/components/forms/ArrowBendUpLeft.svg'
 
 const lang = [
   {
@@ -50,11 +51,15 @@ const AddNews = () => {
     setInfoContainer,
     handleEdtiorChange,
     handlerNews,  
+    goBack,
   } = useContainer();
+
+ 
 
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
+      <button className="btn go-back" onClick={()=>goBack()}><img src={BackArrow} alt="Back"/></button>
       <form className="cms" onSubmit={handlerNews}>
         <h2 className="main-title">Add News</h2>
         <section className="form-container">
