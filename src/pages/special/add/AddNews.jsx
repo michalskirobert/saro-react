@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 import { Formik, Form } from "formik";
 import { addValidationScheme } from "./validation";
 
-import { BUTTONS_HELPER } from "./utils";
+
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
 import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
@@ -54,7 +54,7 @@ const AddNews = () => {
   return (
     <Formik
       {...{
-        initialValues: {},
+        initialValues: {title: ""},
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addValidationScheme,
@@ -86,9 +86,10 @@ const AddNews = () => {
                   type="text"
                   value={values[FORMIK_HELPER.TITLE]}
                   onChange={handleChange}
-                />
-                {<div>{errors[FORMIK_HELPER.TITLE]}</div>}
+                />    
+                {<div className="validation-alert">{errors[FORMIK_HELPER.TITLE]}</div>}     
               </div>
+              
               <div className="form-control">
                 <label htmlFor="crew">Crew</label>
                 <Select
@@ -103,6 +104,7 @@ const AddNews = () => {
                       setFieldValue(FORMIK_HELPER.CREW, values.value),
                   }}
                 />
+                {<div className="validation-alert">{errors[FORMIK_HELPER.CREW]}</div>}
               </div>
               <div className="form-control">
                 <label htmlFor="category">Category</label>
@@ -118,7 +120,7 @@ const AddNews = () => {
                       setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
                   }}
                 />
-                {<div>{errors[FORMIK_HELPER.CATEGORY]}</div>}
+                {<div className="validation-alert">{errors[FORMIK_HELPER.CATEGORY]}</div>}
               </div>
               <div className="form-control">
                 <label htmlFor="language">Language</label>
@@ -134,6 +136,7 @@ const AddNews = () => {
                       setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
                   }}
                 />
+                {<div className="validation-alert">{errors[FORMIK_HELPER.LANGUAGE]}</div>}
               </div>
             </section>
             <section className="editor">
@@ -168,8 +171,9 @@ const AddNews = () => {
                   setFieldValue([FORMIK_HELPER.EDITOR], e.target.getContent())
                 }
               />
+               {<div className="validation-alert">{errors[FORMIK_HELPER.EDITOR]}</div>}
             </section>
-            <Button type="submit" disabled={!isValid} onClick={handleSubmit}>
+            <Button type="submit" disabled={!isValid}  onClick={handleSubmit}>
               Add
             </Button>
           </Form>
