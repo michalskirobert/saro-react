@@ -20,8 +20,10 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.NEWS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
+       
         dispatch(eventsActions.getEvents(newsData));
       });
+      
   };
 
   const getEvents = async () => {
@@ -32,7 +34,7 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.EVENTS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
-
+        
         dispatch(eventsActions.getEvents(newsData));
       });
   };
@@ -45,6 +47,7 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
+       
         dispatch(blogActions.getPosts(newsData));
       });
   };

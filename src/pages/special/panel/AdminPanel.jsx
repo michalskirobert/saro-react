@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {useHistory} from "react-router-dom"
 import { Tabs, Tab, Nav, Table, Button, Pagination } from "react-bootstrap";
 import Select from "react-select";
 
@@ -14,7 +13,7 @@ import { pageSize } from "./utils";
 
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
-  const { handleEdit, goBack } = useEdit();
+  const { handleEdit} = useEdit();
 
   const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
@@ -79,7 +78,7 @@ const AdminPanel = () => {
     getNews();
     getEvents();
     getPosts();
-  }, []);
+  },[]);
 
   return (
     <section className="section saro-panel">
