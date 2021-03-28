@@ -4,16 +4,9 @@ import { Button } from "react-bootstrap";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from './../../../assets/images/components/forms/ArrowBendUpLeft.svg'
+import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
 
-const lang = [
-  {
-    lang: "en",
-  },
-  {
-    lang: "ja",
-  },
-];
+import * as C from "./../../../utils/constants";
 
 const people = [
   {
@@ -47,7 +40,9 @@ const AddEvents = () => {
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
-      <button className="btn go-back" onClick={()=>goBack()}><img src={BackArrow} alt="Back"/></button>
+      <button className="btn go-back" onClick={() => goBack()}>
+        <img src={BackArrow} alt="Back" />
+      </button>
       <form className="cms" onSubmit={handlerEvents}>
         <h2 className="main-title">Add event</h2>
         <section className="form-container">
@@ -166,8 +161,8 @@ const AddEvents = () => {
               {...{
                 id: "lang",
                 name: "lang",
-                options: lang.map((item) => ({
-                  label: item.lang,
+                options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
+                  label: item.label,
                   value: item.lang,
                 })),
                 onChange: (options) => {

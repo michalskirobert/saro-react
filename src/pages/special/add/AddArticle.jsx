@@ -5,16 +5,9 @@ import { Button } from "react-bootstrap";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from './../../../assets/images/components/forms/ArrowBendUpLeft.svg'
+import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
 
-const lang = [
-  {
-    lang: "en",
-  },
-  {
-    lang: "ja",
-  },
-];
+import * as C from "./../../../utils/constants";
 
 const people = [
   {
@@ -50,12 +43,14 @@ const AddArticle = () => {
     infoContainer,
     setInfoContainer,
     handleEdtiorChange,
-    handlerArticle,  
+    handlerArticle,
   } = useContainer();
   return (
     <section className="section add-article">
       {alert && <CmsAlert />}
-      <button className="btn go-back" onClick={()=>goBack()}><img src={BackArrow} alt="Back"/></button>
+      <button className="btn go-back" onClick={() => goBack()}>
+        <img src={BackArrow} alt="Back" />
+      </button>
       <form className="cms" onSubmit={handlerArticle}>
         <h2 className="main-title">Add Article</h2>
         <section className="form-container">
@@ -80,7 +75,6 @@ const AddArticle = () => {
               {...{
                 id: "crew",
                 name: "crew",
-                defaultValue: infoContainer ? infoContainer.crew : people[0],
                 options: people.map((item) => ({
                   label: item.name,
                   value: item.name,
@@ -99,7 +93,6 @@ const AddArticle = () => {
               {...{
                 id: "category",
                 name: "category",
-                defaultValue:  infoContainer ? infoContainer.category : categories[0],
                 options: categories.map((item) => ({
                   label: item.name,
                   value: item.name,
@@ -116,11 +109,10 @@ const AddArticle = () => {
             <label htmlFor="language">Language</label>
             <Select
               {...{
-                id: "lang",
-                name: "lang",
-                defaultValue:  infoContainer ? infoContainer.language : lang[0],
-                options: lang.map((item) => ({
-                  label: item.lang,
+                id: "language",
+                name: "language",
+                options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
+                  label: item.label,
                   value: item.lang,
                 })),
                 onChange: (options) => {

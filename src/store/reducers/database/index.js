@@ -8,6 +8,7 @@ const defaultState = {
   events: [],
   news: [],
   nav: [],
+  hero: [],
 };
 
 export const database = (state = defaultState, action) => {
@@ -49,6 +50,26 @@ export const database = (state = defaultState, action) => {
       return {
         ...state,
         viewMore: !state.viewMore,
+      };
+
+    case CONSTANTS.HERO_CONSTANTS.GET_HERO_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CONSTANTS.HERO_CONSTANTS.GET_HERO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        hero: action.payload,
+      };
+    case CONSTANTS.HERO_CONSTANTS.GET_HERO_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        hero: [],
+        isError: true,
+        errorContent: "Failed to fetch hero",
       };
     default:
       return state;

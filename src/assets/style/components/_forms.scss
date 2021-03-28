@@ -170,6 +170,7 @@ form.cms {
     border: none;
     border-radius: 10px;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
+    z-index: 2;
     label {
       text-align: center;
     }
@@ -251,10 +252,16 @@ form.cms {
       font-weight: bold;
     }
   }
+  div.tox.tox-tinymce,
+  div.tox-editor-header .tox-menubar {
+    position: relative;
+    z-index: 1;
+  }
   .editor {
     width: 95%;
     max-width: 1200px;
     margin: 0 auto;
+    z-index: 1;
   }
   @media (min-width: 500px) {
     .form-container {

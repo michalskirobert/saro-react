@@ -1,40 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useContainer } from "./container";
 
 import { hero } from "../../../store/actions/hero.actions";
-
-import main from "./../../../assets/images/components/hero/main.jpg";
-import second from "./../../../assets/images/components/hero/christmas-hero.jpg";
-import third from "./../../../assets/images/components/hero/header-banner.jpg";
-import another from "./../../../assets/images/components/hero/dialogue.jpg";
-
-const heroData = [
-  {
-    imageURL: main,
-    title: "Welcome",
-    subtitle: `Saro is the best`,
-    button: "Learn more",
-    click: "/learn-more",
-  },
-  {
-    imageURL: second,
-    title: "Second picture",
-    subtitle: `Second subtitle`,
-    button: "",
-  },
-  {
-    imageURL: third,
-    title: "Third picture",
-    subtitle: `Third subtitle`,
-    button: "And another button",
-  },
-  {
-    imageURL: another,
-    title: "Another",
-    subtitle: `Another subtitle`,
-    button: "And another button",
-  },
-];
 
 const heroInfoData = {
   title: "Polish learning online",
@@ -43,7 +11,10 @@ const heroInfoData = {
 };
 
 const Main = () => {
+  const { getHero } = useContainer();
+
   const index = useSelector((state) => state.hero);
+  const heroData = useSelector((state) => state.database.hero);
   const dispatch = useDispatch();
 
   const checkNumber = (number) => {
@@ -63,20 +34,24 @@ const Main = () => {
     };
   });
 
+  useEffect(() => {
+    getHero();
+  }, []);
+
   const getBanner = (id) => {
     return dispatch(hero(id));
   };
 
   return (
-    <section className={`hero`} style={{ padding: "0" }}>
+    <section className="hero" style={{ padding: "0" }}>
       <div className="hero__container">
         <div className="img__container">
           {heroData.map((item, currentId) => {
             return (
-              <div key={item.title}>
+              <div key={item.id}>
                 <img
-                  src={item.imageURL}
-                  alt={"img"}
+                  src={item.imgURL}
+                  alt={item.title}
                   key={currentId}
                   className={`${index === currentId ? "active" : "remove"}`}
                 ></img>
@@ -87,10 +62,8 @@ const Main = () => {
                 >
                   <h2 style={{ color: "#deb887" }}>{item.title}</h2>
                   <h3>{item.subtitle}</h3>
-                  {item.button && (
-                    <button className="btn hero-btn">
-                      {item.button}
-                    </button>
+                  {item.buttonTitle && (
+                    <button className="btn hero-btn">{item.buttonTitle}</button>
                   )}
                 </div>
               </div>

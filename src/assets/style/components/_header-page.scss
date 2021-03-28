@@ -3,7 +3,7 @@ header {
   background: $crl-base-blue;
   width: 100%;
   position: sticky;
-  z-index: 2;
+  z-index: 10;
   top: 0;
   transition: all 0.2s ease-in-out;
 
@@ -63,7 +63,7 @@ header {
   }
 }
 .nav-container {
-  z-index: 3;
+  z-index: 15;
   height: 100vh;
   min-width: 250px;
   width: 70%;

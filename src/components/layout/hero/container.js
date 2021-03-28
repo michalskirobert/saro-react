@@ -9,18 +9,19 @@ export const useContainer = () => {
   const lang = useSelector((state) => state.general.language);
 
   const getHero = async () => {
-    dispatch(ACTIONS.heroActions.heroRequest());
+    dispatch(ACTIONS.heroActions.getHeroRequest());
     try {
       firestore
         .collection(GENERAL_CONSTANTS.LANG)
         .doc(lang)
         .collection(GENERAL_CONSTANTS.HERO)
+        .orderBy("title")
         .onSnapshot((resp) => {
-          const data = resp.docs.map((item) => item.docs.data());
-          dispatch(ACTIONS.heroActions.heroSuccess(data));
+          const data = resp.docs.map((item) => item.data());
+          dispatch(ACTIONS.heroActions.getHeroSuccess(data));
         });
     } catch {
-      dispatch(ACTIONS.heroActions.heroFailure());
+      dispatch(ACTIONS.heroActions.getHeroFailure());
     }
   };
 

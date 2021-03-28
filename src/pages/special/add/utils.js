@@ -14,3 +14,11 @@ const BUTTONS_HELPER = [
     isActive: (selectedRowId) => !!selectedRowId,
   },
 ];
+
+export const FORMIK_HELPER = Object.freeze({
+  TITLE: "title",
+  CREW: "crew",
+  CATEGORY: "category",
+  LANGUAGE: "language",
+  EDITOR: "content",
+});

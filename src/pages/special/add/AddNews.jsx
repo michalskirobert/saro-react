@@ -3,19 +3,16 @@ import Select from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "react-bootstrap";
 
+import { Formik, Form } from "formik";
+import { addValidationScheme } from "./validation";
+
 import { BUTTONS_HELPER } from "./utils";
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from './../../../assets/images/components/forms/ArrowBendUpLeft.svg'
+import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
 
-const lang = [
-  {
-    lang: "en",
-  },
-  {
-    lang: "ja",
-  },
-];
+import * as C from "./../../../utils/constants";
+import { FORMIK_HELPER } from "./utils.js";
 
 const people = [
   {
@@ -50,128 +47,135 @@ const AddNews = () => {
     infoContainer,
     setInfoContainer,
     handleEdtiorChange,
-    handlerNews,  
+    handlerNews,
     goBack,
   } = useContainer();
 
- 
-
   return (
-    <section className="section add-news">
-      {alert && <CmsAlert />}
-      <button className="btn go-back" onClick={()=>goBack()}><img src={BackArrow} alt="Back"/></button>
-      <form className="cms" onSubmit={handlerNews}>
-        <h2 className="main-title">Add News</h2>
-        <section className="form-container">
-          <div className="form-control">
-            <label htmlFor="title">Title</label>
-            <input
-              id="title"
-              placeholder="add title"
-              type="text"
-              value={infoContainer.title}
-              onChange={(e) => {
-                const value = e.target.value;
-                setInfoContainer((prevState) => {
-                  return { ...prevState, title: value };
-                });
-              }}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="crew">Crew</label>
-            <Select
-              {...{
-                id: "crew",
-                name: "crew",
-                defaultValue: infoContainer ? infoContainer.crew : people[0],
-                options: people.map((item) => ({
-                  label: item.name,
-                  value: item.name,
-                })),
-                onChange: (options) => {
-                  setInfoContainer((prevState) => {
-                    return { ...prevState, crew: options.value };
-                  });
-                },
-              }}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="category">Category</label>
-            <Select
-              {...{
-                id: "category",
-                name: "category",
-                defaultValue: infoContainer ? infoContainer.category : categories[0],
-                options: categories.map((item) => ({
-                  label: item.name,
-                  value: item.name,
-                })),
-                onChange:  (options) => {
-                  setInfoContainer((prevState) => {
-                    return { ...prevState, category: options.value };
-                  });
-                },
-              }}
-            />
-          </div>
-          <div className="form-control">
-            <label htmlFor="language">Language</label>
-            <Select
-              {...{
-                id: "lang",
-                name: "lang",
-                defaultValue: infoContainer ? infoContainer.language : lang[0],
-                options: lang.map((item) => ({
-                  label: item.lang,
-                  value: item.lang,
-                })),
-                onChange:  (options) => {
-                  setInfoContainer((prevState) => {
-                    return { ...prevState, language: options.value };
-                  });
-                },
-              }}
-            />
-          </div>
+    <Formik
+      {...{
+        initialValues: {},
+        validateOnChange: true,
+        validateOnMount: true,
+        validationSchema: addValidationScheme,
+        onSubmit: (values) => console.log(values),
+      }}
+    >
+      {({
+        values,
+        errors,
+        isValid,
+        touched,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+      }) => (
+        <section className="section add-news">
+          {alert && <CmsAlert />}
+          <button className="btn go-back" onClick={() => goBack()}>
+            <img src={BackArrow} alt="Back" />
+          </button>
+          <Form className="cms" onSubmit={handlerNews}>
+            <h2 className="main-title">Add News</h2>
+            <section className="form-container">
+              <div className="form-control">
+                <label htmlFor="title">Title</label>
+                <input
+                  id="title"
+                  placeholder="add title"
+                  type="text"
+                  value={values[FORMIK_HELPER.TITLE]}
+                  onChange={handleChange}
+                />
+                {<div>{errors[FORMIK_HELPER.TITLE]}</div>}
+              </div>
+              <div className="form-control">
+                <label htmlFor="crew">Crew</label>
+                <Select
+                  {...{
+                    id: "crew",
+                    name: "crew",
+                    options: people.map((item) => ({
+                      label: item.name,
+                      value: item.name,
+                    })),
+                    onChange: (values) =>
+                      setFieldValue(FORMIK_HELPER.CREW, values.value),
+                  }}
+                />
+              </div>
+              <div className="form-control">
+                <label htmlFor="category">Category</label>
+                <Select
+                  {...{
+                    id: "category",
+                    name: "category",
+                    options: categories.map((item) => ({
+                      label: item.name,
+                      value: item.name,
+                    })),
+                    onChange: (values) =>
+                      setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
+                  }}
+                />
+                {<div>{errors[FORMIK_HELPER.CATEGORY]}</div>}
+              </div>
+              <div className="form-control">
+                <label htmlFor="language">Language</label>
+                <Select
+                  {...{
+                    id: "language",
+                    name: "language",
+                    options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
+                      label: item.label,
+                      value: item.lang,
+                    })),
+                    onChange: (values) =>
+                      setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
+                  }}
+                />
+              </div>
+            </section>
+            <section className="editor">
+              <Editor
+                apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
+                initialValue={infoContainer.content}
+                init={{
+                  plugins: [
+                    "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
+                    " lists link linkchecker media mediaembed noneditable powerpaste preview",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                    "table emoticons template help",
+                  ],
+                  a_plugin_option: true,
+                  a_configuration_option: 400,
+                  image_title: true,
+                  automatic_uploads: true,
+                  file_picker_types: "image",
+                  toolbar:
+                    "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+                  menu: {
+                    favs: {
+                      title: "Shortcut",
+                      items: "code visualaid | searchreplace | emoticons",
+                    },
+                  },
+                  menubar: "favs file edit view insert format tools table help",
+                  image_caption: true,
+                  powerpaste_allow_local_images: true,
+                }}
+                onChange={(e) =>
+                  setFieldValue([FORMIK_HELPER.EDITOR], e.target.getContent())
+                }
+              />
+            </section>
+            <Button type="submit" disabled={!isValid} onClick={handleSubmit}>
+              Add
+            </Button>
+          </Form>
         </section>
-        <section className="editor">
-          <Editor
-            apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-            initialValue={infoContainer.content}
-            init={{
-              plugins: [
-                "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                " lists link linkchecker media mediaembed noneditable powerpaste preview",
-                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                "table emoticons template help",
-              ],
-              a_plugin_option: true,
-              a_configuration_option: 400,
-              image_title: true,
-              automatic_uploads: true,
-              file_picker_types: "image",
-              toolbar:
-                "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-              menu: {
-                favs: {
-                  title: "Shortcut",
-                  items: "code visualaid | searchreplace | emoticons",
-                },
-              },
-              menubar: "favs file edit view insert format tools table help",
-              image_caption: true,
-              powerpaste_allow_local_images: true,
-            }}
-            onChange={handleEdtiorChange}
-          />
-        </section>
-        <Button onClick={handlerNews} type="submit" disabled={isLoading}>
-          Add
-        </Button>
-      </form>
-    </section>
+      )}
+    </Formik>
   );
 };
 

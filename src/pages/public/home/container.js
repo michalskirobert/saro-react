@@ -13,17 +13,16 @@ export const useContainer = () => {
   const lang = useSelector((state) => state.general.language);
 
   const getNews = async () => {
-    dispatch(fetchActions.fetchNewsRequest);
+    dispatch(fetchActions.fetchNewsRequest());
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .collection(GENERAL_CONSTANTS.NEWS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
-       
-        dispatch(eventsActions.getEvents(newsData));
+        dispatch(fetchActions.fetchNews(newsData));
+        console.log(newsData);
       });
-      
   };
 
   const getEvents = async () => {
@@ -34,7 +33,7 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.EVENTS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
-        
+
         dispatch(eventsActions.getEvents(newsData));
       });
   };
@@ -47,7 +46,7 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
-       
+
         dispatch(blogActions.getPosts(newsData));
       });
   };

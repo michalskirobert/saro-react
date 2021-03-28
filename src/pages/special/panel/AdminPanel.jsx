@@ -6,14 +6,14 @@ import Select from "react-select";
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
 import { firestore } from "../../../components/feature/firebase";
-import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
+import CmsAlert from "../../../components/shared/alerts/CmsAlert";
 
-import * as C from "./../../../utils/constants";
+import * as C from "../../../utils/constants";
 import { pageSize } from "./utils";
 
 const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
-  const { handleEdit} = useEdit();
+  const { handleEdit } = useEdit();
 
   const newsItems = useSelector((state) => state.database.news);
   const newsEvents = useSelector((state) => state.database.events);
@@ -23,16 +23,16 @@ const AdminPanel = () => {
   const pagination = [];
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [key, setKey] = useState("newsContent");
+  const [key, setKey] = useState(C.GENERAL_CONSTANTS.NEWS_CONTENT);
 
   const totalCountValue = (key) => {
-    if (key === "newsContent") {
+    if (key === C.GENERAL_CONSTANTS.NEWS_CONTENT) {
       return newsItems.length;
     }
-    if (key === "eventsContent") {
+    if (key === C.GENERAL_CONSTANTS.EVENTS_CONTENT) {
       return newsEvents.length;
     }
-    if (key === "blogContent") {
+    if (key === C.GENERAL_CONSTANTS.BLOG_CONTENT) {
       return newsPosts.length;
     }
   };
@@ -78,7 +78,7 @@ const AdminPanel = () => {
     getNews();
     getEvents();
     getPosts();
-  },[]);
+  }, []);
 
   return (
     <section className="section saro-panel">
@@ -88,7 +88,6 @@ const AdminPanel = () => {
         <Tab eventKey="newContent" title="Add new content">
           <Nav className="flex-column">
             <Nav.Link href="/panel/add/news-content">Add news</Nav.Link>
-            <Nav.Link href="/panel/add/post">Add new blog post</Nav.Link>
             <Nav.Link href="/panel/add/events">Add new event</Nav.Link>
             <Nav.Link href="/panel/add/article">Add new article</Nav.Link>
           </Nav>
@@ -202,13 +201,13 @@ const AdminPanel = () => {
                   </tr>
                 </thead>
                 {slicedPosts.map((post, index) => {
-                  const { crew, title, published, id, type } = post;
+                  const { crew, title, publishedDate, id, type } = post;
                   return (
                     <tbody key={id}>
                       <tr>
                         <td>{index}</td>
                         <td>{title}</td>
-                        <td>{new Date(published).toLocaleString()}</td>
+                        <td>{publishedDate}</td>
                         <td>{crew}</td>
                         <td>
                           <Button
