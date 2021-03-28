@@ -170,17 +170,18 @@ form.cms {
     border: none;
     border-radius: 10px;
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
-    z-index: 2;
+    z-index: 5;
     label {
       text-align: center;
     }
   }
   .form-info {
     margin: 25px auto 0 auto;
-    height: 200px;
+    min-height: 250px;
     display: block;
     width: 100%;
     max-width: 600px;
+    padding-bottom: 20px;
   }
   input {
     width: 100%;
@@ -196,7 +197,7 @@ form.cms {
   }
 
   textarea {
-    height: 150px;
+    height: 190px;
     width: 100%;
     background: $crl-main-grey;
     border-radius: 10px;
