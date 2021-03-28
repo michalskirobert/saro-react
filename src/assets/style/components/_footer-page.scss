@@ -2,71 +2,54 @@
   background-color: $crl-base-blue;
   font-family: $family-en-primary;
   color: $crl-base;
-  width: 100%;
-  left: 0px;
-  top: 1995px;
-  padding: 25px 20px 14px;
+  width: 100vw;
+  padding: 20px 20px 14px;
 
-  .footer-page__language-button {
+  * {
     display: flex;
-    position: relative;
-    align-items: center;
     justify-content: center;
 
-    select {
-      display: flex;
+    #dropdown-basic {
       position: relative;
       align-items: center;
       color: $crl-base;
       background-color: $crl-main-grey-button;
-      width: 110px;
+      width: calc(281.141px / 2);
       height: 40px;
-      margin: 0 4px 16px 0;
+      margin: 0;
       font-style: normal;
-      font-weight: bold;
-      font-size: 17px;
+      font-weight: 700;
+      font-size: 1.2rem;
       line-height: 23px;
       letter-spacing: -0.02em;
       border: 1px solid $crl-main-blue;
       border-radius: 5px 0px 0px 5px;
+      box-shadow: 0 0 0 0.2rem $crl-main-blue;
+      margin: 5px 0;
     }
 
     .language-button__rectangle {
       position: absolute;
-      display: flex;
-      justify-content: center;
       height: 38px;
       width: 38px;
-      transform: translateX(87%) translateY(-21%);
+      transform: translateX(130%);
     }
-
-    .language-button__arrows {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      height: 12px;
-      width: 12px;
-      margin-left: 66px;
-      margin-bottom: 14px;
-
-      .arrows__ArrowDown {
-        position: relative;
-        transform: translateY(15%);
-      }
+    .arrows__ArrowDown {
+      width: 14px;
+      height: 14px;
+      position: relative;
+      transform: translateY(12%) translateX(135%);
     }
   }
   .footer-page__content {
-    display: flex;
     align-items: center;
     flex-direction: column;
     position: relative;
     justify-content: flex-start;
 
     h2 {
-      display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 15px auto 10px;
+      margin: 25px auto 5px;
       font-style: normal;
       font-weight: 500;
       font-size: 1.4rem;
@@ -76,11 +59,10 @@
     }
 
     p {
-      display: flex;
       color: $crl-base;
       align-items: center;
       max-width: 550px;
-      margin: 10px 0;
+      margin: 10px 0 0;
       font-style: normal;
       font-weight: normal;
       font-size: 1rem;
@@ -90,20 +72,17 @@
   }
 
   .footer-page__icons {
-    display: flex;
     position: relative;
     align-items: center;
     flex-direction: column;
 
     .footer-page__socialMedia {
       position: relative;
-      display: flex;
       align-items: center;
 
       .footer-page__facebook,
       .footer-page__instagram,
       .footer-page__youtube {
-        display: flex;
         position: relative;
         flex-direction: row;
         width: 60px;
