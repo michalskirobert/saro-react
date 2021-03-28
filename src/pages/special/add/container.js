@@ -147,8 +147,7 @@ export const useContainer = () => {
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .collection(GENERAL_CONSTANTS.CREW)
-      .onSnapshot((resp) =>
-        dispatch(fetchActions.getCrewSuccess(resp.docs.data()))
+      .onSnapshot((resp) => resp.docs.map(item =>  dispatch(fetchActions.getCrewSuccess(item.data()))
       );
   };
 
