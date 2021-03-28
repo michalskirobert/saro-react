@@ -94,7 +94,7 @@ const AddNews = () => {
                     id: "crew",
                     name: "crew",
                     options: crew.map((item) => ({
-                      label: `${item.name} ${item.surname[0]}`,
+                      label: `${item.name} ${item.surname}`,
                       value: `${item.name} ${item.surname}`,
                     })),
                     onChange: (values) =>
