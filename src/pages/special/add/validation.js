@@ -14,7 +14,6 @@ export const addValidationScheme = yup.object().shape({
   [FORMIK_HELPER.EDITOR]: yup.string().required("Field required."),
 });
 
-
 export const addEventsValidationScheme = yup.object().shape({
   [FORMIK_HELPER.TITLE]: yup
     .string()
@@ -31,4 +30,3 @@ export const addEventsValidationScheme = yup.object().shape({
   [FORMIK_HELPER.IMG_URL]: yup.string().required("Field required."),
   [FORMIK_HELPER.LINK]: yup.string().required("Field required."),
 });
-

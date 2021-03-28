@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions } from "../../../store/actions";
+import { cmsActions, fetchActions } from "../../../store/actions";
 import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
@@ -12,6 +12,7 @@ export const useContainer = () => {
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
+  const crew = useSelector((state) => state.database.crew);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -141,6 +142,16 @@ export const useContainer = () => {
     });
   };
 
+  const fetchCrew = async () => {
+    return firestore
+      .collection(GENERAL_CONSTANTS.LANG)
+      .doc(lang)
+      .collection(GENERAL_CONSTANTS.CREW)
+      .onSnapshot((resp) =>
+        dispatch(fetchActions.getCrewSuccess(resp.docs.data()))
+      );
+  };
+
   const goBack = () => {
     history.goBack();
   };
@@ -158,5 +169,7 @@ export const useContainer = () => {
     handlerNews,
     handlerEvents,
     handlerArticle,
+    crew,
+    fetchCrew,
   };
 };

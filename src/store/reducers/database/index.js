@@ -1,6 +1,6 @@
 import * as CONSTANTS from "../../../utils/constants";
 
-const defaultState = {
+const initialState = {
   isLoading: true,
   isError: false,
   ErrorContent: "",
@@ -9,49 +9,68 @@ const defaultState = {
   news: [],
   nav: [],
   hero: [],
+  crew: [],
 };
 
-export const database = (state = defaultState, action) => {
+export const database = (state = initialState, action) => {
   switch (action.type) {
-    case CONSTANTS.BLOG_CONSTANTS.GET_POSTS_REQ:
+    case CONSTANTS.FETCH_CONSTANTS.GET_POSTS_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case CONSTANTS.BLOG_CONSTANTS.GET_POSTS_SUCCESS:
+    case CONSTANTS.FETCH_CONSTANTS.GET_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload,
         isLoading: false,
       };
-    case CONSTANTS.EVENTS_CONSTANTS.GET_EVENTS_REQ:
+    case CONSTANTS.FETCH_CONSTANTS.GET_POSTS_FAILURE:
+      return {
+        ...state,
+        posts: [],
+        isLoading: false,
+        isError: true,
+        errorContent: "Oops.. Something went wrong, refresh your browser",
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_EVENTS_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case CONSTANTS.EVENTS_CONSTANTS.GET_EVENTS_SUCCESS:
+    case CONSTANTS.FETCH_CONSTANTS.GET_EVENTS_SUCCESS:
       return {
         ...state,
         events: action.payload,
         isLoading: false,
       };
-    case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_REQ:
+    case CONSTANTS.FETCH_CONSTANTS.GET_EVENTS_FAILURE:
+      return {
+        ...state,
+        events: action.payload,
+        isLoading: false,
+        isError: true,
+        errorContent: "Oops.. Something went wrong, refresh your browser",
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_NEWS_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case CONSTANTS.NEWS_CONSTANTS.GET_NEWS_SUCCESS:
+    case CONSTANTS.FETCH_CONSTANTS.GET_NEWS_SUCCESS:
       return {
         ...state,
         news: action.payload,
         isLoading: false,
       };
-    case CONSTANTS.NEWS_CONSTANTS.NEWS_VIEW_MORE:
+    case CONSTANTS.FETCH_CONSTANTS.GET_NEWS_FAILURE:
       return {
         ...state,
-        viewMore: !state.viewMore,
+        news: [],
+        isLoading: false,
+        isError: true,
+        errorContent: "Oops.. Something went wrong, refresh your browser",
       };
-
     case CONSTANTS.HERO_CONSTANTS.GET_HERO_REQUEST:
       return {
         ...state,
@@ -70,6 +89,25 @@ export const database = (state = defaultState, action) => {
         hero: [],
         isError: true,
         errorContent: "Failed to fetch hero",
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_CREW_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_CREW_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        crew: action.payload,
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_CREW_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        crew: [],
+        isError: true,
+        errorContent: "Ooops, we couldn't load our crew :/",
       };
     default:
       return state;
