@@ -6,6 +6,7 @@ export const GENERAL_CONSTANTS = {
   EVENTS: "events",
   CURRENT_USER: "user",
   USERS: "users",
+  CREW: "crew",
   CHANGE_LANGUAGE_TO: {
     ENGLISH: "en",
     KOREAN: "ko",
