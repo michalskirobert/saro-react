@@ -5,7 +5,7 @@ import Select from "react-select";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
-import { firestore } from "../../../components/feature/firebase";
+import { firestore, auth } from "../../../components/feature/firebase";
 import CmsAlert from "../../../components/shared/alerts/CmsAlert";
 
 import * as C from "../../../utils/constants";
@@ -84,6 +84,12 @@ const AdminPanel = () => {
     <section className="section saro-panel">
       {alert && <CmsAlert />}
       <h1>Saro CMS 1.0.0</h1>
+      <h2>
+        Welcome{" "}
+        <span style={{ color: "red" }}>
+          {auth?.currentUser?.displayName ?? "Saro-crew"}
+        </span>
+      </h2>
       <Tabs defaultActiveKey="newContent" id="uncontrolled-tab-example">
         <Tab eventKey="newContent" title="Add new content">
           <Nav className="flex-column">
