@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Select from "react-select";
-import { Button } from "react-bootstrap";
+import { Button, Form as F } from "react-bootstrap";
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
@@ -12,16 +12,6 @@ import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft
 import * as C from "./../../../utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
 
-const people = [
-  {
-    id: 1,
-    name: "Robert",
-  },
-  {
-    id: 22,
-    name: "xxx",
-  },
-];
 
 const cities = [
   {
@@ -36,11 +26,15 @@ const AddEvents = () => {
   const {
     alert,
     goBack,
+    crew,
+    fetchCrew,
     isLoading,
-    infoContainer,
-    setInfoContainer,
     handlerEvents,
   } = useContainer();
+
+  useEffect(() => {
+    fetchCrew();
+  }, []);
   return (
     <Formik
       {...{
@@ -77,7 +71,11 @@ const AddEvents = () => {
               placeholder="add title"
               onChange={handleChange}
             />
-            {<div className="validation-alert">{errors[FORMIK_HELPER.TITLE]}</div>}  
+            {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.TITLE]}
+                  </F.Text>  : null
+                }
           </div>
 
           <div className="form-control">
@@ -94,7 +92,11 @@ const AddEvents = () => {
                 setFieldValue(FORMIK_HELPER.CITY, values.value),
               }}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.CITY]}</div>}  
+             {errors[FORMIK_HELPER.CITY] || touched[FORMIK_HELPER.CITY] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.CITY]}
+                  </F.Text>  : null
+                }
           </div>
 
           <div className="form-control">
@@ -106,7 +108,11 @@ const AddEvents = () => {
               value={values[FORMIK_HELPER.PLACE]}
               onChange={handleChange}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.PLACE]}</div>} 
+            {errors[FORMIK_HELPER.PLACE] || touched[FORMIK_HELPER.PLACE] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.PLACE]}
+                  </F.Text>  : null
+                }
           </div>
 
           <div className="form-control">
@@ -117,7 +123,11 @@ const AddEvents = () => {
               value={values[FORMIK_HELPER.DATE]}
               onChange={handleChange}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.DATE]}</div>}
+            {errors[FORMIK_HELPER.DATE] || touched[FORMIK_HELPER.DATE] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.DATE]}
+                  </F.Text>  : null
+                }
           </div>
           <div className="form-control">
             <label htmlFor="time">Time</label>
@@ -127,7 +137,11 @@ const AddEvents = () => {
               value={values[FORMIK_HELPER.TIME]}
               onChange={handleChange}
             />
-            {<div className="validation-alert">{errors[FORMIK_HELPER.TIME]}</div>}
+            {errors[FORMIK_HELPER.TIME] || touched[FORMIK_HELPER.TIME] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.TIME]}
+                  </F.Text>  : null
+                }
           </div>
           <div className="form-control">
             <label htmlFor="imgURL">Img URL</label>
@@ -138,7 +152,11 @@ const AddEvents = () => {
               value={values[FORMIK_HELPER.IMG_URL]}
               onChange={handleChange}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</div>}
+            {errors[FORMIK_HELPER.IMG_URL] || touched[FORMIK_HELPER.IMG_URL] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.IMG_URL]}
+                  </F.Text>  : null
+                }
           </div>
           <div className="form-control">
             <label htmlFor="link">Link</label>
@@ -149,7 +167,11 @@ const AddEvents = () => {
               value={values[FORMIK_HELPER.LINK]}
               onChange={handleChange}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.LINK]}</div>}
+             {errors[FORMIK_HELPER.LINK] || touched[FORMIK_HELPER.LINK] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.LINK]}
+                  </F.Text>  : null
+                }
           </div>
           <div className="form-control">
             <label htmlFor="language">Lang</label>
@@ -164,7 +186,11 @@ const AddEvents = () => {
                 onChange: (values) => setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
               }}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.LANGUAGE]}</div>}
+             {errors[FORMIK_HELPER.LANGUAGE] || touched[FORMIK_HELPER.LANGUAGE] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.LANGUAGE]}
+                  </F.Text>  : null
+                }
           </div>
           <div className="form-control">
             <label htmlFor="crew">Crew</label>
@@ -172,14 +198,18 @@ const AddEvents = () => {
               {...{
                 id: "crew",
                 name: "crew",
-                options: people.map((item) => ({
-                  label: item.name,
-                  value: item.name,
+                options: crew.map((item) => ({
+                  label: `${item.name} ${item.surname}`,
+                  value: `${item.name} ${item.surname}`,
                 })),
                 onChange: (values) => setFieldValue(FORMIK_HELPER.CREW, values.value),
               }}
             />
-             {<div className="validation-alert">{errors[FORMIK_HELPER.CREW]}</div>}
+            {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.CREW]}
+                  </F.Text>  : null
+                }
           </div>
         </section>
         <div className="form-control form-info">
@@ -192,10 +222,14 @@ const AddEvents = () => {
             cols="30"
             rows="10"
           ></textarea>   
-          {<div className="validation-alert">{errors[FORMIK_HELPER.EDITOR]}</div>}          
+         {errors[FORMIK_HELPER.EDITOR] || touched[FORMIK_HELPER.EDITOR] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.EDITOR]}
+                  </F.Text>  : null
+                }   
         </div>   
 
-        <Button type="submit" disabled={!isValid} onClick={handleSubmit}>
+        <Button className="submit-btn" type="submit" disabled={!isValid} onClick={handleSubmit}>
           Add
         </Button>
       </Form>

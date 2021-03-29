@@ -317,7 +317,7 @@ const Edit = () => {
             />
           </section>
         )}
-        <Button type="button" onClick={() => handlerSubmit(type, id)}>
+        <Button className="submit-btn" type="button" onClick={() => handlerSubmit(type, id)}>
           Send
         </Button>
       </form>

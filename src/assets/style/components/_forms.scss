@@ -227,37 +227,25 @@ form.cms {
     font-style: italic;
   }
 
-  button {
+  .submit-btn {
     display: block;
-    color: white;
-    background-color: #1b1b1be3;
-    border-radius: 0px;
-    border: 1px solid black;
-    outline: 1px solid black;
-    outline-offset: -2px;
+    color: $crl-base;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    background-color: $crl-base-blue;
+    border:1px solid $crl-base-blue;
+    opacity: 1;
+    border-radius: 30px;
     padding: 10px 35px;
     margin: 25px auto;
-    cursor: pointer;
-    transition: all 0.25s ease-in-out;
+   cursor: pointer;
+   &:hover {
+     background-color: rgba($crl-base-blue, 0.9);
+   }
+  }
 
-    &:hover {
-      border: 1px solid black;
-      font-weight: bold;
-      background: $crl-base-blue;
-      color: black;
-      outline-offset: 2px;
-    }
-    &:focus {
-      background: transparent;
-      color: black;
-      font-weight: bold;
-    }
-  }
-  div.tox.tox-tinymce,
-  div.tox-editor-header .tox-menubar {
-    position: relative;
-    z-index: 1;
-  }
+ 
   .editor {
     width: 95%;
     max-width: 1200px;
