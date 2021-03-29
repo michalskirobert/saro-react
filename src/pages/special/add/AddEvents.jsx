@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
@@ -54,8 +55,15 @@ const AddEvents = () => {
           handleSubmit,
           setFieldValue,
       })=>(     
-      <section className="section add-news">
+      <section className="section add-news" style={{paddingTop: "50px"}}>
       {alert && <CmsAlert />}
+      <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">
+              Admin Panel
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Add Event</Breadcrumb.Item>
+          </Breadcrumb>
       <button className="btn go-back" onClick={() => goBack()}>
         <img src={BackArrow} alt="Back" /><p>Go Back</p>
       </button>

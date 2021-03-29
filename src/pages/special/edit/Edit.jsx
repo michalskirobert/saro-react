@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
@@ -73,8 +74,15 @@ const Edit = () => {
   }, []);
 
   return (
-    <section className="section add-news">
+    <section className="section edit" style={{paddingTop: "50px"}}>
       {alert && <CmsAlert />}
+      <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">
+              Admin Panel
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Edit</Breadcrumb.Item>
+          </Breadcrumb>
       <button className="btn go-back" onClick={() => goBack()}>
         <img src={BackArrow} alt="Back" />
         <p>Go Back</p>

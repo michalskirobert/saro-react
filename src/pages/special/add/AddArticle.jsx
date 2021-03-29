@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import Select from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button, Form as F } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
 import { addValidationScheme } from "./validation";
@@ -61,8 +62,15 @@ const AddArticle = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-article">
+        <section className="section add-article" style={{paddingTop: "50px"}}>
           {alert && <CmsAlert />}
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">
+              Admin Panel
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Add Article</Breadcrumb.Item>
+          </Breadcrumb>
           <button className="btn go-back" onClick={() => goBack()}>
             <img src={BackArrow} alt="Back" /><p>Go Back</p>
           </button>
