@@ -19,10 +19,12 @@
 
 .btn.go-back {
   margin-left: 10%;
-  display: block;
+  display: flex;
   outline: none;
+  align-items: center;
   img {
-    max-height: 25px;
+    max-height: 15px;
+    margin-right: 5px;
   }
 }
 

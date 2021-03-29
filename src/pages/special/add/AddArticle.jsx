@@ -64,7 +64,7 @@ const AddArticle = () => {
         <section className="section add-article">
           {alert && <CmsAlert />}
           <button className="btn go-back" onClick={() => goBack()}>
-            <img src={BackArrow} alt="Back" />
+            <img src={BackArrow} alt="Back" /><p>Go Back</p>
           </button>
           <Form className="cms" onSubmit={handlerArticle}>
             <h2 className="main-title">Add Article</h2>

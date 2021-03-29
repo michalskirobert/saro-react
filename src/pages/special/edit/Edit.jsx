@@ -9,7 +9,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "react-bootstrap";
 
 import * as CONSTANTS from "./../../../utils/constants";
-import BackArrow from './../../../assets/images/components/forms/ArrowBendUpLeft.svg'
+import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
 
 const cities = [
   {
@@ -75,7 +75,10 @@ const Edit = () => {
   return (
     <section className="section add-news">
       {alert && <CmsAlert />}
-      <button className="btn go-back" onClick={()=>goBack()}><img src={BackArrow} alt="Back"/></button>
+      <button className="btn go-back" onClick={() => goBack()}>
+        <img src={BackArrow} alt="Back" />
+        <p>Go Back</p>
+      </button>
       <form className="cms">
         <h2 className="main-title">Edit element</h2>
         <section className="form-container">
@@ -317,7 +320,11 @@ const Edit = () => {
             />
           </section>
         )}
-        <Button className="submit-btn" type="button" onClick={() => handlerSubmit(type, id)}>
+        <Button
+          className="submit-btn"
+          type="button"
+          onClick={() => handlerSubmit(type, id)}
+        >
           Send
         </Button>
       </form>

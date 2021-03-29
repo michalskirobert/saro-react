@@ -65,7 +65,7 @@ const AddNews = () => {
         <section className="section add-news">
           {alert && <CmsAlert />}
           <button className="btn go-back" onClick={() => goBack()}>
-            <img src={BackArrow} alt="Back" />
+            <img src={BackArrow} alt="Back" /><p>Go Back</p>
           </button>
           <Form className="cms" onSubmit={handlerNews}>
             <h2 className="main-title">Add News</h2>
