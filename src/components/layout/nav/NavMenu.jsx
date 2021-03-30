@@ -14,18 +14,6 @@ const nav = [
     isLogged: false,
   },
   {
-    title: "Sign In",
-    path: "/sign-in",
-    classLink: "",
-    isLogged: false,
-  },
-  {
-    title: "Sign Out",
-    path: "/sign-in",
-    classLink: "",
-    isLogged: true,
-  },
-  {
     title: "Lessons",
     path: "/lessons",
     classLink: "",
@@ -127,6 +115,18 @@ const nav = [
     classLink: "",
     isLogged: false,
   },
+  {
+    title: "Sign In",
+    path: "/sign-in",
+    classLink: "",
+    isLogged: false,
+  },
+  {
+    title: "Sign Out",
+    path: "/sign-in",
+    classLink: "",
+    isLogged: true,
+  },
 ];
 
 const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
@@ -150,7 +150,6 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   };
 
   let navData = user.isLogged ? nav : publicMap;
-
 
   return (
     <>
