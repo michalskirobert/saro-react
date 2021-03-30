@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useContainer } from "./container";
 import { useContainer as useHomeContainer } from "../../../pages/public/home/container";
@@ -8,22 +8,20 @@ import { hero } from "../../../store/actions/hero.actions";
 const Main = () => {
   const { getHero } = useContainer();
   const { getEvents } = useHomeContainer();
-  const [isReversed, setIsReversed] = useState(false)
+  const [isReversed, setIsReversed] = useState(false);
 
   const index = useSelector((state) => state.hero);
   const heroData = useSelector((state) => state.database.hero);
-  const eventsData = useSelector((state)=> state.database.events);
+  const eventsData = useSelector((state) => state.database.events);
   const dispatch = useDispatch();
 
+  const data = [...heroData, ...eventsData.slice(0, 2)];
 
-  const data = [...heroData, ...eventsData.slice(0, 2)]
-  
   data.map((item, index) => {
-    return item["order"] = index
-  })
+    return (item["order"] = index);
+  });
 
-  console.log(data)
-  const dataOrdered = isReversed ? data.reverse() : data
+  const dataOrdered = isReversed ? data.reverse() : data;
 
   const checkNumber = (number) => {
     if (number > data.length - 1) {
@@ -44,7 +42,7 @@ const Main = () => {
 
   useEffect(() => {
     getHero();
-    getEvents()
+    getEvents();
   }, []);
 
   const getBanner = (id) => {
@@ -56,8 +54,22 @@ const Main = () => {
       <div className="hero__container">
         <div className="img__container">
           {dataOrdered.map((item, currentId) => {
-            const {id, imgURL, type, title, subtitle, date, time, place, city, content, link, buttonTitle, buttonAction, } = item;
-             return (
+            const {
+              id,
+              imgURL,
+              type,
+              title,
+              subtitle,
+              date,
+              time,
+              place,
+              city,
+              content,
+              link,
+              buttonTitle,
+              buttonAction,
+            } = item;
+            return (
               <div key={id}>
                 <img
                   src={imgURL}
@@ -73,11 +85,17 @@ const Main = () => {
                   <h2 style={{ color: "#deb887" }}>{item.title}</h2>
                   <h3>{subtitle}</h3>
                   {type === "events" && (
-                    <>                                                   
-                    <p>Date: ${date} Time: ${time}</p>                    
-                    <p>Place: {place}, {city}</p>
-                    <p>{content}</p>
-                    <button className="btn hero-btn"><a href={link}>Learn more</a></button>
+                    <>
+                      <p>
+                        Date: ${date} Time: ${time}
+                      </p>
+                      <p>
+                        Place: {place}, {city}
+                      </p>
+                      <p>{content}</p>
+                      <button className="btn hero-btn">
+                        <a href={link}>Learn more</a>
+                      </button>
                     </>
                   )}
                   {buttonTitle && (
