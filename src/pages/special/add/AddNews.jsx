@@ -13,7 +13,6 @@ import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft
 
 import * as C from "./../../../utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
-import CustomWarningModal from "../../../components/shared/modals/CustomWarningModal";
 
 const categories = [
   {
@@ -46,7 +45,6 @@ const AddNews = () => {
 
   return (
     <>
-    <CustomWarningModal itemName={"nazwa pliku"}/>
     <Formik
       {...{
         initialValues: { title: "" },

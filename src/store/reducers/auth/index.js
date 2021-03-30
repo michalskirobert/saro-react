@@ -1,6 +1,7 @@
 import { userConstants } from "../../../utils/constants/";
 
 const userState = {
+  status: "",
   uid: 0,
   username: "anonymous",
   email: "anonymous",
@@ -12,8 +13,7 @@ const userState = {
   about: "",
   role: "user",  
   isLogged: false,
-  isLoading: false,
-  status: "",
+  isLoading: false,  
 };
 
 export const currentUserReducer = (state = userState, action) => {

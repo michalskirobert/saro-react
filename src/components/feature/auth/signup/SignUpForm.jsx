@@ -25,6 +25,7 @@ const SignUpForm = () => {
         await auth
           .createUserWithEmailAndPassword(userData.email, userData.password)
           .then((resp) => dispatch(userActions.signUp(resp.user.providerData)))
+        await auth.user.updateProfile({status: "10"})
         history.push("/");
       } catch (error) {
         console.error(error);
