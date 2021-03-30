@@ -11,6 +11,7 @@
     "cra-template-pwa": "^1.0.3",
     "firebase": "^8.2.5",
     "formik": "^2.2.6",
+    "husky": "^6.0.0",
     "lodash.throttle": "^4.1.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
@@ -32,7 +33,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "del .eslintcache && react-scripts start",
     "build": "CI= react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,6 +42,26 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.config.js"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn run test"
+    }
+  },
+  "lint-staged": {
+    "*.+(ts|tsx)": [
+      "npm run --silent lint:fix",
+      "git add"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json,css}": [
+      "prettier --write",
+      "git add"
     ]
   },
   "browserslist": {
