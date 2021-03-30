@@ -15,11 +15,14 @@ const Main = () => {
   const eventsData = useSelector((state)=> state.database.events);
   const dispatch = useDispatch();
 
-  const data = [...heroData, ...eventsData.slice(0, 2)]
 
-  for (let i = 0; i < data.length; i++){
-    data[i]["order"] = i
-  }
+  const data = [...heroData, ...eventsData.slice(0, 2)]
+  
+  data.map((item, index) => {
+    return item["order"] = index
+  })
+
+  console.log(data)
   const dataOrdered = isReversed ? data.reverse() : data
 
   const checkNumber = (number) => {
@@ -53,11 +56,12 @@ const Main = () => {
       <div className="hero__container">
         <div className="img__container">
           {dataOrdered.map((item, currentId) => {
-            return (
-              <div key={item.id}>
+            const {id, imgURL, type, title, subtitle, date, time, place, city, content, link, buttonTitle, buttonAction, } = item;
+             return (
+              <div key={id}>
                 <img
-                  src={item.imgURL}
-                  alt={item.title}
+                  src={imgURL}
+                  alt={title}
                   key={currentId}
                   className={`${index === currentId ? "active" : "remove"}`}
                 ></img>
@@ -67,17 +71,17 @@ const Main = () => {
                   }`}
                 >
                   <h2 style={{ color: "#deb887" }}>{item.title}</h2>
-                  <h3>{item.subtitle}</h3>
-                  {item.type === "events" && (
-                    <>                                   
-                    <p>Date: {item.date ? item.date : ("15th April 2021")} Time: {item.time ? item.time : ("3:00PM")}</p>                    
-                    <p>Place: {item.place}, {item.city}</p>
-                    <p>{item.content}</p>
-                    <button className="btn hero-btn"><a href={item.link}>Learn more</a></button>
+                  <h3>{subtitle}</h3>
+                  {type === "events" && (
+                    <>                                                   
+                    <p>Date: ${date} Time: ${time}</p>                    
+                    <p>Place: {place}, {city}</p>
+                    <p>{content}</p>
+                    <button className="btn hero-btn"><a href={link}>Learn more</a></button>
                     </>
                   )}
-                  {item.buttonTitle && (
-                    <button className="btn hero-btn">{item.buttonTitle}</button>
+                  {buttonTitle && (
+                    <button className="btn hero-btn">{buttonTitle}</button>
                   )}
                 </div>
               </div>

@@ -50,7 +50,11 @@ const AddNews = () => {
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addValidationScheme,
-        onSubmit: (values) => console.log(values),
+        onSubmit: (values) => {
+          console.log(values)
+          
+        
+        },
       }}
     >
       {({
