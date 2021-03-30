@@ -1,6 +1,6 @@
 # Check live here
 
-Develop LIVE [here](https://i-saro.netlify.app/)
+Live: [here](https://i-saro.netlify.app/)
 
 Project has been created by [@michalskirobert](https://github.com/michalskirobert) - owner and mentor.
 

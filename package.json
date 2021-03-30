@@ -37,7 +37,10 @@
     "start": "del .eslintcache && react-scripts start",
     "build": "CI= react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .ts,.tsx .",
+    "lint:fix": "npm run lint --write",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -45,14 +48,9 @@
       "react-app/jest"
     ]
   },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/jest.config.js"
-    ]
-  },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && yarn run test"
+      "pre-commit": "lint-staged && npm test"
     }
   },
   "lint-staged": {
@@ -76,5 +74,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "^6.0.0"
   }
 }
