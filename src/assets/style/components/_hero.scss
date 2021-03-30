@@ -2,40 +2,6 @@
   position: relative;
   overflow-x: hidden;
   .hero__container {
-    .hero__info {
-      width: 100%;
-      color: $crl-main-blue;
-      background-color: $crl-base;
-      padding: 14px 25px 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      .title {
-        text-transform: uppercase;
-      }
-      .subtitle {
-        color: $crl-main-blue;
-        margin: 25px 0;
-        text-align: left;
-        max-width: 550px;
-      }
-      .find-out-btn {
-        width: 160px;
-        height: 30px;
-        background: $crl-main-blue;
-        border-radius: 60px;
-        color: $crl-base;
-        font-weight: 500;
-        font-size: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        letter-spacing: 0.02em;
-        text-decoration: underline;
-        margin-bottom: 10px;
-      }
-    }
     .img__container {
       position: relative;
       width: 100%;
