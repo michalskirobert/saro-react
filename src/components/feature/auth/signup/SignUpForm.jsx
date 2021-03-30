@@ -24,7 +24,7 @@ const SignUpForm = () => {
         dispatch(userActions.signUpRequest());
         await auth
           .createUserWithEmailAndPassword(userData.email, userData.password)
-          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)));
+          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)))
         history.push("/");
       } catch (error) {
         console.error(error);
