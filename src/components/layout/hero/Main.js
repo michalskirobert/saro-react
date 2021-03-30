@@ -1,18 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useContainer } from "./container";
+import { useContainer as useHomeContainer } from "../../../pages/public/home/container";
 
 import { hero } from "../../../store/actions/hero.actions";
 
 const Main = () => {
   const { getHero } = useContainer();
+  const { getEvents } = useHomeContainer();
+  const [isReversed, setIsReversed] = useState(false)
 
   const index = useSelector((state) => state.hero);
   const heroData = useSelector((state) => state.database.hero);
+  const eventsData = useSelector((state)=> state.database.events);
   const dispatch = useDispatch();
 
+
+  const data = [...heroData, ...eventsData.slice(0, 2)]
+  
+  data.map((item, index) => {
+    return item["order"] = index
+  })
+
+  console.log(data)
+  const dataOrdered = isReversed ? data.reverse() : data
+
   const checkNumber = (number) => {
-    if (number > heroData.length - 1) {
+    if (number > data.length - 1) {
       dispatch(hero(0));
     } else {
       return dispatch(hero(number));
@@ -30,6 +44,7 @@ const Main = () => {
 
   useEffect(() => {
     getHero();
+    getEvents()
   }, []);
 
   const getBanner = (id) => {
@@ -40,12 +55,13 @@ const Main = () => {
     <section className="hero" style={{ padding: "0" }}>
       <div className="hero__container">
         <div className="img__container">
-          {heroData.map((item, currentId) => {
-            return (
-              <div key={item.id}>
+          {dataOrdered.map((item, currentId) => {
+            const {id, imgURL, type, title, subtitle, date, time, place, city, content, link, buttonTitle, buttonAction, } = item;
+             return (
+              <div key={id}>
                 <img
-                  src={item.imgURL}
-                  alt={item.title}
+                  src={imgURL}
+                  alt={title}
                   key={currentId}
                   className={`${index === currentId ? "active" : "remove"}`}
                 ></img>
@@ -55,9 +71,17 @@ const Main = () => {
                   }`}
                 >
                   <h2 style={{ color: "#deb887" }}>{item.title}</h2>
-                  <h3>{item.subtitle}</h3>
-                  {item.buttonTitle && (
-                    <button className="btn hero-btn">{item.buttonTitle}</button>
+                  <h3>{subtitle}</h3>
+                  {type === "events" && (
+                    <>                                                   
+                    <p>Date: ${date} Time: ${time}</p>                    
+                    <p>Place: {place}, {city}</p>
+                    <p>{content}</p>
+                    <button className="btn hero-btn"><a href={link}>Learn more</a></button>
+                    </>
+                  )}
+                  {buttonTitle && (
+                    <button className="btn hero-btn">{buttonTitle}</button>
                   )}
                 </div>
               </div>
@@ -67,10 +91,10 @@ const Main = () => {
         <div className="hero__content">
           <div className="hero__item">
             <div className="slidershow">
-              {heroData.map((item, id) => {
+              {dataOrdered.map((item, id) => {
                 return (
                   <button
-                    key={item.title}
+                    key={item.id}
                     className={`dot ${index === id && "active"}`}
                     onClick={() => getBanner(id)}
                   ></button>
