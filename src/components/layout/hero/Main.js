@@ -22,7 +22,6 @@ const Main = () => {
     return item["order"] = index
   })
 
-  console.log(data)
   const dataOrdered = isReversed ? data.reverse() : data
 
   const checkNumber = (number) => {
