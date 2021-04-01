@@ -9,10 +9,10 @@ const userState = {
   lastName: "",
   nativeLang: "",
   studyingLang: "",
-  about: "",
-  role: "user",
+  about: "", 
   isLogged: false,
-  isLoading: false,
+  isLoading: false,  
+  status: 0,
 };
 
 export const currentUserReducer = (state = userState, action) => {

@@ -35,8 +35,8 @@ const AddNews = () => {
     fetchCrew,
     crew,
     infoContainer,
-    handlerNews,
     goBack,
+    handlerNews,
   } = useContainer();
 
   useEffect(() => {
@@ -44,6 +44,7 @@ const AddNews = () => {
   }, []);
 
   return (
+    <>
     <Formik
       {...{
         initialValues: { title: "" },
@@ -52,8 +53,7 @@ const AddNews = () => {
         validationSchema: addValidationScheme,
         onSubmit: (values) => {
           console.log(values)
-          
-        
+         handlerNews(values)        
         },
       }}
     >
@@ -79,7 +79,7 @@ const AddNews = () => {
             <img src={BackArrow} alt="Back" />
             <p>Go Back</p>
           </button>
-          <Form className="cms" onSubmit={handlerNews}>
+          <Form className="cms">
             <h2 className="main-title">Add News</h2>
             <section className="form-container">
               <div className="form-control">
@@ -212,6 +212,7 @@ const AddNews = () => {
         </section>
       )}
     </Formik>
+    </>
   );
 };
 

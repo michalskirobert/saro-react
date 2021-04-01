@@ -24,7 +24,7 @@ const SignUpForm = () => {
         dispatch(userActions.signUpRequest());
         await auth
           .createUserWithEmailAndPassword(userData.email, userData.password)
-          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)));
+          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)))
         history.push("/");
       } catch (error) {
         console.error(error);
@@ -39,7 +39,7 @@ const SignUpForm = () => {
   return (
     <Formik
       {...{
-        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "", about:"" },
+        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "", about:"", status: 10 },
         validateOnChange: true,
         validationSchema: signUpValidationScheme,
         onSubmit: (values) => handlerSubmit(values),

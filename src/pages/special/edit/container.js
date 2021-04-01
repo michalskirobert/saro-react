@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions } from "../../../store/actions";
+import { cmsActions, fetchActions } from "../../../store/actions";
 import { GENERAL_CONSTANTS } from "../../../utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
@@ -16,6 +16,7 @@ export const useEdit = () => {
 
   const lang = useSelector((state) => state.general.language);
   const editable = useSelector((state) => state.CMS.edit);
+  const crew = useSelector((state) => state.database.crew);
 
   const getEvent = (id, type) => {
     try {
@@ -37,16 +38,17 @@ export const useEdit = () => {
       .update({
         id,
         type: GENERAL_CONSTANTS.EVENTS,
-        title: editableContainer.title,
-        imgURL: editableContainer.imgURL || "https://via.placeholder.com/50",
-        content: editableContainer.content,
-        date: editableContainer.date,
-        time: editableContainer.time,
-        crew: editableContainer.crew,
-        city: editableContainer.city,
-        place: editableContainer.place,
-        link: editableContainer.link,
-        language: editableContainer.language,
+        title: editableContainer?.title,
+        subtitle: editableContainer?.subtitle,
+        imgURL: editableContainer?.imgURL || "https://via.placeholder.com/50",
+        content: editableContainer?.content,
+        date: editableContainer?.date,
+        time: editableContainer?.time,
+        crew: editableContainer?.crew,
+        city: editableContainer?.city,
+        place: editableContainer?.place,
+        link: editableContainer?.link,
+        language: editableContainer?.language,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
       });
@@ -81,11 +83,26 @@ export const useEdit = () => {
     }
   };
 
+  
+  const fetchCrew = async () => {
+    return firestore
+      .collection(GENERAL_CONSTANTS.LANG)
+      .doc(lang)
+      .collection(GENERAL_CONSTANTS.CREW)
+      .onSnapshot((resp) =>
+        dispatch(
+          fetchActions.getCrewSuccess(resp.docs.map((item) => item.data()))
+        )
+      );
+  };
+
   const goBack = () => {
     history.goBack()
   }
 
   return {
+    fetchCrew,
+    crew,
     alert,
     goBack,
     handleEdtiorChange,

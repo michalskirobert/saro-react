@@ -16,7 +16,7 @@ export function FirstStep({ handleChange, values, errors }) {
         />
         <p>{errors[FORM_HELPER.EMAIL]}</p>
       </div>
-      <div className="form-control">
+      <div className="form-control form-on-top">
         <label htmlFor="password" className="floatLabel"></label>
         <input
           type="password"

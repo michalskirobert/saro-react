@@ -27,10 +27,9 @@ const AddEvents = () => {
   const {
     alert,
     goBack,
+    handlerEvents,
     crew,
     fetchCrew,
-    isLoading,
-    handlerEvents,
   } = useContainer();
 
   useEffect(() => {
@@ -43,7 +42,10 @@ const AddEvents = () => {
       validateOnChange: true,
       validateOnMount: true,
       validationSchema: addEventsValidationScheme,
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        console.log(values)
+        handlerEvents(values)}
+
     }}
     >
       {({
@@ -67,7 +69,7 @@ const AddEvents = () => {
       <button className="btn go-back" onClick={() => goBack()}>
         <img src={BackArrow} alt="Back" /><p>Go Back</p>
       </button>
-      <Form className="cms" onSubmit={handlerEvents}>
+      <Form className="cms">
         <h2 className="main-title">Add event</h2>
         <section className="form-container">
           <div className="form-control">
@@ -82,6 +84,21 @@ const AddEvents = () => {
             {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? 
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
+                  </F.Text>  : null
+                }
+          </div>
+          <div className="form-control">
+            <label htmlFor="subtitle">Subtitle</label>
+            <input
+              id="subtitle"
+              type="text"
+              value={values[FORMIK_HELPER.SUBTITLE]}
+              placeholder="add subtitle"
+              onChange={handleChange}
+            />
+            {errors[FORMIK_HELPER.SUBTITLE] || touched[FORMIK_HELPER.SUBTITLE] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.SUBTITLE]}
                   </F.Text>  : null
                 }
           </div>
