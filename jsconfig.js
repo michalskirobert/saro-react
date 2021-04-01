@@ -5,7 +5,8 @@
       "paths": {
         "@utils/*": ["utils/*"],
         "@components/*": ["components/*"],
-        "@actions": ["store/actions/index"],
+        "@actions/*": ["store/actions/*"],
       }
-    }
+    },
+    "include": ["src/**/*"]
   }

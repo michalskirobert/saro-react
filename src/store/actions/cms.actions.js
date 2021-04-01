@@ -67,7 +67,26 @@ const edit = (params) => {
   };
 };
 
+const updateSuccess = () => {
+  return {
+    type: CMS_CONSTANTS.UPDATE_SUCESS,
+  };
+};
+const updateRequest = () => {
+  return {
+    type: CMS_CONSTANTS.UPDATE_REQUEST,
+  };
+};
+const updateFailure = () => {
+  return {
+    type: CMS_CONSTANTS.UPDATE_FAILURE,
+  };
+};
+
 export const cmsActions = {
+  updateSuccess,
+  updateRequest,
+  updateFailure,
   addNewsReq,
   addNewsSuccess,
   addNewsFailure,

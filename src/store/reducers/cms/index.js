@@ -85,6 +85,27 @@ export const cmsReducer = (state = defaultState, action) => {
         alertMsg: "",
         alertType: "",
       };
+    case CONSTANTS.CMS_CONSTANTS.UPDATE_FAILURE:
+      return {
+        ...state,
+        alert: true,
+        alertMsg: "Update unsuccessful",
+        alertType: CONSTANTS.ALERT_CONSTANTS.STATUS_ERROR,
+        isLoading: false,
+      };
+    case CONSTANTS.CMS_CONSTANTS.UPDATE_SUCESS:
+      return {
+        ...state,
+        alert: true,
+        alertMsg: "Update successful",
+        alertType: CONSTANTS.ALERT_CONSTANTS.STATUS_SUCCESS,
+        isLoading: false,
+      };
+    case CONSTANTS.CMS_CONSTANTS.UPDATE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
     default:
       return state;
   }

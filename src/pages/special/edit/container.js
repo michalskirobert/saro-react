@@ -16,7 +16,7 @@ export const useEdit = () => {
 
   const lang = useSelector((state) => state.general.language);
   const editable = useSelector((state) => state.CMS.edit);
-  const crew = useSelector((state) => state.database.crew);
+  const database = useSelector((state) => state.database);
 
   const getEvent = (id, type) => {
     try {
@@ -29,29 +29,25 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-  const updateEvent = async (id, type) => {
-    return await firestore
-      .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
-      .collection(type)
-      .doc(id)
-      .update({
-        id,
-        type: GENERAL_CONSTANTS.EVENTS,
-        title: editableContainer?.title,
-        subtitle: editableContainer?.subtitle,
-        imgURL: editableContainer?.imgURL || "https://via.placeholder.com/50",
-        content: editableContainer?.content,
-        date: editableContainer?.date,
-        time: editableContainer?.time,
-        crew: editableContainer?.crew,
-        city: editableContainer?.city,
-        place: editableContainer?.place,
-        link: editableContainer?.link,
-        language: editableContainer?.language,
-        published: new Date(),
-        publishedDate: new Date().toLocaleString(),
-      });
+  const updateEvent = async (id, type, ...values) => {
+    dispatch(cmsActions.clear());
+    try {
+      dispatch(cmsActions.updateRequest);
+      await firestore
+        .collection(GENERAL_CONSTANTS.LANG)
+        .doc(lang)
+        .collection(type)
+        .doc(id)
+        .update({
+          ...values,
+          published: new Date(),
+          publishedDate: new Date().toLocaleString(),
+        });
+      dispatch(cmsActions.updateSuccess);
+      history.push("/panel");
+    } catch (error) {
+      dispatch(cmsActions.updateFailure);
+    }
   };
 
   const handleEdit = async (id, type) => {
@@ -83,7 +79,6 @@ export const useEdit = () => {
     }
   };
 
-  
   const fetchCrew = async () => {
     return firestore
       .collection(GENERAL_CONSTANTS.LANG)
@@ -97,12 +92,11 @@ export const useEdit = () => {
   };
 
   const goBack = () => {
-    history.goBack()
-  }
+    history.goBack();
+  };
 
   return {
     fetchCrew,
-    crew,
     alert,
     goBack,
     handleEdtiorChange,
@@ -112,5 +106,7 @@ export const useEdit = () => {
     editableContainer,
     setEditableContainer,
     editable,
+    database,
+    updateEvent,
   };
 };

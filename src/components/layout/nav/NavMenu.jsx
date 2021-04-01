@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -130,7 +130,6 @@ const nav = [
 ];
 
 const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
-  const linksRef = useRef(null);
   const [selected, setSelected] = useState(null);
   const user = useSelector((state) => state.currentUser);
 
@@ -154,7 +153,7 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   return (
     <>
       <div className={`nav-container ${isNavOpen && "active"}`}>
-        <ul className="nav-links" ref={linksRef}>
+        <ul className="nav-links">
           {navData.map((link, index) => {
             const { title, path, content } = link;
             return (
