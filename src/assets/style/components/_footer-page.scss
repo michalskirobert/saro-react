@@ -2,59 +2,9 @@
   background-color: $crl-base-blue;
   font-family: $family-en-primary;
   color: $crl-base;
-  width: 100%;
-  left: 0px;
-  top: 1995px;
-  padding: 25px 20px 14px;
+  width: 100vw;
+  padding: 20px 20px 14px;
 
-  .footer-page__language-button {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-
-    select {
-      display: flex;
-      position: relative;
-      align-items: center;
-      color: $crl-base;
-      background-color: $crl-main-grey-button;
-      width: 110px;
-      height: 40px;
-      margin: 0 4px 16px 0;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 17px;
-      line-height: 23px;
-      letter-spacing: -0.02em;
-      border: 1px solid $crl-main-blue;
-      border-radius: 5px 0px 0px 5px;
-    }
-
-    .language-button__rectangle {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      height: 38px;
-      width: 38px;
-      transform: translateX(87%) translateY(-21%);
-    }
-
-    .language-button__arrows {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      height: 12px;
-      width: 12px;
-      margin-left: 66px;
-      margin-bottom: 14px;
-
-      .arrows__ArrowDown {
-        position: relative;
-        transform: translateY(15%);
-      }
-    }
-  }
   .footer-page__content {
     display: flex;
     align-items: center;
@@ -62,31 +12,49 @@
     position: relative;
     justify-content: flex-start;
 
-    h2 {
+    select {
       display: flex;
+      position: relative;
       align-items: center;
-      justify-content: center;
-      margin: 15px auto 10px;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 1.4rem;
-      line-height: 18px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    p {
-      display: flex;
       color: $crl-base;
-      align-items: center;
-      max-width: 550px;
-      margin: 10px 0;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 1rem;
+      width: calc(281.141px / 2);
+      height: 41px;
+      padding-left: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
       line-height: 23px;
       letter-spacing: -0.02em;
+      border: 1px solid $crl-main-blue;
+      border-radius: 5px 0px 0px 5px;
+      margin-bottom: 10px;
+      background-image: url("../../../assets/images/components/footer/ArrowDown.svg"),
+        linear-gradient(90deg, $crl-main-grey-button 73%, $crl-base 27%);
+      background-repeat: no-repeat;
+      background-position: 91% 55%;
+      background-size: 10% auto, cover;
     }
+  }
+
+  h2 {
+    align-items: center;
+    margin: 20px auto 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  p {
+    color: $crl-base;
+    align-items: center;
+    max-width: 550px;
+    margin: 8px 0 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 23px;
+    letter-spacing: -0.02em;
   }
 
   .footer-page__icons {
