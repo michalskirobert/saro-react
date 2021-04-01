@@ -35,7 +35,6 @@ const AddArticle = () => {
     alert,
     goBack,
     infoContainer,
-    handlerArticle,
     fetchCrew,
     crew,
   } = useContainer();
@@ -74,7 +73,7 @@ const AddArticle = () => {
           <button className="btn go-back" onClick={() => goBack()}>
             <img src={BackArrow} alt="Back" /><p>Go Back</p>
           </button>
-          <Form className="cms" onSubmit={handlerArticle}>
+          <Form className="cms" >
             <h2 className="main-title">Add Article</h2>
             <section className="form-container">
               <div className="form-control">

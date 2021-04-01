@@ -29,8 +29,6 @@ const AddEvents = () => {
     goBack,
     crew,
     fetchCrew,
-    isLoading,
-    handlerEvents,
   } = useContainer();
 
   useEffect(() => {
@@ -67,7 +65,7 @@ const AddEvents = () => {
       <button className="btn go-back" onClick={() => goBack()}>
         <img src={BackArrow} alt="Back" /><p>Go Back</p>
       </button>
-      <Form className="cms" onSubmit={handlerEvents}>
+      <Form className="cms">
         <h2 className="main-title">Add event</h2>
         <section className="form-container">
           <div className="form-control">

@@ -35,7 +35,6 @@ const AddNews = () => {
     fetchCrew,
     crew,
     infoContainer,
-    handlerNews,
     goBack,
   } = useContainer();
 
@@ -52,9 +51,7 @@ const AddNews = () => {
         validateOnMount: true,
         validationSchema: addValidationScheme,
         onSubmit: (values) => {
-          console.log(values)
-          
-        
+         console.log(values)            
         },
       }}
     >
@@ -80,7 +77,7 @@ const AddNews = () => {
             <img src={BackArrow} alt="Back" />
             <p>Go Back</p>
           </button>
-          <Form className="cms" onSubmit={handlerNews}>
+          <Form className="cms">
             <h2 className="main-title">Add News</h2>
             <section className="form-container">
               <div className="form-control">
