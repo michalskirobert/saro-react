@@ -32,10 +32,10 @@ export const useContainer = () => {
     content: "",
   });
 
-  const addNews = async (id) => {
+  const addNews = async (id, {title, crew, language, category, content }) => {
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(infoContainer.language)
+      .doc(language)
       .collection(GENERAL_CONSTANTS.NEWS)
       .doc(id)
       .set({
@@ -43,21 +43,19 @@ export const useContainer = () => {
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
-        title: infoContainer.title,
-        imgURL: infoContainer.imgURL || "https://via.placeholder.com/50",
-        crew: infoContainer.crew,
-        language: infoContainer.language,
-        category: infoContainer.category,
-        content: infoContainer.content,
+        title,
+        crew,
+        language,
+        category,
+        content,
       });
   };
 
-  const handlerNews = (e) => {
-    e.preventDefault();
+  const handlerNews = (values) => {
     dispatch(cmsActions.clear());
     try {
       dispatch(cmsActions.addNewsReq());
-      addNews(uuidv4());
+      addNews(uuidv4(), values);
       dispatch(cmsActions.addNewsSuccess());
       history.push("/panel");
     } catch (error) {
@@ -65,10 +63,10 @@ export const useContainer = () => {
     }
   };
 
-  const addEvents = async (id) => {
+  const addEvents = async (id, {title, subtitle, city, place, date, time, imgURL, link, crew, language, content }) => {
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(infoContainer.language)
+      .doc(language)
       .collection(GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .set({
@@ -76,26 +74,25 @@ export const useContainer = () => {
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
-        title: infoContainer.title,
-        city: infoContainer.city,
-        place: infoContainer.place,
-        subtitle: infoContainer.subtitle,
-        date: infoContainer.date,
-        time: infoContainer.time,
-        imgURL: infoContainer.imgURL ?? "https://via.placeholder.com/50",
-        link: infoContainer.link,
-        crew: infoContainer.crew,
-        language: infoContainer.language,
-        content: infoContainer.content,
+        title,
+        city,
+        place,
+        subtitle,
+        date,
+        time,
+        imgURL,
+        link,
+        crew,
+        language,
+        content,
       });
   };
 
-  const handlerEvents = (e) => {
-    e.preventDefault();
+  const handlerEvents = (values) => {
     dispatch(cmsActions.clear());
     try {
       dispatch(cmsActions.addEventsReq());
-      addEvents(uuidv4());
+      addEvents(uuidv4(), values);
       dispatch(cmsActions.addEventsSuccess());
       history.push("/panel");
     } catch (error) {
@@ -103,10 +100,10 @@ export const useContainer = () => {
     }
   };
 
-  const addArticle = async (id) => {
+  const addArticle = async (id, {title, crew, language, category, content}) => {
     return await firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(infoContainer.language)
+      .doc(language)
       .collection(GENERAL_CONSTANTS.BLOG_POSTS)
       .doc(id)
       .set({
@@ -114,20 +111,19 @@ export const useContainer = () => {
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
-        title: infoContainer.title,
-        crew: infoContainer.crew,
-        language: infoContainer.language,
-        category: infoContainer.category,
-        content: infoContainer.content,
+        title,
+        crew,
+        language,
+        category,
+        content,
       });
   };
 
-  const handlerArticle = (e) => {
-    e.preventDefault();
+  const handlerArticle = (values) => {
     dispatch(cmsActions.clear());
     try {
       dispatch(cmsActions.addArticleReq());
-      addArticle(uuidv4());
+      addArticle(uuidv4(), values);
       dispatch(cmsActions.addArticleSuccess());
       history.push("/panel");
     } catch (error) {

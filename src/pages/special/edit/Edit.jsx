@@ -108,7 +108,24 @@ const Edit = () => {
                     {errors[FORMIK_HELPER.TITLE]}
                   </F.Text>
                 ) : null}
-          </div>
+          </div>   
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? ( 
+          <div className="form-control">
+            <label htmlFor="subtitle">Subtitle</label>
+            <input
+              id="subtitle"
+              placeholder={editableContainer?.subtitle}
+              type="text"
+              value={values[FORMIK_HELPER.SUBTITLE]}
+              onChange={handleChange}
+            />
+              {errors[FORMIK_HELPER.SUBTITLE] || touched[FORMIK_HELPER.SUBTITLE] ? (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.SUBTITLE]}
+                  </F.Text>
+                ) : null}
+          </div> ) : null }
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? ( 
           <div className="form-control">
             <label htmlFor="city">City</label>
             <Select
@@ -130,7 +147,8 @@ const Edit = () => {
                     {errors[FORMIK_HELPER.CITY]}
                   </F.Text>
                 ) : null}
-          </div>
+          </div> ) : null }
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (  
           <div className="form-control">
             <label htmlFor="place">Place</label>
             <input
@@ -146,8 +164,8 @@ const Edit = () => {
                     {errors[FORMIK_HELPER.PLACE]}
                   </F.Text>
                 ) : null}
-          </div>
-
+          </div> ) : null }
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (  
           <div className="form-control">
             <label htmlFor="date">Date</label>
             <input
@@ -162,7 +180,8 @@ const Edit = () => {
                     {errors[FORMIK_HELPER.DATE]}
                   </F.Text>
                 ) : null}
-          </div>
+          </div>) : null }
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (  
           <div className="form-control">
             <label htmlFor="time">Time</label>
             <input
@@ -177,7 +196,8 @@ const Edit = () => {
                     {errors[FORMIK_HELPER.TIME]}
                   </F.Text>
                 ) : null}
-          </div>
+          </div>) : null }
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (          
           <div className="form-control">
             <label htmlFor="imgURL">Img URL</label>
             <input
@@ -192,7 +212,8 @@ const Edit = () => {
                     {errors[FORMIK_HELPER.IMG_URL]}
                   </F.Text>
                 ) : null}
-          </div>
+          </div>) : null }
+          {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
           <div className="form-control">
             <label htmlFor="link">Link</label>
             <input
@@ -208,6 +229,7 @@ const Edit = () => {
                   </F.Text>
                 ) : null}
           </div>
+            ) : null}
           {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? null : (
             <div className="form-control">
               <label htmlFor="category">Category</label>

@@ -36,6 +36,7 @@ const AddArticle = () => {
     goBack,
     infoContainer,
     fetchCrew,
+    handlerArticle,
     crew,
   } = useContainer();
 
@@ -49,7 +50,8 @@ const AddArticle = () => {
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addValidationScheme,
-        onSubmit: (values) => console.log(values),
+        onSubmit: (values) => {console.log(values)
+        handlerArticle(values)},
       }}
     >
       {({

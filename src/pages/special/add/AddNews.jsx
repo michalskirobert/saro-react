@@ -36,6 +36,7 @@ const AddNews = () => {
     crew,
     infoContainer,
     goBack,
+    handlerNews,
   } = useContainer();
 
   useEffect(() => {
@@ -51,7 +52,8 @@ const AddNews = () => {
         validateOnMount: true,
         validationSchema: addValidationScheme,
         onSubmit: (values) => {
-         console.log(values)            
+          console.log(values)
+         handlerNews(values)        
         },
       }}
     >

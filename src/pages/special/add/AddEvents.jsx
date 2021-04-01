@@ -27,6 +27,7 @@ const AddEvents = () => {
   const {
     alert,
     goBack,
+    handlerEvents,
     crew,
     fetchCrew,
   } = useContainer();
@@ -41,7 +42,10 @@ const AddEvents = () => {
       validateOnChange: true,
       validateOnMount: true,
       validationSchema: addEventsValidationScheme,
-      onSubmit: (values) => console.log(values),
+      onSubmit: (values) => {
+        console.log(values)
+        handlerEvents(values)}
+
     }}
     >
       {({
@@ -80,6 +84,21 @@ const AddEvents = () => {
             {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? 
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
+                  </F.Text>  : null
+                }
+          </div>
+          <div className="form-control">
+            <label htmlFor="subtitle">Subtitle</label>
+            <input
+              id="subtitle"
+              type="text"
+              value={values[FORMIK_HELPER.SUBTITLE]}
+              placeholder="add subtitle"
+              onChange={handleChange}
+            />
+            {errors[FORMIK_HELPER.SUBTITLE] || touched[FORMIK_HELPER.SUBTITLE] ? 
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.SUBTITLE]}
                   </F.Text>  : null
                 }
           </div>
