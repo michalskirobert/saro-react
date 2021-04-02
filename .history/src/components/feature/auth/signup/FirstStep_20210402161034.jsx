@@ -50,11 +50,7 @@ export function FirstStep({ handleChange, values, errors, touched }) {
           placeholder="••••••••••••"
           tabindex="3"
         />
-        {errors[FORM_HELPER.CONF_PASSWORD] || touched[FORM_HELPER.CONF_PASSWORD] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.CONF_PASSWORD]}
-                  </F.Text>
-                ) : null}
+        <p>{errors[FORM_HELPER.CONF_PASSWORD]}</p>
       </div>
     </>
   );

@@ -35,10 +35,6 @@
     width: 100%;
     margin-bottom: 32px;
   }
-  .form-control.select {
-    display: block;
-    
-  }
   .form-control {
     margin: 0 0 50px 0;
     position: relative;
@@ -48,7 +44,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
+    .select {
+      display: block;
+    }
     &--gender {
       margin: 25px 0;
       justify-content: center;

@@ -1,7 +1,11 @@
 .section.login {
   position: relative;
   padding: 20px 20px;
-  
+  .arrow-back-icon {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+  }
 }
 
 .section.profile-update {
@@ -24,35 +28,26 @@
   align-items: center;
   justify-content: center;
   padding: 20px 20px;
-  .arrow-back-icon {
-    cursor: pointer;
-    border: none;
-    background-color: white;
-  }
+
   h2 {
     font-size: 36px;
     color: $crl-base-blue;
     width: 100%;
     margin-bottom: 32px;
   }
-  .form-control.select {
-    display: block;
-    
-  }
   .form-control {
     margin: 0 0 50px 0;
     position: relative;
     width: 100%;
     border: none;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
     &--gender {
       margin: 25px 0;
+      display: flex;
       justify-content: center;
-      // align-items: center;
+      align-items: center;
       transform: translate(-10px, 0px);
       .gender {
         position: relative;
@@ -60,6 +55,7 @@
       }
     }
     &--lang {
+      display: flex;
       flex-flow: column wrap;
       align-items: center;
       margin: 15px 0;
