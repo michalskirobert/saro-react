@@ -171,6 +171,13 @@ form.cms {
     justify-content: center;
     overflow-x: scroll;
     height: 120px;
+   
+    &:nth-child(3) {
+      z-index: 10;
+    }
+    &:nth-child(4), &:nth-child(9), &:nth-child(10) {
+      z-index: 7;
+    }   
   }
   .form-control {
     position: relative;
@@ -188,11 +195,9 @@ form.cms {
       text-align: center;
     }
     &:nth-child(2) {
-      z-index: 9;
+      z-index: 11;
     }
-    &:nth-child(3) {
-      z-index: 8;
-    }
+     
   }
   .form-info {
     min-height: 250px;
@@ -201,6 +206,7 @@ form.cms {
     max-width: 600px;
     padding-bottom: 20px;
     margin: 0 auto;
+    z-index: 7;
   }
   input {
     width: 100%;
@@ -274,7 +280,7 @@ form.cms {
       height: min-content;
     }
     .form-control {
-      margin: 0;
+      margin: 0 auto;
       &:last-child {
         margin-bottom: 0;
       }

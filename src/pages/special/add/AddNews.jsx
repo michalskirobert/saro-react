@@ -5,7 +5,7 @@ import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
-import { addValidationScheme } from "./validation";
+import { addNewsValidationScheme } from "./validation";
 
 import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
@@ -50,7 +50,7 @@ const AddNews = () => {
           initialValues: { title: "" },
           validateOnChange: true,
           validateOnMount: true,
-          validationSchema: addValidationScheme,
+          validationSchema: addNewsValidationScheme,
           onSubmit: (values) => {
             handlerNews(values);
           },
@@ -93,6 +93,40 @@ const AddNews = () => {
                   touched[FORMIK_HELPER.TITLE] ? (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.TITLE]}
+                    </F.Text>
+                  ) : null}
+                </div>
+                <div className="form-control">
+                  <label htmlFor="subtitle">Subtitle</label>
+                  <input
+                    id="subtitle"
+                    placeholder="add subtitle"
+                    type="text"
+                    autoComplete="off"
+                    value={values[FORMIK_HELPER.SUBTITLE]}
+                    onChange={handleChange}
+                  />
+                  {errors[FORMIK_HELPER.SUBTITLE] ||
+                  touched[FORMIK_HELPER.SUBTITLE] ? (
+                    <F.Text className="validation-alert">
+                      {errors[FORMIK_HELPER.SUBTITLE]}
+                    </F.Text>
+                  ) : null}
+                </div>
+                <div className="form-control">
+                  <label htmlFor="imgURL">Img URL</label>
+                  <input
+                    id="imgURL"
+                    placeholder="add image URL"
+                    type="text"
+                    autoComplete="off"
+                    value={values[FORMIK_HELPER.IMG_URL]}
+                    onChange={handleChange}
+                  />
+                  {errors[FORMIK_HELPER.IMG_URL] ||
+                  touched[FORMIK_HELPER.IMG_URL] ? (
+                    <F.Text className="validation-alert">
+                      {errors[FORMIK_HELPER.IMG_URL]}
                     </F.Text>
                   ) : null}
                 </div>
@@ -166,8 +200,8 @@ const AddNews = () => {
                   initialValue={infoContainer.content}
                   init={{
                     plugins: [
-                      "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                      " lists link linkchecker media mediaembed noneditable powerpaste preview",
+                      "advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
+                      " lists link media noneditable preview",
                       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                       "table emoticons template help",
                     ],
