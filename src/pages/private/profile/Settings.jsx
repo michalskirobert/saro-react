@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import Select from "react-select";
 
-import { auth, firestore } from "../../../components/feature/firebase";
-import Alert from "../../../components/shared/alerts";
+import { auth, firestore } from "@components/feature/firebase";
+import Alert from "@components/shared/alerts";
 import { alertActions, userActions } from "../../../store/actions";
-import { ReactComponent as ArrowBack } from "../../../assets/images/components/forms/arrowBack.svg";
+import { ReactComponent as ArrowBack } from "@assets/images/components/forms/arrowBack.svg";
 
 const Settings = () => {
   const currentUser = auth.currentUser;

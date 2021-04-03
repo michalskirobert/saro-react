@@ -1,4 +1,4 @@
-import { ALERT_CONSTANTS } from "../../utils/constants/alert.constants";
+import { ALERT_CONSTANTS } from "@utils/constants/alert.constants";
 
 const success = (message) => {
   return { type: ALERT_CONSTANTS.SUCCESS, message };

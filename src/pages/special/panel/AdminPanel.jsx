@@ -5,10 +5,10 @@ import Select from "react-select";
 
 import { useContainer } from "../../public/home/container";
 import { useEdit } from "../../special/edit/container";
-import { firestore, auth } from "../../../components/feature/firebase";
-import CmsAlert from "../../../components/shared/alerts/CmsAlert";
+import { firestore, auth } from "@components/feature/firebase";
+import CmsAlert from "@components/shared/alerts/CmsAlert";
 
-import * as C from "../../../utils/constants";
+import * as C from "@utils/constants";
 import { pageSize } from "./utils";
 
 const AdminPanel = () => {

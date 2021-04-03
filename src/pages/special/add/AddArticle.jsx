@@ -7,11 +7,11 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Formik, Form } from "formik";
 import { addArticleValidationScheme } from "./validation";
 
-import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
+import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
+import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
-import * as C from "./../../../utils/constants";
+import * as C from "@utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
 
 

@@ -69,7 +69,7 @@ const Edit = () => {
           initialValues: { ...database[type] },
           validateOnChange: true,
           validateOnMount: true,
-          // validationSchema: editValidationScheme(type),
+          validationSchema: editValidationScheme(type),
           onSubmit: (values) => updateDatabase(id, type, values),
           enableReinitialize: true,
         }}

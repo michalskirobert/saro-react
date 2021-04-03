@@ -1,9 +1,9 @@
 import React from "react";
 
-import { ReactComponent as IconTeacher } from "../../../assets/images/components/home/chalkboardTeacher.svg";
-import { ReactComponent as IconBook } from "../../../assets/images/components/home/book.svg";
-import { ReactComponent as IconNotePencil } from "../../../assets/images/components/home/notePencil.svg";
-import { ReactComponent as IconBird } from "../../../assets/images/components/home/bird.svg";
+import { ReactComponent as IconTeacher } from "@assets/images/components/home/chalkboardTeacher.svg";
+import { ReactComponent as IconBook } from "@assets/images/components/home/book.svg";
+import { ReactComponent as IconNotePencil } from "@assets/images/components/home/notePencil.svg";
+import { ReactComponent as IconBird } from "@assets/images/components/home/bird.svg";
 
 const Introduction = () => {
   const cardsData = [

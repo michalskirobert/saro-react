@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import { auth } from "../../firebase";
 import { userActions } from "../../../../store/actions";
-import { ReactComponent as ArrowBack } from "../../../../assets/images/components/forms/arrowBack.svg";
+import { ReactComponent as ArrowBack } from "@assets/images/components/forms/arrowBack.svg";
 
 const Login = () => {
   const dispatch = useDispatch();

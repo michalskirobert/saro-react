@@ -1,4 +1,4 @@
-import * as CONSTANTS from "../../../utils/constants";
+import * as CONSTANTS from "@utils/constants";
 
 const defaultState = {
   language: "en",

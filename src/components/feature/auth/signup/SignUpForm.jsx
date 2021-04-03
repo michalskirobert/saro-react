@@ -8,7 +8,7 @@ import { FORM_HELPER } from "./utils";
 import { signUpValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { userActions } from "../../../../store/actions";
-import { ReactComponent as ArrowBack } from "../../../../assets/images/components/forms/arrowBack.svg";
+import { ReactComponent as ArrowBack } from "@assets/images/components/forms/arrowBack.svg";
 import { FirstStep } from "./FirstStep";
 import { SecondStep } from "./SecondStep";
 
