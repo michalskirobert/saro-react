@@ -6,13 +6,13 @@ import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
-import { editValidationScheme, editEventsValidationScheme } from "./validation";
+import { editValidationScheme } from "./validation";
 
-import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
+import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
 
-import * as CONSTANTS from "./../../../utils/constants";
-import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
+import * as CONSTANTS from "@utils/constants";
+import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 import { FORMIK_HELPER } from "./utils.js";
 
 const cities = [
@@ -44,36 +44,33 @@ const Edit = () => {
     alert,
     fetchCrew,
     goBack,
-    getEvent,
+    getDatabase,
     editableContainer,
     database,
-    updateEvent,
+    updateDatabase,
   } = useEdit();
 
   const query = new URLSearchParams(useLocation().search);
-  const type = query.get("type");
-  const id = query.get("id");
+  const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
+  const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
 
   useEffect(() => {
-    getEvent(id, type);
+    getDatabase(id, type);
     fetchCrew();
-  }, [id]);
+    console.log("turned on");
+  }, []);
 
-  const events = database.events[0];
-  const crew = database.crew;
+  console.log({ ...database[type] });
 
   return (
     <>
       <Formik
         {...{
-          initialValues: { ...events },
+          initialValues: { ...database[type] },
           validateOnChange: true,
           validateOnMount: true,
-          validationSchema:
-            type === CONSTANTS.GENERAL_CONSTANTS.EVENTS
-              ? editEventsValidationScheme
-              : editValidationScheme,
-          onSubmit: (values) => updateEvent(id, type, ...values),
+          // validationSchema: editValidationScheme(type),
+          onSubmit: (values) => updateDatabase(id, type, values),
 
           enableReinitialize: true,
         }}
@@ -298,10 +295,12 @@ const Edit = () => {
                       id: "crew",
                       name: "crew",
                       placeholder: editableContainer?.crew,
-                      options: crew.map((item) => ({
-                        label: `${item.name} ${item.surname}`,
-                        value: `${item.name} ${item.surname}`,
-                      })),
+                      options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
+                        (item) => ({
+                          label: `${item.name} ${item.surname}`,
+                          value: `${item.name} ${item.surname}`,
+                        })
+                      ),
                       onChange: (values) =>
                         setFieldValue(FORMIK_HELPER.CREW, values.value),
                     }}
@@ -339,8 +338,8 @@ const Edit = () => {
                     initialValue={editableContainer?.content}
                     init={{
                       plugins: [
-                        "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                        " lists link linkchecker media mediaembed noneditable powerpaste preview",
+                        " advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
+                        " lists link media noneditable preview",
                         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                         "table emoticons template help",
                       ],

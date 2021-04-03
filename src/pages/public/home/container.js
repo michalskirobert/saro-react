@@ -9,14 +9,14 @@ export const useContainer = () => {
   const lang = useSelector((state) => state.general.language);
 
   const getNews = async () => {
-    dispatch(fetchActions.fetchNewsRequest());
+    dispatch(fetchActions.getNewsRequest());
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .collection(GENERAL_CONSTANTS.NEWS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
-        dispatch(fetchActions.fetchNewsSuccess(newsData));
+        dispatch(fetchActions.getNewsSuccess(newsData));
         console.log(newsData);
       });
   };

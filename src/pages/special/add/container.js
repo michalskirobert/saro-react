@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { cmsActions, fetchActions } from "../../../store/actions";
-import { GENERAL_CONSTANTS } from "../../../utils/constants";
+import * as CONSTANTS from "@utils/constants";
 import { firestore } from "../../../components/feature/firebase";
 
 import { v4 as uuidv4 } from "uuid";
@@ -32,14 +32,14 @@ export const useContainer = () => {
     content: "",
   });
 
-  const addNews = async (id, {title, crew, language, category, content }) => {
+  const addNews = async (id, { title, crew, language, category, content }) => {
     return await firestore
-      .collection(GENERAL_CONSTANTS.LANG)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(language)
-      .collection(GENERAL_CONSTANTS.NEWS)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.NEWS)
       .doc(id)
       .set({
-        type: GENERAL_CONSTANTS.NEWS,
+        type: CONSTANTS.GENERAL_CONSTANTS.NEWS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
@@ -63,14 +63,29 @@ export const useContainer = () => {
     }
   };
 
-  const addEvents = async (id, {title, subtitle, city, place, date, time, imgURL, link, crew, language, content }) => {
+  const addEvents = async (
+    id,
+    {
+      title,
+      subtitle,
+      city,
+      place,
+      date,
+      time,
+      imgURL,
+      link,
+      crew,
+      language,
+      content,
+    }
+  ) => {
     return await firestore
-      .collection(GENERAL_CONSTANTS.LANG)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(language)
-      .collection(GENERAL_CONSTANTS.EVENTS)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .set({
-        type: GENERAL_CONSTANTS.EVENTS,
+        type: CONSTANTS.GENERAL_CONSTANTS.EVENTS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
@@ -100,14 +115,17 @@ export const useContainer = () => {
     }
   };
 
-  const addArticle = async (id, {title, crew, language, category, content}) => {
+  const addArticle = async (
+    id,
+    { title, crew, language, category, content }
+  ) => {
     return await firestore
-      .collection(GENERAL_CONSTANTS.LANG)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(language)
-      .collection(GENERAL_CONSTANTS.BLOG_POSTS)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS)
       .doc(id)
       .set({
-        type: GENERAL_CONSTANTS.BLOG_POSTS,
+        type: CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
@@ -140,9 +158,9 @@ export const useContainer = () => {
 
   const fetchCrew = async () => {
     return firestore
-      .collection(GENERAL_CONSTANTS.LANG)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(GENERAL_CONSTANTS.CREW)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.CREW)
       .onSnapshot((resp) =>
         dispatch(
           fetchActions.getCrewSuccess(resp.docs.map((item) => item.data()))

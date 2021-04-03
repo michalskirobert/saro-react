@@ -7,6 +7,8 @@ export const GENERAL_CONSTANTS = {
   CURRENT_USER: "user",
   USERS: "users",
   CREW: "crew",
+  TYPE: "type",
+  ID: "id",
   CHANGE_LANGUAGE_TO: {
     ENGLISH: "en",
     KOREAN: "ko",

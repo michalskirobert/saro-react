@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "jsx": "react",
+      "module": "commonJS",
+      "target": "es6",
+      "paths": {
+        "@utils/*": ["./src/utils/*"],
+        "@components/*": ["./src/components/*"],
+        "@actions/*": ["./src/store/actions/*"],
+        "@assets/*": ["./src/assets/*"],
+        "@pages/*": ["./src/pages/*"],
+        "@firebase": ["./src/components/feature/firebase/index"],
+        "@auth": ["./src/components/feature/auth/login/authHeader"]
+      }
+    },
+    "include": ["src/**/*", "scripts"],
+    "exclude": ["node_modules"]
+  }

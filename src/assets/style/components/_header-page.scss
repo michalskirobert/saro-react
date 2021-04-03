@@ -3,7 +3,7 @@ header {
   background: $crl-base-blue;
   width: 100%;
   position: sticky;
-  z-index: 10;
+  z-index: 15;
   top: 0;
   transition: all 0.2s ease-in-out;
 
@@ -36,6 +36,11 @@ header {
         border-radius: 60px;
       }
     }
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
   .header-lower {
     min-height: 50px;
@@ -63,7 +68,7 @@ header {
   }
 }
 .nav-container {
-  z-index: 15;
+  z-index: 20;
   height: 100vh;
   min-width: 250px;
   width: 70%;
