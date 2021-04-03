@@ -1,5 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
+import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
@@ -13,7 +14,6 @@ import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
 import * as C from "@utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
-
 
 const categories = [
   {
@@ -33,7 +33,6 @@ const categories = [
 const AddArticle = () => {
   const {
     alert,
-    goBack,
     infoContainer,
     fetchCrew,
     handlerArticle,
@@ -46,12 +45,11 @@ const AddArticle = () => {
   return (
     <Formik
       {...{
-        initialValues: { title: "" },
+        initialValues: {},
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addArticleValidationScheme,
-        onSubmit: (values) => {console.log(values)
-        handlerArticle(values)},
+        onSubmit: (values) => handlerArticle(values),
       }}
     >
       {({
@@ -63,19 +61,18 @@ const AddArticle = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-article" style={{paddingTop: "50px"}}>
+        <section className="section add-article" style={{ paddingTop: "50px" }}>
           {alert && <CmsAlert />}
           <Breadcrumb>
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">
-              Admin Panel
-            </Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
             <Breadcrumb.Item active>Add Article</Breadcrumb.Item>
           </Breadcrumb>
-          <button className="btn go-back" onClick={() => goBack()}>
-            <img src={BackArrow} alt="Back" /><p>Go Back</p>
-          </button>
-          <Form className="cms" >
+          <Link className="btn go-back" to="/panel">
+            <img src={BackArrow} alt="Back" />
+            <p>Go Back</p>
+          </Link>
+          <Form className="cms">
             <h2 className="main-title">Add Article</h2>
             <section className="form-container">
               <div className="form-control">
@@ -87,11 +84,11 @@ const AddArticle = () => {
                   value={values[FORMIK_HELPER.TITLE]}
                   onChange={handleChange}
                 />
-               {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? 
+                {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
-                  </F.Text>  : null
-                }
+                  </F.Text>
+                ) : null}
               </div>
               <div className="form-control">
                 <label htmlFor="crew">Crew</label>
@@ -107,11 +104,11 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.CREW, values.value),
                   }}
                 />
-                {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? 
+                {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CREW]}
-                  </F.Text>  : null
-                }
+                  </F.Text>
+                ) : null}
               </div>
               <div className="form-control">
                 <label htmlFor="category">Category</label>
@@ -127,11 +124,12 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
                   }}
                 />
-                {errors[FORMIK_HELPER.CATEGORY] || touched[FORMIK_HELPER.CATEGORY] ? 
+                {errors[FORMIK_HELPER.CATEGORY] ||
+                touched[FORMIK_HELPER.CATEGORY] ? (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CATEGORY]}
-                  </F.Text>  : null
-                }
+                  </F.Text>
+                ) : null}
               </div>
               <div className="form-control">
                 <label htmlFor="language">Language</label>
@@ -147,11 +145,12 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
                   }}
                 />
-                {errors[FORMIK_HELPER.LANGUAGE] || touched[FORMIK_HELPER.LANGUAGE] ? 
+                {errors[FORMIK_HELPER.LANGUAGE] ||
+                touched[FORMIK_HELPER.LANGUAGE] ? (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.LANGUAGE]}
-                  </F.Text>  : null
-                }
+                  </F.Text>
+                ) : null}
               </div>
             </section>
 
@@ -187,11 +186,11 @@ const AddArticle = () => {
                   setFieldValue([FORMIK_HELPER.EDITOR], e.target.getContent())
                 }
               />
-              {errors[FORMIK_HELPER.EDITOR] || touched[FORMIK_HELPER.EDITOR] ? 
-                  <F.Text className="validation-alert">
-                    {errors[FORMIK_HELPER.EDITOR]}
-                  </F.Text>  : null
-                }
+              {errors[FORMIK_HELPER.EDITOR] || touched[FORMIK_HELPER.EDITOR] ? (
+                <F.Text className="validation-alert">
+                  {errors[FORMIK_HELPER.EDITOR]}
+                </F.Text>
+              ) : null}
             </section>
             <Button
               className="submit-btn"

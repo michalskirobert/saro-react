@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions } from "../../../store/actions";
+import { cmsActions, fetchActions } from "@actions";
 import { firestore } from "@components/feature/firebase";
 
 import * as CONSTANTS from "@utils/constants";
@@ -13,10 +13,7 @@ export const useEdit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [editableContainer, setEditableContainer] = useState({});
-
   const lang = useSelector((state) => state.general.language);
-  const editable = useSelector((state) => state.CMS.edit);
   const database = useSelector((state) => state.database);
 
   const getDatabase = (id, type) => {
@@ -38,7 +35,6 @@ export const useEdit = () => {
 
   const updateDatabase = async (id, type, values) => {
     dispatch(cmsActions.clear());
-    console.log("works");
     try {
       dispatch(cmsActions.updateRequest);
       await firestore
@@ -63,13 +59,6 @@ export const useEdit = () => {
     history.push(`/panel/edit?type=${type}&id=${id}`);
   };
 
-  const handleEdtiorChange = (e) => {
-    const value = e.target.getContent();
-    setEditableContainer((prevState) => {
-      return { ...prevState, content: value };
-    });
-  };
-
   const fetchCrew = async () => {
     return firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
@@ -82,19 +71,10 @@ export const useEdit = () => {
       );
   };
 
-  const goBack = () => {
-    history.goBack();
-  };
-
   return {
     fetchCrew,
     alert,
-    goBack,
-    handleEdtiorChange,
     handleEdit,
-    editableContainer,
-    setEditableContainer,
-    editable,
     database,
     getDatabase,
     updateDatabase,

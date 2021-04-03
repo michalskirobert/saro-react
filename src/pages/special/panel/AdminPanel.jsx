@@ -15,9 +15,9 @@ const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
 
-  const newsItems = useSelector((state) => state.database.news);
-  const newsEvents = useSelector((state) => state.database.events);
-  const newsPosts = useSelector((state) => state.database.posts);
+  const newsItems = useSelector((state) => state.database?.news);
+  const newsEvents = useSelector((state) => state.database?.events);
+  const newsPosts = useSelector((state) => state.database?.posts);
   const alert = useSelector((state) => state.CMS.alert);
 
   const pagination = [];

@@ -106,6 +106,27 @@ export const cmsReducer = (state = defaultState, action) => {
         ...state,
         isLoading: true,
       };
+    case CONSTANTS.UPLOAD_CONSTANTS.UPLOAD_IMAGE_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CONSTANTS.UPLOAD_CONSTANTS.UPLOAD_IMAGE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        alert: true,
+        alertType: CONSTANTS.ALERT_CONSTANTS.STATUS_SUCCESS,
+        alertMsg: "Your image has been uploaded",
+      };
+    case CONSTANTS.UPLOAD_CONSTANTS.UPLOAD_IMAGE_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        alert: true,
+        alertType: CONSTANTS.ALERT_CONSTANTS.STATUS_ERROR,
+        errorContent: "something went wrong ooops...",
+      };
     default:
       return state;
   }

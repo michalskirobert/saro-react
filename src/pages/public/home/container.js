@@ -17,7 +17,6 @@ export const useContainer = () => {
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
         dispatch(fetchActions.getNewsSuccess(newsData));
-        console.log(newsData);
       });
   };
 

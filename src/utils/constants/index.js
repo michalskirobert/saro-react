@@ -4,3 +4,4 @@ export { HERO_CONSTANTS } from "./hero.constants";
 export { userConstants } from "./user.constants";
 export { GENERAL_CONSTANTS } from "./general.constants";
 export { CMS_CONSTANTS } from "./cms.constants";
+export { UPLOAD_CONSTANTS } from "./upload.constants";

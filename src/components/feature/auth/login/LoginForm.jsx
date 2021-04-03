@@ -6,7 +6,7 @@ import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { FORM_HELPER } from "./utils";
-import { userActions, alertActions } from "../../../../store/actions";
+import { userActions, alertActions } from "@actions";
 import Alert from "./../../../shared/alerts";
 import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
 

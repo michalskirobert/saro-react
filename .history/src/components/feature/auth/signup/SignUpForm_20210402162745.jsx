@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import { Formik, Form } from "formik";
 import { FORM_HELPER } from "./utils";
 import { signUpValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
-import { userActions } from "../../../../store/actions";
+import { userActions } from "@actions";
 import { ReactComponent as ArrowBack } from "../../../../assets/images/components/forms/arrowBack.svg";
 import { FirstStep } from "./FirstStep";
 import { SecondStep } from "./SecondStep";
@@ -24,7 +24,7 @@ const SignUpForm = () => {
         dispatch(userActions.signUpRequest());
         await auth
           .createUserWithEmailAndPassword(userData.email, userData.password)
-          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)))
+          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)));
         history.push("/");
       } catch (error) {
         console.error(error);

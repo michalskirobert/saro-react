@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Select from "react-select";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button, Form as F } from "react-bootstrap";
@@ -45,7 +45,6 @@ const Edit = () => {
     fetchCrew,
     goBack,
     getDatabase,
-    editableContainer,
     database,
     updateDatabase,
   } = useEdit();
@@ -57,10 +56,9 @@ const Edit = () => {
   useEffect(() => {
     getDatabase(id, type);
     fetchCrew();
-    console.log("turned on");
   }, []);
 
-  console.log({ ...database[type] });
+  console.log({ data: database[type], id, type });
 
   return (
     <>
@@ -90,10 +88,10 @@ const Edit = () => {
               <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
               <Breadcrumb.Item active>Edit</Breadcrumb.Item>
             </Breadcrumb>
-            <button className="btn go-back" onClick={() => goBack()}>
+            <Link className="btn go-back" to="/panel">
               <img src={BackArrow} alt="Back" />
               <p>Go Back</p>
-            </button>
+            </Link>
             <Form className="cms">
               <h2 className="main-title">Edit element</h2>
               <section className="form-container">
@@ -102,6 +100,7 @@ const Edit = () => {
                   <input
                     id="title"
                     type="text"
+                    placeholder={database[type]?.title}
                     value={values[FORMIK_HELPER.TITLE]}
                     onChange={handleChange}
                   />
@@ -118,6 +117,7 @@ const Edit = () => {
                     <input
                       id="subtitle"
                       type="text"
+                      placeholder={database[type]?.subtitle}
                       value={values[FORMIK_HELPER.SUBTITLE]}
                       onChange={handleChange}
                     />
@@ -136,7 +136,7 @@ const Edit = () => {
                       {...{
                         id: "city",
                         name: "city",
-                        placeholder: editableContainer?.city,
+                        placeholder: database[type]?.city,
                         options: cities.map((item) => ({
                           label: item.city,
                           value: item.city,
@@ -160,6 +160,7 @@ const Edit = () => {
                       id="place"
                       type="text"
                       autoComplete="off"
+                      placeholder={database[type]?.place}
                       value={values[FORMIK_HELPER.PLACE]}
                       onChange={handleChange}
                     />
@@ -177,6 +178,7 @@ const Edit = () => {
                     <input
                       id="date"
                       type="date"
+                      placeholder={database[type]?.date}
                       value={values[FORMIK_HELPER.DATE]}
                       onChange={handleChange}
                     />
@@ -194,6 +196,7 @@ const Edit = () => {
                     <input
                       id="time"
                       type="time"
+                      placeholder={database[type]?.time}
                       value={values[FORMIK_HELPER.TIME]}
                       onChange={handleChange}
                     />
@@ -211,6 +214,7 @@ const Edit = () => {
                     <input
                       id="imgURL"
                       type="text"
+                      placeholder={database[type]?.imgURL}
                       value={values[FORMIK_HELPER.IMG_URL]}
                       onChange={handleChange}
                     />
@@ -228,6 +232,7 @@ const Edit = () => {
                     <input
                       id="link"
                       type="text"
+                      placeholder={database[type]?.link}
                       value={values[FORMIK_HELPER.LINK]}
                       onChange={handleChange}
                     />
@@ -246,7 +251,7 @@ const Edit = () => {
                       {...{
                         id: "category",
                         name: "category",
-                        placeholder: editableContainer?.category,
+                        placeholder: database[type]?.category,
                         options: categories.map((item) => ({
                           label: item.name,
                           value: item.name,
@@ -269,7 +274,7 @@ const Edit = () => {
                     {...{
                       id: "language",
                       name: "language",
-                      placeholder: editableContainer?.language,
+                      placeholder: database[type]?.language,
                       options: CONSTANTS.GENERAL_CONSTANTS.LANGUAGES.map(
                         (item) => ({
                           label: item.label,
@@ -293,7 +298,7 @@ const Edit = () => {
                     {...{
                       id: "crew",
                       name: "crew",
-                      placeholder: editableContainer?.crew,
+                      placeholder: database[type]?.crew,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
                         (item) => ({
                           label: `${item.name} ${item.surname}`,
@@ -317,7 +322,7 @@ const Edit = () => {
                   <label htmlFor="content">Info</label>
                   <textarea
                     id="content"
-                    placeholder={editableContainer?.content}
+                    placeholder={database[type]?.content}
                     value={values[FORMIK_HELPER.EDITOR]}
                     onChange={handleChange}
                     cols="30"
@@ -334,7 +339,7 @@ const Edit = () => {
                 <section className="editor">
                   <Editor
                     apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-                    initialValue={editableContainer?.content}
+                    initialValue={database[type]?.content}
                     init={{
                       plugins: [
                         " advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",

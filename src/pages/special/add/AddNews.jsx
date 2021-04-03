@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
+import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
@@ -35,8 +36,10 @@ const AddNews = () => {
     fetchCrew,
     crew,
     infoContainer,
-    goBack,
     handlerNews,
+    imageChangeHandler,
+    isLoading,
+    image,
   } = useContainer();
 
   useEffect(() => {
@@ -72,10 +75,10 @@ const AddNews = () => {
               <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
               <Breadcrumb.Item active>Add News</Breadcrumb.Item>
             </Breadcrumb>
-            <button className="btn go-back" onClick={() => goBack()}>
+            <Link className="btn go-back" to="/panel">
               <img src={BackArrow} alt="Back" />
               <p>Go Back</p>
-            </button>
+            </Link>
             <Form className="cms">
               <h2 className="main-title">Add News</h2>
               <section className="form-container">
@@ -114,21 +117,17 @@ const AddNews = () => {
                   ) : null}
                 </div>
                 <div className="form-control">
-                  <label htmlFor="imgURL">Img URL</label>
+                  <label htmlFor={FORMIK_HELPER.IMG_URL}>Upload image</label>
                   <input
-                    id="imgURL"
-                    placeholder="add image URL"
-                    type="text"
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.IMG_URL]}
-                    onChange={handleChange}
+                    id={FORMIK_HELPER.IMG_URL}
+                    name={FORMIK_HELPER.IMG_URL}
+                    type="file"
+                    onChange={imageChangeHandler}
                   />
-                  {errors[FORMIK_HELPER.IMG_URL] ||
-                  touched[FORMIK_HELPER.IMG_URL] ? (
-                    <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.IMG_URL]}
-                    </F.Text>
-                  ) : null}
+                  <F.Text className="validation-alert">
+                    {!image && "Field required."}
+                    {/* zrób tutaj, też walidkę z containera o typie ;) */}
+                  </F.Text>
                 </div>
 
                 <div className="form-control">
@@ -237,7 +236,7 @@ const AddNews = () => {
               <Button
                 className="submit-btn"
                 type="submit"
-                disabled={!isValid}
+                disabled={!image || isLoading || !isValid}
                 onClick={handleSubmit}
               >
                 Add

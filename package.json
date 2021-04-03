@@ -35,8 +35,10 @@
   },
   "scripts": {
     "start": "del .eslintcache && craco start",
-    "build": "CI= react-scripts build",
-    "test": "react-scripts test",
+    "build": "CI= craco build",
+    "test": " craco test",
+    "build:prod": "curl -X POST -d {} https://api.netlify.com/build_hooks/606892e5407c81c608ea1c1a",
+    "build:dev": "curl -X POST -d {} https://api.netlify.com/build_hooks/6068935d5f1acad45d1b9925",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

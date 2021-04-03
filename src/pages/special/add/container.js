@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions } from "../../../store/actions";
+import { cmsActions, fetchActions, uploadActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
-import { firestore } from "@components/feature/firebase";
+import { firestore, storage } from "@components/feature/firebase";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -13,6 +13,7 @@ export const useContainer = () => {
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
+  const [image, setImage] = useState();
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -32,22 +33,41 @@ export const useContainer = () => {
     content: "",
   });
 
-  const addNews = async (id, { title, crew, language, category, content }) => {
-    return await firestore
+  const addNews = async (id, values) => {
+    await firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
-      .doc(language)
+      .doc(lang)
       .collection(CONSTANTS.GENERAL_CONSTANTS.NEWS)
       .doc(id)
       .set({
+        ...values,
+        imgURL: image,
         type: CONSTANTS.GENERAL_CONSTANTS.NEWS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
-        title,
-        crew,
-        language,
-        category,
-        content,
+      });
+    console.log("done");
+  };
+
+  const imageChangeHandler = (e) => {
+    uploadImage(e.currentTarget.files[0]);
+  };
+
+  const uploadImage = async (file) => {
+    if (file.type !== "image/png") {
+      //zrób tutaj walidację
+    }
+    //tutaj również zrób dispatche CONSTANTS oraz reducery masz gotowe (reducer w CMS co do tego :P)
+    storage
+      .ref(`/images/${file.name}`)
+      .put(file)
+      .on("state_changed", () => {
+        storage
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((resp) => setImage(resp));
       });
   };
 
@@ -63,25 +83,10 @@ export const useContainer = () => {
     }
   };
 
-  const addEvents = async (
-    id,
-    {
-      title,
-      subtitle,
-      city,
-      place,
-      date,
-      time,
-      imgURL,
-      link,
-      crew,
-      language,
-      content,
-    }
-  ) => {
+  const addEvents = async (id, values) => {
     return await firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
-      .doc(language)
+      .doc(lang)
       .collection(CONSTANTS.GENERAL_CONSTANTS.EVENTS)
       .doc(id)
       .set({
@@ -89,17 +94,7 @@ export const useContainer = () => {
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
-        title,
-        city,
-        place,
-        subtitle,
-        date,
-        time,
-        imgURL,
-        link,
-        crew,
-        language,
-        content,
+        ...values,
       });
   };
 
@@ -115,25 +110,18 @@ export const useContainer = () => {
     }
   };
 
-  const addArticle = async (
-    id,
-    { title, crew, language, category, content }
-  ) => {
+  const addArticle = async (id, values) => {
     return await firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
-      .doc(language)
+      .doc(lang)
       .collection(CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS)
       .doc(id)
       .set({
+        ...values,
+        id,
         type: CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
-        id,
-        title,
-        crew,
-        language,
-        category,
-        content,
       });
   };
 
@@ -149,13 +137,6 @@ export const useContainer = () => {
     }
   };
 
-  const handleEdtiorChange = (e) => {
-    const value = e.target.getContent();
-    setInfoContainer((prevState) => {
-      return { ...prevState, content: value };
-    });
-  };
-
   const fetchCrew = async () => {
     return firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
@@ -168,24 +149,21 @@ export const useContainer = () => {
       );
   };
 
-  const goBack = () => {
-    history.goBack();
-  };
-
   return {
     alert,
-    goBack,
     isLoading,
     infoContainer,
     setInfoContainer,
     addNews,
     addArticle,
     addEvents,
-    handleEdtiorChange,
     handlerNews,
     handlerEvents,
     handlerArticle,
     crew,
     fetchCrew,
+    imageChangeHandler,
+    isLoading,
+    image,
   };
 };

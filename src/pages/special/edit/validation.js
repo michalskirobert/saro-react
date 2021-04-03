@@ -32,7 +32,7 @@ export const editValidationScheme = (type) => {
       [FORMIK_HELPER.CREW]: yup.string().required("Field required."),
       [FORMIK_HELPER.LANGUAGE]: yup.string().required("Field required."),
       [FORMIK_HELPER.EDITOR]: yup.string().required("Field required."),
-      [FORMIK_HELPER.IMG_URL]: yup.string().required("Field required."),
+      // [FORMIK_HELPER.IMG_URL]: yup.string().required("Field required."),
     });
   }
   return yup.object().shape({
@@ -53,7 +53,7 @@ export const editValidationScheme = (type) => {
     [FORMIK_HELPER.PLACE]: yup.string().required("Field required."),
     [FORMIK_HELPER.DATE]: yup.string().required("Field required."),
     [FORMIK_HELPER.TIME]: yup.string().required("Field required."),
-    [FORMIK_HELPER.IMG_URL]: yup.string().required("Field required."),
+    // [FORMIK_HELPER.IMG_URL]: yup.string().required("Field required."),
     [FORMIK_HELPER.LINK]: yup.string().required("Field required."),
   });
 };

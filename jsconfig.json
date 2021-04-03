@@ -10,8 +10,7 @@
         "@actions/*": ["./src/store/actions/index.js"],
         "@assets/*": ["./src/assets/*"],
         "@pages/*": ["./src/pages/*"],
-        "@firebase": ["./src/components/feature/firebase/index.js"],
-        "@auth": ["./src/components/feature/auth/login/authHeader.js"]
+        "@fire": ["./src/components/feature/firebase/index.js"]
       }
     },
     "include": ["src/**/*"],
