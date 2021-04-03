@@ -1,4 +1,4 @@
-import * as C from "../../utils/constants";
+import * as C from "@utils/constants";
 
 const getNewsRequest = () => {
   return {

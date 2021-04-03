@@ -1,8 +1,7 @@
 import React from "react";
-import Facebook from "../../../assets/images/components/footer/Facebook.svg";
-import Instagram from "../../../assets/images/components/footer/Instagram.svg";
-import Youtube from "../../../assets/images/components/footer/Youtube.svg";
-import ArrowDown from "../../../assets/images/components/footer/ArrowDown.svg";
+import Facebook from "@assets/images/components/footer/Facebook.svg";
+import Instagram from "@assets/images/components/footer/Instagram.svg";
+import Youtube from "@assets/images/components/footer/Youtube.svg";
 
 const Footer = () => {
   return (

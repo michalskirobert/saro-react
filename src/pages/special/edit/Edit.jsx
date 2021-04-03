@@ -69,9 +69,8 @@ const Edit = () => {
           initialValues: { ...database[type] },
           validateOnChange: true,
           validateOnMount: true,
-          // validationSchema: editValidationScheme(type),
+          validationSchema: editValidationScheme(type),
           onSubmit: (values) => updateDatabase(id, type, values),
-
           enableReinitialize: true,
         }}
       >
@@ -113,7 +112,7 @@ const Edit = () => {
                     </F.Text>
                   ) : null}
                 </div>
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                {type === !CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
                   <div className="form-control">
                     <label htmlFor="subtitle">Subtitle</label>
                     <input
@@ -206,7 +205,7 @@ const Edit = () => {
                     ) : null}
                   </div>
                 ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                {type === !CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
                   <div className="form-control">
                     <label htmlFor="imgURL">Img URL</label>
                     <input

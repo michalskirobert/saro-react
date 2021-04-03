@@ -5,13 +5,13 @@ import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
-import { addValidationScheme } from "./validation";
+import { addArticleValidationScheme } from "./validation";
 
-import CmsAlert from "./../../../components/shared/alerts/CmsAlert";
+import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from "./../../../assets/images/components/forms/ArrowBendUpLeft.svg";
+import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
-import * as C from "./../../../utils/constants";
+import * as C from "@utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
 
 
@@ -49,7 +49,7 @@ const AddArticle = () => {
         initialValues: { title: "" },
         validateOnChange: true,
         validateOnMount: true,
-        validationSchema: addValidationScheme,
+        validationSchema: addArticleValidationScheme,
         onSubmit: (values) => {console.log(values)
         handlerArticle(values)},
       }}
@@ -161,8 +161,8 @@ const AddArticle = () => {
                 initialValue={infoContainer.content}
                 init={{
                   plugins: [
-                    "a11ychecker advcode advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                    " lists link linkchecker media mediaembed noneditable powerpaste preview",
+                    "advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
+                    " lists link media noneditable preview",
                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                     "table emoticons template help",
                   ],

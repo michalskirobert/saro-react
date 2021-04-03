@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { FaTimes, FaRegTimesCircle, FaRegCheckCircle } from "react-icons/fa";
 import { cmsActions } from "../../../store/actions";
-import { ALERT_CONSTANTS } from "../../../utils/constants";
+import { ALERT_CONSTANTS } from "@utils/constants";
 
 const CmsAlert = () => {
   const dispatch = useDispatch();

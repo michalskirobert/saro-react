@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ReactComponent as Globe } from "./../../../assets/images/components/home/globe.svg";
+import { ReactComponent as Globe } from "@assets/images/components/home/globe.svg";
 
 const PartnerNearYou = () => {
   return (

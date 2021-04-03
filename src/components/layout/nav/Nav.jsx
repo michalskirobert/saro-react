@@ -7,11 +7,11 @@ import throttle from "lodash.throttle";
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
 
-import UserIcon from "../../../assets/images/components/nav/UserIcon.svg";
-import Hamburger from "../../../assets/images/components/nav/Hamburger.svg";
-import House from "../../../assets/images/components/nav/House.svg";
-import Cross from "../../../assets/images/components/nav/Cross.svg";
-import MagnifyingGlass from "../../../assets/images/components/nav/MagnifyingGlass.svg";
+import UserIcon from "@assets/images/components/nav/UserIcon.svg";
+import Hamburger from "@assets/images/components/nav/Hamburger.svg";
+import House from "@assets/images/components/nav/House.svg";
+import Cross from "@assets/images/components/nav/Cross.svg";
+import MagnifyingGlass from "@assets/images/components/nav/MagnifyingGlass.svg";
 
 const Nav = () => {
   const userName = useSelector((state) => state.currentUser.name);

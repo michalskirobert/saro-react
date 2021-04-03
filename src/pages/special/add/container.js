@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 
 import { cmsActions, fetchActions } from "../../../store/actions";
 import * as CONSTANTS from "@utils/constants";
-import { firestore } from "../../../components/feature/firebase";
+import { firestore } from "@components/feature/firebase";
 
 import { v4 as uuidv4 } from "uuid";
 

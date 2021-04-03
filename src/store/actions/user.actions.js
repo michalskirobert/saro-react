@@ -1,4 +1,4 @@
-import { userConstants } from "../../utils/constants/user.constants";
+import { userConstants } from "@utils/constants/user.constants";
 
 const signUpRequest = () => {
   return {
