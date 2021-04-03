@@ -35,10 +35,6 @@
     width: 100%;
     margin-bottom: 32px;
   }
-  .form-control.select {
-    display: block;
-    
-  }
   .form-control {
     margin: 0 0 50px 0;
     position: relative;
@@ -48,26 +44,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
-    &--gender {
-      margin: 25px 0;
-      justify-content: center;
-      // align-items: center;
-      transform: translate(-10px, 0px);
-      .gender {
-        position: relative;
-        top: 0;
-      }
+    .select {
+      display: block;
     }
-    &--lang {
-      flex-flow: column wrap;
-      align-items: center;
-      margin: 15px 0;
-      .lang {
-        position: relative;
-        top: 0;
-        margin: 15px;
-      }
+    
     }
     label {
       // position: absolute;

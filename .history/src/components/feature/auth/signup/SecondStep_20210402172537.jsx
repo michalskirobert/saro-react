@@ -31,7 +31,7 @@ export function SecondStep({ handleChange, values, errors, touched }) {
 
   return (
     <>
-      <div className="form-control select">
+      <div className="form-control">
         <Select
           width="100%"
           id="gender"
@@ -46,7 +46,7 @@ export function SecondStep({ handleChange, values, errors, touched }) {
                   </F.Text>
                 ) : null}
       </div>
-      <div className="form-control select">
+      <div className="form-control">
         <Select
           width="100%"
           id="nativeLang"
@@ -61,7 +61,7 @@ export function SecondStep({ handleChange, values, errors, touched }) {
                   </F.Text>
                 ) : null}
       </div>
-      <div className="form-control select">
+      <div className="form-control">
         <Select
           width="100%"
           id="studyingLang"

@@ -39,9 +39,8 @@ const SignUpForm = () => {
   return (
     <Formik
       {...{
-        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: ' ', about:' ', status: 10 },
+        initialValues: { gender: "male", nativeLang: "english", studyingLang: "polish", hobbies: "", about:"", status: 10 },
         validateOnChange: true,
-        validateOnMount: true,
         validationSchema: signUpValidationScheme,
         onSubmit: (values) => handlerSubmit(values),
       }}
@@ -63,7 +62,6 @@ const SignUpForm = () => {
               handleChange={handleChange}
               values={values}
               errors={errors}
-              touched={touched}
             />
           ) : null}
           {step === 2 ? (
@@ -71,7 +69,6 @@ const SignUpForm = () => {
               handleChange={handleChange}
               values={values}
               errors={errors}
-              touched={touched}
             />
           ) : null}
           <button
