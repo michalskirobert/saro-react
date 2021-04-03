@@ -34,7 +34,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "del .eslintcache && react-scripts start",
+    "start": "del .eslintcache && craco start",
     "build": "CI= react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -7,13 +7,13 @@
       "paths": {
         "@utils/*": ["./src/utils/*"],
         "@components/*": ["./src/components/*"],
-        "@actions/*": ["./src/store/actions/*"],
+        "@actions/*": ["./src/store/actions/index.js"],
         "@assets/*": ["./src/assets/*"],
         "@pages/*": ["./src/pages/*"],
-        "@firebase": ["./src/components/feature/firebase/index"],
-        "@auth": ["./src/components/feature/auth/login/authHeader"]
+        "@firebase": ["./src/components/feature/firebase/index.js"],
+        "@auth": ["./src/components/feature/auth/login/authHeader.js"]
       }
     },
-    "include": ["src/**/*", "scripts"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules"]
   }
