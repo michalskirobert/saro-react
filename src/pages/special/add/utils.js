@@ -1,20 +1,3 @@
-const BUTTONS_HELPER = [
-  {
-    action: "someConsts",
-    color: "someConsts",
-    content: "someConsts",
-    type: "someConsts",
-    isActive: (selectedRowId) => !!selectedRowId,
-  },
-  {
-    action: "someConsts",
-    color: "someConsts",
-    content: "someConsts",
-    type: "someConsts",
-    isActive: (selectedRowId) => !!selectedRowId,
-  },
-];
-
 export const FORMIK_HELPER = Object.freeze({
   TITLE: "title",
   SUBTITLE: "subtitle",
@@ -28,5 +11,4 @@ export const FORMIK_HELPER = Object.freeze({
   TIME: "time",
   IMG_URL: "imgURL",
   LINK: "link",
-
 });
