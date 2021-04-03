@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions } from "../../../store/actions";
-import { GENERAL_CONSTANTS } from "../../../utils/constants";
-import { firestore } from "../../../components/feature/firebase";
+import { cmsActions, fetchActions } from "@actions/index";
+import { firestore } from "@components/feature/firebase";
+
+import * as CONSTANTS from "@utils/constants";
 
 export const useEdit = () => {
   const alert = useSelector((state) => state.CMS.alert);
@@ -18,23 +19,30 @@ export const useEdit = () => {
   const editable = useSelector((state) => state.CMS.edit);
   const database = useSelector((state) => state.database);
 
-  const getEvent = (id, type) => {
+  const getDatabase = (id, type) => {
     try {
       firestore
-        .collection(GENERAL_CONSTANTS.LANG)
+        .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
         .doc(lang)
         .collection(type)
         .doc(id)
-        .onSnapshot((doc) => setEditableContainer(doc.data()));
+        .onSnapshot((doc) =>
+          dispatch(
+            fetchActions[`get${type[0].toUpperCase() + type.slice(1)}Success`](
+              doc.data()
+            )
+          )
+        );
     } catch (error) {}
   };
 
-  const updateEvent = async (id, type, ...values) => {
+  const updateDatabase = async (id, type, values) => {
     dispatch(cmsActions.clear());
+    console.log("works");
     try {
       dispatch(cmsActions.updateRequest);
       await firestore
-        .collection(GENERAL_CONSTANTS.LANG)
+        .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
         .doc(lang)
         .collection(type)
         .doc(id)
@@ -46,6 +54,7 @@ export const useEdit = () => {
       dispatch(cmsActions.updateSuccess);
       history.push("/panel");
     } catch (error) {
+      console.error(error);
       dispatch(cmsActions.updateFailure);
     }
   };
@@ -61,29 +70,11 @@ export const useEdit = () => {
     });
   };
 
-  const handlerSubmit = async (type, id) => {
-    dispatch(cmsActions.clear());
-    switch (type) {
-      case GENERAL_CONSTANTS.EVENTS:
-        try {
-          dispatch(cmsActions.addEventsReq());
-          updateEvent(id, type);
-          dispatch(cmsActions.addEventsSuccess());
-          history.push(`/panel`);
-        } catch (error) {
-          dispatch(cmsActions.addEventsFailure());
-        }
-        break;
-      default:
-        return;
-    }
-  };
-
   const fetchCrew = async () => {
     return firestore
-      .collection(GENERAL_CONSTANTS.LANG)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(GENERAL_CONSTANTS.CREW)
+      .collection(CONSTANTS.GENERAL_CONSTANTS.CREW)
       .onSnapshot((resp) =>
         dispatch(
           fetchActions.getCrewSuccess(resp.docs.map((item) => item.data()))
@@ -100,13 +91,12 @@ export const useEdit = () => {
     alert,
     goBack,
     handleEdtiorChange,
-    handlerSubmit,
-    getEvent,
     handleEdit,
     editableContainer,
     setEditableContainer,
     editable,
     database,
-    updateEvent,
+    getDatabase,
+    updateDatabase,
   };
 };

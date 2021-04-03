@@ -1,7 +1,6 @@
 .section.login {
   position: relative;
   padding: 20px 20px;
-  
 }
 
 .section.profile-update {
@@ -37,7 +36,6 @@
   }
   .form-control.select {
     display: block;
-    
   }
   .form-control {
     margin: 0 0 50px 0;
@@ -48,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
+
     &--gender {
       margin: 25px 0;
       justify-content: center;
@@ -142,16 +140,18 @@
 }
 
 form.cms {
+  position: relative;
+  width: 100%;
   ::-webkit-scrollbar {
     height: 8px;
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: $crl-base-blue; 
-    border-radius: 2px;
+    background: $crl-base-blue;
+    border-radius: 4px;
   }
   .main-title {
     width: 95%;
@@ -162,25 +162,23 @@ form.cms {
     font-size: 1.3rem;
   }
   .form-container {
+    position: relative;
     padding: 1% 3%;
     width: 100%;
     max-width: 1200px;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 10px;
+    display: flex;
+    flex-flow: row nowrap;
     justify-content: center;
-    margin: auto {
-      bottom: 20px;
-    }
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 270px;
-    
+    overflow-x: scroll;
+    height: 120px;
   }
   .form-control {
+    position: relative;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    min-width: 200px;
+    margin: 0 2px;
+    // width: 100%;
     height: 100px;
     border: none;
     border-radius: 2px;
@@ -190,19 +188,19 @@ form.cms {
       text-align: center;
     }
     &:nth-child(2) {
-      z-index: 10;
+      z-index: 9;
     }
     &:nth-child(3) {
-      z-index: 9;
-    }    
+      z-index: 8;
+    }
   }
   .form-info {
-    margin: 25px auto 0 auto;
     min-height: 250px;
     display: block;
     width: 100%;
     max-width: 600px;
     padding-bottom: 20px;
+    margin: 0 auto;
   }
   input {
     width: 100%;
@@ -232,19 +230,15 @@ form.cms {
     }
   }
   select,
+  .css-yk16xz-control,
   input {
     border: none;
     border-bottom: 1px solid black;
     border-radius: 8px 8px 0 0;
     padding: 5px 10px;
     outline: none;
+    z-index: 999;
   }
-  .css-2b097c-container {
-    position: relative;
-    box-sizing: border-box;
-    min-width: 100%;
-   
-}
   .submit-btn {
     display: block;
     color: $crl-base;
@@ -252,35 +246,38 @@ form.cms {
     text-transform: uppercase;
     font-size: 0.9rem;
     background-color: $crl-base-blue;
-    border:1px solid $crl-base-blue;
+    border: 1px solid $crl-base-blue;
     opacity: 1;
     border-radius: 30px;
     padding: 10px 35px;
     margin: 25px auto;
-   cursor: pointer;
-   &:hover {
-     background-color: rgba($crl-base-blue, 0.9);
-   }
+    cursor: pointer;
+    &:hover {
+      background-color: rgba($crl-base-blue, 0.9);
+    }
   }
-
- 
   .editor {
     width: 100%;
     max-width: 1200px;
     z-index: 1;
     padding: 0;
+    display: block;
+    margin: 0 auto;
   }
   @media (min-width: 730px) {
     .form-container {
+      display: grid;
+      grid-gap: 10px;
+      justify-content: center;
       grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
       overflow: visible;
-    height: min-content;
+      height: min-content;
     }
     .form-control {
+      margin: 0;
       &:last-child {
         margin-bottom: 0;
       }
     }
-   
   }
 }

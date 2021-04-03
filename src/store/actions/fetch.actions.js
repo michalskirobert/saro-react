@@ -1,19 +1,19 @@
 import * as C from "../../utils/constants";
 
-const fetchNewsRequest = () => {
+const getNewsRequest = () => {
   return {
     type: C.FETCH_CONSTANTS.GET_NEWS_REQUEST,
   };
 };
 
-const fetchNewsSuccess = (payload) => {
+const getNewsSuccess = (payload) => {
   return {
     type: C.FETCH_CONSTANTS.GET_NEWS_SUCCESS,
     payload,
   };
 };
 
-const fetchNewsFailure = () => {
+const getNewsFailure = () => {
   return {
     type: C.FETCH_CONSTANTS.GET_NEWS_SUCCESS,
   };
@@ -59,9 +59,9 @@ const getCrewSuccess = (payload) => ({
 const getCrewFailure = () => ({ type: C.FETCH_CONSTANTS.GET_CREW_FAILURE });
 
 export const fetchActions = {
-  fetchNewsSuccess,
-  fetchNewsRequest,
-  fetchNewsFailure,
+  getNewsSuccess,
+  getNewsRequest,
+  getNewsFailure,
   getEventsRequest,
   getEventsSuccess,
   getEventsFailure,
