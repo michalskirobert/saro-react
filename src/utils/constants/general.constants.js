@@ -10,11 +10,11 @@ export const GENERAL_CONSTANTS = {
   TYPE: "type",
   ID: "id",
   CHANGE_LANGUAGE_TO: {
-    ENGLISH: "en",
-    KOREAN: "ko",
-    JAPANESE: "ja",
-    VIETNAMESE: "vi",
-    CHINESE: "zh",
+    EN: "en",
+    KO: "ko",
+    JA: "ja",
+    VI: "vi",
+    ZH: "zh",
   },
   LANGUAGES: [
     {
