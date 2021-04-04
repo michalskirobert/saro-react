@@ -42,7 +42,6 @@ import * as C from "@utils/constants";
 const App = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.general.language);
-  const data = useSelector((state) => state.database.data);
 
   const getDataHandler = () => {
     try {
