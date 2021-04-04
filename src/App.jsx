@@ -80,9 +80,9 @@ const App = () => {
   }, []);
 
   console.log({
-    homepage: data.homepage,
+    homepage: data.pages,
     nav: data.nav,
-    footer: [data.footer],
+    footer: data.footer,
   });
 
   return (
