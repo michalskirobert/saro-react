@@ -79,12 +79,6 @@ const App = () => {
     getDataHandler();
   }, []);
 
-  console.log({
-    homepage: data.pages,
-    nav: data.nav,
-    footer: data.footer,
-  });
-
   return (
     <Router>
       <Unlisten>
