@@ -1,7 +1,8 @@
 // Components:
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { db } from "@fire";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
@@ -9,7 +10,7 @@ import Unlisten from "./routers/Unlisten";
 import { auth, firestore } from "./components/feature/firebase";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
-import { userActions } from "./store/actions";
+import { fetchActions, userActions } from "./store/actions";
 import Nav from "./components/layout/nav/Nav";
 import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
@@ -36,10 +37,26 @@ import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
 
-import * as C from "./utils/constants";
+import * as C from "@utils/constants";
 
 const App = () => {
   const dispatch = useDispatch();
+  const language = useSelector((state) => state.general.language);
+  const data = useSelector((state) => state.database.data);
+
+  const getDataHandler = () => {
+    try {
+      dispatch(fetchActions.getDatabaseRequest);
+      db.ref(`/${C.GENERAL_CONSTANTS.LANG}`)
+        .child(language)
+        .on("value", (querySnapShot) => {
+          dispatch(fetchActions.getDatabaseSucces(querySnapShot.val()));
+        });
+    } catch (error) {
+      dispatch(fetchActions.getDatabaseFailure(error));
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -56,6 +73,16 @@ const App = () => {
     return () => {
       unsubscribe();
     };
+  });
+
+  useEffect(() => {
+    getDataHandler();
+  }, []);
+
+  console.log({
+    homepage: data.homepage,
+    nav: data.nav,
+    footer: [data.footer],
   });
 
   return (

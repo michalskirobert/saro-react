@@ -48,8 +48,6 @@ const AddNews = () => {
     fetchCrew();
   }, []);
 
-  console.log(image);
-
   return (
     <>
       <Formik

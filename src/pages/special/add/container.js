@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -146,6 +146,21 @@ export const useContainer = () => {
         )
       );
   };
+
+  const getCategories = (lang) => {
+    //dorób tutaj dispatche, reducera w CMS do pobrania kategorii, constantsy i akcje :P
+    try {
+      firestore
+        .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
+        .doc(lang)
+        .onSnapshot((resp) => console.log(resp.data()));
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    //Przerzuć crew z add i wywołaj tutaj, wtedy nie musisz kilka razy wywoływać :P
+    getCategories(lang);
+  }, []);
 
   return {
     alert,
