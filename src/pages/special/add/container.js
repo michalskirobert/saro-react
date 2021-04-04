@@ -13,25 +13,12 @@ export const useContainer = () => {
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
+  const [invalid, setInvalid] = useState({ errorMsg: "" });
   const [image, setImage] = useState();
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [infoContainer, setInfoContainer] = useState({
-    id: "",
-    title: "",
-    city: "",
-    place: "",
-    date: "",
-    subtitle: "",
-    time: "",
-    imgURL: "",
-    link: "",
-    crew: "",
-    language: "",
-    category: "",
-    content: "",
-  });
+  const [infoContainer, setInfoContainer] = useState("");
 
   const addNews = async (id, values) => {
     await firestore
@@ -55,10 +42,15 @@ export const useContainer = () => {
   };
 
   const uploadImage = async (file) => {
+    setInvalid({});
+
     if (file.type !== "image/png") {
-      //zrób tutaj walidację
+      setInvalid({ errorMsg: "ppp" });
+      setImage(null);
+      return;
     }
-    //tutaj również zrób dispatche CONSTANTS oraz reducery masz gotowe (reducer w CMS co do tego :P)
+
+    dispatch(cmsActions.uploadImageRequest());
     storage
       .ref(`/images/${file.name}`)
       .put(file)
@@ -67,7 +59,13 @@ export const useContainer = () => {
           .ref("images")
           .child(file.name)
           .getDownloadURL()
-          .then((resp) => setImage(resp));
+          .then((resp) => {
+            dispatch(cmsActions.uploadImageSuccess());
+            setImage(resp);
+          })
+          .catch((err) => {
+            dispatch(cmsActions.uploadImageFailure());
+          });
       });
   };
 
@@ -165,5 +163,6 @@ export const useContainer = () => {
     imageChangeHandler,
     isLoading,
     image,
+    invalid,
   };
 };

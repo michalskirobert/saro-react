@@ -1,4 +1,4 @@
-import { CMS_CONSTANTS } from "@utils/constants";
+import { CMS_CONSTANTS, UPLOAD_CONSTANTS } from "@utils/constants";
 
 const addNewsReq = () => {
   return {
@@ -82,8 +82,26 @@ const updateFailure = () => {
     type: CMS_CONSTANTS.UPDATE_FAILURE,
   };
 };
+const uploadImageRequest = () => {
+  return {
+    type: UPLOAD_CONSTANTS.UPLOAD_IMAGE_REQUEST,
+  };
+};
+const uploadImageSuccess = () => {
+  return {
+    type: UPLOAD_CONSTANTS.UPLOAD_IMAGE_SUCCESS,
+  };
+};
+const uploadImageFailure = () => {
+  return {
+    type: UPLOAD_CONSTANTS.UPLOAD_IMAGE_FAILURE,
+  };
+};
 
 export const cmsActions = {
+  uploadImageRequest,
+  uploadImageSuccess,
+  uploadImageFailure,
   updateSuccess,
   updateRequest,
   updateFailure,

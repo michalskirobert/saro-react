@@ -140,8 +140,6 @@
 }
 
 form.cms {
-  position: relative;
-  width: 100%;
   ::-webkit-scrollbar {
     height: 8px;
     width: 8px;
@@ -161,31 +159,22 @@ form.cms {
     margin-bottom: 50px;
     font-size: 1.3rem;
   }
-  .form-container {
+  .wrapper {
     position: relative;
+  }
+  .form-container {
     padding: 1% 3%;
-    width: 100%;
-    max-width: 1200px;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-x: scroll;
     height: 120px;
-   
-    &:nth-child(3) {
-      z-index: 10;
-    }
-    &:nth-child(4), &:nth-child(9), &:nth-child(10) {
-      z-index: 7;
-    }   
   }
   .form-control {
-    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 200px;
     margin: 0 2px;
-    // width: 100%;
     height: 100px;
     border: none;
     border-radius: 2px;
@@ -194,22 +183,32 @@ form.cms {
     label {
       text-align: center;
     }
-    &:nth-child(2) {
-      z-index: 11;
+
+    div.css-2b097c-container {
+      position: static;
+      z-index: 20;
     }
-     
+    div.css-26l3qy-menu {
+      position: absolute;
+      display: block;
+      top: 0px;
+      right: 35%;
+      z-index: 299;
+      width: max-content;
+    }
+  }
+  select {
+    z-index: 5;
   }
   .form-info {
     min-height: 250px;
     display: block;
-    width: 100%;
     max-width: 600px;
     padding-bottom: 20px;
     margin: 0 auto;
     z-index: 7;
   }
   input {
-    width: 100%;
     max-width: 300px;
     &:focus {
       box-shadow: 0px 10px 10px -12px $crl-main-grey-button;
@@ -243,7 +242,6 @@ form.cms {
     border-radius: 8px 8px 0 0;
     padding: 5px 10px;
     outline: none;
-    z-index: 999;
   }
   .submit-btn {
     display: block;
@@ -262,6 +260,7 @@ form.cms {
       background-color: rgba($crl-base-blue, 0.9);
     }
   }
+
   .editor {
     width: 100%;
     max-width: 1200px;
@@ -271,6 +270,16 @@ form.cms {
     margin: 0 auto;
   }
   @media (min-width: 730px) {
+    div.css-2b097c-container {
+      position: relative;
+      z-index: 20;
+    }
+    div.css-26l3qy-menu {
+      position: relative;
+      display: block;
+      top: 20px;
+      z-index: 299;
+    }
     .form-container {
       display: grid;
       grid-gap: 10px;
@@ -280,6 +289,7 @@ form.cms {
       height: min-content;
     }
     .form-control {
+      position: relative;
       margin: 0 auto;
       &:last-child {
         margin-bottom: 0;

@@ -11,9 +11,10 @@ import { addNewsValidationScheme } from "./validation";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
 import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
+import { FORMIK_HELPER } from "./utils.js";
 
 import * as C from "@utils/constants";
-import { FORMIK_HELPER } from "./utils.js";
+import * as S from "./styles";
 
 const categories = [
   {
@@ -40,11 +41,14 @@ const AddNews = () => {
     imageChangeHandler,
     isLoading,
     image,
+    invalid,
   } = useContainer();
 
   useEffect(() => {
     fetchCrew();
   }, []);
+
+  console.log(image);
 
   return (
     <>
@@ -81,118 +85,125 @@ const AddNews = () => {
             </Link>
             <Form className="cms">
               <h2 className="main-title">Add News</h2>
-              <section className="form-container">
-                <div className="form-control">
-                  <label htmlFor="title">Title</label>
-                  <input
-                    id="title"
-                    placeholder="add title"
-                    type="text"
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.TITLE]}
-                    onChange={handleChange}
-                  />
-                  {errors[FORMIK_HELPER.TITLE] ||
-                  touched[FORMIK_HELPER.TITLE] ? (
+              <div className="wrapper">
+                <section className="form-container">
+                  <div className="form-control">
+                    <label htmlFor="title">Title</label>
+                    <input
+                      id="title"
+                      placeholder="add title"
+                      type="text"
+                      autoComplete="off"
+                      value={values[FORMIK_HELPER.TITLE]}
+                      onChange={handleChange}
+                    />
+                    {errors[FORMIK_HELPER.TITLE] ||
+                    touched[FORMIK_HELPER.TITLE] ? (
+                      <F.Text className="validation-alert">
+                        {errors[FORMIK_HELPER.TITLE]}
+                      </F.Text>
+                    ) : null}
+                  </div>
+                  <div className="form-control">
+                    <label htmlFor="subtitle">Subtitle</label>
+                    <input
+                      id="subtitle"
+                      placeholder="add subtitle"
+                      type="text"
+                      autoComplete="off"
+                      value={values[FORMIK_HELPER.SUBTITLE]}
+                      onChange={handleChange}
+                    />
+                    {errors[FORMIK_HELPER.SUBTITLE] ||
+                    touched[FORMIK_HELPER.SUBTITLE] ? (
+                      <F.Text className="validation-alert">
+                        {errors[FORMIK_HELPER.SUBTITLE]}
+                      </F.Text>
+                    ) : null}
+                  </div>
+                  <div className="form-control">
+                    <label htmlFor={FORMIK_HELPER.IMG_URL}>Upload image</label>
+                    <input
+                      id={FORMIK_HELPER.IMG_URL}
+                      name={FORMIK_HELPER.IMG_URL}
+                      type="file"
+                      onChange={imageChangeHandler}
+                    />
+                    <S.PreviewContainer>
+                      {image && (
+                        <S.PreviewImage src={image} alt="Picture preview" />
+                      )}
+                    </S.PreviewContainer>
                     <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.TITLE]}
+                      {!invalid.errorMsg && !image && "Field required."}
+                      {invalid && invalid.errorMsg}
                     </F.Text>
-                  ) : null}
-                </div>
-                <div className="form-control">
-                  <label htmlFor="subtitle">Subtitle</label>
-                  <input
-                    id="subtitle"
-                    placeholder="add subtitle"
-                    type="text"
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.SUBTITLE]}
-                    onChange={handleChange}
-                  />
-                  {errors[FORMIK_HELPER.SUBTITLE] ||
-                  touched[FORMIK_HELPER.SUBTITLE] ? (
-                    <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.SUBTITLE]}
-                    </F.Text>
-                  ) : null}
-                </div>
-                <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.IMG_URL}>Upload image</label>
-                  <input
-                    id={FORMIK_HELPER.IMG_URL}
-                    name={FORMIK_HELPER.IMG_URL}
-                    type="file"
-                    onChange={imageChangeHandler}
-                  />
-                  <F.Text className="validation-alert">
-                    {!image && "Field required."}
-                    {/* zrób tutaj, też walidkę z containera o typie ;) */}
-                  </F.Text>
-                </div>
-
-                <div className="form-control">
-                  <label htmlFor="crew">Crew</label>
-                  <Select
-                    {...{
-                      id: "crew",
-                      name: "crew",
-                      options: crew.map((item) => ({
-                        label: `${item.name} ${item.surname}`,
-                        value: `${item.name} ${item.surname}`,
-                      })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CREW, values.value),
-                    }}
-                  />
-                  {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? (
-                    <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.CREW]}
-                    </F.Text>
-                  ) : null}
-                </div>
-                <div className="form-control">
-                  <label htmlFor="category">Category</label>
-                  <Select
-                    {...{
-                      id: "category",
-                      name: "category",
-                      options: categories.map((item) => ({
-                        label: item.name,
-                        value: item.name,
-                      })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
-                    }}
-                  />
-                  {errors[FORMIK_HELPER.CATEGORY] ||
-                  touched[FORMIK_HELPER.CATEGORY] ? (
-                    <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.CATEGORY]}
-                    </F.Text>
-                  ) : null}
-                </div>
-                <div className="form-control">
-                  <label htmlFor="language">Language</label>
-                  <Select
-                    {...{
-                      id: "language",
-                      name: "language",
-                      options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
-                        label: item.label,
-                        value: item.lang,
-                      })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
-                    }}
-                  />
-                  {errors[FORMIK_HELPER.LANGUAGE] ||
-                  touched[FORMIK_HELPER.LANGUAGE] ? (
-                    <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.LANGUAGE]}
-                    </F.Text>
-                  ) : null}
-                </div>
-              </section>
+                  </div>
+                  <div className="form-control">
+                    <label htmlFor="crew">Crew</label>
+                    <Select
+                      {...{
+                        id: "crew",
+                        name: "crew",
+                        options: crew.map((item) => ({
+                          label: `${item.name} ${item.surname}`,
+                          value: `${item.name} ${item.surname}`,
+                        })),
+                        onChange: (values) =>
+                          setFieldValue(FORMIK_HELPER.CREW, values.value),
+                      }}
+                    />
+                    {errors[FORMIK_HELPER.CREW] ||
+                    touched[FORMIK_HELPER.CREW] ? (
+                      <F.Text className="validation-alert">
+                        {errors[FORMIK_HELPER.CREW]}
+                      </F.Text>
+                    ) : null}
+                  </div>
+                  <div className="form-control">
+                    <label htmlFor="category">Category</label>
+                    <Select
+                      {...{
+                        id: "category",
+                        name: "category",
+                        options: categories.map((item) => ({
+                          label: item.name,
+                          value: item.name,
+                        })),
+                        onChange: (values) =>
+                          setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
+                      }}
+                    />
+                    {errors[FORMIK_HELPER.CATEGORY] ||
+                    touched[FORMIK_HELPER.CATEGORY] ? (
+                      <F.Text className="validation-alert">
+                        {errors[FORMIK_HELPER.CATEGORY]}
+                      </F.Text>
+                    ) : null}
+                  </div>
+                  <div className="form-control">
+                    <label htmlFor="language">Language</label>
+                    <Select
+                      {...{
+                        id: "language",
+                        name: "language",
+                        options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
+                          label: item.label,
+                          value: item.lang,
+                        })),
+                        onChange: (values) =>
+                          setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
+                      }}
+                    />
+                    {errors[FORMIK_HELPER.LANGUAGE] ||
+                    touched[FORMIK_HELPER.LANGUAGE] ? (
+                      <F.Text className="validation-alert">
+                        {errors[FORMIK_HELPER.LANGUAGE]}
+                      </F.Text>
+                    ) : null}
+                  </div>
+                </section>
+              </div>
               <section className="editor">
                 <Editor
                   apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
@@ -203,12 +214,14 @@ const AddNews = () => {
                       " lists link media noneditable preview",
                       "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
                       "table emoticons template help",
+                      "image paste",
+                      "tinydrive",
                     ],
                     a_plugin_option: true,
                     a_configuration_option: 400,
                     image_title: true,
                     automatic_uploads: true,
-                    file_picker_types: "image",
+                    tinydrive_dropbox_app_key: "dxbn3q44my190l8",
                     toolbar:
                       "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
                     menu: {
@@ -236,7 +249,7 @@ const AddNews = () => {
               <Button
                 className="submit-btn"
                 type="submit"
-                disabled={!image || isLoading || !isValid}
+                disabled={!image || invalid.errorMsg || isLoading || !isValid}
                 onClick={handleSubmit}
               >
                 Add
