@@ -68,7 +68,7 @@ const AdminPanel = () => {
   const removeItem = async (type, id) => {
     return await firestore
       .collection(C.GENERAL_CONSTANTS.LANG)
-      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.ENGLISH)
+      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
       .collection(type)
       .doc(id)
       .delete();

@@ -35,7 +35,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "del .eslintcache && craco start",
+    "start": "craco start",
     "build": "CI= craco build",
     "test": " craco test",
     "build:prod": "curl -X POST -d {} https://api.netlify.com/build_hooks/606892e5407c81c608ea1c1a",

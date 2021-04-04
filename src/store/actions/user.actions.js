@@ -1,4 +1,4 @@
-import { userConstants } from "@utils/constants/user.constants";
+import { userConstants, GENERAL_CONSTANTS } from "@utils/constants";
 
 const signUpRequest = () => {
   return {
@@ -51,6 +51,12 @@ const removeUser = () => {
   };
 };
 
+const changeLanguage = (lang) => {
+  return {
+    type: GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO[lang.toUpperCase()],
+  }
+}
+
 export const userActions = {
   signIn,
   signUp,
@@ -60,4 +66,5 @@ export const userActions = {
   SignInFailure,
   signUpRequest,
   signUpFailure,
+  changeLanguage
 };

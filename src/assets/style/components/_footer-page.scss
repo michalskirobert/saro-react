@@ -68,9 +68,7 @@
       display: flex;
       align-items: center;
 
-      .footer-page__facebook,
-      .footer-page__instagram,
-      .footer-page__youtube {
+      .social-media__icons {
         display: flex;
         position: relative;
         flex-direction: row;
