@@ -7,10 +7,9 @@ const initialState = {
   posts: [],
   events: [],
   news: [],
-  nav: [],
   hero: [],
   crew: [],
-  data: {},
+  data: { nav: [] },
 };
 
 export const database = (state = initialState, action) => {
@@ -110,6 +109,7 @@ export const database = (state = initialState, action) => {
         isError: true,
         errorContent: "Ooops, we couldn't load our crew :/",
       };
+
     case CONSTANTS.FETCH_CONSTANTS.GET_DATABASE_REQUEST:
       return {
         ...state,

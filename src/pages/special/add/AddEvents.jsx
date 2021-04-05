@@ -24,11 +24,8 @@ const cities = [
 ];
 
 const AddEvents = () => {
-  const { alert, handlerEvents, crew, fetchCrew } = useContainer();
+  const { alert, handlerEvents, crew} = useContainer();
 
-  useEffect(() => {
-    fetchCrew();
-  }, []);
   return (
     <Formik
       {...{

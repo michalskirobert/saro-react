@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
@@ -16,37 +16,27 @@ import { FORMIK_HELPER } from "./utils.js";
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
-const categories = [
-  {
-    id: 1,
-    name: "Events",
-  },
-  {
-    id: 2,
-    name: "Food",
-  },
-  {
-    id: 3,
-    name: "Traditions",
-  },
-];
-
 const AddNews = () => {
   const {
     alert,
-    fetchCrew,
     crew,
     infoContainer,
     handlerNews,
     imageChangeHandler,
     isLoading,
     image,
+    categories,
     invalid,
+    deleteImage,
+    setImgName,
+    imgName,
   } = useContainer();
 
   useEffect(() => {
-    fetchCrew();
-  }, []);
+   setImgName({...imgName, type: "news"})
+  }, [])
+
+  console.log({imgName})
 
   return (
     <>
@@ -87,7 +77,7 @@ const AddNews = () => {
                 <section className="form-container">
                   <div className="form-control">
                     <label htmlFor="title">Title</label>
-                    <input
+                    <inputt
                       id="title"
                       placeholder="add title"
                       type="text"
@@ -129,9 +119,13 @@ const AddNews = () => {
                     />
                     <S.PreviewContainer>
                       {image && (
+                        <>
                         <S.PreviewImage src={image} alt="Picture preview" />
+                        <button type="button" onClick={() => deleteImage(image)}>X</button>
+                        </>
                       )}
                     </S.PreviewContainer>
+
                     <F.Text className="validation-alert">
                       {!invalid.errorMsg && !image && "Field required."}
                       {invalid && invalid.errorMsg}
@@ -165,8 +159,8 @@ const AddNews = () => {
                         id: "category",
                         name: "category",
                         options: categories.map((item) => ({
-                          label: item.name,
-                          value: item.name,
+                          label: item,
+                          value: item,
                         })),
                         onChange: (values) =>
                           setFieldValue(FORMIK_HELPER.CATEGORY, values.value),

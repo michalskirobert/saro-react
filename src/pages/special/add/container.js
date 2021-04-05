@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions, uploadActions } from "@actions";
+import { cmsActions, fetchActions} from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
@@ -13,7 +13,9 @@ export const useContainer = () => {
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
+  const [imgName, setImgName] = useState("")
   const [invalid, setInvalid] = useState({ errorMsg: "" });
+  const [categories, setCategories] = useState([]);
   const [image, setImage] = useState();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -34,7 +36,6 @@ export const useContainer = () => {
         publishedDate: new Date().toLocaleString(),
         id,
       });
-    console.log("done");
   };
 
   const imageChangeHandler = (e) => {
@@ -42,6 +43,9 @@ export const useContainer = () => {
   };
 
   const uploadImage = async (file) => {
+
+    console.log({imgName})
+    setImgName(file.name)
     setInvalid({});
 
     if (file.type !== "image/png") {
@@ -52,11 +56,13 @@ export const useContainer = () => {
 
     dispatch(cmsActions.uploadImageRequest());
     storage
-      .ref(`/images/${file.name}`)
+      .ref(`/images/${imgName.type}/${file.name}`)
       .put(file)
       .on("state_changed", () => {
+        setImgName({...imgName, name: file.name});
+
         storage
-          .ref("images")
+          .ref(`images/${imgName.type}`)
           .child(file.name)
           .getDownloadURL()
           .then((resp) => {
@@ -68,6 +74,11 @@ export const useContainer = () => {
           });
       });
   };
+
+  const deleteImage = async (file) => {
+    console.log({delete: imgName})
+    return await storage.refFromURL(file).delete();
+  }
 
   const handlerNews = (values) => {
     dispatch(cmsActions.clear());
@@ -147,19 +158,19 @@ export const useContainer = () => {
       );
   };
 
-  const getCategories = (lang) => {
-    //dorób tutaj dispatche, reducera w CMS do pobrania kategorii, constantsy i akcje :P
-    try {
+  const fetchCategories = () => {
       firestore
         .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
         .doc(lang)
-        .onSnapshot((resp) => console.log(resp.data()));
-    } catch (error) {}
+        .onSnapshot((resp) => {
+          setCategories(resp.data().blogCategory)
+          console.log(resp.data().blogCategory)
+        });
   };
 
   useEffect(() => {
-    //Przerzuć crew z add i wywołaj tutaj, wtedy nie musisz kilka razy wywoływać :P
-    getCategories(lang);
+    fetchCategories();
+    fetchCrew();
   }, []);
 
   return {
@@ -174,10 +185,13 @@ export const useContainer = () => {
     handlerEvents,
     handlerArticle,
     crew,
+    categories,
     fetchCrew,
     imageChangeHandler,
-    isLoading,
     image,
     invalid,
-  };
+    deleteImage,
+    setImgName,
+    imgName
+    };
 };

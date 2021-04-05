@@ -60,6 +60,7 @@ const getCrewSuccess = (payload) => ({
 
 const getCrewFailure = () => ({ type: C.FETCH_CONSTANTS.GET_CREW_FAILURE });
 
+
 const getDatabaseRequest = () => ({
   type: C.FETCH_CONSTANTS.GET_DATABASE_REQUEST,
 });
@@ -72,6 +73,7 @@ const getDatabaseSucces = (payload) => ({
 const getDatabaseFailure = () => ({
   type: C.FETCH_CONSTANTS.GET_DATABASE_FAILURE,
 });
+
 
 export const fetchActions = {
   getNewsSuccess,
