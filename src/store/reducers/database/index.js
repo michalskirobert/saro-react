@@ -11,6 +11,7 @@ const initialState = {
   hero: [],
   crew: [],
   data: {},
+  category: [],
 };
 
 export const database = (state = initialState, action) => {
@@ -110,6 +111,25 @@ export const database = (state = initialState, action) => {
         isError: true,
         errorContent: "Ooops, we couldn't load our crew :/",
       };
+      case CONSTANTS.FETCH_CONSTANTS.GET_CATEGORY_REQUEST:
+        return {
+          ...state,
+          isLoading: true,
+        };
+      case CONSTANTS.FETCH_CONSTANTS.GET_CATEGORY_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          category: action.payload,
+        };
+      case CONSTANTS.FETCH_CONSTANTS.GET_CATEGORY_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          category: [],
+          isError: true,
+          errorContent: "Ooops, we couldn't load categories :/",
+        };
     case CONSTANTS.FETCH_CONSTANTS.GET_DATABASE_REQUEST:
       return {
         ...state,
@@ -129,6 +149,25 @@ export const database = (state = initialState, action) => {
         isError: true,
         errorContent: action.payload,
       };
+      case CONSTANTS.FETCH_CONSTANTS.GET_NAV_REQUEST:
+        return {
+          ...state,
+          isLoading: true,
+        };
+      case CONSTANTS.FETCH_CONSTANTS.GET_NAV_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          nav: action.payload,
+        };
+      case CONSTANTS.FETCH_CONSTANTS.GET_NAV_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          nav: [],
+          isError: true,
+          errorContent: "Ooops, we couldn't load our menu :/ Try again.",
+        };
     default:
       return state;
   }

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { FaAngleLeft } from "react-icons/fa";
+import { useContainer } from "./container";
 
 import * as S from "./style";
 
@@ -132,6 +133,12 @@ const nav = [
 const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   const [selected, setSelected] = useState(null);
   const user = useSelector((state) => state.currentUser);
+
+  // const {nav, fetchNav} = useContainer()
+
+//   useEffect(()=>{
+//     fetchNav()
+// }, [])
 
   const publicMap = nav.filter((item) => {
     return item.isLogged === false;

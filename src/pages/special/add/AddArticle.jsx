@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
@@ -15,33 +15,30 @@ import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 import * as C from "@utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
 
-const categories = [
-  {
-    id: 1,
-    name: "Events",
-  },
-  {
-    id: 2,
-    name: "Food",
-  },
-  {
-    id: 3,
-    name: "Traditions",
-  },
-];
+// const categories = [
+//   {
+//     id: 1,
+//     name: "Events",
+//   },
+//   {
+//     id: 2,
+//     name: "Food",
+//   },
+//   {
+//     id: 3,
+//     name: "Traditions",
+//   },
+// ];
 
 const AddArticle = () => {
   const {
     alert,
     infoContainer,
-    fetchCrew,
+    categories,
     handlerArticle,
     crew,
   } = useContainer();
 
-  useEffect(() => {
-    fetchCrew();
-  }, []);
   return (
     <Formik
       {...{

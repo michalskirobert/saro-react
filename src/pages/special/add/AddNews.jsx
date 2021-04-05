@@ -16,37 +16,33 @@ import { FORMIK_HELPER } from "./utils.js";
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
-const categories = [
-  {
-    id: 1,
-    name: "Events",
-  },
-  {
-    id: 2,
-    name: "Food",
-  },
-  {
-    id: 3,
-    name: "Traditions",
-  },
-];
+// const categories = [
+//   {
+//     id: 1,
+//     name: "Events",
+//   },
+//   {
+//     id: 2,
+//     name: "Food",
+//   },
+//   {
+//     id: 3,
+//     name: "Traditions",
+//   },
+// ];
 
 const AddNews = () => {
   const {
     alert,
-    fetchCrew,
     crew,
     infoContainer,
     handlerNews,
     imageChangeHandler,
     isLoading,
     image,
+    categories,
     invalid,
   } = useContainer();
-
-  useEffect(() => {
-    fetchCrew();
-  }, []);
 
   return (
     <>

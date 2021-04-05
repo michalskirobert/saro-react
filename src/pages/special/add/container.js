@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions, uploadActions } from "@actions";
+import { cmsActions, fetchActions} from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
@@ -13,6 +13,7 @@ export const useContainer = () => {
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
+  const categories = useSelector((state)=> state.database.category)
   const [invalid, setInvalid] = useState({ errorMsg: "" });
   const [image, setImage] = useState();
   const history = useHistory();
@@ -147,19 +148,24 @@ export const useContainer = () => {
       );
   };
 
-  const getCategories = (lang) => {
-    //dorób tutaj dispatche, reducera w CMS do pobrania kategorii, constantsy i akcje :P
+  const fetchCategories = (lang) => {
+    dispatch(fetchActions.getCategoryRequest())
     try {
       firestore
         .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
         .doc(lang)
-        .onSnapshot((resp) => console.log(resp.data()));
-    } catch (error) {}
+        .onSnapshot((resp) => {
+          console.log(resp.data())
+          // dispatch(fetchActions.geCategorySuccess(resp.docs.map(item => item.data())))
+        });
+    } catch (error) {
+      dispatch(fetchActions.getCategoryFailure());
+    }
   };
 
-  useEffect(() => {
-    //Przerzuć crew z add i wywołaj tutaj, wtedy nie musisz kilka razy wywoływać :P
-    getCategories(lang);
+  useEffect(() => {    
+    fetchCategories(lang);
+    fetchCrew();
   }, []);
 
   return {
@@ -174,9 +180,9 @@ export const useContainer = () => {
     handlerEvents,
     handlerArticle,
     crew,
+    categories,
     fetchCrew,
     imageChangeHandler,
-    isLoading,
     image,
     invalid,
   };
