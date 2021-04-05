@@ -43,13 +43,11 @@ export const useContainer = () => {
   };
 
   const uploadImage = async (file) => {
-
-    console.log({imgName})
     setImgName(file.name)
     setInvalid({});
 
     if (file.type !== "image/png") {
-      setInvalid({ errorMsg: "ppp" });
+      setInvalid({ errorMsg: "Invalid file format. Choose .png" });
       setImage(null);
       return;
     }
@@ -76,7 +74,7 @@ export const useContainer = () => {
   };
 
   const deleteImage = async (file) => {
-    console.log({delete: imgName})
+    setImage(null)
     return await storage.refFromURL(file).delete();
   }
 
@@ -164,7 +162,6 @@ export const useContainer = () => {
         .doc(lang)
         .onSnapshot((resp) => {
           setCategories(resp.data().blogCategory)
-          console.log(resp.data().blogCategory)
         });
   };
 

@@ -32,11 +32,11 @@ const AddNews = () => {
     imgName,
   } = useContainer();
 
+
+
   useEffect(() => {
    setImgName({...imgName, type: "news"})
   }, [])
-
-  console.log({imgName})
 
   return (
     <>
@@ -77,7 +77,7 @@ const AddNews = () => {
                 <section className="form-container">
                   <div className="form-control">
                     <label htmlFor="title">Title</label>
-                    <inputt
+                    <input
                       id="title"
                       placeholder="add title"
                       type="text"
@@ -121,7 +121,7 @@ const AddNews = () => {
                       {image && (
                         <>
                         <S.PreviewImage src={image} alt="Picture preview" />
-                        <button type="button" onClick={() => deleteImage(image)}>X</button>
+                        <S.PreviewDelete type="button" onClick={() => deleteImage(image)}>X</S.PreviewDelete>
                         </>
                       )}
                     </S.PreviewContainer>

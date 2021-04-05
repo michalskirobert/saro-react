@@ -12,6 +12,7 @@ import { useContainer } from "./container";
 import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
 import * as C from "@utils/constants";
+import * as S from "./styles";
 import { FORMIK_HELPER } from "./utils.js";
 
 const cities = [
@@ -24,7 +25,21 @@ const cities = [
 ];
 
 const AddEvents = () => {
-  const { alert, handlerEvents, crew} = useContainer();
+  const { 
+    alert, 
+    handlerEvents, 
+    crew,
+    image,
+    deleteImage,
+    imageChangeHandler,
+    invalid,
+    isLoading,
+    setImgName,
+    imgName,
+  } = useContainer();
+  useEffect(() => {
+    setImgName({...imgName, type: "events"})
+   }, [])
 
   return (
     <Formik
@@ -162,17 +177,25 @@ const AddEvents = () => {
                 <label htmlFor="imgURL">Img URL</label>
                 <input
                   id="imgURL"
-                  placeholder="add img URL"
-                  type="text"
+                  type="file"
                   value={values[FORMIK_HELPER.IMG_URL]}
-                  onChange={handleChange}
+                  onChange={imageChangeHandler}
                 />
-                {errors[FORMIK_HELPER.IMG_URL] ||
-                touched[FORMIK_HELPER.IMG_URL] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORMIK_HELPER.IMG_URL]}
-                  </F.Text>
-                ) : null}
+                <S.PreviewContainer>
+                  {image && (
+                    <>
+                      <S.PreviewImage src={image} alt="Picture preview" />
+                      <S.PreviewDelete
+                        type="button"
+                        onClick={() => deleteImage(image)}
+                      >X</S.PreviewDelete>
+                    </>
+                  )}
+                </S.PreviewContainer>
+                <F.Text className="validation-alert">
+                      {!invalid.errorMsg && !image && "Field required."}
+                      {invalid && invalid.errorMsg}
+                    </F.Text>
               </div>
               <div className="form-control">
                 <label htmlFor="link">Link</label>
@@ -251,7 +274,7 @@ const AddEvents = () => {
             <Button
               className="submit-btn"
               type="submit"
-              disabled={!isValid}
+              disabled={!image || invalid.errorMsg || isLoading || !isValid}
               onClick={handleSubmit}
             >
               Add

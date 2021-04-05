@@ -15,20 +15,6 @@ import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 import * as C from "@utils/constants";
 import { FORMIK_HELPER } from "./utils.js";
 
-// const categories = [
-//   {
-//     id: 1,
-//     name: "Events",
-//   },
-//   {
-//     id: 2,
-//     name: "Food",
-//   },
-//   {
-//     id: 3,
-//     name: "Traditions",
-//   },
-// ];
 
 const AddArticle = () => {
   const {
@@ -114,8 +100,8 @@ const AddArticle = () => {
                     id: "category",
                     name: "category",
                     options: categories.map((item) => ({
-                      label: item.name,
-                      value: item.name,
+                      label: item,
+                      value: item,
                     })),
                     onChange: (values) =>
                       setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
