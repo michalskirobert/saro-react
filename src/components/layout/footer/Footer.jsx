@@ -5,7 +5,7 @@ import { userActions } from "@actions";
 
 const Footer = () => {
   const dispatch = useDispatch();
-  const footerElements = useSelector((state) => state.database.data.footer);
+  const footerElements = useSelector((state) => state.database.init.footer);
 
   return (
     <>
