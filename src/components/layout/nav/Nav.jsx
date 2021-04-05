@@ -6,7 +6,6 @@ import throttle from "lodash.throttle";
 
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
-import { useContainer } from "./container";
 
 import UserIcon from "@assets/images/components/nav/UserIcon.svg";
 import Hamburger from "@assets/images/components/nav/Hamburger.svg";

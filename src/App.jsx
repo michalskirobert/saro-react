@@ -12,7 +12,6 @@ import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { fetchActions, userActions } from "./store/actions";
 import Nav from "./components/layout/nav/Nav";
-import Sidebar from "./components/layout/nav/Sidebar";
 import Footer from "./components/layout/footer/Footer";
 // Pages
 
@@ -78,11 +77,11 @@ const App = () => {
     getDataHandler();
   }, []);
 
+
   return (
     <Router>
       <Unlisten>
         <Nav />
-        <Sidebar />
         <Switch>
           {/* Public Router */}
           <Route path="/" component={Home} exact />

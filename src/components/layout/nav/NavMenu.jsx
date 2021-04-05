@@ -1,148 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { FaAngleLeft } from "react-icons/fa";
-import { useContainer } from "./container";
 
 import * as S from "./style";
 
-const nav = [
-  {
-    title: "Home",
-    path: "/",
-    classLink: "",
-    isLogged: false,
-  },
-  {
-    title: "Lessons",
-    path: "/lessons",
-    classLink: "",
-    isLogged: false,
-    content: [
-      {
-        title: "Begginer",
-        path: "/lessons",
-      },
-      {
-        title: "Elementary",
-        path: "lessons/",
-      },
-      {
-        title: "Pre-intermediate",
-        path: "/lessons",
-      },
-      {
-        title: "Low Intermediate",
-        path: "/lessons",
-      },
-      {
-        title: "Intermediate",
-        path: "/lessons",
-      },
-      {
-        title: "Upper Intermediate",
-        path: "/lessons",
-      },
-      {
-        title: "Pre-advanced",
-        path: "/lessons",
-      },
-      {
-        title: "Advanced",
-        path: "/lessons",
-      },
-      {
-        title: "Very Advanced",
-        path: "/lessons",
-      },
-    ],
-  },
-  {
-    title: "Tests",
-    path: "/tests",
-    classLink: "",
-    isLogged: false,
-  },
-  {
-    title: "Stuff",
-    path: "/stuff",
-    classLink: "",
-    isLogged: false,
-    content: [
-      {
-        title: "Foods",
-        path: "",
-      },
-      {
-        title: "Curiosities",
-        path: "",
-      },
-      {
-        title: "Traditions",
-        path: "",
-      },
-      {
-        title: "Media",
-        path: "",
-      },
-      {
-        title: "Tools",
-        path: "",
-      },
-      {
-        title: "Quiz",
-        path: "",
-      },
-      {
-        title: "Dialogue",
-        path: "",
-      },
-      {
-        title: "Beauty",
-        path: "",
-      },
-    ],
-  },
-  {
-    title: "Community",
-    path: "/community",
-    classLink: "",
-    isLogged: false,
-  },
-  {
-    title: "About Us",
-    path: "/about",
-    classLink: "",
-    isLogged: false,
-  },
-  {
-    title: "Sign In",
-    path: "/sign-in",
-    classLink: "",
-    isLogged: false,
-  },
-  {
-    title: "Sign Out",
-    path: "/sign-in",
-    classLink: "",
-    isLogged: true,
-  },
-];
-
 const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
+
   const [selected, setSelected] = useState(null);
   const user = useSelector((state) => state.currentUser);
+  const nav = useSelector(state => state.database.data.nav);
 
-  // const {nav, fetchNav} = useContainer()
-
-//   useEffect(()=>{
-//     fetchNav()
-// }, [])
-
-  const publicMap = nav.filter((item) => {
-    return item.isLogged === false;
-  });
+  const publicMap = nav.filter(item => !item.isLogged)
 
   const toggleInnerMenu = (index) => {
     if (selected === index) {

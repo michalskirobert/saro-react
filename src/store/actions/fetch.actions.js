@@ -60,15 +60,6 @@ const getCrewSuccess = (payload) => ({
 
 const getCrewFailure = () => ({ type: C.FETCH_CONSTANTS.GET_CREW_FAILURE });
 
-const getCategoryRequest = () => ({ type: C.FETCH_CONSTANTS.GET_CREW_REQUEST });
-
-const geCategorySuccess = (payload) => ({
-  type: C.FETCH_CONSTANTS.GET_CREW_SUCCESS,
-  payload,
-});
-
-const getCategoryFailure = () => ({ type: C.FETCH_CONSTANTS.GET_CREW_FAILURE });
-
 
 const getDatabaseRequest = () => ({
   type: C.FETCH_CONSTANTS.GET_DATABASE_REQUEST,
@@ -83,22 +74,8 @@ const getDatabaseFailure = () => ({
   type: C.FETCH_CONSTANTS.GET_DATABASE_FAILURE,
 });
 
-const getNavRequest = () => ({ type: C.FETCH_CONSTANTS.GET_NAV_REQUEST });
-
-const getNavSuccess = (payload) => ({
-  type: C.FETCH_CONSTANTS.GET_NAV_SUCCESS,
-  payload,
-});
-
-const getNavFailure = () => ({ type: C.FETCH_CONSTANTS.GET_NAV_FAILURE });
 
 export const fetchActions = {
-  getNavRequest,
-  getNavSuccess,
-  getNavFailure,
-  getCategoryRequest,
-  geCategorySuccess,
-  getCategoryFailure,
   getNewsSuccess,
   getNewsRequest,
   getNewsFailure,
