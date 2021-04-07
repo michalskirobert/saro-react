@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { ReactComponent as IconTeacher } from "@assets/images/components/home/chalkboardTeacher.svg";
 import { ReactComponent as IconBook } from "@assets/images/components/home/book.svg";
 import { ReactComponent as IconNotePencil } from "@assets/images/components/home/notePencil.svg";
 import { ReactComponent as IconBird } from "@assets/images/components/home/bird.svg";
+import index from "../404/Error";
 
 const Introduction = () => {
+  const sectionData = useSelector((state) => state.database.init.pages);
   const cardsData = [
     {
       svg: <IconTeacher />,
@@ -35,23 +38,21 @@ const Introduction = () => {
   return (
     <section className="introduction">
       <div className="introduction__welcome">
-        <h2>WELCOME TO SARO</h2>
-        <p>
-          The project was created as a result of a desire to help people
-          studying the Polish language. SARO was created from combining the name
-          “Saki” in Japanese 沙季 and the name Robert. Saki and Robert are
-          Polish-Japanese couple trying to share their knowledge with others.
-        </p>
+        <h2>{sectionData?.homepage[0].sections[1].header}</h2>
+        <p>{sectionData?.homepage[0].sections[1].details}</p>
       </div>
       <div className="introduction__cards">
-        {cardsData.map((card, index) => {
+        {sectionData?.homepage[1].subsection.map((card, key) => {
+          const { details, header, imgURL } = card;
           return (
-            <div className="card" key={index}>
+            <div className="card" key={key}>
               <div className="text">
-                <h2 className={card.color}>{card.title} </h2>
-                <p className={card.color}>{card.subtitle}</p>
+                <h2 className="">{header} </h2>
+                <p className="">{details}</p>
               </div>
-              <div className={`icon ${card.color}`}>{card.svg}</div>
+              <div className={`icon `}>
+                <img src={imgURL} alt=""></img>
+              </div>
             </div>
           );
         })}

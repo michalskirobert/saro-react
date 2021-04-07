@@ -6,15 +6,13 @@ const PolsihLearning = () => {
   return (
     <section className="section__Polish__Learning">
       <div className="polish__Learning__info">
-        <h2 className="title">
-          {sectionData ? sectionData.homepage[0].sections[0].header : null}
-        </h2>
+        <h2 className="title">{sectionData?.homepage[0].sections[0].header}</h2>
         <p className="subtitle">
-          {sectionData ? sectionData.homepage[0].sections[0].details : null}
+          {sectionData?.homepage[0].sections[0].details}
         </p>
         <button className="btn find-out-btn">
           {" "}
-          {sectionData ? sectionData.homepage[0].sections[0].linkTitle : null}
+          {sectionData?.homepage[0].sections[0].linkTitle}
         </button>
       </div>
     </section>
