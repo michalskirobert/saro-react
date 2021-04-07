@@ -43,7 +43,6 @@ const Edit = () => {
   const {
     alert,
     fetchCrew,
-    goBack,
     getDatabase,
     database,
     updateDatabase,
@@ -111,7 +110,7 @@ const Edit = () => {
                     </F.Text>
                   ) : null}
                 </div>
-                {type === !CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
+                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
                   <div className="form-control">
                     <label htmlFor="subtitle">Subtitle</label>
                     <input
@@ -208,7 +207,7 @@ const Edit = () => {
                     ) : null}
                   </div>
                 ) : null}
-                {type === !CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
+                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
                   <div className="form-control">
                     <label htmlFor="imgURL">Img URL</label>
                     <input

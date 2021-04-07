@@ -12,9 +12,9 @@ export const useEdit = () => {
   const [type, setType] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
-
   const lang = useSelector((state) => state.general.language);
   const database = useSelector((state) => state.database);
+  const footer = database.init.footer
 
   const getDatabase = (id, type) => {
     try {
@@ -78,5 +78,6 @@ export const useEdit = () => {
     database,
     getDatabase,
     updateDatabase,
+    footer
   };
 };
