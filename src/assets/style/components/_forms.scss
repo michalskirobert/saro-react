@@ -297,3 +297,50 @@ form.cms {
     }
   }
 }
+
+form.cms-translate {
+  display: block;
+  margin: 0 auto;
+  max-width: 900px;
+  .translate-container {
+    margin-top: 50px;
+
+    .form-group {
+      border-top: 1px solid $crl-main-placeholder;
+      padding-top: 20px;
+      margin-top: 40px;
+
+      label {
+
+      }
+      input, textarea {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid $crl-base-blue;
+      }
+
+      blockquote {
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+    }
+    
+  }
+  .submit-btn {
+    display: block;
+    color: $crl-base;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    background-color: $crl-base-blue;
+    border: 1px solid $crl-base-blue;
+    opacity: 1;
+    border-radius: 30px;
+    padding: 10px 35px;
+    margin: 25px auto;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba($crl-base-blue, 0.9);
+    }
+  }
+}

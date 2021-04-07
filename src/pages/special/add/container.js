@@ -9,6 +9,8 @@ import { firestore, storage } from "@components/feature/firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export const useContainer = () => {
+  const footer = useSelector((state)=>state.database.init.footer)
+
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
@@ -37,7 +39,7 @@ export const useContainer = () => {
         id,
       });
   };
-
+  console.log(footer)
   const imageChangeHandler = (e) => {
     uploadImage(e.currentTarget.files[0]);
   };

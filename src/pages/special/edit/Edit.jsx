@@ -43,7 +43,6 @@ const Edit = () => {
   const {
     alert,
     fetchCrew,
-    goBack,
     getDatabase,
     database,
     updateDatabase,
