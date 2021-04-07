@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -7,12 +7,11 @@ import { FaAngleLeft } from "react-icons/fa";
 import * as S from "./style";
 
 const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
-
   const [selected, setSelected] = useState(null);
   const user = useSelector((state) => state.currentUser);
-  const nav = useSelector(state => state.database.data.nav);
+  const nav = useSelector((state) => state.database.init.nav);
 
-  const publicMap = nav.filter(item => !item.isLogged)
+  const publicMap = nav.filter((item) => !item.isLogged);
 
   const toggleInnerMenu = (index) => {
     if (selected === index) {

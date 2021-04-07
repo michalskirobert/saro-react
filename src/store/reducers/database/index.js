@@ -9,7 +9,7 @@ const initialState = {
   news: [],
   hero: [],
   crew: [],
-  data: { nav: [] },
+  init: { nav: [] },
 };
 
 export const database = (state = initialState, action) => {
@@ -119,13 +119,13 @@ export const database = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        init: action.payload,
       };
     case CONSTANTS.FETCH_CONSTANTS.GET_DATABASE_FAILURE:
       return {
         ...state,
         isLoading: false,
-        data: {},
+        init: {},
         isError: true,
         errorContent: action.payload,
       };
