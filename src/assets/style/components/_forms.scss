@@ -309,19 +309,26 @@ form.cms-translate {
       border-top: 1px solid $crl-main-placeholder;
       padding-top: 20px;
       margin-top: 40px;
-
-      label {
-
-      }
       input, textarea {
         width: 100%;
         border-radius: 5px;
         border: 1px solid $crl-base-blue;
+        padding: 10px;
       }
 
       blockquote {
         font-style: italic;
         font-size: 0.9rem;
+
+        .blockquote-footer::before {
+          display: none;
+        }
+      }
+      .card {
+        border-radius: 0px;
+        border: none;
+        border-left: 1px solid $crl-base-blue;
+        margin-bottom: 10px;
       }
     }
     
