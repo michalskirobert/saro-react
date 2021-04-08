@@ -1,8 +1,10 @@
 import React from "react";
-
-import { ReactComponent as Globe } from "@assets/images/components/home/globe.svg";
+import { useSelector } from "react-redux";
 
 const PartnerNearYou = () => {
+  const homepageData = useSelector(
+    (state) => state.database.init.pages.homepage
+  );
   return (
     <>
       <div className="section__partnerNearYou">
@@ -11,18 +13,27 @@ const PartnerNearYou = () => {
             <div className="left"></div>
             <div className="bottom"></div>
             <div className="overlay">
-              <Globe className="globe" />
-              <h2>
-                Are you looking for a face-to-face Polish partner near you?
-              </h2>
-              <select
-                placeholder="- Choose a country/territory -"
-                defaultValue="example"
-              >
-                <option>- example -</option>
-                <option>- example -</option>
-                <option>- example -</option>
-              </select>
+              {homepageData?.map((item) => {
+                const { nearPeople } = item;
+                return nearPeople ? (
+                  <>
+                    <img
+                      src={nearPeople?.imgURL}
+                      alt="globe"
+                      className="globe"
+                    />
+                    <h2>{nearPeople?.header}</h2>
+                    <select
+                      placeholder="- Choose a country/territory -"
+                      defaultValue="example"
+                    >
+                      {nearPeople?.options.map((item) => (
+                        <option>- {item.value} -</option>
+                      ))}
+                    </select>
+                  </>
+                ) : null;
+              })}
             </div>
           </div>
         </div>
