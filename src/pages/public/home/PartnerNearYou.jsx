@@ -2,7 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PartnerNearYou = () => {
-  const sectionData = useSelector((state) => state.database.init.pages);
+  const homepageData = useSelector(
+    (state) => state.database.init.pages.homepage
+  );
   return (
     <>
       <div className="section__partnerNearYou">
@@ -11,20 +13,27 @@ const PartnerNearYou = () => {
             <div className="left"></div>
             <div className="bottom"></div>
             <div className="overlay">
-              <img
-                src={sectionData?.homepage[2].nearPeople.imgURL}
-                alt=""
-                className="globe"
-              />
-              <h2>{sectionData?.homepage[2].nearPeople.header}</h2>
-              <select
-                placeholder="- Choose a country/territory -"
-                defaultValue="example"
-              >
-                {sectionData?.homepage[2].nearPeople.options.map((item) => (
-                  <option>-{item.value}-</option>
-                ))}
-              </select>
+              {homepageData?.map((item) => {
+                const { nearPeople } = item;
+                return nearPeople ? (
+                  <>
+                    <img
+                      src={nearPeople?.imgURL}
+                      alt="globe"
+                      className="globe"
+                    />
+                    <h2>{nearPeople?.header}</h2>
+                    <select
+                      placeholder="- Choose a country/territory -"
+                      defaultValue="example"
+                    >
+                      {nearPeople?.options.map((item) => (
+                        <option>- {item.value} -</option>
+                      ))}
+                    </select>
+                  </>
+                ) : null;
+              })}
             </div>
           </div>
         </div>

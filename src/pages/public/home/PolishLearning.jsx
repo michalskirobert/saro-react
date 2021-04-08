@@ -2,18 +2,28 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PolsihLearning = () => {
-  const sectionData = useSelector((state) => state.database.init.pages);
+  const homepageData = useSelector(
+    (state) => state.database.init.pages.homepage
+  );
   return (
     <section className="section__Polish__Learning">
       <div className="polish__Learning__info">
-        <h2 className="title">{sectionData?.homepage[0].sections[0].header}</h2>
-        <p className="subtitle">
-          {sectionData?.homepage[0].sections[0].details}
-        </p>
-        <button className="btn find-out-btn">
-          {" "}
-          {sectionData?.homepage[0].sections[0].linkTitle}
-        </button>
+        {homepageData?.map((item) => {
+          const { sections } = item;
+          return sections
+            ? sections.map((item) => {
+                const { linkTitle, header, details } = item;
+                return linkTitle ? (
+                  <>
+                    {" "}
+                    <h2 className="title">{header}</h2>
+                    <p className="subtitle">{details}</p>{" "}
+                    <button className="btn find-out-btn"> {linkTitle}</button>
+                  </>
+                ) : null;
+              })
+            : null;
+        })}
       </div>
     </section>
   );
