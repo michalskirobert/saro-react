@@ -25,9 +25,9 @@ const cities = [
 ];
 
 const AddEvents = () => {
-  const { 
-    alert, 
-    handlerEvents, 
+  const {
+    alert,
+    handlerEvents,
     crew,
     image,
     deleteImage,
@@ -38,8 +38,9 @@ const AddEvents = () => {
     imgName,
   } = useContainer();
   useEffect(() => {
-    setImgName({...imgName, type: "events"})
-   }, [])
+    setImgName({ ...imgName, type: "events" });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Formik
@@ -188,14 +189,16 @@ const AddEvents = () => {
                       <S.PreviewDelete
                         type="button"
                         onClick={() => deleteImage(image)}
-                      >X</S.PreviewDelete>
+                      >
+                        X
+                      </S.PreviewDelete>
                     </>
                   )}
                 </S.PreviewContainer>
                 <F.Text className="validation-alert">
-                      {!invalid.errorMsg && !image && "Field required."}
-                      {invalid && invalid.errorMsg}
-                    </F.Text>
+                  {!invalid.errorMsg && !image && "Field required."}
+                  {invalid && invalid.errorMsg}
+                </F.Text>
               </div>
               <div className="form-control">
                 <label htmlFor="link">Link</label>

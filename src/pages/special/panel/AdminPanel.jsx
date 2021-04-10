@@ -63,6 +63,7 @@ const AdminPanel = () => {
     if (totalCount <= itemsPerPage) {
       paginate(1);
     }
+    // eslint-disable-next-line
   }, [totalCount, itemsPerPage]);
 
   const removeItem = async (type, id) => {
@@ -78,6 +79,7 @@ const AdminPanel = () => {
     getNews();
     getEvents();
     getPosts();
+    // eslint-disable-next-line
   }, []);
 
   return (

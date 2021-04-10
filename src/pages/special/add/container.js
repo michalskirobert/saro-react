@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions} from "@actions";
+import { cmsActions, fetchActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
-import { v4 as uuidv4 } from "uuid";
+import uuidv4 from "react-uuid";
 
 export const useContainer = () => {
-  const footer = useSelector((state)=>state.database.init.footer)
+  const footer = useSelector((state) => state.database.init.footer);
 
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
-  const [imgName, setImgName] = useState("")
+  const [imgName, setImgName] = useState("");
   const [invalid, setInvalid] = useState({ errorMsg: "" });
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState();
@@ -39,13 +39,12 @@ export const useContainer = () => {
         id,
       });
   };
-  console.log(footer)
   const imageChangeHandler = (e) => {
     uploadImage(e.currentTarget.files[0]);
   };
 
   const uploadImage = async (file) => {
-    setImgName(file.name)
+    setImgName(file.name);
     setInvalid({});
 
     if (file.type !== "image/png") {
@@ -59,7 +58,7 @@ export const useContainer = () => {
       .ref(`/images/${imgName.type}/${file.name}`)
       .put(file)
       .on("state_changed", () => {
-        setImgName({...imgName, name: file.name});
+        setImgName({ ...imgName, name: file.name });
 
         storage
           .ref(`images/${imgName.type}`)
@@ -69,16 +68,16 @@ export const useContainer = () => {
             dispatch(cmsActions.uploadImageSuccess());
             setImage(resp);
           })
-          .catch((err) => {
+          .catch(() => {
             dispatch(cmsActions.uploadImageFailure());
           });
       });
   };
 
   const deleteImage = async (file) => {
-    setImage(null)
+    setImage(null);
     return await storage.refFromURL(file).delete();
-  }
+  };
 
   const handlerNews = (values) => {
     dispatch(cmsActions.clear());
@@ -129,6 +128,7 @@ export const useContainer = () => {
         ...values,
         id,
         type: CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS,
+        imgURL: image,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
       });
@@ -159,17 +159,18 @@ export const useContainer = () => {
   };
 
   const fetchCategories = () => {
-      firestore
-        .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
-        .doc(lang)
-        .onSnapshot((resp) => {
-          setCategories(resp.data().blogCategory)
-        });
+    firestore
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
+      .doc(lang)
+      .onSnapshot((resp) => {
+        setCategories(resp.data().blogCategory);
+      });
   };
 
   useEffect(() => {
     fetchCategories();
     fetchCrew();
+    // eslint-disable-next-line
   }, []);
 
   return {
@@ -191,6 +192,6 @@ export const useContainer = () => {
     invalid,
     deleteImage,
     setImgName,
-    imgName
-    };
+    imgName,
+  };
 };

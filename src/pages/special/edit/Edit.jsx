@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import Select from "react-select";
-import { Editor } from "@tinymce/tinymce-react";
+import CustomEditor from "@components/shared/custom-editor";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
@@ -40,13 +40,7 @@ const categories = [
 ];
 
 const Edit = () => {
-  const {
-    alert,
-    fetchCrew,
-    getDatabase,
-    database,
-    updateDatabase,
-  } = useEdit();
+  const { alert, fetchCrew, getDatabase, database, updateDatabase } = useEdit();
 
   const query = new URLSearchParams(useLocation().search);
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
@@ -55,9 +49,8 @@ const Edit = () => {
   useEffect(() => {
     getDatabase(id, type);
     fetchCrew();
+    // eslint-disable-next-line
   }, []);
-
-  console.log({ data: database[type], id, type });
 
   return (
     <>
@@ -336,40 +329,11 @@ const Edit = () => {
                 </div>
               ) : (
                 <section className="editor">
-                  <Editor
-                    apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-                    initialValue={database[type]?.content}
-                    init={{
-                      plugins: [
-                        " advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                        " lists link media noneditable preview",
-                        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                        "table emoticons template help",
-                      ],
-                      a_plugin_option: true,
-                      a_configuration_option: 400,
-                      image_title: true,
-                      automatic_uploads: true,
-                      file_picker_types: "image",
-                      toolbar:
-                        "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-                      menu: {
-                        favs: {
-                          title: "Shortcut",
-                          items: "code visualaid | searchreplace | emoticons",
-                        },
-                      },
-                      menubar:
-                        "favs file edit view insert format tools table help",
-                      image_caption: true,
-                      powerpaste_allow_local_images: true,
+                  <CustomEditor
+                    {...{
+                      propName: FORMIK_HELPER.EDITOR,
+                      onChangeEditor: setFieldValue,
                     }}
-                    onChange={(e) =>
-                      setFieldValue(
-                        [FORMIK_HELPER.EDITOR],
-                        e.target.getContent()
-                      )
-                    }
                   />
                   {errors[FORMIK_HELPER.EDITOR] ||
                   touched[FORMIK_HELPER.EDITOR] ? (

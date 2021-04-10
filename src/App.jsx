@@ -75,8 +75,8 @@ const App = () => {
 
   useEffect(() => {
     getDataHandler();
+    // eslint-disable-next-line
   }, []);
-
 
   return (
     <Router>

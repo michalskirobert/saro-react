@@ -8,7 +8,7 @@ import { hero } from "../../../store/actions/hero.actions";
 const Main = () => {
   const { getHero } = useContainer();
   const { getEvents } = useHomeContainer();
-  const [isReversed, setIsReversed] = useState(false);
+  const [isReversed] = useState(false);
 
   const index = useSelector((state) => state.hero);
   const heroData = useSelector((state) => state.database.hero);
@@ -38,11 +38,13 @@ const Main = () => {
     return () => {
       clearInterval(slider);
     };
+    // eslint-disable-next-line
   });
 
   useEffect(() => {
     getHero();
     getEvents();
+    // eslint-disable-next-line
   }, []);
 
   const getBanner = (id) => {
@@ -67,7 +69,6 @@ const Main = () => {
               content,
               link,
               buttonTitle,
-              buttonAction,
             } = item;
             return (
               <div key={id}>

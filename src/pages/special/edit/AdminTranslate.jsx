@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import TranslateFooter from './../translate/TranslateFooter'
-
+import TranslateFooter from "./../translate/TranslateFooter";
 
 const AdminTranslate = () => {
-
-  return (
-    <TranslateFooter />
-  );
+  return <TranslateFooter />;
 };
 
 export default AdminTranslate;

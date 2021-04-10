@@ -1,17 +1,18 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
-import { Editor } from "@tinymce/tinymce-react";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
 import { addNewsValidationScheme } from "./validation";
 
+import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 import { FORMIK_HELPER } from "./utils.js";
+
+import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
@@ -32,11 +33,10 @@ const AddNews = () => {
     imgName,
   } = useContainer();
 
-
-
   useEffect(() => {
-   setImgName({...imgName, type: "news"})
-  }, [])
+    setImgName({ ...imgName, type: "news" });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
@@ -120,8 +120,13 @@ const AddNews = () => {
                     <S.PreviewContainer>
                       {image && (
                         <>
-                        <S.PreviewImage src={image} alt="Picture preview" />
-                        <S.PreviewDelete type="button" onClick={() => deleteImage(image)}>X</S.PreviewDelete>
+                          <S.PreviewImage src={image} alt="Picture preview" />
+                          <S.PreviewDelete
+                            type="button"
+                            onClick={() => deleteImage(image)}
+                          >
+                            X
+                          </S.PreviewDelete>
                         </>
                       )}
                     </S.PreviewContainer>
@@ -197,39 +202,11 @@ const AddNews = () => {
                 </section>
               </div>
               <section className="editor">
-                <Editor
-                  apiKey={`${process.env.REACT_APP_TINY_API_KEY}`}
-                  initialValue={infoContainer.content}
-                  init={{
-                    plugins: [
-                      "advlist autolink link help imagetools image code lists charmap print preview hr anchor pagebreak",
-                      " lists link media noneditable preview",
-                      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                      "table emoticons template help",
-                      "image paste",
-                      "tinydrive",
-                    ],
-                    a_plugin_option: true,
-                    a_configuration_option: 400,
-                    image_title: true,
-                    automatic_uploads: true,
-                    tinydrive_dropbox_app_key: "dxbn3q44my190l8",
-                    toolbar:
-                      "insertfile undo redo a11ycheck | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-                    menu: {
-                      favs: {
-                        title: "Shortcut",
-                        items: "code visualaid | searchreplace | emoticons",
-                      },
-                    },
-                    menubar:
-                      "favs file edit view insert format tools table help",
-                    image_caption: true,
-                    powerpaste_allow_local_images: true,
+                <CustomEditor
+                  {...{
+                    propName: FORMIK_HELPER.EDITOR,
+                    onChangeEditor: setFieldValue,
                   }}
-                  onChange={(e) =>
-                    setFieldValue([FORMIK_HELPER.EDITOR], e.target.getContent())
-                  }
                 />
                 {errors[FORMIK_HELPER.EDITOR] ||
                 touched[FORMIK_HELPER.EDITOR] ? (

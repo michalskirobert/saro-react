@@ -38,4 +38,12 @@ export const GENERAL_CONSTANTS = {
       label: "한국어",
     },
   ],
+  B_PRIMARY: "primary",
+  B_SECONDARY: "secondary",
+  B_SUCCESS: "success",
+  B_WARNING: "warning",
+  B_DANGER: "danger",
+  B_INFO: "info",
+  B_LIGHT: "light",
+  B_DARK: "dark",
 };

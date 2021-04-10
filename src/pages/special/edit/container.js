@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -9,12 +8,11 @@ import * as CONSTANTS from "@utils/constants";
 
 export const useEdit = () => {
   const alert = useSelector((state) => state.CMS.alert);
-  const [type, setType] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
   const database = useSelector((state) => state.database);
-  const footer = database.init.footer
+  const footer = database.init.footer;
 
   const getDatabase = (id, type) => {
     try {
@@ -78,6 +76,6 @@ export const useEdit = () => {
     database,
     getDatabase,
     updateDatabase,
-    footer
+    footer,
   };
 };

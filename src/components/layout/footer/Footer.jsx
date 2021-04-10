@@ -33,7 +33,7 @@ const Footer = () => {
               const { link, imgURL, title } = links;
               return (
                 <li key={index}>
-                  <a href={link} target="_blank">
+                  <a href={link} target="_blank" rel="noreferrer">
                     <img
                       src={imgURL}
                       alt={title}

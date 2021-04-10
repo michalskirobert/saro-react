@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import uuid from "react-uuid";
 
 const PolsihLearning = () => {
   const homepageData = useSelector(
@@ -14,12 +15,12 @@ const PolsihLearning = () => {
             ? sections.map((item) => {
                 const { linkTitle, header, details } = item;
                 return linkTitle ? (
-                  <>
+                  <React.Fragment key={uuid()}>
                     {" "}
                     <h2 className="title">{header}</h2>
                     <p className="subtitle">{details}</p>{" "}
                     <button className="btn find-out-btn"> {linkTitle}</button>
-                  </>
+                  </React.Fragment>
                 ) : null;
               })
             : null;

@@ -4,7 +4,6 @@ import { useHistory, Link } from "react-router-dom";
 
 import { Formik, Form } from "formik";
 
-import { FORM_HELPER } from "./utils";
 import { signUpValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { userActions } from "@actions";

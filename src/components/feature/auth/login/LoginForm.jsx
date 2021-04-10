@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { Button, Form as F } from "react-bootstrap";
 
 import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";
@@ -41,6 +42,7 @@ const LoginForm = () => {
         initialValues: {},
         validateOnChange: true,
         validationSchema: loginValidationScheme,
+        validateOnMount: true,
         onSubmit: (values) => handleSubmit(values),
       }}
     >
@@ -49,11 +51,7 @@ const LoginForm = () => {
           {alert && <Alert />}
           <h2>Log in</h2>
           <div className="form-control">
-            <label htmlFor="email" className="label">
-              {errors.email && touched.email ? (
-                <div className="error__message">{errors.email}</div>
-              ) : null}
-            </label>
+            <label htmlFor="email" className="label"></label>
             <input
               name="email"
               type="email"
@@ -63,13 +61,15 @@ const LoginForm = () => {
               required
               placeholder="jane@example.com"
             />
+
+            {errors[FORM_HELPER.EMAIL] || touched[FORM_HELPER.EMAIL] ? (
+              <F.Text className="validation-alert">
+                {errors[FORM_HELPER.EMAIL]}
+              </F.Text>
+            ) : null}
           </div>
           <div className="form-control">
-            <label htmlFor="password" className="label">
-              {errors.password && touched.password ? (
-                <div>{errors.password}</div>
-              ) : null}
-            </label>
+            <label htmlFor="password" className="label"></label>
             <input
               type="password"
               id="password"
@@ -78,6 +78,11 @@ const LoginForm = () => {
               required
               placeholder="••••••••••••"
             />
+            {errors[FORM_HELPER.PASSWORD] || touched[FORM_HELPER.PASSWORD] ? (
+              <F.Text className="validation-alert">
+                {errors[FORM_HELPER.PASSWORD]}
+              </F.Text>
+            ) : null}
           </div>
           <button type="submit" disabled={!isValid} onClick={handleSubmit}>
             LOG IN

@@ -15,6 +15,7 @@ function Unlisten({ history, children }) {
     return () => {
       unlisten();
     };
+    // eslint-disable-next-line
   }, [history]);
 
   return <Fragment>{children}</Fragment>;

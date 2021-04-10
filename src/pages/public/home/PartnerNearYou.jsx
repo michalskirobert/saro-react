@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import uuid4 from "react-uuid";
 
 const PartnerNearYou = () => {
   const homepageData = useSelector(
@@ -16,7 +17,7 @@ const PartnerNearYou = () => {
               {homepageData?.map((item) => {
                 const { nearPeople } = item;
                 return nearPeople ? (
-                  <>
+                  <React.Fragment key={uuid4()}>
                     <img
                       src={nearPeople?.imgURL}
                       alt="globe"
@@ -28,10 +29,10 @@ const PartnerNearYou = () => {
                       defaultValue="example"
                     >
                       {nearPeople?.options.map((item) => (
-                        <option>- {item.value} -</option>
+                        <option key={uuid4()}>- {item.value} -</option>
                       ))}
                     </select>
-                  </>
+                  </React.Fragment>
                 ) : null;
               })}
             </div>
