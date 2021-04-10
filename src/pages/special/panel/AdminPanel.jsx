@@ -271,6 +271,11 @@ const AdminPanel = () => {
             />
           </div>
         </Tab>
+        <Tab eventKey="translateContent" title="Translate content">
+          <Nav className="flex-column">
+            <Nav.Link href="/panel/translate">Translate</Nav.Link>
+          </Nav>
+        </Tab>
         <Tab eventKey="menagmentOfCrew" title="Menage your profile" disabled>
           2
         </Tab>
