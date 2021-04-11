@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "cra-template-pwa": "^1.0.3",
+    "express": "^4.17.1",
     "firebase": "^8.2.5",
     "formik": "^2.2.6",
     "lint-staged": "^10.5.4",

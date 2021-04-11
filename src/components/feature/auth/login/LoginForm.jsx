@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Button, Form as F } from "react-bootstrap";
+import { Form as F } from "react-bootstrap";
 
 import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";

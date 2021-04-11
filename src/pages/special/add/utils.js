@@ -10,5 +10,6 @@ export const FORMIK_HELPER = Object.freeze({
   DATE: "date",
   TIME: "time",
   IMG_URL: "imgURL",
+  IMAGES_URL: "imagesURL",
   LINK: "link",
 });

@@ -1,7 +1,14 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-const CustomEditor = ({ value, onChangeEditor, key, style, propName }) => {
+const CustomEditor = ({
+  value,
+  onChangeEditor,
+  key,
+  style,
+  propName,
+  editorValue,
+}) => {
   return (
     <Editor
       {...{
@@ -9,6 +16,7 @@ const CustomEditor = ({ value, onChangeEditor, key, style, propName }) => {
         key,
         className: `editor-${style}`,
         initialValue: value,
+        value: editorValue,
         onChange: (e) => onChangeEditor([propName], e.target.getContent()),
       }}
     />

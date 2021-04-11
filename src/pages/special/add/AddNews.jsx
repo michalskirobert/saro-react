@@ -21,7 +21,6 @@ const AddNews = () => {
   const {
     alert,
     crew,
-    infoContainer,
     handlerNews,
     imageChangeHandler,
     isLoading,
@@ -31,10 +30,15 @@ const AddNews = () => {
     deleteImage,
     setImgName,
     imgName,
+    imagesName,
+    setImagesName,
+    images,
+    setImages,
   } = useContainer();
 
   useEffect(() => {
     setImgName({ ...imgName, type: "news" });
+    setImagesName({ ...imagesName, type: "news", kind: "images" });
     // eslint-disable-next-line
   }, []);
 
@@ -110,7 +114,9 @@ const AddNews = () => {
                     ) : null}
                   </div>
                   <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.IMG_URL}>Upload image</label>
+                    <label htmlFor={FORMIK_HELPER.IMG_URL}>
+                      Upload cover image
+                    </label>
                     <input
                       id={FORMIK_HELPER.IMG_URL}
                       name={FORMIK_HELPER.IMG_URL}
@@ -177,6 +183,37 @@ const AddNews = () => {
                         {errors[FORMIK_HELPER.CATEGORY]}
                       </F.Text>
                     ) : null}
+                  </div>
+                  <div className="form-control">
+                    <label htmlFor={FORMIK_HELPER.IMAGES_URL}>
+                      Upload images
+                    </label>
+                    <input
+                      id={FORMIK_HELPER.IMAGES_URL}
+                      name={FORMIK_HELPER.IMAGES_URL}
+                      type="file"
+                      onChange={(e) => {
+                        imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                      }}
+                    />
+                    <S.PreviewContainer>
+                      {images && (
+                        <>
+                          <S.PreviewImage src={images} alt="Picture preview" />
+                          <S.PreviewDelete
+                            type="button"
+                            onClick={() => deleteImage(images)}
+                          >
+                            X
+                          </S.PreviewDelete>
+                        </>
+                      )}
+                    </S.PreviewContainer>
+
+                    <F.Text className="validation-alert">
+                      {!invalid.errorMsg && !images && "Field required."}
+                      {invalid && invalid.errorMsg}
+                    </F.Text>
                   </div>
                   <div className="form-control">
                     <label htmlFor="language">Language</label>

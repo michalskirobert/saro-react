@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
+import uuidv4 from "react-uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+
+import { FORMIK_HELPER } from "./utils";
 
 import { cmsActions, fetchActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
-import uuidv4 from "react-uuid";
-
 export const useContainer = () => {
-  const footer = useSelector((state) => state.database.init.footer);
-
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
   const [imgName, setImgName] = useState("");
+  const [imagesName, setImagesName] = useState("");
   const [invalid, setInvalid] = useState({ errorMsg: "" });
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState();
+  const [images, setImages] = useState();
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -33,40 +34,67 @@ export const useContainer = () => {
       .set({
         ...values,
         imgURL: image,
+        imagesURL: images,
         type: CONSTANTS.GENERAL_CONSTANTS.NEWS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
         id,
       });
   };
-  const imageChangeHandler = (e) => {
-    uploadImage(e.currentTarget.files[0]);
-  };
 
-  const uploadImage = async (file) => {
-    setImgName(file.name);
-    setInvalid({});
-
-    if (file.type !== "image/png") {
-      setInvalid({ errorMsg: "Invalid file format. Choose .png" });
-      setImage(null);
+  const imageChangeHandler = (e, type) => {
+    const file = e.currentTarget.files[0];
+    console.log({ file });
+    if (type !== FORMIK_HELPER.IMAGES_URL) {
+      uploadImage(file);
       return;
     }
+    uploadImage(file, FORMIK_HELPER.IMAGES_URL);
+  };
+
+  const uploadImage = async (file, type) => {
+    let uploadFile = `/images/${
+      type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
+    }/${file.name}`;
+
+    // if (file.type !== "image/png") {
+    //   setInvalid({
+    //     [`errorMsg-${type}`]: "Invalid file format. Choose jpg/png",
+    //   });
+    //   !image && setImage(null);
+    //   !images && setImages(null);
+    //   return;
+    // } else if (!type) {
+    //   setImgName(file.name);
+    //   setInvalid({});
+    // }
+
+    // setImagesName(file.name);
+    // setInvalid({});
 
     dispatch(cmsActions.uploadImageRequest());
+
     storage
-      .ref(`/images/${imgName.type}/${file.name}`)
+      .ref(uploadFile)
       .put(file)
       .on("state_changed", () => {
-        setImgName({ ...imgName, name: file.name });
-
+        type === FORMIK_HELPER.IMAGES_URL
+          ? setImagesName({ ...imagesName, name: file.name })
+          : setImgName({ ...imgName, name: file.name });
+        console.log({ uploadFile });
         storage
-          .ref(`images/${imgName.type}`)
+          .ref(
+            `/images/${
+              type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
+            } `
+          )
           .child(file.name)
           .getDownloadURL()
           .then((resp) => {
             dispatch(cmsActions.uploadImageSuccess());
-            setImage(resp);
+            type === FORMIK_HELPER.IMAGES_URL
+              ? setImages(resp)
+              : setImage(resp);
           })
           .catch(() => {
             dispatch(cmsActions.uploadImageFailure());
@@ -75,7 +103,6 @@ export const useContainer = () => {
   };
 
   const deleteImage = async (file) => {
-    setImage(null);
     return await storage.refFromURL(file).delete();
   };
 
@@ -129,6 +156,7 @@ export const useContainer = () => {
         id,
         type: CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS,
         imgURL: image,
+        imagesURL: images,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
       });
@@ -193,5 +221,9 @@ export const useContainer = () => {
     deleteImage,
     setImgName,
     imgName,
+    imagesName,
+    setImagesName,
+    images,
+    setImages,
   };
 };

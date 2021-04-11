@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+
+import { CustomTable } from "@components/shared/custom-table";
 
 import { Formik, Form } from "formik";
 import { addArticleValidationScheme } from "./validation";
@@ -17,6 +19,17 @@ import { FORMIK_HELPER } from "./utils.js";
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
+const a = [
+  {
+    value: "world",
+    name: "chuj",
+  },
+  {
+    value: "spaaartaaa!!!!!!!!!!!!!!!!!1",
+    name: "podwójny",
+  },
+];
+
 const AddArticle = () => {
   const {
     alert,
@@ -27,7 +40,19 @@ const AddArticle = () => {
     image,
     deleteImage,
     invalid,
+    imagesName,
+    setImagesName,
+    images,
+    setImages,
+    setImgName,
+    imgName,
   } = useContainer();
+
+  useEffect(() => {
+    setImgName({ ...imgName, type: "article" });
+    setImagesName({ ...imagesName, type: "article", kind: "images" });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Formik
@@ -37,7 +62,6 @@ const AddArticle = () => {
         validateOnMount: true,
         validationSchema: addArticleValidationScheme,
         onSubmit: (values) => handlerArticle(values),
-        onSubmit: (values) => console.log(values),
       }}
     >
       {({
@@ -50,6 +74,7 @@ const AddArticle = () => {
         setFieldValue,
       }) => (
         <section className="section add-article" style={{ paddingTop: "50px" }}>
+          <CustomTable row={a} />
           {alert && <CmsAlert />}
           <Breadcrumb>
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -169,11 +194,41 @@ const AddArticle = () => {
                   {invalid && invalid.errorMsg}
                 </F.Text>
               </div>
+              <div className="form-control">
+                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>Upload images</label>
+                <input
+                  id={FORMIK_HELPER.IMAGES_URL}
+                  name={FORMIK_HELPER.IMAGES_URL}
+                  type="file"
+                  onChange={(e) => {
+                    imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                  }}
+                />
+                <S.PreviewContainer>
+                  {images && (
+                    <>
+                      <S.PreviewImage src={images} alt="Picture preview" />
+                      <S.PreviewDelete
+                        type="button"
+                        onClick={() => deleteImage(images)}
+                      >
+                        X
+                      </S.PreviewDelete>
+                    </>
+                  )}
+                </S.PreviewContainer>
+
+                <F.Text className="validation-alert">
+                  {!invalid.errorMsg && !images && "Field required."}
+                  {invalid && invalid.errorMsg}
+                </F.Text>
+              </div>
             </section>
 
             <section className="editor">
               <CustomEditor
                 {...{
+                  editorValue: "",
                   propName: FORMIK_HELPER.EDITOR,
                   onChangeEditor: setFieldValue,
                 }}
