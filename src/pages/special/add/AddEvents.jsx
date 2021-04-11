@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
-import { Link } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
 
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
+
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
@@ -65,15 +64,7 @@ const AddEvents = () => {
       }) => (
         <section className="section add-news" style={{ paddingTop: "50px" }}>
           {alert && <CmsAlert />}
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Add Event</Breadcrumb.Item>
-          </Breadcrumb>
-          <Link className="btn go-back" to="/panel">
-            <img src={BackArrow} alt="Back" />
-            <p>Go Back</p>
-          </Link>
+
           <Form className="cms">
             <h2 className="main-title">Add event</h2>
             <section className="form-container">

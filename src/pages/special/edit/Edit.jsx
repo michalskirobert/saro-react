@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import CustomEditor from "@components/shared/custom-editor";
 import { Button, Form as F } from "react-bootstrap";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+
 
 import { Formik, Form } from "formik";
 import { editValidationScheme } from "./validation";
@@ -12,7 +12,7 @@ import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
+
 import { FORMIK_HELPER } from "./utils.js";
 
 const cities = [
@@ -75,15 +75,7 @@ const Edit = () => {
         }) => (
           <section className="section edit" style={{ paddingTop: "50px" }}>
             {alert && <CmsAlert />}
-            <Breadcrumb>
-              <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-              <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-              <Breadcrumb.Item active>Edit</Breadcrumb.Item>
-            </Breadcrumb>
-            <Link className="btn go-back" to="/panel">
-              <img src={BackArrow} alt="Back" />
-              <p>Go Back</p>
-            </Link>
+
             <Form className="cms">
               <h2 className="main-title">Edit element</h2>
               <section className="form-container">

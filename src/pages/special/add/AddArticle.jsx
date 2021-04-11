@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
-import { Link } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { CustomTable } from "@components/shared/custom-table";
 
@@ -12,7 +10,6 @@ import { addArticleValidationScheme } from "./validation";
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
 import { FORMIK_HELPER } from "./utils.js";
 
@@ -75,16 +72,8 @@ const AddArticle = () => {
       }) => (
         <section className="section add-article" style={{ paddingTop: "50px" }}>
           <CustomTable row={a} />
-          {alert && <CmsAlert />}
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Add Article</Breadcrumb.Item>
-          </Breadcrumb>
-          <Link className="btn go-back" to="/panel">
-            <img src={BackArrow} alt="Back" />
-            <p>Go Back</p>
-          </Link>
+          {alert && <CmsAlert />}     
+
           <Form className="cms">
             <h2 className="main-title">Add Article</h2>
             <section className="form-container">

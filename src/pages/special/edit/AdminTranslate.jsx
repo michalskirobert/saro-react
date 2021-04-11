@@ -1,6 +1,6 @@
 import React from "react";
 
-import TranslateFooter from "./../translate/TranslateFooter";
+import TranslateFooter from "../panel/translate/TranslateFooter";
 
 const AdminTranslate = () => {
   return <TranslateFooter />;

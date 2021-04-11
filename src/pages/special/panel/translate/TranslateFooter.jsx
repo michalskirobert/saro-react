@@ -1,11 +1,9 @@
 import React from 'react'
-import { Link } from "react-router-dom";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Card } from "react-bootstrap";
 
-import { useEdit } from "../edit/container";
+import { useEdit } from "../../edit/container";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
+
 
 const TranslateFooter = () => {
     const { alert, footer } = useEdit();
@@ -13,15 +11,7 @@ const TranslateFooter = () => {
     return (
         <section className="section translate" style={{ paddingTop: "50px" }}>
         {alert && <CmsAlert />}
-        <Breadcrumb>
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-          <Breadcrumb.Item active>Translate</Breadcrumb.Item>
-        </Breadcrumb>
-        <Link className="btn go-back" to="/panel">
-          <img src={BackArrow} alt="Back" />
-          <p>Go Back</p>
-        </Link>
+
         <h2 className="main-title">Translate element</h2>
         <form className="cms-translate">
           <section className="translate-container">
