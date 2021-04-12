@@ -98,11 +98,11 @@ const App = () => {
           <PrivateRoute path="/profile/:id" children={<User />} />
           {/* CMS SARO 1.0.0 */}
           <SaroRoute path="/panel" component={AdminDashboard} />
-          {/* <SaroRoute path="/panel/add/article" component={AdminDashboard} />
+          <SaroRoute path="/panel/add/article" component={AdminDashboard} />
           <SaroRoute path="/panel/add/events" component={AdminDashboard} />
           <SaroRoute path="/panel/add/news-content" component={AdminDashboard} />
           <SaroRoute path="/panel/edit" component={AdminEdit} />
-          <SaroRoute path="/panel/translate" component={AdminTranslate} /> */}
+          <SaroRoute path="/panel/translate" component={AdminTranslate} />
           <Route path="*" component={Error} />
         </Switch>
         <Footer />

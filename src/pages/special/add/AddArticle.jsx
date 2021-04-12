@@ -70,8 +70,8 @@ const AddArticle = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-article" style={{ paddingTop: "50px" }}>
-          <CustomTable row={a} />
+        <section className="section add-article" >
+          {/* <CustomTable row={a} /> */}
           {alert && <CmsAlert />}     
 
           <Form className="cms">
@@ -212,9 +212,8 @@ const AddArticle = () => {
                   {invalid && invalid.errorMsg}
                 </F.Text>
               </div>
-            </section>
-
-            <section className="editor">
+              <div className="form-control editor">
+              <label>Info</label>
               <CustomEditor
                 {...{
                   editorValue: "",
@@ -227,6 +226,8 @@ const AddArticle = () => {
                   {errors[FORMIK_HELPER.EDITOR]}
                 </F.Text>
               ) : null}
+              </div>
+              
             </section>
             <Button
               className="submit-btn"

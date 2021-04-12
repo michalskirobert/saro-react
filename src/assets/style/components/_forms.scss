@@ -154,16 +154,29 @@ form.cms {
   } 
   .form-container {
     border-radius: 5px;
-    margin: 2%;
+    margin-right: 2%;
     padding: 10px 0;
     background: white;
     box-shadow: 0 0 0.5rem $crl-main-grey;
   }
+  .form-control.editor {
+    padding: 10px;
+    display: block;
+    min-height: 280px;
+    textarea {
+      width: 95%;
+    }
+    .validation-alert {
+      position: inherit;
+      left: 0;
+    }
+  }
   .form-control {
+    position: relative;
     width: 90%;
     background: $crl-panel-grey;
     margin: 10px auto;
-    min-height: 80px;
+    min-height: 75px;
     display: flex;
     border: none;
     align-items: center;
@@ -172,10 +185,13 @@ form.cms {
     input {
       background-color: white;
       width: 70%;
-      min-height: 38px;
+      min-height: 30px;
       border: 1px solid $crl-panel-dark-grey;
       padding: 1%;
       border-radius: 4px;
+    }
+    select {
+      max-height: 30px;
     }
     label {
       width: 30%;
@@ -183,6 +199,12 @@ form.cms {
  
     div.css-2b097c-container {     
       width: 70%;
+    }
+
+    .validation-alert {
+      position: absolute;
+      bottom: 0;
+      left: 31%;
     }
 
   }
@@ -216,15 +238,7 @@ form.cms {
     &:hover {
       background-color: rgba($crl-base-blue, 0.9);
     }
-  }
-
-  .editor {
-    width: 100%;
-    max-width: 1200px;
-    padding: 0;
-    display: block;
-    margin: 0 auto;
-  }
+  } 
 }
 
 

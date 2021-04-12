@@ -65,8 +65,7 @@ const AddNews = () => {
             {alert && <CmsAlert />}          
  
             <Form className="cms">
-              <h2 className="main-title">Add News</h2>
-              <div className="wrapper">
+              <h2 className="main-title">Add News</h2>              
                 <section className="form-container">
                   <div className="form-control">
                     <label htmlFor="title">Title</label>
@@ -224,11 +223,10 @@ const AddNews = () => {
                         {errors[FORMIK_HELPER.LANGUAGE]}
                       </F.Text>
                     ) : null}
-                  </div>
-                </section>
-              </div>
-              <section className="editor">
-                <CustomEditor
+                  </div>              
+                <div className="form-control editor">
+                  <label>Content</label>
+                  <CustomEditor
                   {...{
                     propName: FORMIK_HELPER.EDITOR,
                     onChangeEditor: setFieldValue,
@@ -240,6 +238,8 @@ const AddNews = () => {
                     {errors[FORMIK_HELPER.EDITOR]}
                   </F.Text>
                 ) : null}
+                </div>
+                
               </section>
               <Button
                 className="submit-btn"
