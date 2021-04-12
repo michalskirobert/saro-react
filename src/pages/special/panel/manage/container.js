@@ -1,11 +1,11 @@
-//  pagination and fetching items from database here
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useSelector} from 'react-redux'
-import {useEdit} from './../../edit/container'
-import { firestore, auth } from "@components/feature/firebase";
-import * as C from "@utils/constants";
 
+import { firestore } from "@components/feature/firebase";
+import * as C from "@utils/constants";
 import { useContainer } from "./../../../public/home/container";
+import {useEdit} from './../../edit/container'
+
 
 export const useManage = () => {
     const pagination = [];
@@ -75,6 +75,10 @@ export const useManage = () => {
         newsPosts,
         removeItem,
         handleEdit,
-        getNews, getEvents, getPosts
+        getNews, getEvents, getPosts,
+        pagination,
+        itemsPerPage,
+        setItemsPerPage,
+        currentPage
     )
 } 

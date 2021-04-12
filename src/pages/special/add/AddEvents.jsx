@@ -45,7 +45,7 @@ const AddEvents = () => {
         initialValues: { title: "", place: "", imgURL: "", link: "" },
         validateOnChange: true,
         validateOnMount: true,
-        validationSchema: addEventsValidationScheme,
+        // validationSchema: addEventsValidationScheme,
         onSubmit: (values) => {
           handlerEvents(values);
         },
@@ -184,10 +184,10 @@ const AddEvents = () => {
                     </>
                   )}
                 </S.PreviewContainer>
-                <F.Text className="validation-alert">
+                {/* <F.Text className="validation-alert">
                   {!invalid.errorMsg && !image && "Field required."}
                   {invalid && invalid.errorMsg}
-                </F.Text>
+                </F.Text> */}
               </div>
               <div className="form-control">
                 <label htmlFor="link">Link</label>
@@ -266,7 +266,7 @@ const AddEvents = () => {
             <Button
               className="submit-btn"
               type="submit"
-              disabled={!image || invalid.errorMsg || isLoading || !isValid}
+              // disabled={!image || invalid.errorMsg || isLoading || !isValid}
               onClick={handleSubmit}
             >
               Add
