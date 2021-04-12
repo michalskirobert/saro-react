@@ -61,7 +61,7 @@ const AddNews = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className="section add-news" style={{ paddingTop: "50px" }}>
+          <section className="section add-news" >
             {alert && <CmsAlert />}          
  
             <Form className="cms">

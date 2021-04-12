@@ -161,10 +161,7 @@ const AdminPanel = () => {
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey="3">
                     Manage your profile
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="3">
-                    <Card.Body></Card.Body>
-                  </Accordion.Collapse>
+                  </Accordion.Toggle>                
                 </Card>
               ) : null}
 
@@ -172,10 +169,7 @@ const AdminPanel = () => {
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey="4">
                     Manage pictures
-                  </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="4">
-                    <Card.Body></Card.Body>
-                  </Accordion.Collapse>
+                  </Accordion.Toggle>               
                 </Card>
               ) : null}
             </Accordion>

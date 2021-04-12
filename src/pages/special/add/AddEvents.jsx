@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
-import { Button, Form as F } from "react-bootstrap";
-
+import { Button, Form as F, Tabs, Tab } from "react-bootstrap";
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
 
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
@@ -62,19 +60,18 @@ const AddEvents = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-news" style={{ paddingTop: "50px" }}>
+        <section className="section add-news">
           {alert && <CmsAlert />}
-
           <Form className="cms">
             <h2 className="main-title">Add event</h2>
-            <section className="form-container">
+            <section className="form-container">          
               <div className="form-control">
-                <label htmlFor="title">Title</label>
+              <label htmlFor="title">Title</label>
                 <input
                   id="title"
                   type="text"
                   value={values[FORMIK_HELPER.TITLE]}
-                  placeholder="add title"
+                  placeholder="Add title"
                   onChange={handleChange}
                 />
                 {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? (
@@ -83,13 +80,14 @@ const AddEvents = () => {
                   </F.Text>
                 ) : null}
               </div>
+              
               <div className="form-control">
                 <label htmlFor="subtitle">Subtitle</label>
                 <input
                   id="subtitle"
                   type="text"
                   value={values[FORMIK_HELPER.SUBTITLE]}
-                  placeholder="add subtitle"
+                  placeholder="Add subtitle"
                   onChange={handleChange}
                 />
                 {errors[FORMIK_HELPER.SUBTITLE] ||
@@ -125,7 +123,7 @@ const AddEvents = () => {
                 <label htmlFor="place">Place</label>
                 <input
                   id="place"
-                  placeholder="add place"
+                  placeholder="Add place"
                   type="text"
                   value={values[FORMIK_HELPER.PLACE]}
                   onChange={handleChange}
@@ -195,7 +193,7 @@ const AddEvents = () => {
                 <label htmlFor="link">Link</label>
                 <input
                   id="link"
-                  placeholder="add link"
+                  placeholder="Add link"
                   type="text"
                   value={values[FORMIK_HELPER.LINK]}
                   onChange={handleChange}
@@ -247,8 +245,7 @@ const AddEvents = () => {
                   </F.Text>
                 ) : null}
               </div>
-            </section>
-            <div className="form-control form-info">
+              <div className="form-control form-info">
               <label htmlFor="content">Info</label>
               <textarea
                 id="content"
@@ -264,6 +261,7 @@ const AddEvents = () => {
                 </F.Text>
               ) : null}
             </div>
+            </section>          
 
             <Button
               className="submit-btn"
