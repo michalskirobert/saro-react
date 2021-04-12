@@ -16,6 +16,7 @@
         color: $crl-main-grey;
         .card {
             border: none;
+            border-bottom: 1px solid $crl-base;
         }
 
         .card-header {

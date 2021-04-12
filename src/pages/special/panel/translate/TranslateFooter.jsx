@@ -9,13 +9,13 @@ const TranslateFooter = () => {
     const { alert, footer } = useEdit();
 
     return (
-        <section className="section translate" style={{ paddingTop: "50px" }}>
+        <section className="section translate" >
         {alert && <CmsAlert />}
-
-        <h2 className="main-title">Translate element</h2>
+        
         <form className="cms-translate">
-          <section className="translate-container">
-          <div className="form-group">
+        <h2 className="main-title">Translate footer</h2>
+          <section className="form-container">
+          <div className="form-control">
               <Card>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
@@ -27,7 +27,7 @@ const TranslateFooter = () => {
               <label htmlFor="title">Your translation</label>
               <input id="title" type="text"></input>            
             </div>
-            <div className="form-group">
+            <div className="form-control">
               <Card>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">
@@ -37,9 +37,9 @@ const TranslateFooter = () => {
                 </Card.Body>
               </Card>
               <label htmlFor="details">Your translation</label>
-              <textarea id="details" rows="5" ></textarea>            
+              <textarea id="details" rows="4" ></textarea>            
             </div>
-            <div className="form-group">
+            <div className="form-control">
               <Card>
                 <Card.Body>
                   <blockquote className="blockquote mb-0">

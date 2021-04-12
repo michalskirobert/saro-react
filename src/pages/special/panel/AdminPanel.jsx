@@ -26,6 +26,7 @@ import AdminAddArticle from "./../add/AddArticle";
 import AdminAddEvents from "./../add/AddEvents";
 import AdminAddNews from "./../add/AddNews";
 import TranslateFooter from "./translate/TranslateFooter";
+import ManageNews from './manage/ManageNews'
 
 import { Tr } from "./style";
 
@@ -33,67 +34,12 @@ const AdminPanel = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
 
-  const newsItems = useSelector((state) => state.database?.news);
-  const newsEvents = useSelector((state) => state.database?.events);
-  const newsPosts = useSelector((state) => state.database?.posts);
+
   const alert = useSelector((state) => state.CMS.alert);
   // const userStatus = useSelector(state => state.currentUser.status)
   const userStatus = C.userConstants.USER_STATUS_DEVELOPER;
 
-  const pagination = [];
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [key, setKey] = useState(C.GENERAL_CONSTANTS.NEWS_CONTENT);
-
-  const totalCountValue = (key) => {
-    if (key === C.GENERAL_CONSTANTS.NEWS_CONTENT) {
-      return newsItems.length;
-    }
-    if (key === C.GENERAL_CONSTANTS.EVENTS_CONTENT) {
-      return newsEvents.length;
-    }
-    if (key === C.GENERAL_CONSTANTS.BLOG_CONTENT) {
-      return newsPosts.length;
-    }
-  };
-  const totalCount = totalCountValue(key);
-
-  const indexOfLastVisible = currentPage * itemsPerPage;
-  const indexOfFirstVisible = indexOfLastVisible - itemsPerPage;
-
-  const slicedNews = newsItems.slice(indexOfFirstVisible, indexOfLastVisible);
-  const slicedEvents = newsEvents.slice(
-    indexOfFirstVisible,
-    indexOfLastVisible
-  );
-  const slicedPosts = newsPosts.slice(indexOfFirstVisible, indexOfLastVisible);
-
-  const paginate = (number) => {
-    setCurrentPage(number);
-  };
-  for (
-    let number = 1;
-    number <= Math.ceil(totalCount / itemsPerPage);
-    number++
-  ) {
-    pagination.push(number);
-  }
-
-  useEffect(() => {
-    if (totalCount <= itemsPerPage) {
-      paginate(1);
-    }
-    // eslint-disable-next-line
-  }, [totalCount, itemsPerPage]);
-
-  const removeItem = async (type, id) => {
-    return await firestore
-      .collection(C.GENERAL_CONSTANTS.LANG)
-      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
-      .collection(type)
-      .doc(id)
-      .delete();
-  };
+ 
 
   useEffect(() => {
     getNews();
@@ -116,12 +62,17 @@ const AdminPanel = () => {
           </h2>
           <div className="cms-wrapper">
             <Accordion defaultActiveKey="0" className="menu-container">
+            <Card>
+            <Accordion.Toggle as={Card.Header} eventKey="0">
+                  <Link style={{color: "white"}} to="/panel">Admin Panel</Link>
+                  </Accordion.Toggle>            
+                </Card>
               {userStatus === C.userConstants.USER_STATUS_DEVELOPER ? (
                 <Card>
-                  <Accordion.Toggle as={Card.Header} eventKey="0">
+                  <Accordion.Toggle as={Card.Header} eventKey="1">
                     Add new content
                   </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="0">
+                  <Accordion.Collapse eventKey="1">
                     <Card.Body>
                       <Link to="/panel/add/events">Add event</Link>
                       <Link to="/panel/add/article">Add article</Link>
@@ -132,10 +83,10 @@ const AdminPanel = () => {
               ) : null}
               {userStatus === C.userConstants.USER_STATUS_DEVELOPER ? (
                 <Card>
-                  <Accordion.Toggle as={Card.Header} eventKey="1">
+                  <Accordion.Toggle as={Card.Header} eventKey="2">
                     Manage content
                   </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="1">
+                  <Accordion.Collapse eventKey="2">
                     <Card.Body>
                       <Link to="/panel/manage/events">Manage Events</Link>
                       <Link to="/panel/manage/article">Manage Articles</Link>
@@ -146,12 +97,12 @@ const AdminPanel = () => {
               ) : null}
               {userStatus === C.userConstants.USER_STATUS_DEVELOPER ? (
                 <Card>
-                  <Accordion.Toggle as={Card.Header} eventKey="2">
+                  <Accordion.Toggle as={Card.Header} eventKey="3">
                     Translate content
                   </Accordion.Toggle>
-                  <Accordion.Collapse eventKey="2">
+                  <Accordion.Collapse eventKey="3">
                     <Card.Body>
-                      <Link to="/panel/translate">Translate</Link>
+                      <Link to="/panel/translate/footer">Translate footer</Link>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -159,7 +110,7 @@ const AdminPanel = () => {
 
               {userStatus === C.userConstants.USER_STATUS_DEVELOPER ? (
                 <Card>
-                  <Accordion.Toggle as={Card.Header} eventKey="3">
+                  <Accordion.Toggle as={Card.Header} eventKey="4">
                     Manage your profile
                   </Accordion.Toggle>                
                 </Card>
@@ -167,7 +118,7 @@ const AdminPanel = () => {
 
               {userStatus === C.userConstants.USER_STATUS_DEVELOPER ? (
                 <Card>
-                  <Accordion.Toggle as={Card.Header} eventKey="4">
+                  <Accordion.Toggle as={Card.Header} eventKey="5">
                     Manage pictures
                   </Accordion.Toggle>               
                 </Card>
@@ -175,152 +126,21 @@ const AdminPanel = () => {
             </Accordion>
 
             <Switch>
-              <SaroRoute exact path="/panel/add/article">
-                <AdminAddArticle />
+              <SaroRoute exact path="/panel" >
+                <p>Panel Main Page - COMING SOON</p>
               </SaroRoute>
-              <SaroRoute exact path="/panel/add/events">
-                <AdminAddEvents />
-              </SaroRoute>
-              <SaroRoute path="/panel/add/news-content">
-                <AdminAddNews />
-              </SaroRoute>
-              <SaroRoute exact path="/panel/translate">
-                <TranslateFooter />
-              </SaroRoute>
-              <SaroRoute path="/panel/manage/news-content">
-              <Table striped bordered hover>
-                  <thead>
-                    <Tr>Manage news</Tr>
-                    <tr>
-                      <th>#</th>
-                      <th>Title</th>
-                      <th>Published date</th>
-                      <th>Author</th>
-                      <th>Menagement</th>
-                    </tr>
-                  </thead>
-                  {slicedNews.map((post, index) => {
-                    const { crew, title, publishedDate, id, type } = post;
-                    return (
-                      <tbody key={id}>
-                        <tr>
-                          <td>{index}</td>
-                          <td>{title}</td>
-                          <td>{publishedDate}</td>
-                          <td>{crew}</td>
-                          <td>
-                            <Button
-                              {...{
-                                variant: "primary",
-                                onClick: () => handleEdit(id, type),
-                              }}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              {...{
-                                variant: "danger",
-                                onClick: () => removeItem(type, id),
-                              }}
-                            >
-                              Remove
-                            </Button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    );
-                  })}
-                </Table>
+              <SaroRoute exact path="/panel/add/article" component={AdminAddArticle} />
+              <SaroRoute exact path="/panel/add/events" component={AdminAddEvents} />             
+              <SaroRoute exact path="/panel/add/news-content" component={AdminAddNews} />        
+              <SaroRoute exact path="/panel/translate/footer" component={TranslateFooter} />       
+              <SaroRoute exact path="/panel/manage/news-content">
+                <p>manage news</p>
               </SaroRoute>
               <SaroRoute exact path="/panel/manage/article">
-                <Table striped bordered hover>
-                  <thead>
-                    <Tr>Manage article</Tr>
-                    <tr>
-                      <th>#</th>
-                      <th>Title</th>
-                      <th>Published date</th>
-                      <th>Author</th>
-                      <th>Menagement</th>
-                    </tr>
-                  </thead>
-                  {slicedPosts.map((post, index) => {
-                    const { crew, title, publishedDate, id, type } = post;
-                    return (
-                      <tbody key={id}>
-                        <tr>
-                          <td>{index}</td>
-                          <td>{title}</td>
-                          <td>{publishedDate}</td>
-                          <td>{crew}</td>
-                          <td>
-                            <Button
-                              {...{
-                                variant: "primary",
-                                onClick: () => handleEdit(id, type),
-                              }}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              {...{
-                                variant: "danger",
-                                onClick: () => removeItem(type, id),
-                              }}
-                            >
-                              Remove
-                            </Button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    );
-                  })}
-                </Table>
+                <p>manage articles</p>
               </SaroRoute>
               <SaroRoute exact path="/panel/manage/events">
-                <Table striped bordered hover>
-                  <thead>
-                    <Tr>Manage events</Tr>
-                    <tr>
-                      <th>#</th>
-                      <th>Title</th>
-                      <th>Published date</th>
-                      <th>Author</th>
-                      <th>Menagement</th>
-                    </tr>
-                  </thead>
-                  {slicedEvents.map((post, index) => {
-                    const { crew, title, publishedDate, id, type } = post;
-                    return (
-                      <tbody key={id}>
-                        <tr>
-                          <td>{index}</td>
-                          <td>{title}</td>
-                          <td>{publishedDate}</td>
-                          <td>{crew}</td>
-                          <td>
-                            <Button
-                              {...{
-                                variant: "primary",
-                                onClick: () => handleEdit(id, type),
-                              }}
-                            >
-                              Edit
-                            </Button>
-                            <Button
-                              {...{
-                                variant: "danger",
-                                onClick: () => removeItem(type, id),
-                              }}
-                            >
-                              Remove
-                            </Button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    );
-                  })}
-                </Table>
+                <p>manage events</p>
               </SaroRoute>
             </Switch>
           </div>

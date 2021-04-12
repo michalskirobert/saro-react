@@ -35,6 +35,9 @@ import AdminAddEvents from "./pages/special/add/AddEvents";
 import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
+import AdminManageArticle from './pages/special/panel/manage/ManageArticles'
+import AdminManageNews from './pages/special/panel/manage/ManageNews'
+import AdminManageEvents from './pages/special/panel/manage/ManageEvents'
 
 import * as C from "@utils/constants";
 
@@ -98,9 +101,12 @@ const App = () => {
           <PrivateRoute path="/profile/:id" children={<User />} />
           {/* CMS SARO 1.0.0 */}
           <SaroRoute path="/panel" component={AdminDashboard} />
-          <SaroRoute path="/panel/add/article" component={AdminDashboard} />
-          <SaroRoute path="/panel/add/events" component={AdminDashboard} />
-          <SaroRoute path="/panel/add/news-content" component={AdminDashboard} />
+          <SaroRoute path="/panel/add/article" component={AdminAddArticle} />
+          <SaroRoute path="/panel/add/events" component={AdminAddEvents} />
+          <SaroRoute path="/panel/add/news-content" component={AdminAddNews} />
+          <SaroRoute path="/panel/manage/articles" component={AdminManageArticle} />
+          <SaroRoute path="/panel/manage/events" component={AdminManageEvents} />
+          <SaroRoute path="/panel/manage/news-content" component={AdminManageNews} />
           <SaroRoute path="/panel/edit" component={AdminEdit} />
           <SaroRoute path="/panel/translate" component={AdminTranslate} />
           <Route path="*" component={Error} />
