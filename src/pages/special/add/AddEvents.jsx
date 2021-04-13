@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button, Form as F, Tabs, Tab } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
@@ -62,11 +63,16 @@ const AddEvents = () => {
       }) => (
         <section className="section add-news">
           {alert && <CmsAlert />}
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
+            <Breadcrumb.Item active>Add event</Breadcrumb.Item>
+          </Breadcrumb>
           <Form className="cms">
             <h2 className="main-title">Add event</h2>
-            <section className="form-container">          
+            <section className="form-container">
               <div className="form-control">
-              <label htmlFor="title">Title</label>
+                <label htmlFor="title">Title</label>
                 <input
                   id="title"
                   type="text"
@@ -80,7 +86,7 @@ const AddEvents = () => {
                   </F.Text>
                 ) : null}
               </div>
-              
+
               <div className="form-control">
                 <label htmlFor="subtitle">Subtitle</label>
                 <input
@@ -246,22 +252,23 @@ const AddEvents = () => {
                 ) : null}
               </div>
               <div className="form-control form-info">
-              <label htmlFor="content">Info</label>
-              <textarea
-                id="content"
-                placeholder="add event details"
-                value={values[FORMIK_HELPER.EDITOR]}
-                onChange={handleChange}
-                cols="30"
-                rows="10"
-              ></textarea>
-              {errors[FORMIK_HELPER.EDITOR] || touched[FORMIK_HELPER.EDITOR] ? (
-                <F.Text className="validation-alert">
-                  {errors[FORMIK_HELPER.EDITOR]}
-                </F.Text>
-              ) : null}
-            </div>
-            </section>          
+                <label htmlFor="content">Info</label>
+                <textarea
+                  id="content"
+                  placeholder="add event details"
+                  value={values[FORMIK_HELPER.EDITOR]}
+                  onChange={handleChange}
+                  cols="30"
+                  rows="10"
+                ></textarea>
+                {errors[FORMIK_HELPER.EDITOR] ||
+                touched[FORMIK_HELPER.EDITOR] ? (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.EDITOR]}
+                  </F.Text>
+                ) : null}
+              </div>
+            </section>
 
             <Button
               className="submit-btn"

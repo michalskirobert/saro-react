@@ -101,14 +101,14 @@ const App = () => {
           <PrivateRoute path="/profile/:id" children={<User />} />
           {/* CMS SARO 1.0.0 */}
           <SaroRoute path="/panel" component={AdminDashboard} />
-          <SaroRoute path="/panel/add/article" component={AdminAddArticle} />
-          <SaroRoute path="/panel/add/events" component={AdminAddEvents} />
-          <SaroRoute path="/panel/add/news-content" component={AdminAddNews} />
-          <SaroRoute path="/panel/manage/articles" component={AdminManageArticle} />
-          <SaroRoute path="/panel/manage/events" component={AdminManageEvents} />
-          <SaroRoute path="/panel/manage/news-content" component={AdminManageNews} />
-          <SaroRoute path="/panel/edit" component={AdminEdit} />
-          <SaroRoute path="/panel/translate" component={AdminTranslate} />
+          <SaroRoute exact path="/panel/add/article" component={AdminAddArticle} />
+          <SaroRoute exact path="/panel/add/events" component={AdminAddEvents} />
+          <SaroRoute exact path="/panel/add/news-content" component={AdminAddNews} />
+          <SaroRoute exact path="/panel/manage/articles" component={AdminManageArticle} />
+          <SaroRoute exact path="/panel/manage/events" component={AdminManageEvents} />
+          <SaroRoute exact path="/panel/manage/news-content" component={AdminManageNews} />
+          <SaroRoute exact path="/panel/edit" component={AdminEdit} />
+          <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
           <Route path="*" component={Error} />
         </Switch>
         <Footer />

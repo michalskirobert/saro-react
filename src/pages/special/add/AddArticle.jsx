@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 import { CustomTable } from "@components/shared/custom-table";
 
@@ -70,10 +71,14 @@ const AddArticle = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-article" >
+        <section className="section add-article">
           {/* <CustomTable row={a} /> */}
-          {alert && <CmsAlert />}     
-
+          {alert && <CmsAlert />}
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
+            <Breadcrumb.Item active>Add article</Breadcrumb.Item>
+          </Breadcrumb>
           <Form className="cms">
             <h2 className="main-title">Add Article</h2>
             <section className="form-container">
@@ -213,21 +218,21 @@ const AddArticle = () => {
                 </F.Text>
               </div>
               <div className="form-control editor">
-              <label>Info</label>
-              <CustomEditor
-                {...{
-                  editorValue: "",
-                  propName: FORMIK_HELPER.EDITOR,
-                  onChangeEditor: setFieldValue,
-                }}
-              />
-              {errors[FORMIK_HELPER.EDITOR] || touched[FORMIK_HELPER.EDITOR] ? (
-                <F.Text className="validation-alert">
-                  {errors[FORMIK_HELPER.EDITOR]}
-                </F.Text>
-              ) : null}
+                <label>Info</label>
+                <CustomEditor
+                  {...{
+                    editorValue: "",
+                    propName: FORMIK_HELPER.EDITOR,
+                    onChangeEditor: setFieldValue,
+                  }}
+                />
+                {errors[FORMIK_HELPER.EDITOR] ||
+                touched[FORMIK_HELPER.EDITOR] ? (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.EDITOR]}
+                  </F.Text>
+                ) : null}
               </div>
-              
             </section>
             <Button
               className="submit-btn"

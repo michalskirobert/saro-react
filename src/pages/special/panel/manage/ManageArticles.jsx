@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Table, Button, Breadcrumb } from "react-bootstrap";
 
 import { useManage } from "./container";
+import { useContainer } from "./../../../public/home/container";
 
-import { Tr } from "./../style";
-
+import Edit from "@assets/images/components/forms/PencilLine.svg";
+import Delete from "@assets/images/components/forms/Trash.svg";
 
 const ManageArticles = () => {
+  const { getPosts } = useContainer();
+
   const {
     paginate,
     totalCount,
     itemsPerPage,
-    slicedNews,
-    slicedEvents,
-    slicedPosts,
-    newsItems,
-    newsEvents,
     handleEdit,
-    newsPosts,
     removeItem,
   } = useManage();
+
+  const articleItems = useSelector((state) => state.database.posts);
 
   useEffect(() => {
     if (totalCount <= itemsPerPage) {
@@ -28,50 +28,59 @@ const ManageArticles = () => {
     // eslint-disable-next-line
   }, [totalCount, itemsPerPage]);
 
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
-    <Table striped bordered hover>
-      <thead>
-        <Tr>Manage article</Tr>
-        <tr>
-          <th>#</th>
-          <th>Title</th>
-          <th>Published date</th>
-          <th>Author</th>
-          <th>Menagement</th>
-        </tr>
-      </thead>
-      {slicedPosts.map((post, index) => {
-        const { crew, title, publishedDate, id, type } = post;
-        return (
-          <tbody key={id}>
-            <tr>
-              <td>{index}</td>
-              <td>{title}</td>
-              <td>{publishedDate}</td>
-              <td>{crew}</td>
-              <td>
-                <Button
-                  {...{
-                    variant: "primary",
-                    onClick: () => handleEdit(id, type),
-                  }}
-                >
-                  Edit
-                </Button>
-                <Button
-                  {...{
-                    variant: "danger",
-                    onClick: () => removeItem(type, id),
-                  }}
-                >
-                  Remove
-                </Button>
-              </td>
-            </tr>
-          </tbody>
-        );
-      })}
-    </Table>
+    <section className="section manage-articles">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
+        <Breadcrumb.Item active>Manage articles</Breadcrumb.Item>
+      </Breadcrumb>
+      <h2 className="main-title">Manage articles</h2>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Last modified</th>
+            <th>Author</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {articleItems.map((item) => {
+            const { id, title, publishedDate, crew, type } = item;
+            return (
+              <tr key={id}>
+                <td>[✓]</td>
+                <td>{title}</td>
+                <td>{publishedDate}</td>
+                <td>{crew}</td>
+                <td>
+                  <Button
+                    {...{
+                      onClick: () => handleEdit(id, type),
+                    }}
+                  >
+                    <img src={Edit} alt="Edit" />
+                  </Button>
+                  <Button
+                    {...{
+                      onClick: () => removeItem(type, id),
+                    }}
+                  >
+                    <img src={Delete} alt="Delete" />
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </section>
   );
 };
 

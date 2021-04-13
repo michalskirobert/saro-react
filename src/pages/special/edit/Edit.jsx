@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Select from "react-select";
 import CustomEditor from "@components/shared/custom-editor";
 import { Button, Form as F } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 
 import { Formik, Form } from "formik";
@@ -73,8 +74,15 @@ const Edit = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className="section edit" style={{ paddingTop: "50px" }}>
+          <section className="section edit">
             {alert && <CmsAlert />}
+            <Breadcrumb>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">
+              Admin Panel
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Edit</Breadcrumb.Item>
+          </Breadcrumb>
 
             <Form className="cms">
               <h2 className="main-title">Edit element</h2>
@@ -299,7 +307,7 @@ const Edit = () => {
                     </F.Text>
                   ) : null}
                 </div>
-              </section>
+              
 
               {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
                 <div className="form-control form-info">
@@ -320,7 +328,7 @@ const Edit = () => {
                   ) : null}
                 </div>
               ) : (
-                <section className="editor">
+                <div className="form-control editor">
                   <CustomEditor
                     {...{
                       propName: FORMIK_HELPER.EDITOR,
@@ -333,8 +341,9 @@ const Edit = () => {
                       {errors[FORMIK_HELPER.EDITOR]}
                     </F.Text>
                   ) : null}
-                </section>
+                </div>
               )}
+              </section>
               <Button
                 className="submit-btn"
                 type="button"
