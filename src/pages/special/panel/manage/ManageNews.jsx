@@ -1,38 +1,74 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Table, Button, Pagination, Breadcrumb } from "react-bootstrap";
 import Select from "react-select";
 
 import { useManage } from "./container";
 import { useContainer } from "./../../../public/home/container";
-import { pageSize } from "./../utils";
 
 import Edit from "@assets/images/components/forms/PencilLine.svg";
 import Delete from "@assets/images/components/forms/Trash.svg";
+
+import * as C from "@utils/constants";
 
 const ManageNews = () => {
   const { getNews } = useContainer();
 
   const {
-    handleEdit,
+    setKey,
+    paginate,
+    itemsPerPage,
     removeItem,
+    setItemsPerPage,
+    pagination,
+    currentPage,
+    paginatedNews,
+    handleEdit,
+    pageSize,
   } = useManage();
-
-  const newsItems = useSelector((state) => state.database.news);
-
 
   useEffect(() => {
     getNews();
+    setKey(C.GENERAL_CONSTANTS.NEWS);
   }, []);
 
   return (
     <section className="section manage-news">
       <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Manage news</Breadcrumb.Item>
-          </Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
+        <Breadcrumb.Item active>Manage news</Breadcrumb.Item>
+      </Breadcrumb>
       <h2 className="main-title">Manage news</h2>
+      <div className="pagination">
+        <Pagination>
+          {pagination.map((number) => {
+            return (
+              <Pagination.Item
+                key={number}
+                onClick={() => paginate(number)}
+                active={number === currentPage}
+              >
+                {number}
+              </Pagination.Item>
+            );
+          })}
+        </Pagination>
+        <Select
+          {...{
+            id: "pageSize",
+            name: "pageSize",
+            placeholder: itemsPerPage,
+            value: itemsPerPage,
+            options: pageSize.map((size) => ({
+              label: size,
+              value: size,
+            })),
+            onChange: (options) => {
+              setItemsPerPage(options.value);
+            },
+          }}
+        />
+      </div>
       <Table>
         <thead>
           <tr>
@@ -44,7 +80,7 @@ const ManageNews = () => {
           </tr>
         </thead>
         <tbody>
-          {newsItems.map((item) => {
+          {paginatedNews.map((item) => {
             const { id, type, title, publishedDate, crew } = item;
             return (
               <tr key={id}>
@@ -72,9 +108,8 @@ const ManageNews = () => {
             );
           })}
         </tbody>
-      </Table>     
+      </Table>
     </section>
-
   );
 };
 

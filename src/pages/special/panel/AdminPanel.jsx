@@ -24,17 +24,17 @@ import * as C from "@utils/constants";
 
 
 const AdminPanel = () => {
-  const { getNews, getEvents, getPosts } = useContainer();
+  // const { getNews, getEvents, getPosts } = useContainer();
   const [isPanelNavOpen, setIsPanelNavOpen] = useState(false);
 
   const alert = useSelector((state) => state.CMS.alert);
   const userStatus =  useSelector(state => state.currentUser.status) || C.userConstants.USER_STATUS_DEVELOPER;
 
-  useEffect(()=>{
-    getEvents()
-    getNews()
-    getPosts()
-  },[])
+  // useEffect(()=>{
+  //   getEvents()
+  //   getNews()
+  //   getPosts()
+  // },[])
 
   return (   
       <Router>

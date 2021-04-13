@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Table, Button, Breadcrumb } from "react-bootstrap";
+import Select from "react-select";
+import { Table, Button, Breadcrumb, Pagination } from "react-bootstrap";
 
 import { useManage } from "./container";
 import { useContainer } from "./../../../public/home/container";
@@ -8,30 +8,28 @@ import { useContainer } from "./../../../public/home/container";
 import Edit from "@assets/images/components/forms/PencilLine.svg";
 import Delete from "@assets/images/components/forms/Trash.svg";
 
+import * as C from "@utils/constants";
+
 const ManageArticles = () => {
-  const { getPosts } = useContainer();
+  const { getPosts } = useContainer(); 
 
   const {
+    setKey,
     paginate,
-    totalCount,
-    itemsPerPage,
-    handleEdit,
+    itemsPerPage,   
     removeItem,
-  } = useManage();
+    setItemsPerPage,
+    pagination,
+    currentPage,
+    paginatedArticles,
+    handleEdit,
+    pageSize
+  } = useManage();  
 
-  const articleItems = useSelector((state) => state.database.posts);
-
-  useEffect(() => {
-    if (totalCount <= itemsPerPage) {
-      paginate(1);
-    }
-    // eslint-disable-next-line
-  }, [totalCount, itemsPerPage]);
-
-  useEffect(() => {
+  useEffect(()=>{
     getPosts();
-  }, []);
-
+    setKey(C.GENERAL_CONSTANTS.BLOG_POSTS)
+  }, [])
   return (
     <section className="section manage-articles">
       <Breadcrumb>
@@ -40,6 +38,36 @@ const ManageArticles = () => {
         <Breadcrumb.Item active>Manage articles</Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">Manage articles</h2>
+      <div className="pagination">       
+        <Pagination>
+          {pagination.map((number) => {
+            return (
+              <Pagination.Item
+                key={number}
+                onClick={() => paginate(number)}
+                active={number === currentPage}
+              >
+                {number}
+              </Pagination.Item>
+            );
+          })}
+        </Pagination>
+        <Select
+          {...{
+            id: "pageSize",
+            name: "pageSize",
+            placeholder: itemsPerPage,
+            value: itemsPerPage,
+            options: pageSize.map((size) => ({
+              label: size,
+              value: size,
+            })),
+            onChange: (options) => {
+              setItemsPerPage(options.value);
+            },
+          }}
+        />
+      </div>
       <Table>
         <thead>
           <tr>
@@ -51,7 +79,7 @@ const ManageArticles = () => {
           </tr>
         </thead>
         <tbody>
-          {articleItems.map((item) => {
+          {paginatedArticles.map((item) => {
             const { id, title, publishedDate, crew, type } = item;
             return (
               <tr key={id}>

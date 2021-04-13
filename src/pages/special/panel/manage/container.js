@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { firestore } from "@components/feature/firebase";
 import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
+import { pageSize } from "./../utils";
 
 import * as C from "@utils/constants";
 
@@ -12,7 +13,7 @@ export const useManage = () => {
   const { handleEdit } = useEdit();
 
   const newsItems = useSelector((state) => state.database.news);
-  const eventItems = useSelector((state) => state.database.events);   
+  const eventItems = useSelector((state) => state.database.events);
   const articleItems = useSelector((state) => state.database.posts);
 
   const pagination = [];
@@ -21,14 +22,15 @@ export const useManage = () => {
   const [key, setKey] = useState("");
 
   const totalCountValue = (key) => {
-    if (key === C.GENERAL_CONSTANTS.NEWS) {
-      return newsItems.length;
-    }
-    if (key === C.GENERAL_CONSTANTS.EVENTS) {
-      return eventItems.length;
-    }
-    if (key === C.GENERAL_CONSTANTS.BLOG_POSTS) {
-      return articleItems.length;
+    switch (key) {
+      case C.GENERAL_CONSTANTS.NEWS:
+        return newsItems.length;
+      case C.GENERAL_CONSTANTS.EVENTS:
+        return eventItems.length;
+      case C.GENERAL_CONSTANTS.BLOG_POSTS:
+        return articleItems.length;
+      default:
+        return;
     }
   };
 
@@ -62,6 +64,14 @@ export const useManage = () => {
     pagination.push(number);
   }
 
+  useEffect(() => {
+    if (totalCount <= itemsPerPage) {
+      paginate(1);
+    }
+    // eslint-disable-next-line
+  }, [totalCount, itemsPerPage]);    
+
+
   const removeItem = async (type, id) => {
     return await firestore
       .collection(C.GENERAL_CONSTANTS.LANG)
@@ -71,27 +81,27 @@ export const useManage = () => {
       .delete();
   };
 
-  return (
+  return {
     paginate,
     totalCount,
     itemsPerPage,
     removeItem,
     handleEdit,
     pagination,
-    itemsPerPage,
     setItemsPerPage,
     currentPage,
-
     paginatedNews,
     paginatedEvents,
     paginatedArticles,
-
     setKey,
-    getNews, getEvents, getPosts,
-
+    getNews,
+    getEvents,
+    getPosts,
     newsItems,
     eventItems,
-    articleItems
-
-  );
+    articleItems,
+    pageSize,
+  }
+    
+  
 };
