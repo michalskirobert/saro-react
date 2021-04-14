@@ -41,6 +41,7 @@ const Nav = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   return (
     <>

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Select from "react-select";
-import CustomEditor from "@components/shared/custom-editor";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
-
+import CustomEditor from "@components/shared/custom-editor";
 import { Formik, Form } from "formik";
 import { editValidationScheme } from "./validation";
 
@@ -13,7 +12,6 @@ import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
-
 import { FORMIK_HELPER } from "./utils.js";
 
 const cities = [
