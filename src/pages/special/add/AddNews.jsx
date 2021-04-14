@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import {AiOutlineClose} from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { addNewsValidationScheme } from "./validation";
@@ -30,7 +31,6 @@ const AddNews = () => {
     imagesName,
     setImagesName,
     images,
-    setImages,
   } = useContainer();
 
   useEffect(() => {
@@ -82,12 +82,12 @@ const AddNews = () => {
                     value={values[FORMIK_HELPER.TITLE]}
                     onChange={handleChange}
                   />
-                  {errors[FORMIK_HELPER.TITLE] ||
-                  touched[FORMIK_HELPER.TITLE] ? (
+                  {(errors[FORMIK_HELPER.TITLE] ||
+                  touched[FORMIK_HELPER.TITLE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.TITLE]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
                 <div className="form-control">
                   <label htmlFor="subtitle">Subtitle</label>
@@ -99,12 +99,12 @@ const AddNews = () => {
                     value={values[FORMIK_HELPER.SUBTITLE]}
                     onChange={handleChange}
                   />
-                  {errors[FORMIK_HELPER.SUBTITLE] ||
-                  touched[FORMIK_HELPER.SUBTITLE] ? (
+                  {(errors[FORMIK_HELPER.SUBTITLE] ||
+                  touched[FORMIK_HELPER.SUBTITLE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.SUBTITLE]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.IMG_URL}>
@@ -124,7 +124,7 @@ const AddNews = () => {
                           type="button"
                           onClick={() => deleteImage(image)}
                         >
-                          X
+                          <AiOutlineClose />
                         </S.PreviewDelete>
                       </>
                     )}
@@ -141,19 +141,19 @@ const AddNews = () => {
                     {...{
                       id: "crew",
                       name: "crew",
-                      options: crew.map((item) => ({
-                        label: `${item.name} ${item.surname}`,
-                        value: `${item.name} ${item.surname}`,
+                      options: crew.map(({name, surname}) => ({
+                        label: `${name} ${surname}`,
+                        value: `${name} ${surname}`,
                       })),
                       onChange: (values) =>
                         setFieldValue(FORMIK_HELPER.CREW, values.value),
                     }}
                   />
-                  {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? (
+                  {(errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.CREW]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
                 <div className="form-control">
                   <label htmlFor="category">Category</label>
@@ -169,12 +169,12 @@ const AddNews = () => {
                         setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
                     }}
                   />
-                  {errors[FORMIK_HELPER.CATEGORY] ||
-                  touched[FORMIK_HELPER.CATEGORY] ? (
+                  {(errors[FORMIK_HELPER.CATEGORY] ||
+                  touched[FORMIK_HELPER.CATEGORY]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.CATEGORY]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.IMAGES_URL}>
@@ -196,7 +196,7 @@ const AddNews = () => {
                           type="button"
                           onClick={() => deleteImage(images)}
                         >
-                          X
+                          <AiOutlineClose />
                         </S.PreviewDelete>
                       </>
                     )}
@@ -221,12 +221,12 @@ const AddNews = () => {
                         setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
                     }}
                   />
-                  {errors[FORMIK_HELPER.LANGUAGE] ||
-                  touched[FORMIK_HELPER.LANGUAGE] ? (
+                  {(errors[FORMIK_HELPER.LANGUAGE] ||
+                  touched[FORMIK_HELPER.LANGUAGE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.LANGUAGE]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
                 <div className="form-control editor">
                   <label>Content</label>
@@ -236,12 +236,12 @@ const AddNews = () => {
                       onChangeEditor: setFieldValue,
                     }}
                   />
-                  {errors[FORMIK_HELPER.EDITOR] ||
-                  touched[FORMIK_HELPER.EDITOR] ? (
+                  {(errors[FORMIK_HELPER.EDITOR] ||
+                  touched[FORMIK_HELPER.EDITOR]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.EDITOR]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
               </section>
               <Button
