@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Select from "react-select";
-import CustomEditor from "@components/shared/custom-editor";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
+import CustomEditor from "@components/shared/custom-editor";
 import { Formik, Form } from "formik";
 import { editValidationScheme } from "./validation";
 
@@ -12,7 +12,6 @@ import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 import { FORMIK_HELPER } from "./utils.js";
 
 const cities = [
@@ -73,17 +72,16 @@ const Edit = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className="section edit" style={{ paddingTop: "50px" }}>
+          <section className="section edit">
             {alert && <CmsAlert />}
             <Breadcrumb>
-              <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-              <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-              <Breadcrumb.Item active>Edit</Breadcrumb.Item>
-            </Breadcrumb>
-            <Link className="btn go-back" to="/panel">
-              <img src={BackArrow} alt="Back" />
-              <p>Go Back</p>
-            </Link>
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="/panel">
+              Admin Panel
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>Edit</Breadcrumb.Item>
+          </Breadcrumb>
+
             <Form className="cms">
               <h2 className="main-title">Edit element</h2>
               <section className="form-container">
@@ -96,14 +94,14 @@ const Edit = () => {
                     value={values[FORMIK_HELPER.TITLE]}
                     onChange={handleChange}
                   />
-                  {errors[FORMIK_HELPER.TITLE] ||
-                  touched[FORMIK_HELPER.TITLE] ? (
+                  {(errors[FORMIK_HELPER.TITLE] ||
+                  touched[FORMIK_HELPER.TITLE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.TITLE]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
-                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
+                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS && (
                   <div className="form-control">
                     <label htmlFor="subtitle">Subtitle</label>
                     <input
@@ -113,15 +111,15 @@ const Edit = () => {
                       value={values[FORMIK_HELPER.SUBTITLE]}
                       onChange={handleChange}
                     />
-                    {errors[FORMIK_HELPER.SUBTITLE] ||
-                    touched[FORMIK_HELPER.SUBTITLE] ? (
+                    {(errors[FORMIK_HELPER.SUBTITLE] ||
+                    touched[FORMIK_HELPER.SUBTITLE]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.SUBTITLE]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                )}
+                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor="city">City</label>
                     <Select
@@ -137,15 +135,15 @@ const Edit = () => {
                           setFieldValue(FORMIK_HELPER.CITY, values.value),
                       }}
                     />
-                    {errors[FORMIK_HELPER.CITY] ||
-                    touched[FORMIK_HELPER.CITY] ? (
+                    {(errors[FORMIK_HELPER.CITY] ||
+                    touched[FORMIK_HELPER.CITY]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.CITY]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                )}
+                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor="place">Place</label>
                     <input
@@ -156,15 +154,15 @@ const Edit = () => {
                       value={values[FORMIK_HELPER.PLACE]}
                       onChange={handleChange}
                     />
-                    {errors[FORMIK_HELPER.PLACE] ||
-                    touched[FORMIK_HELPER.PLACE] ? (
+                    {(errors[FORMIK_HELPER.PLACE] ||
+                    touched[FORMIK_HELPER.PLACE]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.PLACE]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                )}
+                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor="date">Date</label>
                     <input
@@ -174,15 +172,15 @@ const Edit = () => {
                       value={values[FORMIK_HELPER.DATE]}
                       onChange={handleChange}
                     />
-                    {errors[FORMIK_HELPER.DATE] ||
-                    touched[FORMIK_HELPER.DATE] ? (
+                    {(errors[FORMIK_HELPER.DATE] ||
+                    touched[FORMIK_HELPER.DATE]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.DATE]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                )}
+                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor="time">Time</label>
                     <input
@@ -192,15 +190,15 @@ const Edit = () => {
                       value={values[FORMIK_HELPER.TIME]}
                       onChange={handleChange}
                     />
-                    {errors[FORMIK_HELPER.TIME] ||
-                    touched[FORMIK_HELPER.TIME] ? (
+                    {(errors[FORMIK_HELPER.TIME] ||
+                    touched[FORMIK_HELPER.TIME]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.TIME]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS ? (
+                )}
+                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS && (
                   <div className="form-control">
                     <label htmlFor="imgURL">Img URL</label>
                     <input
@@ -210,15 +208,15 @@ const Edit = () => {
                       value={values[FORMIK_HELPER.IMG_URL]}
                       onChange={handleChange}
                     />
-                    {errors[FORMIK_HELPER.IMG_URL] ||
-                    touched[FORMIK_HELPER.IMG_URL] ? (
+                    {(errors[FORMIK_HELPER.IMG_URL] ||
+                    touched[FORMIK_HELPER.IMG_URL]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.IMG_URL]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
+                )}
+                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor="link">Link</label>
                     <input
@@ -228,15 +226,15 @@ const Edit = () => {
                       value={values[FORMIK_HELPER.LINK]}
                       onChange={handleChange}
                     />
-                    {errors[FORMIK_HELPER.LINK] ||
-                    touched[FORMIK_HELPER.LINK] ? (
+                    {(errors[FORMIK_HELPER.LINK] ||
+                    touched[FORMIK_HELPER.LINK]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.LINK]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
-                ) : null}
-                {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? null : (
+                )}
+                {type !== CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor="category">Category</label>
                     <Select
@@ -252,12 +250,12 @@ const Edit = () => {
                           setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
                       }}
                     />
-                    {errors[FORMIK_HELPER.CATEGORY] ||
-                    touched[FORMIK_HELPER.CATEGORY] ? (
+                    {(errors[FORMIK_HELPER.CATEGORY] ||
+                    touched[FORMIK_HELPER.CATEGORY]) && (
                       <F.Text className="validation-alert">
                         {errors[FORMIK_HELPER.CATEGORY]}
                       </F.Text>
-                    ) : null}
+                    )}
                   </div>
                 )}
                 <div className="form-control">
@@ -277,12 +275,12 @@ const Edit = () => {
                         setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
                     }}
                   />
-                  {errors[FORMIK_HELPER.LANGUAGE] ||
-                  touched[FORMIK_HELPER.LANGUAGE] ? (
+                  {(errors[FORMIK_HELPER.LANGUAGE] ||
+                  touched[FORMIK_HELPER.LANGUAGE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.LANGUAGE]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
                 <div className="form-control">
                   <label htmlFor="crew">Crew</label>
@@ -301,13 +299,13 @@ const Edit = () => {
                         setFieldValue(FORMIK_HELPER.CREW, values.value),
                     }}
                   />
-                  {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? (
+                  {(errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.CREW]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
-              </section>
+              
 
               {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
                 <div className="form-control form-info">
@@ -320,29 +318,30 @@ const Edit = () => {
                     cols="30"
                     rows="10"
                   ></textarea>
-                  {errors[FORMIK_HELPER.EDITOR] ||
-                  touched[FORMIK_HELPER.EDITOR] ? (
+                  {(errors[FORMIK_HELPER.EDITOR] ||
+                  touched[FORMIK_HELPER.EDITOR]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.EDITOR]}
                     </F.Text>
-                  ) : null}
+                  )}
                 </div>
               ) : (
-                <section className="editor">
+                <div className="form-control editor">
                   <CustomEditor
                     {...{
                       propName: FORMIK_HELPER.EDITOR,
                       onChangeEditor: setFieldValue,
                     }}
                   />
-                  {errors[FORMIK_HELPER.EDITOR] ||
-                  touched[FORMIK_HELPER.EDITOR] ? (
+                  {(errors[FORMIK_HELPER.EDITOR] ||
+                  touched[FORMIK_HELPER.EDITOR]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.EDITOR]}
                     </F.Text>
-                  ) : null}
-                </section>
+                  )}
+                </div>
               )}
+              </section>
               <Button
                 className="submit-btn"
                 type="button"

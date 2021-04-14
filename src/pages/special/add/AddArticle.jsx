@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
-import { Link } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-
-import { CustomTable } from "@components/shared/custom-table";
+import {AiOutlineClose} from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { addArticleValidationScheme } from "./validation";
@@ -12,23 +10,12 @@ import { addArticleValidationScheme } from "./validation";
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import BackArrow from "@assets/images/components/forms/ArrowBendUpLeft.svg";
 
 import { FORMIK_HELPER } from "./utils.js";
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
-const a = [
-  {
-    value: "world",
-    name: "chuj",
-  },
-  {
-    value: "spaaartaaa!!!!!!!!!!!!!!!!!1",
-    name: "podwójny",
-  },
-];
 
 const AddArticle = () => {
   const {
@@ -43,7 +30,6 @@ const AddArticle = () => {
     imagesName,
     setImagesName,
     images,
-    setImages,
     setImgName,
     imgName,
   } = useContainer();
@@ -73,18 +59,13 @@ const AddArticle = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-article" style={{ paddingTop: "50px" }}>
-          <CustomTable row={a} />
+        <section className="section add-article">
           {alert && <CmsAlert />}
           <Breadcrumb>
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Add Article</Breadcrumb.Item>
+            <Breadcrumb.Item active>Add article</Breadcrumb.Item>
           </Breadcrumb>
-          <Link className="btn go-back" to="/panel">
-            <img src={BackArrow} alt="Back" />
-            <p>Go Back</p>
-          </Link>
           <Form className="cms">
             <h2 className="main-title">Add Article</h2>
             <section className="form-container">
@@ -97,11 +78,11 @@ const AddArticle = () => {
                   value={values[FORMIK_HELPER.TITLE]}
                   onChange={handleChange}
                 />
-                {errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE] ? (
+                {(errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
                   </F.Text>
-                ) : null}
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="crew">Crew</label>
@@ -117,11 +98,11 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.CREW, values.value),
                   }}
                 />
-                {errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW] ? (
+                {(errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CREW]}
                   </F.Text>
-                ) : null}
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="category">Category</label>
@@ -137,12 +118,12 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
                   }}
                 />
-                {errors[FORMIK_HELPER.CATEGORY] ||
-                touched[FORMIK_HELPER.CATEGORY] ? (
+                {(errors[FORMIK_HELPER.CATEGORY] ||
+                touched[FORMIK_HELPER.CATEGORY]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CATEGORY]}
                   </F.Text>
-                ) : null}
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="language">Language</label>
@@ -158,12 +139,12 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
                   }}
                 />
-                {errors[FORMIK_HELPER.LANGUAGE] ||
-                touched[FORMIK_HELPER.LANGUAGE] ? (
+                {(errors[FORMIK_HELPER.LANGUAGE] ||
+                touched[FORMIK_HELPER.LANGUAGE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.LANGUAGE]}
                   </F.Text>
-                ) : null}
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMG_URL}>
@@ -183,7 +164,7 @@ const AddArticle = () => {
                         type="button"
                         onClick={() => deleteImage(image)}
                       >
-                        X
+                         <AiOutlineClose />
                       </S.PreviewDelete>
                     </>
                   )}
@@ -212,7 +193,7 @@ const AddArticle = () => {
                         type="button"
                         onClick={() => deleteImage(images)}
                       >
-                        X
+                        <AiOutlineClose />
                       </S.PreviewDelete>
                     </>
                   )}
@@ -223,21 +204,22 @@ const AddArticle = () => {
                   {invalid && invalid.errorMsg}
                 </F.Text>
               </div>
-            </section>
-
-            <section className="editor">
-              <CustomEditor
-                {...{
-                  editorValue: "",
-                  propName: FORMIK_HELPER.EDITOR,
-                  onChangeEditor: setFieldValue,
-                }}
-              />
-              {errors[FORMIK_HELPER.EDITOR] || touched[FORMIK_HELPER.EDITOR] ? (
-                <F.Text className="validation-alert">
-                  {errors[FORMIK_HELPER.EDITOR]}
-                </F.Text>
-              ) : null}
+              <div className="form-control editor">
+                <label>Info</label>
+                <CustomEditor
+                  {...{
+                    editorValue: "",
+                    propName: FORMIK_HELPER.EDITOR,
+                    onChangeEditor: setFieldValue,
+                  }}
+                />
+                {(errors[FORMIK_HELPER.EDITOR] ||
+                touched[FORMIK_HELPER.EDITOR]) && (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.EDITOR]}
+                  </F.Text>
+                )}
+              </div>
             </section>
             <Button
               className="submit-btn"
