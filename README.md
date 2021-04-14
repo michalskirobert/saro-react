@@ -9,7 +9,6 @@ Project has been created by [@michalskirobert](https://github.com/michalskirober
 - [@mjaskowska](https://github.com/mjaskowska)
 - [@kadheryna](https://github.com/kadheryna)
 - [@MacRapacki](https://github.com/MacRapacki)
-- [@tequss](https://github.com/tequss)
 
 # Getting Started with Create React App
 
