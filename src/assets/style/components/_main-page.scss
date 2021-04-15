@@ -45,6 +45,10 @@
   }
 }
 section.introduction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   color: $crl-main-blue;
   .introduction__welcome,
   .introduction__cards {
@@ -71,10 +75,8 @@ section.introduction {
   }
   .introduction__cards {
     position: relative;
-    width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 
