@@ -9,7 +9,7 @@ const initialState = {
   news: [],
   hero: [],
   crew: [],
-  init: { nav: [], pages: [] },
+  init: { nav: [], pages: [], auth: [] },
 };
 
 export const database = (state = initialState, action) => {

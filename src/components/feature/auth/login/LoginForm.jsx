@@ -16,6 +16,11 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const alert = useSelector((state) => state.alert.alert);
   const isLoading = useSelector((state) => state.currentUser.isLoading);
+  const validationData = useSelector(
+    (state) => state.database.init.auth["sign-in"]?.labels[0]
+  );
+  const logInData = useSelector((state) => state.database.init.auth["sign-in"]);
+  console.log(logInData);
 
   const signin = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
@@ -41,7 +46,10 @@ const LoginForm = () => {
       {...{
         initialValues: {},
         validateOnChange: true,
-        validationSchema: loginValidationScheme,
+        validationSchema: loginValidationScheme(
+          validationData?.invalid,
+          validationData?.valid
+        ),
         validateOnMount: true,
         onSubmit: (values) => handleSubmit(values),
       }}
@@ -49,7 +57,7 @@ const LoginForm = () => {
       {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
         <>
           {alert && <Alert />}
-          <h2>Log in</h2>
+          <h2>{logInData?.header}</h2>
           <div className="form-control">
             <label htmlFor="email" className="label"></label>
             <input
@@ -85,11 +93,11 @@ const LoginForm = () => {
             ) : null}
           </div>
           <button type="submit" disabled={!isValid} onClick={handleSubmit}>
-            LOG IN
+            {logInData?.buttonTitle}
           </button>
           <div className="auth-control">
             <Link className="create-account-link" to="/sign-up">
-              Create an account
+              {logInData?.link}
             </Link>
           </div>
         </>
