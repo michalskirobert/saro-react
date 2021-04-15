@@ -8,7 +8,7 @@ import { auth } from "@components/feature/firebase";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 
 import Hamburger from "@assets/images/components/nav/HamburgerBlack.svg";
-import Cross from "@assets/images/components/nav/CrossBlack.svg";
+import Cross from "@assets/images/components/nav/Cross.svg";
 
 import AdminAddArticle from "./../add/AddArticle";
 import AdminAddEvents from "./../add/AddEvents";
@@ -31,8 +31,8 @@ const AdminPanel = () => {
     C.userConstants.USER_STATUS_DEVELOPER;
 
   const handleClick = () => {
-      setIsPanelNavOpen(!isPanelNavOpen);
-    };
+    setIsPanelNavOpen(!isPanelNavOpen);
+  };
 
   return (
     <Router>
@@ -51,11 +51,7 @@ const AdminPanel = () => {
             setIsPanelNavOpen(!isPanelNavOpen);
           }}
         >
-          {isPanelNavOpen ? (
-            <img src={Cross} alt="Close" />
-          ) : (
-            <img src={Hamburger} alt="Menu" />
-          )}
+          <img src={Hamburger} alt="Menu" />
         </button>
         <div className="cms-wrapper">
           <Accordion
@@ -125,7 +121,8 @@ const AdminPanel = () => {
                 </Accordion.Toggle>
               </Card>
             )}
-          </Accordion>         
+          </Accordion>
+          <button onClick={handleClick} className={`close ${isPanelNavOpen && "active"}`}><img src={Cross} alt="Close"/></button>
 
           <Switch>
             <SaroRoute exact path="/panel">
