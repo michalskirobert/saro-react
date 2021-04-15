@@ -1,0 +1,47 @@
+.warning {
+    z-index: 20;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 0.5rem $crl-main-grey-button;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width:200px;
+    width: 80%;
+    max-width: 400px;
+    height: 200px;
+
+    .warning-message{
+        text-align: center;
+        margin-top: 5vh;
+        width: 75%;
+        display: block;
+        margin: 0 auto;
+        margin-top: 50px;
+        span {
+            font-weight: bold;
+        }
+    }
+    .btn-container {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        .btn {
+            margin: 0 5px;
+            padding: 10px 30px;
+        }        
+    }    
+    .close {
+        position: absolute;
+        top: -120px;
+        right: 10px;
+    }
+}
+.warning.closed {
+    display: none;
+}

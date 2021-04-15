@@ -1,0 +1,81 @@
+.footer-page {
+  background-color: $crl-base-blue;
+  font-family: $family-en-primary;
+  color: $crl-base;
+  width: 100vw;
+  padding: 20px 20px 14px;
+
+  .footer-page__content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start;
+
+    select {
+      display: flex;
+      position: relative;
+      align-items: center;
+      color: $crl-base;
+      width: calc(281.141px / 2);
+      height: 41px;
+      padding-left: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 23px;
+      letter-spacing: -0.02em;
+      border: 1px solid $crl-main-blue;
+      border-radius: 5px 0px 0px 5px;
+      margin-bottom: 10px;
+      background-image: url("../../../assets/images/components/footer/ArrowDown.svg"),
+        linear-gradient(90deg, $crl-main-grey-button 73%, $crl-base 27%);
+      background-repeat: no-repeat;
+      background-position: 91% 55%;
+      background-size: 10% auto, cover;
+    }
+  }
+
+  h2 {
+    align-items: center;
+    margin: 20px auto 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  p {
+    color: $crl-base;
+    align-items: center;
+    max-width: 550px;
+    margin: 8px 0 10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 23px;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-page__icons {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+
+    .footer-page__socialMedia {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .social-media__icons {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        width: 60px;
+        height: 60px;
+        padding: 0 10px 0;
+      }
+    }
+  }
+}

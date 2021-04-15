@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "@tinymce/tinymce-react": "^3.10.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "cra-template-pwa": "^1.0.3",
+    "express": "^4.17.1",
     "firebase": "^8.2.5",
     "formik": "^2.2.6",
+    "lint-staged": "^10.5.4",
     "lodash.throttle": "^4.1.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
@@ -32,9 +36,11 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI= react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "CI= craco build",
+    "test": " craco test",
+    "build:prod": "curl -X POST -d {} https://api.netlify.com/build_hooks/606892e5407c81c608ea1c1a",
+    "build:dev": "curl -X POST -d {} https://api.netlify.com/build_hooks/6068935d5f1acad45d1b9925",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

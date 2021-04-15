@@ -1,0 +1,19 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 250px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    #pageSize {
+        width: 150px;
+    }   
+    a.page-link {
+        color: $crl-base-blue;
+    }
+    .page-item.active .page-link {
+        border: none;
+        background: $crl-base-blue;
+        color: $crl-base;
+    }
+}
