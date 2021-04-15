@@ -20,7 +20,6 @@ const LoginForm = () => {
     (state) => state.database.init.auth["sign-in"]?.labels[0]
   );
   const logInData = useSelector((state) => state.database.init.auth["sign-in"]);
-  console.log(logInData);
 
   const signin = async (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
@@ -29,6 +28,7 @@ const LoginForm = () => {
   const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
     try {
+      console.log({ values });
       await signin(values.email, values.password);
       dispatch(userActions.request());
       history.push("/dashboard");
