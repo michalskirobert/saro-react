@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { FORM_HELPER } from "./utils";
-import { userActions, alertActions } from "@actions";
+import { userActions, alertActions } from "@actions/index";
 import Alert from "./../../../shared/alerts";
 import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
 
@@ -28,9 +28,9 @@ const LoginForm = () => {
   const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
     try {
-      console.log({ values });
+      dispatch(userActions.SignInRequest);
       await signin(values.email, values.password);
-      dispatch(userActions.request());
+      dispatch(userActions.signInSuccess);
       history.push("/dashboard");
     } catch (error) {
       dispatch(alertActions.error(error.message));
