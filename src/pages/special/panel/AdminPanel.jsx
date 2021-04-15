@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
@@ -75,18 +75,18 @@ const cmsNavData = [
         title: "Translate footer",
         path: "/panel/translate/footer",
       },
-    ]
+    ],
   },
   {
     title: "Manage your profile",
     path: "/panel",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER]
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
   },
   {
     title: "Manage pictures",
     path: "/panel",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER]
-  }
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
+  },
 ];
 
 const AdminPanel = () => {
@@ -98,6 +98,11 @@ const AdminPanel = () => {
   const handleClick = () => {
     setIsPanelNavOpen(!isPanelNavOpen);
   };
+
+  const authorize = (status) => {
+    return cmsNavData.filter((item) => item.authFor.includes(status));
+  };
+  const authData = authorize(userStatus);
 
   return (
     <Router>
@@ -123,9 +128,8 @@ const AdminPanel = () => {
             defaultActiveKey="0"
             className={`${isPanelNavOpen && "active"}`}
           >
-            {cmsNavData.map(({ title, path, content, authFor }, index) => {
+            {authData.map(({ title, path, content }, index) => {
               return (
-                authFor.includes(userStatus) &&
                 <Card>
                   {content ? (
                     <React.Fragment key={index}>
