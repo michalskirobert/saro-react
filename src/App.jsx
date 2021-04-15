@@ -35,9 +35,9 @@ import AdminAddEvents from "./pages/special/add/AddEvents";
 import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
-import AdminManageArticle from './pages/special/panel/manage/ManageArticles'
-import AdminManageNews from './pages/special/panel/manage/ManageNews'
-import AdminManageEvents from './pages/special/panel/manage/ManageEvents'
+import AdminManageArticle from "./pages/special/panel/manage/ManageArticles";
+import AdminManageNews from "./pages/special/panel/manage/ManageNews";
+import AdminManageEvents from "./pages/special/panel/manage/ManageEvents";
 
 import * as C from "@utils/constants";
 
@@ -65,7 +65,7 @@ const App = () => {
           .collection(C.GENERAL_CONSTANTS.USERS)
           .doc(user.uid)
           .onSnapshot((currentUser) => {
-            dispatch(userActions.signIn(currentUser.data()));
+            dispatch(userActions.signInSuccess(currentUser.data()));
           });
       } else {
         dispatch(userActions.logout());
@@ -101,12 +101,36 @@ const App = () => {
           <PrivateRoute path="/profile/:id" children={<User />} />
           {/* CMS SARO 1.0.0 */}
           <SaroRoute path="/panel" component={AdminDashboard} />
-          <SaroRoute exact path="/panel/add/article" component={AdminAddArticle} />
-          <SaroRoute exact path="/panel/add/events" component={AdminAddEvents} />
-          <SaroRoute exact path="/panel/add/news-content" component={AdminAddNews} />
-          <SaroRoute exact path="/panel/manage/articles" component={AdminManageArticle} />
-          <SaroRoute exact path="/panel/manage/events" component={AdminManageEvents} />
-          <SaroRoute exact path="/panel/manage/news-content" component={AdminManageNews} />
+          <SaroRoute
+            exact
+            path="/panel/add/article"
+            component={AdminAddArticle}
+          />
+          <SaroRoute
+            exact
+            path="/panel/add/events"
+            component={AdminAddEvents}
+          />
+          <SaroRoute
+            exact
+            path="/panel/add/news-content"
+            component={AdminAddNews}
+          />
+          <SaroRoute
+            exact
+            path="/panel/manage/articles"
+            component={AdminManageArticle}
+          />
+          <SaroRoute
+            exact
+            path="/panel/manage/events"
+            component={AdminManageEvents}
+          />
+          <SaroRoute
+            exact
+            path="/panel/manage/news-content"
+            component={AdminManageNews}
+          />
           <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
           <Route path="*" component={Error} />
