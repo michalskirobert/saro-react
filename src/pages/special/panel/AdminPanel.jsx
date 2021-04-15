@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { auth } from "@components/feature/firebase";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 
 import Hamburger from "@assets/images/components/nav/HamburgerBlack.svg";
-import Cross from "@assets/images/components/nav/CrossBlack.svg";
+import Cross from "@assets/images/components/nav/Cross.svg";
 
 import AdminAddArticle from "./../add/AddArticle";
 import AdminAddEvents from "./../add/AddEvents";
@@ -22,17 +22,87 @@ import AdminEdit from "./../edit/Edit";
 import * as C from "@utils/constants";
 import * as S from "./style";
 
+const cmsNavData = [
+  {
+    title: "Admin Panel",
+    path: "/panel",
+    authFor: [
+      C.userConstants.USER_STATUS_CREW,
+      C.userConstants.USER_STATUS_DEVELOPER,
+    ],
+  },
+  {
+    title: "Add new content",
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
+    content: [
+      {
+        title: "Add event",
+        path: "/panel/add/events",
+      },
+      {
+        title: "Add article",
+        path: "/panel/add/article",
+      },
+      {
+        title: "Add news",
+        path: "/panel/add/news-content",
+      },
+    ],
+  },
+  {
+    title: "Manage content",
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
+    content: [
+      {
+        title: "Manage events",
+        path: "/panel/manage/events",
+      },
+      {
+        title: "Manage article",
+        path: "/panel/manage/article",
+      },
+      {
+        title: "Manage news",
+        path: "/panel/manage/news-content",
+      },
+    ],
+  },
+  {
+    title: "Translate content",
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
+    content: [
+      {
+        title: "Translate footer",
+        path: "/panel/translate/footer",
+      },
+    ],
+  },
+  {
+    title: "Manage your profile",
+    path: "/panel",
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
+  },
+  {
+    title: "Manage pictures",
+    path: "/panel",
+    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
+  },
+];
+
 const AdminPanel = () => {
   const [isPanelNavOpen, setIsPanelNavOpen] = useState(false);
 
   const alert = useSelector((state) => state.CMS.alert);
-  const userStatus =
-    useSelector((state) => state.currentUser.status) ||
-    C.userConstants.USER_STATUS_DEVELOPER;
+  const userStatus = C.userConstants.USER_STATUS_DEVELOPER;
 
   const handleClick = () => {
-      setIsPanelNavOpen(!isPanelNavOpen);
-    };
+    setIsPanelNavOpen(!isPanelNavOpen);
+  };
+
+  const authorize = (status) => {
+    return cmsNavData.filter((item) => item.authFor.includes(status));
+  };
+  const authData = authorize(userStatus);
 
   return (
     <Router>
@@ -51,81 +121,50 @@ const AdminPanel = () => {
             setIsPanelNavOpen(!isPanelNavOpen);
           }}
         >
-          {isPanelNavOpen ? (
-            <img src={Cross} alt="Close" />
-          ) : (
-            <img src={Hamburger} alt="Menu" />
-          )}
+          <img src={Hamburger} alt="Menu" />
         </button>
         <div className="cms-wrapper">
           <Accordion
             defaultActiveKey="0"
             className={`${isPanelNavOpen && "active"}`}
           >
-            <Card>
-              <Accordion.Toggle as={Card.Header} eventKey="0">
-                <Link style={{ color: "white" }} to="/panel">
-                  Admin Panel
-                </Link>
-              </Accordion.Toggle>
-            </Card>
-            {userStatus === C.userConstants.USER_STATUS_DEVELOPER && (
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="1">
-                  Add new content
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="1">
-                  <Card.Body>
-                    <Link to="/panel/add/events">Add event</Link>
-                    <Link to="/panel/add/article">Add article</Link>
-                    <Link to="/panel/add/news-content">Add news</Link>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            )}
-            {userStatus === C.userConstants.USER_STATUS_DEVELOPER && (
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="2">
-                  Manage content
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="2">
-                  <Card.Body>
-                    <Link to="/panel/manage/events">Manage Events</Link>
-                    <Link to="/panel/manage/article">Manage Articles</Link>
-                    <Link to="/panel/manage/news-content">Manage News</Link>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            )}
-            {userStatus === C.userConstants.USER_STATUS_DEVELOPER && (
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="3">
-                  Translate content
-                </Accordion.Toggle>
-                <Accordion.Collapse eventKey="3">
-                  <Card.Body>
-                    <Link to="/panel/translate/footer">Translate footer</Link>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            )}
-
-            {userStatus === C.userConstants.USER_STATUS_DEVELOPER && (
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="4">
-                  Manage your profile
-                </Accordion.Toggle>
-              </Card>
-            )}
-
-            {userStatus === C.userConstants.USER_STATUS_DEVELOPER && (
-              <Card>
-                <Accordion.Toggle as={Card.Header} eventKey="5">
-                  Manage pictures
-                </Accordion.Toggle>
-              </Card>
-            )}
-          </Accordion>         
+            {authData.map(({ title, path, content }, index) => {
+              return (
+                <Card>
+                  {content ? (
+                    <React.Fragment key={index}>
+                      <Accordion.Toggle as={Card.Header} eventKey={index}>
+                        {title}
+                      </Accordion.Toggle>
+                      <Accordion.Collapse eventKey={index}>
+                        <Card.Body>
+                          {content.map(({ title, path }) => (
+                            <Link to={path}>{title}</Link>
+                          ))}
+                        </Card.Body>
+                      </Accordion.Collapse>
+                    </React.Fragment>
+                  ) : (
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey={index}
+                      key={index}
+                    >
+                      <Link style={{ color: "white" }} to={path}>
+                        {title}
+                      </Link>
+                    </Accordion.Toggle>
+                  )}
+                </Card>
+              );
+            })}
+          </Accordion>
+          <button
+            onClick={handleClick}
+            className={`close ${isPanelNavOpen && "active"}`}
+          >
+            <img src={Cross} alt="Close" />
+          </button>
 
           <Switch>
             <SaroRoute exact path="/panel">

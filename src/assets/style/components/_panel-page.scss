@@ -7,19 +7,23 @@
     width: 100%;
     margin-top: 50px;
     background-color: $crl-panel-grey;
-    position: relative;
+  }
+  .breadcrumb {
+    background-color: transparent;
   }
   .accordion {
+    padding-top: 30px;
     position: fixed;
-    top: 130px;
+    top: 0px;
     left: 0;
     transform: translateX(-100%);
     transition: all 0.3s ease-in-out;
     width: 250px;
     background-color: $crl-main-blue;
     border: none;
+    border-right: 1px solid $crl-base;
     color: $crl-main-grey;
-    z-index: 19;
+    z-index: 50;
     height: 100vh;
     .card {
       border: none;
@@ -41,6 +45,19 @@
   }
   .accordion.active {
     transform: translateX(0);
+}
+  .close {
+    color: black;
+    z-index: 55;
+    position: fixed;
+    top: 10px;
+    left: 210px;
+    transform: translateX(-300px);
+    transition: all 0.3s ease-in-out;
+
+  }
+  .close.active {
+    transform: translateX(0);
   }
   section.add-news {
     padding: 0;
@@ -60,11 +77,10 @@
     min-height: 50vh;
   }
   .hamburger {
-    margin-left: auto;
     z-index: 5;
     position: absolute;
-    top: 50px;
-    right: 0;
+    top: 70px;
+    right: 10px;
   }
 }
 
@@ -73,11 +89,15 @@
     .cms-wrapper {
       display: flex;
     }
+    .close {
+      display: none;
+    }
     .accordion {
       position: static;
       transform: translateX(0);
       z-index: 5;
       height: inherit;
+      padding-top: 0;
     }
     .hamburger {
       display: none;
