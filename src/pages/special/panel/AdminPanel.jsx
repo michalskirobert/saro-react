@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
@@ -22,75 +22,10 @@ import AdminEdit from "./../edit/Edit";
 import * as C from "@utils/constants";
 import * as S from "./style";
 
-const cmsNavData = [
-  {
-    title: "Admin Panel",
-    path: "/panel",
-    authFor: [
-      C.userConstants.USER_STATUS_CREW,
-      C.userConstants.USER_STATUS_DEVELOPER,
-    ],
-  },
-  {
-    title: "Add new content",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
-    content: [
-      {
-        title: "Add event",
-        path: "/panel/add/events",
-      },
-      {
-        title: "Add article",
-        path: "/panel/add/article",
-      },
-      {
-        title: "Add news",
-        path: "/panel/add/news-content",
-      },
-    ],
-  },
-  {
-    title: "Manage content",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
-    content: [
-      {
-        title: "Manage events",
-        path: "/panel/manage/events",
-      },
-      {
-        title: "Manage article",
-        path: "/panel/manage/article",
-      },
-      {
-        title: "Manage news",
-        path: "/panel/manage/news-content",
-      },
-    ],
-  },
-  {
-    title: "Translate content",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
-    content: [
-      {
-        title: "Translate footer",
-        path: "/panel/translate/footer",
-      },
-    ],
-  },
-  {
-    title: "Manage your profile",
-    path: "/panel",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
-  },
-  {
-    title: "Manage pictures",
-    path: "/panel",
-    authFor: [C.userConstants.USER_STATUS_DEVELOPER],
-  },
-];
 
 const AdminPanel = () => {
   const [isPanelNavOpen, setIsPanelNavOpen] = useState(false);
+  const cmsNavData = useSelector(state=>state.database?.init?.nav[0]?.content) 
 
   const alert = useSelector((state) => state.CMS.alert);
   const userStatus = C.userConstants.USER_STATUS_DEVELOPER;
@@ -100,9 +35,13 @@ const AdminPanel = () => {
   };
 
   const authorize = (status) => {
-    return cmsNavData.filter((item) => item.authFor.includes(status));
+    return cmsNavData?.filter((item) => {      
+      if(!item.status) {
+        return item
+      }            
+      return item.status.includes(status)});
   };
-  const authData = authorize(userStatus);
+  const authCmsNavData = authorize(userStatus);
 
   return (
     <Router>
@@ -128,17 +67,17 @@ const AdminPanel = () => {
             defaultActiveKey="0"
             className={`${isPanelNavOpen && "active"}`}
           >
-            {authData.map(({ title, path, content }, index) => {
+            {authCmsNavData?.map(({ title, path, subcontent }, index) => {
               return (
                 <Card>
-                  {content ? (
+                  {subcontent ? (
                     <React.Fragment key={index}>
                       <Accordion.Toggle as={Card.Header} eventKey={index}>
                         {title}
                       </Accordion.Toggle>
                       <Accordion.Collapse eventKey={index}>
                         <Card.Body>
-                          {content.map(({ title, path }) => (
+                          {subcontent.map(({ title, path }) => (
                             <Link to={path}>{title}</Link>
                           ))}
                         </Card.Body>
