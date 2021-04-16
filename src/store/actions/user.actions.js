@@ -6,7 +6,7 @@ const signUpRequest = () => {
   };
 };
 
-const signUp = (payload) => {
+const signUpSuccess = (payload) => {
   return {
     type: userConstants.REGISTER_SUCCESS,
     payload,
@@ -19,7 +19,7 @@ const signUpFailure = () => {
   };
 };
 
-const signIn = (data) => {
+const signInSuccess = (data) => {
   return {
     type: userConstants.LOGIN_SUCCESS,
     payload: data,
@@ -54,17 +54,17 @@ const removeUser = () => {
 const changeLanguage = (lang) => {
   return {
     type: GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO[lang.toUpperCase()],
-  }
-}
+  };
+};
 
 export const userActions = {
-  signIn,
-  signUp,
+  signInSuccess,
+  signUpSuccess,
   logout,
   removeUser,
   SignInRequest,
   SignInFailure,
   signUpRequest,
   signUpFailure,
-  changeLanguage
+  changeLanguage,
 };

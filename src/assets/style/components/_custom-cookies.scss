@@ -3,17 +3,16 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 110px;
+  height: 130px;
   background-color: $crl-main-blue;
-  padding: 0 50px;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   .cookies__info {
-    font-size: 15px;
+    font-size: 14px;
     color: $crl-base;
-    padding-right: 30px;
+    padding-right: 20px;
   }
   .cookies__btn__wrapper {
     height: 100%;
@@ -22,7 +21,7 @@
     justify-content: space-around;
     align-items: flex-end;
     .cookies__btn {
-      width: 160px;
+      width: 130px;
       height: 30px;
       background: $crl-main-blue;
       border-radius: 60px;
