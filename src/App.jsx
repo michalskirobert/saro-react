@@ -111,11 +111,7 @@ const App = () => {
             path="/panel/add/events"
             component={AdminAddEvents}
           />
-          <SaroRoute
-            exact
-            path="/panel/add/news-content"
-            component={AdminAddNews}
-          />
+          <SaroRoute exact path="/panel/add/news" component={AdminAddNews} />
           <SaroRoute
             exact
             path="/panel/manage/articles"
@@ -128,7 +124,7 @@ const App = () => {
           />
           <SaroRoute
             exact
-            path="/panel/manage/news-content"
+            path="/panel/manage/news"
             component={AdminManageNews}
           />
           <SaroRoute exact path="/panel/edit" component={AdminEdit} />

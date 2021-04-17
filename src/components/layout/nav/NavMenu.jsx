@@ -12,9 +12,6 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   const user = useSelector((state) => state.currentUser);
   const nav = useSelector((state) => state.database.init.nav);
 
-  const publicMap = nav.filter((item) => !item.isLogged);
-  const regularMap = nav.filter((item) => !item.status);
-
   const toggleInnerMenu = (index) => {
     if (selected === index) {
       setSelected(null);
@@ -22,15 +19,10 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
       setSelected(index);
     }
   };
+
   const handleClick = () => {
     setIsNavOpen(!isNavOpen);
   };
-
-  let navData = user.isLogged
-    ? user.status >= 30
-      ? nav
-      : regularMap
-    : publicMap;
 
   return (
     <>
@@ -38,7 +30,7 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
         defaultActiveKey="0"
         className={`nav-container ${isNavOpen && "active"}`}
       >
-        {navData.map((link, index) => {
+        {nav.map((link, index) => {
           const { title, path, content, status } = link;
           return content ? (
             <Card>
