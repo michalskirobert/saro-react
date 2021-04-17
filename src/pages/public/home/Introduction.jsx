@@ -33,15 +33,15 @@ const Introduction = () => {
           <React.Fragment key={uuid4()}>
             {subsection
               ? subsection?.map((subsectionItem) => {
-                  const { details, header, imgURL } = subsectionItem;
+                  const { details, header, imgURL, className } = subsectionItem;
                   return (
                     <div className="introduction__cards" key={uuid4()}>
                       <div className="card">
                         <div className="text">
-                          <h2 className="">{header} </h2>
-                          <p className="">{details}</p>
+                          <h2 className={className}>{header} </h2>
+                          <p className={className}>{details}</p>
                         </div>
-                        <div className={`icon `}>
+                        <div className={`icon ${className}`}>
                           <img src={imgURL} alt="icon"></img>
                         </div>
                       </div>

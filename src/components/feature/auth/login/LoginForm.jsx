@@ -46,10 +46,9 @@ const LoginForm = () => {
       {...{
         initialValues: {},
         validateOnChange: true,
-        validationSchema: loginValidationScheme(
-          validationData?.invalid,
-          validationData?.valid
-        ),
+        validationSchema: loginValidationScheme,
+        validateOnBlur: true,
+        enableReinitialize: true,
         validateOnMount: true,
         onSubmit: (values) => handleSubmit(values),
       }}
@@ -58,40 +57,30 @@ const LoginForm = () => {
         <>
           {alert && <Alert />}
           <h2>{logInData?.header}</h2>
-          <div className="form-control">
-            <label htmlFor="email" className="label"></label>
-            <input
-              name="email"
-              type="email"
-              id="email"
-              value={values[FORM_HELPER.EMAIL]}
-              onChange={handleChange}
-              required
-              placeholder="jane@example.com"
-            />
+          {logInData?.labels.map((item, index) => {
+            const { invalid, placeholder, type, valid, label } = item;
+            console.log(values[FORM_HELPER[type.toUpperCase()]]);
+            return (
+              <div className="form-control" key={index}>
+                <input
+                  name={FORM_HELPER[type.toUpperCase()]}
+                  type={type}
+                  id={FORM_HELPER[type.toUpperCase()]}
+                  value={values[FORM_HELPER[type.toUpperCase()]]}
+                  onChange={handleChange}
+                  required
+                  placeholder={placeholder}
+                />
 
-            {errors[FORM_HELPER.EMAIL] || touched[FORM_HELPER.EMAIL] ? (
-              <F.Text className="validation-alert">
-                {errors[FORM_HELPER.EMAIL]}
-              </F.Text>
-            ) : null}
-          </div>
-          <div className="form-control">
-            <label htmlFor="password" className="label"></label>
-            <input
-              type="password"
-              id="password"
-              value={values[FORM_HELPER.PASSWORD]}
-              onChange={handleChange}
-              required
-              placeholder="••••••••••••"
-            />
-            {errors[FORM_HELPER.PASSWORD] || touched[FORM_HELPER.PASSWORD] ? (
-              <F.Text className="validation-alert">
-                {errors[FORM_HELPER.PASSWORD]}
-              </F.Text>
-            ) : null}
-          </div>
+                {errors[FORM_HELPER[type.toUpperCase()]] ||
+                  (touched[FORM_HELPER[type.toUpperCase()]] && (
+                    <F.Text className="validation-alert">
+                      {errors[FORM_HELPER[type.toUpperCase()]]}
+                    </F.Text>
+                  ))}
+              </div>
+            );
+          })}
           <button type="submit" disabled={!isValid} onClick={handleSubmit}>
             {logInData?.buttonTitle}
           </button>

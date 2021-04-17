@@ -140,8 +140,7 @@ section.introduction {
       }
     }
   }
-  .introduction__welcome::before,
-  .introduction__cards::before {
+  .introduction__welcome::before {
     content: "";
     position: absolute;
     top: 0;

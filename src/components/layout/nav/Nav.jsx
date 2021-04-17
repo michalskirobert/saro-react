@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { auth } from "@fire";
 
 import throttle from "lodash.throttle";
 
@@ -41,7 +42,6 @@ const Nav = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
 
   return (
     <>
@@ -57,7 +57,10 @@ const Nav = () => {
           <section className="user">
             {userIsLogged ? (
               <Link to="/dashboard">
-                <img src={UserIcon} alt={userName} />
+                <img
+                  src={auth?.currentUser?.photoURL ?? UserIcon}
+                  alt={userName}
+                />
               </Link>
             ) : (
               <Link to="/sign-up">

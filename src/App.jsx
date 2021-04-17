@@ -100,7 +100,7 @@ const App = () => {
           <PrivateRoute path="/profile/settings" component={ProfileSettings} />
           <PrivateRoute path="/profile/:id" children={<User />} />
           {/* CMS SARO 1.0.0 */}
-          <SaroRoute path="/panel" component={AdminDashboard} />
+          <SaroRoute exact path="/panel" component={AdminDashboard} />
           <SaroRoute
             exact
             path="/panel/add/article"
