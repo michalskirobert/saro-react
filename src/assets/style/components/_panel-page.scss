@@ -12,19 +12,12 @@
     background-color: transparent;
   }
   .accordion {
-    padding-top: 30px;
-    position: fixed;
-    top: 0px;
-    left: 0;
-    transform: translateX(-100%);
-    transition: all 0.3s ease-in-out;
+    display: none;
     width: 250px;
     background-color: $crl-main-blue;
     border: none;
     border-right: 1px solid $crl-base;
-    color: $crl-main-grey;
-    z-index: 50;
-    height: 100vh;
+    color: $crl-main-grey;        
     .card {
       border: none;
       border-bottom: 1px solid $crl-base;
@@ -43,9 +36,6 @@
       }
     }
   }
-  .accordion.active {
-    transform: translateX(0);
-}
   .close {
     color: black;
     z-index: 55;
@@ -93,14 +83,8 @@
       display: none;
     }
     .accordion {
-      position: static;
-      transform: translateX(0);
-      z-index: 5;
+      display: block;
       height: inherit;
-      padding-top: 0;
-    }
-    .hamburger {
-      display: none;
     }
   }
 }

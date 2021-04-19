@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
@@ -6,9 +6,6 @@ import { Accordion, Card } from "react-bootstrap";
 import { SaroRoute } from "./../../../routers/SaroRoute";
 import { auth } from "@components/feature/firebase";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-
-import Hamburger from "@assets/images/components/nav/HamburgerBlack.svg";
-import Cross from "@assets/images/components/nav/Cross.svg";
 
 import AdminAddArticle from "./../add/AddArticle";
 import AdminAddEvents from "./../add/AddEvents";
@@ -20,19 +17,13 @@ import ManageArticles from "./manage/ManageArticles";
 import AdminEdit from "./../edit/Edit";
 
 import * as C from "@utils/constants";
-import * as S from "./style";
-
 
 const AdminPanel = () => {
-  const [isPanelNavOpen, setIsPanelNavOpen] = useState(false);
   const cmsNavData = useSelector(state=>state.database?.init?.nav[0]?.content) 
 
   const alert = useSelector((state) => state.CMS.alert);
   const userStatus = C.userConstants.USER_STATUS_DEVELOPER;
 
-  const handleClick = () => {
-    setIsPanelNavOpen(!isPanelNavOpen);
-  };
 
   const authorize = (status) => {
     return cmsNavData?.filter((item) => {      
@@ -53,19 +44,10 @@ const AdminPanel = () => {
           <span style={{ color: "red" }}>
             {auth?.currentUser?.displayName ?? "Saro-crew"}
           </span>
-        </h2>
-        <button
-          className="hamburger"
-          onClick={() => {
-            setIsPanelNavOpen(!isPanelNavOpen);
-          }}
-        >
-          <img src={Hamburger} alt="Menu" />
-        </button>
+        </h2> 
         <div className="cms-wrapper">
           <Accordion
-            defaultActiveKey="0"
-            className={`${isPanelNavOpen && "active"}`}
+            defaultActiveKey="0"            
           >
             {authCmsNavData?.map(({ title, path, subcontent }, index) => {
               return (
@@ -98,12 +80,6 @@ const AdminPanel = () => {
               );
             })}
           </Accordion>
-          <button
-            onClick={handleClick}
-            className={`close ${isPanelNavOpen && "active"}`}
-          >
-            <img src={Cross} alt="Close" />
-          </button>
 
           <Switch>
             <SaroRoute exact path="/panel">
@@ -149,8 +125,7 @@ const AdminPanel = () => {
             <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           </Switch>
         </div>
-      </section>
-      {isPanelNavOpen && <S.Overlay onClick={handleClick}></S.Overlay>}
+      </section>      
     </Router>
   );
 };

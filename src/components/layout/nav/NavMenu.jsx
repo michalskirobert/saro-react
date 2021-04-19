@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
@@ -8,94 +8,69 @@ import { FaAngleLeft } from "react-icons/fa";
 import * as S from "./style";
 
 const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
-  const [selected, setSelected] = useState(null);
-  const user = useSelector((state) => state.currentUser);
+  const user = useSelector((state) => state.currentUser); 
   const nav = useSelector((state) => state.database.init.nav);
 
-  const toggleInnerMenu = (index) => {
-    if (selected === index) {
-      setSelected(null);
-    } else {
-      setSelected(index);
-    }
-  };
-
-  const handleClick = () => {
+  const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const filterNavData = () => {
+    if (user.status === 0 ) {
+      return nav.filter(item => item?.status?.includes(user?.status))
+    }
+    else {
+       return nav.filter(item => !item?.action && item?.status?.includes(user?.status) )
+    }
+  }
+  const filteredNavData = filterNavData()
+
   return (
     <>
-      <Accordion
-        defaultActiveKey="0"
-        className={`nav-container ${isNavOpen && "active"}`}
-      >
-        {nav.map((link, index) => {
-          const { title, path, content, status } = link;
+      <Accordion className={`nav-container ${isNavOpen && "active"}`}>
+        {filteredNavData.map(({ title, path, content }) => {
           return content ? (
-            <Card>
-              <Accordion.Toggle eventKey={index} as={Card.Header}>
-                {title}
+            <Card key={title}>
+              <Accordion.Toggle eventKey={title} as={Card.Header}>
+              <FaAngleLeft className="arrow" /> {title}
               </Accordion.Toggle>
-              <Accordion.Collapse eventKey={index}>
+              <Accordion.Collapse eventKey={title}>
                 <Card.Body>
-                  {content.map(({ titile, path }) => (
-                    <Link to={path}>{title}</Link>
-                  ))}
+                <Accordion>
+                  {content.map(({ title, path, subcontent }) => {
+                    return subcontent ? (                      
+                        <Card>
+                          <Accordion.Toggle as={Card.Header} eventKey={title}>
+                            {title}
+                          </Accordion.Toggle>
+                          <Accordion.Collapse eventKey={title}>
+                            <Card.Body className="inner-body">
+                              {subcontent.map(({path, title}) => (
+                                <Link className="inner-links" to={path}>{title}</Link>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                        </Card>                      
+                    ) : (
+                      <Link to={path}>{title}</Link>
+                    );
+                  })}
+                  </Accordion>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
           ) : (
             <Accordion.Toggle as={Card.Header}>
-              <p style={{ color: "white" }}>{title}</p>
+              <Link to={path}>
+              <FaAngleLeft className="arrow" /> {title}
+              </Link>
             </Accordion.Toggle>
           );
         })}
       </Accordion>
-      {isNavOpen && <S.Overlay onClick={handleClick}></S.Overlay>}
+      {isNavOpen && <S.Overlay onClick={toggleNav}></S.Overlay>}
     </>
   );
 };
 
 export default NavMenu;
-
-// <li key={index} className="nav-link">
-//   {content ? (
-//     <>
-//       <button
-//         onClick={() => {
-//           toggleInnerMenu(index);
-//         }}
-//       >
-//         <FaAngleLeft
-//           className={selected === index ? "icon rotate" : "icon"}
-//         />
-//         {title}
-//       </button>
-
-//       <div
-//         className={
-//           selected === index
-//             ? "nav-inner-container open"
-//             : "nav-inner-container"
-//         }
-//       >
-//         <ul className="nav-links-inner">
-//           {content?.map((link, index) => {
-//             const { title, path } = link;
-//             return (
-//               <li key={index} className="nav-link-inner">
-//                 <Link to={path}>{title}</Link>
-//               </li>
-//             );
-//           })}
-//         </ul>
-//       </div>
-//     </>
-//   ) : (
-//     <Link to={path}>
-//       <FaAngleLeft className="icon" />
-//       {title}
-//     </Link>
-//   )}
-// </li>
