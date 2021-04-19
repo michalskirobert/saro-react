@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
@@ -216,7 +216,7 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   //   }
   // }
 
-  // const navData = filterNavData()
+  // const filteredNavData = filterNavData()
 
   return (
     <>
@@ -225,37 +225,37 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
           return content ? (
             <Card key={title}>
               <Accordion.Toggle eventKey={title} as={Card.Header}>
-                {title} <p>level1</p>
+              <FaAngleLeft className="arrow" /> {title}
               </Accordion.Toggle>
               <Accordion.Collapse eventKey={title}>
                 <Card.Body>
-                  {content.map(({ title, path, subcontent }, index) => {
-                    return subcontent ? (
-                      <Accordion>
+                <Accordion>
+                  {content.map(({ title, path, subcontent }) => {
+                    return subcontent ? (                      
                         <Card>
                           <Accordion.Toggle as={Card.Header} eventKey={title}>
-                            {title} level2a
+                            {title}
                           </Accordion.Toggle>
                           <Accordion.Collapse eventKey={title}>
-                            <Card.Body>
-                              {subcontent.map((item) => (
-                                <Link to={item.path}>{item.title}</Link>
+                            <Card.Body className="inner-body">
+                              {subcontent.map(({path, title}) => (
+                                <Link className="inner-links" to={path}>{title}</Link>
                               ))}
                             </Card.Body>
                           </Accordion.Collapse>
-                        </Card>
-                      </Accordion>
+                        </Card>                      
                     ) : (
-                      <Link to={path}>{title} level2b</Link>
+                      <Link to={path}>{title}</Link>
                     );
                   })}
+                  </Accordion>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
           ) : (
             <Accordion.Toggle as={Card.Header}>
-              <Link to={path} style={{ color: "white" }}>
-                {title}
+              <Link to={path}>
+              <FaAngleLeft className="arrow" /> {title}
               </Link>
             </Accordion.Toggle>
           );
