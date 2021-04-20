@@ -22,7 +22,7 @@ const AdminPanel = () => {
   const alert = useSelector((state) => state.CMS.alert);
 
   const filterNavData = () => {
-    return cmsNavData.filter(item => !item.status || item?.status?.includes(+user?.status))
+    return cmsNavData && cmsNavData.filter(item => !item.status || item?.status?.includes(+user?.status))
   }
   const filteredData = filterNavData()
 
@@ -42,11 +42,10 @@ const AdminPanel = () => {
             defaultActiveKey="0"            
           >
             {filteredData?.map(({ title, path, subcontent }, index) => {
-              return (
-                <React.Fragment  key={index}>
-                <Card>
+              return (                
+                <Card key={index}>
                   {subcontent ? (
-                    <React.Fragment key={index}>
+                    <React.Fragment key={index} >
                       <Accordion.Toggle as={Card.Header} eventKey={index}>
                         {title}
                       </Accordion.Toggle>
@@ -69,8 +68,7 @@ const AdminPanel = () => {
                       </Link>
                     </Accordion.Toggle>
                   )}
-                </Card>
-                </React.Fragment>
+                </Card>               
               );
             })}
           </Accordion>

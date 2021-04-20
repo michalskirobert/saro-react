@@ -28,9 +28,8 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
     <>
       <Accordion className={`nav-container ${isNavOpen && "active"}`}>
         {filteredNavData.map(({ title, path, content }, index) => {
-          return content ? (
-            <React.Fragment key={index}>
-            <Card>
+          return content ? (            
+            <Card key={index}>
               <Accordion.Toggle eventKey={title} as={Card.Header}>
               <FaAngleLeft className="arrow" /> {title}
               </Accordion.Toggle>
@@ -39,8 +38,8 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
                 <Accordion>
                   {content.map(({ title, path, subcontent }, index) => {
                     return subcontent ? ( 
-                      <React.Fragment key={index}>                    
-                        <Card >
+                                        
+                        <Card key={index}>
                           <Accordion.Toggle as={Card.Header} eventKey={title}>
                             {title}
                           </Accordion.Toggle>
@@ -52,26 +51,21 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>     
-                        </React.Fragment>                  
-                    ) : (
-                      <React.Fragment key={index}>
-                      <Link  to={path}>{title}</Link>
-                      </React.Fragment>
+                                        
+                    ) : (                      
+                      <Link key={index} to={path}>{title}</Link>                      
                     );
                   })}
                   </Accordion>
                 </Card.Body>
               </Accordion.Collapse>
-            </Card>
-            </React.Fragment>
-          ) : (
-            <React.Fragment key={index}>
-            <Accordion.Toggle as={Card.Header}>
+            </Card>           
+          ) : (            
+            <Accordion.Toggle  key={index} as={Card.Header}>
               <Link to={path}>
               <FaAngleLeft className="arrow" /> {title}
               </Link>
-            </Accordion.Toggle>
-            </React.Fragment>
+            </Accordion.Toggle>           
           );
         })}
       </Accordion>
