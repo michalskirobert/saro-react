@@ -124,8 +124,19 @@ header {
       .inner-body {
         padding: 10px 20px;
         margin: 0;
+
         .inner-links {
-          font-size: 1.2rem;
+          font-size: 1.2rem;          
+        }
+        .inner-links-btn {
+          border: none;
+          background: transparent;
+          font-size: 1.25rem;
+        line-height: 1.5rem;
+        color: $crl-base;
+        padding: 0px 40px;
+        font-weight: 600;
+
         }
       }
     }
