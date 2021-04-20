@@ -35,6 +35,7 @@ import AdminAddEvents from "./pages/special/add/AddEvents";
 import AdminAddNews from "./pages/special/add/AddNews";
 import AdminDashboard from "./pages/special/panel/AdminPanel";
 import AdminTranslate from "./pages/special/edit/AdminTranslate";
+import AdminTranslateFooter from "./pages/special/panel/translate/TranslateFooter";
 import AdminManageArticle from "./pages/special/panel/manage/ManageArticles";
 import AdminManageNews from "./pages/special/panel/manage/ManageNews";
 import AdminManageEvents from "./pages/special/panel/manage/ManageEvents";
@@ -114,7 +115,7 @@ const App = () => {
           <SaroRoute exact path="/panel/add/news" component={AdminAddNews} />
           <SaroRoute
             exact
-            path="/panel/manage/articles"
+            path="/panel/manage/article"
             component={AdminManageArticle}
           />
           <SaroRoute
@@ -129,6 +130,7 @@ const App = () => {
           />
           <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
+          <SaroRoute exact path="/panel/translate/footer" component={AdminTranslateFooter} />
           <Route path="*" component={Error} />
         </Switch>
         <Footer />

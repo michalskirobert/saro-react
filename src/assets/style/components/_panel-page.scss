@@ -7,6 +7,9 @@
     width: 100%;
     margin-top: 50px;
     background-color: $crl-panel-grey;
+    .link {
+      color: white;
+    }
   }
   .breadcrumb {
     background-color: transparent;
@@ -33,6 +36,15 @@
       border: none;
       a {
         padding: 5px 0;
+      }
+      .inner-links-btn {
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        text-align: left;
+        padding: 0;
+        font-weight: 600;
+        color: $crl-base-blue;
       }
     }
   }

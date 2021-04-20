@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
-
 import { FaAngleLeft } from "react-icons/fa";
 
 import * as S from "./style";
@@ -17,10 +16,10 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
 
   const filterNavData = () => {
     if (user.status === 0 ) {
-      return nav.filter(item => item?.status?.includes(user?.status))
+      return nav.filter(item => item?.status?.includes(+user?.status))
     }
     else {
-       return nav.filter(item => !item?.action && item?.status?.includes(user?.status) )
+       return nav.filter(item => !item?.action && item?.status?.includes(+user?.status) )
     }
   }
   const filteredNavData = filterNavData()
@@ -28,43 +27,45 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
   return (
     <>
       <Accordion className={`nav-container ${isNavOpen && "active"}`}>
-        {filteredNavData.map(({ title, path, content }) => {
-          return content ? (
-            <Card key={title}>
+        {filteredNavData.map(({ title, path, content }, index) => {
+          return content ? (            
+            <Card key={index}>
               <Accordion.Toggle eventKey={title} as={Card.Header}>
               <FaAngleLeft className="arrow" /> {title}
               </Accordion.Toggle>
               <Accordion.Collapse eventKey={title}>
                 <Card.Body>
                 <Accordion>
-                  {content.map(({ title, path, subcontent }) => {
-                    return subcontent ? (                      
-                        <Card>
+                  {content.map(({ title, path, subcontent }, index) => {
+                    return subcontent ? ( 
+                                        
+                        <Card key={index}>
                           <Accordion.Toggle as={Card.Header} eventKey={title}>
                             {title}
                           </Accordion.Toggle>
                           <Accordion.Collapse eventKey={title}>
                             <Card.Body className="inner-body">
-                              {subcontent.map(({path, title}) => (
-                                <Link className="inner-links" to={path}>{title}</Link>
-                              ))}
+                              {subcontent.map(({path, title}, index) => {
+                                return path ? (<Link key={index} className="inner-links" to={path}>{title}</Link>) : (<button className="inner-links-btn" key={index}>{title}</button>)
+                              })}
                             </Card.Body>
                           </Accordion.Collapse>
-                        </Card>                      
-                    ) : (
-                      <Link to={path}>{title}</Link>
+                        </Card>     
+                                        
+                    ) : (                      
+                      <Link key={index} to={path}>{title}</Link>                      
                     );
                   })}
                   </Accordion>
                 </Card.Body>
               </Accordion.Collapse>
-            </Card>
-          ) : (
-            <Accordion.Toggle as={Card.Header}>
+            </Card>           
+          ) : (            
+            <Accordion.Toggle  key={index} as={Card.Header}>
               <Link to={path}>
               <FaAngleLeft className="arrow" /> {title}
               </Link>
-            </Accordion.Toggle>
+            </Accordion.Toggle>           
           );
         })}
       </Accordion>
