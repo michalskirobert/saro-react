@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
+import { FaAngleLeft } from "react-icons/fa";
 
 import { SaroRoute } from "./../../../routers/SaroRoute";
 import { auth } from "@components/feature/firebase";
@@ -47,7 +48,7 @@ const AdminPanel = () => {
                   {subcontent ? (
                     <React.Fragment key={index} >
                       <Accordion.Toggle as={Card.Header} eventKey={index}>
-                        {title}
+                      <FaAngleLeft className="arrow" /> {title}
                       </Accordion.Toggle>
                       <Accordion.Collapse eventKey={index}>
                         <Card.Body>
