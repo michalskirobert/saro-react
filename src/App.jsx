@@ -23,7 +23,7 @@ import Blog from "./pages/public/blog/Blog";
 import Error from "./pages/public/404/Error";
 import Contact from "./pages/public/contact";
 
-//User
+//User-space
 import Dashboard from "./pages/private/dashboard/Dashboard";
 import ProfileSettings from "./pages/private/profile/Settings";
 import User from "./pages/private/profile/User";
@@ -130,7 +130,11 @@ const App = () => {
           />
           <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
-          <SaroRoute exact path="/panel/translate/footer" component={AdminTranslateFooter} />
+          <SaroRoute
+            exact
+            path="/panel/translate/footer"
+            component={AdminTranslateFooter}
+          />
           <Route path="*" component={Error} />
         </Switch>
         <Footer />
