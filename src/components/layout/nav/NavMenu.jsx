@@ -41,7 +41,7 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
                                         
                         <Card key={index}>
                           <Accordion.Toggle as={Card.Header} eventKey={title}>
-                            {title}
+                          <FaAngleLeft className="arrow inner-arrow" /> {title}
                           </Accordion.Toggle>
                           <Accordion.Collapse eventKey={title}>
                             <Card.Body className="inner-body">
@@ -63,7 +63,7 @@ const NavMenu = ({ isNavOpen, setIsNavOpen }) => {
           ) : (            
             <Accordion.Toggle  key={index} as={Card.Header}>
               <Link to={path}>
-              <FaAngleLeft className="arrow" /> {title}
+              {title}
               </Link>
             </Accordion.Toggle>           
           );

@@ -91,7 +91,10 @@ header {
     top: 50%;
     transform: translateY(-50%);
     left: 17px;
-  }
+     }
+     .inner-arrow {
+       left: 30px;
+     }  
   .card {
     position: relative;
     background-color: $crl-main-blue;
@@ -100,7 +103,7 @@ header {
     line-height: 2rem;
     padding: 0;
     box-shadow: none;
-    border: none;
+    border: none;    
 
     .card-body {
       margin: 0;
