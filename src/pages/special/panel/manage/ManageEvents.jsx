@@ -12,8 +12,8 @@ import * as C from "@utils/constants";
 
 const ManageEvents = () => {
   const { getEvents } = useContainer();
-  const [selectedItems] = useState([]);
-  const [isSelected, setIsSelected] = useState("")
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [isSelected, setIsSelected] = useState("");
 
   const {
     setKey,
@@ -28,11 +28,15 @@ const ManageEvents = () => {
     pageSize,
   } = useManage();
 
-  useEffect(()=>{
-    isSelected && !selectedItems.includes(isSelected) && selectedItems.push(isSelected)
-    console.log({selectedItems})
+  useEffect(() => {
+    setSelectedItems((prev) => [...prev, isSelected]);
 
-  },[isSelected])
+    const selectedRowId = Array.from(
+      new Set(selectedItems.map((item) => item))
+    );
+
+    console.log(selectedRowId);
+  }, [isSelected]);
 
   useEffect(() => {
     getEvents();
@@ -40,8 +44,8 @@ const ManageEvents = () => {
   }, []);
 
   const deleteSelected = () => {
-    selectedItems.map(item=>console.log(item))
-  }
+    selectedItems.map((item) => console.log(item));
+  };
 
   return (
     <section className="section manage-events">
@@ -81,7 +85,9 @@ const ManageEvents = () => {
           }}
         />
       </div>
-      <Button type="button" onClick={deleteSelected}>Delete selected</Button>
+      <Button type="button" onClick={deleteSelected}>
+        Delete selected
+      </Button>
       <Table>
         <thead>
           <tr>
@@ -103,9 +109,8 @@ const ManageEvents = () => {
                       selected: false,
                       type: "checkbox",
                       onChange: () => {
-                        console.log(`${id} toggled`)   
-                        setIsSelected({type, id})
-                      },                                      
+                        setIsSelected(id);
+                      },
                     }}
                   />
                 </td>

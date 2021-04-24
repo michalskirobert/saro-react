@@ -1,4 +1,4 @@
-import { userConstants } from "@utils/constants/";
+import { USER_CONSTANTS } from "@utils/constants/";
 
 const userState = {
   uid: 0,
@@ -9,41 +9,41 @@ const userState = {
   lastName: "",
   nativeLang: "",
   studyingLang: "",
-  about: "", 
+  about: "",
   isLogged: false,
-  isLoading: false,  
+  isLoading: false,
   status: 0,
 };
 
 export const currentUserReducer = (state = userState, action) => {
   switch (action.type) {
-    case userConstants.LOGIN_REQUEST:
+    case USER_CONSTANTS.LOGIN_REQUEST:
       return {
         ...state,
         isLogged: true,
         isLoading: true,
       };
-    case userConstants.LOGIN_SUCCESS:
+    case USER_CONSTANTS.LOGIN_SUCCESS:
       return {
         ...action.payload,
         isLogged: true,
         isLoading: false,
       };
-    case userConstants.REGISTER_REQUEST:
+    case USER_CONSTANTS.REGISTER_REQUEST:
       return {
         ...state,
         isLoading: true,
         isLogged: false,
       };
-    case userConstants.REGISTER_SUCCESS:
+    case USER_CONSTANTS.REGISTER_SUCCESS:
       return {
         ...action.payload,
         isLogged: true,
         isLoading: false,
       };
-    case userConstants.LOGOUT:
+    case USER_CONSTANTS.LOGOUT:
       return userState;
-    case userConstants.DELETE_SUCCESS:
+    case USER_CONSTANTS.DELETE_SUCCESS:
       return {
         isLogged: false,
       };

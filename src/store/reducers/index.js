@@ -5,6 +5,7 @@ import { alertsReducer } from "./alerts";
 import { cmsReducer } from "./cms";
 import { database } from "./database";
 import { generalReducer } from "./general";
+import { stateStepsControlReducer } from "./state-steps-control";
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   database,
   CMS: cmsReducer,
   general: generalReducer,
+  stateStepsControl: stateStepsControlReducer,
 });
 
 export default rootReducer;

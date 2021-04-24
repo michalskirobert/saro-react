@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
 import { auth } from "@fire";
-
-import throttle from "lodash.throttle";
 
 import NavMenu from "./NavMenu";
 import Logo from "./Logo";
@@ -14,43 +11,29 @@ import House from "@assets/images/components/nav/House.svg";
 import Cross from "@assets/images/components/nav/Cross.svg";
 import MagnifyingGlass from "@assets/images/components/nav/MagnifyingGlass.svg";
 
+import { useContainer } from "./container";
+
+import { Header } from "./style";
+
 const Nav = () => {
-  const userName = useSelector((state) => state.currentUser.name);
-  const userIsLogged = useSelector((state) => state.currentUser.isLogged);
-
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    let prevPosition = window.pageYOffset;
-
-    const handleScroll = throttle(() => {
-      let currPosition = window.pageYOffset;
-      if (currPosition > 400) {
-        if (prevPosition > currPosition) {
-          setScrolled(false);
-        } else {
-          setScrolled(true);
-        }
-        prevPosition = currPosition;
-      } else {
-        setScrolled(false);
-      }
-    }, 200);
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const {
+    userName,
+    userIsLogged,
+    isNavOpen,
+    setIsNavOpen,
+    scrolled,
+    toggleNav,
+  } = useContainer();
 
   return (
     <>
-      <header
-        style={
-          scrolled
-            ? { transform: "translateY(-100%)" }
-            : { transform: "translateY(0)" }
-        }
+      <Header
+        // style={
+        //   scrolled
+        //     ? { transform: "translateY(-100%)" }
+        //     : { transform: "translateY(0)" }
+        // }
+        {...{ scrolled }}
       >
         <section className="header-upper">
           <Logo className="header-logo" />
@@ -79,10 +62,7 @@ const Nav = () => {
             </Link>
           </div>
           <nav className="header-nav">
-            <button
-              className="hamburger"
-              onClick={() => setIsNavOpen(!isNavOpen)}
-            >
+            <button className="hamburger" onClick={toggleNav}>
               {isNavOpen ? (
                 <img src={Cross} alt="Close" />
               ) : (
@@ -91,8 +71,8 @@ const Nav = () => {
             </button>
           </nav>
         </section>
-      </header>
-      <NavMenu {...{ isNavOpen, setIsNavOpen }} />
+      </Header>
+      <NavMenu {...{ isNavOpen, toggleNav }} />
     </>
   );
 };

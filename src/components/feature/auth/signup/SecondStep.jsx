@@ -8,27 +8,19 @@ const options = [
   { value: "female", label: "female" },
 ];
 
-const optionsNativeLang = [
+const optionsLang = [
   { value: "english", label: "english" },
   { value: "polish", label: "polish" },
 ];
 
-const optionsStudyingLang = [
-  { value: "polish", label: "polish" },
-  { value: "english", label: "english" },
-];
-
-export function SecondStep({ handleChange, values, errors, touched }) {
-  function onChange(value) {
-    handleChange("gender", value);
-  }
-  function onChangeNativeLang(value) {
-    handleChange("gender", value);
-  }
-  function onChangeStudyingLang(value) {
-    handleChange("gender", value);
-  }
-
+export function SecondStep({
+  handleChange,
+  values,
+  errors,
+  touched,
+  setFieldValue,
+}) {
+  console.log(values);
   return (
     <>
       <div className="form-control select">
@@ -36,45 +28,50 @@ export function SecondStep({ handleChange, values, errors, touched }) {
           width="100%"
           id="gender"
           options={options}
-          // value={values[FORM_HELPER.GENDER]}
-          onChange={onChange}
+          value={values[FORM_HELPER.GENDER]}
+          onChange={(value) => setFieldValue(FORM_HELPER.GENDER, value.value)}
           placeholder="Select your Gender"
         />
         {errors[FORM_HELPER.GENDER] || touched[FORM_HELPER.GENDER] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.GENDER]}
-                  </F.Text>
-                ) : null}
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.GENDER]}
+          </F.Text>
+        ) : null}
       </div>
       <div className="form-control select">
         <Select
           width="100%"
           id="nativeLang"
-          options={optionsNativeLang}
-          // value={values[FORM_HELPER.GENDER]}
-          onChange={onChangeNativeLang}
+          options={optionsLang}
+          value={values[FORM_HELPER.NATIVE_LANG]}
+          onChange={(value) =>
+            setFieldValue(FORM_HELPER.NATIVE_LANG, value.value)
+          }
           placeholder="Select your Native Language "
         />
         {errors[FORM_HELPER.NATIVE_LANG] || touched[FORM_HELPER.NATIVE_LANG] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.NATIVE_LANG]}
-                  </F.Text>
-                ) : null}
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.NATIVE_LANG]}
+          </F.Text>
+        ) : null}
       </div>
       <div className="form-control select">
         <Select
           width="100%"
           id="studyingLang"
-          options={optionsStudyingLang}
-          // value={values[FORM_HELPER.GENDER]}
-          onChange={onChangeStudyingLang}
+          options={optionsLang}
+          value={values[FORM_HELPER.STUDYING_LANG]}
+          onChange={(value) =>
+            setFieldValue(FORM_HELPER.STUDYING_LANG, value.value)
+          }
           placeholder="Select your Studying Language"
         />
-        {errors[FORM_HELPER.STUDYING_LANG] || touched[FORM_HELPER.STUDYING_LANG] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.STUDYING_LANG]}
-                  </F.Text>
-                ) : null}
+        {errors[FORM_HELPER.STUDYING_LANG] ||
+        touched[FORM_HELPER.STUDYING_LANG] ? (
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.STUDYING_LANG]}
+          </F.Text>
+        ) : null}
       </div>
       <div className="form-control">
         <label htmlFor="hobbies" className="floatLabel"></label>
@@ -87,10 +84,10 @@ export function SecondStep({ handleChange, values, errors, touched }) {
           placeholder="Your hobbies"
         />
         {errors[FORM_HELPER.HOBBIES] || touched[FORM_HELPER.HOBBIES] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.HOBBIES]}
-                  </F.Text>
-                ) : null}
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.HOBBIES]}
+          </F.Text>
+        ) : null}
       </div>
       <div className="form-control">
         <label htmlFor="about" className="floatLabel"></label>
@@ -103,10 +100,10 @@ export function SecondStep({ handleChange, values, errors, touched }) {
           placeholder="About You"
         />
         {errors[FORM_HELPER.ABOUT] || touched[FORM_HELPER.ABOUT] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.ABOUT]}
-                  </F.Text>
-                ) : null}
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.ABOUT]}
+          </F.Text>
+        ) : null}
       </div>
     </>
   );

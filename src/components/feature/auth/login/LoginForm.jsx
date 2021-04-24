@@ -19,14 +19,17 @@ const LoginForm = () => {
   const validationData = useSelector(
     (state) => state.database.init.auth["sign-in"]?.labels[0]
   );
-  const logInData = useSelector((state) => state.database.init.auth["sign-in"]);
+  const logInData = useSelector(
+    (state) => state.database?.init.auth["sign-in"]
+  );
 
   const signin = async (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
+    return await auth.signInWithEmailAndPassword(email, password);
   };
 
   const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
+
     try {
       dispatch(userActions.SignInRequest);
       await signin(values.email, values.password);
@@ -58,8 +61,7 @@ const LoginForm = () => {
           {alert && <Alert />}
           <h2>{logInData?.header}</h2>
           {logInData?.labels.map((item, index) => {
-            const { invalid, placeholder, type, valid, label } = item;
-            console.log(values[FORM_HELPER[type.toUpperCase()]]);
+            const { placeholder, type } = item;
             return (
               <div className="form-control" key={index}>
                 <input
@@ -81,7 +83,12 @@ const LoginForm = () => {
               </div>
             );
           })}
-          <button type="submit" disabled={!isValid} onClick={handleSubmit}>
+          <button
+            {...{
+              disabled: !isValid,
+              onClick: handleSubmit,
+            }}
+          >
             {logInData?.buttonTitle}
           </button>
           <div className="auth-control">
