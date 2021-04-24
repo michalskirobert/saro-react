@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { Table, Button, Pagination, Breadcrumb } from "react-bootstrap";
 
@@ -11,37 +11,47 @@ import Delete from "@assets/images/components/forms/Trash.svg";
 import * as C from "@utils/constants";
 
 const ManageEvents = () => {
-  const { getEvents } = useContainer(); 
+  const { getEvents } = useContainer();
+  const [selectedItems] = useState([]);
+  const [isSelected, setIsSelected] = useState("")
 
   const {
     setKey,
     paginate,
-    itemsPerPage,   
+    itemsPerPage,
     removeItem,
     setItemsPerPage,
     pagination,
     currentPage,
     paginatedEvents,
     handleEdit,
-    pageSize
-  } = useManage();  
+    pageSize,
+  } = useManage();
 
   useEffect(()=>{
-    getEvents();
-    setKey(C.GENERAL_CONSTANTS.EVENTS)
-  }, [])
+    isSelected && !selectedItems.includes(isSelected) && selectedItems.push(isSelected)
+    console.log({selectedItems})
 
- 
+  },[isSelected])
+
+  useEffect(() => {
+    getEvents();
+    setKey(C.GENERAL_CONSTANTS.EVENTS);
+  }, []);
+
+  const deleteSelected = () => {
+    selectedItems.map(item=>console.log(item))
+  }
 
   return (
     <section className="section manage-events">
       <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Manage events</Breadcrumb.Item>
-          </Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
+        <Breadcrumb.Item active>Manage events</Breadcrumb.Item>
+      </Breadcrumb>
       <h2 className="main-title">Manage events</h2>
-      <div className="pagination">       
+      <div className="pagination">
         <Pagination>
           {pagination.map((number) => {
             return (
@@ -71,6 +81,7 @@ const ManageEvents = () => {
           }}
         />
       </div>
+      <Button type="button" onClick={deleteSelected}>Delete selected</Button>
       <Table>
         <thead>
           <tr>
@@ -86,7 +97,18 @@ const ManageEvents = () => {
             const { id, type, title, publishedDate, crew } = item;
             return (
               <tr key={id}>
-                <td>[✓]</td>
+                <td>
+                  <input
+                    {...{
+                      selected: false,
+                      type: "checkbox",
+                      onChange: () => {
+                        console.log(`${id} toggled`)   
+                        setIsSelected({type, id})
+                      },                                      
+                    }}
+                  />
+                </td>
                 <td>{title}</td>
                 <td>{publishedDate}</td>
                 <td>{crew}</td>
@@ -111,7 +133,6 @@ const ManageEvents = () => {
           })}
         </tbody>
       </Table>
-     
     </section>
   );
 };
