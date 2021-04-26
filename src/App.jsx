@@ -39,6 +39,7 @@ import AdminTranslateFooter from "./pages/special/panel/translate/TranslateFoote
 import AdminManageArticle from "./pages/special/panel/manage/ManageArticles";
 import AdminManageNews from "./pages/special/panel/manage/ManageNews";
 import AdminManageEvents from "./pages/special/panel/manage/ManageEvents";
+import AdminManageUsers from "./pages/special/panel/manage/ManageUsers";
 
 import * as C from "@utils/constants";
 
@@ -128,6 +129,11 @@ const App = () => {
             path="/panel/manage/news"
             component={AdminManageNews}
           />
+          <SaroRoute
+            exact
+            path="/panel/manage/users"
+            component={AdminManageUsers}
+          />          
           <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
           <SaroRoute

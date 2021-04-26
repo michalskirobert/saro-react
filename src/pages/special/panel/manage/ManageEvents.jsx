@@ -13,7 +13,8 @@ import * as C from "@utils/constants";
 const ManageEvents = () => {
   const { getEvents } = useContainer();
   const [selectedItems, setSelectedItems] = useState([]);
-  const [isSelected, setIsSelected] = useState("");
+  const [isSelected, setIsSelected] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
 
   const {
     setKey,
@@ -28,15 +29,20 @@ const ManageEvents = () => {
     pageSize,
   } = useManage();
 
-  useEffect(() => {
-    setSelectedItems((prev) => [...prev, isSelected]);
-
-    const selectedRowId = Array.from(
-      new Set(selectedItems.map((item) => item))
-    );
-
-    console.log(selectedRowId);
-  }, [isSelected]);
+  const handleCheckboxChange = (id) => {
+    if(selectedItems.includes(id)){
+      console.log("item found and deleted")
+      const newArray = selectedItems.filter(item => item !== id) 
+      setSelectedItems(newArray)
+      console.log({newArray})
+    } else {
+      console.log("item added")
+      const newSelectedItems = [...selectedItems, id];
+      const uniqeItems = [...new Set(newSelectedItems)];
+      setSelectedItems(uniqeItems);
+      console.log({uniqeItems})
+    }    
+  }
 
   useEffect(() => {
     getEvents();
@@ -44,7 +50,7 @@ const ManageEvents = () => {
   }, []);
 
   const deleteSelected = () => {
-    selectedItems.map((item) => console.log(item));
+    selectedItems.map((item) => console.log(`${item} deleted`));
   };
 
   return (
@@ -104,13 +110,12 @@ const ManageEvents = () => {
             return (
               <tr key={id}>
                 <td>
-                  <input
-                    {...{
-                      selected: false,
+                  <input 
+                    {...{                    
                       type: "checkbox",
-                      onChange: () => {
-                        setIsSelected(id);
-                      },
+                      onClick: ()=> {                        
+                        handleCheckboxChange(id)
+                      }
                     }}
                   />
                 </td>
