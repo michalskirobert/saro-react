@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { db } from "@fire";
+import { db, auth } from "@fire";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
