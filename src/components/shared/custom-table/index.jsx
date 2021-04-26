@@ -1,7 +1,6 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
-  CustomPaging,
   FilteringState,
   GroupingState,
   IntegratedFiltering,
@@ -21,20 +20,16 @@ import {
   TableSelection,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
-import { CustomTableCell } from "./custom-table-cell";
-
 import * as S from "./styles";
 import { getRowId } from "./utils";
-import { CheckTypeProvider, DateTypeProvider } from "./container";
+import { DateTypeProvider } from "./container";
 
 export const CustomDataTable = ({
   rows,
-  totalCount,
   columns,
   isGrouping,
   tableColumnExtensions,
   dateColumns,
-  checkboxColumns,
   checkboxSelection = false,
   showSelectAll = false,
   onRowSelected,
@@ -108,12 +103,16 @@ export const CustomDataTable = ({
         <IntegratedFiltering />
 
         {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
-        {checkboxColumns?.length && <CheckTypeProvider for={checkboxColumns} />}
-        {!!onChangePage && <CustomPaging {...{ totalCount }} />}
 
         <Table
           columnExtensions={tableColumnExtensions}
-          rowComponent={({ ...restProps }) => CustomTableCell(restProps)}
+          rowComponent={({ ...restProps }) => (
+            <S.TableRow
+              {...{
+                restProps,
+              }}
+            />
+          )}
         />
 
         <TableSelection
