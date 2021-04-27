@@ -9,6 +9,7 @@ const initialState = {
   news: [],
   hero: [],
   crew: [],
+  dictionary: [],
   init: { nav: [], pages: [], auth: [] },
 };
 
@@ -126,6 +127,26 @@ export const database = (state = initialState, action) => {
         ...state,
         isLoading: false,
         init: {},
+        isError: true,
+        errorContent: action.payload,
+      };
+
+    case CONSTANTS.FETCH_CONSTANTS.GET_DICTIONARY_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_DICTIONARY_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        dictionary: action.payload,
+      };
+    case CONSTANTS.FETCH_CONSTANTS.GET_DICTIONARY_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        dictionary: [],
         isError: true,
         errorContent: action.payload,
       };

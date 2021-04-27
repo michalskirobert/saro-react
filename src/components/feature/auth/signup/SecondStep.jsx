@@ -20,7 +20,7 @@ export function SecondStep({
   touched,
   setFieldValue,
 }) {
-  console.log(values);
+  // console.log(values);
   return (
     <>
       <div className="form-control select">

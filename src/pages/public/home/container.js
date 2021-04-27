@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { db } from "@fire";
 
 import { fetchActions } from "../../../store/actions";
 import { GENERAL_CONSTANTS } from "@utils/constants";
 import { firestore } from "@components/feature/firebase";
+
+import * as C from "@utils/constants";
 
 export const useContainer = () => {
   const dispatch = useDispatch();
@@ -46,9 +49,24 @@ export const useContainer = () => {
       });
   };
 
+  const getDictionary = async () => {
+    try {
+      dispatch(fetchActions.getDictionaryRequest);
+      db.ref(`/${C.GENERAL_CONSTANTS.DICTIONARY}`)
+        .child("languages")
+        .on("value", (querySnapShot) => {
+          console.log(querySnapShot.val());
+          dispatch(fetchActions.getDictionarySucces(querySnapShot.val()));
+        });
+    } catch (error) {
+      dispatch(fetchActions.getDictionaryFailure(error));
+    }
+  };
+
   return {
     getNews,
     getEvents,
     getPosts,
+    getDictionary,
   };
 };
