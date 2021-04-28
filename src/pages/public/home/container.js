@@ -49,24 +49,9 @@ export const useContainer = () => {
       });
   };
 
-  const getDictionary = async () => {
-    try {
-      dispatch(fetchActions.getDictionaryRequest);
-      db.ref(`/${C.GENERAL_CONSTANTS.DICTIONARY}`)
-        .child("languages")
-        .on("value", (querySnapShot) => {
-          console.log(querySnapShot.val());
-          dispatch(fetchActions.getDictionarySucces(querySnapShot.val()));
-        });
-    } catch (error) {
-      dispatch(fetchActions.getDictionaryFailure(error));
-    }
-  };
-
   return {
     getNews,
     getEvents,
     getPosts,
-    getDictionary,
   };
 };

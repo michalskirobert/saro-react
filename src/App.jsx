@@ -46,6 +46,20 @@ const App = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.general.language);
 
+  const getDictionary = async () => {
+    try {
+      dispatch(fetchActions.getDictionaryRequest);
+      db.ref(`/${C.GENERAL_CONSTANTS.DICTIONARY}`).on(
+        "value",
+        (querySnapShot) => {
+          dispatch(fetchActions.getDictionarySucces(querySnapShot.val()));
+        }
+      );
+    } catch (error) {
+      dispatch(fetchActions.getDictionaryFailure(error));
+    }
+  };
+
   const getDataHandler = () => {
     try {
       dispatch(fetchActions.getDatabaseRequest);
@@ -79,6 +93,7 @@ const App = () => {
 
   useEffect(() => {
     getDataHandler();
+    getDictionary();
     // eslint-disable-next-line
   }, []);
 

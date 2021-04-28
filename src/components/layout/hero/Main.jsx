@@ -7,7 +7,7 @@ import { hero } from "../../../store/actions/hero.actions";
 
 const Main = () => {
   const { getHero } = useContainer();
-  const { getEvents, getDictionary } = useHomeContainer();
+  const { getEvents } = useHomeContainer();
   const [isReversed] = useState(false);
 
   const index = useSelector((state) => state.hero);
@@ -44,7 +44,6 @@ const Main = () => {
   useEffect(() => {
     getHero();
     getEvents();
-    getDictionary();
     // eslint-disable-next-line
   }, []);
 
