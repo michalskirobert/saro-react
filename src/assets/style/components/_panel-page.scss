@@ -97,6 +97,9 @@
     top: 70px;
     right: 10px;
   }
+  div.table-responsive.dx-g-bs4-table-container > div > table {
+    min-width: 200px;
+  }
 }
 
 @media (min-width: 1100px) {

@@ -1,35 +1,33 @@
 import React, { useEffect } from "react";
-import Select from "react-select";
-import { Table, Button, Breadcrumb, Pagination } from "react-bootstrap";
+import { Breadcrumb } from "react-bootstrap";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
-import { useManage } from "./container";
+import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
-
-import Edit from "@assets/images/components/forms/PencilLine.svg";
-import Delete from "@assets/images/components/forms/Trash.svg";
+import { CustomDataTable } from "@components/shared/custom-table";
 
 import * as C from "@utils/constants";
+import * as S from "../style";
 
 const ManageArticles = () => {
   const { getPosts } = useContainer(); 
 
   const {
     setKey,
-    paginate,
-    itemsPerPage,   
-    removeItem,
-    setItemsPerPage,
-    pagination,
-    currentPage,
-    paginatedArticles,
-    handleEdit,
-    pageSize
-  } = useManage();  
+    dateColumns,
+    columns,
+    tableColumnExtentions,
+    handleDeleteBtnClick,
+    onRowSelected,onChangePage,
+    articleRows
+  } = useManageContainer();  
 
   useEffect(()=>{
     getPosts();
     setKey(C.GENERAL_CONSTANTS.BLOG_POSTS)
   }, [])
+  
   return (
     <section className="section manage-articles">
       <Breadcrumb>
@@ -38,76 +36,23 @@ const ManageArticles = () => {
         <Breadcrumb.Item active>Manage articles</Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">Manage articles</h2>
-      <div className="pagination">       
-        <Pagination>
-          {pagination.map((number) => {
-            return (
-              <Pagination.Item
-                key={number}
-                onClick={() => paginate(number)}
-                active={number === currentPage}
-              >
-                {number}
-              </Pagination.Item>
-            );
-          })}
-        </Pagination>
-        <Select
-          {...{
-            id: "pageSize",
-            name: "pageSize",
-            placeholder: itemsPerPage,
-            value: itemsPerPage,
-            options: pageSize.map((size) => ({
-              label: size,
-              value: size,
-            })),
-            onChange: (options) => {
-              setItemsPerPage(options.value);
-            },
-          }}
-        />
-      </div>
-      <Table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Last modified</th>
-            <th>Author</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedArticles.map((item) => {
-            const { id, title, publishedDate, crew, type } = item;
-            return (
-              <tr key={id}>
-                <td>[✓]</td>
-                <td>{title}</td>
-                <td>{publishedDate}</td>
-                <td>{crew}</td>
-                <td>
-                  <Button
-                    {...{
-                      onClick: () => handleEdit(id, type),
-                    }}
-                  >
-                    <img src={Edit} alt="Edit" />
-                  </Button>
-                  <Button
-                    {...{
-                      onClick: () => removeItem(type, id),
-                    }}
-                  >
-                    <img src={Delete} alt="Delete" />
-                  </Button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <S.TableButton onClick={handleDeleteBtnClick}>Delete Selected</S.TableButton>
+      <ToastContainer autoClose={false} />
+
+      <CustomDataTable
+        {...{
+          rows: articleRows,
+          columns,
+          isGrouping: false,
+          tableColumnExtensions: tableColumnExtentions,
+          dateColumns,
+          checkboxSelection: true,
+          showSelectAll: false,
+          onRowSelected,
+          initSelection: null,
+          onChangePage,
+        }}
+      />
     </section>
   );
 };

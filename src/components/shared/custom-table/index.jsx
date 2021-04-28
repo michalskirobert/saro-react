@@ -44,7 +44,7 @@ export const CustomDataTable = ({
   const changeSelection = (selection) => {
     if (checkboxSelection || showSelectAll) {
       setSelection(selection);
-      onRowSelected(selection);
+      onRowSelected(selection);      
       return;
     }
 
@@ -60,6 +60,7 @@ export const CustomDataTable = ({
 
     if (selection.length) {
       onRowSelected(selection);
+      
     }
   };
 
@@ -97,11 +98,9 @@ export const CustomDataTable = ({
         )}
 
         <IntegratedSorting />
-        {!onChangePage && <IntegratedPaging />}
-        <IntegratedSelection />
-
+        <IntegratedPaging />
+        
         <IntegratedFiltering />
-
         {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
 
         <Table
@@ -114,7 +113,7 @@ export const CustomDataTable = ({
             />
           )}
         />
-
+        <IntegratedSelection />
         <TableSelection
           {...{
             showSelectionColumn: checkboxSelection,
@@ -123,10 +122,9 @@ export const CustomDataTable = ({
             showSelectAll,
           }}
         />
-
+        <SelectionState />
         <TableHeaderRow />
-        <TableFilterRow showFilterSelector />
-
+        <TableFilterRow showFilterSelector />     
         <PagingPanel {...{ pageSizes }} />
       </Grid>
     </S.TableCard>

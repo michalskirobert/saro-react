@@ -7,7 +7,7 @@ import { db, auth } from "@fire";
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
 import Unlisten from "./routers/Unlisten";
-import { auth, firestore } from "./components/feature/firebase";
+import { firestore } from "./components/feature/firebase";
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { fetchActions, userActions } from "./store/actions";

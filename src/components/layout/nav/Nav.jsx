@@ -20,7 +20,6 @@ const Nav = () => {
     userName,
     userIsLogged,
     isNavOpen,
-    setIsNavOpen,
     scrolled,
     toggleNav,
   } = useContainer();
