@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { Button} from "react-bootstrap";
 
 import { firestore } from "@components/feature/firebase";
 import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
 import { pageSize } from "./../utils";
+import Edit from "@assets/images/components/forms/PencilLine.svg";
+import Delete from "@assets/images/components/forms/Trash.svg";
 
 import * as C from "@utils/constants";
 import * as S from "../style";
@@ -30,8 +33,24 @@ export const useManageContainer = () => {
     { name: "title", title: "Title" },
     { name: "lastModified", title: "Last modified" },
     { name: "author", title: "Author" },
+    { name: "manage", title: "Manage" },
   ];
-  const eventRows = eventItems.map(({ title, publishedDate, crew, id }) => {
+  const eventRows = eventItems?.map(({ title, publishedDate, crew, id }) => {
+    return {
+      id,
+      title,
+      lastModified: publishedDate,
+      author: crew,
+      manage: ( <Button
+        {...{
+          onClick: () => handleEdit(id, key),
+        }}
+      >
+        <img src={Edit} alt="Edit" />
+      </Button>)
+    };
+  });
+  const newsRows = newsItems?.map(({ title, publishedDate, crew, id }) => {
     return {
       id,
       title,
@@ -39,15 +58,7 @@ export const useManageContainer = () => {
       author: crew,
     };
   });
-  const newsRows = newsItems.map(({ title, publishedDate, crew, id }) => {
-    return {
-      id,
-      title,
-      lastModified: publishedDate,
-      author: crew,
-    };
-  });
-  const articleRows = articleItems.map(({ title, publishedDate, crew, id }) => {
+  const articleRows = articleItems?.map(({ title, publishedDate, crew, id }) => {
     return {
       id,
       title,
@@ -59,6 +70,7 @@ export const useManageContainer = () => {
     { columnName: "title", align: "left", wordWrapEnabled: true },
     { columnName: "lastModified", align: "left", wordWrapEnabled: true },
     { columnName: "author", align: "left", wordWrapEnabled: true },
+    { columnName: "manage", align: "right", wordWrapEnabled: true, width: 60 },
   ]);
   const onRowSelected = (item) => {
     setSelectedItemsId(item);
