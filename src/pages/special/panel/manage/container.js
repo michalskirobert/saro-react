@@ -9,7 +9,6 @@ import { useEdit } from "./../../edit/container";
 import Edit from "@assets/images/components/forms/PencilLine.svg";
 
 import * as C from "@utils/constants";
-import * as S from "../style";
 
 export const useManageContainer = () => {
   const { getNews, getEvents, getPosts } = useContainer();
@@ -25,6 +24,7 @@ export const useManageContainer = () => {
   const [key, setKey] = useState("");
 
   const [selectedRowsId, setSelectedRowsId] = useState([]);
+  const [showAlert, setShowAlert] = useState(false)
 
   const eventRows = eventItems?.map(({ title, publishedDate, crew, id }) => {
     return {
@@ -84,24 +84,13 @@ export const useManageContainer = () => {
   };
   const handleDeleteBtnClick = () => {
     selectedRowsId.length > 0
-      ? toast(toastMsg, { position: toast.POSITION.TOP_CENTER })
+      ? setShowAlert(true)
       : toast("Nothing to delete.", { position: toast.POSITION.TOP_CENTER });
   };
   const handleDeleteSelected = () => {
     selectedRowsId.forEach((id) => removeItem(key, id));
+    setShowAlert(false)
   };
-
-  const toastMsg = ({ closeToast }) => (
-    <div>
-      <p>{`Do you want to delete ${selectedRowsId.length} selected ${
-        selectedRowsId.length > 1 ? "items" : "item"
-      }?`}</p>
-      <S.NotificationButton onClick={handleDeleteSelected}>
-        Yes
-      </S.NotificationButton>
-      <S.NotificationButton onClick={closeToast}>No</S.NotificationButton>
-    </div>
-  );
 
   const totalCountValue = (key) => {
     switch (key) {
@@ -183,10 +172,12 @@ export const useManageContainer = () => {
     removeItem,
     handleEdit,
     handleDeleteBtnClick,
+    handleDeleteSelected,
     onChangePage,
     eventRows,
     articleRows,
     newsRows,
     setSelectedRowsId,
+    showAlert, setShowAlert
   };
 };

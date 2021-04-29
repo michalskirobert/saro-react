@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Breadcrumb } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Breadcrumb, Alert, Button } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
@@ -7,7 +7,11 @@ import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
 import { CustomDataTable } from "@components/shared/custom-table";
 
-import { TABLE_COLUMN_PROPERTIES, COLUMNS, tableColumnExtentions } from "../utils";
+import {
+  TABLE_COLUMN_PROPERTIES,
+  COLUMNS,
+  tableColumnExtentions,
+} from "../utils";
 import * as C from "@utils/constants";
 import * as S from "../style";
 
@@ -18,6 +22,9 @@ const ManageEvents = () => {
     onChangePage,
     setSelectedRowsId,
     eventRows,
+    showAlert,
+    setShowAlert,
+    handleDeleteSelected,
   } = useManageContainer();
   const { getEvents } = useContainer();
 
@@ -38,6 +45,17 @@ const ManageEvents = () => {
         Delete Selected
       </S.TableButton>
       <ToastContainer autoClose={false} />
+      <Alert variant="warning" show={showAlert}>
+        <S.AlertMessage>
+          Are you sure you want to delete selected items?
+        </S.AlertMessage>
+        <Button variant="danger" onClick={handleDeleteSelected}>
+          Yes
+        </Button>
+        <Button variant="dark" onClick={() => setShowAlert(false)}>
+          No
+        </Button>
+      </Alert>
 
       <CustomDataTable
         {...{
@@ -47,7 +65,7 @@ const ManageEvents = () => {
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: true,
           onRowSelected: (rowId) => setSelectedRowsId(rowId),
-          onChangePage: () => onChangePage(),
+          onChangePage: (page, size) => onChangePage(page, size),
         }}
       />
     </section>

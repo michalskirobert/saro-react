@@ -34,3 +34,8 @@ padding: 7px;
 font-size: 0.75rem;
 margin-bottom: 5px;
 `;
+
+export const AlertMessage = styled.p`
+display: block;
+margin: 0 auto;
+`;

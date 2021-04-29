@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Breadcrumb } from "react-bootstrap";
+import { Breadcrumb, Alert, Button } from "react-bootstrap";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -19,7 +19,10 @@ const ManageArticles = () => {
     handleDeleteBtnClick,
     onChangePage,
     articleRows,
-    setSelectedRowsId
+    setSelectedRowsId,
+    showAlert,
+    setShowAlert,
+    handleDeleteSelected,
   } = useManageContainer();  
 
   useEffect(()=>{
@@ -37,6 +40,17 @@ const ManageArticles = () => {
       <h2 className="main-title">Manage articles</h2>
       <S.TableButton onClick={handleDeleteBtnClick}>Delete Selected</S.TableButton>
       <ToastContainer autoClose={false} />
+      <Alert variant="warning" show={showAlert}>
+        <S.AlertMessage>
+          Are you sure you want to delete selected items?
+        </S.AlertMessage>
+        <Button variant="danger" onClick={handleDeleteSelected}>
+          Yes
+        </Button>
+        <Button variant="dark" onClick={() => setShowAlert(false)}>
+          No
+        </Button>
+      </Alert>
 
       <CustomDataTable
         {...{
