@@ -7,6 +7,7 @@ import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
 import { CustomDataTable } from "@components/shared/custom-table";
 
+import { TABLE_COLUMN_PROPERTIES, COLUMNS, tableColumnExtentions } from "../utils";
 import * as C from "@utils/constants";
 import * as S from "../style";
 
@@ -15,12 +16,10 @@ const ManageArticles = () => {
 
   const {
     setKey,
-    dateColumns,
-    columns,
-    tableColumnExtentions,
     handleDeleteBtnClick,
-    onRowSelected,onChangePage,
-    articleRows
+    onChangePage,
+    articleRows,
+    setSelectedRowsId
   } = useManageContainer();  
 
   useEffect(()=>{
@@ -42,15 +41,12 @@ const ManageArticles = () => {
       <CustomDataTable
         {...{
           rows: articleRows,
-          columns,
-          isGrouping: false,
+          columns: COLUMNS,
           tableColumnExtensions: tableColumnExtentions,
-          dateColumns,
+          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: true,
-          showSelectAll: false,
-          onRowSelected,
-          initSelection: null,
-          onChangePage,
+          onRowSelected: (rowId) => setSelectedRowsId(rowId),
+          onChangePage: () => onChangePage(),
         }}
       />
     </section>

@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-import { firestore } from "@components/feature/firebase";
+import { firestore } from "@fire";
 import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
-import { pageSize } from "./../utils";
 import Edit from "@assets/images/components/forms/PencilLine.svg";
-import Delete from "@assets/images/components/forms/Trash.svg";
 
 import * as C from "@utils/constants";
 import * as S from "../style";
@@ -26,28 +24,23 @@ export const useManageContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [key, setKey] = useState("");
 
-  const [dateColumns] = useState(["lastModified"]);
-  const [selectedItemsId, setSelectedItemsId] = useState([]);
+  const [selectedRowsId, setSelectedRowsId] = useState([]);
 
-  const columns = [
-    { name: "title", title: "Title" },
-    { name: "lastModified", title: "Last modified" },
-    { name: "author", title: "Author" },
-    { name: "manage", title: "Manage" },
-  ];
   const eventRows = eventItems?.map(({ title, publishedDate, crew, id }) => {
     return {
       id,
       title,
       lastModified: publishedDate,
       author: crew,
-      manage: ( <Button
-        {...{
-          onClick: () => handleEdit(id, key),
-        }}
-      >
-        <img src={Edit} alt="Edit" />
-      </Button>)
+      manage: (
+        <Button
+          {...{
+            onClick: () => handleEdit(id, key),
+          }}
+        >
+          <img src={Edit} alt="Edit" />
+        </Button>
+      ),
     };
   });
   const newsRows = newsItems?.map(({ title, publishedDate, crew, id }) => {
@@ -56,41 +49,52 @@ export const useManageContainer = () => {
       title,
       lastModified: publishedDate,
       author: crew,
+      manage: (
+        <Button
+          {...{
+            onClick: () => handleEdit(id, key),
+          }}
+        >
+          <img src={Edit} alt="Edit" />
+        </Button>
+      ),
     };
   });
-  const articleRows = articleItems?.map(({ title, publishedDate, crew, id }) => {
-    return {
-      id,
-      title,
-      lastModified: publishedDate,
-      author: crew,
-    };
-  }); 
-  const [tableColumnExtentions] = useState([
-    { columnName: "title", align: "left", wordWrapEnabled: true },
-    { columnName: "lastModified", align: "left", wordWrapEnabled: true },
-    { columnName: "author", align: "left", wordWrapEnabled: true },
-    { columnName: "manage", align: "right", wordWrapEnabled: true, width: 60 },
-  ]);
-  const onRowSelected = (item) => {
-    setSelectedItemsId(item);
-  };
+  const articleRows = articleItems?.map(
+    ({ title, publishedDate, crew, id }) => {
+      return {
+        id,
+        title,
+        lastModified: publishedDate,
+        author: crew,
+        manage: (
+          <Button
+            {...{
+              onClick: () => handleEdit(id, key),
+            }}
+          >
+            <img src={Edit} alt="Edit" />
+          </Button>
+        ),
+      };
+    }
+  );
   const onChangePage = () => {
     return;
   };
   const handleDeleteBtnClick = () => {
-    selectedItemsId.length > 0
+    selectedRowsId.length > 0
       ? toast(toastMsg, { position: toast.POSITION.TOP_CENTER })
       : toast("Nothing to delete.", { position: toast.POSITION.TOP_CENTER });
   };
   const handleDeleteSelected = () => {
-    selectedItemsId.forEach((id) => removeItem(key, id));
+    selectedRowsId.forEach((id) => removeItem(key, id));
   };
 
   const toastMsg = ({ closeToast }) => (
     <div>
-      <p>{`Do you want to delete ${selectedItemsId.length} selected ${
-        selectedItemsId.length > 1 ? "items" : "item"
+      <p>{`Do you want to delete ${selectedRowsId.length} selected ${
+        selectedRowsId.length > 1 ? "items" : "item"
       }?`}</p>
       <S.NotificationButton onClick={handleDeleteSelected}>
         Yes
@@ -160,16 +164,13 @@ export const useManageContainer = () => {
 
   return {
     paginate,
-    totalCount,
-    itemsPerPage,
-    removeItem,
-    handleEdit,
     pagination,
     setItemsPerPage,
     currentPage,
     paginatedNews,
     paginatedEvents,
     paginatedArticles,
+
     key,
     setKey,
     getNews,
@@ -178,16 +179,14 @@ export const useManageContainer = () => {
     newsItems,
     eventItems,
     articleItems,
-    pageSize,
-
-    dateColumns,
-    columns,
-    tableColumnExtentions,
+    totalCount,
+    removeItem,
+    handleEdit,
     handleDeleteBtnClick,
-    onRowSelected,
     onChangePage,
     eventRows,
     articleRows,
     newsRows,
+    setSelectedRowsId,
   };
 };

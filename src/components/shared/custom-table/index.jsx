@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   FilteringState,
   GroupingState,
@@ -20,9 +19,10 @@ import {
   TableSelection,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
-import * as S from "./styles";
 import { getRowId } from "./utils";
 import { DateTypeProvider } from "./container";
+
+import * as S from "./styles";
 
 export const CustomDataTable = ({
   rows,
@@ -44,23 +44,19 @@ export const CustomDataTable = ({
   const changeSelection = (selection) => {
     if (checkboxSelection || showSelectAll) {
       setSelection(selection);
-      onRowSelected(selection);      
+      onRowSelected(selection);
       return;
     }
-
     const lastSelected = selection.find(
       (selected) => savedSelection.indexOf(selected) === -1
     );
-
     if (lastSelected !== undefined) {
       setSelection([lastSelected]);
       onRowSelected([lastSelected]);
       return;
     }
-
     if (selection.length) {
       onRowSelected(selection);
-      
     }
   };
 
@@ -99,7 +95,7 @@ export const CustomDataTable = ({
 
         <IntegratedSorting />
         <IntegratedPaging />
-        
+
         <IntegratedFiltering />
         {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
 
@@ -124,7 +120,7 @@ export const CustomDataTable = ({
         />
         <SelectionState />
         <TableHeaderRow />
-        <TableFilterRow showFilterSelector />     
+        <TableFilterRow showFilterSelector />
         <PagingPanel {...{ pageSizes }} />
       </Grid>
     </S.TableCard>
