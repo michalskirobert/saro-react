@@ -82,7 +82,7 @@
   .add-events,
   .add-article,
   .edit,
-  .translate {
+  .translate, .manage-users {
     width: 100%;
     flex-grow: 1;
     padding: 0;
@@ -96,6 +96,9 @@
     position: absolute;
     top: 70px;
     right: 10px;
+  }
+  div.table-responsive.dx-g-bs4-table-container > div > table {
+    min-width: 200px;
   }
 }
 
@@ -115,7 +118,8 @@
 }
 .manage-events,
 .manage-articles,
-.manage-news {
+.manage-news,
+.manage-users {
   flex-grow: 1;
   padding: 0 5%;
   padding-bottom: 50px;
@@ -130,39 +134,5 @@
     font-size: 1.3rem;
     padding: 10px;
   }
-  .table {
-    background: white;
-    width: 100%;
-    border-radius: 5px;
-    border-left: 3px solid transparent;
-    overflow-x: auto;
-
-    .btn {
-      visibility: hidden;
-      pointer-events: none;
-      display: inline;
-      border: 1px solid transparent;
-      border-radius: 2px;
-      outline: none;
-      background: transparent;
-      padding: 2px 4px;
-      &:hover {
-        background: $crl-panel-grey;
-      }
-    }   
-    tbody {
-      tr:hover {
-        border-left: 3px solid $crl-base-blue;
-        box-shadow: 0 0 0.4rem $crl-panel-grey;
-
-        .btn {
-          visibility: visible;
-          pointer-events: auto;
-        }
-      }
-    }
-    .row-title {
-      width: 40%;
-    }
-  }
+  
 }
