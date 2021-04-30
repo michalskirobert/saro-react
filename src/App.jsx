@@ -2,12 +2,12 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { db, auth } from "@fire";
+import { db, auth, firestore } from "@fire";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
 import Unlisten from "./routers/Unlisten";
-import { firestore } from "./components/feature/firebase";
+import { firestore } from "./components/feature/firebase"
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { fetchActions, userActions } from "./store/actions";
@@ -39,6 +39,7 @@ import AdminTranslateFooter from "./pages/special/panel/translate/TranslateFoote
 import AdminManageArticle from "./pages/special/panel/manage/ManageArticles";
 import AdminManageNews from "./pages/special/panel/manage/ManageNews";
 import AdminManageEvents from "./pages/special/panel/manage/ManageEvents";
+import AdminManageUsers from "./pages/special/panel/manage/ManageUsers";
 
 import * as C from "@utils/constants";
 
@@ -146,6 +147,11 @@ const App = () => {
             path="/panel/manage/news"
             component={AdminManageNews}
           />
+          <SaroRoute
+            exact
+            path="/panel/manage/users"
+            component={AdminManageUsers}
+          />          
           <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
           <SaroRoute

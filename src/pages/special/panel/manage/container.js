@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Button } from "react-bootstrap";
 
-import { firestore } from "@components/feature/firebase";
+import { firestore } from "@fire";
 import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
-import { pageSize } from "./../utils";
+import Edit from "@assets/images/components/forms/PencilLine.svg";
 
 import * as C from "@utils/constants";
 
-export const useManage = () => {
+export const useManageContainer = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
 
@@ -20,6 +22,75 @@ export const useManage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [key, setKey] = useState("");
+
+  const [selectedRowsId, setSelectedRowsId] = useState([]);
+  const [showAlert, setShowAlert] = useState(false)
+
+  const eventRows = eventItems?.map(({ title, publishedDate, crew, id }) => {
+    return {
+      id,
+      title,
+      lastModified: publishedDate,
+      author: crew,
+      manage: (
+        <Button
+          {...{
+            onClick: () => handleEdit(id, key),
+          }}
+        >
+          <img src={Edit} alt="Edit" />
+        </Button>
+      ),
+    };
+  });
+  const newsRows = newsItems?.map(({ title, publishedDate, crew, id }) => {
+    return {
+      id,
+      title,
+      lastModified: publishedDate,
+      author: crew,
+      manage: (
+        <Button
+          {...{
+            onClick: () => handleEdit(id, key),
+          }}
+        >
+          <img src={Edit} alt="Edit" />
+        </Button>
+      ),
+    };
+  });
+  const articleRows = articleItems?.map(
+    ({ title, publishedDate, crew, id }) => {
+      return {
+        id,
+        title,
+        lastModified: publishedDate,
+        author: crew,
+        manage: (
+          <Button
+            {...{
+              onClick: () => handleEdit(id, key),
+            }}
+          >
+            <img src={Edit} alt="Edit" />
+          </Button>
+        ),
+      };
+    }
+  );
+  const onChangePage = () => {
+    return;
+  };
+  const handleDeleteBtnClick = () => {
+    selectedRowsId.length > 0
+      ? setShowAlert(true)
+      : toast("Nothing to delete.", { position: toast.POSITION.TOP_CENTER });
+  };
+  const handleDeleteSelected = () => {
+    selectedRowsId.forEach((id) => removeItem(key, id));
+    setShowAlert(false)
+  };
 
   const totalCountValue = (key) => {
     switch (key) {
@@ -69,8 +140,7 @@ export const useManage = () => {
       paginate(1);
     }
     // eslint-disable-next-line
-  }, [totalCount, itemsPerPage]);    
-
+  }, [totalCount, itemsPerPage]);
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -83,16 +153,14 @@ export const useManage = () => {
 
   return {
     paginate,
-    totalCount,
-    itemsPerPage,
-    removeItem,
-    handleEdit,
     pagination,
     setItemsPerPage,
     currentPage,
     paginatedNews,
     paginatedEvents,
     paginatedArticles,
+
+    key,
     setKey,
     getNews,
     getEvents,
@@ -100,8 +168,16 @@ export const useManage = () => {
     newsItems,
     eventItems,
     articleItems,
-    pageSize,
-  }
-    
-  
+    totalCount,
+    removeItem,
+    handleEdit,
+    handleDeleteBtnClick,
+    handleDeleteSelected,
+    onChangePage,
+    eventRows,
+    articleRows,
+    newsRows,
+    setSelectedRowsId,
+    showAlert, setShowAlert
+  };
 };

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   FilteringState,
   GroupingState,
@@ -20,9 +19,10 @@ import {
   TableSelection,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
-import * as S from "./styles";
 import { getRowId } from "./utils";
 import { DateTypeProvider } from "./container";
+
+import * as S from "./styles";
 
 export const CustomDataTable = ({
   rows,
@@ -47,17 +47,14 @@ export const CustomDataTable = ({
       onRowSelected(selection);
       return;
     }
-
     const lastSelected = selection.find(
       (selected) => savedSelection.indexOf(selected) === -1
     );
-
     if (lastSelected !== undefined) {
       setSelection([lastSelected]);
       onRowSelected([lastSelected]);
       return;
     }
-
     if (selection.length) {
       onRowSelected(selection);
     }
@@ -97,11 +94,9 @@ export const CustomDataTable = ({
         )}
 
         <IntegratedSorting />
-        {!onChangePage && <IntegratedPaging />}
-        <IntegratedSelection />
+        <IntegratedPaging />
 
         <IntegratedFiltering />
-
         {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
 
         <Table
@@ -114,7 +109,7 @@ export const CustomDataTable = ({
             />
           )}
         />
-
+        <IntegratedSelection />
         <TableSelection
           {...{
             showSelectionColumn: checkboxSelection,
@@ -123,10 +118,9 @@ export const CustomDataTable = ({
             showSelectAll,
           }}
         />
-
+        <SelectionState />
         <TableHeaderRow />
         <TableFilterRow showFilterSelector />
-
         <PagingPanel {...{ pageSizes }} />
       </Grid>
     </S.TableCard>

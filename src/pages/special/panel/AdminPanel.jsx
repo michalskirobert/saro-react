@@ -15,17 +15,25 @@ import TranslateFooter from "./translate/TranslateFooter";
 import ManageNews from "./manage/ManageNews";
 import ManageEvents from "./manage/ManageEvents";
 import ManageArticles from "./manage/ManageArticles";
+import ManageUsers from './manage/ManageUsers'
 import AdminEdit from "./../edit/Edit";
 
 const AdminPanel = () => {
-  const cmsNavData = useSelector(state=>state.database?.init?.nav[0]?.content) 
-  const user = useSelector((state) => state.currentUser); 
+  const cmsNavData = useSelector(
+    (state) => state.database?.init?.nav[0]?.content
+  );
+  const user = useSelector((state) => state.currentUser);
   const alert = useSelector((state) => state.CMS.alert);
 
   const filterNavData = () => {
-    return cmsNavData && cmsNavData.filter(item => !item.status || item?.status?.includes(+user?.status))
-  }
-  const filteredData = filterNavData()
+    return (
+      cmsNavData &&
+      cmsNavData.filter(
+        (item) => !item.status || item?.status?.includes(+user?.status)
+      )
+    );
+  };
+  const filteredData = filterNavData();
 
   return (
     <Router>
@@ -37,41 +45,61 @@ const AdminPanel = () => {
           <span style={{ color: "red" }}>
             {auth?.currentUser?.displayName ?? "Saro-crew"}
           </span>
-        </h2> 
+        </h2>
         <div className="cms-wrapper">
-          <Accordion
-            defaultActiveKey="0"            
-          >
+          <Accordion defaultActiveKey="0">
             {filteredData?.map(({ title, path, subcontent }, index) => {
-              return (                
+              return (
                 <Card key={index}>
                   {subcontent ? (
-                    <React.Fragment key={index} >
+                    <React.Fragment key={index}>
                       <Accordion.Toggle as={Card.Header} eventKey={index}>
-                      <FaAngleLeft className="arrow" /> {title}
+                        <FaAngleLeft className="arrow" /> {title}
                       </Accordion.Toggle>
                       <Accordion.Collapse eventKey={index}>
                         <Card.Body>
-                        {subcontent.map(({path, title}, index) => {
-                                return path ? (<Link key={index} className="inner-links" to={path}>{title}</Link>) : (<button className="inner-links-btn" key={index}>{title}</button>)
-                              })}
+                          {subcontent.map(({ path, title }, index) => {
+                            return path ? (
+                              <Link
+                                key={index}
+                                className="inner-links"
+                                to={path}
+                              >
+                                {title}
+                              </Link>
+                            ) : (
+                              <button className="inner-links-btn" key={index}>
+                                {title}
+                              </button>
+                            );
+                          })}
                         </Card.Body>
                       </Accordion.Collapse>
                     </React.Fragment>
                   ) : (
                     <Accordion.Toggle
                       as={Card.Header}
-                      eventKey={index}     
-                      key={index}                 
+                      eventKey={index}
+                      key={index}
                     >
                       <Link className="link" to={path}>
                         {title}
                       </Link>
                     </Accordion.Toggle>
                   )}
-                </Card>               
+                </Card>
               );
             })}
+            <Card>
+            <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey="users"
+                    >
+                      <Link className="link" to="/panel/manage/users">
+                        Manage Users
+                      </Link>
+                    </Accordion.Toggle>
+            </Card>
           </Accordion>
 
           <Switch>
@@ -90,21 +118,13 @@ const AdminPanel = () => {
               path="/panel/add/events"
               component={AdminAddEvents}
             />
-            <SaroRoute
-              exact
-              path="/panel/add/news"
-              component={AdminAddNews}
-            />
+            <SaroRoute exact path="/panel/add/news" component={AdminAddNews} />
             <SaroRoute
               exact
               path="/panel/translate/footer"
               component={TranslateFooter}
             />
-            <SaroRoute
-              exact
-              path="/panel/manage/news"
-              component={ManageNews}
-            />
+            <SaroRoute exact path="/panel/manage/news" component={ManageNews} />
             <SaroRoute
               exact
               path="/panel/manage/article"
@@ -115,10 +135,15 @@ const AdminPanel = () => {
               path="/panel/manage/events"
               component={ManageEvents}
             />
+            <SaroRoute
+              exact
+              path="/panel/manage/users"
+              component={ManageUsers}
+            />
             <SaroRoute exact path="/panel/edit" component={AdminEdit} />
           </Switch>
         </div>
-      </section>      
+      </section>
     </Router>
   );
 };
