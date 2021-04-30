@@ -73,6 +73,11 @@ const App = () => {
     }
   };
 
+  const initialDataHandler = async () => {
+    await getDictionary();
+    await getDataHandler();
+  };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -92,9 +97,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    getDataHandler();
-    getDictionary();
-    // eslint-disable-next-line
+    initialDataHandler();
   }, []);
 
   return (
