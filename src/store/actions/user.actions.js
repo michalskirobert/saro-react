@@ -1,70 +1,70 @@
-import { userConstants, GENERAL_CONSTANTS } from "@utils/constants";
+import { USER_CONSTANTS, GENERAL_CONSTANTS } from "@utils/constants";
 
 const signUpRequest = () => {
   return {
-    type: userConstants.REGISTER_REQUEST,
+    type: USER_CONSTANTS.REGISTER_REQUEST,
   };
 };
 
-const signUp = (payload) => {
+const signUpSuccess = (payload) => {
   return {
-    type: userConstants.REGISTER_SUCCESS,
+    type: USER_CONSTANTS.REGISTER_SUCCESS,
     payload,
   };
 };
 
 const signUpFailure = () => {
   return {
-    type: userConstants.REGISTER_FAILURE,
+    type: USER_CONSTANTS.REGISTER_FAILURE,
   };
 };
 
-const signIn = (data) => {
+const signInSuccess = (data) => {
   return {
-    type: userConstants.LOGIN_SUCCESS,
+    type: USER_CONSTANTS.LOGIN_SUCCESS,
     payload: data,
   };
 };
 
 const SignInRequest = () => {
   return {
-    type: userConstants.LOGIN_REQUEST,
+    type: USER_CONSTANTS.LOGIN_REQUEST,
   };
 };
 
 const SignInFailure = (error) => {
   return {
-    type: userConstants.LOGIN_FAILURE,
+    type: USER_CONSTANTS.LOGIN_FAILURE,
     payload: error,
   };
 };
 
 const logout = () => {
   return {
-    type: userConstants.LOGOUT,
+    type: USER_CONSTANTS.LOGOUT,
   };
 };
 
 const removeUser = () => {
   return {
-    type: userConstants.DELETE_REQUEST,
+    type: USER_CONSTANTS.DELETE_REQUEST,
   };
 };
 
 const changeLanguage = (lang) => {
   return {
     type: GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO[lang.toUpperCase()],
-  }
-}
+  };
+};
 
 export const userActions = {
-  signIn,
-  signUp,
+  signInSuccess,
+  signUpSuccess,
   logout,
   removeUser,
   SignInRequest,
   SignInFailure,
   signUpRequest,
   signUpFailure,
-  changeLanguage
+  changeLanguage,
 };

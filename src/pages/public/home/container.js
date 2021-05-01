@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { db } from "@fire";
 
 import { fetchActions } from "../../../store/actions";
 import { GENERAL_CONSTANTS } from "@utils/constants";
 import { firestore } from "@components/feature/firebase";
+
+import * as C from "@utils/constants";
 
 export const useContainer = () => {
   const dispatch = useDispatch();

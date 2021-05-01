@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Button } from "react-bootstrap";
 
-import { firestore } from "@components/feature/firebase";
+import { firestore } from "@fire";
 import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
-import { pageSize } from "./../utils";
 
+import { BUTTON_ACTIONS } from "./../utils";
 import * as C from "@utils/constants";
 
-export const useManage = () => {
+export const useManageContainer = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
 
@@ -21,56 +23,46 @@ export const useManage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [key, setKey] = useState("");
 
-  const totalCountValue = (key) => {
-    switch (key) {
-      case C.GENERAL_CONSTANTS.NEWS:
-        return newsItems.length;
-      case C.GENERAL_CONSTANTS.EVENTS:
-        return eventItems.length;
-      case C.GENERAL_CONSTANTS.BLOG_POSTS:
-        return articleItems.length;
+  const [selectedRowsId, setSelectedRowsId] = useState([]);
+  const [selectedRowId, setSelectedRowId] = useState();
+  const [showAlert, setShowAlert] = useState(false);
+  const [isAll, setIsAll] = useState(false);
+
+  const handleButtonActions = (action) => {
+    switch (action) {
+      case BUTTON_ACTIONS.DELETE:
+        selectedRowsId.length > 0 || selectedRowId
+          ? setShowAlert(true)
+          : toast("Nothing to delete.", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+        break;
+
+      case BUTTON_ACTIONS.EDIT:
+        handleEdit(selectedRowId, key);
+        break;
+      case BUTTON_ACTIONS.IS_ALL:
+        setSelectedRowsId([selectedRowId]);
+        setIsAll(!isAll);
+        break;
       default:
         return;
     }
   };
-
-  const totalCount = totalCountValue(key);
-
-  const indexOfLastVisible = currentPage * itemsPerPage;
-  const indexOfFirstVisible = indexOfLastVisible - itemsPerPage;
-
-  const paginatedNews = newsItems.slice(
-    indexOfFirstVisible,
-    indexOfLastVisible
-  );
-  const paginatedEvents = eventItems.slice(
-    indexOfFirstVisible,
-    indexOfLastVisible
-  );
-  const paginatedArticles = articleItems.slice(
-    indexOfFirstVisible,
-    indexOfLastVisible
-  );
-
-  const paginate = (number) => {
-    setCurrentPage(number);
+  const onChangePage = () => {
+    return;
   };
-
-  for (
-    let number = 1;
-    number <= Math.ceil(totalCount / itemsPerPage);
-    number++
-  ) {
-    pagination.push(number);
-  }
-
-  useEffect(() => {
-    if (totalCount <= itemsPerPage) {
-      paginate(1);
-    }
-    // eslint-disable-next-line
-  }, [totalCount, itemsPerPage]);    
-
+  const handleDeleteBtnClick = () => {
+    selectedRowsId.length > 0
+      ? setShowAlert(true)
+      : toast("Nothing to delete.", { position: toast.POSITION.TOP_CENTER });
+  };
+  const handleDeleteSelected = () => {
+    selectedRowId
+      ? removeItem(key, selectedRowId)
+      : selectedRowsId.forEach((id) => removeItem(key, id));
+    setShowAlert(false);
+  };
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -81,18 +73,22 @@ export const useManage = () => {
       .delete();
   };
 
+  const isEditable = (selectedRowId) => {
+    if (selectedRowsId.length > 1) {
+      return true;
+    } else if (!selectedRowId) {
+      return true;
+    }
+    return false;
+  };
+
   return {
-    paginate,
-    totalCount,
-    itemsPerPage,
-    removeItem,
-    handleEdit,
     pagination,
     setItemsPerPage,
     currentPage,
-    paginatedNews,
-    paginatedEvents,
-    paginatedArticles,
+
+    isEditable,
+    key,
     setKey,
     getNews,
     getEvents,
@@ -100,8 +96,20 @@ export const useManage = () => {
     newsItems,
     eventItems,
     articleItems,
-    pageSize,
-  }
-    
-  
+    removeItem,
+    handleEdit,
+    handleDeleteBtnClick,
+    handleDeleteSelected,
+    onChangePage,
+    setSelectedRowsId,
+    showAlert,
+    setShowAlert,
+    handleButtonActions,
+    isAll,
+    setIsAll,
+    selectedRowId,
+    setSelectedRowId,
+    eventItems,
+    selectedRowsId,
+  };
 };

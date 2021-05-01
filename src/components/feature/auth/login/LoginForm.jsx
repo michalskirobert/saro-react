@@ -1,15 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Form as F } from "react-bootstrap";
 
 import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { FORM_HELPER } from "./utils";
-import { userActions, alertActions } from "@actions";
+import { userActions, alertActions } from "@actions/index";
 import Alert from "./../../../shared/alerts";
 import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
+
+import * as S from "./styles";
+import { signUpValidationScheme } from "../signup/validation";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -19,18 +21,20 @@ const LoginForm = () => {
   const validationData = useSelector(
     (state) => state.database.init.auth["sign-in"]?.labels[0]
   );
-  const logInData = useSelector((state) => state.database.init.auth["sign-in"]);
-  console.log(logInData);
+  const logInData = useSelector(
+    (state) => state.database?.init.auth["sign-in"]
+  );
 
   const signin = async (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
+    return await auth.signInWithEmailAndPassword(email, password);
   };
 
   const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
     try {
+      dispatch(userActions.SignInRequest());
       await signin(values.email, values.password);
-      dispatch(userActions.request());
+      dispatch(userActions.signInSuccess());
       history.push("/dashboard");
     } catch (error) {
       dispatch(alertActions.error(error.message));
@@ -46,53 +50,44 @@ const LoginForm = () => {
       {...{
         initialValues: {},
         validateOnChange: true,
-        validationSchema: loginValidationScheme(
-          validationData?.invalid,
-          validationData?.valid
-        ),
-        validateOnMount: true,
+        validationSchema: loginValidationScheme,
+        validateOnBlur: true,
+        enableReinitialize: true,
         onSubmit: (values) => handleSubmit(values),
       }}
     >
-      {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
+      {({ values, errors, isValid, handleChange, handleSubmit }) => (
         <>
           {alert && <Alert />}
           <h2>{logInData?.header}</h2>
-          <div className="form-control">
-            <label htmlFor="email" className="label"></label>
-            <input
-              name="email"
-              type="email"
-              id="email"
-              value={values[FORM_HELPER.EMAIL]}
-              onChange={handleChange}
-              required
-              placeholder="jane@example.com"
-            />
+          {logInData?.labels.map((item, index) => {
+            const { placeholder, type } = item;
+            return (
+              <div className="form-control" key={index}>
+                <input
+                  name={FORM_HELPER[type.toUpperCase()]}
+                  type={type}
+                  id={FORM_HELPER[type.toUpperCase()]}
+                  value={values[FORM_HELPER[type.toUpperCase()]]}
+                  onChange={handleChange}
+                  required
+                  placeholder={placeholder}
+                />
 
-            {errors[FORM_HELPER.EMAIL] || touched[FORM_HELPER.EMAIL] ? (
-              <F.Text className="validation-alert">
-                {errors[FORM_HELPER.EMAIL]}
-              </F.Text>
-            ) : null}
-          </div>
-          <div className="form-control">
-            <label htmlFor="password" className="label"></label>
-            <input
-              type="password"
-              id="password"
-              value={values[FORM_HELPER.PASSWORD]}
-              onChange={handleChange}
-              required
-              placeholder="••••••••••••"
-            />
-            {errors[FORM_HELPER.PASSWORD] || touched[FORM_HELPER.PASSWORD] ? (
-              <F.Text className="validation-alert">
-                {errors[FORM_HELPER.PASSWORD]}
-              </F.Text>
-            ) : null}
-          </div>
-          <button type="submit" disabled={!isValid} onClick={handleSubmit}>
+                {errors[FORM_HELPER[type.toUpperCase()]] && (
+                  <S.Feedback>
+                    {errors[FORM_HELPER[type.toUpperCase()]]}
+                  </S.Feedback>
+                )}
+              </div>
+            );
+          })}
+          <button
+            {...{
+              disabled: !isValid,
+              onClick: handleSubmit,
+            }}
+          >
             {logInData?.buttonTitle}
           </button>
           <div className="auth-control">

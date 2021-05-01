@@ -44,7 +44,6 @@ export const useContainer = () => {
 
   const imageChangeHandler = (e, type) => {
     const file = e.currentTarget.files[0];
-    console.log({ file });
     if (type !== FORMIK_HELPER.IMAGES_URL) {
       uploadImage(file);
       return;
@@ -81,7 +80,6 @@ export const useContainer = () => {
         type === FORMIK_HELPER.IMAGES_URL
           ? setImagesName({ ...imagesName, name: file.name })
           : setImgName({ ...imgName, name: file.name });
-        console.log({ uploadFile });
         storage
           .ref(
             `/images/${

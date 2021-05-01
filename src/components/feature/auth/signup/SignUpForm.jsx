@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
-import { Formik, Form } from "formik";
+import { Formik } from "formik";
 
 import { signUpValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
@@ -10,51 +10,36 @@ import { userActions } from "@actions";
 import { ReactComponent as ArrowBack } from "@assets/images/components/forms/arrowBack.svg";
 import { FirstStep } from "./FirstStep";
 import { SecondStep } from "./SecondStep";
+import { useContainerSignUp } from "./container";
 
 const SignUpForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
 
+  const { handleSubmit } = useContainerSignUp();
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const handlerSubmit = async (userData) => {
-    if (step === 2) {
-      try {
-        dispatch(userActions.signUpRequest());
-        await auth
-          .createUserWithEmailAndPassword(userData.email, userData.password)
-          .then((resp) => dispatch(userActions.signUp(resp.user.providerData)));
-        history.push("/");
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      setStep(step + 1);
-      // actions.setTouched({});
-      // actions.setSubmitting(false);
-    }
-  };
 
   return (
     <Formik
       {...{
-        initialValues: {
-          gender: "male",
-          nativeLang: "english",
-          studyingLang: "polish",
-          hobbies: " ",
-          about: " ",
-          status: 10,
-        },
+        initialValues: {},
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: signUpValidationScheme,
-        onSubmit: (values) => handlerSubmit(values),
+        onSubmit: (values) => console.log(values),
       }}
     >
-      {({ values, errors, isValid, handleChange, handleSubmit, touched }) => (
-        <Form>
-          {step !== 1 ? (
+      {({
+        values,
+        errors,
+        isValid,
+        handleChange,
+        handleSubmit,
+        touched,
+        setFieldValue,
+      }) => (
+        <>
+          {step !== 1 && (
             <button
               className="arrow-back-icon"
               type="button"
@@ -62,29 +47,30 @@ const SignUpForm = () => {
             >
               <ArrowBack />
             </button>
-          ) : null}
+          )}
           <h2>Sign Up</h2>
-          {step === 1 ? (
+          {step === 1 && (
             <FirstStep
               handleChange={handleChange}
               values={values}
               errors={errors}
               touched={touched}
             />
-          ) : null}
-          {step === 2 ? (
+          )}
+          {step === 2 && (
             <SecondStep
+              setFieldValue={setFieldValue}
               handleChange={handleChange}
               values={values}
               errors={errors}
               touched={touched}
             />
-          ) : null}
+          )}
           <button
             type="submit"
             tabindex="4"
             onClick={handleSubmit}
-            disabled={!isValid}
+            disabled={isValid}
           >
             {step === 2 ? "Sign Up" : "Next"}
           </button>
@@ -92,7 +78,7 @@ const SignUpForm = () => {
             <p style={{ display: "inline" }}>Do you have an account?</p>
             <Link to="/sign-in">Log-in</Link>
           </div>
-        </Form>
+        </>
       )}
     </Formik>
   );

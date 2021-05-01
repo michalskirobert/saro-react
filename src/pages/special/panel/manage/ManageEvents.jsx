@@ -1,117 +1,102 @@
 import React, { useEffect } from "react";
-import Select from "react-select";
-import { Table, Button, Pagination, Breadcrumb } from "react-bootstrap";
+import { Breadcrumb, Alert, Button } from "react-bootstrap";
+import "react-toastify/dist/ReactToastify.min.css";
 
-import { useManage } from "./container";
+import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
+import { CustomDataTable } from "@components/shared/custom-table";
 
-import Edit from "@assets/images/components/forms/PencilLine.svg";
-import Delete from "@assets/images/components/forms/Trash.svg";
-
+import {
+  TABLE_COLUMN_PROPERTIES,
+  COLUMNS,
+  tableColumnExtensions,
+  BUTTONS_HELPER,
+} from "../utils";
 import * as C from "@utils/constants";
+import * as S from "../style";
 
 const ManageEvents = () => {
-  const { getEvents } = useContainer(); 
-
   const {
     setKey,
-    paginate,
-    itemsPerPage,   
-    removeItem,
-    setItemsPerPage,
-    pagination,
-    currentPage,
-    paginatedEvents,
-    handleEdit,
-    pageSize
-  } = useManage();  
+    setSelectedRowsId,
+    showAlert,
+    setShowAlert,
+    handleDeleteSelected,
+    handleButtonActions,
+    isAll,
+    selectedRowId,
+    setSelectedRowId,
+    eventItems,
+    isEditable,
+    selectedRowsId,
+  } = useManageContainer();
+  const { getEvents } = useContainer();
 
-  useEffect(()=>{
+  useEffect(() => {
     getEvents();
-    setKey(C.GENERAL_CONSTANTS.EVENTS)
-  }, [])
-
- 
+    setKey(C.GENERAL_CONSTANTS.EVENTS);
+  }, []);
 
   return (
     <section className="section manage-events">
       <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Manage events</Breadcrumb.Item>
-          </Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
+        <Breadcrumb.Item active>Manage events</Breadcrumb.Item>
+      </Breadcrumb>
       <h2 className="main-title">Manage events</h2>
-      <div className="pagination">       
-        <Pagination>
-          {pagination.map((number) => {
-            return (
-              <Pagination.Item
-                key={number}
-                onClick={() => paginate(number)}
-                active={number === currentPage}
-              >
-                {number}
-              </Pagination.Item>
-            );
-          })}
-        </Pagination>
-        <Select
-          {...{
-            id: "pageSize",
-            name: "pageSize",
-            placeholder: itemsPerPage,
-            value: itemsPerPage,
-            options: pageSize.map((size) => ({
-              label: size,
-              value: size,
-            })),
-            onChange: (options) => {
-              setItemsPerPage(options.value);
-            },
-          }}
-        />
-      </div>
-      <Table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Last modified</th>
-            <th>Author</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedEvents.map((item) => {
-            const { id, type, title, publishedDate, crew } = item;
-            return (
-              <tr key={id}>
-                <td>[✓]</td>
-                <td>{title}</td>
-                <td>{publishedDate}</td>
-                <td>{crew}</td>
-                <td>
-                  <Button
-                    {...{
-                      onClick: () => handleEdit(id, type),
-                    }}
-                  >
-                    <img src={Edit} alt="Edit" />
-                  </Button>
-                  <Button
-                    {...{
-                      onClick: () => removeItem(type, id),
-                    }}
-                  >
-                    <img src={Delete} alt="Delete" />
-                  </Button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-     
+      {BUTTONS_HELPER.map(
+        ({ content, color, action, isActive, type, status }, index) => {
+          return (
+            <S.TableButton
+              key={index}
+              {...{
+                onClick: () => handleButtonActions(action),
+                variant: color,
+                type,
+                disabled:
+                  status === "EDIT"
+                    ? isEditable(selectedRowId)
+                    : status === "IS_ALL"
+                    ? false
+                    : !isActive(selectedRowId),
+              }}
+            >
+              {content}
+            </S.TableButton>
+          );
+        }
+      )}
+
+      <Alert variant="warning" show={showAlert}>
+        <S.AlertMessage>
+          Are you sure you want to delete selected items?
+        </S.AlertMessage>
+        <Button variant="danger" onClick={handleDeleteSelected}>
+          Yes
+        </Button>
+        <Button variant="dark" onClick={() => setShowAlert(false)}>
+          No
+        </Button>
+      </Alert>
+
+      <CustomDataTable
+        {...{
+          rows: eventItems,
+          columns: COLUMNS,
+          tableColumnExtensions,
+          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
+          checkboxSelection: !!isAll,
+          isGrouping: false,
+          loading: true,
+          showSelectionColumn: true,
+          onRowSelected: (selectedRowId) =>
+            !isAll
+              ? setSelectedRowId(selectedRowId[0])
+              : setSelectedRowsId(selectedRowId),
+          initSelection: selectedRowsId,
+        }}
+      />
     </section>
   );
 };

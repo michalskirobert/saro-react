@@ -75,7 +75,7 @@
       font-size: 16px;
       display: inline-block;
       padding: 4px 10px;
-      font-weight: 400;
+      font-weight: $weight-normal;
       background-color: rgba(255, 255, 255, 0);
       transition: background-color 0.5s ease;
       border: none;
@@ -105,7 +105,7 @@
     cursor: pointer;
     display: block;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: $weight-bold;
     margin: 0 auto;
     width: 343px;
     height: 52px;
@@ -228,7 +228,7 @@ form.cms, form.cms-translate {
   .submit-btn {
     display: block;
     color: $crl-base;
-    font-weight: bold;
+    font-weight: $weight-bold;
     text-transform: uppercase;
     font-size: 0.9rem;
     background-color: $crl-base-blue;

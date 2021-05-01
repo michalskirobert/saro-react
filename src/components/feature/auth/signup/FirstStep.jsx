@@ -1,6 +1,6 @@
 import { FORM_HELPER } from "./utils";
 
-import { Form as F } from 'react-bootstrap';
+import { Form as F } from "react-bootstrap";
 
 export function FirstStep({ handleChange, values, errors, touched }) {
   return (
@@ -17,10 +17,10 @@ export function FirstStep({ handleChange, values, errors, touched }) {
           tabindex="1"
         />
         {errors[FORM_HELPER.EMAIL] || touched[FORM_HELPER.EMAIL] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.EMAIL]}
-                  </F.Text>
-                ) : null}
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.EMAIL]}
+          </F.Text>
+        ) : null}
       </div>
       <div className="form-control form-on-top">
         <label htmlFor="password" className="floatLabel"></label>
@@ -34,10 +34,10 @@ export function FirstStep({ handleChange, values, errors, touched }) {
           tabindex="2"
         />
         {errors[FORM_HELPER.PASSWORD] || touched[FORM_HELPER.PASSWORD] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.PASSWORD]}
-                  </F.Text>
-                ) : null}
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.PASSWORD]}
+          </F.Text>
+        ) : null}
       </div>
       <div className="form-control">
         <label htmlFor="confPassword" className="floatLabel"></label>
@@ -50,11 +50,12 @@ export function FirstStep({ handleChange, values, errors, touched }) {
           placeholder="••••••••••••"
           tabindex="3"
         />
-        {errors[FORM_HELPER.CONF_PASSWORD] || touched[FORM_HELPER.CONF_PASSWORD] ? (
-                  <F.Text className="validation-alert">
-                    {errors[FORM_HELPER.CONF_PASSWORD]}
-                  </F.Text>
-                ) : null}
+        {errors[FORM_HELPER.CONF_PASSWORD] ||
+        touched[FORM_HELPER.CONF_PASSWORD] ? (
+          <F.Text className="validation-alert">
+            {errors[FORM_HELPER.CONF_PASSWORD]}
+          </F.Text>
+        ) : null}
       </div>
     </>
   );

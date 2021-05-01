@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import {AiOutlineClose} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
@@ -81,7 +81,8 @@ const AddEvents = () => {
                   placeholder="Add title"
                   onChange={handleChange}
                 />
-                {(errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE]) && (
+                {(errors[FORMIK_HELPER.TITLE] ||
+                  touched[FORMIK_HELPER.TITLE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
                   </F.Text>
@@ -98,7 +99,7 @@ const AddEvents = () => {
                   onChange={handleChange}
                 />
                 {(errors[FORMIK_HELPER.SUBTITLE] ||
-                touched[FORMIK_HELPER.SUBTITLE]) && (
+                  touched[FORMIK_HELPER.SUBTITLE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.SUBTITLE]}
                   </F.Text>
@@ -119,7 +120,8 @@ const AddEvents = () => {
                       setFieldValue(FORMIK_HELPER.CITY, values.value),
                   }}
                 />
-                {(errors[FORMIK_HELPER.CITY] || touched[FORMIK_HELPER.CITY]) && (
+                {(errors[FORMIK_HELPER.CITY] ||
+                  touched[FORMIK_HELPER.CITY]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CITY]}
                   </F.Text>
@@ -135,7 +137,8 @@ const AddEvents = () => {
                   value={values[FORMIK_HELPER.PLACE]}
                   onChange={handleChange}
                 />
-                {(errors[FORMIK_HELPER.PLACE] || touched[FORMIK_HELPER.PLACE]) && (
+                {(errors[FORMIK_HELPER.PLACE] ||
+                  touched[FORMIK_HELPER.PLACE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.PLACE]}
                   </F.Text>
@@ -150,7 +153,8 @@ const AddEvents = () => {
                   value={values[FORMIK_HELPER.DATE]}
                   onChange={handleChange}
                 />
-                {(errors[FORMIK_HELPER.DATE] || touched[FORMIK_HELPER.DATE]) && (
+                {(errors[FORMIK_HELPER.DATE] ||
+                  touched[FORMIK_HELPER.DATE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.DATE]}
                   </F.Text>
@@ -164,7 +168,8 @@ const AddEvents = () => {
                   value={values[FORMIK_HELPER.TIME]}
                   onChange={handleChange}
                 />
-                {(errors[FORMIK_HELPER.TIME] || touched[FORMIK_HELPER.TIME]) && (
+                {(errors[FORMIK_HELPER.TIME] ||
+                  touched[FORMIK_HELPER.TIME]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TIME]}
                   </F.Text>
@@ -205,7 +210,8 @@ const AddEvents = () => {
                   value={values[FORMIK_HELPER.LINK]}
                   onChange={handleChange}
                 />
-                {(errors[FORMIK_HELPER.LINK] || touched[FORMIK_HELPER.LINK]) && (
+                {(errors[FORMIK_HELPER.LINK] ||
+                  touched[FORMIK_HELPER.LINK]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.LINK]}
                   </F.Text>
@@ -226,7 +232,7 @@ const AddEvents = () => {
                   }}
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
-                touched[FORMIK_HELPER.LANGUAGE]) && (
+                  touched[FORMIK_HELPER.LANGUAGE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.LANGUAGE]}
                   </F.Text>
@@ -246,7 +252,8 @@ const AddEvents = () => {
                       setFieldValue(FORMIK_HELPER.CREW, values.value),
                   }}
                 />
-                {(errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW]) && (
+                {(errors[FORMIK_HELPER.CREW] ||
+                  touched[FORMIK_HELPER.CREW]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CREW]}
                   </F.Text>
@@ -263,7 +270,7 @@ const AddEvents = () => {
                   rows="10"
                 ></textarea>
                 {(errors[FORMIK_HELPER.EDITOR] ||
-                touched[FORMIK_HELPER.EDITOR]) && (
+                  touched[FORMIK_HELPER.EDITOR]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.EDITOR]}
                   </F.Text>
