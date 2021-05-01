@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+
+import { CustomTableCell } from "./custom-table-cell";
+
 import {
   FilteringState,
   GroupingState,
@@ -13,10 +16,10 @@ import {
 import {
   Grid,
   PagingPanel,
-  Table,
   TableFilterRow,
   TableHeaderRow,
   TableSelection,
+  Table,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
 import { getRowId } from "./utils";
@@ -34,7 +37,6 @@ export const CustomDataTable = ({
   showSelectAll = false,
   onRowSelected,
   initSelection,
-  onChangePage,
 }) => {
   const [savedSelection, setSelection] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -50,6 +52,7 @@ export const CustomDataTable = ({
     const lastSelected = selection.find(
       (selected) => savedSelection.indexOf(selected) === -1
     );
+
     if (lastSelected !== undefined) {
       setSelection([lastSelected]);
       onRowSelected([lastSelected]);
@@ -67,17 +70,20 @@ export const CustomDataTable = ({
     }
   }, [initSelection]);
 
-  useEffect(() => {
-    if (onChangePage) {
-      onChangePage(currentPage + 1, pageSize);
-    }
-  }, [currentPage, pageSize]);
-
   return (
     <S.TableCard>
       <Grid {...{ columns, rows, getRowId }}>
         <FilteringState />
-        <SortingState />
+        <SortingState
+          {...{
+            defaultSorting: [
+              {
+                columnName: "publishedDate",
+                direction: "asc",
+              },
+            ],
+          }}
+        />
         <PagingState
           {...{
             currentPage,
@@ -100,14 +106,13 @@ export const CustomDataTable = ({
         {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
 
         <Table
-          columnExtensions={tableColumnExtensions}
-          rowComponent={({ ...restProps }) => (
-            <S.TableRow
-              {...{
-                restProps,
-              }}
-            />
-          )}
+          {...{
+            columnExtensions: tableColumnExtensions,
+            rowComponent: ({ ...restProps }) => CustomTableCell(...restProps),
+            messages: {
+              noData: "Nothing to display",
+            },
+          }}
         />
         <IntegratedSelection />
         <TableSelection
@@ -118,8 +123,7 @@ export const CustomDataTable = ({
             showSelectAll,
           }}
         />
-        <SelectionState />
-        <TableHeaderRow />
+        <TableHeaderRow showSortingControls />
         <TableFilterRow showFilterSelector />
         <PagingPanel {...{ pageSizes }} />
       </Grid>

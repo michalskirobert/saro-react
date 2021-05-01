@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Breadcrumb, Alert, Button } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
 import { useManageContainer } from "./container";
@@ -10,7 +9,8 @@ import { CustomDataTable } from "@components/shared/custom-table";
 import {
   TABLE_COLUMN_PROPERTIES,
   COLUMNS,
-  tableColumnExtentions,
+  tableColumnExtensions,
+  BUTTONS_HELPER,
 } from "../utils";
 import * as C from "@utils/constants";
 import * as S from "../style";
@@ -18,13 +18,17 @@ import * as S from "../style";
 const ManageEvents = () => {
   const {
     setKey,
-    handleDeleteBtnClick,
-    onChangePage,
     setSelectedRowsId,
-    eventRows,
     showAlert,
     setShowAlert,
     handleDeleteSelected,
+    handleButtonActions,
+    isAll,
+    selectedRowId,
+    setSelectedRowId,
+    eventItems,
+    isEditable,
+    selectedRowsId,
   } = useManageContainer();
   const { getEvents } = useContainer();
 
@@ -41,9 +45,28 @@ const ManageEvents = () => {
         <Breadcrumb.Item active>Manage events</Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">Manage events</h2>
-      <S.TableButton onClick={handleDeleteBtnClick}>
-        Delete Selected
-      </S.TableButton>
+      {BUTTONS_HELPER.map(
+        ({ content, color, action, isActive, type, status }, index) => {
+          return (
+            <S.TableButton
+              key={index}
+              {...{
+                onClick: () => handleButtonActions(action),
+                variant: color,
+                type,
+                disabled:
+                  status === "EDIT"
+                    ? isEditable(selectedRowId)
+                    : status === "IS_ALL"
+                    ? false
+                    : !isActive(selectedRowId),
+              }}
+            >
+              {content}
+            </S.TableButton>
+          );
+        }
+      )}
 
       <Alert variant="warning" show={showAlert}>
         <S.AlertMessage>
@@ -59,13 +82,19 @@ const ManageEvents = () => {
 
       <CustomDataTable
         {...{
-          rows: eventRows,
+          rows: eventItems,
           columns: COLUMNS,
-          tableColumnExtensions: tableColumnExtentions,
+          tableColumnExtensions,
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
-          checkboxSelection: true,
-          onRowSelected: (rowId) => setSelectedRowsId(rowId),
-          onChangePage: (page, size) => onChangePage(page, size),
+          checkboxSelection: !!isAll,
+          isGrouping: false,
+          loading: true,
+          showSelectionColumn: true,
+          onRowSelected: (selectedRowId) =>
+            !isAll
+              ? setSelectedRowId(selectedRowId[0])
+              : setSelectedRowsId(selectedRowId),
+          initSelection: selectedRowsId,
         }}
       />
     </section>

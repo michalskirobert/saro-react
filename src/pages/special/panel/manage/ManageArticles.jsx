@@ -10,7 +10,7 @@ import { CustomDataTable } from "@components/shared/custom-table";
 import {
   TABLE_COLUMN_PROPERTIES,
   COLUMNS,
-  tableColumnExtentions,
+  tableColumnExtensions,
 } from "../utils";
 import * as C from "@utils/constants";
 import * as S from "../style";
@@ -21,12 +21,13 @@ const ManageArticles = () => {
   const {
     setKey,
     handleDeleteBtnClick,
-    onChangePage,
     articleRows,
     setSelectedRowsId,
     showAlert,
     setShowAlert,
     handleDeleteSelected,
+    isAll,
+    setIsAll,
   } = useManageContainer();
 
   useEffect(() => {
@@ -59,13 +60,12 @@ const ManageArticles = () => {
 
       <CustomDataTable
         {...{
-          rows: articleRows,
+          rows: [],
           columns: COLUMNS,
-          tableColumnExtensions: tableColumnExtentions,
+          tableColumnExtensions,
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: true,
           onRowSelected: (rowId) => setSelectedRowsId(rowId),
-          onChangePage: () => onChangePage(),
         }}
       />
     </section>

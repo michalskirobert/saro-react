@@ -34,7 +34,7 @@ const App = () => {
     }
   };
 
-  const getDataHandler = () => {
+  const getDataHandler = async () => {
     try {
       dispatch(fetchActions.getDatabaseRequest);
       db.ref(`/${C.GENERAL_CONSTANTS.LANG}`)

@@ -57,13 +57,11 @@ const ManageNews = () => {
       </Alert>
       <CustomDataTable
         {...{
-          rows: newsRows,
+          rows: [],
           columns: COLUMNS,
-          tableColumnExtensions: tableColumnExtentions,
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: true,
           onRowSelected: (rowId) => setSelectedRowsId(rowId),
-          onChangePage: () => onChangePage(),
         }}
       />
     </section>

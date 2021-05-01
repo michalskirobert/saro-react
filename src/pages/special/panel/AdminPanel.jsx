@@ -1,8 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Accordion, Card } from "react-bootstrap";
-import { FaAngleLeft } from "react-icons/fa";
 
 import { auth } from "@fire";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
@@ -22,15 +19,14 @@ const AdminPanel = () => {
       )
     );
   };
-  const filteredData = filterNavData();
 
   return (
-    <Router>
+    <>
       <section className="section saro-panel">
         {alert && <CmsAlert />}
         <h1>Saro CMS 1.0.0</h1>
         <h2>
-          Welcome{" "}
+          Welcome
           <span style={{ color: "red" }}>
             {auth?.currentUser?.displayName ?? "Saro-crew"}
           </span>
@@ -39,7 +35,8 @@ const AdminPanel = () => {
           <p>Admin main page</p>
         </div>
       </section>
-    </Router>
+      <section className="section saro-nav"></section>
+    </>
   );
 };
 
