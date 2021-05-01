@@ -9,6 +9,7 @@ export const GENERAL_CONSTANTS = {
   CREW: "crew",
   TYPE: "type",
   ID: "id",
+  DICTIONARY: "dictionary",
   CHANGE_LANGUAGE_TO: {
     EN: "en",
     KO: "ko",
@@ -46,6 +47,4 @@ export const GENERAL_CONSTANTS = {
   B_INFO: "info",
   B_LIGHT: "light",
   B_DARK: "dark",
-
-
 };

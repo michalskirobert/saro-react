@@ -60,7 +60,6 @@ const getCrewSuccess = (payload) => ({
 
 const getCrewFailure = () => ({ type: C.FETCH_CONSTANTS.GET_CREW_FAILURE });
 
-
 const getDatabaseRequest = () => ({
   type: C.FETCH_CONSTANTS.GET_DATABASE_REQUEST,
 });
@@ -74,6 +73,18 @@ const getDatabaseFailure = () => ({
   type: C.FETCH_CONSTANTS.GET_DATABASE_FAILURE,
 });
 
+const getDictionaryRequest = () => ({
+  type: C.FETCH_CONSTANTS.GET_DICTIONARY_REQUEST,
+});
+
+const getDictionarySucces = (payload) => ({
+  type: C.FETCH_CONSTANTS.GET_DICTIONARY_SUCCESS,
+  payload,
+});
+
+const getDictionaryFailure = () => ({
+  type: C.FETCH_CONSTANTS.GET_DICTIONARY_FAILURE,
+});
 
 export const fetchActions = {
   getNewsSuccess,
@@ -90,4 +101,7 @@ export const fetchActions = {
   getDatabaseRequest,
   getDatabaseSucces,
   getDatabaseFailure,
+  getDictionaryRequest,
+  getDictionarySucces,
+  getDictionaryFailure,
 };

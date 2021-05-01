@@ -1,5 +1,6 @@
 import Select from "react-select";
 import { Form as F } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 import { FORM_HELPER } from "./utils";
 import * as S from "./styles";
@@ -9,11 +10,6 @@ const options = [
   { value: "female", label: "female" },
 ];
 
-const optionsLang = [
-  { value: "english", label: "english" },
-  { value: "polish", label: "polish" },
-];
-
 export function SecondStep({
   handleChange,
   values,
@@ -21,7 +17,17 @@ export function SecondStep({
   touched,
   setFieldValue,
 }) {
-  console.log(values);
+  const languagesData = useSelector((state) => state.database.dictionary);
+
+  const languagesOptions = languagesData.languages?.map((lang) => {
+    const container = {};
+
+    container["value"] = lang.name;
+    container["label"] = lang.name;
+
+    return container;
+  });
+
   return (
     <>
       <div className="form-control select">
@@ -41,7 +47,7 @@ export function SecondStep({
         <Select
           width="100%"
           id="nativeLang"
-          options={optionsLang}
+          options={languagesOptions}
           value={values[FORM_HELPER.NATIVE_LANG]}
           onChange={(value) =>
             setFieldValue(FORM_HELPER.NATIVE_LANG, value.value)
@@ -58,7 +64,7 @@ export function SecondStep({
         <Select
           width="100%"
           id="studyingLang"
-          options={optionsLang}
+          options={languagesOptions}
           value={values[FORM_HELPER.STUDYING_LANG]}
           onChange={(value) =>
             setFieldValue(FORM_HELPER.STUDYING_LANG, value.value)
