@@ -1,20 +1,3 @@
-export const ROUTE_PATHS = Object.freeze([
-  {
-    type: "Route",
-    path: "",
-    exact,
-    component: "",
-  },
-  {
-    type: "PrivateRoute",
-    path: "",
-    exact,
-    component: "",
-  },
-  {
-    type: "SpecialRoute",
-    path: "",
-    exact,
-    component: "",
-  },
-]);
+export { PUBLIC_ROUTE } from "./public";
+export { PRIVATE_ROUTE } from "./private";
+export { SARO_ROUTE } from "./cms";

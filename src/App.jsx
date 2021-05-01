@@ -1,5 +1,4 @@
-// Components:
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { db, auth, firestore } from "@fire";
@@ -7,40 +6,15 @@ import { db, auth, firestore } from "@fire";
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
 import Unlisten from "./routers/Unlisten";
-import SignIn from "./components/feature/auth/login/Login";
-import SignUp from "./components/feature/auth/signup/SignUp";
 import { fetchActions, userActions } from "./store/actions";
 import Nav from "./components/layout/nav/Nav";
 import Footer from "./components/layout/footer/Footer";
-// Pages
-
-//Public
-import Home from "./pages/public/home/Home";
-import About from "./pages/public/about/About";
-import Lessons from "./pages/public/lessons/Lessons";
-import Blog from "./pages/public/blog/Blog";
-import Error from "./pages/public/404/Error";
-import Contact from "./pages/public/contact";
-
-//User-space
-import Dashboard from "./pages/private/dashboard/Dashboard";
-import ProfileSettings from "./pages/private/profile/Settings";
-import User from "./pages/private/profile/User";
-
-//Special
-import AdminEdit from "./pages/special/edit/Edit";
-import AdminAddArticle from "./pages/special/add/AddArticle";
-import AdminAddEvents from "./pages/special/add/AddEvents";
-import AdminAddNews from "./pages/special/add/AddNews";
-import AdminDashboard from "./pages/special/panel/AdminPanel";
-import AdminTranslate from "./pages/special/edit/AdminTranslate";
-import AdminTranslateFooter from "./pages/special/panel/translate/TranslateFooter";
-import AdminManageArticle from "./pages/special/panel/manage/ManageArticles";
-import AdminManageNews from "./pages/special/panel/manage/ManageNews";
-import AdminManageEvents from "./pages/special/panel/manage/ManageEvents";
-import AdminManageUsers from "./pages/special/panel/manage/ManageUsers";
+import { DefaultLoader } from "./components/shared/loadings/DefaultLoader";
+import { PUBLIC_ROUTE, PRIVATE_ROUTE, SARO_ROUTE } from "@utils/route";
 
 import * as C from "@utils/constants";
+
+const NotFound = lazy(() => import("./pages/public/404/Error"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -72,9 +46,7 @@ const App = () => {
         dispatch(userActions.logout());
       }
     });
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   });
 
   useEffect(() => {
@@ -86,62 +58,22 @@ const App = () => {
     <Router>
       <Unlisten>
         <Nav />
-        <Switch>
-          {/* Public Router */}
-          <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
-          <Route path="/sign-in" component={SignIn} />
-          <Route path="/sign-up" component={SignUp} />
-          <Route path="/lessons" component={Lessons} />
-          <Route exact path="/blog" component={Blog} />
-          <Route path="/contact" component={Contact} />
-          {/* User route */}
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/profile" component={User} />
-          <PrivateRoute path="/profile/settings" component={ProfileSettings} />
-          <PrivateRoute path="/profile/:id" children={<User />} />
-          {/* CMS SARO 1.0.0 */}
-          <SaroRoute exact path="/panel" component={AdminDashboard} />
-          <SaroRoute
-            exact
-            path="/panel/add/article"
-            component={AdminAddArticle}
-          />
-          <SaroRoute
-            exact
-            path="/panel/add/events"
-            component={AdminAddEvents}
-          />
-          <SaroRoute exact path="/panel/add/news" component={AdminAddNews} />
-          <SaroRoute
-            exact
-            path="/panel/manage/article"
-            component={AdminManageArticle}
-          />
-          <SaroRoute
-            exact
-            path="/panel/manage/events"
-            component={AdminManageEvents}
-          />
-          <SaroRoute
-            exact
-            path="/panel/manage/news"
-            component={AdminManageNews}
-          />
-          <SaroRoute
-            exact
-            path="/panel/manage/users"
-            component={AdminManageUsers}
-          />          
-          <SaroRoute exact path="/panel/edit" component={AdminEdit} />
-          <SaroRoute exact path="/panel/translate" component={AdminTranslate} />
-          <SaroRoute
-            exact
-            path="/panel/translate/footer"
-            component={AdminTranslateFooter}
-          />
-          <Route path="*" component={Error} />
-        </Switch>
+        <Suspense fallback={<DefaultLoader />}>
+          <Switch>
+            {PUBLIC_ROUTE.map(({ path, component, exact }) => {
+              return <Route key={path} {...{ path, component, exact }} />;
+            })}
+            {PRIVATE_ROUTE.map(({ path, component, exact }) => {
+              return (
+                <PrivateRoute key={path} {...{ path, component, exact }} />
+              );
+            })}
+            {SARO_ROUTE.map(({ path, component, exact }) => {
+              return <SaroRoute key={path} {...{ path, component, exact }} />;
+            })}
+            <Route {...{ path: C.ROUTE_PATHS.ERROR, component: NotFound }} />
+          </Switch>
+        </Suspense>
         <Footer />
       </Unlisten>
     </Router>

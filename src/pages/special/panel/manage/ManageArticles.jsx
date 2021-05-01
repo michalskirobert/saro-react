@@ -1,18 +1,22 @@
 import React, { useEffect } from "react";
 import { Breadcrumb, Alert, Button } from "react-bootstrap";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
 import { CustomDataTable } from "@components/shared/custom-table";
 
-import { TABLE_COLUMN_PROPERTIES, COLUMNS, tableColumnExtentions } from "../utils";
+import {
+  TABLE_COLUMN_PROPERTIES,
+  COLUMNS,
+  tableColumnExtentions,
+} from "../utils";
 import * as C from "@utils/constants";
 import * as S from "../style";
 
 const ManageArticles = () => {
-  const { getPosts } = useContainer(); 
+  const { getPosts } = useContainer();
 
   const {
     setKey,
@@ -23,13 +27,13 @@ const ManageArticles = () => {
     showAlert,
     setShowAlert,
     handleDeleteSelected,
-  } = useManageContainer();  
+  } = useManageContainer();
 
-  useEffect(()=>{
+  useEffect(() => {
     getPosts();
-    setKey(C.GENERAL_CONSTANTS.BLOG_POSTS)
-  }, [])
-  
+    setKey(C.GENERAL_CONSTANTS.BLOG_POSTS);
+  }, []);
+
   return (
     <section className="section manage-articles">
       <Breadcrumb>
@@ -38,8 +42,9 @@ const ManageArticles = () => {
         <Breadcrumb.Item active>Manage articles</Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">Manage articles</h2>
-      <S.TableButton onClick={handleDeleteBtnClick}>Delete Selected</S.TableButton>
-      <ToastContainer autoClose={false} />
+      <S.TableButton onClick={handleDeleteBtnClick}>
+        Delete Selected
+      </S.TableButton>
       <Alert variant="warning" show={showAlert}>
         <S.AlertMessage>
           Are you sure you want to delete selected items?

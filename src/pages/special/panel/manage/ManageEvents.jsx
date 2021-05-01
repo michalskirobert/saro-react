@@ -44,7 +44,7 @@ const ManageEvents = () => {
       <S.TableButton onClick={handleDeleteBtnClick}>
         Delete Selected
       </S.TableButton>
-      <ToastContainer autoClose={false} />
+
       <Alert variant="warning" show={showAlert}>
         <S.AlertMessage>
           Are you sure you want to delete selected items?

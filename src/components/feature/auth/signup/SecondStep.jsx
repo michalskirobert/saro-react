@@ -2,6 +2,7 @@ import Select from "react-select";
 import { Form as F } from "react-bootstrap";
 
 import { FORM_HELPER } from "./utils";
+import * as S from "./styles";
 
 const options = [
   { value: "male", label: "male" },
@@ -33,9 +34,7 @@ export function SecondStep({
           placeholder="Select your Gender"
         />
         {errors[FORM_HELPER.GENDER] || touched[FORM_HELPER.GENDER] ? (
-          <F.Text className="validation-alert">
-            {errors[FORM_HELPER.GENDER]}
-          </F.Text>
+          <F.Text>{errors[FORM_HELPER.GENDER]}</F.Text>
         ) : null}
       </div>
       <div className="form-control select">

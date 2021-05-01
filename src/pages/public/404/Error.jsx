@@ -1,6 +1,6 @@
 import React from "react";
 
-const index = () => {
+export const NotFound = () => {
   return (
     <section className="section error">
       <h1>Error 404</h1>
@@ -8,5 +8,3 @@ const index = () => {
     </section>
   );
 };
-
-export default index;

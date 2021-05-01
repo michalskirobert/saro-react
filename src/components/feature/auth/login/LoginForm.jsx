@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Form as F } from "react-bootstrap";
 
 import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";
@@ -10,6 +9,9 @@ import { FORM_HELPER } from "./utils";
 import { userActions, alertActions } from "@actions/index";
 import Alert from "./../../../shared/alerts";
 import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
+
+import * as S from "./styles";
+import { signUpValidationScheme } from "../signup/validation";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -29,11 +31,10 @@ const LoginForm = () => {
 
   const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
-
     try {
-      dispatch(userActions.SignInRequest);
+      dispatch(userActions.SignInRequest());
       await signin(values.email, values.password);
-      dispatch(userActions.signInSuccess);
+      dispatch(userActions.signInSuccess());
       history.push("/dashboard");
     } catch (error) {
       dispatch(alertActions.error(error.message));
@@ -52,11 +53,10 @@ const LoginForm = () => {
         validationSchema: loginValidationScheme,
         validateOnBlur: true,
         enableReinitialize: true,
-        validateOnMount: true,
         onSubmit: (values) => handleSubmit(values),
       }}
     >
-      {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
+      {({ values, errors, isValid, handleChange, handleSubmit }) => (
         <>
           {alert && <Alert />}
           <h2>{logInData?.header}</h2>
@@ -74,12 +74,11 @@ const LoginForm = () => {
                   placeholder={placeholder}
                 />
 
-                {errors[FORM_HELPER[type.toUpperCase()]] ||
-                  (touched[FORM_HELPER[type.toUpperCase()]] && (
-                    <F.Text className="validation-alert">
-                      {errors[FORM_HELPER[type.toUpperCase()]]}
-                    </F.Text>
-                  ))}
+                {errors[FORM_HELPER[type.toUpperCase()]] && (
+                  <S.Feedback>
+                    {errors[FORM_HELPER[type.toUpperCase()]]}
+                  </S.Feedback>
+                )}
               </div>
             );
           })}
