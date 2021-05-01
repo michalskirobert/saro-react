@@ -7,6 +7,7 @@ import { db, auth, firestore } from "@fire";
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
 import Unlisten from "./routers/Unlisten";
+import { firestore } from "./components/feature/firebase"
 import SignIn from "./components/feature/auth/login/Login";
 import SignUp from "./components/feature/auth/signup/SignUp";
 import { fetchActions, userActions } from "./store/actions";
@@ -46,6 +47,20 @@ const App = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.general.language);
 
+  const getDictionary = async () => {
+    try {
+      dispatch(fetchActions.getDictionaryRequest);
+      db.ref(`/${C.GENERAL_CONSTANTS.DICTIONARY}`).on(
+        "value",
+        (querySnapShot) => {
+          dispatch(fetchActions.getDictionarySucces(querySnapShot.val()));
+        }
+      );
+    } catch (error) {
+      dispatch(fetchActions.getDictionaryFailure(error));
+    }
+  };
+
   const getDataHandler = () => {
     try {
       dispatch(fetchActions.getDatabaseRequest);
@@ -57,6 +72,11 @@ const App = () => {
     } catch (error) {
       dispatch(fetchActions.getDatabaseFailure(error));
     }
+  };
+
+  const initialDataHandler = async () => {
+    await getDictionary();
+    await getDataHandler();
   };
 
   useEffect(() => {
@@ -78,8 +98,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    getDataHandler();
-    // eslint-disable-next-line
+    initialDataHandler();
   }, []);
 
   return (
