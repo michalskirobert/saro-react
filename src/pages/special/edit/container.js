@@ -45,8 +45,8 @@ export const useEdit = () => {
         .doc(id)
         .update({
           ...values,
-          published: new Date(),
-          publishedDate: new Date().toLocaleString(),
+          modified: new Date(),
+          modifiedDate: new Date().toLocaleString(),
         });
       dispatch(cmsActions.updateSuccess);
       history.push("/panel");

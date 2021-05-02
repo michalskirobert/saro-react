@@ -38,6 +38,8 @@ export const useContainer = () => {
         type: CONSTANTS.GENERAL_CONSTANTS.NEWS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
+        modified: new Date(),
+        modifiedDate: new Date().toLocaleString(),
         id,
       });
   };
@@ -126,6 +128,8 @@ export const useContainer = () => {
         type: CONSTANTS.GENERAL_CONSTANTS.EVENTS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
+        modified: new Date(),
+        modifiedDate: new Date().toLocaleString(),
         id,
         ...values,
       });
@@ -157,6 +161,8 @@ export const useContainer = () => {
         imagesURL: images,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
+        modified: new Date(),
+        modifiedDate: new Date().toLocaleString(),
       });
   };
 
