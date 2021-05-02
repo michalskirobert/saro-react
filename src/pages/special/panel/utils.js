@@ -49,6 +49,7 @@ export const TABLE_COLUMN = Object.freeze({
 export const COLUMNS = Object.freeze([
   { name: TABLE_COLUMN_PROPERTIES.TITLE, title: TABLE_COLUMN.TITLE },
   { name: TABLE_COLUMN_PROPERTIES.MODIFIED, title: TABLE_COLUMN.MODIFIED },
+  { name: TABLE_COLUMN_PROPERTIES.PUBLISHED, title: TABLE_COLUMN.PUBLISHED },
   { name: TABLE_COLUMN_PROPERTIES.AUTHOR, title: TABLE_COLUMN.AUTHOR },
 ]);
 export const tableColumnExtensions = Object.freeze([

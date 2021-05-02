@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button } from "react-bootstrap";
 
 import { firestore } from "@fire";
 import { useContainer } from "./../../../public/home/container";
@@ -16,11 +15,8 @@ export const useManageContainer = () => {
 
   const newsItems = useSelector((state) => state.database.news);
   const eventItems = useSelector((state) => state.database.events);
-  const articleItems = useSelector((state) => state.database.posts);
+  const articleItems = useSelector((state) => state.database.posts); 
 
-  const pagination = [];
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
   const [key, setKey] = useState("");
 
   const [selectedRowsId, setSelectedRowsId] = useState([]);
@@ -33,7 +29,7 @@ export const useManageContainer = () => {
       case BUTTON_ACTIONS.DELETE:
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
-          : toast("Nothing to delete.", {
+          : toast.info("Nothing to delete.", {
               position: toast.POSITION.TOP_CENTER,
             });
         break;
@@ -52,17 +48,17 @@ export const useManageContainer = () => {
   const onChangePage = () => {
     return;
   };
-  const handleDeleteBtnClick = () => {
-    selectedRowsId.length > 0
-      ? setShowAlert(true)
-      : toast("Nothing to delete.", { position: toast.POSITION.TOP_CENTER });
-  };
-  const handleDeleteSelected = () => {
+  const deleteSelections = () => {
     selectedRowId
       ? removeItem(key, selectedRowId)
       : selectedRowsId.forEach((id) => removeItem(key, id));
     setShowAlert(false);
+    toast.success("Items deleted", {
+      autoClose: 2000,
+      position: toast.POSITION.TOP_CENTER,      
+    })
   };
+
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -82,11 +78,7 @@ export const useManageContainer = () => {
     return false;
   };
 
-  return {
-    pagination,
-    setItemsPerPage,
-    currentPage,
-
+  return { 
     isEditable,
     key,
     setKey,
@@ -95,21 +87,19 @@ export const useManageContainer = () => {
     getPosts,
     newsItems,
     eventItems,
-    articleItems,
-    removeItem,
-    handleEdit,
-    handleDeleteBtnClick,
-    handleDeleteSelected,
+    articleItems,    
     onChangePage,
+    selectedRowsId,
     setSelectedRowsId,
+    selectedRowId,
+    setSelectedRowId,
     showAlert,
     setShowAlert,
     handleButtonActions,
+    removeItem,
+    handleEdit,
+    deleteSelections,
     isAll,
-    setIsAll,
-    selectedRowId,
-    setSelectedRowId,
-    eventItems,
-    selectedRowsId,
+    setIsAll,  
   };
 };

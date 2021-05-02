@@ -32,8 +32,3 @@ export const TableButton = styled(Button)`
   font-weight: 500;
   margin: 0 5px 10px 4px;
 `;
-
-export const AlertMessage = styled.p`
-  display: block;
-  margin: 0 auto;
-`;

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Alert, Button } from "react-bootstrap";
-import "react-toastify/dist/ReactToastify.min.css";
+import { Breadcrumb, Modal, Button } from "react-bootstrap";
 
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
@@ -13,6 +12,8 @@ import {
   BUTTONS_HELPER,
 } from "../utils";
 import * as C from "@utils/constants";
+
+import "react-toastify/dist/ReactToastify.min.css";
 import * as S from "../style";
 
 const ManageEvents = () => {
@@ -21,7 +22,7 @@ const ManageEvents = () => {
     setSelectedRowsId,
     showAlert,
     setShowAlert,
-    handleDeleteSelected,
+    deleteSelections,
     handleButtonActions,
     isAll,
     selectedRowId,
@@ -67,19 +68,19 @@ const ManageEvents = () => {
           );
         }
       )}
-
-      <Alert variant="warning" show={showAlert}>
-        <S.AlertMessage>
-          Are you sure you want to delete selected items?
-        </S.AlertMessage>
-        <Button variant="danger" onClick={handleDeleteSelected}>
+      <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+        <Modal.Body>
+          Are you sure you want to permanently delete selected items?
+        </Modal.Body>
+        <Modal.Footer>
+        <Button variant="danger" onClick={deleteSelections}>
           Yes
         </Button>
         <Button variant="dark" onClick={() => setShowAlert(false)}>
           No
         </Button>
-      </Alert>
-
+        </Modal.Footer>       
+      </Modal>
       <CustomDataTable
         {...{
           rows: eventItems,

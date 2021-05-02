@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Alert, Button } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
+import { Breadcrumb, Modal, Button } from "react-bootstrap";
 
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
@@ -11,23 +9,29 @@ import {
   TABLE_COLUMN_PROPERTIES,
   COLUMNS,
   tableColumnExtensions,
+  BUTTONS_HELPER,
 } from "../utils";
 import * as C from "@utils/constants";
+
 import * as S from "../style";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const ManageArticles = () => {
   const { getPosts } = useContainer();
 
   const {
     setKey,
-    handleDeleteBtnClick,
-    articleRows,
     setSelectedRowsId,
     showAlert,
     setShowAlert,
-    handleDeleteSelected,
+    deleteSelections,
+    handleButtonActions,
     isAll,
-    setIsAll,
+    selectedRowId,
+    setSelectedRowId,
+    articleItems,
+    isEditable,
+    selectedRowsId,
   } = useManageContainer();
 
   useEffect(() => {
@@ -43,29 +47,57 @@ const ManageArticles = () => {
         <Breadcrumb.Item active>Manage articles</Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">Manage articles</h2>
-      <S.TableButton onClick={handleDeleteBtnClick}>
-        Delete Selected
-      </S.TableButton>
-      <Alert variant="warning" show={showAlert}>
-        <S.AlertMessage>
-          Are you sure you want to delete selected items?
-        </S.AlertMessage>
-        <Button variant="danger" onClick={handleDeleteSelected}>
+      {BUTTONS_HELPER.map(
+        ({ content, color, action, isActive, type, status }, index) => {
+          return (
+            <S.TableButton
+              key={index}
+              {...{
+                onClick: () => handleButtonActions(action),
+                variant: color,
+                type,
+                disabled:
+                  status === "EDIT"
+                    ? isEditable(selectedRowId)
+                    : status === "IS_ALL"
+                    ? false
+                    : !isActive(selectedRowId),
+              }}
+            >
+              {content}
+            </S.TableButton>
+          );
+        }
+      )}
+       <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+        <Modal.Body>
+          Are you sure you want to permanently delete selected items?
+        </Modal.Body>
+        <Modal.Footer>
+        <Button variant="danger" onClick={deleteSelections}>
           Yes
         </Button>
         <Button variant="dark" onClick={() => setShowAlert(false)}>
           No
         </Button>
-      </Alert>
-
+        </Modal.Footer>
+       
+      </Modal>
       <CustomDataTable
         {...{
-          rows: [],
+          rows: articleItems,
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
-          checkboxSelection: true,
-          onRowSelected: (rowId) => setSelectedRowsId(rowId),
+          checkboxSelection: !!isAll,
+          isGrouping: false,
+          loading: true,
+          showSelectionColumn: true,
+          onRowSelected: (selectedRowId) =>
+            !isAll
+              ? setSelectedRowId(selectedRowId[0])
+              : setSelectedRowsId(selectedRowId),
+          initSelection: selectedRowsId,
         }}
       />
     </section>
