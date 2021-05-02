@@ -5,9 +5,17 @@ export const BUTTON_ACTIONS = Object.freeze({
   EDIT: "EDIT",
   IS_ALL: "IS_ALL",
   UNCHECK: "UNCHECK",
+  ADD: "/add/",
 });
 
 export const BUTTONS_HELPER = Object.freeze([
+  {
+    action: BUTTON_ACTIONS.ADD,
+    color: C.GENERAL_CONSTANTS.B_SUCCESS,
+    content: "Add",
+    type: "button",
+    isActive: () => true,
+  },
   {
     action: BUTTON_ACTIONS.DELETE,
     color: C.GENERAL_CONSTANTS.B_DANGER,
@@ -26,7 +34,7 @@ export const BUTTONS_HELPER = Object.freeze([
   {
     status: BUTTON_ACTIONS.IS_ALL,
     action: BUTTON_ACTIONS.IS_ALL,
-    color: C.GENERAL_CONSTANTS.B_SUCCESS,
+    color: C.GENERAL_CONSTANTS.B_DARK,
     content: "Select fields",
     type: "button",
     isActive: (selectedRowId) => !!selectedRowId,
@@ -35,8 +43,8 @@ export const BUTTONS_HELPER = Object.freeze([
 
 export const TABLE_COLUMN_PROPERTIES = Object.freeze({
   TITLE: "title",
-  MODIFIED: "modifiedDate",
-  PUBLISHED: "publishedDate",
+  MODIFIED: "modified",
+  PUBLISHED: "published",
   AUTHOR: "crew",
 });
 export const TABLE_COLUMN = Object.freeze({

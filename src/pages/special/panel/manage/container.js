@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -12,10 +13,11 @@ import * as C from "@utils/constants";
 export const useManageContainer = () => {
   const { getNews, getEvents, getPosts } = useContainer();
   const { handleEdit } = useEdit();
+  const history = useHistory();
 
   const newsItems = useSelector((state) => state.database.news);
   const eventItems = useSelector((state) => state.database.events);
-  const articleItems = useSelector((state) => state.database.posts); 
+  const articleItems = useSelector((state) => state.database.posts);
 
   const [key, setKey] = useState("");
 
@@ -27,6 +29,7 @@ export const useManageContainer = () => {
   const handleButtonActions = (action) => {
     switch (action) {
       case BUTTON_ACTIONS.DELETE:
+        console.log({ selectedRowId, selectedRowsId });
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
           : toast.info("Nothing to delete.", {
@@ -41,24 +44,29 @@ export const useManageContainer = () => {
         setSelectedRowsId([selectedRowId]);
         setIsAll(!isAll);
         break;
+      case BUTTON_ACTIONS.ADD:
+        history.push("/panel/add/article");
+        break;
       default:
         return;
     }
   };
-  const onChangePage = () => {
-    return;
-  };
+
+  const onChangePage = () => null;
+
   const deleteSelections = () => {
-    selectedRowId
-      ? removeItem(key, selectedRowId)
-      : selectedRowsId.forEach((id) => removeItem(key, id));
+    selectedRowsId
+      ? selectedRowsId.forEach((id) => removeItem(key, id))
+      : removeItem(key, selectedRowId);
     setShowAlert(false);
     toast.success("Items deleted", {
       autoClose: 2000,
-      position: toast.POSITION.TOP_CENTER,      
-    })
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
+  //zrób dwie funkcje, jedną grupową, drugą taką, przy zmianie otypowania isAll ze swapuj je... ewentualnie dodaj to we wnątrz funkcji
+  //mały protip, abyś się nie męczyła.
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -78,7 +86,7 @@ export const useManageContainer = () => {
     return false;
   };
 
-  return { 
+  return {
     isEditable,
     key,
     setKey,
@@ -87,8 +95,7 @@ export const useManageContainer = () => {
     getPosts,
     newsItems,
     eventItems,
-    articleItems,    
-    onChangePage,
+    articleItems,
     selectedRowsId,
     setSelectedRowsId,
     selectedRowId,
@@ -100,6 +107,6 @@ export const useManageContainer = () => {
     handleEdit,
     deleteSelections,
     isAll,
-    setIsAll,  
+    setIsAll,
   };
 };

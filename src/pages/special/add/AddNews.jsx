@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import {AiOutlineClose} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { addNewsValidationScheme } from "./validation";
@@ -24,7 +24,6 @@ const AddNews = () => {
     isLoading,
     image,
     categories,
-    invalid,
     deleteImage,
     setImgName,
     imgName,
@@ -83,7 +82,7 @@ const AddNews = () => {
                     onChange={handleChange}
                   />
                   {(errors[FORMIK_HELPER.TITLE] ||
-                  touched[FORMIK_HELPER.TITLE]) && (
+                    touched[FORMIK_HELPER.TITLE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.TITLE]}
                     </F.Text>
@@ -100,7 +99,7 @@ const AddNews = () => {
                     onChange={handleChange}
                   />
                   {(errors[FORMIK_HELPER.SUBTITLE] ||
-                  touched[FORMIK_HELPER.SUBTITLE]) && (
+                    touched[FORMIK_HELPER.SUBTITLE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.SUBTITLE]}
                     </F.Text>
@@ -130,10 +129,7 @@ const AddNews = () => {
                     )}
                   </S.PreviewContainer>
 
-                  <F.Text className="validation-alert">
-                    {!invalid.errorMsg && !image && "Field required."}
-                    {invalid && invalid.errorMsg}
-                  </F.Text>
+                  <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">
                   <label htmlFor="crew">Crew</label>
@@ -141,7 +137,7 @@ const AddNews = () => {
                     {...{
                       id: "crew",
                       name: "crew",
-                      options: crew.map(({name, surname}) => ({
+                      options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
                       })),
@@ -149,7 +145,8 @@ const AddNews = () => {
                         setFieldValue(FORMIK_HELPER.CREW, values.value),
                     }}
                   />
-                  {(errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW]) && (
+                  {(errors[FORMIK_HELPER.CREW] ||
+                    touched[FORMIK_HELPER.CREW]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.CREW]}
                     </F.Text>
@@ -170,7 +167,7 @@ const AddNews = () => {
                     }}
                   />
                   {(errors[FORMIK_HELPER.CATEGORY] ||
-                  touched[FORMIK_HELPER.CATEGORY]) && (
+                    touched[FORMIK_HELPER.CATEGORY]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.CATEGORY]}
                     </F.Text>
@@ -202,10 +199,7 @@ const AddNews = () => {
                     )}
                   </S.PreviewContainer>
 
-                  <F.Text className="validation-alert">
-                    {!invalid.errorMsg && !images && "Field required."}
-                    {invalid && invalid.errorMsg}
-                  </F.Text>
+                  <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">
                   <label htmlFor="language">Language</label>
@@ -222,7 +216,7 @@ const AddNews = () => {
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
-                  touched[FORMIK_HELPER.LANGUAGE]) && (
+                    touched[FORMIK_HELPER.LANGUAGE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.LANGUAGE]}
                     </F.Text>
@@ -237,7 +231,7 @@ const AddNews = () => {
                     }}
                   />
                   {(errors[FORMIK_HELPER.EDITOR] ||
-                  touched[FORMIK_HELPER.EDITOR]) && (
+                    touched[FORMIK_HELPER.EDITOR]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.EDITOR]}
                     </F.Text>
@@ -247,7 +241,7 @@ const AddNews = () => {
               <Button
                 className="submit-btn"
                 type="submit"
-                disabled={!image || invalid.errorMsg || isLoading || !isValid}
+                disabled={!image || isLoading || !isValid}
                 onClick={handleSubmit}
               >
                 Add

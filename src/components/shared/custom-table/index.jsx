@@ -79,7 +79,7 @@ export const CustomDataTable = ({
             defaultSorting: [
               {
                 columnName: "publishedDate",
-                direction: "asc",
+                direction: "dsc",
               },
             ],
           }}

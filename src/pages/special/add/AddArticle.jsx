@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import {AiOutlineClose} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { addArticleValidationScheme } from "./validation";
@@ -14,8 +14,6 @@ import { useContainer } from "./container";
 import { FORMIK_HELPER } from "./utils.js";
 
 import * as C from "@utils/constants";
-import * as S from "./styles";
-
 
 const AddArticle = () => {
   const {
@@ -32,6 +30,8 @@ const AddArticle = () => {
     images,
     setImgName,
     imgName,
+    handleEditorChange,
+    value,
   } = useContainer();
 
   useEffect(() => {
@@ -45,8 +45,8 @@ const AddArticle = () => {
       {...{
         initialValues: {},
         validateOnChange: true,
-        validateOnMount: true,
-        validationSchema: addArticleValidationScheme,
+        // validateOnMount: true,
+        // validationSchema: addArticleValidationScheme,
         onSubmit: (values) => handlerArticle(values),
       }}
     >
@@ -78,7 +78,8 @@ const AddArticle = () => {
                   value={values[FORMIK_HELPER.TITLE]}
                   onChange={handleChange}
                 />
-                {(errors[FORMIK_HELPER.TITLE] || touched[FORMIK_HELPER.TITLE]) && (
+                {(errors[FORMIK_HELPER.TITLE] ||
+                  touched[FORMIK_HELPER.TITLE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
                   </F.Text>
@@ -98,7 +99,8 @@ const AddArticle = () => {
                       setFieldValue(FORMIK_HELPER.CREW, values.value),
                   }}
                 />
-                {(errors[FORMIK_HELPER.CREW] || touched[FORMIK_HELPER.CREW]) && (
+                {(errors[FORMIK_HELPER.CREW] ||
+                  touched[FORMIK_HELPER.CREW]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CREW]}
                   </F.Text>
@@ -119,7 +121,7 @@ const AddArticle = () => {
                   }}
                 />
                 {(errors[FORMIK_HELPER.CATEGORY] ||
-                touched[FORMIK_HELPER.CATEGORY]) && (
+                  touched[FORMIK_HELPER.CATEGORY]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.CATEGORY]}
                   </F.Text>
@@ -140,13 +142,13 @@ const AddArticle = () => {
                   }}
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
-                touched[FORMIK_HELPER.LANGUAGE]) && (
+                  touched[FORMIK_HELPER.LANGUAGE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.LANGUAGE]}
                   </F.Text>
                 )}
               </div>
-              <div className="form-control">
+              {/* <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMG_URL}>
                   Upload cover image
                 </label>
@@ -164,7 +166,7 @@ const AddArticle = () => {
                         type="button"
                         onClick={() => deleteImage(image)}
                       >
-                         <AiOutlineClose />
+                        <AiOutlineClose />
                       </S.PreviewDelete>
                     </>
                   )}
@@ -174,8 +176,8 @@ const AddArticle = () => {
                   {!invalid.errorMsg && !image && "Field required."}
                   {invalid && invalid.errorMsg}
                 </F.Text>
-              </div>
-              <div className="form-control">
+              </div> */}
+              {/* <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMAGES_URL}>Upload images</label>
                 <input
                   id={FORMIK_HELPER.IMAGES_URL}
@@ -203,22 +205,18 @@ const AddArticle = () => {
                   {!invalid.errorMsg && !images && "Field required."}
                   {invalid && invalid.errorMsg}
                 </F.Text>
-              </div>
+              </div> */}
               <div className="form-control editor">
                 <label>Info</label>
                 <CustomEditor
                   {...{
-                    editorValue: "",
                     propName: FORMIK_HELPER.EDITOR,
-                    onChangeEditor: setFieldValue,
+                    onChangeEditor: handleEditorChange,
                   }}
                 />
-                {(errors[FORMIK_HELPER.EDITOR] ||
-                touched[FORMIK_HELPER.EDITOR]) && (
-                  <F.Text className="validation-alert">
-                    {errors[FORMIK_HELPER.EDITOR]}
-                  </F.Text>
-                )}
+                <F.Text className="validation-alert">
+                  {!!value.length && errors[FORMIK_HELPER.EDITOR]}
+                </F.Text>
               </div>
             </section>
             <Button

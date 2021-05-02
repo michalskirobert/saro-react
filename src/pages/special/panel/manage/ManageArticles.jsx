@@ -69,26 +69,25 @@ const ManageArticles = () => {
           );
         }
       )}
-       <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+      <Modal show={showAlert} onHide={() => setShowAlert(false)}>
         <Modal.Body>
           Are you sure you want to permanently delete selected items?
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="danger" onClick={deleteSelections}>
-          Yes
-        </Button>
-        <Button variant="dark" onClick={() => setShowAlert(false)}>
-          No
-        </Button>
+          <Button variant="danger" onClick={deleteSelections}>
+            Yes
+          </Button>
+          <Button variant="dark" onClick={() => setShowAlert(false)}>
+            No
+          </Button>
         </Modal.Footer>
-       
       </Modal>
       <CustomDataTable
         {...{
           rows: articleItems,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
+          dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED],
           checkboxSelection: !!isAll,
           isGrouping: false,
           loading: true,

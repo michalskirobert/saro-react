@@ -9,20 +9,23 @@ import { cmsActions, fetchActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
+import moment from "moment";
+
 export const useContainer = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
   const lang = useSelector((state) => state.general.language);
   const crew = useSelector((state) => state.database.crew);
+  const [value, setValue] = useState("");
   const [imgName, setImgName] = useState("");
   const [imagesName, setImagesName] = useState("");
-  const [invalid, setInvalid] = useState({ errorMsg: "" });
   const [categories, setCategories] = useState([]);
-  const [image, setImage] = useState();
-  const [images, setImages] = useState();
-  const history = useHistory();
-  const dispatch = useDispatch();
-
+  const [image, setImage] = useState("");
+  const [images, setImages] = useState("");
+  const publishedDate = moment().format();
   const [infoContainer, setInfoContainer] = useState("");
 
   const addNews = async (id, values) => {
@@ -128,8 +131,7 @@ export const useContainer = () => {
         type: CONSTANTS.GENERAL_CONSTANTS.EVENTS,
         published: new Date(),
         publishedDate: new Date().toLocaleString(),
-        modified: new Date(),
-        modifiedDate: new Date().toLocaleString(),
+
         id,
         ...values,
       });
@@ -159,10 +161,7 @@ export const useContainer = () => {
         type: CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS,
         imgURL: image,
         imagesURL: images,
-        published: new Date(),
-        publishedDate: new Date().toLocaleString(),
-        modified: new Date(),
-        modifiedDate: new Date().toLocaleString(),
+        published: publishedDate,
       });
   };
 
@@ -199,6 +198,10 @@ export const useContainer = () => {
       });
   };
 
+  const handleEditorChange = (value) => {
+    setValue(value);
+  };
+
   useEffect(() => {
     fetchCategories();
     fetchCrew();
@@ -221,7 +224,6 @@ export const useContainer = () => {
     fetchCrew,
     imageChangeHandler,
     image,
-    invalid,
     deleteImage,
     setImgName,
     imgName,
@@ -229,5 +231,7 @@ export const useContainer = () => {
     setImagesName,
     images,
     setImages,
+    handleEditorChange,
+    value,
   };
 };

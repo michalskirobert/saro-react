@@ -7,7 +7,7 @@ const CustomEditor = ({
   key,
   style,
   propName,
-  editorValue,
+  initialValue,
 }) => {
   return (
     <Editor
@@ -15,8 +15,8 @@ const CustomEditor = ({
         apiKey: process.env.REACT_APP_TINY_API_KEY,
         key,
         className: `editor-${style}`,
-        initialValue: value,
-        value: editorValue,
+        initialValue,
+        value,
         onChange: (e) => onChangeEditor([propName], e.target.getContent()),
       }}
     />
