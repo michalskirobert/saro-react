@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Alert, Button } from "react-bootstrap";
+import { Breadcrumb, Modal, Button } from "react-bootstrap";
 
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
@@ -24,7 +24,7 @@ const ManageArticles = () => {
     setSelectedRowsId,
     showAlert,
     setShowAlert,
-    deleteSelected,
+    deleteSelections,
     handleButtonActions,
     isAll,
     selectedRowId,
@@ -69,17 +69,20 @@ const ManageArticles = () => {
           );
         }
       )}
-      <Alert variant="warning" show={showAlert}>
-        <S.AlertMessage>
-          Are you sure you want to delete selected items?
-        </S.AlertMessage>
-        <Button variant="danger" onClick={deleteSelected}>
+       <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+        <Modal.Body>
+          Are you sure you want to permanently delete selected items?
+        </Modal.Body>
+        <Modal.Footer>
+        <Button variant="danger" onClick={deleteSelections}>
           Yes
         </Button>
         <Button variant="dark" onClick={() => setShowAlert(false)}>
           No
         </Button>
-      </Alert>
+        </Modal.Footer>
+       
+      </Modal>
       <CustomDataTable
         {...{
           rows: articleItems,

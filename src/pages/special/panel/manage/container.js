@@ -29,7 +29,7 @@ export const useManageContainer = () => {
       case BUTTON_ACTIONS.DELETE:
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
-          : toast("Nothing to delete.", {
+          : toast.info("Nothing to delete.", {
               position: toast.POSITION.TOP_CENTER,
             });
         break;
@@ -48,12 +48,17 @@ export const useManageContainer = () => {
   const onChangePage = () => {
     return;
   };
-  const deleteSelected = () => {
+  const deleteSelections = () => {
     selectedRowId
       ? removeItem(key, selectedRowId)
       : selectedRowsId.forEach((id) => removeItem(key, id));
     setShowAlert(false);
+    toast.success("Items deleted", {
+      autoClose: 2000,
+      position: toast.POSITION.TOP_CENTER,      
+    })
   };
+
 
   const removeItem = async (type, id) => {
     return await firestore
@@ -93,7 +98,7 @@ export const useManageContainer = () => {
     handleButtonActions,
     removeItem,
     handleEdit,
-    deleteSelected,
+    deleteSelections,
     isAll,
     setIsAll,  
   };
