@@ -5,20 +5,7 @@ import { auth } from "@fire";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 
 const AdminPanel = () => {
-  const cmsNavData = useSelector(
-    (state) => state.database?.init?.nav[0]?.content
-  );
-  const user = useSelector((state) => state.currentUser);
   const alert = useSelector((state) => state.CMS.alert);
-
-  const filterNavData = () => {
-    return (
-      cmsNavData &&
-      cmsNavData.filter(
-        (item) => !item.status || item?.status?.includes(+user?.status)
-      )
-    );
-  };
 
   return (
     <>

@@ -22,7 +22,7 @@ const ManageEvents = () => {
     setSelectedRowsId,
     showAlert,
     setShowAlert,
-    handleDeleteSelected,
+    deleteSelected,
     handleButtonActions,
     isAll,
     selectedRowId,
@@ -68,19 +68,17 @@ const ManageEvents = () => {
           );
         }
       )}
-
       <Alert variant="warning" show={showAlert}>
         <S.AlertMessage>
           Are you sure you want to delete selected items?
         </S.AlertMessage>
-        <Button variant="danger" onClick={handleDeleteSelected}>
+        <Button variant="danger" onClick={deleteSelected}>
           Yes
         </Button>
         <Button variant="dark" onClick={() => setShowAlert(false)}>
           No
         </Button>
       </Alert>
-
       <CustomDataTable
         {...{
           rows: eventItems,
