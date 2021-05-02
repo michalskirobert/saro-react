@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Breadcrumb, Alert, Button } from "react-bootstrap";
-import "react-toastify/dist/ReactToastify.min.css";
 
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
@@ -13,6 +12,8 @@ import {
   BUTTONS_HELPER,
 } from "../utils";
 import * as C from "@utils/constants";
+
+import "react-toastify/dist/ReactToastify.min.css";
 import * as S from "../style";
 
 const ManageEvents = () => {
