@@ -73,13 +73,13 @@ const ManageEvents = () => {
           Are you sure you want to permanently delete selected items?
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="danger" onClick={deleteSelections}>
-          Yes
-        </Button>
-        <Button variant="dark" onClick={() => setShowAlert(false)}>
-          No
-        </Button>
-        </Modal.Footer>       
+          <Button variant="danger" onClick={deleteSelections}>
+            Yes
+          </Button>
+          <Button variant="dark" onClick={() => setShowAlert(false)}>
+            No
+          </Button>
+        </Modal.Footer>
       </Modal>
       <CustomDataTable
         {...{

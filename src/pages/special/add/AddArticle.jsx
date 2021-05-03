@@ -19,7 +19,7 @@ const AddArticle = () => {
   const {
     alert,
     categories,
-    handlerArticle,
+    handleSubmit,
     crew,
     imageChangeHandler,
     image,
@@ -47,7 +47,7 @@ const AddArticle = () => {
         validateOnChange: true,
         // validateOnMount: true,
         // validationSchema: addArticleValidationScheme,
-        onSubmit: (values) => handlerArticle(values),
+        onSubmit: (values) => handleSubmit(values),
       }}
     >
       {({
@@ -211,6 +211,7 @@ const AddArticle = () => {
                 <CustomEditor
                   {...{
                     propName: FORMIK_HELPER.EDITOR,
+                    value: value[FORMIK_HELPER.EDITOR],
                     onChangeEditor: handleEditorChange,
                   }}
                 />

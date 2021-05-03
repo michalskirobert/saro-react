@@ -1,7 +1,7 @@
 export const GENERAL_CONSTANTS = {
   LANG: "language",
   NEWS: "news",
-  BLOG_POSTS: "blog",
+  ARTICLES: "articles",
   HERO: "hero",
   EVENTS: "events",
   CURRENT_USER: "user",
@@ -10,6 +10,8 @@ export const GENERAL_CONSTANTS = {
   TYPE: "type",
   ID: "id",
   DICTIONARY: "dictionary",
+  SIGN_IN_SUCCESS_MESSAGE: "You have successfully logged in",
+  NOTHING_TO_DELETE_MESSAGE: "Nothing to delete.",
   CHANGE_LANGUAGE_TO: {
     EN: "en",
     KO: "ko",

@@ -39,7 +39,7 @@ export const SARO_ROUTE = Object.freeze([
     component: AdminEdit,
   },
   {
-    path: ROUTE_PATHS.ADD_NEW_ARTICLE_ROUTE,
+    path: ROUTE_PATHS.ADD_NEW_ARTICLES_ROUTE,
     component: AdminAddArticle,
     exact: true,
   },

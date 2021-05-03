@@ -29,6 +29,12 @@ export const currentUserReducer = (state = userState, action) => {
         isLogged: true,
         isLoading: false,
       };
+    case USER_CONSTANTS.LOGIN_FAILURE:
+      return {
+        ...state,
+        isLogged: false,
+        isLoading: false,
+      };
     case USER_CONSTANTS.REGISTER_REQUEST:
       return {
         ...state,

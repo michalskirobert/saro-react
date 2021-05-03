@@ -7,3 +7,9 @@ export const Feedback = styled.p`
   width: 100%;
   text-align: center;
 `;
+
+export const SignInContainer = styled.div`
+  opacity: ${({ isLoading }) => (isLoading ? "0.5" : "1")};
+  cursor: ${({ isLoading }) => (isLoading ? "none" : "pointer")};
+  z-index: ${({ isLoading }) => (isLoading ? "-1" : "1")};
+`;

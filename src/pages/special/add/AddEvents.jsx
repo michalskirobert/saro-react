@@ -26,7 +26,7 @@ const cities = [
 const AddEvents = () => {
   const {
     alert,
-    handlerEvents,
+    handleSubmit,
     crew,
     image,
     deleteImage,
@@ -49,7 +49,7 @@ const AddEvents = () => {
         validateOnMount: true,
         validationSchema: addEventsValidationScheme,
         onSubmit: (values) => {
-          handlerEvents(values);
+          handleSubmit(values);
         },
       }}
     >

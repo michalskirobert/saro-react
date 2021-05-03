@@ -7,22 +7,22 @@ import { firestore } from "@components/feature/firebase";
 export const useContainer = () => {
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
-  const article = useSelector((state) => state.blog.posts);
+  const article = useSelector((state) => state.blog.article);
 
-  const getPosts = async () => {
-    dispatch(fetchActions.getPostsRequest());
+  const getarticle = async () => {
+    dispatch(fetchActions.getarticleRequest());
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(GENERAL_CONSTANTS.BLOG_POSTS)
+      .collection(GENERAL_CONSTANTS.BLOG_article)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
-        dispatch(fetchActions.getPostsSuccess(newsData));
+        dispatch(fetchActions.getarticleSuccess(newsData));
       });
   };
 
   return {
-    getPosts,
+    getarticle,
     article,
   };
 };

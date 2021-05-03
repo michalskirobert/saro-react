@@ -17,7 +17,7 @@ import * as S from "../style";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const ManageArticles = () => {
-  const { getPosts } = useContainer();
+  const { getarticle } = useContainer();
 
   const {
     setKey,
@@ -35,8 +35,8 @@ const ManageArticles = () => {
   } = useManageContainer();
 
   useEffect(() => {
-    getPosts();
-    setKey(C.GENERAL_CONSTANTS.BLOG_POSTS);
+    getarticle();
+    setKey(C.GENERAL_CONSTANTS.ARTICLES);
   }, []);
 
   return (
@@ -60,6 +60,8 @@ const ManageArticles = () => {
                   status === "EDIT"
                     ? isEditable(selectedRowId)
                     : status === "IS_ALL"
+                    ? false
+                    : selectedRowsId.length > 0
                     ? false
                     : !isActive(selectedRowId),
               }}

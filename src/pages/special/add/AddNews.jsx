@@ -19,7 +19,7 @@ const AddNews = () => {
   const {
     alert,
     crew,
-    handlerNews,
+    handleSubmit,
     imageChangeHandler,
     isLoading,
     image,
@@ -47,7 +47,7 @@ const AddNews = () => {
           validateOnMount: true,
           validationSchema: addNewsValidationScheme,
           onSubmit: (values) => {
-            handlerNews(values);
+            handleSubmit(values);
           },
         }}
       >

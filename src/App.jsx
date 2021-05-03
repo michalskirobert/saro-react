@@ -16,12 +16,7 @@ import * as C from "@utils/constants";
 const NotFound = lazy(() => import("./pages/public/404/Error"));
 
 const App = () => {
-  const { language } = useInitialService();
-
-  useEffect(() => {
-    document.title = `Welcome to Saro! - ${language}`;
-  });
-
+  const { currentPage } = useInitialService();
   return (
     <Router>
       <Unlisten>

@@ -38,16 +38,16 @@ const getEventsFailure = () => {
   };
 };
 
-const getPostsRequest = () => {
+const getarticleRequest = () => {
   return {
-    type: C.FETCH_CONSTANTS.GET_POSTS_REQUEST,
+    type: C.FETCH_CONSTANTS.GET_article_REQUEST,
   };
 };
 
-const getPostsSuccess = (posts) => {
+const getarticleSuccess = (article) => {
   return {
-    type: C.FETCH_CONSTANTS.GET_POSTS_SUCCESS,
-    payload: posts,
+    type: C.FETCH_CONSTANTS.GET_article_SUCCESS,
+    payload: article,
   };
 };
 
@@ -93,8 +93,8 @@ export const fetchActions = {
   getEventsRequest,
   getEventsSuccess,
   getEventsFailure,
-  getPostsRequest,
-  getPostsSuccess,
+  getarticleRequest,
+  getarticleSuccess,
   getCrewRequest,
   getCrewSuccess,
   getCrewFailure,

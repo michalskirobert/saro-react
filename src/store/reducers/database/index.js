@@ -4,7 +4,7 @@ const initialState = {
   isLoading: true,
   isError: false,
   ErrorContent: "",
-  posts: [],
+  article: [],
   events: [],
   news: [],
   hero: [],
@@ -15,21 +15,21 @@ const initialState = {
 
 export const database = (state = initialState, action) => {
   switch (action.type) {
-    case CONSTANTS.FETCH_CONSTANTS.GET_POSTS_REQUEST:
+    case CONSTANTS.FETCH_CONSTANTS.GET_article_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case CONSTANTS.FETCH_CONSTANTS.GET_POSTS_SUCCESS:
+    case CONSTANTS.FETCH_CONSTANTS.GET_article_SUCCESS:
       return {
         ...state,
-        posts: action.payload,
+        article: action.payload,
         isLoading: false,
       };
-    case CONSTANTS.FETCH_CONSTANTS.GET_POSTS_FAILURE:
+    case CONSTANTS.FETCH_CONSTANTS.GET_article_FAILURE:
       return {
         ...state,
-        posts: [],
+        article: [],
         isLoading: false,
         isError: true,
         errorContent: "Oops.. Something went wrong, refresh your browser",

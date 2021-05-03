@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import uuidv4 from "react-uuid";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -11,9 +12,14 @@ import { firestore, storage } from "@components/feature/firebase";
 
 import moment from "moment";
 
+import { toast } from "react-toastify";
+
 export const useContainer = () => {
+  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
+  const currentPathname = location.pathname.split("/");
+  const currentPage = currentPathname[currentPathname.length - 1];
 
   const alert = useSelector((state) => state.CMS.alert);
   const isLoading = useSelector((state) => state.CMS.isLoading);
@@ -25,26 +31,37 @@ export const useContainer = () => {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState("");
   const [images, setImages] = useState("");
-  const publishedDate = moment().format();
   const [infoContainer, setInfoContainer] = useState("");
 
-  const addNews = async (id, values) => {
-    await firestore
+  const addNewItem = async (id, values) => {
+    return await firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(CONSTANTS.GENERAL_CONSTANTS.NEWS)
+      .collection(currentPage)
       .doc(id)
       .set({
         ...values,
-        imgURL: image,
-        imagesURL: images,
-        type: CONSTANTS.GENERAL_CONSTANTS.NEWS,
-        published: new Date(),
-        publishedDate: new Date().toLocaleString(),
-        modified: new Date(),
-        modifiedDate: new Date().toLocaleString(),
+        imgURL: image ?? "",
+        imagesURL: images ?? "",
+        type: currentPage,
+        published: moment().toISOString(),
+        modified: "N/A",
         id,
       });
+  };
+
+  const handleSubmit = async (values) => {
+    try {
+      dispatch(cmsActions.addNewItemRequest());
+      await addNewItem(uuidv4(), values);
+      dispatch(cmsActions.addNewItemSuccess());
+      toast.success("Event has been successfully added");
+      history.push(
+        CONSTANTS.ROUTE_PATHS[`MANAGE_${currentPage.toUpperCase()}_ROUTE`]
+      );
+    } catch (error) {
+      dispatch(cmsActions.addNewItemFailure());
+    }
   };
 
   const imageChangeHandler = (e, type) => {
@@ -57,6 +74,8 @@ export const useContainer = () => {
   };
 
   const uploadImage = async (file, type) => {
+    //Musisz dodać do setValue prev state i dodać jako nowy state z komponentem czyli np
+    // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
     let uploadFile = `/images/${
       type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
     }/${file.name}`;
@@ -109,74 +128,6 @@ export const useContainer = () => {
     return await storage.refFromURL(file).delete();
   };
 
-  const handlerNews = (values) => {
-    dispatch(cmsActions.clear());
-    try {
-      dispatch(cmsActions.addNewsReq());
-      addNews(uuidv4(), values);
-      dispatch(cmsActions.addNewsSuccess());
-      history.push("/panel");
-    } catch (error) {
-      dispatch(cmsActions.addNewsFailure());
-    }
-  };
-
-  const addEvents = async (id, values) => {
-    return await firestore
-      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
-      .doc(lang)
-      .collection(CONSTANTS.GENERAL_CONSTANTS.EVENTS)
-      .doc(id)
-      .set({
-        type: CONSTANTS.GENERAL_CONSTANTS.EVENTS,
-        published: new Date(),
-        publishedDate: new Date().toLocaleString(),
-
-        id,
-        ...values,
-      });
-  };
-
-  const handlerEvents = (values) => {
-    dispatch(cmsActions.clear());
-    try {
-      dispatch(cmsActions.addEventsReq());
-      addEvents(uuidv4(), values);
-      dispatch(cmsActions.addEventsSuccess());
-      history.push("/panel");
-    } catch (error) {
-      dispatch(cmsActions.addEventsFailure());
-    }
-  };
-
-  const addArticle = async (id, values) => {
-    return await firestore
-      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
-      .doc(lang)
-      .collection(CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS)
-      .doc(id)
-      .set({
-        ...values,
-        id,
-        type: CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS,
-        imgURL: image,
-        imagesURL: images,
-        published: publishedDate,
-      });
-  };
-
-  const handlerArticle = (values) => {
-    dispatch(cmsActions.clear());
-    try {
-      dispatch(cmsActions.addArticleReq());
-      addArticle(uuidv4(), values);
-      dispatch(cmsActions.addArticleSuccess());
-      history.push("/panel");
-    } catch (error) {
-      dispatch(cmsActions.addArticleFailure());
-    }
-  };
-
   const fetchCrew = async () => {
     return firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
@@ -194,7 +145,7 @@ export const useContainer = () => {
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .onSnapshot((resp) => {
-        setCategories(resp.data().blogCategory);
+        setCategories(resp.data().blogCategories);
       });
   };
 
@@ -213,12 +164,7 @@ export const useContainer = () => {
     isLoading,
     infoContainer,
     setInfoContainer,
-    addNews,
-    addArticle,
-    addEvents,
-    handlerNews,
-    handlerEvents,
-    handlerArticle,
+    handleSubmit,
     crew,
     categories,
     fetchCrew,
@@ -233,5 +179,6 @@ export const useContainer = () => {
     setImages,
     handleEditorChange,
     value,
+    addNewItem,
   };
 };

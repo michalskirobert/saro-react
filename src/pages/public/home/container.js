@@ -33,22 +33,22 @@ export const useContainer = () => {
       });
   };
 
-  const getPosts = async () => {
-    dispatch(fetchActions.getPostsRequest);
+  const getarticle = async () => {
+    dispatch(fetchActions.getarticleRequest);
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
-      .collection(GENERAL_CONSTANTS.BLOG_POSTS)
+      .collection(GENERAL_CONSTANTS.ARTICLES)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
 
-        dispatch(fetchActions.getPostsSuccess(newsData));
+        dispatch(fetchActions.getarticleSuccess(newsData));
       });
   };
 
   return {
     getNews,
     getEvents,
-    getPosts,
+    getarticle,
   };
 };

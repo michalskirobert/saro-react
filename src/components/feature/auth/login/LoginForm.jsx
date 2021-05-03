@@ -2,21 +2,22 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 import { Formik } from "formik";
 import { loginValidationScheme } from "./validation";
 import { auth } from "./../../firebase";
 import { FORM_HELPER } from "./utils";
 import { userActions, alertActions } from "@actions/index";
-import Alert from "./../../../shared/alerts";
-import { DefaultLoader } from "./../../../shared/loadings/DefaultLoader";
+
+import * as C from "@utils/constants";
 
 import * as S from "./styles";
-import { signUpValidationScheme } from "../signup/validation";
+import { Loader } from "@components/shared/loadings/Loader";
 
 const LoginForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const alert = useSelector((state) => state.alert.alert);
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const validationData = useSelector(
     (state) => state.database.init.auth["sign-in"]?.labels[0]
@@ -35,15 +36,13 @@ const LoginForm = () => {
       dispatch(userActions.SignInRequest());
       await signin(values.email, values.password);
       dispatch(userActions.signInSuccess());
-      history.push("/dashboard");
+      history.push(C.ROUTE_PATHS.DASHBOARD_ROUTE);
+      toast.success(C.GENERAL_CONSTANTS.SIGN_IN_SUCCESS_MESSAGE);
     } catch (error) {
-      dispatch(alertActions.error(error.message));
+      dispatch(userActions.SignInFailure());
+      toast.error(error.message);
     }
   };
-
-  if (isLoading) {
-    return <DefaultLoader />;
-  }
 
   return (
     <Formik
@@ -57,8 +56,12 @@ const LoginForm = () => {
       }}
     >
       {({ values, errors, isValid, handleChange, handleSubmit }) => (
-        <>
-          {alert && <Alert />}
+        <S.SignInContainer
+          {...{
+            isLoading,
+          }}
+        >
+          {isLoading && <Loader />}
           <h2>{logInData?.header}</h2>
           {logInData?.labels.map((item, index) => {
             const { placeholder, type } = item;
@@ -95,7 +98,7 @@ const LoginForm = () => {
               {logInData?.link}
             </Link>
           </div>
-        </>
+        </S.SignInContainer>
       )}
     </Formik>
   );

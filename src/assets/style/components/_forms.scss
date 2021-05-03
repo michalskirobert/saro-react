@@ -27,6 +27,7 @@
     cursor: pointer;
     border: none;
     background-color: white;
+    text-align: left;
   }
   h2 {
     font-size: 36px;
@@ -50,7 +51,6 @@
     &--gender {
       margin: 25px 0;
       justify-content: center;
-      // align-items: center;
       transform: translate(-10px, 0px);
       .gender {
         position: relative;
@@ -139,13 +139,11 @@
   }
 }
 
-
-
-
-form.cms, form.cms-translate {
+form.cms,
+form.cms-translate {
   flex-grow: 1;
   margin-left: 5%;
-  
+
   .main-title {
     text-align: left;
     margin: {
@@ -153,10 +151,10 @@ form.cms, form.cms-translate {
       bottom: 50px;
       right: 0;
       left: 0;
-    };
+    }
     font-size: 1.3rem;
     padding: 10px;
-  } 
+  }
   .form-container {
     border-radius: 5px;
     margin-right: 2%;
@@ -200,9 +198,9 @@ form.cms, form.cms-translate {
     }
     label {
       width: 30%;
-    } 
- 
-    div.css-2b097c-container {     
+    }
+
+    div.css-2b097c-container {
       width: 70%;
     }
 
@@ -211,7 +209,6 @@ form.cms, form.cms-translate {
       bottom: 0;
       left: 31%;
     }
-
   }
   .form-info {
     min-height: 270px;
@@ -223,7 +220,7 @@ form.cms, form.cms-translate {
       padding: 1%;
       border-radius: 4px;
     }
-  } 
+  }
 
   .submit-btn {
     display: block;
@@ -241,7 +238,7 @@ form.cms, form.cms-translate {
     &:hover {
       background-color: rgba($crl-base-blue, 0.9);
     }
-  } 
+  }
 }
 
 form.cms-translate {
@@ -252,7 +249,8 @@ form.cms-translate {
       display: block;
       width: 100%;
     }
-    textarea, input {
+    textarea,
+    input {
       background-color: white;
       width: 95%;
       border: 1px solid $crl-panel-dark-grey;
@@ -268,10 +266,9 @@ form.cms-translate {
       max-height: 60px;
       overflow-y: auto;
     }
-    footer, p{
+    footer,
+    p {
       font-size: 0.7rem;
     }
-    
   }
-  
 }

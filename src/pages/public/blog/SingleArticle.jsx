@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { useContainer } from "./container";
 
 const SingleArticle = () => {
-  const { getPosts, article } = useContainer();
+  const { getarticle, article } = useContainer();
 
   useEffect(() => {
-    getPosts();
+    getarticle();
   });
 
   return (

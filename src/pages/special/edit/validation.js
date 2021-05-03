@@ -4,7 +4,7 @@ import { FORMIK_HELPER } from "./utils";
 import * as CONSTANTS from "@utils/constants";
 
 export const editValidationScheme = (type) => {
-  if (type === CONSTANTS.GENERAL_CONSTANTS.BLOG_POSTS) {
+  if (type === CONSTANTS.GENERAL_CONSTANTS.BLOG_article) {
     return yup.object().shape({
       [FORMIK_HELPER.TITLE]: yup
         .string()

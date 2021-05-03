@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -11,16 +11,17 @@ import { BUTTON_ACTIONS } from "./../utils";
 import * as C from "@utils/constants";
 
 export const useManageContainer = () => {
-  const { getNews, getEvents, getPosts } = useContainer();
+  const { getNews, getEvents, getarticle } = useContainer();
   const { handleEdit } = useEdit();
   const history = useHistory();
+  const location = useLocation();
 
+  const currentPathname = location.pathname.split("/");
+  const currentPage = currentPathname[currentPathname.length - 1];
   const newsItems = useSelector((state) => state.database.news);
   const eventItems = useSelector((state) => state.database.events);
-  const articleItems = useSelector((state) => state.database.posts);
-
+  const articleItems = useSelector((state) => state.database.article);
   const [key, setKey] = useState("");
-
   const [selectedRowsId, setSelectedRowsId] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState();
   const [showAlert, setShowAlert] = useState(false);
@@ -32,32 +33,36 @@ export const useManageContainer = () => {
         console.log({ selectedRowId, selectedRowsId });
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
-          : toast.info("Nothing to delete.", {
+          : toast.info(C.GENERAL_CONSTANTS.NOTHING_TO_DELETE_MESSAGE, {
               position: toast.POSITION.TOP_CENTER,
             });
         break;
 
       case BUTTON_ACTIONS.EDIT:
-        handleEdit(selectedRowId, key);
+        handleEdit(selectedRowId, currentPage);
         break;
       case BUTTON_ACTIONS.IS_ALL:
-        setSelectedRowsId([selectedRowId]);
+        setSelectedRowsId([]);
         setIsAll(!isAll);
         break;
       case BUTTON_ACTIONS.ADD:
-        history.push("/panel/add/article");
+        history.push(
+          C.ROUTE_PATHS[`ADD_NEW_${currentPage.toUpperCase()}_ROUTE`]
+        );
         break;
       default:
         return;
     }
   };
 
-  const onChangePage = () => null;
-
   const deleteSelections = () => {
-    selectedRowsId
-      ? selectedRowsId.forEach((id) => removeItem(key, id))
-      : removeItem(key, selectedRowId);
+    if (isAll && selectedRowsId.length > 0) {
+      selectedRowsId.forEach((id) => removeItem(currentPage, id));
+    }
+    if (!isAll && selectedRowId) {
+      removeItem(key, selectedRowId);
+    }
+
     setShowAlert(false);
     toast.success("Items deleted", {
       autoClose: 2000,
@@ -65,14 +70,11 @@ export const useManageContainer = () => {
     });
   };
 
-  //zrób dwie funkcje, jedną grupową, drugą taką, przy zmianie otypowania isAll ze swapuj je... ewentualnie dodaj to we wnątrz funkcji
-  //mały protip, abyś się nie męczyła.
-
-  const removeItem = async (type, id) => {
+  const removeItem = async (currentPage, id) => {
     return await firestore
       .collection(C.GENERAL_CONSTANTS.LANG)
       .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
-      .collection(type)
+      .collection(currentPage)
       .doc(id)
       .delete();
   };
@@ -92,7 +94,7 @@ export const useManageContainer = () => {
     setKey,
     getNews,
     getEvents,
-    getPosts,
+    getarticle,
     newsItems,
     eventItems,
     articleItems,

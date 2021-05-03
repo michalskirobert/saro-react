@@ -1,6 +1,11 @@
 .loader {
-  display: flex;
-  align-items: center;
-  flex-flow: column wrap;
-  width: 100vw;
+  position: relative;
+  z-index: 50;
+
+  .loader-icon {
+    position: absolute;
+    top: calc(100vh - 85vh);
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
 }

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchActions, userActions } from "@actions";
@@ -10,6 +11,8 @@ import * as C from "@utils/constants";
 export const useInitialService = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.general.language);
+  // const currentPath = useLocation().pathname.split("/");
+  // const currentPage = currentPath[currentPath.length - 1] || "";
 
   const getDictionary = async () => {
     try {
@@ -68,5 +71,6 @@ export const useInitialService = () => {
     getDataHandler,
     initialDataHandler,
     language,
+    // currentPage,
   };
 };

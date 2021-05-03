@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
 import { FaAngleLeft } from "react-icons/fa";
 
-import {DefaultLoader} from "@components/shared/loadings/TransparentLoader"
+import { DefaultLoader } from "@components/shared/loadings/DefaultLoader";
 import { useContainer } from "./container";
 
 import * as S from "./style";
 
 const NavMenu = ({ isNavOpen, toggleNav }) => {
   const { filteredNavData } = useContainer();
-  const isLoading = useSelector((state) => state.database.isLoading);  
- 
+  const isLoading = useSelector((state) => state.database.isLoading);
+
   return (
-    <>      
+    <>
       <Accordion className={`nav-container ${isNavOpen && "active"}`}>
         {isLoading && <DefaultLoader />}
         {filteredNavData.map(({ title, path, content }, index) => {
