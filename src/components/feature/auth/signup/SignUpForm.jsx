@@ -41,7 +41,7 @@ const SignUpForm = () => {
         <>
           {step !== 1 && (
             <button
-              className="arrow-back-icon"
+              className="arrow-back-icon back"
               type="button"
               onClick={() => setStep(step - 1)}
             >
