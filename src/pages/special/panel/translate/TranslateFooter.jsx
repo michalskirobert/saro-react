@@ -10,7 +10,7 @@ const TranslateFooter = () => {
   const { alert } = useEdit();
 
   return (
-    <section className="section translate">
+    <section className="section saro-panel">
       {alert && <CmsAlert />}
       <Breadcrumb>
         <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>

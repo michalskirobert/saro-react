@@ -60,16 +60,21 @@ const AddNews = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className="section add-news">
+          <section className="section saro-panel">
             {alert && <CmsAlert />}
             <Breadcrumb>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>{C.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
-        <Breadcrumb.Item active>{C.GENERAL_CONSTANTS.ADD_NEWS}</Breadcrumb.Item>
-      </Breadcrumb>
-
+              <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>
+                {C.GENERAL_CONSTANTS.HOME}
+              </Breadcrumb.Item>
+              <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>
+                {C.GENERAL_CONSTANTS.ADMIN_PANEL}
+              </Breadcrumb.Item>
+              <Breadcrumb.Item active>
+                {C.GENERAL_CONSTANTS.ADD_NEWS}
+              </Breadcrumb.Item>
+            </Breadcrumb>
+            <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_NEWS}</h2>
             <Form className="cms">
-              <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_NEWS}</h2>
               <section className="form-container">
                 <div className="form-control">
                   <label htmlFor="title">Title</label>

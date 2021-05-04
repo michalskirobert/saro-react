@@ -40,7 +40,7 @@ const ManageEvents = () => {
   }, []);
 
   return (
-    <section className="section manage-events">
+    <section className="section saro-panel">
       <Breadcrumb>
         <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
         <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>{C.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>

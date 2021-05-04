@@ -72,7 +72,7 @@ const Edit = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className="section edit">
+          <section className="section saro-panel edit">
             {alert && <CmsAlert />}
             <Breadcrumb>
         <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>{CONSTANTS.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
