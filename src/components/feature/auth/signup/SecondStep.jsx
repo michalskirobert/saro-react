@@ -35,7 +35,7 @@ export function SecondStep({
           width="100%"
           id="gender"
           options={options}
-          value={values[FORM_HELPER.GENDER]}
+          value={values[FORM_HELPER.GENDER]?.value}
           onChange={(value) => setFieldValue(FORM_HELPER.GENDER, value.value)}
           placeholder="Select your Gender"
         />
@@ -48,10 +48,10 @@ export function SecondStep({
           width="100%"
           id="nativeLang"
           options={languagesOptions}
-          value={values[FORM_HELPER.NATIVE_LANG]}
-          onChange={(value) =>
-            setFieldValue(FORM_HELPER.NATIVE_LANG, value.value)
-          }
+          value={values[FORM_HELPER.NATIVE_LANG]?.value}
+          onChange={(value) => {
+            setFieldValue(FORM_HELPER.NATIVE_LANG, value.value);
+          }}
           placeholder="Select your Native Language "
         />
         {errors[FORM_HELPER.NATIVE_LANG] || touched[FORM_HELPER.NATIVE_LANG] ? (
@@ -65,10 +65,10 @@ export function SecondStep({
           width="100%"
           id="studyingLang"
           options={languagesOptions}
-          value={values[FORM_HELPER.STUDYING_LANG]}
-          onChange={(value) =>
-            setFieldValue(FORM_HELPER.STUDYING_LANG, value.value)
-          }
+          value={values[FORM_HELPER.STUDYING_LANG]?.value}
+          onChange={(value) => {
+            setFieldValue(FORM_HELPER.STUDYING_LANG, value.value);
+          }}
           placeholder="Select your Studying Language"
         />
         {errors[FORM_HELPER.STUDYING_LANG] ||
