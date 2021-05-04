@@ -25,10 +25,8 @@ const Login = () => {
 
   return (
     <section className="section login">
-      <Link to="/">
-        <button className="arrow-back-icon" type="button">
-          <ArrowBack />
-        </button>
+      <Link to="/" className="arrow-back-icon">
+        <ArrowBack />
       </Link>
 
       <LoginForm />
