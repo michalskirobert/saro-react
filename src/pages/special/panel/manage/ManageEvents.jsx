@@ -10,6 +10,7 @@ import {
   COLUMNS,
   tableColumnExtensions,
   BUTTONS_HELPER,
+  BUTTON_ACTIONS
 } from "../utils";
 import * as C from "@utils/constants";
 
@@ -41,11 +42,11 @@ const ManageEvents = () => {
   return (
     <section className="section manage-events">
       <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-        <Breadcrumb.Item active>Manage events</Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>{C.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
+        <Breadcrumb.Item active>{C.GENERAL_CONSTANTS.MANAGE_EVENTS}</Breadcrumb.Item>
       </Breadcrumb>
-      <h2 className="main-title">Manage events</h2>
+      <h2 className="main-title">{C.GENERAL_CONSTANTS.MANAGE_EVENTS}</h2>
       {BUTTONS_HELPER.map(
         ({ content, color, action, isActive, type, status }, index) => {
           return (
@@ -56,9 +57,9 @@ const ManageEvents = () => {
                 variant: color,
                 type,
                 disabled:
-                  status === "EDIT"
+                  status === BUTTON_ACTIONS.EDIT
                     ? isEditable(selectedRowId)
-                    : status === "IS_ALL"
+                    : status === BUTTON_ACTIONS.IS_ALL
                     ? false
                     : !isActive(selectedRowId),
               }}
@@ -70,14 +71,14 @@ const ManageEvents = () => {
       )}
       <Modal show={showAlert} onHide={() => setShowAlert(false)}>
         <Modal.Body>
-          Are you sure you want to permanently delete selected items?
+        {C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={deleteSelections}>
-            Yes
+          <Button variant={C.GENERAL_CONSTANTS.B_DANGER} onClick={deleteSelections}>
+          {C.GENERAL_CONSTANTS.YES}
           </Button>
-          <Button variant="dark" onClick={() => setShowAlert(false)}>
-            No
+          <Button variant={C.GENERAL_CONSTANTS.B_DARK} onClick={() => setShowAlert(false)}>
+          {C.GENERAL_CONSTANTS.NO}
           </Button>
         </Modal.Footer>
       </Modal>

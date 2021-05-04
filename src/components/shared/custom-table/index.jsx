@@ -26,6 +26,7 @@ import { getRowId } from "./utils";
 import { DateTypeProvider } from "./container";
 
 import * as S from "./styles";
+import * as C from "@utils/constants";
 
 export const CustomDataTable = ({
   rows,
@@ -101,7 +102,6 @@ export const CustomDataTable = ({
 
         <IntegratedSorting />
         <IntegratedPaging />
-
         <IntegratedFiltering />
         {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
 
@@ -110,7 +110,7 @@ export const CustomDataTable = ({
             columnExtensions: tableColumnExtensions,
             rowComponent: ({ ...restProps }) => CustomTableCell(...restProps),
             messages: {
-              noData: "Nothing to display",
+              noData: C.GENERAL_CONSTANTS.NO_DATA_MESSAGE,
             },
           }}
         />

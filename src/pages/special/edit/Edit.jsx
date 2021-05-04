@@ -75,13 +75,13 @@ const Edit = () => {
           <section className="section edit">
             {alert && <CmsAlert />}
             <Breadcrumb>
-              <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-              <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-              <Breadcrumb.Item active>Edit</Breadcrumb.Item>
-            </Breadcrumb>
+        <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>{CONSTANTS.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
+        <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.PANEL_ROUTE}>{CONSTANTS.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
+        <Breadcrumb.Item active>{CONSTANTS.GENERAL_CONSTANTS.EDIT}</Breadcrumb.Item>
+      </Breadcrumb>
 
             <Form className="cms">
-              <h2 className="main-title">Edit element</h2>
+              <h2 className="main-title">{CONSTANTS.GENERAL_CONSTANTS.EDIT}</h2>
               <section className="form-container">
                 <div className="form-control">
                   <label htmlFor="title">Title</label>

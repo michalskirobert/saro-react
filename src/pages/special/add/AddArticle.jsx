@@ -62,12 +62,12 @@ const AddArticle = () => {
         <section className="section add-article">
           {alert && <CmsAlert />}
           <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Add article</Breadcrumb.Item>
-          </Breadcrumb>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>{C.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
+        <Breadcrumb.Item active>{C.GENERAL_CONSTANTS.ADD_ARTICLES}</Breadcrumb.Item>
+      </Breadcrumb>
           <Form className="cms">
-            <h2 className="main-title">Add Article</h2>
+            <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_ARTICLES}</h2>
             <section className="form-container">
               <div className="form-control">
                 <label htmlFor="title">Title</label>
