@@ -5,7 +5,7 @@ import { Card, CardGroup } from "react-bootstrap";
 
 import { auth } from "@fire";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-import { DefaultLoader } from "@components/shared/loadings/DefaultLoader";
+import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 
 const AdminPanel = () => {
   const alert = useSelector((state) => state.CMS.alert);

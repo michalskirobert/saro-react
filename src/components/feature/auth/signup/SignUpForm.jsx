@@ -13,7 +13,7 @@ import { SecondStep } from "./SecondStep";
 import { useContainerSignUp } from "./container";
 
 const SignUpForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
 
   const { handleSubmit } = useContainerSignUp();
   const history = useHistory();

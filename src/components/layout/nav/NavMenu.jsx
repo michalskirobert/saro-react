@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Accordion, Card } from "react-bootstrap";
 import { FaAngleLeft } from "react-icons/fa";
 
-import { DefaultLoader } from "@components/shared/loadings/DefaultLoader";
+import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 import { useContainer } from "./container";
 
 import * as S from "./style";

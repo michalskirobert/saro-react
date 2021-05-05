@@ -10,7 +10,7 @@ import {
   COLUMNS,
   tableColumnExtensions,
   BUTTONS_HELPER,
-  BUTTON_ACTIONS
+  BUTTON_ACTIONS,
 } from "../utils";
 import * as C from "@utils/constants";
 
@@ -42,9 +42,15 @@ const ManageEvents = () => {
   return (
     <section className="section saro-panel">
       <Breadcrumb>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>{C.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
-        <Breadcrumb.Item active>{C.GENERAL_CONSTANTS.MANAGE_EVENTS}</Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>
+          {C.GENERAL_CONSTANTS.HOME}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>
+          {C.GENERAL_CONSTANTS.ADMIN_PANEL}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>
+          {C.GENERAL_CONSTANTS.MANAGE_EVENTS}
+        </Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">{C.GENERAL_CONSTANTS.MANAGE_EVENTS}</h2>
       {BUTTONS_HELPER.map(
@@ -70,15 +76,19 @@ const ManageEvents = () => {
         }
       )}
       <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-        <Modal.Body>
-        {C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE}
-        </Modal.Body>
+        <Modal.Body>{C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE}</Modal.Body>
         <Modal.Footer>
-          <Button variant={C.GENERAL_CONSTANTS.B_DANGER} onClick={deleteSelections}>
-          {C.GENERAL_CONSTANTS.YES}
+          <Button
+            variant={C.GENERAL_CONSTANTS.B_DANGER}
+            onClick={deleteSelections}
+          >
+            {C.GENERAL_CONSTANTS.YES}
           </Button>
-          <Button variant={C.GENERAL_CONSTANTS.B_DARK} onClick={() => setShowAlert(false)}>
-          {C.GENERAL_CONSTANTS.NO}
+          <Button
+            variant={C.GENERAL_CONSTANTS.B_DARK}
+            onClick={() => setShowAlert(false)}
+          >
+            {C.GENERAL_CONSTANTS.NO}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -90,7 +100,7 @@ const ManageEvents = () => {
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: !!isAll,
           isGrouping: false,
-          loading: true,
+          isLoading: true,
           showSelectionColumn: true,
           onRowSelected: (selectedRowId) =>
             !isAll

@@ -1,5 +1,3 @@
-import Select from "react-select";
-import { Form as F } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import { FORM_HELPER } from "./utils";
@@ -28,7 +26,7 @@ export function SecondStep({
 
     return container;
   });
-
+  console.log(values);
   return (
     <>
       <div className="form-control select">
@@ -37,7 +35,7 @@ export function SecondStep({
             name: FORM_HELPER.GENDER,
             options: genderOptions,
             value: values[FORM_HELPER.GENDER]?.value,
-            onChange: (value) => setFieldValue(FORM_HELPER.GENDER, value.value),
+            onChange: setFieldValue,
             placeholder: "Select your Gender",
           }}
         />
@@ -52,8 +50,7 @@ export function SecondStep({
             name: FORM_HELPER.NATIVE_LANG,
             options: languagesOptions,
             value: values[FORM_HELPER.NATIVE_LANG]?.value,
-            onChange: (value) =>
-              setFieldValue(FORM_HELPER.NATIVE_LANG, value.value),
+            onChange: setFieldValue,
             placeholder: "Select your Native Language",
           }}
         />
@@ -69,8 +66,7 @@ export function SecondStep({
             name: FORM_HELPER.STUDYING_LANG,
             options: languagesOptions,
             value: values[FORM_HELPER.STUDYING_LANG]?.value,
-            onChange: (value) =>
-              setFieldValue(FORM_HELPER.STUDYING_LANG, value.value),
+            onChange: setFieldValue,
             placeholder: "Select your Studying Language",
           }}
         />

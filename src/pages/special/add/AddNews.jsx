@@ -9,10 +9,17 @@ import { addNewsValidationScheme } from "./validation";
 
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-import { useContainer } from "./container";
-import { FORMIK_HELPER } from "./utils.js";
+import { CustomSelect } from "@components/shared/custom-select";
 
+import { useContainer } from "./container";
+
+import {
+  FORMIK_HELPER,
+  CMS_INPUT_TYPES,
+  CMS_INPUT_PLACEHOLDERS,
+} from "./utils.js";
 import * as C from "@utils/constants";
+
 import * as S from "./styles";
 
 const AddNews = () => {
@@ -77,14 +84,19 @@ const AddNews = () => {
             <Form className="cms">
               <section className="form-container">
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
+                  <label htmlFor={FORMIK_HELPER.TITLE}>
+                    {C.CMS_LABELS.TITLE}
+                  </label>
                   <input
-                    id={FORMIK_HELPER.TITLE}
-                    placeholder="add title"
-                    type="text"
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.TITLE]}
-                    onChange={handleChange}
+                    {...{
+                      className: errors[FORMIK_HELPER.TITLE] && "invalid",
+                      id: FORMIK_HELPER.TITLE,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.TITLE,
+                      type: CMS_INPUT_TYPES.TEXT,
+                      autoComplete: "off",
+                      value: values[FORMIK_HELPER.TITLE],
+                      onChange: handleChange,
+                    }}
                   />
                   {(errors[FORMIK_HELPER.TITLE] ||
                     touched[FORMIK_HELPER.TITLE]) && (
@@ -94,14 +106,19 @@ const AddNews = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.SUBTITLE}>{C.CMS_LABELS.SUBTITLE}</label>
+                  <label htmlFor={FORMIK_HELPER.SUBTITLE}>
+                    {C.CMS_LABELS.SUBTITLE}
+                  </label>
                   <input
-                    id={FORMIK_HELPER.SUBTITLE}
-                    placeholder="add subtitle"
-                    type="text"
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.SUBTITLE]}
-                    onChange={handleChange}
+                    {...{
+                      className: errors[FORMIK_HELPER.SUBTITLE] && "invalid",
+                      id: FORMIK_HELPER.SUBTITLE,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.SUBTITLE,
+                      type: CMS_INPUT_TYPES.TEXT,
+                      autoComplete: "off",
+                      value: values[FORMIK_HELPER.SUBTITLE],
+                      onChange: handleChange,
+                    }}
                   />
                   {(errors[FORMIK_HELPER.SUBTITLE] ||
                     touched[FORMIK_HELPER.SUBTITLE]) && (
@@ -112,20 +129,23 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.IMG_URL}>
-                  {C.CMS_LABELS.UPLOAD_COVER_IMG}
+                    {C.CMS_LABELS.UPLOAD_COVER_IMG}
                   </label>
                   <input
-                    id={FORMIK_HELPER.IMG_URL}
-                    name={FORMIK_HELPER.IMG_URL}
-                    type="file"
-                    onChange={imageChangeHandler}
+                    {...{
+                      className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                      id: FORMIK_HELPER.IMG_URL,
+                      name: FORMIK_HELPER.IMG_URL,
+                      type: CMS_INPUT_TYPES.FILE,
+                      onChange: imageChangeHandler,
+                    }}
                   />
                   <S.PreviewContainer>
                     {image && (
                       <>
                         <S.PreviewImage src={image} alt="Picture preview" />
                         <S.PreviewDelete
-                          type="button"
+                          type={CMS_INPUT_TYPES.BUTTON}
                           onClick={() => deleteImage(image)}
                         >
                           <AiOutlineClose />
@@ -137,17 +157,19 @@ const AddNews = () => {
                   <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
-                  <Select
+                  <label htmlFor={FORMIK_HELPER.CREW}>
+                    {C.CMS_LABELS.CREW}
+                  </label>
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.CREW,
                       name: FORMIK_HELPER.CREW,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
+                      invalid: !errors[FORMIK_HELPER.CREW],
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
                       })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CREW, values.value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
@@ -158,17 +180,19 @@ const AddNews = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.CATEGORY}>{C.CMS_LABELS.CATEGORY}</label>
-                  <Select
+                  <label htmlFor={FORMIK_HELPER.CATEGORY}>
+                    {C.CMS_LABELS.CATEGORY}
+                  </label>
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.CATEGORY,
                       name: FORMIK_HELPER.CATEGORY,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
+                      invalid: !errors[FORMIK_HELPER.CATEGORY],
                       options: categories.map((item) => ({
                         label: item,
                         value: item,
                       })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -180,14 +204,17 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.IMAGES_URL}>
-                  {C.CMS_LABELS.UPLOAD_IMGS}
+                    {C.CMS_LABELS.UPLOAD_IMGS}
                   </label>
                   <input
-                    id={FORMIK_HELPER.IMAGES_URL}
-                    name={FORMIK_HELPER.IMAGES_URL}
-                    type="file"
-                    onChange={(e) => {
-                      imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                    {...{
+                      className: errors[FORMIK_HELPER.IMAGES_URL] && "invalid",
+                      id: FORMIK_HELPER.IMAGES_URL,
+                      name: FORMIK_HELPER.IMAGES_URL,
+                      type: CMS_INPUT_TYPES.FILE,
+                      onChange: (e) => {
+                        imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                      },
                     }}
                   />
                   <S.PreviewContainer>
@@ -195,7 +222,7 @@ const AddNews = () => {
                       <>
                         <S.PreviewImage src={images} alt="Picture preview" />
                         <S.PreviewDelete
-                          type="button"
+                          type={CMS_INPUT_TYPES.BUTTON}
                           onClick={() => deleteImage(images)}
                         >
                           <AiOutlineClose />
@@ -207,17 +234,21 @@ const AddNews = () => {
                   <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
-                  <Select
+                  <label htmlFor={FORMIK_HELPER.LANGUAGE}>
+                    {C.CMS_LABELS.LANG}
+                  </label>
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.LANGUAGE,
                       name: FORMIK_HELPER.LANGUAGE,
-                      options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
-                        label: item.label,
-                        value: item.lang,
-                      })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
+                      placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
+                      invalid: !errors[FORMIK_HELPER.LANGUAGE],
+                      options: C.GENERAL_CONSTANTS.LANGUAGES.map(
+                        ({ label, lang }) => ({
+                          label,
+                          value: lang,
+                        })
+                      ),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -244,12 +275,14 @@ const AddNews = () => {
                 </div>
               </section>
               <Button
-                className="submit-btn"
-                type="submit"
-                disabled={!image || isLoading || !isValid}
-                onClick={handleSubmit}
+                {...{
+                  className: "submit-btn",
+                  type: CMS_INPUT_TYPES.SUBMIT,
+                  disabled: !image || isLoading || !isValid,
+                  onClick: handleSubmit,
+                }}
               >
-                Add
+                {C.GENERAL_CONSTANTS.ADD}
               </Button>
             </Form>
           </section>

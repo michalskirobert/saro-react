@@ -9,6 +9,7 @@ export const CustomSelect = ({
   onChange,
   isDisabled,
   invalid,
+  propName,
   options,
 }) => {
   return (
@@ -21,9 +22,10 @@ export const CustomSelect = ({
         menuPortalTarget: document.body,
         menuPosition: "fixed",
         placeholder,
-        // value: { label, value },
-        options: options,
-        onChange: onChange,
+        value: { label, value },
+        options,
+        onChange: (values) => onChange(propName, values),
+        isDisabled,
       }}
     />
   );
