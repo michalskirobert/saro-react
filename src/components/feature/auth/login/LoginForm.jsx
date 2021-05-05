@@ -13,7 +13,7 @@ import { userActions, alertActions } from "@actions/index";
 import * as C from "@utils/constants";
 
 import * as S from "./styles";
-import { Loader } from "@components/shared/loadings/Loader";
+import { Loader } from "@components/shared/custom-loadings/Loader";
 
 const LoginForm = () => {
   const history = useHistory();

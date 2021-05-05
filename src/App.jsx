@@ -6,7 +6,7 @@ import { SaroRoute } from "./routers/SaroRoute";
 import Unlisten from "./routers/Unlisten";
 import Nav from "./components/layout/nav/Nav";
 import Footer from "./components/layout/footer/Footer";
-import { DefaultLoader } from "./components/shared/loadings/DefaultLoader";
+import { DefaultLoader } from "./components/shared/custom-loadings/DefaultLoader";
 import { PUBLIC_ROUTE, PRIVATE_ROUTE, SARO_ROUTE } from "@utils/route";
 
 import { useInitialService } from "./core/service";
