@@ -21,7 +21,7 @@ export const CustomSelect = ({
         menuPortalTarget: document.body,
         menuPosition: "fixed",
         placeholder,
-        // value: { label, value },
+        value: { label, value },
         options,
         onChange: (values) => onChange(values),
         isDisabled,

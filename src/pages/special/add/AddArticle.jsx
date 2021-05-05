@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,8 +8,9 @@ import { addArticleValidationScheme } from "./validation";
 
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-import { useContainer } from "./container";
 import { CustomSelect } from "@components/shared/custom-select";
+
+import { useContainer } from "./container";
 
 import {
   FORMIK_HELPER,
@@ -85,12 +85,14 @@ const AddArticle = () => {
                   {C.CMS_LABELS.TITLE}
                 </label>
                 <input
-                  className={errors[FORMIK_HELPER.TITLE] && "invalid"}
-                  id={FORMIK_HELPER.TITLE}
-                  placeholder={CMS_INPUT_PLACEHOLDERS.TITLE}
-                  type={CMS_INPUT_TYPES.TEXT}
-                  value={values[FORMIK_HELPER.TITLE]}
-                  onChange={handleChange}
+                  {...{
+                    className: errors[FORMIK_HELPER.TITLE] && "invalid",
+                    id: FORMIK_HELPER.TITLE,
+                    placeholder: CMS_INPUT_PLACEHOLDERS.TITLE,
+                    type: CMS_INPUT_TYPES.TEXT,
+                    value: values[FORMIK_HELPER.TITLE],
+                    onChange: handleChange,
+                  }}
                 />
                 {(errors[FORMIK_HELPER.TITLE] ||
                   touched[FORMIK_HELPER.TITLE]) && (
@@ -110,8 +112,7 @@ const AddArticle = () => {
                       label: `${name} ${surname}`,
                       value: `${name} ${surname}`,
                     })),
-                    onChange: ({ value }) =>
-                      setFieldValue(FORMIK_HELPER.CREW, value),
+                    onChange: setFieldValue,
                   }}
                 />
                 {(errors[FORMIK_HELPER.CREW] ||
@@ -134,8 +135,7 @@ const AddArticle = () => {
                       label: item,
                       value: item,
                     })),
-                    onChange: ({ value }) =>
-                      setFieldValue(FORMIK_HELPER.CATEGORY, value),
+                    onChange: setFieldValue,
                   }}
                 />
                 {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -158,8 +158,7 @@ const AddArticle = () => {
                       label: item.label,
                       value: item.lang,
                     })),
-                    onChange: ({ value }) =>
-                      setFieldValue(FORMIK_HELPER.LANGUAGE, value),
+                    onChange: setFieldValue,
                   }}
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -242,10 +241,12 @@ const AddArticle = () => {
               </div>
             </section>
             <Button
-              className="submit-btn"
-              type={CMS_INPUT_TYPES.SUBMIT}
-              disabled={!isValid}
-              onClick={handleSubmit}
+              {...{
+                className: "submit-btn",
+                type: CMS_INPUT_TYPES.SUBMIT,
+                disabled: !isValid,
+                onClick: handleSubmit,
+              }}
             >
               {C.GENERAL_CONSTANTS.ADD}
             </Button>

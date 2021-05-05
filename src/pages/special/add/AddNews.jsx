@@ -9,8 +9,9 @@ import { addNewsValidationScheme } from "./validation";
 
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-import { useContainer } from "./container";
 import { CustomSelect } from "@components/shared/custom-select";
+
+import { useContainer } from "./container";
 
 import {
   FORMIK_HELPER,
@@ -18,6 +19,7 @@ import {
   CMS_INPUT_PLACEHOLDERS,
 } from "./utils.js";
 import * as C from "@utils/constants";
+
 import * as S from "./styles";
 
 const AddNews = () => {
@@ -86,13 +88,15 @@ const AddNews = () => {
                     {C.CMS_LABELS.TITLE}
                   </label>
                   <input
-                    className={errors[FORMIK_HELPER.TITLE] && "invalid"}
-                    id={FORMIK_HELPER.TITLE}
-                    placeholder={CMS_INPUT_PLACEHOLDERS.TITLE}
-                    type={CMS_INPUT_TYPES.TEXT}
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.TITLE]}
-                    onChange={handleChange}
+                    {...{
+                      className: errors[FORMIK_HELPER.TITLE] && "invalid",
+                      id: FORMIK_HELPER.TITLE,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.TITLE,
+                      type: CMS_INPUT_TYPES.TEXT,
+                      autoComplete: "off",
+                      value: values[FORMIK_HELPER.TITLE],
+                      onChange: handleChange,
+                    }}
                   />
                   {(errors[FORMIK_HELPER.TITLE] ||
                     touched[FORMIK_HELPER.TITLE]) && (
@@ -106,13 +110,15 @@ const AddNews = () => {
                     {C.CMS_LABELS.SUBTITLE}
                   </label>
                   <input
-                    className={errors[FORMIK_HELPER.SUBTITLE] && "invalid"}
-                    id={FORMIK_HELPER.SUBTITLE}
-                    placeholder={CMS_INPUT_PLACEHOLDERS.SUBTITLE}
-                    type={CMS_INPUT_TYPES.TEXT}
-                    autoComplete="off"
-                    value={values[FORMIK_HELPER.SUBTITLE]}
-                    onChange={handleChange}
+                    {...{
+                      className: errors[FORMIK_HELPER.SUBTITLE] && "invalid",
+                      id: FORMIK_HELPER.SUBTITLE,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.SUBTITLE,
+                      type: CMS_INPUT_TYPES.TEXT,
+                      autoComplete: "off",
+                      value: values[FORMIK_HELPER.SUBTITLE],
+                      onChange: handleChange,
+                    }}
                   />
                   {(errors[FORMIK_HELPER.SUBTITLE] ||
                     touched[FORMIK_HELPER.SUBTITLE]) && (
@@ -126,11 +132,13 @@ const AddNews = () => {
                     {C.CMS_LABELS.UPLOAD_COVER_IMG}
                   </label>
                   <input
-                    className={errors[FORMIK_HELPER.IMG_URL] && "invalid"}
-                    id={FORMIK_HELPER.IMG_URL}
-                    name={FORMIK_HELPER.IMG_URL}
-                    type={CMS_INPUT_TYPES.FILE}
-                    onChange={imageChangeHandler}
+                    {...{
+                      className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                      id: FORMIK_HELPER.IMG_URL,
+                      name: FORMIK_HELPER.IMG_URL,
+                      type: CMS_INPUT_TYPES.FILE,
+                      onChange: imageChangeHandler,
+                    }}
                   />
                   <S.PreviewContainer>
                     {image && (
@@ -161,8 +169,7 @@ const AddNews = () => {
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
                       })),
-                      onChange: ({ value }) =>
-                        setFieldValue(FORMIK_HELPER.CREW, value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
@@ -185,8 +192,7 @@ const AddNews = () => {
                         label: item,
                         value: item,
                       })),
-                      onChange: ({ value }) =>
-                        setFieldValue(FORMIK_HELPER.CATEGORY, value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -201,12 +207,14 @@ const AddNews = () => {
                     {C.CMS_LABELS.UPLOAD_IMGS}
                   </label>
                   <input
-                    className={errors[FORMIK_HELPER.IMAGES_URL] && "invalid"}
-                    id={FORMIK_HELPER.IMAGES_URL}
-                    name={FORMIK_HELPER.IMAGES_URL}
-                    type={CMS_INPUT_TYPES.FILE}
-                    onChange={(e) => {
-                      imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                    {...{
+                      className: errors[FORMIK_HELPER.IMAGES_URL] && "invalid",
+                      id: FORMIK_HELPER.IMAGES_URL,
+                      name: FORMIK_HELPER.IMAGES_URL,
+                      type: CMS_INPUT_TYPES.FILE,
+                      onChange: (e) => {
+                        imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                      },
                     }}
                   />
                   <S.PreviewContainer>
@@ -240,8 +248,7 @@ const AddNews = () => {
                           value: lang,
                         })
                       ),
-                      onChange: ({ value }) =>
-                        setFieldValue(FORMIK_HELPER.LANGUAGE, value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -268,10 +275,12 @@ const AddNews = () => {
                 </div>
               </section>
               <Button
-                className="submit-btn"
-                type={CMS_INPUT_TYPES.SUBMIT}
-                disabled={!image || isLoading || !isValid}
-                onClick={handleSubmit}
+                {...{
+                  className: "submit-btn",
+                  type: CMS_INPUT_TYPES.SUBMIT,
+                  disabled: !image || isLoading || !isValid,
+                  onClick: handleSubmit,
+                }}
               >
                 {C.GENERAL_CONSTANTS.ADD}
               </Button>

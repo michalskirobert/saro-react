@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Select from "react-select";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
-import CustomEditor from "@components/shared/custom-editor";
 import { Formik, Form } from "formik";
 import { editValidationScheme } from "./validation";
 
+import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
-import { useEdit } from "./container";
 import { CustomSelect } from "@components/shared/custom-select";
+
+import { useEdit } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
 import { FORMIK_HELPER, CMS_INPUT_TYPES } from "./utils.js";
@@ -95,12 +95,14 @@ const Edit = () => {
                     {CONSTANTS.CMS_LABELS.TITLE}
                   </label>
                   <input
-                    className={errors[FORMIK_HELPER.TITLE] && "invalid"}
-                    id={FORMIK_HELPER.TITLE}
-                    type={CMS_INPUT_TYPES.TEXT}
-                    placeholder={database[type]?.title}
-                    value={values[FORMIK_HELPER.TITLE]}
-                    onChange={handleChange}
+                    {...{
+                      className: errors[FORMIK_HELPER.TITLE] && "invalid",
+                      id: FORMIK_HELPER.TITLE,
+                      typ: CMS_INPUT_TYPES.TEXT,
+                      placeholder: database[type]?.title,
+                      value: values[FORMIK_HELPER.TITLE],
+                      onChange: handleChange,
+                    }}
                   />
                   {(errors[FORMIK_HELPER.TITLE] ||
                     touched[FORMIK_HELPER.TITLE]) && (
@@ -115,12 +117,14 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.SUBTITLE}
                     </label>
                     <input
-                      className={errors[FORMIK_HELPER.SUBTITLE] && "invalid"}
-                      id={FORMIK_HELPER.SUBTITLE}
-                      type={CMS_INPUT_TYPES.TEXT}
-                      placeholder={database[type]?.subtitle}
-                      value={values[FORMIK_HELPER.SUBTITLE]}
-                      onChange={handleChange}
+                      {...{
+                        className: errors[FORMIK_HELPER.SUBTITLE] && "invalid",
+                        id: FORMIK_HELPER.SUBTITLE,
+                        type: CMS_INPUT_TYPES.TEXT,
+                        placeholder: database[type]?.subtitle,
+                        value: values[FORMIK_HELPER.SUBTITLE],
+                        onChange: handleChange,
+                      }}
                     />
                     {(errors[FORMIK_HELPER.SUBTITLE] ||
                       touched[FORMIK_HELPER.SUBTITLE]) && (
@@ -144,8 +148,7 @@ const Edit = () => {
                           label: city,
                           value: city,
                         })),
-                        onChange: ({ value }) =>
-                          setFieldValue(FORMIK_HELPER.CITY, value),
+                        onChange: setFieldValue,
                       }}
                     />
                     {(errors[FORMIK_HELPER.CITY] ||
@@ -162,13 +165,15 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.PLACE}
                     </label>
                     <input
-                      className={errors[FORMIK_HELPER.PLACE] && "invalid"}
-                      id={FORMIK_HELPER.PLACE}
-                      type={CMS_INPUT_TYPES.TEXT}
-                      autoComplete="off"
-                      placeholder={database[type]?.place}
-                      value={values[FORMIK_HELPER.PLACE]}
-                      onChange={handleChange}
+                      {...{
+                        className: errors[FORMIK_HELPER.PLACE] && "invalid",
+                        id: FORMIK_HELPER.PLACE,
+                        type: CMS_INPUT_TYPES.TEXT,
+                        autoComplete: "off",
+                        placeholder: database[type]?.place,
+                        value: values[FORMIK_HELPER.PLACE],
+                        onChange: handleChange,
+                      }}
                     />
                     {(errors[FORMIK_HELPER.PLACE] ||
                       touched[FORMIK_HELPER.PLACE]) && (
@@ -184,12 +189,14 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.DATE}
                     </label>
                     <input
-                      className={errors[FORMIK_HELPER.DATE] && "invalid"}
-                      id={FORMIK_HELPER.DATE}
-                      type={CMS_INPUT_TYPES.DATE}
-                      placeholder={database[type]?.date}
-                      value={values[FORMIK_HELPER.DATE]}
-                      onChange={handleChange}
+                      {...{
+                        className: errors[FORMIK_HELPER.DATE] && "invalid",
+                        id: FORMIK_HELPER.DATE,
+                        type: CMS_INPUT_TYPES.DATE,
+                        placeholder: database[type]?.date,
+                        value: values[FORMIK_HELPER.DATE],
+                        onChange: handleChange,
+                      }}
                     />
                     {(errors[FORMIK_HELPER.DATE] ||
                       touched[FORMIK_HELPER.DATE]) && (
@@ -205,12 +212,14 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.TIME}
                     </label>
                     <input
-                      className={errors[FORMIK_HELPER.TIME] && "invalid"}
-                      id={FORMIK_HELPER.TIME}
-                      type={CMS_INPUT_TYPES.TIME}
-                      placeholder={database[type]?.time}
-                      value={values[FORMIK_HELPER.TIME]}
-                      onChange={handleChange}
+                      {...{
+                        className: errors[FORMIK_HELPER.TIME] && "invalid",
+                        id: FORMIK_HELPER.TIME,
+                        type: CMS_INPUT_TYPES.TIME,
+                        placeholder: database[type]?.time,
+                        value: values[FORMIK_HELPER.TIME],
+                        onChange: handleChange,
+                      }}
                     />
                     {(errors[FORMIK_HELPER.TIME] ||
                       touched[FORMIK_HELPER.TIME]) && (
@@ -226,12 +235,14 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.IMG_URL}
                     </label>
                     <input
-                      className={errors[FORMIK_HELPER.IMG_URL] && "invalid"}
-                      id={FORMIK_HELPER.IMG_URL}
-                      type={CMS_INPUT_TYPES.TEXT}
-                      placeholder={database[type]?.imgURL}
-                      value={values[FORMIK_HELPER.IMG_URL]}
-                      onChange={handleChange}
+                      {...{
+                        className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                        id: FORMIK_HELPER.IMG_URL,
+                        type: CMS_INPUT_TYPES.TEXT,
+                        placeholder: database[type]?.imgURL,
+                        value: values[FORMIK_HELPER.IMG_URL],
+                        onChange: handleChange,
+                      }}
                     />
                     {(errors[FORMIK_HELPER.IMG_URL] ||
                       touched[FORMIK_HELPER.IMG_URL]) && (
@@ -247,12 +258,14 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.LINK}
                     </label>
                     <input
-                      className={errors[FORMIK_HELPER.LINK] && "invalid"}
-                      id={FORMIK_HELPER.LINK}
-                      type={CMS_INPUT_TYPES.TEXT}
-                      placeholder={database[type]?.link}
-                      value={values[FORMIK_HELPER.LINK]}
-                      onChange={handleChange}
+                      {...{
+                        className: errors[FORMIK_HELPER.LINK] && "invalid",
+                        id: FORMIK_HELPER.LINK,
+                        type: CMS_INPUT_TYPES.TEXT,
+                        placeholder: database[type]?.link,
+                        value: values[FORMIK_HELPER.LINK],
+                        onChange: handleChange,
+                      }}
                     />
                     {(errors[FORMIK_HELPER.LINK] ||
                       touched[FORMIK_HELPER.LINK]) && (
@@ -276,8 +289,7 @@ const Edit = () => {
                           label: name,
                           value: name,
                         })),
-                        onChange: ({ value }) =>
-                          setFieldValue(FORMIK_HELPER.CATEGORY, value),
+                        onChange: setFieldValue,
                       }}
                     />
                     {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -303,8 +315,7 @@ const Edit = () => {
                           value: lang,
                         })
                       ),
-                      onChange: ({ value }) =>
-                        setFieldValue(FORMIK_HELPER.LANGUAGE, value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -330,8 +341,7 @@ const Edit = () => {
                           value: `${name} ${surname}`,
                         })
                       ),
-                      onChange: ({ value }) =>
-                        setFieldValue(FORMIK_HELPER.CREW, value),
+                      onChange: setFieldValue,
                     }}
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
@@ -348,12 +358,14 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.CONTENT}
                     </label>
                     <textarea
-                      id={FORMIK_HELPER.EDITOR}
-                      placeholder={database[type]?.content}
-                      value={values[FORMIK_HELPER.EDITOR]}
-                      onChange={handleChange}
-                      cols="30"
-                      rows="10"
+                      {...{
+                        id: FORMIK_HELPER.EDITOR,
+                        placeholder: database[type]?.content,
+                        value: values[FORMIK_HELPER.EDITOR],
+                        onChange: handleChange,
+                        cols: "30",
+                        rows: "10",
+                      }}
                     ></textarea>
                     {(errors[FORMIK_HELPER.EDITOR] ||
                       touched[FORMIK_HELPER.EDITOR]) && (
@@ -380,10 +392,12 @@ const Edit = () => {
                 )}
               </section>
               <Button
-                className="submit-btn"
-                type={CMS_INPUT_TYPES.SUBMIT}
-                disabled={!isValid}
-                onClick={handleSubmit}
+                {...{
+                  className: "submit-btn",
+                  type: CMS_INPUT_TYPES.SUBMIT,
+                  disabled: !isValid,
+                  onClick: handleSubmit,
+                }}
               >
                 {CONSTANTS.GENERAL_CONSTANTS.SEND}
               </Button>
