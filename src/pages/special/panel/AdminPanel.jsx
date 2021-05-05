@@ -25,21 +25,25 @@ const AdminPanel = () => {
       {isLoading && <DefaultLoader />}
       <CardGroup>
         {nav &&
-          nav.map(({ title, subcontent, path }, index) => {
+          nav.map(({ title, subcontent, path }) => {
             return subcontent ? (
-              <Card key={index}>
+              <Card {...{ key: title }}>
                 <Card.Body>
                   <Card.Title className="title">{title}</Card.Title>
                   {subcontent.map(({ title, path }) => {
-                    return <Link to={path}>{title}</Link>;
+                    return path ? (
+                      <Link {...{ to: path, key: path }}>{title}</Link>
+                    ) : (
+                      <p {...{ key: title }}>{title}</p>
+                    );
                   })}
                 </Card.Body>
               </Card>
             ) : (
-              <Card key={index}>
+              <Card {...{ key: title }}>
                 <Card.Body>
                   <Card.Title>
-                    <Link to={path}>{title}</Link>
+                    <Link {...{ to: path, key: title }}>{title}</Link>
                   </Card.Title>
                 </Card.Body>
               </Card>

@@ -77,9 +77,9 @@ const AddNews = () => {
             <Form className="cms">
               <section className="form-container">
                 <div className="form-control">
-                  <label htmlFor="title">Title</label>
+                  <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
                   <input
-                    id="title"
+                    id={FORMIK_HELPER.TITLE}
                     placeholder="add title"
                     type="text"
                     autoComplete="off"
@@ -94,9 +94,9 @@ const AddNews = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor="subtitle">Subtitle</label>
+                  <label htmlFor={FORMIK_HELPER.SUBTITLE}>{C.CMS_LABELS.SUBTITLE}</label>
                   <input
-                    id="subtitle"
+                    id={FORMIK_HELPER.SUBTITLE}
                     placeholder="add subtitle"
                     type="text"
                     autoComplete="off"
@@ -112,7 +112,7 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.IMG_URL}>
-                    Upload cover image
+                  {C.CMS_LABELS.UPLOAD_COVER_IMG}
                   </label>
                   <input
                     id={FORMIK_HELPER.IMG_URL}
@@ -137,11 +137,11 @@ const AddNews = () => {
                   <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">
-                  <label htmlFor="crew">Crew</label>
+                  <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
                   <Select
                     {...{
-                      id: "crew",
-                      name: "crew",
+                      id: FORMIK_HELPER.CREW,
+                      name: FORMIK_HELPER.CREW,
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
@@ -158,11 +158,11 @@ const AddNews = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor="category">Category</label>
+                  <label htmlFor={FORMIK_HELPER.CATEGORY}>{C.CMS_LABELS.CATEGORY}</label>
                   <Select
                     {...{
-                      id: "category",
-                      name: "category",
+                      id: FORMIK_HELPER.CATEGORY,
+                      name: FORMIK_HELPER.CATEGORY,
                       options: categories.map((item) => ({
                         label: item,
                         value: item,
@@ -180,7 +180,7 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.IMAGES_URL}>
-                    Upload images
+                  {C.CMS_LABELS.UPLOAD_IMGS}
                   </label>
                   <input
                     id={FORMIK_HELPER.IMAGES_URL}
@@ -207,11 +207,11 @@ const AddNews = () => {
                   <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">
-                  <label htmlFor="language">Language</label>
+                  <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
                   <Select
                     {...{
-                      id: "language",
-                      name: "language",
+                      id: FORMIK_HELPER.LANGUAGE,
+                      name: FORMIK_HELPER.LANGUAGE,
                       options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                         label: item.label,
                         value: item.lang,
@@ -228,7 +228,7 @@ const AddNews = () => {
                   )}
                 </div>
                 <div className="form-control editor">
-                  <label>Content</label>
+                  <label>{C.CMS_LABELS.CONTENT}</label>
                   <CustomEditor
                     {...{
                       propName: FORMIK_HELPER.EDITOR,

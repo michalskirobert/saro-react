@@ -75,18 +75,26 @@ const Edit = () => {
           <section className="section saro-panel edit">
             {alert && <CmsAlert />}
             <Breadcrumb>
-        <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>{CONSTANTS.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
-        <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.PANEL_ROUTE}>{CONSTANTS.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
-        <Breadcrumb.Item active>{CONSTANTS.GENERAL_CONSTANTS.EDIT}</Breadcrumb.Item>
-      </Breadcrumb>
+              <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>
+                {CONSTANTS.GENERAL_CONSTANTS.HOME}
+              </Breadcrumb.Item>
+              <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.PANEL_ROUTE}>
+                {CONSTANTS.GENERAL_CONSTANTS.ADMIN_PANEL}
+              </Breadcrumb.Item>
+              <Breadcrumb.Item active>
+                {CONSTANTS.GENERAL_CONSTANTS.EDIT}
+              </Breadcrumb.Item>
+            </Breadcrumb>
 
             <Form className="cms">
               <h2 className="main-title">{CONSTANTS.GENERAL_CONSTANTS.EDIT}</h2>
               <section className="form-container">
                 <div className="form-control">
-                  <label htmlFor="title">Title</label>
+                  <label htmlFor={FORMIK_HELPER.TITLE}>
+                    {CONSTANTS.CMS_LABELS.TITLE}
+                  </label>
                   <input
-                    id="title"
+                    id={FORMIK_HELPER.TITLE}
                     type="text"
                     placeholder={database[type]?.title}
                     value={values[FORMIK_HELPER.TITLE]}
@@ -101,9 +109,11 @@ const Edit = () => {
                 </div>
                 {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_article && (
                   <div className="form-control">
-                    <label htmlFor="subtitle">Subtitle</label>
+                    <label htmlFor={FORMIK_HELPER.SUBTITLE}>
+                      {CONSTANTS.CMS_LABELS.SUBTITLE}
+                    </label>
                     <input
-                      id="subtitle"
+                      id={FORMIK_HELPER.SUBTITLE}
                       type="text"
                       placeholder={database[type]?.subtitle}
                       value={values[FORMIK_HELPER.SUBTITLE]}
@@ -119,11 +129,13 @@ const Edit = () => {
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor="city">City</label>
+                    <label htmlFor={FORMIK_HELPER.CITY}>
+                      {CONSTANTS.CMS_LABELS.CITY}
+                    </label>
                     <Select
                       {...{
-                        id: "city",
-                        name: "city",
+                        id: FORMIK_HELPER.CITY,
+                        name: FORMIK_HELPER.CITY,
                         placeholder: database[type]?.city,
                         options: cities.map((item) => ({
                           label: item.city,
@@ -143,9 +155,11 @@ const Edit = () => {
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor="place">Place</label>
+                    <label htmlFor={FORMIK_HELPER.PLACE}>
+                      {CONSTANTS.CMS_LABELS.PLACE}
+                    </label>
                     <input
-                      id="place"
+                      id={FORMIK_HELPER.PLACE}
                       type="text"
                       autoComplete="off"
                       placeholder={database[type]?.place}
@@ -162,10 +176,12 @@ const Edit = () => {
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor="date">Date</label>
+                    <label htmlFor={FORMIK_HELPER.DATE}>
+                      {CONSTANTS.CMS_LABELS.DATE}
+                    </label>
                     <input
-                      id="date"
-                      type="date"
+                      id={FORMIK_HELPER.DATE}
+                      type={FORMIK_HELPER.DATE}
                       placeholder={database[type]?.date}
                       value={values[FORMIK_HELPER.DATE]}
                       onChange={handleChange}
@@ -180,10 +196,12 @@ const Edit = () => {
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor="time">Time</label>
+                    <label htmlFor={FORMIK_HELPER.TIME}>
+                      {CONSTANTS.CMS_LABELS.TIME}
+                    </label>
                     <input
-                      id="time"
-                      type="time"
+                      id={FORMIK_HELPER.TIME}
+                      type={FORMIK_HELPER.TIME}
                       placeholder={database[type]?.time}
                       value={values[FORMIK_HELPER.TIME]}
                       onChange={handleChange}
@@ -198,9 +216,11 @@ const Edit = () => {
                 )}
                 {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_article && (
                   <div className="form-control">
-                    <label htmlFor="imgURL">Img URL</label>
+                    <label htmlFor={FORMIK_HELPER.IMG_URL}>
+                      {CONSTANTS.CMS_LABELS.IMG_URL}
+                    </label>
                     <input
-                      id="imgURL"
+                      id={FORMIK_HELPER.IMG_URL}
                       type="text"
                       placeholder={database[type]?.imgURL}
                       value={values[FORMIK_HELPER.IMG_URL]}
@@ -216,9 +236,11 @@ const Edit = () => {
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor="link">Link</label>
+                    <label htmlFor={FORMIK_HELPER.LINK}>
+                      {CONSTANTS.CMS_LABELS.LINK}
+                    </label>
                     <input
-                      id="link"
+                      id={FORMIK_HELPER.LINK}
                       type="text"
                       placeholder={database[type]?.link}
                       value={values[FORMIK_HELPER.LINK]}
@@ -234,11 +256,13 @@ const Edit = () => {
                 )}
                 {type !== CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor="category">Category</label>
+                    <label htmlFor={FORMIK_HELPER.CATEGORY}>
+                      {CONSTANTS.CMS_LABELS.CATEGORY}
+                    </label>
                     <Select
                       {...{
-                        id: "category",
-                        name: "category",
+                        id: FORMIK_HELPER.CATEGORY,
+                        name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         options: categories.map((item) => ({
                           label: item.name,
@@ -257,11 +281,13 @@ const Edit = () => {
                   </div>
                 )}
                 <div className="form-control">
-                  <label htmlFor="language">Language</label>
+                  <label htmlFor={FORMIK_HELPER.LANGUAGE}>
+                    {CONSTANTS.CMS_LABELS.LANG}
+                  </label>
                   <Select
                     {...{
-                      id: "language",
-                      name: "language",
+                      id: FORMIK_HELPER.LANGUAGE,
+                      name: FORMIK_HELPER.LANGUAGE,
                       placeholder: database[type]?.language,
                       options: CONSTANTS.GENERAL_CONSTANTS.LANGUAGES.map(
                         (item) => ({
@@ -281,11 +307,13 @@ const Edit = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor="crew">Crew</label>
+                  <label htmlFor={FORMIK_HELPER.CREW}>
+                    {CONSTANTS.CMS_LABELS.CREW}
+                  </label>
                   <Select
                     {...{
-                      id: "crew",
-                      name: "crew",
+                      id: FORMIK_HELPER.CREW,
+                      name: FORMIK_HELPER.CREW,
                       placeholder: database[type]?.crew,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
                         (item) => ({
@@ -307,9 +335,11 @@ const Edit = () => {
 
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS ? (
                   <div className="form-control form-info">
-                    <label htmlFor="content">Info</label>
+                    <label htmlFor={FORMIK_HELPER.EDITOR}>
+                      {CONSTANTS.CMS_LABELS.CONTENT}
+                    </label>
                     <textarea
-                      id="content"
+                      id={FORMIK_HELPER.EDITOR}
                       placeholder={database[type]?.content}
                       value={values[FORMIK_HELPER.EDITOR]}
                       onChange={handleChange}

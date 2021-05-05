@@ -22,7 +22,7 @@ import {
   Table,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
-import { getRowId } from "./utils";
+import { getRowId, TABLE_HELPER} from "./utils";
 import { DateTypeProvider } from "./container";
 
 import * as S from "./styles";
@@ -79,8 +79,8 @@ export const CustomDataTable = ({
           {...{
             defaultSorting: [
               {
-                columnName: "published",
-                direction: "desc",
+                columnName: TABLE_HELPER.PUBLISHED_COLUMN_PROPERTY,
+                direction: TABLE_HELPER.DIRECTION_DESCENDING,
               },
             ],
           }}
