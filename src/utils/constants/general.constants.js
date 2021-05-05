@@ -31,6 +31,8 @@ export const GENERAL_CONSTANTS = {
   EDIT: "Edit",
   YES: "YES",
   NO: "NO",
+  SEND: "Send",
+  ADD: "Add",
   CHANGE_LANGUAGE_TO: {
     EN: "en",
     KO: "ko",

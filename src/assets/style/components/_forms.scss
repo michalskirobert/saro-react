@@ -196,6 +196,10 @@ form.cms {
       border: 1px solid $crl-panel-dark-grey;
       padding: 1%;
       border-radius: 4px;
+
+      &.invalid{
+        border: 1.5px solid red;
+      }
     }
     select {
       max-height: 30px;
