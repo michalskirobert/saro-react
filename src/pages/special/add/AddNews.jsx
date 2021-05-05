@@ -10,8 +10,13 @@ import { addNewsValidationScheme } from "./validation";
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
-import { FORMIK_HELPER } from "./utils.js";
+import { CustomSelect } from "@components/shared/custom-select";
 
+import {
+  FORMIK_HELPER,
+  CMS_INPUT_TYPES,
+  CMS_INPUT_PLACEHOLDERS,
+} from "./utils.js";
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
@@ -80,8 +85,8 @@ const AddNews = () => {
                   <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
                   <input
                     id={FORMIK_HELPER.TITLE}
-                    placeholder="add title"
-                    type="text"
+                    placeholder={CMS_INPUT_PLACEHOLDERS.TITLE}
+                    type={CMS_INPUT_TYPES.TEXT}
                     autoComplete="off"
                     value={values[FORMIK_HELPER.TITLE]}
                     onChange={handleChange}
@@ -97,8 +102,8 @@ const AddNews = () => {
                   <label htmlFor={FORMIK_HELPER.SUBTITLE}>{C.CMS_LABELS.SUBTITLE}</label>
                   <input
                     id={FORMIK_HELPER.SUBTITLE}
-                    placeholder="add subtitle"
-                    type="text"
+                    placeholder={CMS_INPUT_PLACEHOLDERS.SUBTITLE}
+                    type={CMS_INPUT_TYPES.TEXT}
                     autoComplete="off"
                     value={values[FORMIK_HELPER.SUBTITLE]}
                     onChange={handleChange}
@@ -117,7 +122,7 @@ const AddNews = () => {
                   <input
                     id={FORMIK_HELPER.IMG_URL}
                     name={FORMIK_HELPER.IMG_URL}
-                    type="file"
+                    type={CMS_INPUT_TYPES.FILE}
                     onChange={imageChangeHandler}
                   />
                   <S.PreviewContainer>
@@ -125,7 +130,7 @@ const AddNews = () => {
                       <>
                         <S.PreviewImage src={image} alt="Picture preview" />
                         <S.PreviewDelete
-                          type="button"
+                          type={CMS_INPUT_TYPES.BUTTON}
                           onClick={() => deleteImage(image)}
                         >
                           <AiOutlineClose />
@@ -138,16 +143,17 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
-                  <Select
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.CREW,
                       name: FORMIK_HELPER.CREW,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
+                      disabled: !errors[FORMIK_HELPER.CREW],
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
                       })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CREW, values.value),
+                      onChange: ({value}) =>
+                        setFieldValue(FORMIK_HELPER.CREW, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
@@ -159,16 +165,17 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.CATEGORY}>{C.CMS_LABELS.CATEGORY}</label>
-                  <Select
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.CATEGORY,
                       name: FORMIK_HELPER.CATEGORY,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
+                      disabled: !errors[FORMIK_HELPER.CATEGORY],
                       options: categories.map((item) => ({
                         label: item,
                         value: item,
                       })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
+                      onChange: ({value}) =>
+                        setFieldValue(FORMIK_HELPER.CATEGORY, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -185,7 +192,7 @@ const AddNews = () => {
                   <input
                     id={FORMIK_HELPER.IMAGES_URL}
                     name={FORMIK_HELPER.IMAGES_URL}
-                    type="file"
+                    type={CMS_INPUT_TYPES.FILE}
                     onChange={(e) => {
                       imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
                     }}
@@ -195,7 +202,7 @@ const AddNews = () => {
                       <>
                         <S.PreviewImage src={images} alt="Picture preview" />
                         <S.PreviewDelete
-                          type="button"
+                          type={CMS_INPUT_TYPES.BUTTON}
                           onClick={() => deleteImage(images)}
                         >
                           <AiOutlineClose />
@@ -210,14 +217,15 @@ const AddNews = () => {
                   <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
                   <Select
                     {...{
-                      id: FORMIK_HELPER.LANGUAGE,
                       name: FORMIK_HELPER.LANGUAGE,
-                      options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
-                        label: item.label,
-                        value: item.lang,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
+                      disabled: !errors[FORMIK_HELPER.LANGUAGE],
+                      options: C.GENERAL_CONSTANTS.LANGUAGES.map(({label, lang}) => ({
+                        label,
+                        value: lang,
                       })),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
+                      onChange: ({value}) =>
+                        setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -245,7 +253,7 @@ const AddNews = () => {
               </section>
               <Button
                 className="submit-btn"
-                type="submit"
+                type={CMS_INPUT_TYPES.SUBMIT}
                 disabled={!image || isLoading || !isValid}
                 onClick={handleSubmit}
               >

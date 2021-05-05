@@ -10,8 +10,13 @@ import { addArticleValidationScheme } from "./validation";
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useContainer } from "./container";
+import { CustomSelect } from "@components/shared/custom-select";
 
-import { FORMIK_HELPER } from "./utils.js";
+import {
+  FORMIK_HELPER,
+  CMS_INPUT_TYPES,
+  CMS_INPUT_PLACEHOLDERS,
+} from "./utils.js";
 
 import * as C from "@utils/constants";
 
@@ -79,8 +84,8 @@ const AddArticle = () => {
                 <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
                 <input
                   id={FORMIK_HELPER.TITLE}
-                  placeholder="add title"
-                  type="text"
+                  placeholder={CMS_INPUT_PLACEHOLDERS.TITLE}
+                  type={CMS_INPUT_TYPES.TEXT}
                   value={values[FORMIK_HELPER.TITLE]}
                   onChange={handleChange}
                 />
@@ -93,16 +98,17 @@ const AddArticle = () => {
               </div>
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
-                <Select
+                <CustomSelect
                   {...{
-                    id: FORMIK_HELPER.CREW,
                     name: FORMIK_HELPER.CREW,
-                    options: crew.map((item) => ({
-                      label: `${item.name} ${item.surname}`,
-                      value: `${item.name} ${item.surname}`,
+                    placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
+                    disabled: !errors[FORMIK_HELPER.CREW],
+                    options: crew.map(({name, surname}) => ({
+                      label: `${name} ${surname}`,
+                      value: `${name} ${surname}`,
                     })),
-                    onChange: (values) =>
-                      setFieldValue(FORMIK_HELPER.CREW, values.value),
+                    onChange: ({value}) =>
+                      setFieldValue(FORMIK_HELPER.CREW, value),
                   }}
                 />
                 {(errors[FORMIK_HELPER.CREW] ||
@@ -114,16 +120,17 @@ const AddArticle = () => {
               </div>
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.CATEGORY}>{C.CMS_LABELS.CATEGORY}</label>
-                <Select
+                <CustomSelect
                   {...{
-                    id: FORMIK_HELPER.CATEGORY,
                     name: FORMIK_HELPER.CATEGORY,
+                    placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
+                    disabled: !errors[FORMIK_HELPER.CATEGORY],
                     options: categories.map((item) => ({
                       label: item,
                       value: item,
                     })),
-                    onChange: (values) =>
-                      setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
+                    onChange: ({value}) =>
+                      setFieldValue(FORMIK_HELPER.CATEGORY, value),
                   }}
                 />
                 {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -135,16 +142,17 @@ const AddArticle = () => {
               </div>
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
-                <Select
+                <CustomSelect
                   {...{
-                    id: FORMIK_HELPER.LANGUAGE,
                     name: FORMIK_HELPER.LANGUAGE,
+                    placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
+                    disabled: !errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                       label: item.label,
                       value: item.lang,
                     })),
-                    onChange: (values) =>
-                      setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
+                    onChange: ({value}) =>
+                      setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                   }}
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -228,7 +236,7 @@ const AddArticle = () => {
             </section>
             <Button
               className="submit-btn"
-              type="submit"
+              type={CMS_INPUT_TYPES.SUBMIT}
               disabled={!isValid}
               onClick={handleSubmit}
             >
