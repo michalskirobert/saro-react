@@ -1,5 +1,7 @@
 import * as S from "./styles";
 
-export const CustomFeedback = ({ text }) => {
+const CustomFeedback = ({ text }) => {
   return <S.Feedback>{text}</S.Feedback>;
 };
+
+export default CustomFeedback;

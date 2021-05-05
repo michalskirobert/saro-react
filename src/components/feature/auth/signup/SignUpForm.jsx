@@ -13,7 +13,7 @@ import { SecondStep } from "./SecondStep";
 import { useContainerSignUp } from "./container";
 
 const SignUpForm = () => {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
 
   const { handleSubmit } = useContainerSignUp();
   const history = useHistory();
@@ -41,7 +41,7 @@ const SignUpForm = () => {
         <>
           {step !== 1 && (
             <button
-              className="arrow-back-icon"
+              className="arrow-back-icon back"
               type="button"
               onClick={() => setStep(step - 1)}
             >

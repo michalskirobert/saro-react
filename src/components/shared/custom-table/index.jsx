@@ -24,8 +24,10 @@ import {
   TableColumnResizing,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
-import { getRowId } from "./utils";
+import { getRowId, TABLE_HELPER } from "./utils";
 import { DateTypeProvider } from "./container";
+
+import * as CONSTANTS from "@utils/constants";
 
 import * as S from "./styles";
 
@@ -40,6 +42,7 @@ export const CustomDataTable = ({
   onRowSelected,
   initSelection,
   isLoading = false,
+  isFixTable = false,
 }) => {
   const [savedSelection, setSelection] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -87,8 +90,8 @@ export const CustomDataTable = ({
             {...{
               defaultSorting: [
                 {
-                  columnName: "publishedDate",
-                  direction: "dsc",
+                  columnName: TABLE_HELPER.PUBLISHED_COLUMN_PROPERTY,
+                  direction: TABLE_HELPER.DIRECTION_DESCENDING,
                 },
               ],
             }}
@@ -124,7 +127,7 @@ export const CustomDataTable = ({
               columnExtensions: tableColumnExtensions,
               rowComponent: ({ ...restProps }) => CustomTableCell(...restProps),
               messages: {
-                noData: "Nothing to display",
+                noData: CONSTANTS.GENERAL_CONSTANTS.NO_DATA_MESSAGE,
               },
             }}
           />

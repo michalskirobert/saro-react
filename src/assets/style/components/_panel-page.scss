@@ -1,138 +1,37 @@
 .saro-panel {
-  padding: 0;
-  margin: 30px 0;
+  padding: 0 5% 150px;
+  margin: 0 auto;
   position: relative;
-
-  .cms-wrapper {
-    width: 100%;
-    margin-top: 50px;
-    background-color: $crl-panel-grey;
-    .link {
-      color: white;
-    }
-  }
+  max-width: 1500px;
   .breadcrumb {
     background-color: transparent;
-  }
-  .accordion {
-    display: none;
-    width: 250px;
-    background-color: $crl-main-blue;
-    border: none;
-    border-right: 1px solid $crl-base;
-    color: $crl-main-grey;     
-    .arrow {
-      position: absolute;
-      top: 15px;
-      transform: rotate(180deg);
-      right: 17px;
-    }   
-    .card {
-      border: none;
-      border-bottom: 1px solid $crl-base;
-      position: relative;
-    }
-    .card-header {
-      background-color: $crl-main-blue;
-      border: none;
-      font-weight: $weight-semi-bold;
-      cursor: pointer;
-    }
-    .card-body {
-      background-color: $crl-main-teal;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border: none;
-     
-      a {
-        padding: 5px 0;
-        color: $crl-base;
-        
-      }
-      .inner-links-btn {
-        border: none;
-        background-color: transparent;
-        width: 100%;
-        text-align: left;
-        padding: 0;
-        font-weight: $weight-semi-bold;
-        color: $crl-base;
-      }
-    }
-  }
-  .close {
-    color: black;
-    z-index: 55;
-    position: fixed;
-    top: 10px;
-    left: 210px;
-    transform: translateX(-300px);
-    transition: all 0.3s ease-in-out;
-
-  }
-  .close.active {
-    transform: translateX(0);
-  }
-  section.add-news {
-    padding: 0;
-    margin: 0;
-  }
-  .add-news,
-  .add-events,
-  .add-article,
-  .edit,
-  .translate, .manage-users {
-    width: 100%;
-    flex-grow: 1;
+    margin: 20px 0;
     padding: 0;
   }
-  .panel-main {
-    width: 100%;
-    min-height: 50vh;
-  }
-  .hamburger {
-    z-index: 5;
-    position: absolute;
-    top: 70px;
-    right: 10px;
-  }
-  div.table-responsive.dx-g-bs4-table-container > div > table {
-    min-width: 200px;
-  }
-}
-
-@media (min-width: 1100px) {
-  .saro-panel {
-    .cms-wrapper {
-      display: flex;
-    }
-    .close {
-      display: none;
-    }
-    .accordion {
-      display: block;
-      height: inherit;
-    }
-  }
-}
-.manage-events,
-.manage-articles,
-.manage-news,
-.manage-users {
-  flex-grow: 1;
-  padding: 0 5%;
-  padding-bottom: 50px;
   .main-title {
     text-align: left;
-    margin: {
-      top: 10px;
-      bottom: 50px;
-      right: 0;
-      left: 0;
-    }
+    margin-bottom: 50px;
     font-size: 1.3rem;
-    padding: 10px;
+  } 
+  .card-group {
+    max-width: 1000px;
+    margin: 100px auto;
+    .card-title {
+      font-size: 1rem;
+      font-weight: $weight-bold;
+      color: $crl-base-blue;
+    }
+    .card-title.title {
+      padding-bottom: 5px;
+      border-bottom: 2px solid $crl-base-blue;
+    }
+    .card-body a {
+        color: black;
+        display: block;
+        margin: 15px 0;
+      }   
+    .card-title a {
+      margin: 0;
+    }
   }
-  
 }

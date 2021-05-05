@@ -8,3 +8,20 @@ export const CMS_CONSTANTS = {
   UPDATE_REQUEST: "UPDATE_REQUEST",
   UPDATE_FAILURE: "UPDATE_FAILURE",
 };
+
+export const CMS_LABELS = Object.freeze({
+  TITLE: "Title",
+  SUBTITLE: "Subtitle",
+  CITY: "City",
+  PLACE: "Place",
+  DATE: "Date",
+  TIME: "Time",
+  IMG_URL: "IMG URL",
+  UPLOAD_IMGS: "Upload images",
+  UPLOAD_COVER_IMG: "Upload cover image",
+  LINK: "Link",
+  LANG: "Language",
+  CREW: "Crew",
+  CONTENT: "Content",
+  CATEGORY: "Category",
+});
