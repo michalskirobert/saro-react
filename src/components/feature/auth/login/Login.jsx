@@ -6,6 +6,7 @@ import LoginForm from "./LoginForm";
 import { auth } from "../../firebase";
 import { userActions } from "@actions";
 import { ReactComponent as ArrowBack } from "@assets/images/components/forms/arrowBack.svg";
+import * as C from "@utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -25,10 +26,8 @@ const Login = () => {
 
   return (
     <section className="section login">
-      <Link to="/">
-        <button className="arrow-back-icon" type="button">
-          <ArrowBack />
-        </button>
+      <Link {...{ to: C.ROUTE_PATHS.HOME_ROUTE }} className="arrow-back-icon">
+        <ArrowBack />
       </Link>
 
       <LoginForm />
