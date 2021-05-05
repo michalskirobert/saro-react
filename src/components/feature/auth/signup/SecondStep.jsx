@@ -3,7 +3,7 @@ import { Form as F } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import { FORM_HELPER } from "./utils";
-import CustomFeedback from "../../../../components/shared/custom-feedback/index";
+import CustomFeedback from "@components/shared/custom-feedback/index";
 
 const options = [
   { value: "male", label: "male" },
