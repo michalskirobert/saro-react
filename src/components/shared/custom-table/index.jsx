@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { CustomTableCell } from "./custom-table-cell";
-import { LoadingBlocker } from "@components/shared/loadings/LoadingBlocker";
+import { CustomLoadingBlocker } from "@components/shared/custom-loadings/LoadingBlocker";
 
 import {
   FilteringState,
@@ -20,6 +20,7 @@ import {
   TableFilterRow,
   TableHeaderRow,
   TableSelection,
+  Table,
   VirtualTable,
   TableColumnResizing,
 } from "@devexpress/dx-react-grid-bootstrap4";
@@ -82,7 +83,7 @@ export const CustomDataTable = ({
   }, [initSelection]);
 
   return (
-    <LoadingBlocker {...{ isLoading }}>
+    <CustomLoadingBlocker {...{ isLoading }}>
       <S.TableCard>
         <Grid {...{ columns, rows, getRowId }}>
           <FilteringState />
@@ -122,15 +123,29 @@ export const CustomDataTable = ({
           <IntegratedFiltering />
           {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
 
-          <VirtualTable
-            {...{
-              columnExtensions: tableColumnExtensions,
-              rowComponent: ({ ...restProps }) => CustomTableCell(...restProps),
-              messages: {
-                noData: CONSTANTS.GENERAL_CONSTANTS.NO_DATA_MESSAGE,
-              },
-            }}
-          />
+          {isFixTable ? (
+            <VirtualTable
+              {...{
+                columnExtensions: tableColumnExtensions,
+                rowComponent: ({ ...restProps }) =>
+                  CustomTableCell(...restProps),
+                messages: {
+                  noData: CONSTANTS.GENERAL_CONSTANTS.NO_DATA_MESSAGE,
+                },
+              }}
+            />
+          ) : (
+            <Table
+              {...{
+                columnExtensions: tableColumnExtensions,
+                rowComponent: ({ ...restProps }) =>
+                  CustomTableCell(...restProps),
+                messages: {
+                  noData: CONSTANTS.GENERAL_CONSTANTS.NO_DATA_MESSAGE,
+                },
+              }}
+            />
+          )}
 
           <TableColumnResizing
             {...{
@@ -153,6 +168,6 @@ export const CustomDataTable = ({
           <PagingPanel {...{ pageSizes }} />
         </Grid>
       </S.TableCard>
-    </LoadingBlocker>
+    </CustomLoadingBlocker>
   );
 };

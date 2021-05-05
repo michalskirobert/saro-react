@@ -2,14 +2,14 @@ import React from "react";
 
 import BlockUi from "react-block-ui";
 
-import * as S from "./styles";
+import { Spinner } from "react-bootstrap";
 
 export const CustomLoadingBlocker = ({ children, isLoading }) => (
   <BlockUi
     {...{
       tag: "div",
       blocking: isLoading,
-      loader: <S.CustomLoader type={"ball-pulse-sync"} active={true} />,
+      loader: <Spinner animation="border" role="status"></Spinner>,
     }}
   >
     {children}
