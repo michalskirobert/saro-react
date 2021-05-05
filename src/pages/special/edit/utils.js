@@ -22,3 +22,13 @@ export const FORMIK_HELPER = Object.freeze({
   MAX_15_CHARACTERS_MESSAGE: "Max 15 characters.",
   WRONG_IMG_FORMAT_MESSAGE: "Wrong file format. PNG or JPG/JPEG only.",
 });
+
+
+export const CMS_INPUT_TYPES = Object.freeze({
+  TEXT: "text",
+  FILE: "file",
+  DATE: "date",
+  TIME: "time",
+  SUBMIT: "submit",
+  BUTTON: "button"
+})
