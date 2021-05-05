@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { CustomTableCell } from "./custom-table-cell";
+import { LoadingBlocker } from "@components/shared/loadings/LoadingBlocker";
 
 import {
   FilteringState,
@@ -19,7 +20,8 @@ import {
   TableFilterRow,
   TableHeaderRow,
   TableSelection,
-  Table,
+  VirtualTable,
+  TableColumnResizing,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
 import { getRowId } from "./utils";
@@ -37,11 +39,17 @@ export const CustomDataTable = ({
   showSelectAll = false,
   onRowSelected,
   initSelection,
+  isLoading = false,
 }) => {
   const [savedSelection, setSelection] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [pageSizes] = useState([5, 25, 50]);
+
+  const resizedColumns = columns.map(({ name }) => ({
+    columnName: name,
+    width: "80%",
+  }));
 
   const changeSelection = (selection) => {
     if (checkboxSelection || showSelectAll) {
@@ -71,62 +79,77 @@ export const CustomDataTable = ({
   }, [initSelection]);
 
   return (
-    <S.TableCard>
-      <Grid {...{ columns, rows, getRowId }}>
-        <FilteringState />
-        <SortingState
-          {...{
-            defaultSorting: [
-              {
-                columnName: "publishedDate",
-                direction: "dsc",
+    <LoadingBlocker {...{ isLoading }}>
+      <S.TableCard>
+        <Grid {...{ columns, rows, getRowId }}>
+          <FilteringState />
+          <SortingState
+            {...{
+              defaultSorting: [
+                {
+                  columnName: "publishedDate",
+                  direction: "dsc",
+                },
+              ],
+            }}
+          />
+          <PagingState
+            {...{
+              currentPage,
+              onCurrentPageChange: setCurrentPage,
+              pageSize,
+              onPageSizeChange: setPageSize,
+            }}
+          />
+          <SelectionState
+            {...{
+              selection: savedSelection,
+              onSelectionChange: changeSelection,
+            }}
+          />
+          {isGrouping && (
+            <GroupingState
+              defaultGrouping={[{ columnName: columns[0].name }]}
+            />
+          )}
+
+          <IntegratedSorting />
+          <IntegratedPaging />
+
+          <IntegratedFiltering />
+          {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
+
+          <VirtualTable
+            {...{
+              columnExtensions: tableColumnExtensions,
+              rowComponent: ({ ...restProps }) => CustomTableCell(...restProps),
+              messages: {
+                noData: "Nothing to display",
               },
-            ],
-          }}
-        />
-        <PagingState
-          {...{
-            currentPage,
-            onCurrentPageChange: setCurrentPage,
-            pageSize,
-            onPageSizeChange: setPageSize,
-          }}
-        />
-        <SelectionState
-          {...{ selection: savedSelection, onSelectionChange: changeSelection }}
-        />
-        {isGrouping && (
-          <GroupingState defaultGrouping={[{ columnName: columns[0].name }]} />
-        )}
+            }}
+          />
 
-        <IntegratedSorting />
-        <IntegratedPaging />
+          <TableColumnResizing
+            {...{
+              defaultColumnWidths: resizedColumns,
+              resizingMode: "nextColumn",
+            }}
+          />
 
-        <IntegratedFiltering />
-        {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
-
-        <Table
-          {...{
-            columnExtensions: tableColumnExtensions,
-            rowComponent: ({ ...restProps }) => CustomTableCell(...restProps),
-            messages: {
-              noData: "Nothing to display",
-            },
-          }}
-        />
-        <IntegratedSelection />
-        <TableSelection
-          {...{
-            showSelectionColumn: checkboxSelection,
-            selectByRowClick: true,
-            highlightRow: true,
-            showSelectAll,
-          }}
-        />
-        <TableHeaderRow showSortingControls />
-        <TableFilterRow showFilterSelector />
-        <PagingPanel {...{ pageSizes }} />
-      </Grid>
-    </S.TableCard>
+          <IntegratedSelection />
+          <TableSelection
+            {...{
+              showSelectionColumn: checkboxSelection,
+              selectByRowClick: true,
+              highlightRow: true,
+              showSelectAll,
+            }}
+          />
+          <TableHeaderRow showSortingControls />
+          <TableFilterRow showFilterSelector />
+          <PagingPanel {...{ pageSizes }} />
+        </Grid>
+      </S.TableCard>
+    </LoadingBlocker>
   );
 };
