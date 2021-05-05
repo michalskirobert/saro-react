@@ -23,8 +23,7 @@ export const CustomSelect = ({
         placeholder,
         // value: { label, value },
         options: options,
-        onChange: (values) => onChange(values),
-        isDisabled,
+        onChange: onChange,
       }}
     />
   );
