@@ -13,10 +13,7 @@ import { useEdit } from "./container";
 import { CustomSelect } from "@components/shared/custom-select";
 
 import * as CONSTANTS from "@utils/constants";
-import {
-  FORMIK_HELPER,
-  CMS_INPUT_TYPES,
-} from "./utils.js";
+import { FORMIK_HELPER, CMS_INPUT_TYPES } from "./utils.js";
 
 const cities = [
   {
@@ -98,6 +95,7 @@ const Edit = () => {
                     {CONSTANTS.CMS_LABELS.TITLE}
                   </label>
                   <input
+                    className={errors[FORMIK_HELPER.TITLE] && "invalid"}
                     id={FORMIK_HELPER.TITLE}
                     type={CMS_INPUT_TYPES.TEXT}
                     placeholder={database[type]?.title}
@@ -117,6 +115,7 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.SUBTITLE}
                     </label>
                     <input
+                      className={errors[FORMIK_HELPER.SUBTITLE] && "invalid"}
                       id={FORMIK_HELPER.SUBTITLE}
                       type={CMS_INPUT_TYPES.TEXT}
                       placeholder={database[type]?.subtitle}
@@ -141,11 +140,11 @@ const Edit = () => {
                         name: FORMIK_HELPER.CITY,
                         placeholder: database[type]?.city,
                         disabled: !errors[FORMIK_HELPER.CITY],
-                        options: cities.map(({city}) => ({
+                        options: cities.map(({ city }) => ({
                           label: city,
                           value: city,
                         })),
-                        onChange: ({value}) =>
+                        onChange: ({ value }) =>
                           setFieldValue(FORMIK_HELPER.CITY, value),
                       }}
                     />
@@ -163,6 +162,7 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.PLACE}
                     </label>
                     <input
+                      className={errors[FORMIK_HELPER.PLACE] && "invalid"}
                       id={FORMIK_HELPER.PLACE}
                       type={CMS_INPUT_TYPES.TEXT}
                       autoComplete="off"
@@ -184,6 +184,7 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.DATE}
                     </label>
                     <input
+                      className={errors[FORMIK_HELPER.DATE] && "invalid"}
                       id={FORMIK_HELPER.DATE}
                       type={CMS_INPUT_TYPES.DATE}
                       placeholder={database[type]?.date}
@@ -204,6 +205,7 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.TIME}
                     </label>
                     <input
+                      className={errors[FORMIK_HELPER.TIME] && "invalid"}
                       id={FORMIK_HELPER.TIME}
                       type={CMS_INPUT_TYPES.TIME}
                       placeholder={database[type]?.time}
@@ -224,6 +226,7 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.IMG_URL}
                     </label>
                     <input
+                      className={errors[FORMIK_HELPER.IMG_URL] && "invalid"}
                       id={FORMIK_HELPER.IMG_URL}
                       type={CMS_INPUT_TYPES.TEXT}
                       placeholder={database[type]?.imgURL}
@@ -244,6 +247,7 @@ const Edit = () => {
                       {CONSTANTS.CMS_LABELS.LINK}
                     </label>
                     <input
+                      className={errors[FORMIK_HELPER.LINK] && "invalid"}
                       id={FORMIK_HELPER.LINK}
                       type={CMS_INPUT_TYPES.TEXT}
                       placeholder={database[type]?.link}
@@ -268,11 +272,11 @@ const Edit = () => {
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         invalid: !errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({name}) => ({
+                        options: categories.map(({ name }) => ({
                           label: name,
                           value: name,
                         })),
-                        onChange: ({value}) =>
+                        onChange: ({ value }) =>
                           setFieldValue(FORMIK_HELPER.CATEGORY, value),
                       }}
                     />
@@ -294,12 +298,12 @@ const Edit = () => {
                       placeholder: database[type]?.language,
                       invalid: !errors[FORMIK_HELPER.LANGUAGE],
                       options: CONSTANTS.GENERAL_CONSTANTS.LANGUAGES.map(
-                        ({label, lang}) => ({
+                        ({ label, lang }) => ({
                           label: label,
                           value: lang,
                         })
                       ),
-                      onChange: ({value}) =>
+                      onChange: ({ value }) =>
                         setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                     }}
                   />
@@ -321,12 +325,12 @@ const Edit = () => {
                       invalid: !errors[FORMIK_HELPER.CREW],
                       disabled: true,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
-                        ({name, surname}) => ({
+                        ({ name, surname }) => ({
                           label: `${name} ${surname}`,
                           value: `${name} ${surname}`,
                         })
                       ),
-                      onChange: ({value}) =>
+                      onChange: ({ value }) =>
                         setFieldValue(FORMIK_HELPER.CREW, value),
                     }}
                   />

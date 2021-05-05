@@ -78,11 +78,14 @@ const AddArticle = () => {
             </Breadcrumb.Item>
           </Breadcrumb>
           <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_ARTICLES}</h2>
-          <Form className="cms">            
+          <Form className="cms">
             <section className="form-container">
               <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
+                <label htmlFor={FORMIK_HELPER.TITLE}>
+                  {C.CMS_LABELS.TITLE}
+                </label>
                 <input
+                  className={errors[FORMIK_HELPER.TITLE] && "invalid"}
                   id={FORMIK_HELPER.TITLE}
                   placeholder={CMS_INPUT_PLACEHOLDERS.TITLE}
                   type={CMS_INPUT_TYPES.TEXT}
@@ -103,11 +106,11 @@ const AddArticle = () => {
                     name: FORMIK_HELPER.CREW,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     invalid: !errors[FORMIK_HELPER.CREW],
-                    options: crew.map(({name, surname}) => ({
+                    options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,
                       value: `${name} ${surname}`,
                     })),
-                    onChange: ({value}) =>
+                    onChange: ({ value }) =>
                       setFieldValue(FORMIK_HELPER.CREW, value),
                   }}
                 />
@@ -119,7 +122,9 @@ const AddArticle = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.CATEGORY}>{C.CMS_LABELS.CATEGORY}</label>
+                <label htmlFor={FORMIK_HELPER.CATEGORY}>
+                  {C.CMS_LABELS.CATEGORY}
+                </label>
                 <CustomSelect
                   {...{
                     name: FORMIK_HELPER.CATEGORY,
@@ -129,7 +134,7 @@ const AddArticle = () => {
                       label: item,
                       value: item,
                     })),
-                    onChange: ({value}) =>
+                    onChange: ({ value }) =>
                       setFieldValue(FORMIK_HELPER.CATEGORY, value),
                   }}
                 />
@@ -141,7 +146,9 @@ const AddArticle = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
+                <label htmlFor={FORMIK_HELPER.LANGUAGE}>
+                  {C.CMS_LABELS.LANG}
+                </label>
                 <CustomSelect
                   {...{
                     name: FORMIK_HELPER.LANGUAGE,
@@ -151,7 +158,7 @@ const AddArticle = () => {
                       label: item.label,
                       value: item.lang,
                     })),
-                    onChange: ({value}) =>
+                    onChange: ({ value }) =>
                       setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                   }}
                 />

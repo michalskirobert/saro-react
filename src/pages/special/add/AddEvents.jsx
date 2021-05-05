@@ -88,6 +88,7 @@ const AddEvents = () => {
                   {C.CMS_LABELS.TITLE}
                 </label>
                 <input
+                  className={errors[FORMIK_HELPER.TITLE] && "invalid"}
                   id={FORMIK_HELPER.TITLE}
                   type={CMS_INPUT_TYPES.TEXT}
                   value={values[FORMIK_HELPER.TITLE]}
@@ -107,6 +108,7 @@ const AddEvents = () => {
                   {C.CMS_LABELS.SUBTITLE}
                 </label>
                 <input
+                  className={errors[FORMIK_HELPER.SUBTITLE] && "invalid"}
                   id={FORMIK_HELPER.SUBTITLE}
                   type={CMS_INPUT_TYPES.TEXT}
                   value={values[FORMIK_HELPER.SUBTITLE]}
@@ -149,6 +151,7 @@ const AddEvents = () => {
                   {C.CMS_LABELS.PLACE}
                 </label>
                 <input
+                  className={errors[FORMIK_HELPER.PLACE] && "invalid"}
                   id={FORMIK_HELPER.PLACE}
                   placeholder={CMS_INPUT_PLACEHOLDERS.PLACE}
                   type={CMS_INPUT_TYPES.TEXT}
@@ -166,6 +169,7 @@ const AddEvents = () => {
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.DATE}>{C.CMS_LABELS.DATE}</label>
                 <input
+                  className={errors[FORMIK_HELPER.DATE] && "invalid"}
                   id={FORMIK_HELPER.DATE}
                   type={CMS_INPUT_TYPES.DATE}
                   value={values[FORMIK_HELPER.DATE]}
@@ -181,6 +185,7 @@ const AddEvents = () => {
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.TIME}>{C.CMS_LABELS.TIME}</label>
                 <input
+                  className={errors[FORMIK_HELPER.TIME] && "invalid"}
                   id={FORMIK_HELPER.TIME}
                   type={CMS_INPUT_TYPES.TIME}
                   value={values[FORMIK_HELPER.TIME]}
@@ -198,6 +203,7 @@ const AddEvents = () => {
                   {C.CMS_LABELS.IMG_URL}
                 </label>
                 <input
+                  className={errors[FORMIK_HELPER.IMG_URL] && "invalid"}
                   id={FORMIK_HELPER.IMG_URL}
                   type={CMS_INPUT_TYPES.FILE}
                   value={values[FORMIK_HELPER.IMG_URL]}
@@ -221,6 +227,7 @@ const AddEvents = () => {
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.LINK}>{C.CMS_LABELS.LINK}</label>
                 <input
+                  className={errors[FORMIK_HELPER.LINK] && "invalid"}
                   id={FORMIK_HELPER.LINK}
                   placeholder={CMS_INPUT_PLACEHOLDERS.LINK}
                   type={CMS_INPUT_TYPES.TEXT}
