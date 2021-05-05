@@ -10,9 +10,13 @@ import { editValidationScheme } from "./validation";
 
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { useEdit } from "./container";
+import { CustomSelect } from "@components/shared/custom-select";
 
 import * as CONSTANTS from "@utils/constants";
-import { FORMIK_HELPER } from "./utils.js";
+import {
+  FORMIK_HELPER,
+  CMS_INPUT_TYPES,
+} from "./utils.js";
 
 const cities = [
   {
@@ -95,7 +99,7 @@ const Edit = () => {
                   </label>
                   <input
                     id={FORMIK_HELPER.TITLE}
-                    type="text"
+                    type={CMS_INPUT_TYPES.TEXT}
                     placeholder={database[type]?.title}
                     value={values[FORMIK_HELPER.TITLE]}
                     onChange={handleChange}
@@ -107,14 +111,14 @@ const Edit = () => {
                     </F.Text>
                   )}
                 </div>
-                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_article && (
+                {type !== CONSTANTS.GENERAL_CONSTANTS.ARTICLES && (
                   <div className="form-control">
                     <label htmlFor={FORMIK_HELPER.SUBTITLE}>
                       {CONSTANTS.CMS_LABELS.SUBTITLE}
                     </label>
                     <input
                       id={FORMIK_HELPER.SUBTITLE}
-                      type="text"
+                      type={CMS_INPUT_TYPES.TEXT}
                       placeholder={database[type]?.subtitle}
                       value={values[FORMIK_HELPER.SUBTITLE]}
                       onChange={handleChange}
@@ -132,17 +136,17 @@ const Edit = () => {
                     <label htmlFor={FORMIK_HELPER.CITY}>
                       {CONSTANTS.CMS_LABELS.CITY}
                     </label>
-                    <Select
+                    <CustomSelect
                       {...{
-                        id: FORMIK_HELPER.CITY,
                         name: FORMIK_HELPER.CITY,
                         placeholder: database[type]?.city,
-                        options: cities.map((item) => ({
-                          label: item.city,
-                          value: item.city,
+                        disabled: !errors[FORMIK_HELPER.CITY],
+                        options: cities.map(({city}) => ({
+                          label: city,
+                          value: city,
                         })),
-                        onChange: (values) =>
-                          setFieldValue(FORMIK_HELPER.CITY, values.value),
+                        onChange: ({value}) =>
+                          setFieldValue(FORMIK_HELPER.CITY, value),
                       }}
                     />
                     {(errors[FORMIK_HELPER.CITY] ||
@@ -160,7 +164,7 @@ const Edit = () => {
                     </label>
                     <input
                       id={FORMIK_HELPER.PLACE}
-                      type="text"
+                      type={CMS_INPUT_TYPES.TEXT}
                       autoComplete="off"
                       placeholder={database[type]?.place}
                       value={values[FORMIK_HELPER.PLACE]}
@@ -181,7 +185,7 @@ const Edit = () => {
                     </label>
                     <input
                       id={FORMIK_HELPER.DATE}
-                      type={FORMIK_HELPER.DATE}
+                      type={CMS_INPUT_TYPES.DATE}
                       placeholder={database[type]?.date}
                       value={values[FORMIK_HELPER.DATE]}
                       onChange={handleChange}
@@ -201,7 +205,7 @@ const Edit = () => {
                     </label>
                     <input
                       id={FORMIK_HELPER.TIME}
-                      type={FORMIK_HELPER.TIME}
+                      type={CMS_INPUT_TYPES.TIME}
                       placeholder={database[type]?.time}
                       value={values[FORMIK_HELPER.TIME]}
                       onChange={handleChange}
@@ -214,14 +218,14 @@ const Edit = () => {
                     )}
                   </div>
                 )}
-                {type !== CONSTANTS.GENERAL_CONSTANTS.BLOG_article && (
+                {type !== CONSTANTS.GENERAL_CONSTANTS.ARTICLES && (
                   <div className="form-control">
                     <label htmlFor={FORMIK_HELPER.IMG_URL}>
                       {CONSTANTS.CMS_LABELS.IMG_URL}
                     </label>
                     <input
                       id={FORMIK_HELPER.IMG_URL}
-                      type="text"
+                      type={CMS_INPUT_TYPES.TEXT}
                       placeholder={database[type]?.imgURL}
                       value={values[FORMIK_HELPER.IMG_URL]}
                       onChange={handleChange}
@@ -241,7 +245,7 @@ const Edit = () => {
                     </label>
                     <input
                       id={FORMIK_HELPER.LINK}
-                      type="text"
+                      type={CMS_INPUT_TYPES.TEXT}
                       placeholder={database[type]?.link}
                       value={values[FORMIK_HELPER.LINK]}
                       onChange={handleChange}
@@ -259,17 +263,17 @@ const Edit = () => {
                     <label htmlFor={FORMIK_HELPER.CATEGORY}>
                       {CONSTANTS.CMS_LABELS.CATEGORY}
                     </label>
-                    <Select
+                    <CustomSelect
                       {...{
-                        id: FORMIK_HELPER.CATEGORY,
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
-                        options: categories.map((item) => ({
-                          label: item.name,
-                          value: item.name,
+                        invalid: !errors[FORMIK_HELPER.CATEGORY],
+                        options: categories.map(({name}) => ({
+                          label: name,
+                          value: name,
                         })),
-                        onChange: (values) =>
-                          setFieldValue(FORMIK_HELPER.CATEGORY, values.value),
+                        onChange: ({value}) =>
+                          setFieldValue(FORMIK_HELPER.CATEGORY, value),
                       }}
                     />
                     {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -284,19 +288,19 @@ const Edit = () => {
                   <label htmlFor={FORMIK_HELPER.LANGUAGE}>
                     {CONSTANTS.CMS_LABELS.LANG}
                   </label>
-                  <Select
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.LANGUAGE,
                       name: FORMIK_HELPER.LANGUAGE,
                       placeholder: database[type]?.language,
+                      invalid: !errors[FORMIK_HELPER.LANGUAGE],
                       options: CONSTANTS.GENERAL_CONSTANTS.LANGUAGES.map(
-                        (item) => ({
-                          label: item.label,
-                          value: item.lang,
+                        ({label, lang}) => ({
+                          label: label,
+                          value: lang,
                         })
                       ),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.LANGUAGE, values.value),
+                      onChange: ({value}) =>
+                        setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -310,19 +314,20 @@ const Edit = () => {
                   <label htmlFor={FORMIK_HELPER.CREW}>
                     {CONSTANTS.CMS_LABELS.CREW}
                   </label>
-                  <Select
+                  <CustomSelect
                     {...{
-                      id: FORMIK_HELPER.CREW,
                       name: FORMIK_HELPER.CREW,
                       placeholder: database[type]?.crew,
+                      invalid: !errors[FORMIK_HELPER.CREW],
+                      disabled: true,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
-                        (item) => ({
-                          label: `${item.name} ${item.surname}`,
-                          value: `${item.name} ${item.surname}`,
+                        ({name, surname}) => ({
+                          label: `${name} ${surname}`,
+                          value: `${name} ${surname}`,
                         })
                       ),
-                      onChange: (values) =>
-                        setFieldValue(FORMIK_HELPER.CREW, values.value),
+                      onChange: ({value}) =>
+                        setFieldValue(FORMIK_HELPER.CREW, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
@@ -372,11 +377,11 @@ const Edit = () => {
               </section>
               <Button
                 className="submit-btn"
-                type="button"
+                type={CMS_INPUT_TYPES.SUBMIT}
                 disabled={!isValid}
                 onClick={handleSubmit}
               >
-                Send
+                {CONSTANTS.GENERAL_CONSTANTS.SEND}
               </Button>
             </Form>
           </section>

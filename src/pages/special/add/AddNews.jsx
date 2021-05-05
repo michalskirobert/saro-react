@@ -147,7 +147,7 @@ const AddNews = () => {
                     {...{
                       name: FORMIK_HELPER.CREW,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
-                      disabled: !errors[FORMIK_HELPER.CREW],
+                      invalid: !errors[FORMIK_HELPER.CREW],
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
@@ -169,7 +169,7 @@ const AddNews = () => {
                     {...{
                       name: FORMIK_HELPER.CATEGORY,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
-                      disabled: !errors[FORMIK_HELPER.CATEGORY],
+                      invalid: !errors[FORMIK_HELPER.CATEGORY],
                       options: categories.map((item) => ({
                         label: item,
                         value: item,
@@ -215,11 +215,11 @@ const AddNews = () => {
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
-                  <Select
+                  <CustomSelect
                     {...{
                       name: FORMIK_HELPER.LANGUAGE,
                       placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                      disabled: !errors[FORMIK_HELPER.LANGUAGE],
+                      invalid: !errors[FORMIK_HELPER.LANGUAGE],
                       options: C.GENERAL_CONSTANTS.LANGUAGES.map(({label, lang}) => ({
                         label,
                         value: lang,
@@ -257,7 +257,7 @@ const AddNews = () => {
                 disabled={!image || isLoading || !isValid}
                 onClick={handleSubmit}
               >
-                Add
+                {C.GENERAL_CONSTANTS.ADD}
               </Button>
             </Form>
           </section>

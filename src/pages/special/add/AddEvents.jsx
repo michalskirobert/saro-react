@@ -242,6 +242,7 @@ const AddEvents = () => {
                   {...{
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
+                    invalid: !errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map(
                       ({ label, lang }) => ({
                         label,
@@ -261,10 +262,10 @@ const AddEvents = () => {
               </div>
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
-                <Select
+                <CustomSelect
                   {...{
                     name: FORMIK_HELPER.CREW,
-                    disabled: !errors[FORMIK_HELPER.CREW],
+                    invalid: !errors[FORMIK_HELPER.CREW],
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,
@@ -308,7 +309,7 @@ const AddEvents = () => {
               disabled={!image || isLoading || !isValid}
               onClick={handleSubmit}
             >
-              Add
+              {C.GENERAL_CONSTANTS.ADD}
             </Button>
           </Form>
         </section>
