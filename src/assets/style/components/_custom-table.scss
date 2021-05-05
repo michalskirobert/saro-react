@@ -1,35 +1,7 @@
-.section.manage-events, .section.manage-articles, .section.manage-news {
-    .sc-pVTma.czralE {
-        width: 100%;
-    }   
-    .table {
-        width: 100%;
-        background: white;
-        width: 100%;
-        border-radius: 5px;
-        border-left: 3px solid transparent;
-        overflow-x: auto;
-    
-        .btn {
-          display: inline;
-          border: 1px solid transparent;
-          border-radius: 2px;
-          outline: none;
-          background: transparent;
-          padding: 2px 4px;
-          &:hover {
-            background: $crl-panel-grey;
-          }
-        }   
-        tbody {
-          tr:hover {
-            border-left: 3px solid $crl-base-blue;
-            box-shadow: 0 0 0.4rem $crl-panel-grey;   
-            
-          }
-        }
-        .row-title {
-          width: 40%;
-        }
-      }
+.saro-panel { 
+  .table {
+    tr:hover {
+      box-shadow: 0 0 0.4rem $crl-panel-grey;
+    }
+  }
 }

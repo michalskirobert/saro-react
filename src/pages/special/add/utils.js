@@ -12,4 +12,8 @@ export const FORMIK_HELPER = Object.freeze({
   IMG_URL: "imgURL",
   IMAGES_URL: "imagesURL",
   LINK: "link",
+  FIELD_REQUIRED_MESSAGE: "Field required.",
+  MIN_4_CHARACTERS_MESSAGE: "Min 4 characters.",
+  MAX_15_CHARACTERS_MESSAGE: "Max 15 characters.",
+  WRONG_IMG_FORMAT_MESSAGE: "Wrong file format. PNG or JPG/JPEG only.",
 });

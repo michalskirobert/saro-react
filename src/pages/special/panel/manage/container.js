@@ -64,7 +64,7 @@ export const useManageContainer = () => {
     }
 
     setShowAlert(false);
-    toast.success("Items deleted", {
+    toast.success(C.GENERAL_CONSTANTS.DELETE_ITEMS_SUCCESS_MESSAGE, {
       autoClose: 2000,
       position: toast.POSITION.TOP_CENTER,
     });

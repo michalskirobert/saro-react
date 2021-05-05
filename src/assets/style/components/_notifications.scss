@@ -1,3 +1,10 @@
-.Toastify__toast--success {
-  background: $crl-main-green;
+.Toastify{
+  .Toastify__toast--success {
+    background: $crl-main-green;
+  }
+  .Toastify__toast--info {
+    background: $crl-base;
+    color: $crl-base-blue;
+  }
 }
+

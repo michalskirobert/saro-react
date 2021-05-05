@@ -1,18 +1,9 @@
-.pagination{
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    width: 250px;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    #pageSize {
-        width: 150px;
-    }   
+.pagination{     
     a.page-link {
         color: $crl-base-blue;
     }
     .page-item.active .page-link {
-        border: none;
+        border: 1px solid $crl-base-blue;
         background: $crl-base-blue;
         color: $crl-base;
     }

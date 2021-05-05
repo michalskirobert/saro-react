@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Select from "react-select";
+import { useSelector } from "react-redux"
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { AiOutlineClose } from "react-icons/ai";
@@ -36,6 +37,7 @@ const AddEvents = () => {
     setImgName,
     imgName,
   } = useContainer();
+
   useEffect(() => {
     setImgName({ ...imgName, type: "events" });
     // eslint-disable-next-line
@@ -62,20 +64,26 @@ const AddEvents = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-news">
+        <section className="section saro-panel">
           {alert && <CmsAlert />}
           <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Add event</Breadcrumb.Item>
+            <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>
+              {C.GENERAL_CONSTANTS.HOME}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>
+              {C.GENERAL_CONSTANTS.ADMIN_PANEL}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>
+              {C.GENERAL_CONSTANTS.ADD_EVENTS}
+            </Breadcrumb.Item>
           </Breadcrumb>
+          <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_EVENTS}</h2>
           <Form className="cms">
-            <h2 className="main-title">Add event</h2>
             <section className="form-container">
               <div className="form-control">
-                <label htmlFor="title">Title</label>
+                <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
                 <input
-                  id="title"
+                  id={FORMIK_HELPER.TITLE}
                   type="text"
                   value={values[FORMIK_HELPER.TITLE]}
                   placeholder="Add title"
@@ -90,9 +98,9 @@ const AddEvents = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="subtitle">Subtitle</label>
+                <label htmlFor={FORMIK_HELPER.SUBTITLE}>{C.CMS_LABELS.SUBTITLE}</label>
                 <input
-                  id="subtitle"
+                  id={FORMIK_HELPER.SUBTITLE}
                   type="text"
                   value={values[FORMIK_HELPER.SUBTITLE]}
                   placeholder="Add subtitle"
@@ -107,11 +115,11 @@ const AddEvents = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="city">City</label>
+                <label htmlFor={FORMIK_HELPER.CITY}>{C.CMS_LABELS.CITY}</label>
                 <Select
                   {...{
-                    id: "city",
-                    name: "city",
+                    id: FORMIK_HELPER.CITY,
+                    name: FORMIK_HELPER.CITY,
                     options: cities.map((item) => ({
                       label: item.city,
                       value: item.city,
@@ -129,9 +137,9 @@ const AddEvents = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="place">Place</label>
+                <label htmlFor={FORMIK_HELPER.PLACE}>{C.CMS_LABELS.PLACE}</label>
                 <input
-                  id="place"
+                  id={FORMIK_HELPER.PLACE}
                   placeholder="Add place"
                   type="text"
                   value={values[FORMIK_HELPER.PLACE]}
@@ -146,9 +154,9 @@ const AddEvents = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor="date">Date</label>
+                <label htmlFor={FORMIK_HELPER.DATE}>{C.CMS_LABELS.DATE}</label>
                 <input
-                  id="date"
+                  id={FORMIK_HELPER.DATE}
                   type="date"
                   value={values[FORMIK_HELPER.DATE]}
                   onChange={handleChange}
@@ -161,9 +169,9 @@ const AddEvents = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="time">Time</label>
+                <label htmlFor={FORMIK_HELPER.TIME}>{C.CMS_LABELS.TIME}</label>
                 <input
-                  id="time"
+                  id={FORMIK_HELPER.TIME}
                   type="time"
                   value={values[FORMIK_HELPER.TIME]}
                   onChange={handleChange}
@@ -176,9 +184,9 @@ const AddEvents = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="imgURL">Img URL</label>
+                <label htmlFor={FORMIK_HELPER.IMG_URL}>{C.CMS_LABELS.IMG_URL}</label>
                 <input
-                  id="imgURL"
+                  id={FORMIK_HELPER.IMG_URL}
                   type="file"
                   value={values[FORMIK_HELPER.IMG_URL]}
                   onChange={imageChangeHandler}
@@ -199,9 +207,9 @@ const AddEvents = () => {
                 <F.Text className="validation-alert"></F.Text>
               </div>
               <div className="form-control">
-                <label htmlFor="link">Link</label>
+                <label htmlFor={FORMIK_HELPER.LINK}>{C.CMS_LABELS.LINK}</label>
                 <input
-                  id="link"
+                  id={FORMIK_HELPER.LINK}
                   placeholder="Add link"
                   type="text"
                   value={values[FORMIK_HELPER.LINK]}
@@ -215,11 +223,11 @@ const AddEvents = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="language">Lang</label>
+                <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
                 <Select
                   {...{
-                    id: "language",
-                    name: "language",
+                    id: FORMIK_HELPER.LANGUAGE,
+                    name: FORMIK_HELPER.LANGUAGE,
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                       label: item.label,
                       value: item.lang,
@@ -236,11 +244,11 @@ const AddEvents = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="crew">Crew</label>
+                <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
                 <Select
                   {...{
-                    id: "crew",
-                    name: "crew",
+                    id: FORMIK_HELPER.CREW,
+                    name: FORMIK_HELPER.CREW,
                     options: crew.map((item) => ({
                       label: `${item.name} ${item.surname}`,
                       value: `${item.name} ${item.surname}`,
@@ -257,9 +265,9 @@ const AddEvents = () => {
                 )}
               </div>
               <div className="form-control form-info">
-                <label htmlFor="content">Info</label>
+                <label htmlFor={FORMIK_HELPER.EDITOR}>{C.CMS_LABELS.CONTENT}</label>
                 <textarea
-                  id="content"
+                  id={FORMIK_HELPER.EDITOR}
                   placeholder="add event details"
                   value={values[FORMIK_HELPER.EDITOR]}
                   onChange={handleChange}
