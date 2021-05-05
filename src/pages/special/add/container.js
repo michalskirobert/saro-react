@@ -45,7 +45,7 @@ export const useContainer = () => {
         imagesURL: images ?? "",
         type: currentPage,
         published: moment().toISOString(),
-        modified: "N/A",
+        modified: CONSTANTS.GENERAL_CONSTANTS.NOT_APPLICABLE_MESSAGE,
         id,
       });
   };
@@ -55,12 +55,13 @@ export const useContainer = () => {
       dispatch(cmsActions.addNewItemRequest());
       await addNewItem(uuidv4(), values);
       dispatch(cmsActions.addNewItemSuccess());
-      toast.success("Event has been successfully added");
+      toast.success(CONSTANTS.GENERAL_CONSTANTS.ADD_NEW_ITEM_SUCCESS_MESSAGE);
       history.push(
         CONSTANTS.ROUTE_PATHS[`MANAGE_${currentPage.toUpperCase()}_ROUTE`]
       );
-    } catch (error) {
+    } catch (error) {      
       dispatch(cmsActions.addNewItemFailure());
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
     }
   };
 

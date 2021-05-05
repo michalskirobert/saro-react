@@ -59,20 +59,26 @@ const AddArticle = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section add-article">
+        <section className="section saro-panel">
           {alert && <CmsAlert />}
           <Breadcrumb>
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="/panel">Admin Panel</Breadcrumb.Item>
-            <Breadcrumb.Item active>Add article</Breadcrumb.Item>
+            <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>
+              {C.GENERAL_CONSTANTS.HOME}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>
+              {C.GENERAL_CONSTANTS.ADMIN_PANEL}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>
+              {C.GENERAL_CONSTANTS.ADD_ARTICLES}
+            </Breadcrumb.Item>
           </Breadcrumb>
-          <Form className="cms">
-            <h2 className="main-title">Add Article</h2>
+          <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_ARTICLES}</h2>
+          <Form className="cms">            
             <section className="form-container">
               <div className="form-control">
-                <label htmlFor="title">Title</label>
+                <label htmlFor={FORMIK_HELPER.TITLE}>{C.CMS_LABELS.TITLE}</label>
                 <input
-                  id="title"
+                  id={FORMIK_HELPER.TITLE}
                   placeholder="add title"
                   type="text"
                   value={values[FORMIK_HELPER.TITLE]}
@@ -86,11 +92,11 @@ const AddArticle = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="crew">Crew</label>
+                <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
                 <Select
                   {...{
-                    id: "crew",
-                    name: "crew",
+                    id: FORMIK_HELPER.CREW,
+                    name: FORMIK_HELPER.CREW,
                     options: crew.map((item) => ({
                       label: `${item.name} ${item.surname}`,
                       value: `${item.name} ${item.surname}`,
@@ -107,11 +113,11 @@ const AddArticle = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="category">Category</label>
+                <label htmlFor={FORMIK_HELPER.CATEGORY}>{C.CMS_LABELS.CATEGORY}</label>
                 <Select
                   {...{
-                    id: "category",
-                    name: "category",
+                    id: FORMIK_HELPER.CATEGORY,
+                    name: FORMIK_HELPER.CATEGORY,
                     options: categories.map((item) => ({
                       label: item,
                       value: item,
@@ -128,11 +134,11 @@ const AddArticle = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor="language">Language</label>
+                <label htmlFor={FORMIK_HELPER.LANGUAGE}>{C.CMS_LABELS.LANG}</label>
                 <Select
                   {...{
-                    id: "language",
-                    name: "language",
+                    id: FORMIK_HELPER.LANGUAGE,
+                    name: FORMIK_HELPER.LANGUAGE,
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                       label: item.label,
                       value: item.lang,
@@ -150,7 +156,7 @@ const AddArticle = () => {
               </div>
               {/* <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMG_URL}>
-                  Upload cover image
+                  {C.CMS_LABELS.UPLOAD_COVER_IMG}
                 </label>
                 <input
                   id={FORMIK_HELPER.IMG_URL}
@@ -178,7 +184,7 @@ const AddArticle = () => {
                 </F.Text>
               </div> */}
               {/* <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>Upload images</label>
+                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>{C.CMS_LABELS.UPLOAD_IMGS}</label>
                 <input
                   id={FORMIK_HELPER.IMAGES_URL}
                   name={FORMIK_HELPER.IMAGES_URL}
@@ -207,7 +213,7 @@ const AddArticle = () => {
                 </F.Text>
               </div> */}
               <div className="form-control editor">
-                <label>Info</label>
+                <label>{C.CMS_LABELS.CONTENT}</label>
                 <CustomEditor
                   {...{
                     propName: FORMIK_HELPER.EDITOR,

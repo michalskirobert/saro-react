@@ -163,28 +163,10 @@
   }
 }
 
-form.cms,
-form.cms-translate {
-  flex-grow: 1;
-  margin-left: 5%;
-
-  .main-title {
-    text-align: left;
-    margin: {
-      top: 10px;
-      bottom: 50px;
-      right: 0;
-      left: 0;
-    }
-    font-size: 1.3rem;
-    padding: 10px;
-  }
+form.cms {
   .form-container {
-    border-radius: 5px;
-    margin-right: 2%;
-    padding: 10px 0;
-    background: white;
-    box-shadow: 0 0 0.5rem $crl-main-grey;
+    padding: 0;
+    margin: 0;
   }
   .form-control.editor {
     padding: 10px;
@@ -200,7 +182,6 @@ form.cms-translate {
   }
   .form-control {
     position: relative;
-    width: 90%;
     background: $crl-panel-grey;
     margin: 10px auto;
     min-height: 75px;
@@ -210,7 +191,6 @@ form.cms-translate {
     box-shadow: 0 0 0.2rem $crl-main-grey;
 
     input {
-      background-color: white;
       width: 70%;
       min-height: 30px;
       border: 1px solid $crl-panel-dark-grey;
@@ -223,11 +203,9 @@ form.cms-translate {
     label {
       width: 30%;
     }
-
     div.css-2b097c-container {
       width: 70%;
     }
-
     .validation-alert {
       position: absolute;
       bottom: 0;
@@ -236,7 +214,6 @@ form.cms-translate {
   }
   .form-info {
     min-height: 270px;
-
     textarea {
       background-color: white;
       width: 70%;
@@ -245,7 +222,6 @@ form.cms-translate {
       border-radius: 4px;
     }
   }
-
   .submit-btn {
     display: block;
     color: $crl-base;
@@ -261,38 +237,6 @@ form.cms-translate {
     cursor: pointer;
     &:hover {
       background-color: rgba($crl-base-blue, 0.9);
-    }
-  }
-}
-
-form.cms-translate {
-  .form-control {
-    min-height: 230px;
-    display: block;
-    label {
-      display: block;
-      width: 100%;
-    }
-    textarea,
-    input {
-      background-color: white;
-      width: 95%;
-      border: 1px solid $crl-panel-dark-grey;
-      padding: 1%;
-      border-radius: 4px;
-    }
-  }
-
-  .card {
-    background: transparent;
-    .card-body {
-      padding: 5px 15px;
-      max-height: 60px;
-      overflow-y: auto;
-    }
-    footer,
-    p {
-      font-size: 0.7rem;
     }
   }
 }
