@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Select from "react-select";
+import {useSelector} from "react-redux";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { AiOutlineClose } from "react-icons/ai";
@@ -23,6 +23,7 @@ import * as C from "@utils/constants";
 import * as S from "./styles";
 
 const AddNews = () => {
+  const userStatus = useSelector(state=> state?.currentUser?.status) 
   const {
     alert,
     crew,
@@ -165,6 +166,7 @@ const AddNews = () => {
                       name: FORMIK_HELPER.CREW,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                       invalid: !errors[FORMIK_HELPER.CREW],
+                      isDisabled: (userStatus < 50),
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,

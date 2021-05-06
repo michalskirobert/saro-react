@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import {useSelector} from "react-redux"
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { AiOutlineClose } from "react-icons/ai";
@@ -31,6 +32,7 @@ const cities = [
 ];
 
 const AddEvents = () => {
+  const userStatus = useSelector(state=> state?.currentUser?.status) 
   const {
     alert,
     handleSubmit,
@@ -287,6 +289,7 @@ const AddEvents = () => {
                   {...{
                     name: FORMIK_HELPER.CREW,
                     invalid: !errors[FORMIK_HELPER.CREW],
+                    isDisabled: (userStatus < 50),
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,

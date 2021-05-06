@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
@@ -41,6 +42,7 @@ const categories = [
 
 const Edit = () => {
   const { alert, fetchCrew, getDatabase, database, updateDatabase } = useEdit();
+  const userStatus = useSelector((state) => state?.currentUser?.status);
 
   const query = new URLSearchParams(useLocation().search);
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
@@ -334,7 +336,7 @@ const Edit = () => {
                       name: FORMIK_HELPER.CREW,
                       placeholder: database[type]?.crew,
                       invalid: !errors[FORMIK_HELPER.CREW],
-                      disabled: true,
+                      isDisabled: userStatus < 50,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
                         ({ name, surname }) => ({
                           label: `${name} ${surname}`,
