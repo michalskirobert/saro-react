@@ -31,6 +31,7 @@ const ManageEvents = () => {
     eventItems,
     isEditable,
     selectedRowsId,
+    isLoading,
   } = useManageContainer();
   const { getEvents } = useContainer();
 
@@ -100,7 +101,7 @@ const ManageEvents = () => {
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: !!isAll,
           isGrouping: false,
-          isLoading: true,
+          isLoading,
           showSelectionColumn: true,
           onRowSelected: (selectedRowId) =>
             !isAll

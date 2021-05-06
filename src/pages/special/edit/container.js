@@ -32,8 +32,6 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-
-
   const updateDatabase = async (id, type, values) => {
     dispatch(cmsActions.clear());
     try {

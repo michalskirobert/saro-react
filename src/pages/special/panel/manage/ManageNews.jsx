@@ -32,6 +32,7 @@ const ManageNews = () => {
     newsItems,
     isEditable,
     selectedRowsId,
+    isLoading
   } = useManageContainer();
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const ManageNews = () => {
           dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: !!isAll,
           isGrouping: false,
-          loading: true,
+          isLoading,
           showSelectionColumn: true,
           onRowSelected: (selectedRowId) =>
             !isAll

@@ -18,9 +18,12 @@ export const useManageContainer = () => {
 
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
+
   const newsItems = useSelector((state) => state.database.news);
   const eventItems = useSelector((state) => state.database.events);
   const articleItems = useSelector((state) => state.database.article);
+  const isLoading = useSelector(state=>state.database.isLoading)
+
   const [key, setKey] = useState("");
   const [selectedRowsId, setSelectedRowsId] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState();
@@ -110,5 +113,6 @@ export const useManageContainer = () => {
     deleteSelections,
     isAll,
     setIsAll,
+    isLoading
   };
 };

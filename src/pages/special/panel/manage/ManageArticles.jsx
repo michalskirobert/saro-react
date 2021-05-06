@@ -33,6 +33,7 @@ const ManageArticles = () => {
     articleItems,
     isEditable,
     selectedRowsId,
+    isLoading
   } = useManageContainer();
 
   useEffect(() => {
@@ -93,7 +94,7 @@ const ManageArticles = () => {
           dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED],
           checkboxSelection: !!isAll,
           isGrouping: false,
-          loading: true,
+          isLoading,
           showSelectionColumn: true,
           onRowSelected: (selectedRowId) =>
             !isAll
