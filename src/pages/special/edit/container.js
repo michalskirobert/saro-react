@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions } from "@actions";
+import { cmsActions, fetchActions, alertActions } from "@actions";
 import { firestore } from "@components/feature/firebase";
 
 import * as CONSTANTS from "@utils/constants";
@@ -33,7 +33,7 @@ export const useEdit = () => {
   };
 
   const updateDatabase = async (id, type, values) => {
-    dispatch(cmsActions.clear());
+    dispatch(alertActions.clear());
     try {
       dispatch(cmsActions.updateRequest);
       await firestore

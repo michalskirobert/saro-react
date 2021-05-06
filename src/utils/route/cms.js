@@ -44,7 +44,7 @@ export const SARO_ROUTE = Object.freeze([
     exact: true,
   },
   {
-    path: ROUTE_PATHS.ADD_NEW_EVENT_ROUTE,
+    path: ROUTE_PATHS.ADD_NEW_EVENTS_ROUTE,
     component: AdminAddEvents,
   },
   {

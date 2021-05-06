@@ -32,8 +32,7 @@ export const useManageContainer = () => {
 
   const handleButtonActions = (action) => {
     switch (action) {
-      case BUTTON_ACTIONS.DELETE:
-        console.log({ selectedRowId, selectedRowsId });
+      case BUTTON_ACTIONS.DELETE:        
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
           : toast.info(C.GENERAL_CONSTANTS.NOTHING_TO_DELETE_MESSAGE, {
