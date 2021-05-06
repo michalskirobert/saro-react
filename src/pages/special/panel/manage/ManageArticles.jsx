@@ -18,7 +18,7 @@ import * as S from "../style";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const ManageArticles = () => {
-  const { getarticle } = useContainer();
+  const { getArticles } = useContainer();
 
   const {
     setKey,
@@ -37,7 +37,7 @@ const ManageArticles = () => {
   } = useManageContainer();
 
   useEffect(() => {
-    getarticle();
+    getArticles();
     setKey(C.GENERAL_CONSTANTS.ARTICLES);
   }, []);
 

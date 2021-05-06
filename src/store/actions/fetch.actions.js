@@ -34,20 +34,26 @@ const getEventsSuccess = (events) => {
 
 const getEventsFailure = () => {
   return {
-    type: C.FETCH_CONSTANTS.GET_EVENTS_SUCCESS,
+    type: C.FETCH_CONSTANTS.GET_EVENTS_FAILURE,
   };
 };
 
-const getarticleRequest = () => {
+const getArticlesRequest = () => {
   return {
-    type: C.FETCH_CONSTANTS.GET_article_REQUEST,
+    type: C.FETCH_CONSTANTS.GET_ARTICLES_REQUEST,
   };
 };
 
-const getarticleSuccess = (article) => {
+const getArticlesSuccess = (articles) => {
   return {
-    type: C.FETCH_CONSTANTS.GET_article_SUCCESS,
-    payload: article,
+    type: C.FETCH_CONSTANTS.GET_ARTICLES_SUCCESS,
+    payload: articles,
+  };
+};
+
+const getArticlesFailure = () => {
+  return {
+    type: C.FETCH_CONSTANTS.GET_ARTICLES_FAILURE,
   };
 };
 
@@ -93,8 +99,9 @@ export const fetchActions = {
   getEventsRequest,
   getEventsSuccess,
   getEventsFailure,
-  getarticleRequest,
-  getarticleSuccess,
+  getArticlesRequest,
+  getArticlesSuccess,
+  getArticlesFailure,
   getCrewRequest,
   getCrewSuccess,
   getCrewFailure,

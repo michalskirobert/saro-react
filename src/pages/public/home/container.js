@@ -33,8 +33,8 @@ export const useContainer = () => {
       });
   };
 
-  const getarticle = async () => {
-    dispatch(fetchActions.getarticleRequest);
+  const getArticles = async () => {
+    dispatch(fetchActions.getArticlesRequest);
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
       .doc(lang)
@@ -42,13 +42,13 @@ export const useContainer = () => {
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
 
-        dispatch(fetchActions.getarticleSuccess(newsData));
+        dispatch(fetchActions.getArticlesSuccess(newsData));
       });
   };
 
   return {
     getNews,
     getEvents,
-    getarticle,
+    getArticles,
   };
 };
