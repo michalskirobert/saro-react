@@ -1,11 +1,10 @@
-import Select from "react-select";
-import { Form as F } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import { FORM_HELPER } from "./utils";
 import CustomFeedback from "@components/shared/custom-feedback/index";
+import { CustomSelect } from "@components/shared/custom-select";
 
-const options = [
+const genderOptions = [
   { value: "male", label: "male" },
   { value: "female", label: "female" },
 ];
@@ -27,32 +26,33 @@ export function SecondStep({
 
     return container;
   });
-
+  console.log(values);
   return (
     <>
       <div className="form-control select">
-        <Select
-          width="100%"
-          id="gender"
-          options={options}
-          value={values[FORM_HELPER.GENDER]?.value}
-          onChange={(value) => setFieldValue(FORM_HELPER.GENDER, value.value)}
-          placeholder="Select your Gender"
+        <CustomSelect
+          {...{
+            name: FORM_HELPER.GENDER,
+            options: genderOptions,
+            value: values[FORM_HELPER.GENDER]?.value,
+            onChange: setFieldValue,
+            placeholder: "Select your Gender",
+          }}
         />
+
         {errors[FORM_HELPER.GENDER] || touched[FORM_HELPER.GENDER] ? (
           <CustomFeedback text={errors[FORM_HELPER.GENDER]}></CustomFeedback>
         ) : null}
       </div>
       <div className="form-control select">
-        <Select
-          width="100%"
-          id="nativeLang"
-          options={languagesOptions}
-          value={values[FORM_HELPER.NATIVE_LANG]?.value}
-          onChange={(value) => {
-            setFieldValue(FORM_HELPER.NATIVE_LANG, value.value);
+        <CustomSelect
+          {...{
+            name: FORM_HELPER.NATIVE_LANG,
+            options: languagesOptions,
+            value: values[FORM_HELPER.NATIVE_LANG]?.value,
+            onChange: setFieldValue,
+            placeholder: "Select your Native Language",
           }}
-          placeholder="Select your Native Language "
         />
         {errors[FORM_HELPER.NATIVE_LANG] || touched[FORM_HELPER.NATIVE_LANG] ? (
           <CustomFeedback
@@ -61,15 +61,14 @@ export function SecondStep({
         ) : null}
       </div>
       <div className="form-control select">
-        <Select
-          width="100%"
-          id="studyingLang"
-          options={languagesOptions}
-          value={values[FORM_HELPER.STUDYING_LANG]?.value}
-          onChange={(value) => {
-            setFieldValue(FORM_HELPER.STUDYING_LANG, value.value);
+        <CustomSelect
+          {...{
+            name: FORM_HELPER.STUDYING_LANG,
+            options: languagesOptions,
+            value: values[FORM_HELPER.STUDYING_LANG]?.value,
+            onChange: setFieldValue,
+            placeholder: "Select your Studying Language",
           }}
-          placeholder="Select your Studying Language"
         />
         {errors[FORM_HELPER.STUDYING_LANG] ||
         touched[FORM_HELPER.STUDYING_LANG] ? (
