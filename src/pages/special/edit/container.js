@@ -91,5 +91,6 @@ export const useEdit = () => {
     updateDatabase,
     footer,
     type,
+    userStatus,
   };
 };

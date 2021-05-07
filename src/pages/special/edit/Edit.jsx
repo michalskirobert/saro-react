@@ -41,7 +41,15 @@ const categories = [
 ];
 
 const Edit = () => {
-  const { alert, database, updateDatabase, id, userStatus, type } = useEdit();
+  const {
+    alert,
+    database,
+    updateDatabase,
+    id,
+    userStatus,
+    type,
+    useStatus,
+  } = useEdit();
 
   return (
     <>
