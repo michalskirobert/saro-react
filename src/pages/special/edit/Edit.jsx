@@ -41,18 +41,7 @@ const categories = [
 ];
 
 const Edit = () => {
-  const { alert, fetchCrew, getDatabase, database, updateDatabase } = useEdit();
-  const userStatus = useSelector((state) => state?.currentUser?.status);
-
-  const query = new URLSearchParams(useLocation().search);
-  const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
-  const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
-
-  useEffect(() => {
-    getDatabase(id, type);
-    fetchCrew();
-    // eslint-disable-next-line
-  }, []);
+  const { alert, database, updateDatabase, id, userStatus, type } = useEdit();
 
   return (
     <>

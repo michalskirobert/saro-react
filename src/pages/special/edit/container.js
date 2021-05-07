@@ -1,13 +1,19 @@
-
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
-import { cmsActions, fetchActions, alertActions } from "@actions";
+import { cmsActions, fetchActions } from "@actions";
 import { firestore } from "@components/feature/firebase";
 
 import * as CONSTANTS from "@utils/constants";
 
 export const useEdit = () => {
+  const query = new URLSearchParams(useLocation().search);
+  const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
+  const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
+
+  const userStatus = useSelector((state) => state?.currentUser?.status);
+
   const alert = useSelector((state) => state.CMS.alert);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -33,7 +39,7 @@ export const useEdit = () => {
   };
 
   const updateDatabase = async (id, type, values) => {
-    dispatch(alertActions.clear());
+    dispatch(cmsActions.clear());
     try {
       dispatch(cmsActions.updateRequest);
       await firestore
@@ -47,7 +53,7 @@ export const useEdit = () => {
           modifiedDate: new Date().toLocaleString(),
         });
       dispatch(cmsActions.updateSuccess);
-      history.push("/panel")
+      history.push(CONSTANTS.ROUTE_PATHS[`MANAGE_${type.toUpperCase()}_ROUTE`]);
     } catch (error) {
       console.error(error);
       dispatch(cmsActions.updateFailure);
@@ -70,6 +76,12 @@ export const useEdit = () => {
       );
   };
 
+  useEffect(() => {
+    getDatabase(id, type);
+    fetchCrew();
+    // eslint-disable-next-line
+  }, []);
+
   return {
     fetchCrew,
     alert,
@@ -78,5 +90,6 @@ export const useEdit = () => {
     getDatabase,
     updateDatabase,
     footer,
+    type,
   };
 };
