@@ -47,7 +47,7 @@ export const useEdit = () => {
           modifiedDate: new Date().toLocaleString(),
         });
       dispatch(cmsActions.updateSuccess);
-      history.push("/panel");
+      history.push("/panel")
     } catch (error) {
       console.error(error);
       dispatch(cmsActions.updateFailure);

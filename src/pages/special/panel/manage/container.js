@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { firestore } from "@fire";
-import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
 
 import { BUTTON_ACTIONS } from "./../utils";
@@ -93,7 +92,8 @@ export const useManageContainer = () => {
   return {
     isEditable,
     key,
-    setKey,   
+    setKey,
+   
     newsItems,
     eventItems,
     articleItems,
