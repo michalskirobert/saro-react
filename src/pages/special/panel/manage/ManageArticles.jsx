@@ -18,7 +18,7 @@ import * as S from "../style";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const ManageArticles = () => {
-  const { getarticle } = useContainer();
+  const { getArticles } = useContainer();
 
   const {
     setKey,
@@ -33,10 +33,11 @@ const ManageArticles = () => {
     articleItems,
     isEditable,
     selectedRowsId,
+    isLoading
   } = useManageContainer();
 
   useEffect(() => {
-    getarticle();
+    getArticles();
     setKey(C.GENERAL_CONSTANTS.ARTICLES);
   }, []);
 
@@ -93,7 +94,7 @@ const ManageArticles = () => {
           dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED],
           checkboxSelection: !!isAll,
           isGrouping: false,
-          loading: true,
+          isLoading,
           showSelectionColumn: true,
           onRowSelected: (selectedRowId) =>
             !isAll

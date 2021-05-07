@@ -4,23 +4,25 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { firestore } from "@fire";
-import { useContainer } from "./../../../public/home/container";
 import { useEdit } from "./../../edit/container";
 
 import { BUTTON_ACTIONS } from "./../utils";
 import * as C from "@utils/constants";
 
 export const useManageContainer = () => {
-  const { getNews, getEvents, getarticle } = useContainer();
+ 
   const { handleEdit } = useEdit();
   const history = useHistory();
   const location = useLocation();
 
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
+
   const newsItems = useSelector((state) => state.database.news);
   const eventItems = useSelector((state) => state.database.events);
-  const articleItems = useSelector((state) => state.database.article);
+  const articleItems = useSelector((state) => state.database.articles);
+  const isLoading = useSelector(state=>state.database.isLoading)
+
   const [key, setKey] = useState("");
   const [selectedRowsId, setSelectedRowsId] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState();
@@ -29,8 +31,7 @@ export const useManageContainer = () => {
 
   const handleButtonActions = (action) => {
     switch (action) {
-      case BUTTON_ACTIONS.DELETE:
-        console.log({ selectedRowId, selectedRowsId });
+      case BUTTON_ACTIONS.DELETE:        
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
           : toast.info(C.GENERAL_CONSTANTS.NOTHING_TO_DELETE_MESSAGE, {
@@ -92,9 +93,7 @@ export const useManageContainer = () => {
     isEditable,
     key,
     setKey,
-    getNews,
-    getEvents,
-    getarticle,
+   
     newsItems,
     eventItems,
     articleItems,
@@ -110,5 +109,6 @@ export const useManageContainer = () => {
     deleteSelections,
     isAll,
     setIsAll,
+    isLoading
   };
 };

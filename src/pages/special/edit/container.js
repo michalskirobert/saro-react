@@ -2,7 +2,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { cmsActions, fetchActions } from "@actions";
+import { cmsActions, fetchActions, alertActions } from "@actions";
 import { firestore } from "@components/feature/firebase";
 
 import * as CONSTANTS from "@utils/constants";
@@ -32,10 +32,8 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-
-
   const updateDatabase = async (id, type, values) => {
-    dispatch(cmsActions.clear());
+    dispatch(alertActions.clear());
     try {
       dispatch(cmsActions.updateRequest);
       await firestore
@@ -49,7 +47,7 @@ export const useEdit = () => {
           modifiedDate: new Date().toLocaleString(),
         });
       dispatch(cmsActions.updateSuccess);
-      history.push("/panel");
+      history.push("/panel")
     } catch (error) {
       console.error(error);
       dispatch(cmsActions.updateFailure);

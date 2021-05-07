@@ -12,7 +12,7 @@ export const ROUTE_PATHS = {
   USER_ROUTE: "/profile/:id",
   PANEL_ROUTE: "/panel",
   ADD_NEW_ARTICLES_ROUTE: "/panel/add/articles",
-  ADD_NEW_EVENT_ROUTE: "/panel/add/events",
+  ADD_NEW_EVENTS_ROUTE: "/panel/add/events",
   ADD_NEW_NEWS_ROUTE: "/panel/add/news",
   MANAGE_ARTICLES_ROUTE: "/panel/manage/articles",
   MANAGE_NEWS_ROUTE: "/panel/manage/news",

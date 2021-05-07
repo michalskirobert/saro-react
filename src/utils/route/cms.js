@@ -15,7 +15,7 @@ const AdminTranslate = lazy(() =>
 const AdminTranslateFooter = lazy(() =>
   import("../../pages/special/panel/translate/TranslateFooter")
 );
-const AdminManageArticle = lazy(() =>
+const AdminManageArticles = lazy(() =>
   import("../../pages/special/panel/manage/ManageArticles")
 );
 const AdminManageNews = lazy(() =>
@@ -44,7 +44,7 @@ export const SARO_ROUTE = Object.freeze([
     exact: true,
   },
   {
-    path: ROUTE_PATHS.ADD_NEW_EVENT_ROUTE,
+    path: ROUTE_PATHS.ADD_NEW_EVENTS_ROUTE,
     component: AdminAddEvents,
   },
   {
@@ -61,7 +61,7 @@ export const SARO_ROUTE = Object.freeze([
   },
   {
     path: ROUTE_PATHS.MANAGE_ARTICLES_ROUTE,
-    component: AdminManageArticle,
+    component: AdminManageArticles,
   },
   {
     path: ROUTE_PATHS.MANAGE_NEWS_ROUTE,
