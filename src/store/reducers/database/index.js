@@ -23,13 +23,13 @@ export const database = (state = initialState, action) => {
     case CONSTANTS.FETCH_CONSTANTS.GET_ARTICLES_SUCCESS:
       return {
         ...state,
-        article: action.payload,
+        articles: action.payload,
         isLoading: false,
       };
     case CONSTANTS.FETCH_CONSTANTS.GET_ARTICLES_FAILURE:
       return {
         ...state,
-        article: [],
+        articles: [],
         isLoading: false,
         isError: true,
         errorContent: "Oops.. Something went wrong, refresh your browser",

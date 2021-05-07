@@ -11,7 +11,7 @@ import { BUTTON_ACTIONS } from "./../utils";
 import * as C from "@utils/constants";
 
 export const useManageContainer = () => {
-  const { getNews, getEvents, getarticle } = useContainer();
+ 
   const { handleEdit } = useEdit();
   const history = useHistory();
   const location = useLocation();
@@ -21,7 +21,7 @@ export const useManageContainer = () => {
 
   const newsItems = useSelector((state) => state.database.news);
   const eventItems = useSelector((state) => state.database.events);
-  const articleItems = useSelector((state) => state.database.article);
+  const articleItems = useSelector((state) => state.database.articles);
   const isLoading = useSelector(state=>state.database.isLoading)
 
   const [key, setKey] = useState("");
@@ -93,10 +93,7 @@ export const useManageContainer = () => {
   return {
     isEditable,
     key,
-    setKey,
-    getNews,
-    getEvents,
-    getarticle,
+    setKey,   
     newsItems,
     eventItems,
     articleItems,

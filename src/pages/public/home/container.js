@@ -40,7 +40,7 @@ export const useContainer = () => {
       .doc(lang)
       .collection(GENERAL_CONSTANTS.ARTICLES)
       .onSnapshot((resp) => {
-        const newsData = resp.docs.map((item) => item.data());
+        const newsData = resp.docs.map((item) => item.data());        
 
         dispatch(fetchActions.getArticlesSuccess(newsData));
       });
