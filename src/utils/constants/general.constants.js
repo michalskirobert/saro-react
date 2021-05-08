@@ -16,6 +16,7 @@ export const GENERAL_CONSTANTS = {
   NOTHING_TO_DELETE_MESSAGE: "Nothing to delete.",  
   ADD_NEW_ITEM_SUCCESS_MESSAGE: "New item has been successfully added.",
   FAILURE_MESSAGE: "Something went wrong. Try again.",
+  INVALID_FILE_FORMAT: "Wrong file format: png/jpg only.",
   NOT_APPLICABLE_MESSAGE: "N/A",
   NO_DATA_MESSAGE: "Nothing to display.",
   HOME: "Home",

@@ -181,20 +181,7 @@ const AddArticle = () => {
                   name={FORMIK_HELPER.IMG_URL}
                   type="file"
                   onChange={imageChangeHandler}
-                />
-                <S.PreviewContainer>
-                  {image && (
-                    <>
-                      <S.PreviewImage src={image} alt="Picture preview" />
-                      <S.PreviewDelete
-                        type="button"
-                        onClick={() => deleteImage(image)}
-                      >
-                        <AiOutlineClose />
-                      </S.PreviewDelete>
-                    </>
-                  )}
-                </S.PreviewContainer>
+                />        
 
                 <F.Text className="validation-alert">
                   {!invalid.errorMsg && !image && "Field required."}
@@ -210,20 +197,7 @@ const AddArticle = () => {
                   onChange={(e) => {
                     imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
                   }}
-                />
-                <S.PreviewContainer>
-                  {images && (
-                    <>
-                      <S.PreviewImage src={images} alt="Picture preview" />
-                      <S.PreviewDelete
-                        type="button"
-                        onClick={() => deleteImage(images)}
-                      >
-                        <AiOutlineClose />
-                      </S.PreviewDelete>
-                    </>
-                  )}
-                </S.PreviewContainer>
+                />    
 
                 <F.Text className="validation-alert">
                   {!invalid.errorMsg && !images && "Field required."}

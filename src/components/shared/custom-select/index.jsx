@@ -24,7 +24,7 @@ export const CustomSelect = ({
         placeholder,
         value: { label, value },
         options,
-        onChange: (values) => onChange(propName, values),
+        onChange: (values)=> onChange(propName, values),
         isDisabled,
       }}
     />

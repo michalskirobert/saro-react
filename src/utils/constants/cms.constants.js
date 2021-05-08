@@ -16,7 +16,7 @@ export const CMS_LABELS = Object.freeze({
   PLACE: "Place",
   DATE: "Date",
   TIME: "Time",
-  IMG_URL: "IMG URL",
+  IMG_URL: "Upload image",
   UPLOAD_IMGS: "Upload images",
   UPLOAD_COVER_IMG: "Upload cover image",
   LINK: "Link",

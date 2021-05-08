@@ -140,20 +140,7 @@ const AddNews = () => {
                       type: CMS_INPUT_TYPES.FILE,
                       onChange: imageChangeHandler,
                     }}
-                  />
-                  <S.PreviewContainer>
-                    {image && (
-                      <>
-                        <S.PreviewImage src={image} alt="Picture preview" />
-                        <S.PreviewDelete
-                          type={CMS_INPUT_TYPES.BUTTON}
-                          onClick={() => deleteImage(image)}
-                        >
-                          <AiOutlineClose />
-                        </S.PreviewDelete>
-                      </>
-                    )}
-                  </S.PreviewContainer>
+                  />                 
 
                   <F.Text className="validation-alert"></F.Text>
                 </div>
@@ -218,21 +205,7 @@ const AddNews = () => {
                         imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
                       },
                     }}
-                  />
-                  <S.PreviewContainer>
-                    {images && (
-                      <>
-                        <S.PreviewImage src={images} alt="Picture preview" />
-                        <S.PreviewDelete
-                          type={CMS_INPUT_TYPES.BUTTON}
-                          onClick={() => deleteImage(images)}
-                        >
-                          <AiOutlineClose />
-                        </S.PreviewDelete>
-                      </>
-                    )}
-                  </S.PreviewContainer>
-
+                  /> 
                   <F.Text className="validation-alert"></F.Text>
                 </div>
                 <div className="form-control">

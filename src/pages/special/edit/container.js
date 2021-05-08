@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 
-import { cmsActions, fetchActions } from "@actions";
+import { cmsActions, fetchActions, alertActions } from "@actions";
 import { firestore } from "@components/feature/firebase";
+
+import moment from "moment";
 
 import * as CONSTANTS from "@utils/constants";
 
@@ -38,10 +40,10 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-  const updateDatabase = async (id, type, values) => {
-    dispatch(cmsActions.clear());
+  const updateDatabase = async (id, type, values) => { 
+    dispatch(alertActions.clear());
     try {
-      dispatch(cmsActions.updateRequest);
+      dispatch(cmsActions.updateRequest());
       await firestore
         .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
         .doc(lang)
@@ -49,11 +51,13 @@ export const useEdit = () => {
         .doc(id)
         .update({
           ...values,
-          modified: new Date(),
-          modifiedDate: new Date().toLocaleString(),
+          modified: moment().toISOString(),
         });
-      dispatch(cmsActions.updateSuccess);
-      history.push(CONSTANTS.ROUTE_PATHS[`MANAGE_${type.toUpperCase()}_ROUTE`]);
+      dispatch(cmsActions.updateSuccess());
+      // history.push(CONSTANTS.ROUTE_PATHS[`MANAGE_${type.toUpperCase()}_ROUTE`]);
+      history.push("/panel")
+      
+      
     } catch (error) {
       console.error(error);
       dispatch(cmsActions.updateFailure);

@@ -65,68 +65,42 @@ export const useContainer = () => {
     }
   };
 
-  const imageChangeHandler = (e, type) => {
-    const file = e.currentTarget.files[0];
-    if (type !== FORMIK_HELPER.IMAGES_URL) {
-      uploadImage(file);
-      return;
-    }
-    uploadImage(file, FORMIK_HELPER.IMAGES_URL);
-  };
+  // TO DO 
+  //Musisz dodać do setValue prev state i dodać jako nowy state z komponentem czyli np
+  // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
 
-  const uploadImage = async (file, type) => {
-    //Musisz dodać do setValue prev state i dodać jako nowy state z komponentem czyli np
-    // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
-    let uploadFile = `/images/${
-      type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
-    }/${file.name}`;
+  const imageChangeHandler = async (e) => {
+    const file = e.target.files[0]    
+    if(file.type !== "image/png"){
+      setImage("")
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
+      return
+    }  
+    file && uploadImage(file)       
+  }
 
-    // if (file.type !== "image/png") {
-    //   setInvalid({
-    //     [`errorMsg-${type}`]: "Invalid file format. Choose jpg/png",
-    //   });
-    //   !image && setImage(null);
-    //   !images && setImages(null);
-    //   return;
-    // } else if (!type) {
-    //   setImgName(file.name);
-    //   setInvalid({});
-    // }
-
-    // setImagesName(file.name);
-    // setInvalid({});
-
-    dispatch(cmsActions.uploadImageRequest());
-
-    storage
-      .ref(uploadFile)
-      .put(file)
-      .on("state_changed", () => {
-        type === FORMIK_HELPER.IMAGES_URL
-          ? setImagesName({ ...imagesName, name: file.name })
-          : setImgName({ ...imgName, name: file.name });
-        storage
-          .ref(
-            `/images/${
-              type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
-            } `
-          )
-          .child(file.name)
-          .getDownloadURL()
-          .then((resp) => {
-            dispatch(cmsActions.uploadImageSuccess());
-            type === FORMIK_HELPER.IMAGES_URL
-              ? setImages(resp)
-              : setImage(resp);
-          })
-          .catch(() => {
-            dispatch(cmsActions.uploadImageFailure());
-          });
-      });
-  };
+  const uploadImage = async (file) => {
+    dispatch(cmsActions.uploadImageRequest())
+    try {
+      const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`)
+      await fileRef.put(file)
+      setImage(await fileRef.getDownloadURL()) 
+      dispatch(cmsActions.uploadImageSuccess())  
+    } catch (error) {
+      dispatch(cmsActions.uploadImageFailure())
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+    }   
+  }
 
   const deleteImage = async (file) => {
-    return await storage.refFromURL(file).delete();
+    try {
+      await storage.refFromURL(file).delete();     
+      toast.success("file deleted")   
+    } catch (error) {     
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+    }   finally {
+      setImage("")  
+    }       
   };
 
   const fetchCrew = async () => {

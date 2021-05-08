@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
@@ -41,14 +40,14 @@ const categories = [
 ];
 
 const Edit = () => {
+  const query = new URLSearchParams(useLocation().search);
+  const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
+  const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
   const {
     alert,
     database,
     updateDatabase,
-    id,
     userStatus,
-    type,
-    useStatus,
   } = useEdit();
 
   return (
@@ -56,9 +55,9 @@ const Edit = () => {
       <Formik
         {...{
           initialValues: { ...database[type] },
-          validateOnChange: true,
-          validateOnMount: true,
-          validationSchema: editValidationScheme(type),
+          // validateOnChange: true,
+          // validateOnMount: true,
+          // validationSchema: editValidationScheme(type),
           onSubmit: (values) => updateDatabase(id, type, values),
           enableReinitialize: true,
         }}
@@ -393,8 +392,8 @@ const Edit = () => {
               <Button
                 {...{
                   className: "submit-btn",
-                  type: CMS_INPUT_TYPES.SUBMIT,
-                  disabled: !isValid,
+                  type: "submit",
+                  // disabled: !isValid,
                   onClick: handleSubmit,
                 }}
               >
