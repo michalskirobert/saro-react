@@ -18,6 +18,7 @@ export const useContainer = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
+  
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
 
@@ -31,7 +32,6 @@ export const useContainer = () => {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState("");
   const [images, setImages] = useState("");
-  const [infoContainer, setInfoContainer] = useState("");
 
   const addNewItem = async (id, values) => {
     return await firestore
@@ -70,8 +70,13 @@ export const useContainer = () => {
   // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
 
   const imageChangeHandler = async (e) => {
-    const file = e.target.files[0]    
-    if(file.type !== "image/png"){
+    const file = e.target.files[0]   
+    if(!file){
+      setImage("")
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+      return
+    } 
+    if(file?.type !== "image/png"){
       setImage("")
       toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
       return
@@ -137,8 +142,6 @@ export const useContainer = () => {
   return {
     alert,
     isLoading,
-    infoContainer,
-    setInfoContainer,
     handleSubmit,
     crew,
     categories,

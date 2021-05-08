@@ -33,18 +33,7 @@ const AddNews = () => {
     image,
     categories,
     deleteImage,
-    setImgName,
-    imgName,
-    imagesName,
-    setImagesName,
-    images,
   } = useContainer();
-
-  useEffect(() => {
-    setImgName({ ...imgName, type: "news" });
-    setImagesName({ ...imagesName, type: "news", kind: "images" });
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <>
@@ -129,21 +118,43 @@ const AddNews = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.IMG_URL}>
-                    {C.CMS_LABELS.UPLOAD_COVER_IMG}
-                  </label>
-                  <input
+                <label htmlFor={FORMIK_HELPER.IMG_URL}>
+                  {C.CMS_LABELS.IMG_URL}
+                </label>
+                <input
+                  {...{
+                    className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                    id: FORMIK_HELPER.IMG_URL,
+                    type: "file",
+                    value: values[FORMIK_HELPER.IMG_URL],
+                    onChange: imageChangeHandler,
+                  }}
+                />
+                {image && (
+                  <>
+                    <S.PreviewImg
+                      {...{
+                        src: image,
+                        alt: "Preview",
+                      }}
+                    />
+                    <S.DeleteUpload
                     {...{
-                      className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
-                      id: FORMIK_HELPER.IMG_URL,
-                      name: FORMIK_HELPER.IMG_URL,
-                      type: CMS_INPUT_TYPES.FILE,
-                      onChange: imageChangeHandler,
-                    }}
-                  />                 
-
-                  <F.Text className="validation-alert"></F.Text>
-                </div>
+                      type: CMS_INPUT_TYPES.BUTTON,
+                      variant: C.GENERAL_CONSTANTS.B_DANGER,
+                      onClick: () => deleteImage(image)
+                    }}                      
+                    >
+                      <AiOutlineClose />
+                    </S.DeleteUpload>
+                  </>
+                )}
+                 {(errors[FORMIK_HELPER.IMG_URL] ||
+                  touched[FORMIK_HELPER.IMG_URL]) && (
+                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
+                )}                
+              </div>
+               
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.CREW}>
                     {C.CMS_LABELS.CREW}
@@ -152,7 +163,7 @@ const AddNews = () => {
                     {...{
                       name: FORMIK_HELPER.CREW,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
-                      invalid: !errors[FORMIK_HELPER.CREW],
+                      invalid: errors[FORMIK_HELPER.CREW],
                       isDisabled: (userStatus < 50),
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,
@@ -176,7 +187,7 @@ const AddNews = () => {
                     {...{
                       name: FORMIK_HELPER.CATEGORY,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
-                      invalid: !errors[FORMIK_HELPER.CATEGORY],
+                      invalid: errors[FORMIK_HELPER.CATEGORY],
                       options: categories.map((item) => ({
                         label: item,
                         value: item,
@@ -216,7 +227,7 @@ const AddNews = () => {
                     {...{
                       name: FORMIK_HELPER.LANGUAGE,
                       placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                      invalid: !errors[FORMIK_HELPER.LANGUAGE],
+                      invalid: errors[FORMIK_HELPER.LANGUAGE],
                       options: C.GENERAL_CONSTANTS.LANGUAGES.map(
                         ({ label, lang }) => ({
                           label,

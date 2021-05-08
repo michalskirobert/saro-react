@@ -20,6 +20,7 @@ import {
 } from "./utils.js";
 
 import * as C from "@utils/constants";
+import * as S from "./styles";
 
 const AddArticle = () => {
   const userStatus = useSelector(state=> state?.currentUser?.status) 
@@ -53,8 +54,8 @@ const AddArticle = () => {
       {...{
         initialValues: {},
         validateOnChange: true,
-        // validateOnMount: true,
-        // validationSchema: addArticleValidationScheme,
+        validateOnMount: true,
+        validationSchema: addArticleValidationScheme,
         onSubmit: (values) => handleSubmit(values),
       }}
     >
@@ -111,7 +112,7 @@ const AddArticle = () => {
                     name: FORMIK_HELPER.CREW,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     isDisabled: (userStatus < 50),
-                    invalid: !errors[FORMIK_HELPER.CREW],
+                    invalid: errors[FORMIK_HELPER.CREW],
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,
                       value: `${name} ${surname}`,
@@ -134,7 +135,7 @@ const AddArticle = () => {
                   {...{
                     name: FORMIK_HELPER.CATEGORY,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
-                    invalid: !errors[FORMIK_HELPER.CATEGORY],
+                    invalid: errors[FORMIK_HELPER.CATEGORY],
                     options: categories.map((item) => ({
                       label: item,
                       value: item,
@@ -157,7 +158,7 @@ const AddArticle = () => {
                   {...{
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                    invalid: !errors[FORMIK_HELPER.LANGUAGE],
+                    invalid: errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                       label: item.label,
                       value: item.lang,
@@ -172,22 +173,43 @@ const AddArticle = () => {
                   </F.Text>
                 )}
               </div>
-              {/* <div className="form-control">
+              <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMG_URL}>
                   {C.CMS_LABELS.UPLOAD_COVER_IMG}
                 </label>
                 <input
-                  id={FORMIK_HELPER.IMG_URL}
-                  name={FORMIK_HELPER.IMG_URL}
-                  type="file"
-                  onChange={imageChangeHandler}
-                />        
-
-                <F.Text className="validation-alert">
-                  {!invalid.errorMsg && !image && "Field required."}
-                  {invalid && invalid.errorMsg}
-                </F.Text>
-              </div> */}
+                  {...{
+                    className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                    id: FORMIK_HELPER.IMG_URL,
+                    type: "file",
+                    value: values[FORMIK_HELPER.IMG_URL],
+                    onChange: imageChangeHandler,
+                  }}
+                />
+                {image && (
+                  <>
+                    <S.PreviewImg
+                      {...{
+                        src: image,
+                        alt: "Preview",
+                      }}
+                    />
+                    <S.DeleteUpload
+                    {...{
+                      type: CMS_INPUT_TYPES.BUTTON,
+                      variant: C.GENERAL_CONSTANTS.B_DANGER,
+                      onClick: () => deleteImage(image)
+                    }}                      
+                    >
+                      <AiOutlineClose />
+                    </S.DeleteUpload>
+                  </>
+                )}
+                 {(errors[FORMIK_HELPER.IMG_URL] ||
+                  touched[FORMIK_HELPER.IMG_URL]) && (
+                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
+                )}                
+              </div>
               {/* <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMAGES_URL}>{C.CMS_LABELS.UPLOAD_IMGS}</label>
                 <input

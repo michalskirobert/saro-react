@@ -243,7 +243,7 @@ const AddEvents = () => {
                         alt: "Preview",
                       }}
                     />
-                    <S.PreviewDelete 
+                    <S.DeleteUpload
                     {...{
                       type: CMS_INPUT_TYPES.BUTTON,
                       variant: C.GENERAL_CONSTANTS.B_DANGER,
@@ -251,7 +251,7 @@ const AddEvents = () => {
                     }}                      
                     >
                       <AiOutlineClose />
-                    </S.PreviewDelete>
+                    </S.DeleteUpload>
                   </>
                 )}
                  {(errors[FORMIK_HELPER.IMG_URL] ||

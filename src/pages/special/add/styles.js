@@ -6,7 +6,7 @@ export const PreviewImg = styled.img`
   max-height: 100px;
 `;
 
-export const PreviewDelete = styled(Button)`
+export const DeleteUpload = styled(Button)`
 padding: 2px 4px;
 font-size: 0.55rem;
 align-self: flex-start;
