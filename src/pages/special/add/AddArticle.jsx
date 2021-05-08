@@ -33,21 +33,10 @@ const AddArticle = () => {
     imageChangeHandler,
     image,
     deleteImage,
-    invalid,
-    imagesName,
-    setImagesName,
     images,
-    setImgName,
-    imgName,
     handleEditorChange,
     value,
   } = useContainer();
-
-  useEffect(() => {
-    setImgName({ ...imgName, type: "article" });
-    setImagesName({ ...imagesName, type: "article", kind: "images" });
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <Formik
@@ -181,9 +170,9 @@ const AddArticle = () => {
                   {...{
                     className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
                     id: FORMIK_HELPER.IMG_URL,
-                    type: "file",
+                    type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: imageChangeHandler,
+                    onChange: (e)=> imageChangeHandler(e),
                   }}
                 />
                 {image && (
@@ -210,22 +199,22 @@ const AddArticle = () => {
                     <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
                 )}                
               </div>
-              {/* <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>{C.CMS_LABELS.UPLOAD_IMGS}</label>
-                <input
-                  id={FORMIK_HELPER.IMAGES_URL}
-                  name={FORMIK_HELPER.IMAGES_URL}
-                  type="file"
-                  onChange={(e) => {
-                    imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+              <div className="form-control">
+                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>
+                  {C.CMS_LABELS.UPLOAD_IMGS}
+                </label>
+                <input 
+                  {...{
+                    className: errors[FORMIK_HELPER.IMAGES_URL] && "invalid",
+                    id: FORMIK_HELPER.IMAGES_URL,
+                    type: CMS_INPUT_TYPES.FILE,
+                    value: values[FORMIK_HELPER.IMAGES_URL],
+                    onChange: (e)=>imageChangeHandler(e, true),
+                    multiple: true,
                   }}
-                />    
-
-                <F.Text className="validation-alert">
-                  {!invalid.errorMsg && !images && "Field required."}
-                  {invalid && invalid.errorMsg}
-                </F.Text>
-              </div> */}
+                />            
+              </div>
+           
               <div className="form-control editor">
                 <label>{C.CMS_LABELS.CONTENT}</label>
                 <CustomEditor

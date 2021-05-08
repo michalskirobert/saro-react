@@ -18,7 +18,7 @@ export const useContainer = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
-  
+
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
 
@@ -69,27 +69,38 @@ export const useContainer = () => {
   //Musisz dodać do setValue prev state i dodać jako nowy state z komponentem czyli np
   // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
 
-  const imageChangeHandler = async (e) => {
-    const file = e.target.files[0]   
-    if(!file){
-      setImage("")
-      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
-      return
-    } 
-    if(file?.type !== "image/png"){
-      setImage("")
-      toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
-      return
-    }  
-    file && uploadImage(file)       
+  const imageChangeHandler = async (e, multiple) => {  
+      const files = Array.from(e.target.files) 
+      if(!files){
+        multiple ? setImages("") : setImage("")       
+        toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+        return
+      } 
+      else if(!multiple){
+        if(files[0]?.type !== "image/png"){
+          setImage("")
+          toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
+          return
+        }  
+        uploadImage(files[0])
+        return
+      }    
+      files.forEach(file=> {
+        if(file?.type !=="image/png"){
+          setImages("")
+          toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
+          return
+        }
+        uploadImage(file, multiple)
+      })     
   }
 
-  const uploadImage = async (file) => {
+  const uploadImage = async (file, multiple) => {
     dispatch(cmsActions.uploadImageRequest())
     try {
       const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`)
       await fileRef.put(file)
-      setImage(await fileRef.getDownloadURL()) 
+      multiple ? setImages(...images, await fileRef.getDownloadURL()) : setImage(await fileRef.getDownloadURL())    
       dispatch(cmsActions.uploadImageSuccess())  
     } catch (error) {
       dispatch(cmsActions.uploadImageFailure())
