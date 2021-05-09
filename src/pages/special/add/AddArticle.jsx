@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import {useSelector} from "react-redux";
@@ -20,6 +20,7 @@ import {
 } from "./utils.js";
 
 import * as C from "@utils/constants";
+import * as S from "./styles";
 
 const AddArticle = () => {
   const userStatus = useSelector(state=> state?.currentUser?.status) 
@@ -32,29 +33,17 @@ const AddArticle = () => {
     imageChangeHandler,
     image,
     deleteImage,
-    invalid,
-    imagesName,
-    setImagesName,
-    images,
-    setImgName,
-    imgName,
     handleEditorChange,
     value,
   } = useContainer();
-
-  useEffect(() => {
-    setImgName({ ...imgName, type: "article" });
-    setImagesName({ ...imagesName, type: "article", kind: "images" });
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <Formik
       {...{
         initialValues: {},
         validateOnChange: true,
-        // validateOnMount: true,
-        // validationSchema: addArticleValidationScheme,
+        validateOnMount: true,
+        validationSchema: addArticleValidationScheme,
         onSubmit: (values) => handleSubmit(values),
       }}
     >
@@ -111,7 +100,7 @@ const AddArticle = () => {
                     name: FORMIK_HELPER.CREW,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     isDisabled: (userStatus < 50),
-                    invalid: !errors[FORMIK_HELPER.CREW],
+                    invalid: errors[FORMIK_HELPER.CREW],
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,
                       value: `${name} ${surname}`,
@@ -134,7 +123,7 @@ const AddArticle = () => {
                   {...{
                     name: FORMIK_HELPER.CATEGORY,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
-                    invalid: !errors[FORMIK_HELPER.CATEGORY],
+                    invalid: errors[FORMIK_HELPER.CATEGORY],
                     options: categories.map((item) => ({
                       label: item,
                       value: item,
@@ -157,7 +146,7 @@ const AddArticle = () => {
                   {...{
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                    invalid: !errors[FORMIK_HELPER.LANGUAGE],
+                    invalid: errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                       label: item.label,
                       value: item.lang,
@@ -172,64 +161,59 @@ const AddArticle = () => {
                   </F.Text>
                 )}
               </div>
-              {/* <div className="form-control">
+              <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMG_URL}>
                   {C.CMS_LABELS.UPLOAD_COVER_IMG}
                 </label>
                 <input
-                  id={FORMIK_HELPER.IMG_URL}
-                  name={FORMIK_HELPER.IMG_URL}
-                  type="file"
-                  onChange={imageChangeHandler}
-                />
-                <S.PreviewContainer>
-                  {image && (
-                    <>
-                      <S.PreviewImage src={image} alt="Picture preview" />
-                      <S.PreviewDelete
-                        type="button"
-                        onClick={() => deleteImage(image)}
-                      >
-                        <AiOutlineClose />
-                      </S.PreviewDelete>
-                    </>
-                  )}
-                </S.PreviewContainer>
-
-                <F.Text className="validation-alert">
-                  {!invalid.errorMsg && !image && "Field required."}
-                  {invalid && invalid.errorMsg}
-                </F.Text>
-              </div> */}
-              {/* <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>{C.CMS_LABELS.UPLOAD_IMGS}</label>
-                <input
-                  id={FORMIK_HELPER.IMAGES_URL}
-                  name={FORMIK_HELPER.IMAGES_URL}
-                  type="file"
-                  onChange={(e) => {
-                    imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                  {...{
+                    className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                    id: FORMIK_HELPER.IMG_URL,
+                    type: CMS_INPUT_TYPES.FILE,
+                    value: values[FORMIK_HELPER.IMG_URL],
+                    onChange: (e)=> imageChangeHandler(e),
                   }}
                 />
-                <S.PreviewContainer>
-                  {images && (
-                    <>
-                      <S.PreviewImage src={images} alt="Picture preview" />
-                      <S.PreviewDelete
-                        type="button"
-                        onClick={() => deleteImage(images)}
-                      >
-                        <AiOutlineClose />
-                      </S.PreviewDelete>
-                    </>
-                  )}
-                </S.PreviewContainer>
-
-                <F.Text className="validation-alert">
-                  {!invalid.errorMsg && !images && "Field required."}
-                  {invalid && invalid.errorMsg}
-                </F.Text>
-              </div> */}
+                {image && (
+                  <>
+                    <S.PreviewImg
+                      {...{
+                        src: image,
+                        alt: "Preview",
+                      }}
+                    />
+                    <S.DeleteUpload
+                    {...{
+                      type: CMS_INPUT_TYPES.BUTTON,
+                      variant: C.GENERAL_CONSTANTS.B_DANGER,
+                      onClick: () => deleteImage(image)
+                    }}                      
+                    >
+                      <AiOutlineClose />
+                    </S.DeleteUpload>
+                  </>
+                )}
+                 {(errors[FORMIK_HELPER.IMG_URL] ||
+                  touched[FORMIK_HELPER.IMG_URL]) && (
+                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
+                )}                
+              </div>
+              <div className="form-control">
+                <label htmlFor={FORMIK_HELPER.IMAGES_URL}>
+                  {C.CMS_LABELS.UPLOAD_IMGS}
+                </label>
+                <input 
+                  {...{
+                    className: errors[FORMIK_HELPER.IMAGES_URL] && "invalid",
+                    id: FORMIK_HELPER.IMAGES_URL,
+                    type: CMS_INPUT_TYPES.FILE,
+                    value: values[FORMIK_HELPER.IMAGES_URL],
+                    onChange: (e)=>imageChangeHandler(e, true),
+                    multiple: true,
+                  }}
+                />            
+              </div>
+           
               <div className="form-control editor">
                 <label>{C.CMS_LABELS.CONTENT}</label>
                 <CustomEditor

@@ -20,7 +20,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 const ManageNews = () => {
   const { getNews } = useContainer();
   const {
-    setKey,
     setSelectedRowsId,
     showAlert,
     setShowAlert,
@@ -37,7 +36,6 @@ const ManageNews = () => {
 
   useEffect(() => {
     getNews();
-    setKey(C.GENERAL_CONSTANTS.NEWS);
   }, []);
 
   return (
@@ -89,7 +87,7 @@ const ManageNews = () => {
           rows: newsItems,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
+          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED, TABLE_COLUMN_PROPERTIES.PUBLISHED],
           checkboxSelection: !!isAll,
           isGrouping: false,
           isLoading,

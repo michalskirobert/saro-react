@@ -12,7 +12,7 @@ export const addArticleValidationScheme = yup.object().shape({
   [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
-  [FORMIK_HELPER.IMAGES_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+  [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
 });
 
 export const addNewsValidationScheme = yup.object().shape({
@@ -30,7 +30,7 @@ export const addNewsValidationScheme = yup.object().shape({
   [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
-  [FORMIK_HELPER.IMAGES_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+  [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
 });
 
 export const addEventsValidationScheme = yup.object().shape({
@@ -52,4 +52,5 @@ export const addEventsValidationScheme = yup.object().shape({
   [FORMIK_HELPER.DATE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   [FORMIK_HELPER.TIME]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   [FORMIK_HELPER.LINK]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+  [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
 });

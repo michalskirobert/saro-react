@@ -23,7 +23,6 @@ export const useManageContainer = () => {
   const articleItems = useSelector((state) => state.database.articles);
   const isLoading = useSelector(state=>state.database.isLoading)
 
-  const [key, setKey] = useState("");
   const [selectedRowsId, setSelectedRowsId] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState();
   const [showAlert, setShowAlert] = useState(false);
@@ -61,7 +60,7 @@ export const useManageContainer = () => {
       selectedRowsId.forEach((id) => removeItem(currentPage, id));
     }
     if (!isAll && selectedRowId) {
-      removeItem(key, selectedRowId);
+      removeItem(currentPage, selectedRowId);
     }
 
     setShowAlert(false);
@@ -90,10 +89,7 @@ export const useManageContainer = () => {
   };
 
   return {
-    isEditable,
-    key,
-    setKey,
-   
+    isEditable,   
     newsItems,
     eventItems,
     articleItems,

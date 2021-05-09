@@ -3,8 +3,7 @@ import uuidv4 from "react-uuid";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-
-import { FORMIK_HELPER } from "./utils";
+import { toast } from "react-toastify";
 
 import { cmsActions, fetchActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
@@ -12,12 +11,11 @@ import { firestore, storage } from "@components/feature/firebase";
 
 import moment from "moment";
 
-import { toast } from "react-toastify";
-
 export const useContainer = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
+
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
 
@@ -31,7 +29,6 @@ export const useContainer = () => {
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState("");
   const [images, setImages] = useState("");
-  const [infoContainer, setInfoContainer] = useState("");
 
   const addNewItem = async (id, values) => {
     return await firestore
@@ -65,68 +62,55 @@ export const useContainer = () => {
     }
   };
 
-  const imageChangeHandler = (e, type) => {
-    const file = e.currentTarget.files[0];
-    if (type !== FORMIK_HELPER.IMAGES_URL) {
-      uploadImage(file);
-      return;
-    }
-    uploadImage(file, FORMIK_HELPER.IMAGES_URL);
-  };
+  const imageChangeHandler = async (e, multiple) => {  
+      const files = Array.from(e.target.files) 
+      if(!files){
+        multiple ? setImages("") : setImage("")       
+        toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+        return
+      } 
+      else if(!multiple){
+        if(files[0]?.type !== "image/png"){
+          setImage("")
+          toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
+          return
+        }  
+        uploadImage(files[0])
+        return
+      }    
+      files.forEach(file=> {
+        if(file?.type !=="image/png"){
+          setImages("")
+          toast.error(CONSTANTS.GENERAL_CONSTANTS.INVALID_FILE_FORMAT)
+          return
+        }
+        uploadImage(file, multiple)
+      })     
+  }
 
-  const uploadImage = async (file, type) => {
-    //Musisz dodać do setValue prev state i dodać jako nowy state z komponentem czyli np
-    // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
-    let uploadFile = `/images/${
-      type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
-    }/${file.name}`;
-
-    // if (file.type !== "image/png") {
-    //   setInvalid({
-    //     [`errorMsg-${type}`]: "Invalid file format. Choose jpg/png",
-    //   });
-    //   !image && setImage(null);
-    //   !images && setImages(null);
-    //   return;
-    // } else if (!type) {
-    //   setImgName(file.name);
-    //   setInvalid({});
-    // }
-
-    // setImagesName(file.name);
-    // setInvalid({});
-
-    dispatch(cmsActions.uploadImageRequest());
-
-    storage
-      .ref(uploadFile)
-      .put(file)
-      .on("state_changed", () => {
-        type === FORMIK_HELPER.IMAGES_URL
-          ? setImagesName({ ...imagesName, name: file.name })
-          : setImgName({ ...imgName, name: file.name });
-        storage
-          .ref(
-            `/images/${
-              type === FORMIK_HELPER.IMAGES_URL ? imagesName.type : imgName.type
-            } `
-          )
-          .child(file.name)
-          .getDownloadURL()
-          .then((resp) => {
-            dispatch(cmsActions.uploadImageSuccess());
-            type === FORMIK_HELPER.IMAGES_URL
-              ? setImages(resp)
-              : setImage(resp);
-          })
-          .catch(() => {
-            dispatch(cmsActions.uploadImageFailure());
-          });
-      });
-  };
+  const uploadImage = async (file, multiple) => {
+    dispatch(cmsActions.uploadImageRequest())
+    try {
+      const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`)
+      await fileRef.put(file)
+      multiple ? setImages(...images, fileRef.getDownloadURL()) : setImage(fileRef.getDownloadURL())    
+      dispatch(cmsActions.uploadImageSuccess())  
+      toast.success(CONSTANTS.GENERAL_CONSTANTS.UPLOAD_NEW_FILE_SUCCESS_MESSAGE)
+    } catch (error) {
+      dispatch(cmsActions.uploadImageFailure())
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+    }   
+  }
 
   const deleteImage = async (file) => {
-    return await storage.refFromURL(file).delete();
+    try {
+      await storage.refFromURL(file).delete();     
+      toast.success(CONSTANTS.GENERAL_CONSTANTS.FILE_REMOVED_MESSAGE)   
+    } catch (error) {     
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+    }   finally {
+      setImage("")  
+    }       
   };
 
   const fetchCrew = async () => {
@@ -163,8 +147,6 @@ export const useContainer = () => {
   return {
     alert,
     isLoading,
-    infoContainer,
-    setInfoContainer,
     handleSubmit,
     crew,
     categories,

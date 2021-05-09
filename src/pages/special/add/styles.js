@@ -1,28 +1,13 @@
 import styled from "styled-components";
+import {Button} from "react-bootstrap"
 
-export const PreviewContainer = styled.div`
-  display: flex;
-  max-width: 50px;
-  justify-content: center;
-  position: relative;
+export const PreviewImg = styled.img`
+  width: 50px;
+  max-height: 100px;
 `;
 
-export const PreviewImage = styled.img`
-  max-width: 75px;
-  max-height: 50px;
-  position: absolute;
-  top: -70px;
-  left: 140px;
-`;
-
-export const PreviewDelete = styled.button`
-border: 1px solid black;
-background: black;
-color: white;
-border-radius: 50%;
-font-size: 10px;
-font-weight: bold;
-position: absolute;
-top: -70px;
-left: 170px;
+export const DeleteUpload = styled(Button)`
+padding: 2px 4px;
+font-size: 0.55rem;
+align-self: flex-start;
 `;

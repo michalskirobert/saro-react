@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
-
 
 import { CustomSelect } from "@components/shared/custom-select";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
@@ -31,16 +30,17 @@ const cities = [
   },
 ];
 
+
 const AddEvents = () => {
-  const userStatus = useSelector(state=> state?.currentUser?.status) 
+  const userStatus = useSelector((state) => state?.currentUser?.status);
   const {
     alert,
+    isLoading,
     handleSubmit,
     crew,
     image,
     deleteImage,
     imageChangeHandler,
-    isLoading,
     setImgName,
     imgName,
   } = useContainer();
@@ -50,10 +50,19 @@ const AddEvents = () => {
     // eslint-disable-next-line
   }, []);
 
+
   return (
     <Formik
       {...{
-        initialValues: { title: "", place: "", imgURL: "", link: "" },
+        initialValues: {
+          title: "",
+          subtitle: "",
+          place: "",
+          imgURL: "",
+          link: "",
+          time: "",
+          date: "",
+        },
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addEventsValidationScheme,
@@ -86,7 +95,7 @@ const AddEvents = () => {
           </Breadcrumb>
           <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_EVENTS}</h2>
           <Form className="cms">
-            <section className="form-container">
+            <section className="form-container">              
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.TITLE}>
                   {C.CMS_LABELS.TITLE}
@@ -135,9 +144,10 @@ const AddEvents = () => {
                 <label htmlFor={FORMIK_HELPER.CITY}>{C.CMS_LABELS.CITY}</label>
                 <CustomSelect
                   {...{
+                    propName: FORMIK_HELPER.CITY,
                     name: FORMIK_HELPER.CITY,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CITY,
-                    invalid: !errors[FORMIK_HELPER.CITY],
+                    invalid: errors[FORMIK_HELPER.CITY],
                     options: cities.map(({ city }) => ({
                       label: city,
                       value: city,
@@ -211,6 +221,7 @@ const AddEvents = () => {
                   </F.Text>
                 )}
               </div>
+
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.IMG_URL}>
                   {C.CMS_LABELS.IMG_URL}
@@ -219,26 +230,36 @@ const AddEvents = () => {
                   {...{
                     className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
                     id: FORMIK_HELPER.IMG_URL,
-                    type: CMS_INPUT_TYPES.FILE,
+                    type: "file",
                     value: values[FORMIK_HELPER.IMG_URL],
                     onChange: imageChangeHandler,
                   }}
                 />
-                <S.PreviewContainer>
-                  {image && (
-                    <>
-                      <S.PreviewImage src={image} alt="Picture preview" />
-                      <S.PreviewDelete
-                        type={CMS_INPUT_TYPES.BUTTON}
-                        onClick={() => deleteImage(image)}
-                      >
-                        <AiOutlineClose />
-                      </S.PreviewDelete>
-                    </>
-                  )}
-                </S.PreviewContainer>
-                <F.Text className="validation-alert"></F.Text>
+                {image && (
+                  <>
+                    <S.PreviewImg
+                      {...{
+                        src: image,
+                        alt: "Preview",
+                      }}
+                    />
+                    <S.DeleteUpload
+                    {...{
+                      type: CMS_INPUT_TYPES.BUTTON,
+                      variant: C.GENERAL_CONSTANTS.B_DANGER,
+                      onClick: () => deleteImage(image)
+                    }}                      
+                    >
+                      <AiOutlineClose />
+                    </S.DeleteUpload>
+                  </>
+                )}
+                 {(errors[FORMIK_HELPER.IMG_URL] ||
+                  touched[FORMIK_HELPER.IMG_URL]) && (
+                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
+                )}                
               </div>
+
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.LINK}>{C.CMS_LABELS.LINK}</label>
                 <input
@@ -264,9 +285,10 @@ const AddEvents = () => {
                 </label>
                 <CustomSelect
                   {...{
+                    propName: FORMIK_HELPER.LANGUAGE,
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                    invalid: !errors[FORMIK_HELPER.LANGUAGE],
+                    invalid: errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map(
                       ({ label, lang }) => ({
                         label,
@@ -287,9 +309,10 @@ const AddEvents = () => {
                 <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
                 <CustomSelect
                   {...{
+                    propName: FORMIK_HELPER.CREW,
                     name: FORMIK_HELPER.CREW,
-                    invalid: !errors[FORMIK_HELPER.CREW],
-                    isDisabled: (userStatus < 50),
+                    invalid: errors[FORMIK_HELPER.CREW],
+                    isDisabled: userStatus < 50,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,

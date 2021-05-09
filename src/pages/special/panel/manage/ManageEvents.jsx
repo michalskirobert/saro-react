@@ -18,8 +18,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import * as S from "../style";
 
 const ManageEvents = () => {
-  const {
-    setKey,
+  const { 
     setSelectedRowsId,
     showAlert,
     setShowAlert,
@@ -37,7 +36,6 @@ const ManageEvents = () => {
 
   useEffect(() => {
     getEvents();
-    setKey(C.GENERAL_CONSTANTS.EVENTS);
   }, []);
 
   return (
@@ -98,7 +96,7 @@ const ManageEvents = () => {
           rows: eventItems,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
+          dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED, TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: !!isAll,
           isGrouping: false,
           isLoading,
