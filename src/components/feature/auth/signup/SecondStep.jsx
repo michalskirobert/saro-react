@@ -26,7 +26,7 @@ export function SecondStep({
 
     return container;
   });
-  console.log(values);
+
   return (
     <>
       <div className="form-control select">

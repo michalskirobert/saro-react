@@ -1,29 +1,31 @@
 import React from "react";
-import {Form} from "react-bootstrap"
+import { Form } from "react-bootstrap";
+
+import * as S from "./styles";
 
 export const CustomInput = ({
-invalid,
-id,
-placeholder,
-type,
-value,
-onChange,
-label
+  invalid,
+  id,
+  placeholder,
+  type,
+  value,
+  onChange,
+  label,
 }) => {
   return (
     <>
-    {label && <Form.Label for={id}>{label}</Form.Label>}
-    <input
-      {...{
-        className: `saro-custom-input ${invalid && "invalid"}`,
-        id,   
-        placeholder,
-        value,
-        onChange,
-        type,
-        invalid,
-      }}
-    />
-</>
+      {label && <Form.Label for={id}>{label}</Form.Label>}
+      <S.CustomInput
+        {...{
+          className: `saro-custom-input`,
+          id,
+          placeholder,
+          value,
+          onChange,
+          type,
+          invalid,
+        }}
+      />
+    </>
   );
 };
