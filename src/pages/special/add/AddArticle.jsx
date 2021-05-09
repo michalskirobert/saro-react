@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import {useSelector} from "react-redux";
@@ -33,7 +33,6 @@ const AddArticle = () => {
     imageChangeHandler,
     image,
     deleteImage,
-    images,
     handleEditorChange,
     value,
   } = useContainer();

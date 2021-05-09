@@ -21,7 +21,6 @@ const ManageArticles = () => {
   const { getArticles } = useContainer();
 
   const {
-    setKey,
     setSelectedRowsId,
     showAlert,
     setShowAlert,
@@ -37,8 +36,7 @@ const ManageArticles = () => {
   } = useManageContainer();
 
   useEffect(() => {
-    getArticles();
-    setKey(C.GENERAL_CONSTANTS.ARTICLES);
+    getArticles();  
   }, []);
 
   return (

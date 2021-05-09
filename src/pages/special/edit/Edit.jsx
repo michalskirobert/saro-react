@@ -55,9 +55,9 @@ const Edit = () => {
       <Formik
         {...{
           initialValues: { ...database[type] },
-          // validateOnChange: true,
-          // validateOnMount: true,
-          // validationSchema: editValidationScheme(type),
+          validateOnChange: true,
+          validateOnMount: true,
+          validationSchema: editValidationScheme(type),
           onSubmit: (values) => updateDatabase(id, type, values),
           enableReinitialize: true,
         }}
@@ -393,7 +393,7 @@ const Edit = () => {
                 {...{
                   className: "submit-btn",
                   type: "submit",
-                  // disabled: !isValid,
+                  disabled: !isValid,
                   onClick: handleSubmit,
                 }}
               >

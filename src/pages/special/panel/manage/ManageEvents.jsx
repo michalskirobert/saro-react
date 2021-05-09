@@ -18,8 +18,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import * as S from "../style";
 
 const ManageEvents = () => {
-  const {
-    setKey,
+  const { 
     setSelectedRowsId,
     showAlert,
     setShowAlert,
@@ -37,7 +36,6 @@ const ManageEvents = () => {
 
   useEffect(() => {
     getEvents();
-    setKey(C.GENERAL_CONSTANTS.EVENTS);
   }, []);
 
   return (
