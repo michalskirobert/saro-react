@@ -3,16 +3,13 @@ import uuidv4 from "react-uuid";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-
-import { FORMIK_HELPER } from "./utils";
+import { toast } from "react-toastify";
 
 import { cmsActions, fetchActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
 import moment from "moment";
-
-import { toast } from "react-toastify";
 
 export const useContainer = () => {
   const location = useLocation();
@@ -65,10 +62,6 @@ export const useContainer = () => {
     }
   };
 
-  // TO DO 
-  //Musisz dodać do setValue prev state i dodać jako nowy state z komponentem czyli np
-  // setValue(prev => {...prev, value: `<img src="${img} alt=${img.name} />"`})
-
   const imageChangeHandler = async (e, multiple) => {  
       const files = Array.from(e.target.files) 
       if(!files){
@@ -100,8 +93,9 @@ export const useContainer = () => {
     try {
       const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`)
       await fileRef.put(file)
-      multiple ? setImages(...images, await fileRef.getDownloadURL()) : setImage(await fileRef.getDownloadURL())    
+      multiple ? setImages(...images, fileRef.getDownloadURL()) : setImage(fileRef.getDownloadURL())    
       dispatch(cmsActions.uploadImageSuccess())  
+      toast.success(CONSTANTS.GENERAL_CONSTANTS.UPLOAD_NEW_FILE_SUCCESS_MESSAGE)
     } catch (error) {
       dispatch(cmsActions.uploadImageFailure())
       toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
@@ -111,7 +105,7 @@ export const useContainer = () => {
   const deleteImage = async (file) => {
     try {
       await storage.refFromURL(file).delete();     
-      toast.success("file deleted")   
+      toast.success(CONSTANTS.GENERAL_CONSTANTS.FILE_REMOVED_MESSAGE)   
     } catch (error) {     
       toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
     }   finally {

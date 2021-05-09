@@ -91,7 +91,7 @@ const ManageArticles = () => {
           rows: articleItems,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED],
+          dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED, TABLE_COLUMN_PROPERTIES.MODIFIED],
           checkboxSelection: !!isAll,
           isGrouping: false,
           isLoading,

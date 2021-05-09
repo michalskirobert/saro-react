@@ -89,7 +89,7 @@ const ManageNews = () => {
           rows: newsItems,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED],
+          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED, TABLE_COLUMN_PROPERTIES.PUBLISHED],
           checkboxSelection: !!isAll,
           isGrouping: false,
           isLoading,

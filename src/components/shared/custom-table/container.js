@@ -6,11 +6,9 @@ import { formatDate } from "./utils";
 import * as CONSTANTS from "@utils/constants";
 
 const DateFormatter = ({ value }) =>
-  value
-    ? value === CONSTANTS.GENERAL_CONSTANTS.NOT_APPLICABLE_MESSAGE
-      ? value
-      : formatDate(value)
-    : "";
+  value === CONSTANTS.GENERAL_CONSTANTS.NOT_APPLICABLE_MESSAGE
+    ? value
+    : formatDate(value);
 
 export const DateTypeProvider = (props) => (
   <DataTypeProvider formatterComponent={DateFormatter} {...props} />
