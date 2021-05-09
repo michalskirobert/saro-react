@@ -9,6 +9,7 @@ import { editValidationScheme } from "./validation";
 import CustomEditor from "@components/shared/custom-editor";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { CustomSelect } from "@components/shared/custom-select";
+import { CustomInput } from "@components/shared/custom-inputs";
 
 import { useEdit } from "./container";
 
@@ -43,12 +44,7 @@ const Edit = () => {
   const query = new URLSearchParams(useLocation().search);
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
   const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
-  const {
-    alert,
-    database,
-    updateDatabase,
-    userStatus,
-  } = useEdit();
+  const { alert, database, updateDatabase, userStatus } = useEdit();
 
   return (
     <>
@@ -89,12 +85,10 @@ const Edit = () => {
               <h2 className="main-title">{CONSTANTS.GENERAL_CONSTANTS.EDIT}</h2>
               <section className="form-container">
                 <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.TITLE}>
-                    {CONSTANTS.CMS_LABELS.TITLE}
-                  </label>
-                  <input
+                  <CustomInput
                     {...{
-                      className: errors[FORMIK_HELPER.TITLE] && "invalid",
+                      label: CONSTANTS.CMS_LABELS.TITLE,
+                      invalid: errors[FORMIK_HELPER.TITLE],
                       id: FORMIK_HELPER.TITLE,
                       typ: CMS_INPUT_TYPES.TEXT,
                       placeholder: database[type]?.title,
@@ -111,12 +105,10 @@ const Edit = () => {
                 </div>
                 {type !== CONSTANTS.GENERAL_CONSTANTS.ARTICLES && (
                   <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.SUBTITLE}>
-                      {CONSTANTS.CMS_LABELS.SUBTITLE}
-                    </label>
-                    <input
+                    <CustomInput
                       {...{
-                        className: errors[FORMIK_HELPER.SUBTITLE] && "invalid",
+                        label: CONSTANTS.CMS_LABELS.SUBTITLE,
+                        invalid: errors[FORMIK_HELPER.SUBTITLE],
                         id: FORMIK_HELPER.SUBTITLE,
                         type: CMS_INPUT_TYPES.TEXT,
                         placeholder: database[type]?.subtitle,
@@ -158,13 +150,11 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.PLACE}>
-                      {CONSTANTS.CMS_LABELS.PLACE}
-                    </label>
-                    <input
+                  <div className="form-control">              
+                    <CustomInput
                       {...{
-                        className: errors[FORMIK_HELPER.PLACE] && "invalid",
+                        label:CONSTANTS.CMS_LABELS.PLACE,
+                        invalid: errors[FORMIK_HELPER.PLACE],
                         id: FORMIK_HELPER.PLACE,
                         type: CMS_INPUT_TYPES.TEXT,
                         autoComplete: "off",
@@ -182,13 +172,11 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.DATE}>
-                      {CONSTANTS.CMS_LABELS.DATE}
-                    </label>
-                    <input
+                  <div className="form-control">     
+                    <CustomInput
                       {...{
-                        className: errors[FORMIK_HELPER.DATE] && "invalid",
+                        label:CONSTANTS.CMS_LABELS.DATE,
+                        invalid: errors[FORMIK_HELPER.DATE],
                         id: FORMIK_HELPER.DATE,
                         type: CMS_INPUT_TYPES.DATE,
                         placeholder: database[type]?.date,
@@ -205,13 +193,11 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.TIME}>
-                      {CONSTANTS.CMS_LABELS.TIME}
-                    </label>
-                    <input
+                  <div className="form-control">            
+                    <CustomInput
                       {...{
-                        className: errors[FORMIK_HELPER.TIME] && "invalid",
+                        label: CONSTANTS.CMS_LABELS.TIME,
+                        invalid: errors[FORMIK_HELPER.TIME],
                         id: FORMIK_HELPER.TIME,
                         type: CMS_INPUT_TYPES.TIME,
                         placeholder: database[type]?.time,
@@ -228,13 +214,11 @@ const Edit = () => {
                   </div>
                 )}
                 {type !== CONSTANTS.GENERAL_CONSTANTS.ARTICLES && (
-                  <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.IMG_URL}>
-                      {CONSTANTS.CMS_LABELS.IMG_URL}
-                    </label>
-                    <input
+                  <div className="form-control">           
+                    <CustomInput
                       {...{
-                        className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                        label:CONSTANTS.CMS_LABELS.IMG_URL,
+                        invalid: errors[FORMIK_HELPER.IMG_URL],
                         id: FORMIK_HELPER.IMG_URL,
                         type: CMS_INPUT_TYPES.TEXT,
                         placeholder: database[type]?.imgURL,
@@ -251,13 +235,11 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.LINK}>
-                      {CONSTANTS.CMS_LABELS.LINK}
-                    </label>
-                    <input
+                  <div className="form-control">                
+                    <CustomInput
                       {...{
-                        className: errors[FORMIK_HELPER.LINK] && "invalid",
+                        label: CONSTANTS.CMS_LABELS.LINK,
+                        invalid: errors[FORMIK_HELPER.LINK],
                         id: FORMIK_HELPER.LINK,
                         type: CMS_INPUT_TYPES.TEXT,
                         placeholder: database[type]?.link,

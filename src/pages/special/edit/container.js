@@ -41,8 +41,7 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-  const updateDatabase = async (id, type, values) => { 
-    dispatch(alertActions.clear());
+  const updateDatabase = async (id, type, values) => {     
     try {
       dispatch(cmsActions.updateRequest());
       await firestore
@@ -59,7 +58,7 @@ export const useEdit = () => {
       history.push("/panel")      
       
     } catch (error) {
-      dispatch(cmsActions.updateFailure);
+      dispatch(cmsActions.updateFailure());
       toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
     }
   };
