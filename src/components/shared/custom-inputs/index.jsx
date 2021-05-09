@@ -20,7 +20,8 @@ label
         placeholder,
         value,
         onChange,
-        type
+        type,
+        invalid,
       }}
     />
 </>
