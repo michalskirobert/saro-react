@@ -15,7 +15,7 @@ export const CustomInput = ({
   return (
     <>
       {label && <Form.Label for={id}>{label}</Form.Label>}
-      <S.CustomInput
+      <S.Input
         {...{
           className: `saro-custom-input`,
           id,
