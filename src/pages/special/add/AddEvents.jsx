@@ -8,6 +8,7 @@ import { Formik, Form } from "formik";
 import { addEventsValidationScheme } from "./validation";
 
 import { CustomSelect } from "@components/shared/custom-select";
+import { CustomInput } from "@components/shared/custom-inputs";
 import CmsAlert from "@components/shared/alerts/CmsAlert";
 
 import { useContainer } from "./container";
@@ -54,15 +55,7 @@ const AddEvents = () => {
   return (
     <Formik
       {...{
-        initialValues: {
-          title: "",
-          subtitle: "",
-          place: "",
-          imgURL: "",
-          link: "",
-          time: "",
-          date: "",
-        },
+        initialValues: {},
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addEventsValidationScheme,
@@ -96,13 +89,11 @@ const AddEvents = () => {
           <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_EVENTS}</h2>
           <Form className="cms">
             <section className="form-container">              
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.TITLE}>
-                  {C.CMS_LABELS.TITLE}
-                </label>
-                <input
+              <div className="form-control">            
+                <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.TITLE] && "invalid",
+                    label: C.CMS_LABELS.TITLE,
+                    invalid: errors[FORMIK_HELPER.TITLE],
                     id: FORMIK_HELPER.TITLE,
                     type: CMS_INPUT_TYPES.TEXT,
                     value: values[FORMIK_HELPER.TITLE],
@@ -118,13 +109,11 @@ const AddEvents = () => {
                 )}
               </div>
 
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.SUBTITLE}>
-                  {C.CMS_LABELS.SUBTITLE}
-                </label>
-                <input
+              <div className="form-control">           
+                <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.SUBTITLE] && "invalid",
+                    label: C.CMS_LABELS.SUBTITLE,
+                    invalid: errors[FORMIK_HELPER.SUBTITLE],
                     id: FORMIK_HELPER.SUBTITLE,
                     type: CMS_INPUT_TYPES.TEXT,
                     value: values[FORMIK_HELPER.SUBTITLE],
@@ -164,12 +153,10 @@ const AddEvents = () => {
               </div>
 
               <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.PLACE}>
-                  {C.CMS_LABELS.PLACE}
-                </label>
-                <input
+               <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.PLACE] && "invalid",
+                    label: C.CMS_LABELS.PLACE,
+                    invalid: errors[FORMIK_HELPER.PLACE],
                     id: FORMIK_HELPER.PLACE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.PLACE,
                     type: CMS_INPUT_TYPES.TEXT,
@@ -185,11 +172,11 @@ const AddEvents = () => {
                 )}
               </div>
 
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.DATE}>{C.CMS_LABELS.DATE}</label>
-                <input
+              <div className="form-control">         
+                <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.DATE] && "invalid",
+                    label: C.CMS_LABELS.DATE,
+                    invalid: errors[FORMIK_HELPER.DATE],
                     id: FORMIK_HELPER.DATE,
                     type: CMS_INPUT_TYPES.DATE,
                     value: values[FORMIK_HELPER.DATE],
@@ -203,11 +190,11 @@ const AddEvents = () => {
                   </F.Text>
                 )}
               </div>
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.TIME}>{C.CMS_LABELS.TIME}</label>
-                <input
+              <div className="form-control">         
+                <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.TIME] && "invalid",
+                    label:C.CMS_LABELS.TIME,
+                    invalid: errors[FORMIK_HELPER.TIME],
                     id: FORMIK_HELPER.TIME,
                     type: CMS_INPUT_TYPES.TIME,
                     value: values[FORMIK_HELPER.TIME],
@@ -222,13 +209,11 @@ const AddEvents = () => {
                 )}
               </div>
 
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.IMG_URL}>
-                  {C.CMS_LABELS.IMG_URL}
-                </label>
-                <input
+              <div className="form-control">        
+                <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.IMG_URL] && "invalid",
+                    label:C.CMS_LABELS.IMG_URL,
+                    invalid: errors[FORMIK_HELPER.IMG_URL],
                     id: FORMIK_HELPER.IMG_URL,
                     type: "file",
                     value: values[FORMIK_HELPER.IMG_URL],
@@ -260,11 +245,11 @@ const AddEvents = () => {
                 )}                
               </div>
 
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.LINK}>{C.CMS_LABELS.LINK}</label>
-                <input
+              <div className="form-control">          
+                <CustomInput
                   {...{
-                    className: errors[FORMIK_HELPER.LINK] && "invalid",
+                    label: C.CMS_LABELS.LINK,
+                    invalid: errors[FORMIK_HELPER.LINK],
                     id: FORMIK_HELPER.LINK,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LINK,
                     type: CMS_INPUT_TYPES.TEXT,
