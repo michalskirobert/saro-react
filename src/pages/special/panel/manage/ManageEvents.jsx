@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Breadcrumb, Modal, Button } from "react-bootstrap";
+import { Breadcrumb } from "react-bootstrap";
 
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
 import { CustomDataTable } from "@components/shared/custom-table";
+import { CustomWarningModal } from "@components/shared/modals/custom-modal-warning";
 
 import {
   TABLE_COLUMN_PROPERTIES,
@@ -18,7 +19,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import * as S from "../style";
 
 const ManageEvents = () => {
-  const { 
+  const {
     setSelectedRowsId,
     showAlert,
     setShowAlert,
@@ -74,29 +75,26 @@ const ManageEvents = () => {
           );
         }
       )}
-      <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-        <Modal.Body>{C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE}</Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant={C.GENERAL_CONSTANTS.B_DANGER}
-            onClick={deleteSelections}
-          >
-            {C.GENERAL_CONSTANTS.YES}
-          </Button>
-          <Button
-            variant={C.GENERAL_CONSTANTS.B_DARK}
-            onClick={() => setShowAlert(false)}
-          >
-            {C.GENERAL_CONSTANTS.NO}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <CustomWarningModal
+        {...{
+          show: showAlert,
+          content: C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE,
+          confirmMsg: C.GENERAL_CONSTANTS.YES,
+          rejectMsg: C.GENERAL_CONSTANTS.NO,
+          onSave: deleteSelections,
+          onCancel: () => setShowAlert(false),
+          onHide: () => setShowAlert(false),
+        }}
+      />
       <CustomDataTable
         {...{
           rows: eventItems,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.PUBLISHED, TABLE_COLUMN_PROPERTIES.MODIFIED],
+          dateColumns: [
+            TABLE_COLUMN_PROPERTIES.PUBLISHED,
+            TABLE_COLUMN_PROPERTIES.MODIFIED,
+          ],
           checkboxSelection: !!isAll,
           isGrouping: false,
           isLoading,
