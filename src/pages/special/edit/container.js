@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import { toast } from "react-toastify";
@@ -22,9 +22,10 @@ export const useEdit = () => {
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.general.language);
   const database = useSelector((state) => state.database);
-  const footer = database.init.footer;
+  const [categories, setCategories] = useState([])
 
-  const getDatabase = (id, type) => {
+
+  const getEditedItem = (id, type) => {
     try {
       firestore
         .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
@@ -41,7 +42,7 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-  const updateDatabase = async (id, type, values) => {     
+  const updateEditedItem = async (id, type, values) => {     
     try {
       dispatch(cmsActions.updateRequest());
       await firestore
@@ -79,9 +80,20 @@ export const useEdit = () => {
       );
   };
 
+  const fetchCategories = () => {
+    firestore
+      .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
+      .doc(lang)
+      .onSnapshot((resp) => {
+        setCategories(resp.data().blogCategories);
+      });
+  };
+
+
   useEffect(() => {
-    getDatabase(id, type);
+    getEditedItem(id, type);
     fetchCrew();
+    fetchCategories()
     // eslint-disable-next-line
   }, []);
 
@@ -90,10 +102,10 @@ export const useEdit = () => {
     alert,
     handleEdit,
     database,
-    getDatabase,
-    updateDatabase,
-    footer,
+    getEditedItem,
+    updateEditedItem,
     type,
     userStatus,
+    categories
   };
 };

@@ -29,26 +29,11 @@ const cities = [
   },
 ];
 
-const categories = [
-  {
-    id: 1,
-    name: "Events",
-  },
-  {
-    id: 2,
-    name: "Food",
-  },
-  {
-    id: 3,
-    name: "Traditions",
-  },
-];
-
 const Edit = () => {
   const query = new URLSearchParams(useLocation().search);
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
   const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
-  const { alert, database, updateDatabase, userStatus } = useEdit();
+  const { alert, database, updateEditedItem, userStatus, categories } = useEdit();
   const { imageChangeHandler, image, deleteImage } = useContainer();
 
   return (
@@ -59,7 +44,7 @@ const Edit = () => {
           validateOnChange: true,
           validateOnMount: true,
           validationSchema: editValidationScheme(type),
-          onSubmit: (values) => updateDatabase(id, type, values),
+          onSubmit: (values) => updateEditedItem(id, type, values),
           enableReinitialize: true,
         }}
       >
