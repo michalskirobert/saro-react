@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import { toast } from "react-toastify";
 
-import { cmsActions, fetchActions, alertActions } from "@actions";
+import { cmsActions, fetchActions } from "@actions";
 import { firestore } from "@components/feature/firebase";
 
 import moment from "moment";

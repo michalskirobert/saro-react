@@ -31,7 +31,6 @@ const cities = [
   },
 ];
 
-
 const AddEvents = () => {
   const userStatus = useSelector((state) => state?.currentUser?.status);
   const {
@@ -50,7 +49,6 @@ const AddEvents = () => {
     setImgName({ ...imgName, type: "events" });
     // eslint-disable-next-line
   }, []);
-
 
   return (
     <Formik
@@ -88,8 +86,8 @@ const AddEvents = () => {
           </Breadcrumb>
           <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_EVENTS}</h2>
           <Form className="cms">
-            <section className="form-container">              
-              <div className="form-control">            
+            <section className="form-container">
+              <div className="form-control">
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TITLE,
@@ -109,7 +107,7 @@ const AddEvents = () => {
                 )}
               </div>
 
-              <div className="form-control">           
+              <div className="form-control">
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.SUBTITLE,
@@ -133,7 +131,6 @@ const AddEvents = () => {
                 <label htmlFor={FORMIK_HELPER.CITY}>{C.CMS_LABELS.CITY}</label>
                 <CustomSelect
                   {...{
-                    propName: FORMIK_HELPER.CITY,
                     name: FORMIK_HELPER.CITY,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CITY,
                     invalid: errors[FORMIK_HELPER.CITY],
@@ -153,7 +150,7 @@ const AddEvents = () => {
               </div>
 
               <div className="form-control">
-               <CustomInput
+                <CustomInput
                   {...{
                     label: C.CMS_LABELS.PLACE,
                     invalid: errors[FORMIK_HELPER.PLACE],
@@ -172,7 +169,7 @@ const AddEvents = () => {
                 )}
               </div>
 
-              <div className="form-control">         
+              <div className="form-control">
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.DATE,
@@ -190,10 +187,10 @@ const AddEvents = () => {
                   </F.Text>
                 )}
               </div>
-              <div className="form-control">         
+              <div className="form-control">
                 <CustomInput
                   {...{
-                    label:C.CMS_LABELS.TIME,
+                    label: C.CMS_LABELS.TIME,
                     invalid: errors[FORMIK_HELPER.TIME],
                     id: FORMIK_HELPER.TIME,
                     type: CMS_INPUT_TYPES.TIME,
@@ -208,44 +205,7 @@ const AddEvents = () => {
                   </F.Text>
                 )}
               </div>
-
-              <div className="form-control">        
-                <CustomInput
-                  {...{
-                    label:C.CMS_LABELS.IMG_URL,
-                    invalid: errors[FORMIK_HELPER.IMG_URL],
-                    id: FORMIK_HELPER.IMG_URL,
-                    type: "file",
-                    value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: imageChangeHandler,
-                  }}
-                />
-                {image && (
-                  <>
-                    <S.PreviewImg
-                      {...{
-                        src: image,
-                        alt: "Preview",
-                      }}
-                    />
-                    <S.DeleteUpload
-                    {...{
-                      type: CMS_INPUT_TYPES.BUTTON,
-                      variant: C.GENERAL_CONSTANTS.B_DANGER,
-                      onClick: () => deleteImage(image)
-                    }}                      
-                    >
-                      <AiOutlineClose />
-                    </S.DeleteUpload>
-                  </>
-                )}
-                 {(errors[FORMIK_HELPER.IMG_URL] ||
-                  touched[FORMIK_HELPER.IMG_URL]) && (
-                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
-                )}                
-              </div>
-
-              <div className="form-control">          
+              <div className="form-control">
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.LINK,
@@ -264,13 +224,51 @@ const AddEvents = () => {
                   </F.Text>
                 )}
               </div>
+
+              <div className="form-control">
+                <CustomInput
+                  {...{
+                    label: C.CMS_LABELS.IMG_URL,
+                    invalid: errors[FORMIK_HELPER.IMG_URL],
+                    id: FORMIK_HELPER.IMG_URL,
+                    type: "file",
+                    value: values[FORMIK_HELPER.IMG_URL],
+                    onChange: imageChangeHandler,
+                  }}
+                />
+                {image && (
+                  <>
+                    <S.PreviewImg
+                      {...{
+                        src: image,
+                        alt: "Preview",
+                      }}
+                    />
+                    <S.DeleteUpload
+                      {...{
+                        type: CMS_INPUT_TYPES.BUTTON,
+                        variant: C.GENERAL_CONSTANTS.B_DANGER,
+                        onClick: () => deleteImage(image),
+                      }}
+                    >
+                      <AiOutlineClose />
+                    </S.DeleteUpload>
+                  </>
+                )}
+                {(errors[FORMIK_HELPER.IMG_URL] ||
+                  touched[FORMIK_HELPER.IMG_URL]) && (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.IMG_URL]}
+                  </F.Text>
+                )}
+              </div>
+
               <div className="form-control">
                 <label htmlFor={FORMIK_HELPER.LANGUAGE}>
                   {C.CMS_LABELS.LANG}
                 </label>
                 <CustomSelect
                   {...{
-                    propName: FORMIK_HELPER.LANGUAGE,
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
                     invalid: errors[FORMIK_HELPER.LANGUAGE],
@@ -294,7 +292,6 @@ const AddEvents = () => {
                 <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
                 <CustomSelect
                   {...{
-                    propName: FORMIK_HELPER.CREW,
                     name: FORMIK_HELPER.CREW,
                     invalid: errors[FORMIK_HELPER.CREW],
                     isDisabled: userStatus < 50,

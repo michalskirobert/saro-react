@@ -4,7 +4,7 @@ import { FORMIK_HELPER } from "./utils";
 import * as CONSTANTS from "@utils/constants";
 
 export const editValidationScheme = (type) => {
-  if (type === CONSTANTS.GENERAL_CONSTANTS.BLOG_article) {
+  if (type === CONSTANTS.GENERAL_CONSTANTS.ARTICLES) {
     return yup.object().shape({
       [FORMIK_HELPER.TITLE]: yup
         .string()
@@ -14,6 +14,7 @@ export const editValidationScheme = (type) => {
       [FORMIK_HELPER.CATEGORY]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
       [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
       [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
       [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
     });
   } else if (type === CONSTANTS.GENERAL_CONSTANTS.NEWS) {
@@ -32,7 +33,7 @@ export const editValidationScheme = (type) => {
       [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
       [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
       [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
-      // [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
     });
   }
   return yup.object().shape({
@@ -53,7 +54,7 @@ export const editValidationScheme = (type) => {
     [FORMIK_HELPER.PLACE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
     [FORMIK_HELPER.DATE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
     [FORMIK_HELPER.TIME]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
-    // [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
     [FORMIK_HELPER.LINK]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
   });
 };

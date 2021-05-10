@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { AiOutlineClose } from "react-icons/ai";
 
 import { Formik, Form } from "formik";
 import { editValidationScheme } from "./validation";
@@ -12,9 +13,12 @@ import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
 
 import { useEdit } from "./container";
+import { useContainer } from "./../add/container";
 
 import * as CONSTANTS from "@utils/constants";
 import { FORMIK_HELPER, CMS_INPUT_TYPES } from "./utils.js";
+
+import * as S from "./styles";
 
 const cities = [
   {
@@ -45,6 +49,7 @@ const Edit = () => {
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
   const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
   const { alert, database, updateDatabase, userStatus } = useEdit();
+  const { imageChangeHandler, image, deleteImage } = useContainer();
 
   return (
     <>
@@ -124,6 +129,31 @@ const Edit = () => {
                     )}
                   </div>
                 )}
+                {type !== CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
+                  <div className="form-control">
+                    <label htmlFor={FORMIK_HELPER.CATEGORY}>
+                      {CONSTANTS.CMS_LABELS.CATEGORY}
+                    </label>
+                    <CustomSelect
+                      {...{
+                        name: FORMIK_HELPER.CATEGORY,
+                        placeholder: database[type]?.category,
+                        invalid: !errors[FORMIK_HELPER.CATEGORY],
+                        options: categories.map(({ name }) => ({
+                          label: name,
+                          value: name,
+                        })),
+                        onChange: setFieldValue,
+                      }}
+                    />
+                    {(errors[FORMIK_HELPER.CATEGORY] ||
+                      touched[FORMIK_HELPER.CATEGORY]) && (
+                      <F.Text className="validation-alert">
+                        {errors[FORMIK_HELPER.CATEGORY]}
+                      </F.Text>
+                    )}
+                  </div>
+                )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
                     <label htmlFor={FORMIK_HELPER.CITY}>
@@ -150,10 +180,10 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">              
+                  <div className="form-control">
                     <CustomInput
                       {...{
-                        label:CONSTANTS.CMS_LABELS.PLACE,
+                        label: CONSTANTS.CMS_LABELS.PLACE,
                         invalid: errors[FORMIK_HELPER.PLACE],
                         id: FORMIK_HELPER.PLACE,
                         type: CMS_INPUT_TYPES.TEXT,
@@ -172,10 +202,10 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">     
+                  <div className="form-control">
                     <CustomInput
                       {...{
-                        label:CONSTANTS.CMS_LABELS.DATE,
+                        label: CONSTANTS.CMS_LABELS.DATE,
                         invalid: errors[FORMIK_HELPER.DATE],
                         id: FORMIK_HELPER.DATE,
                         type: CMS_INPUT_TYPES.DATE,
@@ -193,7 +223,7 @@ const Edit = () => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">            
+                  <div className="form-control">
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.TIME,
@@ -213,29 +243,8 @@ const Edit = () => {
                     )}
                   </div>
                 )}
-                {type !== CONSTANTS.GENERAL_CONSTANTS.ARTICLES && (
-                  <div className="form-control">           
-                    <CustomInput
-                      {...{
-                        label:CONSTANTS.CMS_LABELS.IMG_URL,
-                        invalid: errors[FORMIK_HELPER.IMG_URL],
-                        id: FORMIK_HELPER.IMG_URL,
-                        type: CMS_INPUT_TYPES.TEXT,
-                        placeholder: database[type]?.imgURL,
-                        value: values[FORMIK_HELPER.IMG_URL],
-                        onChange: handleChange,
-                      }}
-                    />
-                    {(errors[FORMIK_HELPER.IMG_URL] ||
-                      touched[FORMIK_HELPER.IMG_URL]) && (
-                      <F.Text className="validation-alert">
-                        {errors[FORMIK_HELPER.IMG_URL]}
-                      </F.Text>
-                    )}
-                  </div>
-                )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className="form-control">                
+                  <div className="form-control">
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.LINK,
@@ -255,29 +264,58 @@ const Edit = () => {
                     )}
                   </div>
                 )}
+                <div className="form-control">
+                  <CustomInput
+                    {...{
+                      label: CONSTANTS.CMS_LABELS.UPLOAD_COVER_IMG,
+                      invalid: errors[FORMIK_HELPER.IMG_URL],
+                      id: FORMIK_HELPER.IMG_URL,
+                      type: CMS_INPUT_TYPES.FILE,
+                      placeholder: database[type]?.imgURL,
+                      value: values[FORMIK_HELPER.IMG_URL],
+                      onChange: (e) => imageChangeHandler(e),
+                    }}
+                  />
+                  {image && (
+                    <>
+                      <S.PreviewImg
+                        {...{
+                          src: image,
+                          alt: "Preview",
+                        }}
+                      />
+                      <S.DeleteUpload
+                        {...{
+                          type: CMS_INPUT_TYPES.BUTTON,
+                          variant: CONSTANTS.GENERAL_CONSTANTS.B_DANGER,
+                          onClick: () => deleteImage(image),
+                        }}
+                      >
+                        <AiOutlineClose />
+                      </S.DeleteUpload>
+                    </>
+                  )}
+                  {(errors[FORMIK_HELPER.IMG_URL] ||
+                    touched[FORMIK_HELPER.IMG_URL]) && (
+                    <F.Text className="validation-alert">
+                      {errors[FORMIK_HELPER.IMG_URL]}
+                    </F.Text>
+                  )}
+                </div>
                 {type !== CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
                   <div className="form-control">
-                    <label htmlFor={FORMIK_HELPER.CATEGORY}>
-                      {CONSTANTS.CMS_LABELS.CATEGORY}
-                    </label>
-                    <CustomSelect
+                    <CustomInput
                       {...{
-                        name: FORMIK_HELPER.CATEGORY,
-                        placeholder: database[type]?.category,
-                        invalid: !errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({ name }) => ({
-                          label: name,
-                          value: name,
-                        })),
-                        onChange: setFieldValue,
+                        label: CONSTANTS.CMS_LABELS.UPLOAD_IMGS,
+                        invalid: errors[FORMIK_HELPER.IMAGES_URL],
+                        id: FORMIK_HELPER.IMAGES_URL,
+                        type: CMS_INPUT_TYPES.FILE,
+                        placeholder: database[type]?.imagesURL,
+                        value: values[FORMIK_HELPER.IMAGES_URL],
+                        onChange: (e) => imageChangeHandler(e, true),
+                        multiple: true,
                       }}
                     />
-                    {(errors[FORMIK_HELPER.CATEGORY] ||
-                      touched[FORMIK_HELPER.CATEGORY]) && (
-                      <F.Text className="validation-alert">
-                        {errors[FORMIK_HELPER.CATEGORY]}
-                      </F.Text>
-                    )}
                   </div>
                 )}
                 <div className="form-control">
