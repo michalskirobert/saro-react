@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { AiOutlineClose } from "react-icons/ai";
@@ -24,7 +24,7 @@ import * as C from "@utils/constants";
 import * as S from "./styles";
 
 const AddNews = () => {
-  const userStatus = useSelector(state=> state?.currentUser?.status) 
+  const {status} = useSelector(({currentUser}) => currentUser);
   const {
     alert,
     crew,
@@ -74,7 +74,7 @@ const AddNews = () => {
             <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_NEWS}</h2>
             <Form className="cms">
               <section className="form-container">
-                <div className="form-control">        
+                <div className="form-control">
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.TITLE,
@@ -94,7 +94,7 @@ const AddNews = () => {
                     </F.Text>
                   )}
                 </div>
-                <div className="form-control">  
+                <div className="form-control">
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.SUBTITLE,
@@ -111,66 +111,6 @@ const AddNews = () => {
                     touched[FORMIK_HELPER.SUBTITLE]) && (
                     <F.Text className="validation-alert">
                       {errors[FORMIK_HELPER.SUBTITLE]}
-                    </F.Text>
-                  )}
-                </div>
-                <div className="form-control">
-                <CustomInput
-                  {...{
-                    label: C.CMS_LABELS.IMG_URL,
-                    invalid: errors[FORMIK_HELPER.IMG_URL],
-                    id: FORMIK_HELPER.IMG_URL,
-                    type: "file",
-                    value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: imageChangeHandler,
-                  }}
-                />
-                {image && (
-                  <>
-                    <S.PreviewImg
-                      {...{
-                        src: image,
-                        alt: "Preview",
-                      }}
-                    />
-                    <S.DeleteUpload
-                    {...{
-                      type: CMS_INPUT_TYPES.BUTTON,
-                      variant: C.GENERAL_CONSTANTS.B_DANGER,
-                      onClick: () => deleteImage(image)
-                    }}                      
-                    >
-                      <AiOutlineClose />
-                    </S.DeleteUpload>
-                  </>
-                )}
-                 {(errors[FORMIK_HELPER.IMG_URL] ||
-                  touched[FORMIK_HELPER.IMG_URL]) && (
-                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
-                )}                
-              </div>
-               
-                <div className="form-control">
-                  <label htmlFor={FORMIK_HELPER.CREW}>
-                    {C.CMS_LABELS.CREW}
-                  </label>
-                  <CustomSelect
-                    {...{
-                      name: FORMIK_HELPER.CREW,
-                      placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
-                      invalid: errors[FORMIK_HELPER.CREW],
-                      isDisabled: (userStatus < 50),
-                      options: crew.map(({ name, surname }) => ({
-                        label: `${name} ${surname}`,
-                        value: `${name} ${surname}`,
-                      })),
-                      onChange: setFieldValue,
-                    }}
-                  />
-                  {(errors[FORMIK_HELPER.CREW] ||
-                    touched[FORMIK_HELPER.CREW]) && (
-                    <F.Text className="validation-alert">
-                      {errors[FORMIK_HELPER.CREW]}
                     </F.Text>
                   )}
                 </div>
@@ -197,7 +137,44 @@ const AddNews = () => {
                     </F.Text>
                   )}
                 </div>
-                <div className="form-control">     
+                <div className="form-control">
+                  <CustomInput
+                    {...{
+                      label: C.CMS_LABELS.IMG_URL,
+                      invalid: errors[FORMIK_HELPER.IMG_URL],
+                      id: FORMIK_HELPER.IMG_URL,
+                      type: "file",
+                      value: values[FORMIK_HELPER.IMG_URL],
+                      onChange: imageChangeHandler,
+                    }}
+                  />
+                  {image && (
+                    <>
+                      <S.PreviewImg
+                        {...{
+                          src: image,
+                          alt: "Preview",
+                        }}
+                      />
+                      <S.DeleteUpload
+                        {...{
+                          type: CMS_INPUT_TYPES.BUTTON,
+                          variant: C.GENERAL_CONSTANTS.B_DANGER,
+                          onClick: () => deleteImage(image),
+                        }}
+                      >
+                        <AiOutlineClose />
+                      </S.DeleteUpload>
+                    </>
+                  )}
+                  {(errors[FORMIK_HELPER.IMG_URL] ||
+                    touched[FORMIK_HELPER.IMG_URL]) && (
+                    <F.Text className="validation-alert">
+                      {errors[FORMIK_HELPER.IMG_URL]}
+                    </F.Text>
+                  )}
+                </div>
+                <div className="form-control">
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.UPLOAD_IMGS,
@@ -205,12 +182,11 @@ const AddNews = () => {
                       id: FORMIK_HELPER.IMAGES_URL,
                       name: FORMIK_HELPER.IMAGES_URL,
                       type: CMS_INPUT_TYPES.FILE,
-                      onChange: (e) => {
-                        imageChangeHandler(e, FORMIK_HELPER.IMAGES_URL);
+                      onChange: (event) => {
+                        imageChangeHandler(event, FORMIK_HELPER.IMAGES_URL);
                       },
                     }}
-                  /> 
-                  <F.Text className="validation-alert"></F.Text>
+                  />
                 </div>
                 <div className="form-control">
                   <label htmlFor={FORMIK_HELPER.LANGUAGE}>
@@ -237,6 +213,32 @@ const AddNews = () => {
                     </F.Text>
                   )}
                 </div>
+
+                <div className="form-control">
+                  <label htmlFor={FORMIK_HELPER.CREW}>
+                    {C.CMS_LABELS.CREW}
+                  </label>
+                  <CustomSelect
+                    {...{
+                      name: FORMIK_HELPER.CREW,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
+                      invalid: errors[FORMIK_HELPER.CREW],
+                      isDisabled: status < 50,
+                      options: crew.map(({ name, surname }) => ({
+                        label: `${name} ${surname}`,
+                        value: `${name} ${surname}`,
+                      })),
+                      onChange: setFieldValue,
+                    }}
+                  />
+                  {(errors[FORMIK_HELPER.CREW] ||
+                    touched[FORMIK_HELPER.CREW]) && (
+                    <F.Text className="validation-alert">
+                      {errors[FORMIK_HELPER.CREW]}
+                    </F.Text>
+                  )}
+                </div>
+
                 <div className="form-control editor">
                   <label>{C.CMS_LABELS.CONTENT}</label>
                   <CustomEditor

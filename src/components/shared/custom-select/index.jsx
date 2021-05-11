@@ -9,7 +9,6 @@ export const CustomSelect = ({
   onChange,
   isDisabled,
   invalid,
-  propName,
   options,
 }) => {
   return (
@@ -24,7 +23,7 @@ export const CustomSelect = ({
         placeholder,
         value: { label, value },
         options,
-        onChange: (values)=> onChange(propName, values),
+        onChange: (values)=> onChange(name, values),
         isDisabled,
       }}
     />

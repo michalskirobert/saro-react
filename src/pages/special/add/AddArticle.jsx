@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form as F } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Formik, Form } from "formik";
@@ -24,8 +24,7 @@ import * as C from "@utils/constants";
 import * as S from "./styles";
 
 const AddArticle = () => {
-  const userStatus = useSelector(state=> state?.currentUser?.status) 
-  
+  const {status} = useSelector(({currentUser}) => currentUser) 
   const {
     alert,
     categories,
@@ -73,7 +72,7 @@ const AddArticle = () => {
           <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_ARTICLES}</h2>
           <Form className="cms">
             <section className="form-container">
-              <div className="form-control">              
+              <div className="form-control">
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TITLE,
@@ -89,28 +88,6 @@ const AddArticle = () => {
                   touched[FORMIK_HELPER.TITLE]) && (
                   <F.Text className="validation-alert">
                     {errors[FORMIK_HELPER.TITLE]}
-                  </F.Text>
-                )}
-              </div>
-              <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
-                <CustomSelect
-                  {...{
-                    name: FORMIK_HELPER.CREW,
-                    placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
-                    isDisabled: (userStatus < 50),
-                    invalid: errors[FORMIK_HELPER.CREW],
-                    options: crew.map(({ name, surname }) => ({
-                      label: `${name} ${surname}`,
-                      value: `${name} ${surname}`,
-                    })),
-                    onChange: setFieldValue,
-                  }}
-                />
-                {(errors[FORMIK_HELPER.CREW] ||
-                  touched[FORMIK_HELPER.CREW]) && (
-                  <F.Text className="validation-alert">
-                    {errors[FORMIK_HELPER.CREW]}
                   </F.Text>
                 )}
               </div>
@@ -138,29 +115,6 @@ const AddArticle = () => {
                 )}
               </div>
               <div className="form-control">
-                <label htmlFor={FORMIK_HELPER.LANGUAGE}>
-                  {C.CMS_LABELS.LANG}
-                </label>
-                <CustomSelect
-                  {...{
-                    name: FORMIK_HELPER.LANGUAGE,
-                    placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                    invalid: errors[FORMIK_HELPER.LANGUAGE],
-                    options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
-                      label: item.label,
-                      value: item.lang,
-                    })),             
-                    onChange: setFieldValue,
-                  }}
-                />
-                {(errors[FORMIK_HELPER.LANGUAGE] ||
-                  touched[FORMIK_HELPER.LANGUAGE]) && (
-                  <F.Text className="validation-alert">
-                    {errors[FORMIK_HELPER.LANGUAGE]}
-                  </F.Text>
-                )}
-              </div>
-              <div className="form-control">             
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.UPLOAD_COVER_IMG,
@@ -168,7 +122,7 @@ const AddArticle = () => {
                     id: FORMIK_HELPER.IMG_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: (e)=> imageChangeHandler(e),
+                    onChange: (event) => imageChangeHandler(event),
                   }}
                 />
                 {image && (
@@ -180,35 +134,82 @@ const AddArticle = () => {
                       }}
                     />
                     <S.DeleteUpload
-                    {...{
-                      type: CMS_INPUT_TYPES.BUTTON,
-                      variant: C.GENERAL_CONSTANTS.B_DANGER,
-                      onClick: () => deleteImage(image)
-                    }}                      
+                      {...{
+                        type: CMS_INPUT_TYPES.BUTTON,
+                        variant: C.GENERAL_CONSTANTS.B_DANGER,
+                        onClick: () => deleteImage(image),
+                      }}
                     >
                       <AiOutlineClose />
                     </S.DeleteUpload>
                   </>
                 )}
-                 {(errors[FORMIK_HELPER.IMG_URL] ||
+                {(errors[FORMIK_HELPER.IMG_URL] ||
                   touched[FORMIK_HELPER.IMG_URL]) && (
-                    <F.Text className="validation-alert">{errors[FORMIK_HELPER.IMG_URL]}</F.Text>
-                )}                
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.IMG_URL]}
+                  </F.Text>
+                )}
               </div>
-              <div className="form-control">      
-                <CustomInput 
+              <div className="form-control">
+                <CustomInput
                   {...{
                     label: C.CMS_LABELS.UPLOAD_IMGS,
                     invalid: errors[FORMIK_HELPER.IMAGES_URL],
                     id: FORMIK_HELPER.IMAGES_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMAGES_URL],
-                    onChange: (e)=>imageChangeHandler(e, true),
+                    onChange: (event) => imageChangeHandler(event, true),
                     multiple: true,
                   }}
-                />            
+                />
               </div>
-           
+              <div className="form-control">
+                <label htmlFor={FORMIK_HELPER.LANGUAGE}>
+                  {C.CMS_LABELS.LANG}
+                </label>
+                <CustomSelect
+                  {...{
+                    name: FORMIK_HELPER.LANGUAGE,
+                    placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
+                    invalid: errors[FORMIK_HELPER.LANGUAGE],
+                    options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
+                      label: item.label,
+                      value: item.lang,
+                    })),
+                    onChange: setFieldValue,
+                  }}
+                />
+                {(errors[FORMIK_HELPER.LANGUAGE] ||
+                  touched[FORMIK_HELPER.LANGUAGE]) && (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.LANGUAGE]}
+                  </F.Text>
+                )}
+              </div>
+              <div className="form-control">
+                <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
+                <CustomSelect
+                  {...{
+                    name: FORMIK_HELPER.CREW,
+                    placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
+                    isDisabled: status < 50,
+                    invalid: errors[FORMIK_HELPER.CREW],
+                    options: crew.map(({ name, surname }) => ({
+                      label: `${name} ${surname}`,
+                      value: `${name} ${surname}`,
+                    })),
+                    onChange: setFieldValue,
+                  }}
+                />
+                {(errors[FORMIK_HELPER.CREW] ||
+                  touched[FORMIK_HELPER.CREW]) && (
+                  <F.Text className="validation-alert">
+                    {errors[FORMIK_HELPER.CREW]}
+                  </F.Text>
+                )}
+              </div>
+
               <div className="form-control editor">
                 <label>{C.CMS_LABELS.CONTENT}</label>
                 <CustomEditor

@@ -8,9 +8,9 @@ import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 
 const AdminPanel = () => {
-  const alert = useSelector((state) => state.CMS.alert);
-  const nav = useSelector((state) => state.database?.init?.nav[0]?.content);
-  const isLoading = useSelector((state) => state.currentUser.isLoading);
+  const {alert} = useSelector(({CMS}) => CMS);
+  const nav = useSelector(({database}) => database?.init?.nav[0]?.content);
+  const {isLoading} = useSelector(({currentUser}) => currentUser);
 
   return (
     <section className="section saro-panel">
