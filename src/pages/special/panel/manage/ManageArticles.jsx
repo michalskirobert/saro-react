@@ -30,7 +30,7 @@ const ManageArticles = () => {
     isAll,
     selectedRowId,
     setSelectedRowId,
-    articleItems,
+    articles,
     isEditable,
     selectedRowsId,
     isLoading,
@@ -91,7 +91,7 @@ const ManageArticles = () => {
       />
       <CustomDataTable
         {...{
-          rows: articleItems,
+          rows: articles,
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [

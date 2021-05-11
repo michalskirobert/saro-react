@@ -28,7 +28,7 @@ const ManageEvents = () => {
     isAll,
     selectedRowId,
     setSelectedRowId,
-    eventItems,
+    events,
     isEditable,
     selectedRowsId,
     isLoading,
@@ -88,7 +88,7 @@ const ManageEvents = () => {
       />
       <CustomDataTable
         {...{
-          rows: eventItems,
+          rows: events,
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [

@@ -29,7 +29,7 @@ const ManageNews = () => {
     isAll,
     selectedRowId,
     setSelectedRowId,
-    newsItems,
+    news,
     isEditable,
     selectedRowsId,
     isLoading,
@@ -88,7 +88,7 @@ const ManageNews = () => {
       />
       <CustomDataTable
         {...{
-          rows: newsItems,
+          rows: news,
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [

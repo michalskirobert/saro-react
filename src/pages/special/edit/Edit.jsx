@@ -33,7 +33,7 @@ const Edit = () => {
   const query = new URLSearchParams(useLocation().search);
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
   const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
-  const { alert, database, updateEditedItem, userStatus, categories } = useEdit();
+  const { alert, database, updateEditedItem, status, categories } = useEdit();
   const { imageChangeHandler, image, deleteImage } = useContainer();
 
   return (
@@ -258,7 +258,7 @@ const Edit = () => {
                       type: CMS_INPUT_TYPES.FILE,
                       placeholder: database[type]?.imgURL,
                       value: values[FORMIK_HELPER.IMG_URL],
-                      onChange: (e) => imageChangeHandler(e),
+                      onChange: (event) => imageChangeHandler(event),
                     }}
                   />
                   {image && (
@@ -297,7 +297,7 @@ const Edit = () => {
                         type: CMS_INPUT_TYPES.FILE,
                         placeholder: database[type]?.imagesURL,
                         value: values[FORMIK_HELPER.IMAGES_URL],
-                        onChange: (e) => imageChangeHandler(e, true),
+                        onChange: (event) => imageChangeHandler(event, true),
                         multiple: true,
                       }}
                     />
@@ -337,7 +337,7 @@ const Edit = () => {
                       name: FORMIK_HELPER.CREW,
                       placeholder: database[type]?.crew,
                       invalid: !errors[FORMIK_HELPER.CREW],
-                      isDisabled: userStatus < 50,
+                      isDisabled: status < 50,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
                         ({ name, surname }) => ({
                           label: `${name} ${surname}`,

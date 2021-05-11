@@ -32,7 +32,7 @@ const cities = [
 ];
 
 const AddEvents = () => {
-  const userStatus = useSelector((state) => state?.currentUser?.status);
+  const {status} = useSelector(({currentUser}) => currentUser);
   const {
     alert,
     isLoading,
@@ -294,7 +294,7 @@ const AddEvents = () => {
                   {...{
                     name: FORMIK_HELPER.CREW,
                     invalid: errors[FORMIK_HELPER.CREW],
-                    isDisabled: userStatus < 50,
+                    isDisabled: status < 50,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,

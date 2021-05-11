@@ -24,8 +24,7 @@ import * as C from "@utils/constants";
 import * as S from "./styles";
 
 const AddArticle = () => {
-  const userStatus = useSelector((state) => state?.currentUser?.status);
-
+  const {status} = useSelector(({currentUser}) => currentUser) 
   const {
     alert,
     categories,
@@ -123,7 +122,7 @@ const AddArticle = () => {
                     id: FORMIK_HELPER.IMG_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: (e) => imageChangeHandler(e),
+                    onChange: (event) => imageChangeHandler(event),
                   }}
                 />
                 {image && (
@@ -160,7 +159,7 @@ const AddArticle = () => {
                     id: FORMIK_HELPER.IMAGES_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMAGES_URL],
-                    onChange: (e) => imageChangeHandler(e, true),
+                    onChange: (event) => imageChangeHandler(event, true),
                     multiple: true,
                   }}
                 />
@@ -194,7 +193,7 @@ const AddArticle = () => {
                   {...{
                     name: FORMIK_HELPER.CREW,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
-                    isDisabled: userStatus < 50,
+                    isDisabled: status < 50,
                     invalid: errors[FORMIK_HELPER.CREW],
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,

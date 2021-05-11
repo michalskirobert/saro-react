@@ -15,13 +15,13 @@ export const useEdit = () => {
   const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
   const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
 
-  const userStatus = useSelector((state) => state?.currentUser?.status);
-
-  const alert = useSelector((state) => state.CMS.alert);
   const history = useHistory();
   const dispatch = useDispatch();
-  const lang = useSelector((state) => state.general.language);
-  const database = useSelector((state) => state.database);
+
+  const {status} = useSelector(({currentUser}) => currentUser);
+  const {alert} = useSelector(({CMS}) => CMS);
+  const {language: lang} = useSelector(({general}) => general);
+  const database = useSelector(({database}) => database);
   const [categories, setCategories] = useState([])
 
 
@@ -105,7 +105,7 @@ export const useEdit = () => {
     getEditedItem,
     updateEditedItem,
     type,
-    userStatus,
+    status,
     categories
   };
 };
