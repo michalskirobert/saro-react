@@ -14,6 +14,7 @@ import * as C from "@utils/constants";
 
 import * as S from "./styles";
 import { Loader } from "@components/shared/custom-loadings/Loader";
+import { CustomInput } from "@components/shared/custom-inputs";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -67,14 +68,15 @@ const LoginForm = () => {
             const { placeholder, type } = item;
             return (
               <div className="form-control" key={index}>
-                <input
-                  name={FORM_HELPER[type.toUpperCase()]}
-                  type={type}
-                  id={FORM_HELPER[type.toUpperCase()]}
-                  value={values[FORM_HELPER[type.toUpperCase()]]}
-                  onChange={handleChange}
-                  required
-                  placeholder={placeholder}
+                <CustomInput
+                  {...{
+                    invalid: errors[FORM_HELPER[type.toUpperCase()]],
+                    id: FORM_HELPER[type.toUpperCase()],
+                    placeholder: placeholder,
+                    type: type,
+                    value: values[FORM_HELPER[type.toUpperCase()]],
+                    onChange: handleChange,
+                  }}
                 />
 
                 {errors[FORM_HELPER[type.toUpperCase()]] && (

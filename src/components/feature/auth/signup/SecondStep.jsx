@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { FORM_HELPER } from "./utils";
 import CustomFeedback from "@components/shared/custom-feedback/index";
 import { CustomSelect } from "@components/shared/custom-select";
-
+import { CustomInput } from "@components/shared/custom-inputs";
 const genderOptions = [
   { value: "male", label: "male" },
   { value: "female", label: "female" },
@@ -78,28 +78,31 @@ export function SecondStep({
         ) : null}
       </div>
       <div className="form-control text">
-        <label htmlFor="hobbies" className="floatLabel"></label>
-        <input
-          type="text"
-          id="hobbies"
-          value={values[FORM_HELPER.HOBBIES]}
-          onChange={handleChange}
-          required
-          placeholder="Your hobbies"
+        <CustomInput
+          {...{
+            invalid: errors[FORM_HELPER.HOBBIES],
+            id: FORM_HELPER.HOBBIES,
+            placeholder: "Your hobbies",
+            type: "text",
+            value: values[FORM_HELPER.HOBBIES],
+            onChange: handleChange,
+          }}
         />
+
         {errors[FORM_HELPER.HOBBIES] || touched[FORM_HELPER.HOBBIES] ? (
           <CustomFeedback text={errors[FORM_HELPER.HOBBIES]}></CustomFeedback>
         ) : null}
       </div>
       <div className="form-control ">
-        <label htmlFor="about" className="floatLabel"></label>
-        <input
-          type="text"
-          id="about"
-          value={values[FORM_HELPER.ABOUT]}
-          onChange={handleChange}
-          required
-          placeholder="About You"
+        <CustomInput
+          {...{
+            invalid: errors[FORM_HELPER.ABOUT],
+            id: FORM_HELPER.ABOUT,
+            placeholder: "About You",
+            type: "text",
+            value: values[FORM_HELPER.ABOUT],
+            onChange: handleChange,
+          }}
         />
         {errors[FORM_HELPER.ABOUT] || touched[FORM_HELPER.ABOUT] ? (
           <CustomFeedback text={errors[FORM_HELPER.ABOUT]}></CustomFeedback>
