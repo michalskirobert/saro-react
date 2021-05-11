@@ -4,13 +4,14 @@ import { Breadcrumb, Modal, Button } from "react-bootstrap";
 import { useManageContainer } from "./container";
 import { useContainer } from "./../../../public/home/container";
 import { CustomDataTable } from "@components/shared/custom-table";
+import { CustomWarningModal } from "@components/shared/modals/custom-modal-warning";
 
 import {
   TABLE_COLUMN_PROPERTIES,
   COLUMNS,
   tableColumnExtensions,
   BUTTONS_HELPER,
-  BUTTON_ACTIONS
+  BUTTON_ACTIONS,
 } from "../utils";
 import * as C from "@utils/constants";
 
@@ -28,10 +29,10 @@ const ManageNews = () => {
     isAll,
     selectedRowId,
     setSelectedRowId,
-    newsItems,
+    news,
     isEditable,
     selectedRowsId,
-    isLoading
+    isLoading,
   } = useManageContainer();
 
   useEffect(() => {
@@ -41,9 +42,15 @@ const ManageNews = () => {
   return (
     <section className="section saro-panel">
       <Breadcrumb>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</Breadcrumb.Item>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>{C.GENERAL_CONSTANTS.ADMIN_PANEL}</Breadcrumb.Item>
-        <Breadcrumb.Item active>{C.GENERAL_CONSTANTS.MANAGE_NEWS}</Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>
+          {C.GENERAL_CONSTANTS.HOME}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>
+          {C.GENERAL_CONSTANTS.ADMIN_PANEL}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>
+          {C.GENERAL_CONSTANTS.MANAGE_NEWS}
+        </Breadcrumb.Item>
       </Breadcrumb>
       <h2 className="main-title">{C.GENERAL_CONSTANTS.MANAGE_NEWS}</h2>
       {BUTTONS_HELPER.map(
@@ -68,26 +75,26 @@ const ManageNews = () => {
           );
         }
       )}
-        <Modal show={showAlert} onHide={() => setShowAlert(false)}>
-        <Modal.Body>
-          {C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE}
-        </Modal.Body>
-        <Modal.Footer>
-        <Button variant={C.GENERAL_CONSTANTS.B_DANGER} onClick={deleteSelections}>
-        {C.GENERAL_CONSTANTS.YES}
-        </Button>
-        <Button variant={C.GENERAL_CONSTANTS.B_DARK} onClick={() => setShowAlert(false)}>
-        {C.GENERAL_CONSTANTS.NO}
-        </Button>
-        </Modal.Footer>
-       
-      </Modal>
+      <CustomWarningModal
+        {...{
+          show: showAlert,
+          content: C.GENERAL_CONSTANTS.DELETE_REQUEST_MESSAGE,
+          confirmMsg: C.GENERAL_CONSTANTS.YES,
+          rejectMsg: C.GENERAL_CONSTANTS.NO,
+          onSave: deleteSelections,
+          onCancel: () => setShowAlert(false),
+          onHide: () => setShowAlert(false),
+        }}
+      />
       <CustomDataTable
         {...{
-          rows: newsItems,
+          rows: news,
           columns: COLUMNS,
           tableColumnExtensions,
-          dateColumns: [TABLE_COLUMN_PROPERTIES.MODIFIED, TABLE_COLUMN_PROPERTIES.PUBLISHED],
+          dateColumns: [
+            TABLE_COLUMN_PROPERTIES.MODIFIED,
+            TABLE_COLUMN_PROPERTIES.PUBLISHED,
+          ],
           checkboxSelection: !!isAll,
           isGrouping: false,
           isLoading,

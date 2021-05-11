@@ -19,16 +19,16 @@ export const useContainer = () => {
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
 
-  const alert = useSelector((state) => state.CMS.alert);
-  const isLoading = useSelector((state) => state.CMS.isLoading);
-  const lang = useSelector((state) => state.general.language);
-  const crew = useSelector((state) => state.database.crew);
+  const {alert, isLoading} = useSelector(({CMS}) => CMS);
+  const {language: lang} = useSelector(({general}) => general);
+  const {crew} = useSelector(({database}) => database);
   const [value, setValue] = useState("");
   const [imgName, setImgName] = useState("");
   const [imagesName, setImagesName] = useState("");
   const [categories, setCategories] = useState([]);
   const [image, setImage] = useState("");
   const [images, setImages] = useState("");
+
 
   const addNewItem = async (id, values) => {
     return await firestore
@@ -62,8 +62,8 @@ export const useContainer = () => {
     }
   };
 
-  const imageChangeHandler = async (e, multiple) => {  
-      const files = Array.from(e.target.files) 
+  const imageChangeHandler = async (event, multiple) => {  
+      const files = Array.from(event.target.files) 
       if(!files){
         multiple ? setImages("") : setImage("")       
         toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)

@@ -16,6 +16,7 @@ export const FORMIK_HELPER = Object.freeze({
   DATE: "date",
   TIME: "time",
   IMG_URL: "imgURL",
+  IMAGES_URL: "imagesURL",
   LINK: "link",
   FIELD_REQUIRED_MESSAGE: "Field required.",
   MIN_4_CHARACTERS_MESSAGE: "Min 4 characters.",

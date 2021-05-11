@@ -80,7 +80,7 @@ export function SecondStep({
       <div className="form-control text">
         <CustomInput
           {...{
-            isValid: errors[FORM_HELPER.HOBBIES],
+            invalid: errors[FORM_HELPER.HOBBIES],
             id: FORM_HELPER.HOBBIES,
             placeholder: "Your hobbies",
             type: "text",
@@ -96,7 +96,7 @@ export function SecondStep({
       <div className="form-control ">
         <CustomInput
           {...{
-            isValid: errors[FORM_HELPER.ABOUT],
+            invalid: errors[FORM_HELPER.ABOUT],
             id: FORM_HELPER.ABOUT,
             placeholder: "About You",
             type: "text",

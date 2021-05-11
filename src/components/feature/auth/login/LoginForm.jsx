@@ -15,7 +15,6 @@ import * as C from "@utils/constants";
 import * as S from "./styles";
 import { Loader } from "@components/shared/custom-loadings/Loader";
 import { CustomInput } from "@components/shared/custom-inputs";
-import { formatDate } from "@components/shared/custom-table/utils";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -71,7 +70,7 @@ const LoginForm = () => {
               <div className="form-control" key={index}>
                 <CustomInput
                   {...{
-                    isValid: errors[FORM_HELPER[type.toUpperCase()]],
+                    invalid: errors[FORM_HELPER[type.toUpperCase()]],
                     id: FORM_HELPER[type.toUpperCase()],
                     placeholder: placeholder,
                     type: type,
