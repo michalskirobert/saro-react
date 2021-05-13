@@ -18,12 +18,11 @@ export const useEdit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const {status} = useSelector(({currentUser}) => currentUser);
-  const {alert} = useSelector(({CMS}) => CMS);
-  const {language: lang} = useSelector(({general}) => general);
-  const database = useSelector(({database}) => database);
-  const [categories, setCategories] = useState([])
-
+  const { status } = useSelector(({ currentUser }) => currentUser);
+  const { alert } = useSelector(({ CMS }) => CMS);
+  const { language: lang } = useSelector(({ general }) => general);
+  const database = useSelector(({ database }) => database);
+  const [categories, setCategories] = useState([]);
 
   const getEditedItem = (id, type) => {
     try {
@@ -42,7 +41,7 @@ export const useEdit = () => {
     } catch (error) {}
   };
 
-  const updateEditedItem = async (id, type, values) => {     
+  const updateEditedItem = async (id, type, values) => {
     try {
       dispatch(cmsActions.updateRequest());
       await firestore
@@ -54,13 +53,12 @@ export const useEdit = () => {
           ...values,
           modified: moment().toISOString(),
         });
-      dispatch(cmsActions.updateSuccess());     
-      toast.success(CONSTANTS.GENERAL_CONSTANTS.UPDATE_ITEM_SUCCESS_MESSAGE)
-      history.push("/panel")      
-      
+      dispatch(cmsActions.updateSuccess());
+      toast.success(CONSTANTS.GENERAL_CONSTANTS.UPDATE_ITEM_SUCCESS_MESSAGE);
+      history.push("/panel");
     } catch (error) {
       dispatch(cmsActions.updateFailure());
-      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE)
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE);
     }
   };
 
@@ -89,11 +87,10 @@ export const useEdit = () => {
       });
   };
 
-
   useEffect(() => {
     getEditedItem(id, type);
     fetchCrew();
-    fetchCategories()
+    fetchCategories();
     // eslint-disable-next-line
   }, []);
 
@@ -106,6 +103,6 @@ export const useEdit = () => {
     updateEditedItem,
     type,
     status,
-    categories
+    categories,
   };
 };
