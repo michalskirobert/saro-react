@@ -32,7 +32,7 @@ const cities = [
 ];
 
 const AddEvents = () => {
-  const {status} = useSelector(({currentUser}) => currentUser);
+  const { status } = useSelector(({ currentUser }) => currentUser);
   const {
     alert,
     isLoading,
@@ -56,7 +56,7 @@ const AddEvents = () => {
         initialValues: {},
         validateOnChange: true,
         validateOnMount: true,
-        validationSchema: addEventsValidationScheme,
+        // validationSchema: addEventsValidationScheme,
         onSubmit: (values) => {
           handleSubmit(values);
         },
@@ -337,7 +337,7 @@ const AddEvents = () => {
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
-                disabled: !image || isLoading || !isValid,
+                // disabled: !image || isLoading || !isValid,
                 onClick: handleSubmit,
               }}
             >

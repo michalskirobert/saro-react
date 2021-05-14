@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Breadcrumb } from "react-bootstrap";
 
 import { useManageContainer } from "./container";
-import { useContainer } from "./../../../public/home/container";
 import { CustomDataTable } from "@components/shared/custom-table";
 import { CustomWarningModal } from "@components/shared/modals/custom-modal-warning";
 
@@ -33,11 +32,6 @@ const ManageEvents = () => {
     selectedRowsId,
     isLoading,
   } = useManageContainer();
-  const { getEvents } = useContainer();
-
-  useEffect(() => {
-    getEvents();
-  }, []);
 
   return (
     <section className="section saro-panel">
@@ -86,9 +80,10 @@ const ManageEvents = () => {
           onHide: () => setShowAlert(false),
         }}
       />
+      {/*dlaczego nie ma kondycji?  zamiast showAlert... */}
       <CustomDataTable
         {...{
-          rows: events,
+          rows: !!events.length ? events : [],
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [

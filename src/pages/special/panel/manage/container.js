@@ -1,24 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { firestore } from "@fire";
 import { useEdit } from "./../../edit/container";
 
 import { BUTTON_ACTIONS } from "./../utils";
+
+import { fetchActions } from "@actions";
 import * as C from "@utils/constants";
 
 export const useManageContainer = () => {
- 
   const { handleEdit } = useEdit();
   const history = useHistory();
   const location = useLocation();
+  const { language } = useSelector(({ general }) => general);
+  const dispatch = useDispatch();
 
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
 
-  const {news, events, articles, isLoading} = useSelector(({database}) => database);
+  const { news, events, articles, isLoading } = useSelector(
+    ({ database }) => database
+  );
 
   const [selectedRowsId, setSelectedRowsId] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState();
@@ -27,7 +32,7 @@ export const useManageContainer = () => {
 
   const handleButtonActions = (action) => {
     switch (action) {
-      case BUTTON_ACTIONS.DELETE:        
+      case BUTTON_ACTIONS.DELETE:
         selectedRowsId.length > 0 || selectedRowId
           ? setShowAlert(true)
           : toast.info(C.GENERAL_CONSTANTS.NOTHING_TO_DELETE_MESSAGE, {
@@ -50,6 +55,18 @@ export const useManageContainer = () => {
       default:
         return;
     }
+  };
+
+  const getEditContent = async () => {
+    return await firestore
+      .collection(C.GENERAL_CONSTANTS.LANG)
+      .doc(language)
+      .collection(currentPage)
+      .onSnapshot((resp) =>
+        dispatch(
+          fetchActions.getEventsSuccess(resp.docs.map((item) => item.data()))
+        )
+      );
   };
 
   const deleteSelections = () => {
@@ -85,8 +102,14 @@ export const useManageContainer = () => {
     return false;
   };
 
+  useEffect(() => {
+    (async () => getEditContent())();
+  }, []);
+
+  console.log({ events });
+
   return {
-    isEditable,   
+    isEditable,
     news,
     events,
     articles,
@@ -102,6 +125,7 @@ export const useManageContainer = () => {
     deleteSelections,
     isAll,
     setIsAll,
-    isLoading
+    isLoading,
+    getEditContent,
   };
 };

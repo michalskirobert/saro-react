@@ -43,7 +43,7 @@ const Edit = () => {
           initialValues: { ...database[type] },
           validateOnChange: true,
           validateOnMount: true,
-          validationSchema: editValidationScheme(type),
+          // validationSchema: editValidationScheme(type),
           onSubmit: (values) => updateEditedItem(id, type, values),
           enableReinitialize: true,
         }}
@@ -398,7 +398,7 @@ const Edit = () => {
                 {...{
                   className: "submit-btn",
                   type: "submit",
-                  disabled: !isValid,
+                  // disabled: !isValid,
                   onClick: handleSubmit,
                 }}
               >
