@@ -57,11 +57,11 @@ export const useManageContainer = () => {
     }
   };
 
-  const getEditContent = async () => {
-    return await firestore
+  const getEvents = async () => {
+    return firestore
       .collection(C.GENERAL_CONSTANTS.LANG)
       .doc(language)
-      .collection(currentPage)
+      .collection(C.GENERAL_CONSTANTS.EVENTS)
       .onSnapshot((resp) =>
         dispatch(
           fetchActions.getEventsSuccess(resp.docs.map((item) => item.data()))
@@ -103,10 +103,8 @@ export const useManageContainer = () => {
   };
 
   useEffect(() => {
-    (async () => getEditContent())();
+    (async () => getEvents())();
   }, []);
-
-  console.log({ events });
 
   return {
     isEditable,
@@ -126,6 +124,5 @@ export const useManageContainer = () => {
     isAll,
     setIsAll,
     isLoading,
-    getEditContent,
   };
 };

@@ -6,13 +6,13 @@ import { firestore } from "@components/feature/firebase";
 
 export const useContainer = () => {
   const dispatch = useDispatch();
-  const lang = useSelector((state) => state.general.language);
+  const { language } = useSelector(({ general }) => general);
 
   const getNews = async () => {
     dispatch(fetchActions.getNewsRequest());
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
+      .doc(language)
       .collection(GENERAL_CONSTANTS.NEWS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
@@ -24,7 +24,7 @@ export const useContainer = () => {
     dispatch(fetchActions.getEventsRequest);
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
+      .doc(language)
       .collection(GENERAL_CONSTANTS.EVENTS)
       .onSnapshot((resp) => {
         const newsData = resp.docs.map((item) => item.data());
@@ -37,10 +37,10 @@ export const useContainer = () => {
     dispatch(fetchActions.getArticlesRequest);
     firestore
       .collection(GENERAL_CONSTANTS.LANG)
-      .doc(lang)
+      .doc(language)
       .collection(GENERAL_CONSTANTS.ARTICLES)
       .onSnapshot((resp) => {
-        const newsData = resp.docs.map((item) => item.data());        
+        const newsData = resp.docs.map((item) => item.data());
 
         dispatch(fetchActions.getArticlesSuccess(newsData));
       });

@@ -19,7 +19,6 @@ import * as S from "../style";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const ManageNews = () => {
-  const { getNews } = useContainer();
   const {
     setSelectedRowsId,
     showAlert,
@@ -34,10 +33,6 @@ const ManageNews = () => {
     selectedRowsId,
     isLoading,
   } = useManageContainer();
-
-  useEffect(() => {
-    getNews();
-  }, []);
 
   return (
     <section className="section saro-panel">
@@ -88,7 +83,7 @@ const ManageNews = () => {
       />
       <CustomDataTable
         {...{
-          rows: news,
+          rows: [],
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [
