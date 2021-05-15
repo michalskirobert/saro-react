@@ -83,7 +83,7 @@ const ManageEvents = () => {
       {/*dlaczego nie ma kondycji?  zamiast showAlert... */}
       <CustomDataTable
         {...{
-          rows: !!events.length ? events : [],
+          rows: !!events.length ? events : [],      
           columns: COLUMNS,
           tableColumnExtensions,
           dateColumns: [

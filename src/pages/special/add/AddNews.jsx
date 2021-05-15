@@ -127,7 +127,7 @@ const AddNews = () => {
                         label: item,
                         value: item,
                       })),
-                      onChange: setFieldValue,
+                      onChange: ({value})=> setFieldValue(FORMIK_HELPER.CATEGORY, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.CATEGORY] ||
@@ -203,7 +203,7 @@ const AddNews = () => {
                           value: lang,
                         })
                       ),
-                      onChange: setFieldValue,
+                      onChange: ({value})=> setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -228,7 +228,7 @@ const AddNews = () => {
                         label: `${name} ${surname}`,
                         value: `${name} ${surname}`,
                       })),
-                      onChange: setFieldValue,
+                      onChange: ({value})=> setFieldValue(FORMIK_HELPER.CREW, value),
                     }}
                   />
                   {(errors[FORMIK_HELPER.CREW] ||

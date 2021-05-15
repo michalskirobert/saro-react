@@ -138,7 +138,7 @@ const AddEvents = () => {
                       label: city,
                       value: city,
                     })),
-                    onChange: setFieldValue,
+                    onChange: ({value}) => setFieldValue(FORMIK_HELPER.CITY, value),
                   }}
                 />
                 {(errors[FORMIK_HELPER.CITY] ||
@@ -278,7 +278,7 @@ const AddEvents = () => {
                         value: lang,
                       })
                     ),
-                    onChange: setFieldValue,
+                    onChange: ({value})=> setFieldValue(FORMIK_HELPER.LANGUAGE, value),
                   }}
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
@@ -300,7 +300,7 @@ const AddEvents = () => {
                       label: `${name} ${surname}`,
                       value: `${name} ${surname}`,
                     })),
-                    onChange: setFieldValue,
+                    onChange: ({value})=> setFieldValue(FORMIK_HELPER.CREW, value),
                   }}
                 />
                 {(errors[FORMIK_HELPER.CREW] ||
