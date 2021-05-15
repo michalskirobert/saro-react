@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
       "baseUrl": ".",
-      "target": "es5",
       "paths": {
         "@utils/*": ["./src/utils/*"],
         "@components/*": ["./src/components/*"],
@@ -10,8 +9,8 @@
         "@pages/*": ["./src/pages/*"],
         "@fire": ["./src/components/feature/firebase/index.js"],
         "@namespace/*": ["src/core/typings/*"],
+        "@actions": ["src/store/actions/index.js"],
       }
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
+    "include": ["src"]
   }
