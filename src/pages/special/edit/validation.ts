@@ -1,0 +1,60 @@
+import * as yup from "yup";
+
+import { FORMIK_HELPER } from "./utils";
+import * as CONSTANTS from "@utils/constants";
+
+export const editValidationScheme = (type) => {
+  if (type === CONSTANTS.GENERAL_CONSTANTS.ARTICLES) {
+    return yup.object().shape({
+      [FORMIK_HELPER.TITLE]: yup
+        .string()
+        .min(4, FORMIK_HELPER.MIN_4_CHARACTERS_MESSAGE)
+        .max(15, FORMIK_HELPER.MAX_15_CHARACTERS_MESSAGE)
+        .required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.CATEGORY]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    });
+  } else if (type === CONSTANTS.GENERAL_CONSTANTS.NEWS) {
+    return yup.object().shape({
+      [FORMIK_HELPER.TITLE]: yup
+        .string()
+        .min(4, FORMIK_HELPER.MIN_4_CHARACTERS_MESSAGE)
+        .max(15, FORMIK_HELPER.MAX_15_CHARACTERS_MESSAGE)
+        .required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.SUBTITLE]: yup
+        .string()
+        .min(4, FORMIK_HELPER.MIN_4_CHARACTERS_MESSAGE)
+        .max(15, FORMIK_HELPER.MAX_15_CHARACTERS_MESSAGE)
+        .required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.CATEGORY]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+      [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    });
+  }
+  return yup.object().shape({
+    [FORMIK_HELPER.TITLE]: yup
+      .string()
+      .min(4, FORMIK_HELPER.MIN_4_CHARACTERS_MESSAGE)
+      .max(15, FORMIK_HELPER.MAX_15_CHARACTERS_MESSAGE)
+      .required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.SUBTITLE]: yup
+      .string()
+      .min(4, FORMIK_HELPER.MIN_4_CHARACTERS_MESSAGE)
+      .max(15, FORMIK_HELPER.MAX_15_CHARACTERS_MESSAGE)
+      .required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.CREW]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.LANGUAGE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.EDITOR]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.CITY]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.PLACE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.DATE]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.TIME]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.IMG_URL]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+    [FORMIK_HELPER.LINK]: yup.string().required(FORMIK_HELPER.FIELD_REQUIRED_MESSAGE),
+  });
+};
