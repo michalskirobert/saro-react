@@ -1,9 +1,7 @@
 {
     "compilerOptions": {
       "baseUrl": ".",
-      "jsx": "react",
-      "module": "commonJS",
-      "target": "es6",
+      "target": "es5",
       "paths": {
         "@utils/*": ["./src/utils/*"],
         "@components/*": ["./src/components/*"],
@@ -11,7 +9,7 @@
         "@assets/*": ["./src/assets/*"],
         "@pages/*": ["./src/pages/*"],
         "@fire": ["./src/components/feature/firebase/index.js"],
-        "@namespace": ["./src/core/types/*"]
+        "@namespace/*": ["src/core/typings/*"],
       }
     },
     "include": ["src/**/*"],

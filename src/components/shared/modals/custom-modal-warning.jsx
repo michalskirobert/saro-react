@@ -4,7 +4,6 @@ import { Button, Modal } from "react-bootstrap";
 import * as C from "@utils/constants";
 
 export const CustomWarningModal = ({
-  show,
   onSave,
   onCancel,
   onHide,
@@ -13,7 +12,7 @@ export const CustomWarningModal = ({
   rejectMsg,
 }) => {
   return (
-    <Modal {...{ show, onHide }}>
+    <Modal {...{ onHide }}>
       <Modal.Body>{content}</Modal.Body>
       <Modal.Footer>
         <Button
