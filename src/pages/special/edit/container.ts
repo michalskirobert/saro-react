@@ -28,7 +28,7 @@ export const useEdit = () => {
     ({ general }: NReducers.TGeneral) => general
   );
   const database = useSelector(({ database }: NReducers.TDatabase) => database);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<string[]>([]);
 
   const getEditedItem = async (id: string, type: string): Promise<void> => {
     try {
@@ -50,7 +50,7 @@ export const useEdit = () => {
   const updateEditedItem = async (
     id: string,
     type: string,
-    values: Partial<unknown>
+    values: Partial<NCMS.TDefaultBodyValue>
   ): Promise<void> => {
     try {
       dispatch(cmsActions.updateRequest());

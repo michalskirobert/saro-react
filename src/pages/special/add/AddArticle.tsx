@@ -120,7 +120,7 @@ const AddArticle = () => {
                     id: FORMIK_HELPER.IMG_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event),
+                    onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, false),
                   }}
                 />
                 {image && (

@@ -9,7 +9,7 @@ const CustomEditor = ({
   style,
   propName,
   initialValue,
-}: Partial<NCustomItems.TCustomEditor): JSX.Element => {
+}: Partial<NCustomItems.TCustomEditor>): JSX.Element => {
   return (
     <Editor
       {...{

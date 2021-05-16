@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { firestore } from "@fire";
-
 import { NCMS, NReducers } from "@namespace";
 
 import { BUTTON_ACTIONS } from "../utils";
@@ -49,7 +48,7 @@ export const useManageContainer = (): NCMS.TEditContainer => {
         break;
 
       case BUTTON_ACTIONS.EDIT:
-        handleEdit(selectedRowId as string, currentPage);
+        handleEdit(selectedRowId as string, currentPage as string);
         break;
       case BUTTON_ACTIONS.IS_ALL:
         setSelectedRowsId([]);

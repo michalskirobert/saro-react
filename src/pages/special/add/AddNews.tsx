@@ -146,7 +146,7 @@ const AddNews = () => {
                       id: FORMIK_HELPER.IMG_URL,
                       type: "file",
                       value: values[FORMIK_HELPER.IMG_URL],
-                      onChange: imageChangeHandler,
+                      onChange: (event: React.SyntheticEvent<EventTarget>)=> imageChangeHandler(event, false),
                     }}
                   />
                   {image && (

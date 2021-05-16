@@ -1,10 +1,10 @@
-export const buttonHelper = {
+export const buttonHelper: Record<string, string> = {
   type: "",
   action: "",
 };
 
 
-export const FORMIK_HELPER = Object.freeze({
+export const FORMIK_HELPER: Record<string, string> = Object.freeze({
   TITLE: "title",
   SUBTITLE: "subtitle",
   CREW: "crew",
@@ -25,7 +25,7 @@ export const FORMIK_HELPER = Object.freeze({
 });
 
 
-export const CMS_INPUT_TYPES = Object.freeze({
+export const CMS_INPUT_TYPES: Record<string, string> = Object.freeze({
   TEXT: "text",
   FILE: "file",
   DATE: "date",
