@@ -1,15 +1,14 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Button, Form as F } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Form, Formik } from "formik";
 import { addArticleValidationScheme } from "./validation";
 
-import { NReducers } from "@namespace";
-
 import CustomEditor from "@components/shared/custom-editor";
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
+import { CustomButton } from "@components/shared/custom-button";
 
 import { useContainer } from "./container";
 
@@ -85,9 +84,9 @@ const AddArticle = () => {
                 />
                 {(errors[FORMIK_HELPER.TITLE] ||
                   touched[FORMIK_HELPER.TITLE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.TITLE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -108,9 +107,9 @@ const AddArticle = () => {
                 />
                 {(errors[FORMIK_HELPER.CATEGORY] ||
                   touched[FORMIK_HELPER.CATEGORY]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.CATEGORY]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -121,7 +120,7 @@ const AddArticle = () => {
                     id: FORMIK_HELPER.IMG_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: (event) => imageChangeHandler(event),
+                    onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event),
                   }}
                 />
                 {image && (
@@ -145,9 +144,9 @@ const AddArticle = () => {
                 )}
                 {(errors[FORMIK_HELPER.IMG_URL] ||
                   touched[FORMIK_HELPER.IMG_URL]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.IMG_URL]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -181,9 +180,9 @@ const AddArticle = () => {
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
                   touched[FORMIK_HELPER.LANGUAGE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.LANGUAGE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -203,9 +202,9 @@ const AddArticle = () => {
                 />
                 {(errors[FORMIK_HELPER.CREW] ||
                   touched[FORMIK_HELPER.CREW]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.CREW]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -218,21 +217,20 @@ const AddArticle = () => {
                     onChangeEditor: handleEditorChange,
                   }}
                 />
-                <F.Text className={"validation-alert"}>
+                <FormText className={"validation-alert"}>
                   {!!value.length && errors[FORMIK_HELPER.EDITOR]}
-                </F.Text>
+                </FormText>
               </div>
             </section>
-            <Button
+            <CustomButton
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
                 disabled: !isValid,
                 onClick: handleSubmit,
+                content: C.GENERAL_CONSTANTS.ADD
               }}
-            >
-              {C.GENERAL_CONSTANTS.ADD}
-            </Button>
+            />   
           </Form>
         </section>
       )}

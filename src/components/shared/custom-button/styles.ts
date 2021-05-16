@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
 
-export const CustomButton = styled(Button)``;
+export const CustomButton = styled(Button)`
+
+`;

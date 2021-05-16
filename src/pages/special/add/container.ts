@@ -30,12 +30,10 @@ export const useContainer = () => {
   const { status } = useSelector(
     ({ currentUser }: NReducers.TCurrentUser) => currentUser
   );
-  const [value, setValue] = useState("");
-  const [imgName, setImgName] = useState("");
-  const [imagesName, setImagesName] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [image, setImage] = useState("");
-  const [images, setImages] = useState<any[]>([]);
+  const [value, setValue] = useState<string>("");
+  const [categories, setCategories] = useState<string[]>([]);
+  const [image, setImage] = useState<string>("");
+  const [images, setImages] = useState<string[]>([]);
 
   const addNewItem = async (
     id: string,
@@ -78,7 +76,7 @@ export const useContainer = () => {
       const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`);
       await fileRef.put(file);
       multiple
-        ? setImages([...images, fileRef.getDownloadURL()])
+        ? setImages([...images, fileRef.getDownloadURL()])     
         : setImage(String(fileRef.getDownloadURL()));
       dispatch(cmsActions.uploadImageSuccess());
       toast.success(
@@ -90,10 +88,9 @@ export const useContainer = () => {
     }
   };
 
-
   const imageChangeHandler = async (
     event: React.SyntheticEvent<EventTarget>,
-    multiple: boolean
+    multiple?: boolean
   ) => {
     const files: any[] = Array.from((event.target as any).files);
     if (!files) {
@@ -171,10 +168,6 @@ export const useContainer = () => {
     imageChangeHandler,
     image,
     deleteImage,
-    setImgName,
-    imgName,
-    imagesName,
-    setImagesName,
     images,
     setImages,
     handleEditorChange,

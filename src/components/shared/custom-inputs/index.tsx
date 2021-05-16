@@ -1,7 +1,8 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Label } from "reactstrap";
 
 import * as S from "./styles";
+import { NCustomItems } from "src/core/types";
 
 export const CustomInput = ({
   invalid,
@@ -11,10 +12,10 @@ export const CustomInput = ({
   value,
   onChange,
   label,
-}) => {
+}: Partial<NCustomItems.TCustomInput>): JSX.Element => {
   return (
     <>
-      {label && <Form.Label for={id}>{label}</Form.Label>}
+      {label && <Label for={id}>{label}</Label>}
       <S.Input
         {...{
           className: `saro-custom-input`,

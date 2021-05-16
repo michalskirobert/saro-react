@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Button, Form as F } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Form, Formik } from "formik";
@@ -7,6 +7,7 @@ import { addEventsValidationScheme } from "./validation";
 
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
+import { CustomButton } from "@components/shared/custom-button";
 
 import { useContainer } from "./container";
 
@@ -29,8 +30,15 @@ const cities = [
 ];
 
 const AddEvents = () => {
-  const { status, handleSubmit, crew, image, deleteImage, imageChangeHandler } =
-    useContainer();
+  const {
+    status,
+    handleSubmit,
+    crew,
+    image,
+    deleteImage,
+    imageChangeHandler,
+    isLoading,
+  } = useContainer();
 
   return (
     <Formik
@@ -84,9 +92,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.TITLE] ||
                   touched[FORMIK_HELPER.TITLE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.TITLE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -104,9 +112,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.SUBTITLE] ||
                   touched[FORMIK_HELPER.SUBTITLE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.SUBTITLE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -126,9 +134,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.CITY] ||
                   touched[FORMIK_HELPER.CITY]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.CITY]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -146,9 +154,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.PLACE] ||
                   touched[FORMIK_HELPER.PLACE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.PLACE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -165,9 +173,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.DATE] ||
                   touched[FORMIK_HELPER.DATE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.DATE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -183,9 +191,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.TIME] ||
                   touched[FORMIK_HELPER.TIME]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.TIME]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -202,9 +210,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.LINK] ||
                   touched[FORMIK_HELPER.LINK]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.LINK]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -240,9 +248,9 @@ const AddEvents = () => {
                 )}
                 {(errors[FORMIK_HELPER.IMG_URL] ||
                   touched[FORMIK_HELPER.IMG_URL]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.IMG_URL]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
@@ -266,9 +274,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
                   touched[FORMIK_HELPER.LANGUAGE]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.LANGUAGE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control"}>
@@ -288,9 +296,9 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.CREW] ||
                   touched[FORMIK_HELPER.CREW]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.CREW]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
               <div className={"form-control form-info"}>
@@ -306,26 +314,25 @@ const AddEvents = () => {
                     cols: "30",
                     rows: "10",
                   }}
-                ></textarea>
+                />
                 {(errors[FORMIK_HELPER.EDITOR] ||
                   touched[FORMIK_HELPER.EDITOR]) && (
-                  <F.Text className={"validation-alert"}>
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.EDITOR]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
             </section>
 
-            <Button
+            <CustomButton
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
-                // disabled: !image || isLoading || !isValid,
+                disabled: !image || isLoading || !isValid,
                 onClick: handleSubmit,
+                content: C.GENERAL_CONSTANTS.ADD,
               }}
-            >
-              {C.GENERAL_CONSTANTS.ADD}
-            </Button>
+            />
           </Form>
         </section>
       )}

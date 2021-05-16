@@ -1,19 +1,24 @@
 import React from "react";
+import { NCustomItems } from "src/core/types";
 import * as S from "./styles";
 
-const CustomButton = ({ name, style, type, isOutline, outlineType }) => {
+export const CustomButton = ({
+  className,
+  disabled,
+  type,
+  content,
+  onClick,
+}: NCustomItems.TCustomButton): JSX.Element => {
   return (
     <S.CustomButton
       {...{
-        variant: `${style && style} ${
-          isOutline && `${isOutline}-${outlineType}`
-        }`,
+        className,
         type,
+        disabled,
+        onClick,
       }}
     >
-      {name}
+      {content}
     </S.CustomButton>
   );
 };
-
-export default CustomButton;

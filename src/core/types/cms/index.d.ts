@@ -1,5 +1,5 @@
 import { NReducers } from "@namespace";
-import { string } from "yup/lib/locale";
+// import { string } from "yup/lib/locale";
 
 export declare namespace NCMS {
   type S = string;
