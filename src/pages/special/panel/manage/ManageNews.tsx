@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Button, Modal } from "react-bootstrap";
+import { Breadcrumb } from "react-bootstrap";
 
 import { useManageContainer } from "./container";
 import { CustomDataTable } from "@components/shared/custom-table";
@@ -81,7 +81,7 @@ const ManageNews = (): JSX.Element => {
       )}
       <CustomDataTable
         {...{
-          rows: [],
+          rows: !!news.length ? news : [],
           columns: COLUMNS,
           dateColumns: [
             TABLE_COLUMN_PROPERTIES.MODIFIED,

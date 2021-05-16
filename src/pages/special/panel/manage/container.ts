@@ -75,6 +75,15 @@ export const useManageContainer = (): NCMS.TEditContainer => {
       );
   };
 
+  const removeItem = async (currentPage: string, id: string): Promise<void> => {
+    return await firestore
+      .collection(C.GENERAL_CONSTANTS.LANG)
+      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
+      .collection(currentPage)
+      .doc(id)
+      .delete();
+  };
+
   const deleteSelections = (): void => {
     if (isAll && selectedRowsId.length > 0) {
       selectedRowsId.forEach((id) => removeItem(currentPage, id));
@@ -90,14 +99,7 @@ export const useManageContainer = (): NCMS.TEditContainer => {
     });
   };
 
-  const removeItem = async (currentPage: string, id: string): Promise<void> => {
-    return await firestore
-      .collection(C.GENERAL_CONSTANTS.LANG)
-      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
-      .collection(currentPage)
-      .doc(id)
-      .delete();
-  };
+
 
   const isEditable = (selectedRowId: string): boolean => {
     if (selectedRowsId.length > 1) {

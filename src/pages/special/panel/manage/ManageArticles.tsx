@@ -84,7 +84,7 @@ const ManageArticles = (): JSX.Element => {
       )}
       <CustomDataTable
         {...{
-          rows: [],
+          rows: !!articles.length ? articles : [],
           columns: COLUMNS,
           tableColumnExtensions: [],
           dateColumns: [

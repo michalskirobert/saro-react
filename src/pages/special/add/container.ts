@@ -72,6 +72,25 @@ export const useContainer = () => {
     }
   };
 
+  const uploadImage = async (file: any, multiple?: boolean): Promise<void> => {
+    dispatch(cmsActions.uploadImageRequest());
+    try {
+      const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`);
+      await fileRef.put(file);
+      multiple
+        ? setImages([...images, fileRef.getDownloadURL()])
+        : setImage(String(fileRef.getDownloadURL()));
+      dispatch(cmsActions.uploadImageSuccess());
+      toast.success(
+        CONSTANTS.GENERAL_CONSTANTS.UPLOAD_NEW_FILE_SUCCESS_MESSAGE
+      );
+    } catch (error) {
+      dispatch(cmsActions.uploadImageFailure());
+      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE);
+    }
+  };
+
+
   const imageChangeHandler = async (
     event: React.SyntheticEvent<EventTarget>,
     multiple: boolean
@@ -100,23 +119,6 @@ export const useContainer = () => {
     });
   };
 
-  const uploadImage = async (file: any, multiple?: boolean): Promise<void> => {
-    dispatch(cmsActions.uploadImageRequest());
-    try {
-      const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`);
-      await fileRef.put(file);
-      multiple
-        ? setImages([...images, fileRef.getDownloadURL()])
-        : setImage(String(fileRef.getDownloadURL()));
-      dispatch(cmsActions.uploadImageSuccess());
-      toast.success(
-        CONSTANTS.GENERAL_CONSTANTS.UPLOAD_NEW_FILE_SUCCESS_MESSAGE
-      );
-    } catch (error) {
-      dispatch(cmsActions.uploadImageFailure());
-      toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE);
-    }
-  };
 
   const deleteImage = async (file: string): Promise<void> => {
     try {
