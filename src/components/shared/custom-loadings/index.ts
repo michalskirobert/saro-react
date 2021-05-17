@@ -1,2 +1,3 @@
 export { DefaultLoader } from "./DefaultLoader";
-export { TransparentLoader } from "./Loader";
+export { Loader } from "./Loader";
+export { CustomLoadingBlocker } from "./LoadingBlocker";

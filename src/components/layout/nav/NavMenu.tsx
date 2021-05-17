@@ -7,11 +7,14 @@ import { FaAngleLeft } from "react-icons/fa";
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 import { useContainer } from "./container";
 
+import { NCMS } from "@namespace";
+
 import * as S from "./style";
+
 
 const NavMenu = ({ isNavOpen, toggleNav }) => {
   const { filteredNavData } = useContainer();
-  const isLoading = useSelector((state) => state.database.isLoading);
+  const {isLoading} = useSelector(({database}: NCMS.TDatabase) => database);
 
   return (
     <>

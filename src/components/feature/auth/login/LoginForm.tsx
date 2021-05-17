@@ -20,9 +20,9 @@ const LoginForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.currentUser.isLoading);
-  // const validationData = useSelector(
-  //   (state) => state.database.init.auth["sign-in"]?.labels[0]
-  // );
+  const validationData = useSelector(
+    (state) => state.database.init.auth["sign-in"]?.labels[0]
+  );
   const logInData = useSelector(
     (state) => state.database?.init.auth["sign-in"]
   );

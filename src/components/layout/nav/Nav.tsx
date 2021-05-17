@@ -27,11 +27,6 @@ const Nav = () => {
   return (
     <>
       <Header
-        // style={
-        //   scrolled
-        //     ? { transform: "translateY(-100%)" }
-        //     : { transform: "translateY(0)" }
-        // }
         {...{ scrolled }}
       >
         <section className={"header-upper"}>

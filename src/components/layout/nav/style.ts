@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Overlay = styled.div`
+  background: transparent;
   display: block;
+  height: 100vh;
   position: fixed;
   right: 0;
   top: 0;
-  background: transparent;
-  z-index: 19;
   width: 100vw;
-  height: 100vh;
+  z-index: 19;
 `;
 
 export const Header = styled.header`

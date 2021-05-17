@@ -3,14 +3,15 @@ import { useSelector } from "react-redux";
 
 import throttle from "lodash.throttle";
 
-export const useContainer = () => {
-  const user = useSelector((state) => state.currentUser);
-  const nav = useSelector((state) => state.database.init.nav);
-  const userName = useSelector((state) => state.currentUser.name);
-  const userIsLogged = useSelector((state) => state.currentUser.isLogged);
+import { NCMS, NReducers } from "@namespace";
 
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+export const useContainer = (): JSX.Element => {
+  const user = useSelector(({currentUser}: NReducers.TCurrentUser) => currentUser);
+  const nav = useSelector(({database}: NCMS.TDatabase) => database.init.nav);
+  const {name: userName, isLogged: userIsLogged} = useSelector(({currentUser}: NReducers.TCurrentUser) => currentUser);
+
+  const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);

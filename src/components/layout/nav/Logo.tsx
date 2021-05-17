@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Logo = () => {
+const Logo = (): JSX.Element => {
   return (
     <Link to={"/"}>
       <div className={"logo"}>

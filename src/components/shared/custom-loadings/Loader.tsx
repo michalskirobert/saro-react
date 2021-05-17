@@ -1,7 +1,7 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
+import { Spinner } from "reactstrap";
 
-export const Loader = () => {
+export const Loader = (): JSX.Element => {
   return (
     <div className={"loader loader-container"}>
       <div className={"loader loader-icon"}>
