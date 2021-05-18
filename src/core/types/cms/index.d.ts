@@ -1,4 +1,4 @@
-import { NReducers } from "@namespace";
+import { NReducers } from "@namespace/reducers";
 
 export declare namespace NCMS {
   type S = string;
@@ -8,15 +8,48 @@ export declare namespace NCMS {
   type D = Date;
 
   export type TEditContainer = {
-    fetchCrew: () => void;
-    alert: B;
-    handleEdit: (id: N, type: S) => void;
+    fetchCrew: ()=> Promise<()=>void>;
+    fetchCategories?: () => Promise<() => void>,
+    handleEdit: (id: S, type: S) => Promise<void>;
     database: NReducers.TDatabase;
-    getEditedItem: (id: N, type: S) => void;
-    updateEditedItem: (id: N, type: S, values: Partial<any>) => void;
+    getEditedItem: (id: S, type: S) => Promise<void>;
+    updateEditedItem: (
+      id: S,
+      type: S,
+      values: NReducers.TDatabase
+    ) => Promise<void>;
     type: S;
+    id: S;
     status: S;
     categories: S[];
+    image: S;
+    images: S[];
+    imageChangeHandler: (
+      event: React.SyntheticEvent<EventTarget>,
+      multiple?: boolean
+    ) => Promise<void>;
+    deleteImage: (file: S) => Promise<void>;
+  };
+
+
+  export type TManageContainer = {
+    isEditable: (selectedRowId: S) => boolean;
+    news: TNews[];
+    events: TEvents[];
+    articles: TArticles[];
+    selectedRowsId: S[];
+    setSelectedRowsId: React.Dispatch<React.SetStateAction<S[]>>;
+    selectedRowId: S | U;
+    setSelectedRowId: React.Dispatch<React.SetStateAction<S>>;
+    showAlert: B;
+    setShowAlert: React.Dispatch<React.SetStateAction<B>>;
+    handleButtonActions: (action: S) => void;
+    removeItem: (currentPage: S, id: S) => Promise<void>;
+    handleEdit: (id: S, type: S) => Promise<void>;
+    deleteSelections: () => void;
+    isAll: B;
+    setIsAll: React.Dispatch<React.SetStateAction<B>>;
+    isLoading: B;
   };
 
   export type TDefaultBodyValue = {
@@ -35,26 +68,6 @@ export declare namespace NCMS {
     link?: S | U;
   };
 
-  export type TManageContainer = {
-    isEditable: B;
-    news: TNews[];
-    events: TEvents[];
-    articles: S;
-    selectedRowsId: S[];
-    setSelectedRowsId: React.Dispatch<React.SetStateAction<string[]>>;
-    selectedRowId: S | U;
-    setSelectedRowId: React.Dispatch<React.SetStateAction<string>>;
-    showAlert: B;
-    setShowAlert: V;
-    handleButtonActions: (action: S) => void;
-    removeItem: (currentPage: S, id: S) => Promise<void>;
-    handleEdit: (id: S, type: S) => Promise<void>;
-    deleteSelections: void;
-    isAll: B;
-    setIsAll: B;
-    isLoading: B;
-  };
-
   export type TNews = {
     title: S;
     subtitle: S;
@@ -65,20 +78,6 @@ export declare namespace NCMS {
     crew: TCrew[];
     content: S;
   };
-
-  export type TCategories = {};
-
-  export type TCrew = {
-    name: S;
-    hobbies: S[];
-  };
-
-  export type TLanguages = {
-    value: S;
-    label: S;
-  };
-
-  export type TAlerts = {};
 
   export type TEvents = {
     title: S;
@@ -92,5 +91,25 @@ export declare namespace NCMS {
     language: TLanguages[];
     crew: TCrew[];
     content: S;
+  };
+
+  export type TArticles = {
+    title: S;
+    category: S[];
+    imgURL: S;
+    imagesURL: S[];
+    language: S[];
+    crew: TCrew[];
+    content: S;
+  };
+
+  export type TCrew = {
+    name: S;
+    hobbies: S[];
+  };
+
+  export type TLanguages = {
+    value: S;
+    label: S;
   };
 }

@@ -7,16 +7,14 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Form, Formik } from "formik";
 import { editValidationScheme } from "./validation";
 
-import { NCMS } from "@namespace";
+import { NCMS } from "src/core/types";
 
 import CustomEditor from "@components/shared/custom-editor";
-import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
-import { useEdit } from "./container";
-import { useContainer } from "../add/container";
+import { useEditContainer } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
 import { CMS_INPUT_TYPES, FORMIK_HELPER } from "./utils.js";
@@ -32,12 +30,11 @@ const cities = [
   },
 ];
 
-const Edit = () => {
-  const query = new URLSearchParams(useLocation().search);
-  const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
-  const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
-  const { alert, database, updateEditedItem, status, categories } = useEdit();
-  const { imageChangeHandler, image, deleteImage } = useContainer();
+const Edit = (): JSX.Element => {
+  const query: URLSearchParams = new URLSearchParams(useLocation().search);
+  const type: string | null = String(query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE));
+  const id: string | null = String(query.get(CONSTANTS.GENERAL_CONSTANTS.ID));
+  const { database, updateEditedItem, status, categories, imageChangeHandler, image, deleteImage } = useEditContainer();
 
   return (
     <>
@@ -46,7 +43,7 @@ const Edit = () => {
           initialValues: { ...database[type] },
           validateOnChange: true,
           validateOnMount: true,
-          validationSchema: editValidationScheme(type),
+          validationSchema: editValidationScheme(type as string),
           onSubmit: (values: Partial<NCMS.TDefaultBodyValue>) => updateEditedItem(id as string, type as string, values),
           enableReinitialize: true,
         }}
@@ -60,8 +57,7 @@ const Edit = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className={"section saro-panel edit"}>
-            {alert && <CmsAlert />}
+          <section className={"section saro-panel edit"}>       
             <Breadcrumb>
               <BreadcrumbItem>
                 <a href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>
@@ -133,7 +129,7 @@ const Edit = () => {
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         invalid: !!errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({ name }) => ({
+                        options: categories.map(({ name })  => ({
                           label: name,
                           value: name,
                         })),

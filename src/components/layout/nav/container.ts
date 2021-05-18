@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 
 import throttle from "lodash.throttle";
 
-import { NCMS, NReducers } from "@namespace";
+import { NNav } from "@namespace/nav";
 
-export const useContainer = (): JSX.Element => {
-  const user = useSelector(({currentUser}: NReducers.TCurrentUser) => currentUser);
-  const nav = useSelector(({database}: NCMS.TDatabase) => database.init.nav);
-  const {name: userName, isLogged: userIsLogged} = useSelector(({currentUser}: NReducers.TCurrentUser) => currentUser);
+export const useNavContainer = (): NNav.TNavContainer => {
+  const user = useSelector(({ currentUser }: RootStateOrAny) => currentUser);
+  const nav = useSelector(({ database }: RootStateOrAny) => database.init.nav);
+  const { name: userName, isLogged: userIsLogged } = useSelector(
+    ({ currentUser }: RootStateOrAny) => currentUser
+  );
 
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
@@ -51,7 +53,6 @@ export const useContainer = (): JSX.Element => {
   const filteredNavData = filterNavData();
 
   return {
-    user,
     nav,
     userName,
     userIsLogged,
@@ -59,7 +60,6 @@ export const useContainer = (): JSX.Element => {
     setIsNavOpen,
     scrolled,
     toggleNav,
-    filterNavData,
     filteredNavData,
   };
 };

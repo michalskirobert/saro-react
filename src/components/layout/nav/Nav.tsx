@@ -11,18 +11,18 @@ import House from "@assets/images/components/nav/House.svg";
 import Cross from "@assets/images/components/nav/Cross.svg";
 import MagnifyingGlass from "@assets/images/components/nav/MagnifyingGlass.svg";
 
-import { useContainer } from "./container";
+import { useNavContainer } from "./container";
 
 import { Header } from "./style";
 
-const Nav = () => {
+const Nav = (): JSX.Element => {
   const {
     userName,
     userIsLogged,
     isNavOpen,
     scrolled,
     toggleNav,
-  } = useContainer();
+  } = useNavContainer();
 
   return (
     <>
@@ -30,7 +30,7 @@ const Nav = () => {
         {...{ scrolled }}
       >
         <section className={"header-upper"}>
-          <Logo className={"header-logo"} />
+          <Logo/>
           <section className={"user"}>
             {userIsLogged ? (
               <Link to={"/dashboard"}>

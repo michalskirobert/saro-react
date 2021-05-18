@@ -9,7 +9,7 @@ import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
-import { useContainer } from "./container";
+import { useAddContainer } from "./container";
 
 import * as C from "@utils/constants";
 import {
@@ -29,7 +29,7 @@ const cities = [
   },
 ];
 
-const AddEvents = () => {
+const AddEvents = (): JSX.Element => {
   const {
     status,
     handleSubmit,
@@ -38,7 +38,7 @@ const AddEvents = () => {
     deleteImage,
     imageChangeHandler,
     isLoading,
-  } = useContainer();
+  } = useAddContainer();
 
   return (
     <Formik

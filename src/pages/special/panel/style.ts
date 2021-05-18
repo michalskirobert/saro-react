@@ -32,3 +32,7 @@ export const TableButton = styled(Button)`
   margin: 0 5px 10px 4px;
   padding: 7px;
 `;
+
+export const Span = styled.span`
+  color: red;
+`;

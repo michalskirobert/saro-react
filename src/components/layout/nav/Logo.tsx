@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Logo = (): JSX.Element => {
   return (
-    <Link to={"/"}>
+    <Link to={"/"} className={"header-logo"}>
       <div className={"logo"}>
         <p className={"logo-title"}>Saro</p>
       </div>

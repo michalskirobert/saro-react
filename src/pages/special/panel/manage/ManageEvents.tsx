@@ -96,8 +96,8 @@ const ManageEvents = () => {
           showSelectionColumn: true,
           onRowSelected: (selectedRowId: string[]) =>
             !isAll
-              ? setSelectedRowId(selectedRowId[0])
-              : setSelectedRowsId(selectedRowId),
+              ? setSelectedRowId(selectedRowId[0] as string)
+              : setSelectedRowsId(selectedRowId as string[]),
           initSelection: selectedRowsId,
         }}
       />

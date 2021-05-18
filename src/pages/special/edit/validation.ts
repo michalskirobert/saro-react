@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { FORMIK_HELPER } from "./utils";
 import * as CONSTANTS from "@utils/constants";
 
-export const editValidationScheme = (type) => {
+export const editValidationScheme = (type: string): yup.AnyObjectSchema => {
   if (type === CONSTANTS.GENERAL_CONSTANTS.ARTICLES) {
     return yup.object().shape({
       [FORMIK_HELPER.TITLE]: yup

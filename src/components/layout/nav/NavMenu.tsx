@@ -1,26 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Accordion, Card } from "react-bootstrap";
+import { RootStateOrAny, useSelector } from "react-redux";
+import { Accordion, Card } from "reactstrap";
 import { FaAngleLeft } from "react-icons/fa";
 
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
-import { useContainer } from "./container";
-
-import { NCMS } from "@namespace";
+import { useNavContainer } from "./container";
 
 import * as S from "./style";
 
 
 const NavMenu = ({ isNavOpen, toggleNav }) => {
-  const { filteredNavData } = useContainer();
-  const {isLoading} = useSelector(({database}: NCMS.TDatabase) => database);
+  const { filteredNavData } = useNavContainer();
+  const {isLoading} = useSelector(({database}: RootStateOrAny) => database);
 
   return (
     <>
       <Accordion className={`nav-container ${isNavOpen && "active"}`}>
         {isLoading && <DefaultLoader />}
-        {filteredNavData.map(({ title, path, content }, index) => {
+        {filteredNavData.map(({ title, path, content }, index: number) => {
           return content ? (
             <Card key={index}>
               <Accordion.Toggle eventKey={title} as={Card.Header}>

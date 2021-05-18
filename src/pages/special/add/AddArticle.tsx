@@ -10,7 +10,7 @@ import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
-import { useContainer } from "./container";
+import { useAddContainer } from "./container";
 
 import {
   CMS_INPUT_PLACEHOLDERS,
@@ -21,7 +21,7 @@ import {
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
-const AddArticle = () => {
+const AddArticle = (): JSX.Element => {
   const {
     categories,
     handleSubmit,
@@ -32,7 +32,7 @@ const AddArticle = () => {
     handleEditorChange,
     value,
     status,
-  } = useContainer();
+  } = useAddContainer();
 
   return (
     <Formik

@@ -10,7 +10,7 @@ import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
-import { useContainer } from "./container";
+import { useAddContainer } from "./container";
 
 import {
   CMS_INPUT_PLACEHOLDERS,
@@ -21,7 +21,7 @@ import * as C from "@utils/constants";
 
 import * as S from "./styles";
 
-const AddNews = () => {
+const AddNews = (): JSX.Element => {
   const {
     crew,
     handleSubmit,
@@ -31,7 +31,7 @@ const AddNews = () => {
     categories,
     deleteImage,
     status,
-  } = useContainer();
+  } = useAddContainer();
 
   return (
     <>

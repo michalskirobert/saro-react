@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import uuidv4 from "react-uuid";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
@@ -9,26 +9,26 @@ import { cmsActions, fetchActions } from "@actions";
 import * as CONSTANTS from "@utils/constants";
 import { firestore, storage } from "@components/feature/firebase";
 
-import { NCMS, NReducers } from "@namespace";
+import { NCMS } from "src/core/types";
 
 import moment from "moment";
 
-export const useContainer = () => {
+export const useAddContainer = () => {
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const currentPathname = location.pathname.split("/");
-  const currentPage = currentPathname[currentPathname.length - 1];
+  const currentPathname: string[] = location.pathname.split("/");
+  const currentPage: string = currentPathname[currentPathname.length - 1];
 
   const { language: lang } = useSelector(
-    ({ general }: NReducers.TGeneral) => general
+    ({ general }: RootStateOrAny) => general
   );
   const { crew, isLoading } = useSelector(
-    ({ database }: NCMS.TDatabase) => database
+    ({ database }: RootStateOrAny) => database
   );
   const { status } = useSelector(
-    ({ currentUser }: NReducers.TCurrentUser) => currentUser
+    ({ currentUser }: RootStateOrAny) => currentUser
   );
   const [value, setValue] = useState<string>("");
   const [categories, setCategories] = useState<string[]>([]);
@@ -76,7 +76,7 @@ export const useContainer = () => {
       const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`);
       await fileRef.put(file);
       multiple
-        ? setImages([...images, fileRef.getDownloadURL()])     
+        ? setImages([...images, String(fileRef.getDownloadURL())])     
         : setImage(String(fileRef.getDownloadURL()));
       dispatch(cmsActions.uploadImageSuccess());
       toast.success(
@@ -91,8 +91,8 @@ export const useContainer = () => {
   const imageChangeHandler = async (
     event: React.SyntheticEvent<EventTarget>,
     multiple?: boolean
-  ) => {
-    const files: any[] = Array.from((event.target as any).files);
+  ): Promise<void> => { 
+    const files: any[] = Array.from((event.target as any).files); 
     if (!files) {
       multiple ? setImages([]) : setImage("");
       toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE);

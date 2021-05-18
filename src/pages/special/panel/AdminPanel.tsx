@@ -1,24 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardGroup, CardTitle } from "reactstrap";
 
-import {NCMS, NReducers} from "@namespace"
 import { auth } from "@fire";
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 
-const AdminPanel = () => { 
-  const nav = useSelector(({ database }: NCMS.TDatabase) => database?.init?.nav[0]?.content);
-  const { isLoading } = useSelector(({ currentUser }: NReducers.TCurrentUser) => currentUser);
+import * as S from "./style";
+
+const AdminPanel = (): JSX.Element => { 
+  const nav = useSelector(({ database }: RootStateOrAny) => database?.init?.nav[0]?.content);
+  const { isLoading } = useSelector(({ currentUser }:RootStateOrAny) => currentUser);
 
   return (
     <section className={"section saro-panel"}>
       <h1>Saro CMS 1.0.0</h1>
       <h2>
         Welcome
-        <span style={{ color: "red" }}>
+        <S.Span>
           {auth?.currentUser?.displayName ?? " Saro-crew"}
-        </span>
+        </S.Span>
       </h2>
       {isLoading && <DefaultLoader />}
       <CardGroup>
