@@ -9,10 +9,9 @@ import { useNavContainer } from "./container";
 
 import * as S from "./style";
 
-
 const NavMenu = ({ isNavOpen, toggleNav }) => {
   const { filteredNavData } = useNavContainer();
-  const {isLoading} = useSelector(({database}: RootStateOrAny) => database);
+  const { isLoading } = useSelector(({ database }: RootStateOrAny) => database);
 
   return (
     <>

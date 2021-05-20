@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <section className={"section error"}>
       <h1>Error 404</h1>
@@ -8,3 +8,5 @@ export const NotFound = () => {
     </section>
   );
 };
+
+export { NotFound as default };
