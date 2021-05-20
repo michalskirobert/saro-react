@@ -1,26 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, CardGroup } from "react-bootstrap";
+import { Card, CardBody, CardGroup, CardTitle } from "reactstrap";
 
 import { auth } from "@fire";
-import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 
-const AdminPanel = () => {
-  const { alert } = useSelector(({ CMS }) => CMS);
-  const nav = useSelector(({ database }) => database?.init?.nav[0]?.content);
-  const { isLoading } = useSelector(({ currentUser }) => currentUser);
+import * as S from "./style";
+
+const AdminPanel = (): JSX.Element => { 
+  const nav = useSelector(({ database }: RootStateOrAny) => database?.init?.nav[0]?.content);
+  const { isLoading } = useSelector(({ currentUser }:RootStateOrAny) => currentUser);
 
   return (
     <section className={"section saro-panel"}>
-      {alert && <CmsAlert />}
       <h1>Saro CMS 1.0.0</h1>
       <h2>
         Welcome
-        <span style={{ color: "red" }}>
+        <S.Span>
           {auth?.currentUser?.displayName ?? " Saro-crew"}
-        </span>
+        </S.Span>
       </h2>
       {isLoading && <DefaultLoader />}
       <CardGroup>
@@ -28,8 +27,8 @@ const AdminPanel = () => {
           nav.map(({ title, subcontent, path }) => {
             return subcontent ? (
               <Card {...{ key: title }}>
-                <Card.Body>
-                  <Card.Title className={"title"}>{title}</Card.Title>
+                <CardBody>
+                  <CardTitle className={"title"}>{title}</CardTitle>
                   {subcontent.map(({ title, path }) => {
                     return path ? (
                       <Link {...{ to: path, key: path }}>{title}</Link>
@@ -37,15 +36,15 @@ const AdminPanel = () => {
                       <p {...{ key: title }}>{title}</p>
                     );
                   })}
-                </Card.Body>
+                </CardBody>
               </Card>
             ) : (
               <Card {...{ key: title }}>
-                <Card.Body>
-                  <Card.Title>
+                <CardBody>
+                  <CardTitle>
                     <Link {...{ to: path, key: title }}>{title}</Link>
-                  </Card.Title>
-                </Card.Body>
+                  </CardTitle>
+                </CardBody>
               </Card>
             );
           })}

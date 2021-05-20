@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "react-bootstrap";
+import { Button } from "reactstrap";
 
 export const Tr = styled.tr`
   font-weight: bold;
@@ -31,4 +31,8 @@ export const TableButton = styled(Button)`
   font-weight: 500;
   margin: 0 5px 10px 4px;
   padding: 7px;
+`;
+
+export const Span = styled.span`
+  color: red;
 `;

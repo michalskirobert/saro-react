@@ -1,6 +1,6 @@
 import * as C from "@utils/constants";
 
-export const BUTTON_ACTIONS = Object.freeze({
+export const BUTTON_ACTIONS: Record<string, string> = Object.freeze({
   DELETE: "DELETE",
   EDIT: "EDIT",
   IS_ALL: "IS_ALL",
@@ -41,13 +41,13 @@ export const BUTTONS_HELPER = Object.freeze([
   },
 ]);
 
-export const TABLE_COLUMN_PROPERTIES = Object.freeze({
+export const TABLE_COLUMN_PROPERTIES: Record<string, string> = Object.freeze({
   TITLE: "title",
   MODIFIED: "modified",
   PUBLISHED: "published",
   AUTHOR: "crew",
 });
-export const TABLE_COLUMN = Object.freeze({
+export const TABLE_COLUMN: Record<string, string> = Object.freeze({
   TITLE: "Title",
   MODIFIED: "Last modified",
   PUBLISHED: "Published date",

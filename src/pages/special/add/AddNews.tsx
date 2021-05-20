@@ -1,26 +1,27 @@
 import React from "react";
-import { Button, Form as F, Breadcrumb, BreadcrumbItem } from "react-bootstrap";
+import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
-import { Formik, Form } from "formik";
+import { Form, Formik } from "formik";
 import { addNewsValidationScheme } from "./validation";
 
 import CustomEditor from "@components/shared/custom-editor";
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
+import { CustomButton } from "@components/shared/custom-button";
 
-import { useContainer } from "./container";
+import { useAddContainer } from "./container";
 
 import {
-  FORMIK_HELPER,
-  CMS_INPUT_TYPES,
   CMS_INPUT_PLACEHOLDERS,
+  CMS_INPUT_TYPES,
+  FORMIK_HELPER,
 } from "./utils.js";
 import * as C from "@utils/constants";
 
 import * as S from "./styles";
 
-const AddNews = () => {
+const AddNews = (): JSX.Element => {
   const {
     crew,
     handleSubmit,
@@ -30,7 +31,7 @@ const AddNews = () => {
     categories,
     deleteImage,
     status,
-  } = useContainer();
+  } = useAddContainer();
 
   return (
     <>
@@ -54,7 +55,7 @@ const AddNews = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className="section saro-panel">
+          <section className={"section saro-panel"}>
             <Breadcrumb>
               <BreadcrumbItem>
                 <a href={C.ROUTE_PATHS.HOME_ROUTE}>
@@ -70,10 +71,10 @@ const AddNews = () => {
                 {C.GENERAL_CONSTANTS.ADD_NEWS}
               </BreadcrumbItem>
             </Breadcrumb>
-            <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_NEWS}</h2>
-            <Form className="cms">
-              <section className="form-container">
-                <div className="form-control">
+            <h2 className={"main-title"}>{C.GENERAL_CONSTANTS.ADD_NEWS}</h2>
+            <Form className={"cms"}>
+              <section className={"form-container"}>
+                <div className={"form-control"}>
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.TITLE,
@@ -88,12 +89,12 @@ const AddNews = () => {
                   />
                   {(errors[FORMIK_HELPER.TITLE] ||
                     touched[FORMIK_HELPER.TITLE]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.TITLE]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
-                <div className="form-control">
+                <div className={"form-control"}>
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.SUBTITLE,
@@ -108,12 +109,12 @@ const AddNews = () => {
                   />
                   {(errors[FORMIK_HELPER.SUBTITLE] ||
                     touched[FORMIK_HELPER.SUBTITLE]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.SUBTITLE]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
-                <div className="form-control">
+                <div className={"form-control"}>
                   <label htmlFor={FORMIK_HELPER.CATEGORY}>
                     {C.CMS_LABELS.CATEGORY}
                   </label>
@@ -131,20 +132,21 @@ const AddNews = () => {
                   />
                   {(errors[FORMIK_HELPER.CATEGORY] ||
                     touched[FORMIK_HELPER.CATEGORY]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.CATEGORY]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
-                <div className="form-control">
+                <div className={"form-control"}>
                   <CustomInput
                     {...{
+                      placeholder: CMS_INPUT_PLACEHOLDERS.UPLOAD_COVER_IMG,
                       label: C.CMS_LABELS.IMG_URL,
                       invalid: errors[FORMIK_HELPER.IMG_URL],
                       id: FORMIK_HELPER.IMG_URL,
                       type: "file",
                       value: values[FORMIK_HELPER.IMG_URL],
-                      onChange: imageChangeHandler,
+                      onChange: (event: React.SyntheticEvent<EventTarget>)=> imageChangeHandler(event, false),
                     }}
                   />
                   {image && (
@@ -168,12 +170,12 @@ const AddNews = () => {
                   )}
                   {(errors[FORMIK_HELPER.IMG_URL] ||
                     touched[FORMIK_HELPER.IMG_URL]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.IMG_URL]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
-                <div className="form-control">
+                <div className={"form-control"}>
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.UPLOAD_IMGS,
@@ -182,12 +184,12 @@ const AddNews = () => {
                       name: FORMIK_HELPER.IMAGES_URL,
                       type: CMS_INPUT_TYPES.FILE,
                       onChange: (event) => {
-                        imageChangeHandler(event, FORMIK_HELPER.IMAGES_URL);
+                        imageChangeHandler(event, true);
                       },
                     }}
                   />
                 </div>
-                <div className="form-control">
+                <div className={"form-control"}>
                   <label htmlFor={FORMIK_HELPER.LANGUAGE}>
                     {C.CMS_LABELS.LANG}
                   </label>
@@ -207,13 +209,13 @@ const AddNews = () => {
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
                     touched[FORMIK_HELPER.LANGUAGE]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.LANGUAGE]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
 
-                <div className="form-control">
+                <div className={"form-control"}>
                   <label htmlFor={FORMIK_HELPER.CREW}>
                     {C.CMS_LABELS.CREW}
                   </label>
@@ -232,13 +234,13 @@ const AddNews = () => {
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
                     touched[FORMIK_HELPER.CREW]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.CREW]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
 
-                <div className="form-control editor">
+                <div className={"form-control editor"}>
                   <label>{C.CMS_LABELS.CONTENT}</label>
                   <CustomEditor
                     {...{
@@ -248,22 +250,21 @@ const AddNews = () => {
                   />
                   {(errors[FORMIK_HELPER.EDITOR] ||
                     touched[FORMIK_HELPER.EDITOR]) && (
-                    <F.Text className="validation-alert">
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.EDITOR]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
               </section>
-              <Button
+              <CustomButton
                 {...{
                   className: "submit-btn",
                   type: CMS_INPUT_TYPES.SUBMIT,
                   disabled: !image || isLoading || !isValid,
                   onClick: handleSubmit,
+                  content: C.GENERAL_CONSTANTS.ADD
                 }}
-              >
-                {C.GENERAL_CONSTANTS.ADD}
-              </Button>
+              />           
             </Form>
           </section>
         )}

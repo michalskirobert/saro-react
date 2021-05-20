@@ -1,36 +1,35 @@
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { firestore } from "@fire";
-
-import { NCMS, NReducers } from "@namespace";
+import { NCMS } from "src/core/types";
 
 import { BUTTON_ACTIONS } from "../utils";
 
 import { fetchActions } from "@actions/";
 import * as C from "@utils/constants";
 
-export const useManageContainer = (): NCMS.TEditContainer => {
+
+export const useManageContainer = (): NCMS.TManageContainer => {
   const history = useHistory();
   const location = useLocation();
-  const { language } = useSelector(
-    ({ general }: NReducers.TGeneral) => general
-  );
   const dispatch = useDispatch();
-
+  
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
-
   const PAGE_INDEX = `ADD_NEW_${currentPage.toUpperCase()}_ROUTE`;
 
   const { news, events, articles, isLoading } = useSelector(
-    ({ database }: NReducers.TDatabase) => database
+    ({ database }: RootStateOrAny) => database
+  );
+  const { language } = useSelector(
+    ({ general }: RootStateOrAny) => general
   );
 
   const [selectedRowsId, setSelectedRowsId] = useState<string[]>([]);
-  const [selectedRowId, setSelectedRowId] = useState<string>();
+  const [selectedRowId, setSelectedRowId] = useState<string>("");
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isAll, setIsAll] = useState<boolean>(false);
 
@@ -49,7 +48,7 @@ export const useManageContainer = (): NCMS.TEditContainer => {
         break;
 
       case BUTTON_ACTIONS.EDIT:
-        handleEdit(selectedRowId as string, currentPage);
+        handleEdit(selectedRowId as string, currentPage as string);
         break;
       case BUTTON_ACTIONS.IS_ALL:
         setSelectedRowsId([]);
@@ -75,6 +74,15 @@ export const useManageContainer = (): NCMS.TEditContainer => {
       );
   };
 
+  const removeItem = async (currentPage: string, id: string): Promise<void> => {
+    return await firestore
+      .collection(C.GENERAL_CONSTANTS.LANG)
+      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
+      .collection(currentPage)
+      .doc(id)
+      .delete();
+  };
+
   const deleteSelections = (): void => {
     if (isAll && selectedRowsId.length > 0) {
       selectedRowsId.forEach((id) => removeItem(currentPage, id));
@@ -90,14 +98,7 @@ export const useManageContainer = (): NCMS.TEditContainer => {
     });
   };
 
-  const removeItem = async (currentPage: string, id: string): Promise<void> => {
-    return await firestore
-      .collection(C.GENERAL_CONSTANTS.LANG)
-      .doc(C.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.EN)
-      .collection(currentPage)
-      .doc(id)
-      .delete();
-  };
+
 
   const isEditable = (selectedRowId: string): boolean => {
     if (selectedRowsId.length > 1) {

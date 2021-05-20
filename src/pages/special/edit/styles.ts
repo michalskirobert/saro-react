@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Button} from "react-bootstrap";
+import {Button} from "reactstrap";
 
 export const PreviewImg = styled.img`
   max-height: 100px;

@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Button, Form as F, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import React from "react";
+import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
-import { Formik, Form } from "formik";
+import { Form, Formik } from "formik";
 import { addEventsValidationScheme } from "./validation";
 
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
+import { CustomButton } from "@components/shared/custom-button";
 
-import { useContainer } from "./container";
+import { useAddContainer } from "./container";
 
 import * as C from "@utils/constants";
 import {
-  FORMIK_HELPER,
-  CMS_INPUT_TYPES,
   CMS_INPUT_PLACEHOLDERS,
+  CMS_INPUT_TYPES,
+  FORMIK_HELPER,
 } from "./utils.js";
 
 import * as S from "./styles";
@@ -29,9 +29,16 @@ const cities = [
   },
 ];
 
-const AddEvents = () => {
-  const { status, handleSubmit, crew, image, deleteImage, imageChangeHandler } =
-    useContainer();
+const AddEvents = (): JSX.Element => {
+  const {
+    status,
+    handleSubmit,
+    crew,
+    image,
+    deleteImage,
+    imageChangeHandler,
+    isLoading,
+  } = useAddContainer();
 
   return (
     <Formik
@@ -54,7 +61,7 @@ const AddEvents = () => {
         handleSubmit,
         setFieldValue,
       }) => (
-        <section className="section saro-panel">
+        <section className={"section saro-panel"}>
           <Breadcrumb>
             <BreadcrumbItem>
               <a href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</a>
@@ -68,10 +75,10 @@ const AddEvents = () => {
               {C.GENERAL_CONSTANTS.ADD_EVENTS}
             </BreadcrumbItem>
           </Breadcrumb>
-          <h2 className="main-title">{C.GENERAL_CONSTANTS.ADD_EVENTS}</h2>
-          <Form className="cms">
-            <section className="form-container">
-              <div className="form-control">
+          <h2 className={"main-title"}>{C.GENERAL_CONSTANTS.ADD_EVENTS}</h2>
+          <Form className={"cms"}>
+            <section className={"form-container"}>
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TITLE,
@@ -85,13 +92,13 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.TITLE] ||
                   touched[FORMIK_HELPER.TITLE]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.TITLE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
-              <div className="form-control">
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.SUBTITLE,
@@ -105,13 +112,13 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.SUBTITLE] ||
                   touched[FORMIK_HELPER.SUBTITLE]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.SUBTITLE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
-              <div className="form-control">
+              <div className={"form-control"}>
                 <label htmlFor={FORMIK_HELPER.CITY}>{C.CMS_LABELS.CITY}</label>
                 <CustomSelect
                   {...{
@@ -127,13 +134,13 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.CITY] ||
                   touched[FORMIK_HELPER.CITY]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.CITY]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
-              <div className="form-control">
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.PLACE,
@@ -147,13 +154,13 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.PLACE] ||
                   touched[FORMIK_HELPER.PLACE]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.PLACE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
-              <div className="form-control">
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.DATE,
@@ -166,12 +173,12 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.DATE] ||
                   touched[FORMIK_HELPER.DATE]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.DATE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
-              <div className="form-control">
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TIME,
@@ -184,12 +191,12 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.TIME] ||
                   touched[FORMIK_HELPER.TIME]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.TIME]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
-              <div className="form-control">
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.LINK,
@@ -203,13 +210,13 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.LINK] ||
                   touched[FORMIK_HELPER.LINK]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.LINK]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
-              <div className="form-control">
+              <div className={"form-control"}>
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.IMG_URL,
@@ -217,7 +224,7 @@ const AddEvents = () => {
                     id: FORMIK_HELPER.IMG_URL,
                     type: "file",
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: imageChangeHandler,
+                    onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, false),
                   }}
                 />
                 {image && (
@@ -241,13 +248,13 @@ const AddEvents = () => {
                 )}
                 {(errors[FORMIK_HELPER.IMG_URL] ||
                   touched[FORMIK_HELPER.IMG_URL]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.IMG_URL]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
 
-              <div className="form-control">
+              <div className={"form-control"}>
                 <label htmlFor={FORMIK_HELPER.LANGUAGE}>
                   {C.CMS_LABELS.LANG}
                 </label>
@@ -267,12 +274,12 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.LANGUAGE] ||
                   touched[FORMIK_HELPER.LANGUAGE]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.LANGUAGE]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
-              <div className="form-control">
+              <div className={"form-control"}>
                 <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
                 <CustomSelect
                   {...{
@@ -289,12 +296,12 @@ const AddEvents = () => {
                 />
                 {(errors[FORMIK_HELPER.CREW] ||
                   touched[FORMIK_HELPER.CREW]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.CREW]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
-              <div className="form-control form-info">
+              <div className={"form-control form-info"}>
                 <label htmlFor={FORMIK_HELPER.EDITOR}>
                   {C.CMS_LABELS.CONTENT}
                 </label>
@@ -307,26 +314,25 @@ const AddEvents = () => {
                     cols: "30",
                     rows: "10",
                   }}
-                ></textarea>
+                />
                 {(errors[FORMIK_HELPER.EDITOR] ||
                   touched[FORMIK_HELPER.EDITOR]) && (
-                  <F.Text className="validation-alert">
+                  <FormText className={"validation-alert"}>
                     {errors[FORMIK_HELPER.EDITOR]}
-                  </F.Text>
+                  </FormText>
                 )}
               </div>
             </section>
 
-            <Button
+            <CustomButton
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
-                // disabled: !image || isLoading || !isValid,
+                disabled: !image || isLoading || !isValid,
                 onClick: handleSubmit,
+                content: C.GENERAL_CONSTANTS.ADD,
               }}
-            >
-              {C.GENERAL_CONSTANTS.ADD}
-            </Button>
+            />
           </Form>
         </section>
       )}

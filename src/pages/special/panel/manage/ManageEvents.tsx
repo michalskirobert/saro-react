@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb } from "react-bootstrap";
+import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 import { useManageContainer } from "./container";
 import { CustomDataTable } from "@components/shared/custom-table";
@@ -34,15 +34,17 @@ const ManageEvents = () => {
   return (
     <section className={"section saro-panel"}>
       <Breadcrumb>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.HOME_ROUTE}>
-          {C.GENERAL_CONSTANTS.HOME}
-        </Breadcrumb.Item>
-        <Breadcrumb.Item href={C.ROUTE_PATHS.PANEL_ROUTE}>
-          {C.GENERAL_CONSTANTS.ADMIN_PANEL}
-        </Breadcrumb.Item>
-        <Breadcrumb.Item active>
+        <BreadcrumbItem>
+          <a href={C.ROUTE_PATHS.HOME_ROUTE}>{C.GENERAL_CONSTANTS.HOME}</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <a href={C.ROUTE_PATHS.PANEL_ROUTE}>
+            {C.GENERAL_CONSTANTS.ADMIN_PANEL}
+          </a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>
           {C.GENERAL_CONSTANTS.MANAGE_EVENTS}
-        </Breadcrumb.Item>
+        </BreadcrumbItem>
       </Breadcrumb>
       <h2 className={"main-title"}>{C.GENERAL_CONSTANTS.MANAGE_EVENTS}</h2>
       {BUTTONS_HELPER.map(
@@ -94,8 +96,8 @@ const ManageEvents = () => {
           showSelectionColumn: true,
           onRowSelected: (selectedRowId: string[]) =>
             !isAll
-              ? setSelectedRowId(selectedRowId[0])
-              : setSelectedRowsId(selectedRowId),
+              ? setSelectedRowId(selectedRowId[0] as string)
+              : setSelectedRowsId(selectedRowId as string[]),
           initSelection: selectedRowsId,
         }}
       />

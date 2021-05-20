@@ -1,19 +1,20 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Button, Form as F } from "react-bootstrap";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { Breadcrumb,  BreadcrumbItem, FormText  } from "reactstrap";
+
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Form, Formik } from "formik";
 import { editValidationScheme } from "./validation";
 
+import { NCMS } from "src/core/types";
+
 import CustomEditor from "@components/shared/custom-editor";
-import CmsAlert from "@components/shared/alerts/CmsAlert";
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
+import { CustomButton } from "@components/shared/custom-button";
 
-import { useEdit } from "./container";
-import { useContainer } from "../add/container";
+import { useEditContainer } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
 import { CMS_INPUT_TYPES, FORMIK_HELPER } from "./utils.js";
@@ -29,12 +30,11 @@ const cities = [
   },
 ];
 
-const Edit = () => {
-  const query = new URLSearchParams(useLocation().search);
-  const type = query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE);
-  const id = query.get(CONSTANTS.GENERAL_CONSTANTS.ID);
-  const { alert, database, updateEditedItem, status, categories } = useEdit();
-  const { imageChangeHandler, image, deleteImage } = useContainer();
+const Edit = (): JSX.Element => {
+  const query: URLSearchParams = new URLSearchParams(useLocation().search);
+  const type: string | null = String(query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE));
+  const id: string | null = String(query.get(CONSTANTS.GENERAL_CONSTANTS.ID));
+  const { database, updateEditedItem, status, categories, imageChangeHandler, image, deleteImage } = useEditContainer();
 
   return (
     <>
@@ -43,8 +43,8 @@ const Edit = () => {
           initialValues: { ...database[type] },
           validateOnChange: true,
           validateOnMount: true,
-          // validationSchema: editValidationScheme(type),
-          onSubmit: (values) => updateEditedItem(id, type, values),
+          validationSchema: editValidationScheme(type as string),
+          onSubmit: (values: Partial<NCMS.TDefaultBodyValue>) => updateEditedItem(id as string, type as string, values),
           enableReinitialize: true,
         }}
       >
@@ -57,28 +57,33 @@ const Edit = () => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className={"section saro-panel edit"}>
-            {alert && <CmsAlert />}
+          <section className={"section saro-panel edit"}>       
             <Breadcrumb>
-              <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>
-                {CONSTANTS.GENERAL_CONSTANTS.HOME}
-              </Breadcrumb.Item>
-              <Breadcrumb.Item href={CONSTANTS.ROUTE_PATHS.PANEL_ROUTE}>
-                {CONSTANTS.GENERAL_CONSTANTS.ADMIN_PANEL}
-              </Breadcrumb.Item>
-              <Breadcrumb.Item active>
+              <BreadcrumbItem>
+                <a href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>
+                  {CONSTANTS.GENERAL_CONSTANTS.HOME}
+                </a>
+              </BreadcrumbItem>
+              <BreadcrumbItem>
+                <a href={CONSTANTS.ROUTE_PATHS.PANEL_ROUTE}>
+                  {CONSTANTS.GENERAL_CONSTANTS.ADMIN_PANEL}
+                </a>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>
                 {CONSTANTS.GENERAL_CONSTANTS.EDIT}
-              </Breadcrumb.Item>
+              </BreadcrumbItem>
             </Breadcrumb>
 
             <Form className={"cms"}>
-              <h2 className={"main-title"}>{CONSTANTS.GENERAL_CONSTANTS.EDIT}</h2>
+              <h2 className={"main-title"}>
+                {CONSTANTS.GENERAL_CONSTANTS.EDIT}
+              </h2>
               <section className={"form-container"}>
                 <div className={"form-control"}>
                   <CustomInput
                     {...{
                       label: CONSTANTS.CMS_LABELS.TITLE,
-                      invalid: errors[FORMIK_HELPER.TITLE],
+                      invalid: !!errors[FORMIK_HELPER.TITLE],
                       id: FORMIK_HELPER.TITLE,
                       typ: CMS_INPUT_TYPES.TEXT,
                       placeholder: database[type]?.title,
@@ -88,9 +93,9 @@ const Edit = () => {
                   />
                   {(errors[FORMIK_HELPER.TITLE] ||
                     touched[FORMIK_HELPER.TITLE]) && (
-                    <F.Text className={"validation-alert"}>
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.TITLE]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
                 {type !== CONSTANTS.GENERAL_CONSTANTS.ARTICLES && (
@@ -98,7 +103,7 @@ const Edit = () => {
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.SUBTITLE,
-                        invalid: errors[FORMIK_HELPER.SUBTITLE],
+                        invalid: !!errors[FORMIK_HELPER.SUBTITLE],
                         id: FORMIK_HELPER.SUBTITLE,
                         type: CMS_INPUT_TYPES.TEXT,
                         placeholder: database[type]?.subtitle,
@@ -108,9 +113,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.SUBTITLE] ||
                       touched[FORMIK_HELPER.SUBTITLE]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.SUBTITLE]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -123,8 +128,8 @@ const Edit = () => {
                       {...{
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
-                        invalid: !errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({ name }) => ({
+                        invalid: !!errors[FORMIK_HELPER.CATEGORY],
+                        options: categories.map(({ name })  => ({
                           label: name,
                           value: name,
                         })),
@@ -133,9 +138,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.CATEGORY] ||
                       touched[FORMIK_HELPER.CATEGORY]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.CATEGORY]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -148,7 +153,7 @@ const Edit = () => {
                       {...{
                         name: FORMIK_HELPER.CITY,
                         placeholder: database[type]?.city,
-                        disabled: !errors[FORMIK_HELPER.CITY],
+                        invalid: !!errors[FORMIK_HELPER.CITY],
                         options: cities.map(({ city }) => ({
                           label: city,
                           value: city,
@@ -158,9 +163,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.CITY] ||
                       touched[FORMIK_HELPER.CITY]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.CITY]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -169,7 +174,7 @@ const Edit = () => {
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.PLACE,
-                        invalid: errors[FORMIK_HELPER.PLACE],
+                        invalid: !!errors[FORMIK_HELPER.PLACE],
                         id: FORMIK_HELPER.PLACE,
                         type: CMS_INPUT_TYPES.TEXT,
                         autoComplete: "off",
@@ -180,9 +185,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.PLACE] ||
                       touched[FORMIK_HELPER.PLACE]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.PLACE]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -191,7 +196,7 @@ const Edit = () => {
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.DATE,
-                        invalid: errors[FORMIK_HELPER.DATE],
+                        invalid: !!errors[FORMIK_HELPER.DATE],
                         id: FORMIK_HELPER.DATE,
                         type: CMS_INPUT_TYPES.DATE,
                         placeholder: database[type]?.date,
@@ -201,9 +206,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.DATE] ||
                       touched[FORMIK_HELPER.DATE]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.DATE]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -212,7 +217,7 @@ const Edit = () => {
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.TIME,
-                        invalid: errors[FORMIK_HELPER.TIME],
+                        invalid: !!errors[FORMIK_HELPER.TIME],
                         id: FORMIK_HELPER.TIME,
                         type: CMS_INPUT_TYPES.TIME,
                         placeholder: database[type]?.time,
@@ -222,9 +227,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.TIME] ||
                       touched[FORMIK_HELPER.TIME]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.TIME]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -233,7 +238,7 @@ const Edit = () => {
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.LINK,
-                        invalid: errors[FORMIK_HELPER.LINK],
+                        invalid: !!errors[FORMIK_HELPER.LINK],
                         id: FORMIK_HELPER.LINK,
                         type: CMS_INPUT_TYPES.TEXT,
                         placeholder: database[type]?.link,
@@ -243,9 +248,9 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.LINK] ||
                       touched[FORMIK_HELPER.LINK]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.LINK]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
@@ -253,12 +258,12 @@ const Edit = () => {
                   <CustomInput
                     {...{
                       label: CONSTANTS.CMS_LABELS.UPLOAD_COVER_IMG,
-                      invalid: errors[FORMIK_HELPER.IMG_URL],
+                      invalid: !!errors[FORMIK_HELPER.IMG_URL],
                       id: FORMIK_HELPER.IMG_URL,
                       type: CMS_INPUT_TYPES.FILE,
                       placeholder: database[type]?.imgURL,
                       value: values[FORMIK_HELPER.IMG_URL],
-                      onChange: (event) => imageChangeHandler(event),
+                      onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, false),
                     }}
                   />
                   {image && (
@@ -282,9 +287,9 @@ const Edit = () => {
                   )}
                   {(errors[FORMIK_HELPER.IMG_URL] ||
                     touched[FORMIK_HELPER.IMG_URL]) && (
-                    <F.Text className={"validation-alert"}>
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.IMG_URL]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
                 {type !== CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
@@ -292,12 +297,12 @@ const Edit = () => {
                     <CustomInput
                       {...{
                         label: CONSTANTS.CMS_LABELS.UPLOAD_IMGS,
-                        invalid: errors[FORMIK_HELPER.IMAGES_URL],
+                        invalid: !!errors[FORMIK_HELPER.IMAGES_URL],
                         id: FORMIK_HELPER.IMAGES_URL,
                         type: CMS_INPUT_TYPES.FILE,
                         placeholder: database[type]?.imagesURL,
                         value: values[FORMIK_HELPER.IMAGES_URL],
-                        onChange: (event) => imageChangeHandler(event, true),
+                        onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, true),
                         multiple: true,
                       }}
                     />
@@ -311,7 +316,7 @@ const Edit = () => {
                     {...{
                       name: FORMIK_HELPER.LANGUAGE,
                       placeholder: database[type]?.language,
-                      invalid: !errors[FORMIK_HELPER.LANGUAGE],
+                      invalid: !!errors[FORMIK_HELPER.LANGUAGE],
                       options: CONSTANTS.GENERAL_CONSTANTS.LANGUAGES.map(
                         ({ label, lang }) => ({
                           label,
@@ -323,9 +328,9 @@ const Edit = () => {
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||
                     touched[FORMIK_HELPER.LANGUAGE]) && (
-                    <F.Text className={"validation-alert"}>
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.LANGUAGE]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
                 <div className={"form-control"}>
@@ -336,7 +341,7 @@ const Edit = () => {
                     {...{
                       name: FORMIK_HELPER.CREW,
                       placeholder: database[type]?.crew,
-                      invalid: !errors[FORMIK_HELPER.CREW],
+                      invalid: !!errors[FORMIK_HELPER.CREW],
                       isDisabled: status < 50,
                       options: database[CONSTANTS.GENERAL_CONSTANTS.CREW].map(
                         ({ name, surname }) => ({
@@ -349,9 +354,9 @@ const Edit = () => {
                   />
                   {(errors[FORMIK_HELPER.CREW] ||
                     touched[FORMIK_HELPER.CREW]) && (
-                    <F.Text className={"validation-alert"}>
+                    <FormText className={"validation-alert"}>
                       {errors[FORMIK_HELPER.CREW]}
-                    </F.Text>
+                    </FormText>
                   )}
                 </div>
 
@@ -369,12 +374,12 @@ const Edit = () => {
                         cols: "30",
                         rows: "10",
                       }}
-                    ></textarea>
+                    />
                     {(errors[FORMIK_HELPER.EDITOR] ||
                       touched[FORMIK_HELPER.EDITOR]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.EDITOR]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 ) : (
@@ -387,23 +392,22 @@ const Edit = () => {
                     />
                     {(errors[FORMIK_HELPER.EDITOR] ||
                       touched[FORMIK_HELPER.EDITOR]) && (
-                      <F.Text className={"validation-alert"}>
+                      <FormText className={"validation-alert"}>
                         {errors[FORMIK_HELPER.EDITOR]}
-                      </F.Text>
+                      </FormText>
                     )}
                   </div>
                 )}
               </section>
-              <Button
+              <CustomButton
                 {...{
                   className: "submit-btn",
                   type: "submit",
-                  // disabled: !isValid,
+                  disabled: !isValid,
                   onClick: handleSubmit,
+                  content: CONSTANTS.GENERAL_CONSTANTS.SEND,
                 }}
-              >
-                {CONSTANTS.GENERAL_CONSTANTS.SEND}
-              </Button>
+              />    
             </Form>
           </section>
         )}

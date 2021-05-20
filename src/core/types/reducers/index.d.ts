@@ -22,12 +22,6 @@ export declare namespace NReducers {
     status: N;
   };
 
-  export type TAlert = {
-    alert: B;
-    message: S;
-    status: S;
-  };
-
   export type TGeneral = {
     language: S;
   };
@@ -175,6 +169,12 @@ export declare namespace NReducers {
   export type TNavContent = {
     path: S;
     title: S;
+    status?: N[],
+    subcontent?: TNavSubcontent[],
+  };
+
+  export type TNavSubcontent = {
+    
   };
 
   export type TFooter = {
