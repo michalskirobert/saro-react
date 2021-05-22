@@ -1,10 +1,10 @@
-import React, { useEffect, Fragment } from "react";
+import React, { Fragment, useEffect} from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { alertActions } from "../store/actions";
 
-function Unlisten({ history, children }) {
+const Unlisten = ({ history, children }: any): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,6 +19,6 @@ function Unlisten({ history, children }) {
   }, [history]);
 
   return <Fragment>{children}</Fragment>;
-}
+};
 
 export default withRouter(Unlisten);

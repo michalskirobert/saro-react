@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { auth, firestore } from "@fire";
+import { auth, firestore } from "@components/feature/firebase";
 import { useHistory } from "react-router-dom";
 
 import { stateStepsControl, userActions } from "@actions/index";

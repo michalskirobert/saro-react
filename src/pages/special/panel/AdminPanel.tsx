@@ -3,12 +3,12 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardGroup, CardTitle } from "reactstrap";
 
-import { auth } from "@fire";
+import { auth } from "@components/feature/firebase";
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
 
 import * as S from "./style";
 
-const AdminPanel = (): JSX.Element => { 
+const AdminPanel = (): JSX.Element => {
   const nav = useSelector(({ database }: RootStateOrAny) => database?.init?.nav[0]?.content);
   const { isLoading } = useSelector(({ currentUser }:RootStateOrAny) => currentUser);
 
