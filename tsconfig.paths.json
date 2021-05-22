@@ -1,16 +1,14 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
+      "baseUrl": "./src",
       "paths": {
         "@utils/*": ["./src/utils/*"],
         "@components/*": ["./src/components/*"],
-        "@actions/*": ["./src/store/actions/index.js"],
+        "@actions/*": ["./src/store/actions/*"],
         "@assets/*": ["./src/assets/*"],
         "@pages/*": ["./src/pages/*"],
-        "@fire": ["./src/components/feature/firebase/index.js"],
-        "@namespace/*": ["src/core/typings/*"],
-        "@actions": ["src/store/actions/index.js"],
+        "@namespace/*": ["src/core/types/*"]
       }
     },
-    "include": ["src"]
+    "include": ["./src"]
   }

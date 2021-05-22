@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { RootStateOrAny, useSelector } from "react-redux";
-import { Accordion, Card } from "reactstrap";
+// import { Accordion, Card } from "reactstrap";
 import { FaAngleLeft } from "react-icons/fa";
 
 import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
@@ -15,7 +15,7 @@ const NavMenu = ({ isNavOpen, toggleNav }) => {
 
   return (
     <>
-      <Accordion className={`nav-container ${isNavOpen && "active"}`}>
+      {/* <Accordion className={`nav-container ${isNavOpen && "active"}`}>
         {isLoading && <DefaultLoader />}
         {filteredNavData.map(({ title, path, content }, index: number) => {
           return content ? (
@@ -72,7 +72,7 @@ const NavMenu = ({ isNavOpen, toggleNav }) => {
             </Accordion.Toggle>
           );
         })}
-      </Accordion>
+      </Accordion> */}
       {isNavOpen && <S.Overlay onClick={toggleNav} />}
     </>
   );

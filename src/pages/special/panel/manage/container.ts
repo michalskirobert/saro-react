@@ -3,12 +3,12 @@ import { useHistory, useLocation } from "react-router-dom";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import { firestore } from "@fire";
+import { firestore } from "@components/feature/firebase";
 import { NCMS } from "src/core/types";
 
 import { BUTTON_ACTIONS } from "../utils";
 
-import { fetchActions } from "@actions/";
+import { fetchActions } from "@actions/index";
 import * as C from "@utils/constants";
 
 
@@ -16,7 +16,7 @@ export const useManageContainer = (): NCMS.TManageContainer => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-  
+
   const currentPathname = location.pathname.split("/");
   const currentPage = currentPathname[currentPathname.length - 1];
   const PAGE_INDEX = `ADD_NEW_${currentPage.toUpperCase()}_ROUTE`;
