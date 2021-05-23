@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 import * as C from "@utils/constants";
 
@@ -13,8 +13,8 @@ export const CustomWarningModal = ({
 }) => {
   return (
     <Modal {...{ onHide }}>
-      <Modal.Body>{content}</Modal.Body>
-      <Modal.Footer>
+      <ModalBody>{content}</ModalBody>
+      <ModalFooter>
         <Button
           {...{
             variant: C.GENERAL_CONSTANTS.B_DANGER,
@@ -31,7 +31,7 @@ export const CustomWarningModal = ({
         >
           {rejectMsg}
         </Button>
-      </Modal.Footer>
+      </ModalFooter>
     </Modal>
   );
 };

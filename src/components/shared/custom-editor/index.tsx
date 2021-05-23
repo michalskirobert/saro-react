@@ -18,7 +18,9 @@ const CustomEditor = ({
         className: `editor-${style}`,
         initialValue,
         value,
-        onChange: (e) => onChangeEditor([propName], e.target.getContent()),
+        onChange: (e) =>
+          onChangeEditor &&
+          onChangeEditor(propName as string, e.target.getContent()),
       }}
     />
   );

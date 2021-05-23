@@ -10,7 +10,7 @@ export const SaroRoute = ({ component: Component, ...rest }) => {
         return currentUser ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/sign-in" />
+          <Redirect to={"/sign-in"} />
         );
       }}
     ></Route>

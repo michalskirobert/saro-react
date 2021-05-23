@@ -25,12 +25,13 @@ import {
   VirtualTable,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
-import { TABLE_HELPER, getRowId } from "./utils";
+import { getRowId } from "./utils";
 import { DateTypeProvider } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
 
 import * as S from "./styles";
+import { NDefaultReactTypes } from "@namespace/react-types";
 
 export const CustomDataTable = ({
   rows,
@@ -46,7 +47,9 @@ export const CustomDataTable = ({
   isLoading = false,
   isFixTable = false,
 }) => {
-  const [savedSelection, setSelection] = useState<React.ReactText[]>([]);
+  const [savedSelection, setSelection] = useState<NDefaultReactTypes.TText[]>(
+    []
+  );
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [pageSizes] = useState([5, 25, 50]);
@@ -56,7 +59,7 @@ export const CustomDataTable = ({
     width: "80%",
   }));
 
-  const changeSelection = (selection: React.ReactText[]): void => {
+  const changeSelection = (selection: NDefaultReactTypes.TText[]): void => {
     if ((!checkboxOneSelection && checkboxSelection) || showSelectAll) {
       setSelection(selection);
       onRowSelected(selection);

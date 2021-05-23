@@ -1,17 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { RootStateOrAny, useSelector } from "react-redux";
-// import { Accordion, Card } from "reactstrap";
-import { FaAngleLeft } from "react-icons/fa";
+// import { Link } from "react-router-dom";
+// import { RootStateOrAny, useSelector } from "react-redux";
+// import { Card, CardHeader,  } from "reactstrap";
+// import { FaAngleLeft } from "react-icons/fa";
 
-import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
-import { useNavContainer } from "./container";
+// import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader";
+// import { useNavContainer } from "./container";
 
 import * as S from "./style";
 
 const NavMenu = ({ isNavOpen, toggleNav }) => {
-  const { filteredNavData } = useNavContainer();
-  const { isLoading } = useSelector(({ database }: RootStateOrAny) => database);
+  // const { filteredNavData } = useNavContainer();
+  // const { isLoading } = useSelector(({ database }: RootStateOrAny) => database);
 
   return (
     <>

@@ -8,9 +8,8 @@ import { NCMS } from "src/core/types";
 
 import { BUTTON_ACTIONS } from "../utils";
 
-import { fetchActions } from "@actions/index";
 import * as C from "@utils/constants";
-
+import { fetchActions } from "@actions/index";
 
 export const useManageContainer = (): NCMS.TManageContainer => {
   const history = useHistory();
@@ -24,9 +23,7 @@ export const useManageContainer = (): NCMS.TManageContainer => {
   const { news, events, articles, isLoading } = useSelector(
     ({ database }: RootStateOrAny) => database
   );
-  const { language } = useSelector(
-    ({ general }: RootStateOrAny) => general
-  );
+  const { language } = useSelector(({ general }: RootStateOrAny) => general);
 
   const [selectedRowsId, setSelectedRowsId] = useState<string[]>([]);
   const [selectedRowId, setSelectedRowId] = useState<string>("");
@@ -97,8 +94,6 @@ export const useManageContainer = (): NCMS.TManageContainer => {
       position: toast.POSITION.TOP_CENTER,
     });
   };
-
-
 
   const isEditable = (selectedRowId: string): boolean => {
     if (selectedRowsId.length > 1) {

@@ -6,7 +6,7 @@ const signUpRequest = () => {
   };
 };
 
-const signUpSuccess = (payload) => {
+const signUpSuccess = (payload?) => {
   return {
     type: USER_CONSTANTS.REGISTER_SUCCESS,
     payload,
@@ -19,7 +19,7 @@ const signUpFailure = () => {
   };
 };
 
-const signInSuccess = (data) => {
+const signInSuccess = (data?) => {
   return {
     type: USER_CONSTANTS.LOGIN_SUCCESS,
     payload: data,
@@ -32,7 +32,7 @@ const SignInRequest = () => {
   };
 };
 
-const SignInFailure = (error) => {
+const SignInFailure = (error?) => {
   return {
     type: USER_CONSTANTS.LOGIN_FAILURE,
     payload: error,

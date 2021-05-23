@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { Table } from "@devexpress/dx-react-grid-bootstrap4";
-import { Card } from "react-bootstrap";
+import { Card } from "reactstrap";
 
 export const TableContainer = styled.div`
   display: flex;

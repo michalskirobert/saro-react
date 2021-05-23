@@ -1,16 +1,18 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+// import { useLocation } from "react-router-dom";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 
-import { fetchActions, userActions } from "@actions";
+import { fetchActions, userActions } from "@actions/index";
 
-import { auth, db, firestore } from "@fire";
+import { auth, db, firestore } from "@components/feature/firebase";
 
 import * as C from "@utils/constants";
 
 export const useInitialService = () => {
   const dispatch = useDispatch();
-  const language = useSelector((state) => state.general.language);
+  const language = useSelector(
+    ({ general }: RootStateOrAny) => general?.language
+  );
   // const currentPath = useLocation().pathname.split("/");
   // const currentPage = currentPath[currentPath.length - 1] || "";
 
@@ -23,8 +25,8 @@ export const useInitialService = () => {
           dispatch(fetchActions.getDictionarySucces(querySnapShot.val()));
         }
       );
-    } catch (error) {
-      dispatch(fetchActions.getDictionaryFailure(error));
+    } catch {
+      dispatch(fetchActions.getDictionaryFailure());
     }
   };
 
@@ -36,8 +38,8 @@ export const useInitialService = () => {
         .on("value", (querySnapShot) => {
           dispatch(fetchActions.getDatabaseSucces(querySnapShot.val()));
         });
-    } catch (error) {
-      dispatch(fetchActions.getDatabaseFailure(error));
+    } catch {
+      dispatch(fetchActions.getDatabaseFailure());
     }
   };
 

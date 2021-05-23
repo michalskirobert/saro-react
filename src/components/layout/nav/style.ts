@@ -11,7 +11,7 @@ export const Overlay = styled.div`
   z-index: 19;
 `;
 
-export const Header = styled.header`
-  transform: ${(props) =>
-    props.scrolled ? "translateY(-100%)" : "translateY(0)"};
+export const Header = styled.header<{ scrolled: boolean }>`
+  transform: ${({ scrolled }) =>
+    scrolled ? "translateY(-100%)" : "translateY(0)"};
 `;

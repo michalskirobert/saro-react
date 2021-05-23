@@ -1,6 +1,6 @@
 export const ROUTE_PATHS: Record<string, string> = Object.freeze({
-  HOME_ROUTE: "/",
   ABOUT_ROUTE: "/about",
+  HOME_ROUTE: "/",
   SIGN_IN_ROUTE: "/sign-in",
   SIGN_UP_ROUTE: "/sign-up",
   LESSONS_ROUTE: "/lessons",

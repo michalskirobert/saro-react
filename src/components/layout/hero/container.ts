@@ -6,7 +6,7 @@ import { firestore } from "@components/feature/firebase";
 
 export const useContainer = () => {
   const dispatch = useDispatch();
-  const lang = useSelector((state) => state.general.language);
+  const { language: lang } = useSelector(({ general }: any) => general);
 
   const getHero = async () => {
     dispatch(ACTIONS.heroActions.getHeroRequest());

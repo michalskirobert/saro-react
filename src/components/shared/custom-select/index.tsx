@@ -1,23 +1,24 @@
 import React from "react";
 import Select from "react-select";
 
-import { NCustomItems } from "@namespace";
+import { NCustomItems } from "@namespace/index";
 
 export const CustomSelect = ({
   name,
   label,
   value,
+  id,
   placeholder,
   onChange,
   isDisabled,
   invalid,
   options,
-}: Partial<NCustomItems.TCustomSelect>): JSX.Element => {
+}: NCustomItems.TCustomSelect): JSX.Element => {
   return (
     <Select
       {...{
         className: `saro-custom-select ${invalid && "invalid"}`,
-        id: name,
+        id,
         name,
         styles: { menuPortal: (base) => ({ ...base, zIndex: 9999 }) },
         menuPortalTarget: document.body,

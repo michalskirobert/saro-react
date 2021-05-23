@@ -5,15 +5,15 @@ import { useContainer as useHomeContainer } from "../../../pages/public/home/con
 
 import { hero } from "../../../store/actions/hero.actions";
 
-const Main = () => {
+const Main = (): JSX.Element => {
   const { getHero } = useContainer();
   const { getEvents } = useHomeContainer();
   const [isReversed] = useState(false);
-
-  const index = useSelector((state) => state.hero);
-  const heroData = useSelector((state) => state.database.hero);
-  const eventsData = useSelector((state) => state.database.events);
   const dispatch = useDispatch();
+  const index = useSelector(({ hero }: any) => hero);
+  const { hero: heroData, events: eventsData } = useSelector(
+    ({ database }: any) => database
+  );
 
   const data = [...heroData, ...eventsData.slice(0, 2)];
 
@@ -23,7 +23,7 @@ const Main = () => {
 
   const dataOrdered = isReversed ? data.reverse() : data;
 
-  const checkNumber = (number) => {
+  const checkNumber = (number: number) => {
     if (number > data.length - 1) {
       dispatch(hero(0));
     } else {
@@ -47,7 +47,7 @@ const Main = () => {
     // eslint-disable-next-line
   }, []);
 
-  const getBanner = (id) => {
+  const getBanner = (id: number) => {
     return dispatch(hero(id));
   };
 

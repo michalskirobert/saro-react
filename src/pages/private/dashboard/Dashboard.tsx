@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { auth } from "@components/feature/firebase";
 
 const Dashboard = () => {
-  const currentUser = useSelector((state) => state.currentUser);
+  const { currentUser } = useSelector(({ currentUser }: any) => currentUser);
 
   if (currentUser.role === "saro-crew") {
     return <Redirect to={"/panel"} />;
@@ -14,9 +14,16 @@ const Dashboard = () => {
   return (
     <section className={"section dashboard"}>
       <h2>Welcome!</h2>
-      <img src={auth.currentUser.photoURL} alt={auth.currentUser.displayName} />
-      <p>{auth.currentUser.displayName}</p>
-      <a href={`mailto: ${auth.currentUser.email}`}>{auth.currentUser.email}</a>
+      <img
+        {...{
+          src: auth?.currentUser?.photoURL as string,
+          alt: auth?.currentUser?.displayName as string,
+        }}
+      />
+      <p>{auth?.currentUser?.displayName}</p>
+      <a href={`mailto: ${auth?.currentUser?.email}`}>
+        {auth?.currentUser?.email}
+      </a>
     </section>
   );
 };

@@ -1,8 +1,10 @@
 import React from "react";
-import { Label } from "reactstrap";
-
-import * as S from "./styles";
-import { NCustomItems } from "src/core/types";
+import {
+  CustomInputProps,
+  FormGroup,
+  CustomInput as Input,
+  Label,
+} from "reactstrap";
 
 export const CustomInput = ({
   invalid,
@@ -12,11 +14,11 @@ export const CustomInput = ({
   value,
   onChange,
   label,
-}: Partial<NCustomItems.TCustomInput>): JSX.Element => {
+}: CustomInputProps): JSX.Element => {
   return (
-    <>
-      {label && <Label for={id}>{label}</Label>}
-      <S.Input
+    <FormGroup>
+      {label && <Label for={id as string}>{label}</Label>}
+      <Input
         {...{
           className: `saro-custom-input`,
           id,
@@ -27,6 +29,6 @@ export const CustomInput = ({
           invalid,
         }}
       />
-    </>
+    </FormGroup>
   );
 };

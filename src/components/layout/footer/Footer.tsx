@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { RootStateOrAny, useSelector } from "react-redux";
 
-
-const Footer = () => {
-  const dispatch = useDispatch();
-  const footerElements = useSelector((state) => state.database.init.footer);
+const Footer = (): JSX.Element => {
+  const footerElements = useSelector(
+    ({ database }: RootStateOrAny) => database.init.footer
+  );
 
   return (
     <>
@@ -13,14 +13,15 @@ const Footer = () => {
           <select
             placeholder={"Language"}
             defaultValue={"English"}
-            onChange={(e) =>
-              console.log(e)
-              // dispatch(userActions.changeLanguage(e.target.value))
-            }
+            onChange={(e) => console.log(e)}
           >
-            {footerElements?.language.map((language, key) => {
+            {footerElements?.language.map((language, index) => {
               const { value, label } = language;
-              return <option {...{ key, value }}>{label}</option>;
+              return (
+                <option key={index} {...{ value }}>
+                  {label}
+                </option>
+              );
             })}
           </select>
           <h2>{footerElements?.header}</h2>

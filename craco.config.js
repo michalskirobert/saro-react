@@ -1,6 +1,10 @@
 const path = require(`path`);
+const { ESLINT_MODES } = require("@craco/craco");
 
 module.exports = {
+  eslint: {
+    mode: ESLINT_MODES.file,
+  },
   webpack: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

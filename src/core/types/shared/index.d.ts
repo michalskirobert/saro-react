@@ -7,7 +7,9 @@ export declare namespace NCustomItems {
 
   export type TCustomEditor = {
     value: S;
-    onChangeEditor: (propName: S, e: React.SyntheticEvent<EventTarget>) => void;
+    onChangeEditor:
+      | ((propName?: string | undefined, value: string) => void)
+      | undefined;
     key: S;
     style: S;
     propName: S;
@@ -25,22 +27,27 @@ export declare namespace NCustomItems {
   export type TCustomSelect = {
     name: S;
     label?: S | U;
-    value?: S | U;
-    placeholder?: S | U;
+    value?: ValueType<NCustomItems.TOptions, false>;
+    placeholder?: React.ReactNode;
     onChange: (name: string, values: any) => void;
     isDisabled: B;
     invalid: B;
-    options: TOptions[];
+    options?:
+      | GroupedOptionsType<NCustomItems.TOptions>
+      | OptionsType<NCustomItems.TOptions>
+      | undefined;
+    id?: string | undefined;
+    styles?: Partial<Styles<NCustomItems.TOptions, false>> | undefined;
   };
 
   export type TCustomInput = {
     invalid: B;
-    id: S;
+    id: S | N;
     placeholder?: S | U;
-    type: S;
+    type: CustomInputType;
     value?: S | U;
     onChange: any;
-    label: S;
+    label?: S;
   };
 
   type TOptions = {
