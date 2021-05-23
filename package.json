@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@devexpress/dx-react-core": "^2.7.5",
-    "@devexpress/dx-react-grid": "^2.7.5",
-    "@devexpress/dx-react-grid-bootstrap4": "^2.7.5",
+    "@devexpress/dx-react-core": "^2.7.3",
+    "@devexpress/dx-react-grid": "^2.7.3",
+    "@devexpress/dx-react-grid-bootstrap4": "^2.7.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
@@ -51,6 +51,7 @@
     "@types/yup": "^0.29.8",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
+    "@craco/craco": "^6.1.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "cra-template-pwa": "^1.0.3",
@@ -85,9 +86,9 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI= react-scripts build",
-    "test": " react-scripts test",
+    "start": "craco start",
+    "build": "CI= craco build",
+    "test": " craco test",
     "build:prod": "curl -X POST -d {} https://api.netlify.com/build_hooks/606892e5407c81c608ea1c1a",
     "build:dev": "curl -X POST -d {} https://api.netlify.com/build_hooks/6068935d5f1acad45d1b9925",
     "eject": "react-scripts eject",

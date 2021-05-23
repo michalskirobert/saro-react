@@ -16,7 +16,7 @@ import {
   CMS_INPUT_PLACEHOLDERS,
   CMS_INPUT_TYPES,
   FORMIK_HELPER,
-} from "./utils.js";
+} from "./utils";
 
 import * as S from "./styles";
 
@@ -224,7 +224,8 @@ const AddEvents = (): JSX.Element => {
                     id: FORMIK_HELPER.IMG_URL,
                     type: "file",
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, false),
+                    onChange: (event: React.SyntheticEvent<EventTarget>) =>
+                      imageChangeHandler(event, false),
                   }}
                 />
                 {image && (

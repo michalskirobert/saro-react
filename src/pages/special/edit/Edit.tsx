@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Breadcrumb,  BreadcrumbItem, FormText  } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -17,7 +17,7 @@ import { CustomButton } from "@components/shared/custom-button";
 import { useEditContainer } from "./container";
 
 import * as CONSTANTS from "@utils/constants";
-import { CMS_INPUT_TYPES, FORMIK_HELPER } from "./utils.js";
+import { CMS_INPUT_TYPES, FORMIK_HELPER } from "./utils";
 
 import * as S from "./styles";
 
@@ -32,9 +32,19 @@ const cities = [
 
 const Edit = (): JSX.Element => {
   const query: URLSearchParams = new URLSearchParams(useLocation().search);
-  const type: string | null = String(query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE));
+  const type: string | null = String(
+    query.get(CONSTANTS.GENERAL_CONSTANTS.TYPE)
+  );
   const id: string | null = String(query.get(CONSTANTS.GENERAL_CONSTANTS.ID));
-  const { database, updateEditedItem, status, categories, imageChangeHandler, image, deleteImage } = useEditContainer();
+  const {
+    database,
+    updateEditedItem,
+    status,
+    categories,
+    imageChangeHandler,
+    image,
+    deleteImage,
+  } = useEditContainer();
 
   return (
     <>
@@ -44,7 +54,8 @@ const Edit = (): JSX.Element => {
           validateOnChange: true,
           validateOnMount: true,
           validationSchema: editValidationScheme(type as string),
-          onSubmit: (values: Partial<NCMS.TDefaultBodyValue>) => updateEditedItem(id as string, type as string, values),
+          onSubmit: (values: Partial<NCMS.TDefaultBodyValue>) =>
+            updateEditedItem(id as string, type as string, values),
           enableReinitialize: true,
         }}
       >
@@ -57,7 +68,7 @@ const Edit = (): JSX.Element => {
           handleSubmit,
           setFieldValue,
         }) => (
-          <section className={"section saro-panel edit"}>       
+          <section className={"section saro-panel edit"}>
             <Breadcrumb>
               <BreadcrumbItem>
                 <a href={CONSTANTS.ROUTE_PATHS.HOME_ROUTE}>
@@ -129,7 +140,7 @@ const Edit = (): JSX.Element => {
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         invalid: !!errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({ name })  => ({
+                        options: categories.map(({ name }) => ({
                           label: name,
                           value: name,
                         })),
@@ -263,7 +274,8 @@ const Edit = (): JSX.Element => {
                       type: CMS_INPUT_TYPES.FILE,
                       placeholder: database[type]?.imgURL,
                       value: values[FORMIK_HELPER.IMG_URL],
-                      onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, false),
+                      onChange: (event: React.SyntheticEvent<EventTarget>) =>
+                        imageChangeHandler(event, false),
                     }}
                   />
                   {image && (
@@ -302,7 +314,8 @@ const Edit = (): JSX.Element => {
                         type: CMS_INPUT_TYPES.FILE,
                         placeholder: database[type]?.imagesURL,
                         value: values[FORMIK_HELPER.IMAGES_URL],
-                        onChange: (event: React.SyntheticEvent<EventTarget>) => imageChangeHandler(event, true),
+                        onChange: (event: React.SyntheticEvent<EventTarget>) =>
+                          imageChangeHandler(event, true),
                         multiple: true,
                       }}
                     />
@@ -407,7 +420,7 @@ const Edit = (): JSX.Element => {
                   onClick: handleSubmit,
                   content: CONSTANTS.GENERAL_CONSTANTS.SEND,
                 }}
-              />    
+              />
             </Form>
           </section>
         )}
