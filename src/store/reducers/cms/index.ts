@@ -5,49 +5,19 @@ const defaultState = {
   edit: null,
 };
 
-export const cmsReducer = (state = defaultState, action) => {
+export const cmsReducer = (state = defaultState, action): any => {
   switch (action.type) {
-    case CONSTANTS.CMS_CONSTANTS.ADD_NEWS_REQUEST:
+    case CONSTANTS.CMS_CONSTANTS.ADD_NEW_ITEM_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case CONSTANTS.CMS_CONSTANTS.ADD_NEWS_SUCCESS:
+    case CONSTANTS.CMS_CONSTANTS.ADD_NEW_ITEM_SUCCESS:
       return {
         ...state,
         isLoading: false,
       };
-    case CONSTANTS.CMS_CONSTANTS.ADD_NEWS_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case CONSTANTS.CMS_CONSTANTS.ADD_EVENT_REQUEST:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case CONSTANTS.CMS_CONSTANTS.ADD_EVENT_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case CONSTANTS.CMS_CONSTANTS.ADD_EVENT_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case CONSTANTS.CMS_CONSTANTS.ADD_ARTICLE_REQUEST:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case CONSTANTS.CMS_CONSTANTS.ADD_ARTICLE_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case CONSTANTS.CMS_CONSTANTS.ADD_ARTICLE_FAILURE:
+    case CONSTANTS.CMS_CONSTANTS.ADD_NEW_ITEM_FAILURE:
       return {
         ...state,
         isLoading: false,

@@ -7,13 +7,11 @@ export declare namespace NCustomItems {
 
   export type TCustomEditor = {
     value: S;
-    onChangeEditor:
-      | ((propName?: string | undefined, value: string) => void)
-      | undefined;
-    key: S;
-    style: S;
-    propName: S;
-    initialValue: S;
+    onChangeEditor: ((propName?: string, value: string) => void);
+    key?: S;
+    style?: S;
+    propName?: S | U;
+    initialValue?: S;
   };
 
   export type TCustomButton = {
@@ -30,7 +28,7 @@ export declare namespace NCustomItems {
     value?: ValueType<NCustomItems.TOptions, false>;
     placeholder?: React.ReactNode;
     onChange: (name: string, values: any) => void;
-    isDisabled: B;
+    isDisabled?: B;
     invalid: B;
     options?:
       | GroupedOptionsType<NCustomItems.TOptions>

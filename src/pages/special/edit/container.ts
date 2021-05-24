@@ -3,7 +3,7 @@ import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 import { toast } from "react-toastify";
 
-import { cmsActions, fetchActions } from "@actions";
+import { cmsActions, fetchActions } from "@actions/index";
 import { firestore, storage } from "@components/feature/firebase";
 
 import { NCMS } from "src/core/types";
@@ -96,7 +96,7 @@ export const useEditContainer = () => {
   };
 
   const imageChangeHandler = async (
-    event: React.SyntheticEvent<EventTarget>,
+    event,
     multiple?: boolean
   ): Promise<void> => {
     const files: any[] = Array.from((event.target as any).files);

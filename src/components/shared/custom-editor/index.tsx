@@ -1,6 +1,5 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { NCustomItems } from "src/core/types";
 
 const CustomEditor = ({
   value,
@@ -8,8 +7,8 @@ const CustomEditor = ({
   key,
   style,
   propName,
-  initialValue,
-}: Partial<NCustomItems.TCustomEditor>): JSX.Element => {
+  initialValue
+}: any): JSX.Element => {
   return (
     <Editor
       {...{
@@ -20,7 +19,7 @@ const CustomEditor = ({
         value,
         onChange: (e) =>
           onChangeEditor &&
-          onChangeEditor(propName as string, e.target.getContent()),
+          onChangeEditor(propName as string, e.target.getContent() as string),
       }}
     />
   );

@@ -96,7 +96,7 @@ const Edit = (): JSX.Element => {
                       label: CONSTANTS.CMS_LABELS.TITLE,
                       invalid: !!errors[FORMIK_HELPER.TITLE],
                       id: FORMIK_HELPER.TITLE,
-                      typ: CMS_INPUT_TYPES.TEXT,
+                      type: CMS_INPUT_TYPES.TEXT,
                       placeholder: database[type]?.title,
                       value: values[FORMIK_HELPER.TITLE],
                       onChange: handleChange,
@@ -140,7 +140,7 @@ const Edit = (): JSX.Element => {
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         invalid: !!errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({ name }) => ({
+                        options: categories.map(({ name}: any) => ({
                           label: name,
                           value: name,
                         })),
@@ -384,8 +384,8 @@ const Edit = (): JSX.Element => {
                         placeholder: database[type]?.content,
                         value: values[FORMIK_HELPER.EDITOR],
                         onChange: handleChange,
-                        cols: "30",
-                        rows: "10",
+                        cols: 30,
+                        rows: 10,
                       }}
                     />
                     {(errors[FORMIK_HELPER.EDITOR] ||

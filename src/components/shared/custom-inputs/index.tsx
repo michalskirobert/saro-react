@@ -1,6 +1,6 @@
+import { NCustomItems } from "@namespace/shared";
 import React from "react";
-import {
-  CustomInputProps,
+import {  
   FormGroup,
   CustomInput as Input,
   Label,
@@ -14,7 +14,7 @@ export const CustomInput = ({
   value,
   onChange,
   label,
-}: CustomInputProps): JSX.Element => {
+}: NCustomItems.TCustomInput): JSX.Element => {
   return (
     <FormGroup>
       {label && <Label for={id as string}>{label}</Label>}

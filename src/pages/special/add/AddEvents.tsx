@@ -312,8 +312,8 @@ const AddEvents = (): JSX.Element => {
                     placeholder: CMS_INPUT_PLACEHOLDERS.EDITOR,
                     value: values[FORMIK_HELPER.EDITOR],
                     onChange: handleChange,
-                    cols: "30",
-                    rows: "10",
+                    cols: 30,
+                    rows: 10,
                   }}
                 />
                 {(errors[FORMIK_HELPER.EDITOR] ||

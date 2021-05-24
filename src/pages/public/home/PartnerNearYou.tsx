@@ -4,7 +4,7 @@ import uuid4 from "react-uuid";
 
 const PartnerNearYou = () => {
   const homepageData = useSelector(
-    (state) => state.database.init.pages.homepage
+    ({database}: any) => database.init.pages.homepage
   );
   return (
     <>
@@ -17,7 +17,7 @@ const PartnerNearYou = () => {
               {homepageData?.map((item) => {
                 const { nearPeople } = item;
                 return nearPeople ? (
-                  <React.Fragment key={uuid4()}>
+                  <section key={uuid4()}>
                     <img
                       src={nearPeople?.imgURL}
                       alt={"globe"}
@@ -32,7 +32,7 @@ const PartnerNearYou = () => {
                         <option key={uuid4()}>- {item.value} -</option>
                       ))}
                     </select>
-                  </React.Fragment>
+                  </section>
                 ) : null;
               })}
             </div>

@@ -6,7 +6,7 @@ import { firestore } from "@components/feature/firebase";
 
 export const useContainer = () => {
   const dispatch = useDispatch();
-  const { language } = useSelector(({ general }) => general);
+  const { language } = useSelector(({ general }: any) => general);
 
   const getNews = async () => {
     dispatch(fetchActions.getNewsRequest());

@@ -3,7 +3,7 @@ import { lazy } from "react";
 import { ROUTE_PATHS } from "@utils/constants";
 
 const Dashboard = lazy(() => import("../../pages/private/dashboard/Dashboard"));
-const ProfileSettings = lazy(() =>
+const ProfileSettings = lazy((): any =>
   import("../../pages/private/profile/Settings")
 );
 
