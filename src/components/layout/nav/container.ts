@@ -4,19 +4,27 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import throttle from "lodash.throttle";
 
 import { NNav } from "@namespace/nav";
+import { NReducers } from "@namespace/reducers";
 
 export const useNavContainer = (): NNav.TNavContainer => {
   const user = useSelector(({ currentUser }: RootStateOrAny) => currentUser);
-  const nav = useSelector(({ database }: RootStateOrAny) => database.init.nav);
+  const nav = useSelector(({ database }: RootStateOrAny) => database?.init.nav);
   const { name: userName, isLogged: userIsLogged } = useSelector(
     ({ currentUser }: RootStateOrAny) => currentUser
   );
-
+  const [collapse, setCollapse] = useState<number>(-1);
+  const [innerCollapse, setInnerCollapse] = useState<number>(-1);
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
 
-  const toggleNav = () => {
+  const toggleNav = (): void => {
     setIsNavOpen(!isNavOpen);
+  };
+
+  const toggleAccordion = (index: number, inner?: boolean): void => {
+    inner
+      ? setInnerCollapse(innerCollapse === Number(index) ? -1 : Number(index))
+      : setCollapse(collapse === Number(index) ? -1 : Number(index));
   };
 
   useEffect(() => {
@@ -41,12 +49,15 @@ export const useNavContainer = (): NNav.TNavContainer => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const filterNavData = () => {
-    if (user.status === 0) {
-      return nav.filter((item) => item?.status?.includes(+user?.status));
+  const filterNavData = (): NReducers.TNav[] => {
+    if (user?.status === 0) {
+      return nav.filter((item: NReducers.TNav) =>
+        item?.status?.includes(+user?.status)
+      );
     } else {
       return nav.filter(
-        (item) => !item?.action && item?.status?.includes(+user?.status)
+        (item: NReducers.TNav) =>
+          !item?.action && item?.status?.includes(+user?.status)
       );
     }
   };
@@ -61,5 +72,10 @@ export const useNavContainer = (): NNav.TNavContainer => {
     scrolled,
     toggleNav,
     filteredNavData,
+    toggleAccordion,
+    collapse,
+    setCollapse,
+    innerCollapse,
+    setInnerCollapse,
   };
 };

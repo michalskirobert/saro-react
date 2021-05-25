@@ -164,7 +164,7 @@ header {
     }
   }
 }
-div.nav-container.active {
+.nav-container.active {
   transform: translateX(0);
   transition: all 0.5s ease-in-out;
 }
