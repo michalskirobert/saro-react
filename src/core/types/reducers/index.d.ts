@@ -1,4 +1,5 @@
 import { NCMS } from "@namespace";
+import { AxiosResponse } from "axios";
 
 export declare namespace NReducers {
   type S = string;
@@ -211,5 +212,10 @@ export declare namespace NReducers {
     crew: NCMS.TCrew[];
     dictionary: TDictionary;
     init: TInit;
+  };
+
+  export type TUseFetch = {
+    isLoading: B,
+    data: AxiosResponse | undefined,
   };
 }

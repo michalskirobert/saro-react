@@ -62,7 +62,7 @@ const ManageArticles = (): JSX.Element => {
                     ? isEditable(selectedRowId as string)
                     : status === BUTTON_ACTIONS.IS_ALL
                     ? false
-                    : selectedRowsId.length > 0
+                    : !!selectedRowsId.length
                     ? false
                     : !isActive(selectedRowId as string),
               }}
