@@ -5,7 +5,7 @@ import uuid4 from "react-uuid";
 
 const Introduction = () => {
   const homepageData = useSelector(
-    (state) => state.database.init.pages.homepage
+    ({database}: any) => database.init.pages.homepage
   );
 
   return (
@@ -13,7 +13,7 @@ const Introduction = () => {
       {homepageData?.map((item) => {
         const { sections } = item;
         return sections ? (
-          <React.Fragment key={uuid4()}>
+          <section key={uuid4()}>
             {sections?.map((sectionItem) => {
               const { linkTitle, details, header } = sectionItem;
               return linkTitle ? null : (
@@ -23,14 +23,14 @@ const Introduction = () => {
                 </div>
               );
             })}
-          </React.Fragment>
+          </section>
         ) : null;
       })}
 
       {homepageData?.map((item) => {
         const { subsection } = item;
         return subsection ? (
-          <React.Fragment key={uuid4()}>
+          <section key={uuid4()}>
             {subsection
               ? subsection?.map((subsectionItem) => {
                   const { details, header, imgURL, className } = subsectionItem;
@@ -49,7 +49,7 @@ const Introduction = () => {
                   );
                 })
               : null}
-          </React.Fragment>
+          </section>
         ) : null;
       })}
     </section>

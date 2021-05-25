@@ -59,12 +59,12 @@ const ManageArticles = (): JSX.Element => {
                 type,
                 disabled:
                   status === BUTTON_ACTIONS.EDIT
-                    ? isEditable(selectedRowId)
+                    ? isEditable(selectedRowId as string)
                     : status === BUTTON_ACTIONS.IS_ALL
                     ? false
-                    : selectedRowsId.length > 0
+                    : !!selectedRowsId.length
                     ? false
-                    : !isActive(selectedRowId),
+                    : !isActive(selectedRowId as string),
               }}
             >
               {content}

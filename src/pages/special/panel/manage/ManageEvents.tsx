@@ -58,10 +58,10 @@ const ManageEvents = () => {
                 type,
                 disabled:
                   status === BUTTON_ACTIONS.EDIT
-                    ? isEditable(selectedRowId)
+                    ? isEditable(selectedRowId as string)
                     : status === BUTTON_ACTIONS.IS_ALL
                     ? false
-                    : !isActive(selectedRowId),
+                    : !isActive(selectedRowId as string),
               }}
             >
               {content}
