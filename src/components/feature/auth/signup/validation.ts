@@ -12,6 +12,4 @@ export const signUpValidationScheme = yup.object().shape({
   studyingLang: yup.string().required("It's required"),
   hobbies: yup.string().required("It's required"),
   about: yup.string().required("It's required"),
-
-
 });
