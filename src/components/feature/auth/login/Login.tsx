@@ -8,7 +8,7 @@ import { userActions } from "@actions/index";
 import { ReactComponent as ArrowBack } from "@assets/images/components/forms/arrowBack.svg";
 import * as C from "@utils/constants";
 
-const Login = () => {
+const Login = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const logout = async () => {
