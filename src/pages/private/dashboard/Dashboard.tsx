@@ -7,9 +7,7 @@ import { auth } from "@components/feature/firebase";
 const Dashboard = () => {
   const { currentUser } = useSelector(({ currentUser }: any) => currentUser);
 
-  if (currentUser.role === "saro-crew") {
-    return <Redirect to={"/panel"} />;
-  }
+  if (currentUser?.role === "saro-crew") <Redirect to={"/panel"} />;
 
   return (
     <section className={"section dashboard"}>
