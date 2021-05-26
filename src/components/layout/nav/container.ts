@@ -21,11 +21,11 @@ export const useNavContainer = (): NNav.TNavContainer => {
     setIsNavOpen(!isNavOpen);
   };
 
-  const toggleAccordion = (index: number, inner?: boolean): void => {
+  const toggleAccordion = (index: number, inner?: boolean): void => 
     inner
       ? setInnerCollapse(innerCollapse === Number(index) ? -1 : Number(index))
-      : setCollapse(collapse === Number(index) ? -1 : Number(index));
-  };
+      : setCollapse(collapse === Number(index) ? -1 : Number(index));  
+
 
   useEffect(() => {
     let prevPosition = window.pageYOffset;

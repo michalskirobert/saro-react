@@ -162,7 +162,7 @@ export declare namespace NReducers {
     classLink: S;
     isLogged: B;
     title: S;
-    path?: LocationDescriptor<unknown> | U;
+    path?: LocationDescriptor<string> | U;
     status?: number[] | U;
     content?: TNavContent[] | U;
     action?: N;
@@ -176,9 +176,9 @@ export declare namespace NReducers {
   };
 
   export type TNavSubcontent = {
-    path: LocationDescriptor<unknown> | U;
+    path: LocationDescriptor<string> | U;
     title: S;
-    to?: LocationDescriptor<unknown> | U;
+    to?: LocationDescriptor<string> | U;
   };
 
   export type TFooter = {
