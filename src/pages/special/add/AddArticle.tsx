@@ -20,6 +20,7 @@ import {
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
+import { NCMS } from "@namespace/cms";
 
 const AddArticle = (): JSX.Element => {
   const {
@@ -41,7 +42,7 @@ const AddArticle = (): JSX.Element => {
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addArticleValidationScheme,
-        onSubmit: (values) => handleSubmit(values),
+        onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue),
       }}
     >
       {({
@@ -74,7 +75,7 @@ const AddArticle = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TITLE,
-                    invalid: errors[FORMIK_HELPER.TITLE],
+                    invalid: !!errors[FORMIK_HELPER.TITLE],
                     id: FORMIK_HELPER.TITLE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.TITLE,
                     type: CMS_INPUT_TYPES.TEXT,
@@ -90,14 +91,12 @@ const AddArticle = (): JSX.Element => {
                 )}
               </div>
               <div className={"form-control"}>
-                <label htmlFor={FORMIK_HELPER.CATEGORY}>
-                  {C.CMS_LABELS.CATEGORY}
-                </label>
                 <CustomSelect
                   {...{
+                    labelText: C.CMS_LABELS.CATEGORY,
                     name: FORMIK_HELPER.CATEGORY,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
-                    invalid: errors[FORMIK_HELPER.CATEGORY],
+                    invalid: !!errors[FORMIK_HELPER.CATEGORY],
                     options: categories.map((item) => ({
                       label: item,
                       value: item,
@@ -116,7 +115,7 @@ const AddArticle = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.UPLOAD_COVER_IMG,
-                    invalid: errors[FORMIK_HELPER.IMG_URL],
+                    invalid: !!errors[FORMIK_HELPER.IMG_URL],               
                     id: FORMIK_HELPER.IMG_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
@@ -154,7 +153,7 @@ const AddArticle = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.UPLOAD_IMGS,
-                    invalid: errors[FORMIK_HELPER.IMAGES_URL],
+                    invalid: !!errors[FORMIK_HELPER.IMAGES_URL],
                     id: FORMIK_HELPER.IMAGES_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMAGES_URL],
@@ -163,15 +162,13 @@ const AddArticle = (): JSX.Element => {
                   }}
                 />
               </div>
-              <div className={"form-control"}>
-                <label htmlFor={FORMIK_HELPER.LANGUAGE}>
-                  {C.CMS_LABELS.LANG}
-                </label>
+              <div className={"form-control"}> 
                 <CustomSelect
                   {...{
+                    labelText: C.CMS_LABELS.LANG,
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                    invalid: errors[FORMIK_HELPER.LANGUAGE],
+                    invalid: !!errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map((item) => ({
                       label: item.label,
                       value: item.lang,
@@ -186,14 +183,14 @@ const AddArticle = (): JSX.Element => {
                   </FormText>
                 )}
               </div>
-              <div className={"form-control"}>
-                <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
+              <div className={"form-control"}>           
                 <CustomSelect
                   {...{
+                    labelText: C.CMS_LABELS.CREW,
                     name: FORMIK_HELPER.CREW,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     isDisabled: status < 50,
-                    invalid: errors[FORMIK_HELPER.CREW],
+                    invalid: !!errors[FORMIK_HELPER.CREW],
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,
                       value: `${name} ${surname}`,

@@ -20,6 +20,7 @@ import {
 import * as C from "@utils/constants";
 
 import * as S from "./styles";
+import { NCMS } from "@namespace/cms";
 
 const AddNews = (): JSX.Element => {
   const {
@@ -42,7 +43,7 @@ const AddNews = (): JSX.Element => {
           validateOnMount: true,
           validationSchema: addNewsValidationScheme,
           onSubmit: (values) => {
-            handleSubmit(values);
+            handleSubmit(values as NCMS.TDefaultBodyValue);
           },
         }}
       >
@@ -78,7 +79,7 @@ const AddNews = (): JSX.Element => {
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.TITLE,
-                      invalid: errors[FORMIK_HELPER.TITLE],
+                      invalid: !!errors[FORMIK_HELPER.TITLE],
                       id: FORMIK_HELPER.TITLE,
                       placeholder: CMS_INPUT_PLACEHOLDERS.TITLE,
                       type: CMS_INPUT_TYPES.TEXT,
@@ -98,7 +99,7 @@ const AddNews = (): JSX.Element => {
                   <CustomInput
                     {...{
                       label: C.CMS_LABELS.SUBTITLE,
-                      invalid: errors[FORMIK_HELPER.SUBTITLE],
+                      invalid: !!errors[FORMIK_HELPER.SUBTITLE],
                       id: FORMIK_HELPER.SUBTITLE,
                       placeholder: CMS_INPUT_PLACEHOLDERS.SUBTITLE,
                       type: CMS_INPUT_TYPES.TEXT,
@@ -114,15 +115,13 @@ const AddNews = (): JSX.Element => {
                     </FormText>
                   )}
                 </div>
-                <div className={"form-control"}>
-                  <label htmlFor={FORMIK_HELPER.CATEGORY}>
-                    {C.CMS_LABELS.CATEGORY}
-                  </label>
+                <div className={"form-control"}>            
                   <CustomSelect
                     {...{
+                      labelText: C.CMS_LABELS.CATEGORY,
                       name: FORMIK_HELPER.CATEGORY,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CATEGORY,
-                      invalid: errors[FORMIK_HELPER.CATEGORY],
+                      invalid: !!errors[FORMIK_HELPER.CATEGORY],
                       options: categories.map((item) => ({
                         label: item,
                         value: item,
@@ -142,7 +141,7 @@ const AddNews = (): JSX.Element => {
                     {...{
                       placeholder: CMS_INPUT_PLACEHOLDERS.UPLOAD_COVER_IMG,
                       label: C.CMS_LABELS.IMG_URL,
-                      invalid: errors[FORMIK_HELPER.IMG_URL],
+                      invalid: !!errors[FORMIK_HELPER.IMG_URL],
                       id: FORMIK_HELPER.IMG_URL,
                       type: "file",
                       value: values[FORMIK_HELPER.IMG_URL],
@@ -179,8 +178,9 @@ const AddNews = (): JSX.Element => {
                 <div className={"form-control"}>
                   <CustomInput
                     {...{
+                      value: values[FORMIK_HELPER.IMAGES_URL],
                       label: C.CMS_LABELS.UPLOAD_IMGS,
-                      invalid: errors[FORMIK_HELPER.IMAGES_URL],
+                      invalid: !!errors[FORMIK_HELPER.IMAGES_URL],
                       id: FORMIK_HELPER.IMAGES_URL,
                       name: FORMIK_HELPER.IMAGES_URL,
                       type: CMS_INPUT_TYPES.FILE,
@@ -190,15 +190,13 @@ const AddNews = (): JSX.Element => {
                     }}
                   />
                 </div>
-                <div className={"form-control"}>
-                  <label htmlFor={FORMIK_HELPER.LANGUAGE}>
-                    {C.CMS_LABELS.LANG}
-                  </label>
+                <div className={"form-control"}>       
                   <CustomSelect
                     {...{
+                      labelText: C.CMS_LABELS.LANG,
                       name: FORMIK_HELPER.LANGUAGE,
                       placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                      invalid: errors[FORMIK_HELPER.LANGUAGE],
+                      invalid: !!errors[FORMIK_HELPER.LANGUAGE],
                       options: C.GENERAL_CONSTANTS.LANGUAGES.map(
                         ({ label, lang }) => ({
                           label,
@@ -216,15 +214,13 @@ const AddNews = (): JSX.Element => {
                   )}
                 </div>
 
-                <div className={"form-control"}>
-                  <label htmlFor={FORMIK_HELPER.CREW}>
-                    {C.CMS_LABELS.CREW}
-                  </label>
+                <div className={"form-control"}>          
                   <CustomSelect
                     {...{
+                      labelText:C.CMS_LABELS.CREW,
                       name: FORMIK_HELPER.CREW,
                       placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
-                      invalid: errors[FORMIK_HELPER.CREW],
+                      invalid: !!errors[FORMIK_HELPER.CREW],
                       isDisabled: status < 50,
                       options: crew.map(({ name, surname }) => ({
                         label: `${name} ${surname}`,

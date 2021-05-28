@@ -1,10 +1,11 @@
 import { NCustomItems } from "@namespace/shared";
 import React from "react";
-import {  
+import {
   FormGroup,
-  CustomInput as Input,
+  // CustomInput as Input,
   Label,
 } from "reactstrap";
+import * as S from "./styles";
 
 export const CustomInput = ({
   invalid,
@@ -18,7 +19,7 @@ export const CustomInput = ({
   return (
     <FormGroup>
       {label && <Label for={id as string}>{label}</Label>}
-      <Input
+      <S.Input
         {...{
           className: `saro-custom-input`,
           id,
