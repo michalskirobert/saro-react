@@ -11,16 +11,16 @@ import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
 import { useAddContainer } from "./container";
+import { NCMS } from "@namespace/cms";
 
 import {
   CMS_INPUT_PLACEHOLDERS,
   CMS_INPUT_TYPES,
   FORMIK_HELPER,
 } from "./utils";
-
 import * as C from "@utils/constants";
 import * as S from "./styles";
-import { NCMS } from "@namespace/cms";
+
 
 const AddArticle = (): JSX.Element => {
   const {

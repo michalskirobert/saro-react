@@ -10,6 +10,7 @@ import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
 import { useAddContainer } from "./container";
+import { NCMS } from "@namespace/cms";
 
 import * as C from "@utils/constants";
 import {
@@ -19,7 +20,7 @@ import {
 } from "./utils";
 
 import * as S from "./styles";
-import { NCMS } from "@namespace/cms";
+
 
 const cities = [
   {
@@ -48,9 +49,7 @@ const AddEvents = (): JSX.Element => {
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addEventsValidationScheme,
-        onSubmit: (values) => {
-          handleSubmit(values as NCMS.TDefaultBodyValue);
-        },
+        onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue),
       }}
     >
       {({

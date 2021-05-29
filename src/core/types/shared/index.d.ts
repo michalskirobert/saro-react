@@ -7,7 +7,7 @@ export declare namespace NCustomItems {
 
   export type TCustomEditor = {
     value: S;
-    onChangeEditor: ((propName?: S, value: S) => void);
+    onChangeEditor: (propName?: S, value: S) => void;
     key?: S;
     style?: S;
     propName?: S | U;

@@ -11,6 +11,7 @@ import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
 import { useAddContainer } from "./container";
+import { NCMS } from "@namespace/cms";
 
 import {
   CMS_INPUT_PLACEHOLDERS,
@@ -20,7 +21,7 @@ import {
 import * as C from "@utils/constants";
 
 import * as S from "./styles";
-import { NCMS } from "@namespace/cms";
+
 
 const AddNews = (): JSX.Element => {
   const {
@@ -42,9 +43,7 @@ const AddNews = (): JSX.Element => {
           validateOnChange: true,
           validateOnMount: true,
           validationSchema: addNewsValidationScheme,
-          onSubmit: (values) => {
-            handleSubmit(values as NCMS.TDefaultBodyValue);
-          },
+          onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue)      
         }}
       >
         {({
