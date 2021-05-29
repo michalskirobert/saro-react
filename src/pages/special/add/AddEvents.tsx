@@ -10,6 +10,7 @@ import { CustomInput } from "@components/shared/custom-inputs";
 import { CustomButton } from "@components/shared/custom-button";
 
 import { useAddContainer } from "./container";
+import { NCMS } from "@namespace/cms";
 
 import * as C from "@utils/constants";
 import {
@@ -19,6 +20,7 @@ import {
 } from "./utils";
 
 import * as S from "./styles";
+
 
 const cities = [
   {
@@ -47,9 +49,7 @@ const AddEvents = (): JSX.Element => {
         validateOnChange: true,
         validateOnMount: true,
         validationSchema: addEventsValidationScheme,
-        onSubmit: (values) => {
-          handleSubmit(values);
-        },
+        onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue),
       }}
     >
       {({
@@ -82,7 +82,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TITLE,
-                    invalid: errors[FORMIK_HELPER.TITLE],
+                    invalid: !!errors[FORMIK_HELPER.TITLE],
                     id: FORMIK_HELPER.TITLE,
                     type: CMS_INPUT_TYPES.TEXT,
                     value: values[FORMIK_HELPER.TITLE],
@@ -102,7 +102,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.SUBTITLE,
-                    invalid: errors[FORMIK_HELPER.SUBTITLE],
+                    invalid: !!errors[FORMIK_HELPER.SUBTITLE],
                     id: FORMIK_HELPER.SUBTITLE,
                     type: CMS_INPUT_TYPES.TEXT,
                     value: values[FORMIK_HELPER.SUBTITLE],
@@ -118,13 +118,13 @@ const AddEvents = (): JSX.Element => {
                 )}
               </div>
 
-              <div className={"form-control"}>
-                <label htmlFor={FORMIK_HELPER.CITY}>{C.CMS_LABELS.CITY}</label>
+              <div className={"form-control"}>               
                 <CustomSelect
                   {...{
+                    labelText: C.CMS_LABELS.CITY,
                     name: FORMIK_HELPER.CITY,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CITY,
-                    invalid: errors[FORMIK_HELPER.CITY],
+                    invalid: !!errors[FORMIK_HELPER.CITY],
                     options: cities.map(({ city }) => ({
                       label: city,
                       value: city,
@@ -144,7 +144,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.PLACE,
-                    invalid: errors[FORMIK_HELPER.PLACE],
+                    invalid: !!errors[FORMIK_HELPER.PLACE],
                     id: FORMIK_HELPER.PLACE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.PLACE,
                     type: CMS_INPUT_TYPES.TEXT,
@@ -164,7 +164,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.DATE,
-                    invalid: errors[FORMIK_HELPER.DATE],
+                    invalid: !!errors[FORMIK_HELPER.DATE],
                     id: FORMIK_HELPER.DATE,
                     type: CMS_INPUT_TYPES.DATE,
                     value: values[FORMIK_HELPER.DATE],
@@ -182,7 +182,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.TIME,
-                    invalid: errors[FORMIK_HELPER.TIME],
+                    invalid: !!errors[FORMIK_HELPER.TIME],
                     id: FORMIK_HELPER.TIME,
                     type: CMS_INPUT_TYPES.TIME,
                     value: values[FORMIK_HELPER.TIME],
@@ -200,7 +200,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.LINK,
-                    invalid: errors[FORMIK_HELPER.LINK],
+                    invalid: !!errors[FORMIK_HELPER.LINK],
                     id: FORMIK_HELPER.LINK,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LINK,
                     type: CMS_INPUT_TYPES.TEXT,
@@ -220,7 +220,7 @@ const AddEvents = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.IMG_URL,
-                    invalid: errors[FORMIK_HELPER.IMG_URL],
+                    invalid: !!errors[FORMIK_HELPER.IMG_URL],
                     id: FORMIK_HELPER.IMG_URL,
                     type: "file",
                     value: values[FORMIK_HELPER.IMG_URL],
@@ -255,15 +255,13 @@ const AddEvents = (): JSX.Element => {
                 )}
               </div>
 
-              <div className={"form-control"}>
-                <label htmlFor={FORMIK_HELPER.LANGUAGE}>
-                  {C.CMS_LABELS.LANG}
-                </label>
+              <div className={"form-control"}>          
                 <CustomSelect
                   {...{
+                    labelText: C.CMS_LABELS.LANG,
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
-                    invalid: errors[FORMIK_HELPER.LANGUAGE],
+                    invalid: !!errors[FORMIK_HELPER.LANGUAGE],
                     options: C.GENERAL_CONSTANTS.LANGUAGES.map(
                       ({ label, lang }) => ({
                         label,
@@ -280,12 +278,12 @@ const AddEvents = (): JSX.Element => {
                   </FormText>
                 )}
               </div>
-              <div className={"form-control"}>
-                <label htmlFor={FORMIK_HELPER.CREW}>{C.CMS_LABELS.CREW}</label>
+              <div className={"form-control"}>           
                 <CustomSelect
                   {...{
+                    labelText: C.CMS_LABELS.CREW,
                     name: FORMIK_HELPER.CREW,
-                    invalid: errors[FORMIK_HELPER.CREW],
+                    invalid: !!errors[FORMIK_HELPER.CREW],
                     isDisabled: status < 50,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     options: crew.map(({ name, surname }) => ({
@@ -303,6 +301,7 @@ const AddEvents = (): JSX.Element => {
                 )}
               </div>
               <div className={"form-control form-info"}>
+                <div className={"form-group"}>
                 <label htmlFor={FORMIK_HELPER.EDITOR}>
                   {C.CMS_LABELS.CONTENT}
                 </label>
@@ -316,6 +315,7 @@ const AddEvents = (): JSX.Element => {
                     rows: 10,
                   }}
                 />
+                </div>
                 {(errors[FORMIK_HELPER.EDITOR] ||
                   touched[FORMIK_HELPER.EDITOR]) && (
                   <FormText className={"validation-alert"}>

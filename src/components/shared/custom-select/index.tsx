@@ -1,11 +1,13 @@
 import React from "react";
 import Select from "react-select";
+import {FormGroup, Label} from "reactstrap";
 
 import { NCustomItems } from "@namespace/index";
 
 export const CustomSelect = ({
   name,
   label,
+  labelText,
   value,
   id,
   placeholder,
@@ -15,6 +17,8 @@ export const CustomSelect = ({
   options,
 }: NCustomItems.TCustomSelect): JSX.Element => {
   return (
+    <FormGroup>
+    {labelText && <Label for={id as string}>{labelText}</Label>}
     <Select
       {...{
         className: `saro-custom-select ${invalid && "invalid"}`,
@@ -30,5 +34,6 @@ export const CustomSelect = ({
         isDisabled,
       }}
     />
+    </FormGroup>
   );
 };

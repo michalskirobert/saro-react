@@ -37,7 +37,7 @@ export const useAddContainer = () => {
 
   const addNewItem = async (
     id: string,
-    values: Partial<NCMS.TDefaultBodyValue>
+    values: NCMS.TDefaultBodyValue
   ) => {
     return await firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
@@ -55,7 +55,7 @@ export const useAddContainer = () => {
       });
   };
 
-  const handleSubmit = async (values: Partial<NCMS.TDefaultBodyValue>) => {
+  const handleSubmit = async (values: NCMS.TDefaultBodyValue): Promise<void> => {
     try {
       dispatch(cmsActions.addNewItemRequest());
       await addNewItem(uuidv4(), values);
@@ -145,7 +145,7 @@ export const useAddContainer = () => {
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .onSnapshot((resp) => {
-        setCategories((resp as any).data().blogCategories);
+        setCategories((resp as any).data()?.blogCategories);
       });
   };
 

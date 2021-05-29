@@ -185,38 +185,43 @@ form.cms {
     background: $crl-panel-grey;
     margin: 10px auto;
     min-height: 75px;
-    display: flex;
     border: none;
-    align-items: center;
+
     box-shadow: 0 0 0.2rem $crl-main-grey;
 
-    input {
-      width: 70%;
-      min-height: 30px;
-      padding: 1%;
-      border-radius: 4px;
-
-      &.invalid{
-        border: 1.5px solid red;
+    .form-group {
+      display: flex;
+      align-items: center;
+      select {
+        max-height: 30px;
       }
-    }
-    select {
-      max-height: 30px;
-    }
-    label {
-      width: 30%;
-    }
-    div.css-2b097c-container {
-      width: 70%;
+      div.css-2b097c-container {
+        min-width: 70%;
+      }
+      label {
+        width: 30%;
+      }
+      .saro-custom-input {
+        min-width: 70%;
+        min-height: 40px;
+        padding: 1%;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        flex: 1;
+
+        &.invalid {
+          border: 1.5px solid red;
+        }
+      }
     }
     .validation-alert {
       position: absolute;
-      bottom: 0;
+      bottom: 2%;
       left: 31%;
     }
   }
   .form-info {
-    min-height: 270px;
+    min-height: 280px;
     textarea {
       background-color: white;
       width: 70%;
