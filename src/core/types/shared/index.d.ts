@@ -16,7 +16,7 @@ export declare namespace NCustomItems {
 
   export type TCustomButton = {
     className: S;
-    disabled: B;
+    disabled?: B;
     type: S;
     content: S;
     onClick: () => void;
@@ -28,7 +28,7 @@ export declare namespace NCustomItems {
     labelText?: S | U;
     value?: ValueType<NCustomItems.TOptions, false>;
     placeholder?: React.ReactNode;
-    onChange: (name: S, values: any) => void;
+    onChange: (name: S, values: NCMS.TDefaultBodyValue) => void;
     isDisabled?: B;
     invalid: B;
     options?:
@@ -40,12 +40,12 @@ export declare namespace NCustomItems {
   };
 
   export type TCustomInput = {
-    label?: S; 
+    label?: S;
     placeholder?: S | U;
     value?: S | U;
-    invalid: B; 
-    id: S; 
-    type: CustomInputType; 
+    invalid: B;
+    id: S;
+    type: CustomInputType;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   };
 

@@ -4,6 +4,7 @@ import { CustomTableCell } from "./custom-table-cell";
 import { CustomLoadingBlocker } from "@components/shared/custom-loadings/LoadingBlocker";
 
 import {
+  CustomTreeData,
   FilteringState,
   GroupingState,
   IntegratedFiltering,
@@ -13,6 +14,7 @@ import {
   PagingState,
   SelectionState,
   SortingState,
+  TreeDataState,
 } from "@devexpress/dx-react-grid";
 import {
   Grid,
@@ -22,6 +24,7 @@ import {
   TableFilterRow,
   TableHeaderRow,
   TableSelection,
+  TableTreeColumn,
   VirtualTable,
 } from "@devexpress/dx-react-grid-bootstrap4";
 
@@ -46,7 +49,9 @@ export const CustomDataTable = ({
   initSelection,
   isLoading = false,
   isFixTable = false,
-}) => {
+  isTableTreeView = false,
+  showSelectionControls = false,
+}: any): JSX.Element => {
   const [savedSelection, setSelection] = useState<NDefaultReactTypes.TText[]>(
     []
   );
@@ -58,6 +63,10 @@ export const CustomDataTable = ({
     columnName: name,
     width: "80%",
   }));
+
+  const getChildRows = (row: any, rootRows: any): any => {
+    return row ? row.items : rootRows;
+  };
 
   const changeSelection = (selection: NDefaultReactTypes.TText[]): void => {
     if ((!checkboxOneSelection && checkboxSelection) || showSelectAll) {
@@ -129,12 +138,13 @@ export const CustomDataTable = ({
               defaultGrouping={[{ columnName: columns[0].name }]}
             />
           )}
-
           <IntegratedSorting />
           <IntegratedPaging />
-
           <IntegratedFiltering />
           {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
+
+          {isTableTreeView && <TreeDataState />}
+          {isTableTreeView && <CustomTreeData {...{ getChildRows }} />}
 
           {isFixTable ? (
             <VirtualTable
@@ -157,14 +167,12 @@ export const CustomDataTable = ({
               }}
             />
           )}
-
           <TableColumnResizing
             {...{
               defaultColumnWidths: resizedColumns,
               resizingMode: "nextColumn",
             }}
           />
-
           <IntegratedSelection />
           <TableSelection
             {...{
@@ -175,7 +183,10 @@ export const CustomDataTable = ({
             }}
           />
           <TableHeaderRow showSortingControls />
-          <TableFilterRow showFilterSelector />
+          {isTableTreeView && (
+            <TableTreeColumn {...{ showSelectionControls, for: "category" }} />
+          )}
+          <TableFilterRow {...{ showFilterSelector: true }} />
           <PagingPanel {...{ pageSizes }} />
         </Grid>
       </S.TableCard>

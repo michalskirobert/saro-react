@@ -140,7 +140,7 @@ const Edit = (): JSX.Element => {
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         invalid: !!errors[FORMIK_HELPER.CATEGORY],
-                        options: categories.map(({ name}: any) => ({
+                        options: categories.map(({ name }: any) => ({
                           label: name,
                           value: name,
                         })),
@@ -331,12 +331,16 @@ const Edit = (): JSX.Element => {
                       placeholder: database[type]?.language,
                       invalid: !!errors[FORMIK_HELPER.LANGUAGE],
                       options: CONSTANTS.GENERAL_CONSTANTS.LANGUAGES.map(
-                        ({ label, lang }) => ({
-                          label,
-                          value: lang,
+                        (item) => ({
+                          label: item.label,
+                          value: item.lang,
                         })
                       ),
-                      onChange: setFieldValue,
+                      onChange: (options) =>
+                        setFieldValue(
+                          FORMIK_HELPER.LANGUAGE,
+                          (options as any).value
+                        ),
                     }}
                   />
                   {(errors[FORMIK_HELPER.LANGUAGE] ||

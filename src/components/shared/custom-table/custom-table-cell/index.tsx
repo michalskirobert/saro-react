@@ -9,6 +9,7 @@ export const CustomTableCell = ({ tableRow, children, row }) => {
         tableRow,
         children,
         row,
+        title: row.name,
       }}
     />
   );

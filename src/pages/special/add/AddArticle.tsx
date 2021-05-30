@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Form, Formik } from "formik";
-import { addArticleValidationScheme } from "./validation";
+// import { addArticleValidationScheme } from "./validation";
 
 import CustomEditor from "@components/shared/custom-editor";
 import { CustomSelect } from "@components/shared/custom-select";
@@ -21,7 +21,6 @@ import {
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
-
 const AddArticle = (): JSX.Element => {
   const {
     categories,
@@ -35,20 +34,22 @@ const AddArticle = (): JSX.Element => {
     status,
   } = useAddContainer();
 
+  console.log(FORMIK_HELPER.LANGUAGE);
+
   return (
     <Formik
       {...{
         initialValues: {},
         validateOnChange: true,
         validateOnMount: true,
-        validationSchema: addArticleValidationScheme,
+        // validationSchema: addArticleValidationScheme,
         onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue),
       }}
     >
       {({
         values,
         errors,
-        isValid,
+        // isValid,
         touched,
         handleChange,
         handleSubmit,
@@ -115,12 +116,11 @@ const AddArticle = (): JSX.Element => {
                 <CustomInput
                   {...{
                     label: C.CMS_LABELS.UPLOAD_COVER_IMG,
-                    invalid: !!errors[FORMIK_HELPER.IMG_URL],               
+                    invalid: !!errors[FORMIK_HELPER.IMG_URL],
                     id: FORMIK_HELPER.IMG_URL,
                     type: CMS_INPUT_TYPES.FILE,
                     value: values[FORMIK_HELPER.IMG_URL],
-                    onChange: (event) =>
-                      imageChangeHandler(event, false),
+                    onChange: (event) => imageChangeHandler(event, false),
                   }}
                 />
                 {image && (
@@ -162,7 +162,7 @@ const AddArticle = (): JSX.Element => {
                   }}
                 />
               </div>
-              <div className={"form-control"}> 
+              <div className={"form-control"}>
                 <CustomSelect
                   {...{
                     labelText: C.CMS_LABELS.LANG,
@@ -183,7 +183,7 @@ const AddArticle = (): JSX.Element => {
                   </FormText>
                 )}
               </div>
-              <div className={"form-control"}>           
+              <div className={"form-control"}>
                 <CustomSelect
                   {...{
                     labelText: C.CMS_LABELS.CREW,
@@ -224,7 +224,7 @@ const AddArticle = (): JSX.Element => {
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
-                disabled: !isValid,
+                // disabled: !isValid,
                 onClick: handleSubmit,
                 content: C.GENERAL_CONSTANTS.ADD,
               }}
