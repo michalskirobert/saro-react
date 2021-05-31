@@ -30,6 +30,7 @@ const ManageArticles = (): JSX.Element => {
     isEditable,
     selectedRowsId,
     isLoading,
+    parseDataTable,
   } = useManageContainer();
 
   return (
@@ -86,7 +87,7 @@ const ManageArticles = (): JSX.Element => {
       )}
       <CustomDataTable
         {...{
-          rows: !!articles.length ? articles : [],
+          rows: !!articles.length ? parseDataTable(articles) : [],
           columns: COLUMNS,
           tableColumnExtensions: [],
           dateColumns: [
@@ -102,6 +103,7 @@ const ManageArticles = (): JSX.Element => {
               ? setSelectedRowId(selectedRowId[0] as string)
               : setSelectedRowsId(selectedRowId as string[]),
           initSelection: selectedRowsId,
+          isTableTreeView: true,
         }}
       />
     </section>

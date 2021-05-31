@@ -3,6 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
+import uuid from "react-uuid/uuid";
+
 import { firestore } from "@components/feature/firebase";
 import { NCMS } from "src/core/types";
 
@@ -34,6 +36,30 @@ export const useManageContainer = (): NCMS.TManageContainer => {
     history.push(`/panel/edit?type=${type}&id=${id}`);
   };
 
+  const parseDataTable = (table: any): any[] => {
+    const parsedDatabase: any[] = [];
+    const arrayUniqueByKey = [
+      ...new Map(table.map((item) => [item["category"], item])).values(),
+    ];
+    Object.keys(arrayUniqueByKey).forEach((source) => {
+      const sources = {
+        id: uuid(),
+        category: arrayUniqueByKey[source].category.value,
+        items: table
+          .filter(
+            ({ category }) => category === arrayUniqueByKey[source].category
+          )
+          .map((item) => ({
+            ...item,
+            category: "",
+          })),
+      };
+      parsedDatabase.push(sources);
+    });
+
+    return parsedDatabase;
+  };
+
   const handleButtonActions = (action: string): void => {
     switch (action) {
       case BUTTON_ACTIONS.DELETE:
@@ -59,16 +85,32 @@ export const useManageContainer = (): NCMS.TManageContainer => {
     }
   };
 
-  const getEvents = async (): Promise<() => void> => {
-    return firestore
-      .collection(C.GENERAL_CONSTANTS.LANG)
-      .doc(language)
-      .collection(C.GENERAL_CONSTANTS.EVENTS)
-      .onSnapshot((resp) =>
-        dispatch(
-          fetchActions.getEventsSuccess(resp.docs.map((item) => item.data()))
-        )
+  const getDatabase = async (): Promise<void> => {
+    try {
+      dispatch(
+        fetchActions[
+          `get${currentPage[0].toUpperCase() + currentPage.slice(1)}Request`
+        ]()
       );
+      await firestore
+        .collection(C.GENERAL_CONSTANTS.LANG)
+        .doc(language)
+        .collection(currentPage)
+        .onSnapshot((resp) =>
+          dispatch(
+            fetchActions[
+              `get${currentPage[0].toUpperCase() + currentPage.slice(1)}Success`
+            ](resp.docs.map((item) => item.data()))
+          )
+        );
+    } catch (error) {
+      toast.error("kurwaaaa");
+      dispatch(
+        fetchActions[
+          `get${currentPage.toUpperCase() + currentPage.slice(1)}Failure`
+        ]()
+      );
+    }
   };
 
   const removeItem = async (currentPage: string, id: string): Promise<void> => {
@@ -105,7 +147,7 @@ export const useManageContainer = (): NCMS.TManageContainer => {
   };
 
   useEffect(() => {
-    (async () => getEvents())();
+    (async () => getDatabase())();
   }, []);
 
   return {
@@ -126,5 +168,6 @@ export const useManageContainer = (): NCMS.TManageContainer => {
     isAll,
     setIsAll,
     isLoading,
+    parseDataTable,
   };
 };

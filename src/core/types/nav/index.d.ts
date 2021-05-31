@@ -1,3 +1,4 @@
+
 import { NReducers } from "@namespace/reducers";
 
 export declare namespace NNav {
@@ -16,5 +17,11 @@ export declare namespace NNav {
     scrolled: B;
     toggleNav: () => void;
     filteredNavData: NReducers.TNav[];
+    toggleAccordion: (index: N, inner?: B)=>void;
+    collapse: N;
+    setCollapse: React.Dispatch<React.SetStateAction<N>>,
+    innerCollapse: N,
+    setInnerCollapse: React.Dispatch<React.SetStateAction<N>>,
   };
+
 }

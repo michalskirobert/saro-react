@@ -162,20 +162,23 @@ export declare namespace NReducers {
     classLink: S;
     isLogged: B;
     title: S;
-    path?: S | U;
+    path?: LocationDescriptor<string> | U;
     status?: number[] | U;
     content?: TNavContent[] | U;
+    action?: N;
   };
 
   export type TNavContent = {
-    path: S;
+    path: LocationDescriptor<unknown> | U;
     title: S;
-    status?: N[],
-    subcontent?: TNavSubcontent[],
+    status?: N[];
+    subcontent?: TNavSubcontent[];
   };
 
   export type TNavSubcontent = {
-    
+    path: LocationDescriptor<string> | U;
+    title: S;
+    to?: LocationDescriptor<string> | U;
   };
 
   export type TFooter = {
@@ -215,7 +218,7 @@ export declare namespace NReducers {
   };
 
   export type TUseFetch = {
-    isLoading: B,
-    data: AxiosResponse | undefined,
+    isLoading: B;
+    data: AxiosResponse | undefined;
   };
 }

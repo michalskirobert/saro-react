@@ -8,8 +8,8 @@ export declare namespace NCMS {
   type D = Date;
 
   export type TEditContainer = {
-    fetchCrew: ()=> Promise<()=>void>;
-    fetchCategories?: () => Promise<() => void>,
+    fetchCrew: () => Promise<() => void>;
+    fetchCategories?: () => Promise<() => void>;
     handleEdit: (id: S, type: S) => Promise<void>;
     database: NReducers.TDatabase;
     getEditedItem: (id: S, type: S) => Promise<void>;
@@ -31,7 +31,6 @@ export declare namespace NCMS {
     deleteImage: (file: S) => Promise<void>;
   };
 
-
   export type TManageContainer = {
     isEditable: (selectedRowId: S) => boolean;
     news: TNews[];
@@ -50,6 +49,7 @@ export declare namespace NCMS {
     isAll: B;
     setIsAll: React.Dispatch<React.SetStateAction<B>>;
     isLoading: B;
+    parseDataTable: (table: any) => any[];
   };
 
   export type TDefaultBodyValue = {

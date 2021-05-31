@@ -7,7 +7,7 @@ export declare namespace NCustomItems {
 
   export type TCustomEditor = {
     value: S;
-    onChangeEditor: ((propName?: string, value: string) => void);
+    onChangeEditor: (propName?: S, value: S) => void;
     key?: S;
     style?: S;
     propName?: S | U;
@@ -16,7 +16,7 @@ export declare namespace NCustomItems {
 
   export type TCustomButton = {
     className: S;
-    disabled: B;
+    disabled?: B;
     type: S;
     content: S;
     onClick: () => void;
@@ -25,27 +25,28 @@ export declare namespace NCustomItems {
   export type TCustomSelect = {
     name: S;
     label?: S | U;
+    labelText?: S | U;
     value?: ValueType<NCustomItems.TOptions, false>;
     placeholder?: React.ReactNode;
-    onChange: (name: string, values: any) => void;
+    onChange: (name: S, values: NCMS.TDefaultBodyValue) => void;
     isDisabled?: B;
     invalid: B;
     options?:
       | GroupedOptionsType<NCustomItems.TOptions>
       | OptionsType<NCustomItems.TOptions>
-      | undefined;
-    id?: string | undefined;
-    styles?: Partial<Styles<NCustomItems.TOptions, false>> | undefined;
+      | U;
+    id?: S | U;
+    styles?: Partial<Styles<NCustomItems.TOptions, false>> | U;
   };
 
   export type TCustomInput = {
-    invalid: B;
-    id: S | N;
-    placeholder?: S | U;
-    type: CustomInputType;
-    value?: S | U;
-    onChange: any;
     label?: S;
+    placeholder?: S | U;
+    value?: S | U;
+    invalid: B;
+    id: S;
+    type: CustomInputType;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   };
 
   type TOptions = {

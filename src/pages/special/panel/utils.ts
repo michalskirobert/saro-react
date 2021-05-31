@@ -46,15 +46,18 @@ export const TABLE_COLUMN_PROPERTIES: Record<string, string> = Object.freeze({
   MODIFIED: "modified",
   PUBLISHED: "published",
   AUTHOR: "crew",
+  CATEGORY: "category",
 });
 export const TABLE_COLUMN: Record<string, string> = Object.freeze({
   TITLE: "Title",
   MODIFIED: "Last modified",
   PUBLISHED: "Published date",
   AUTHOR: "Author",
+  CATEGORY: "Category",
 });
 
 export const COLUMNS = Object.freeze([
+  { name: TABLE_COLUMN_PROPERTIES.CATEGORY, title: TABLE_COLUMN.CATEGORY },
   { name: TABLE_COLUMN_PROPERTIES.TITLE, title: TABLE_COLUMN.TITLE },
   { name: TABLE_COLUMN_PROPERTIES.MODIFIED, title: TABLE_COLUMN.MODIFIED },
   { name: TABLE_COLUMN_PROPERTIES.PUBLISHED, title: TABLE_COLUMN.PUBLISHED },
