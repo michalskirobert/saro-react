@@ -82,17 +82,8 @@
       }
     }
     label {
-      // position: absolute;
-      left: 8px;
-      top: 12px;
-      color: $crl-alert-error;
-      font-size: 16px;
-      display: block;
-      padding: 4px 10px;
-      font-weight: $weight-normal;
-      background-color: rgba(255, 255, 255, 0);
-      transition: background-color 0.5s ease;
-      border: none;
+      text-align: center;
+      width: 100%;
     }
     input,
     textarea {
@@ -209,9 +200,14 @@ form.cms {
         border: 1px solid #ced4da;
         flex: 1;
 
+<<<<<<< HEAD
         &.invalid {
           border: 1.5px solid red;
         }
+=======
+      &.invalid {
+        border: 1.5px solid red;
+>>>>>>> e6cd350907097df9dc9d6600f78c50789e1eb213
       }
     }
     .validation-alert {
