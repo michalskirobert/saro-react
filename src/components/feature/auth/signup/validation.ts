@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
 export const signUpFirstStepValidationScheme = yup.object().shape({
-  username: yup.string().required("It's required"),
-  email: yup.string().required("It's required").email("Use email"),
-  password: yup.string().required("it's required").min(8, "Too short"),
-  confPassword: yup
+  Username: yup.string().required("It's required"),
+  ["E-mail"]: yup.string().required("It's required").email("Use email"),
+  Password: yup.string().required("it's required").min(8, "Too short"),
+  ["Confirm password"]: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("It's required"),

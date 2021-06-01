@@ -33,24 +33,23 @@ const SignUpForm = (): JSX.Element => {
         {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
           <Form>
             {step1?.map(({ label, placeholder, type }, index) => {
-              // console.log(values);
               return (
                 <section key={index} {...{ className: "sign-up-form step-1" }}>
                   <div className={"form-control"}>
                     <CustomInput
                       {...{
                         label,
-                        invalid: errors[type],
+                        invalid: errors[label],
                         id: label,
                         placeholder,
                         type,
-                        value: values[type],
+                        value: values[label],
                         onChange: handleChange,
                       }}
                     />
-                    {(errors[type] || touched[type]) && (
+                    {(errors[label] || touched[label]) && (
                       <CustomFeedback
-                        {...{ text: errors[type] }}
+                        {...{ text: errors[label] }}
                       ></CustomFeedback>
                     )}
                   </div>

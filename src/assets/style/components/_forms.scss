@@ -200,47 +200,42 @@ form.cms {
         border: 1px solid #ced4da;
         flex: 1;
 
-<<<<<<< HEAD
         &.invalid {
           border: 1.5px solid red;
         }
-=======
-      &.invalid {
-        border: 1.5px solid red;
->>>>>>> e6cd350907097df9dc9d6600f78c50789e1eb213
+      }
+      .validation-alert {
+        position: absolute;
+        bottom: 2%;
+        left: 31%;
       }
     }
-    .validation-alert {
-      position: absolute;
-      bottom: 2%;
-      left: 31%;
+    .form-info {
+      min-height: 280px;
+      textarea {
+        background-color: white;
+        width: 70%;
+        border: 1px solid $crl-panel-dark-grey;
+        padding: 1%;
+        border-radius: 4px;
+      }
     }
-  }
-  .form-info {
-    min-height: 280px;
-    textarea {
-      background-color: white;
-      width: 70%;
-      border: 1px solid $crl-panel-dark-grey;
-      padding: 1%;
-      border-radius: 4px;
-    }
-  }
-  .submit-btn {
-    display: block;
-    color: $crl-base;
-    font-weight: $weight-bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    background-color: $crl-base-blue;
-    border: 1px solid $crl-base-blue;
-    opacity: 1;
-    border-radius: 30px;
-    padding: 10px 35px;
-    margin: 25px auto;
-    cursor: pointer;
-    &:hover {
-      background-color: rgba($crl-base-blue, 0.9);
+    .submit-btn {
+      display: block;
+      color: $crl-base;
+      font-weight: $weight-bold;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      background-color: $crl-base-blue;
+      border: 1px solid $crl-base-blue;
+      opacity: 1;
+      border-radius: 30px;
+      padding: 10px 35px;
+      margin: 25px auto;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba($crl-base-blue, 0.9);
+      }
     }
   }
 }
