@@ -8,7 +8,7 @@ import { CustomWarningModal } from "@components/shared/modals/custom-modal-warni
 import {
   BUTTONS_HELPER,
   BUTTON_ACTIONS,
-  COLUMNS,
+  COLUMNS_ARTICLES as COLUMNS,
   TABLE_COLUMN_PROPERTIES,
 } from "../utils";
 import * as C from "@utils/constants";

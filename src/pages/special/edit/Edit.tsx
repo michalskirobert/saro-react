@@ -131,12 +131,10 @@ const Edit = (): JSX.Element => {
                   </div>
                 )}
                 {type !== CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className={"form-control"}>
-                    <label htmlFor={FORMIK_HELPER.CATEGORY}>
-                      {CONSTANTS.CMS_LABELS.CATEGORY}
-                    </label>
+                  <div className={"form-control"}>      
                     <CustomSelect
                       {...{
+                        labelText: CONSTANTS.CMS_LABELS.CATEGORY,
                         name: FORMIK_HELPER.CATEGORY,
                         placeholder: database[type]?.category,
                         invalid: !!errors[FORMIK_HELPER.CATEGORY],
@@ -156,12 +154,10 @@ const Edit = (): JSX.Element => {
                   </div>
                 )}
                 {type === CONSTANTS.GENERAL_CONSTANTS.EVENTS && (
-                  <div className={"form-control"}>
-                    <label htmlFor={FORMIK_HELPER.CITY}>
-                      {CONSTANTS.CMS_LABELS.CITY}
-                    </label>
+                  <div className={"form-control"}>              
                     <CustomSelect
                       {...{
+                        labelText: CONSTANTS.CMS_LABELS.CITY,
                         name: FORMIK_HELPER.CITY,
                         placeholder: database[type]?.city,
                         invalid: !!errors[FORMIK_HELPER.CITY],
@@ -321,12 +317,10 @@ const Edit = (): JSX.Element => {
                     />
                   </div>
                 )}
-                <div className={"form-control"}>
-                  <label htmlFor={FORMIK_HELPER.LANGUAGE}>
-                    {CONSTANTS.CMS_LABELS.LANG}
-                  </label>
+                <div className={"form-control"}>             
                   <CustomSelect
                     {...{
+                      labelText: CONSTANTS.CMS_LABELS.LANG,
                       name: FORMIK_HELPER.LANGUAGE,
                       placeholder: database[type]?.language,
                       invalid: !!errors[FORMIK_HELPER.LANGUAGE],
@@ -350,12 +344,10 @@ const Edit = (): JSX.Element => {
                     </FormText>
                   )}
                 </div>
-                <div className={"form-control"}>
-                  <label htmlFor={FORMIK_HELPER.CREW}>
-                    {CONSTANTS.CMS_LABELS.CREW}
-                  </label>
+                <div className={"form-control"}>              
                   <CustomSelect
                     {...{
+                      labelText: CONSTANTS.CMS_LABELS.CREW,
                       name: FORMIK_HELPER.CREW,
                       placeholder: database[type]?.crew,
                       invalid: !!errors[FORMIK_HELPER.CREW],

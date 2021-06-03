@@ -99,6 +99,7 @@ const ManageEvents = () => {
               ? setSelectedRowId(selectedRowId[0] as string)
               : setSelectedRowsId(selectedRowId as string[]),
           initSelection: selectedRowsId,
+          isTableTreeView: false,
         }}
       />
     </section>
