@@ -262,12 +262,10 @@ const AddEvents = (): JSX.Element => {
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
                     invalid: !!errors[FORMIK_HELPER.LANGUAGE],
-                    options: C.GENERAL_CONSTANTS.LANGUAGES.map(
-                      ({ label, lang }) => ({
-                        label,
-                        value: lang,
-                      })
-                    ),
+                    options: C.GENERAL_CONSTANTS.LANGUAGES.map(({label, lang}) => ({
+                      label,
+                      value: lang,
+                    })),
                     onChange: setFieldValue,
                   }}
                 />

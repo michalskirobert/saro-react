@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Form, Formik } from "formik";
-// import { addArticleValidationScheme } from "./validation";
+import { addArticleValidationScheme } from "./validation";
 
 import CustomEditor from "@components/shared/custom-editor";
 import { CustomSelect } from "@components/shared/custom-select";
@@ -42,14 +42,14 @@ const AddArticle = (): JSX.Element => {
         initialValues: {},
         validateOnChange: true,
         validateOnMount: true,
-        // validationSchema: addArticleValidationScheme,
+        validationSchema: addArticleValidationScheme,
         onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue),
       }}
     >
       {({
         values,
         errors,
-        // isValid,
+        isValid,
         touched,
         handleChange,
         handleSubmit,
@@ -224,7 +224,7 @@ const AddArticle = (): JSX.Element => {
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
-                // disabled: !isValid,
+                disabled: !isValid,
                 onClick: handleSubmit,
                 content: C.GENERAL_CONSTANTS.ADD,
               }}

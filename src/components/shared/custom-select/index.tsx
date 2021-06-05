@@ -33,7 +33,7 @@ export const CustomSelect = ({
               { label: string | undefined; value: string | undefined },
               false
             >
-          ) => onChange(name, values),
+          ) => onChange(name, values?.value),
           isDisabled,
         }}
       />
