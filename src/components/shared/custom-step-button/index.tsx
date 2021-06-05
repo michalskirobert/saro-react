@@ -1,0 +1,65 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+
+import { stateStepsControl } from "@actions/state-steps-control.actions";
+import { useStepsContainer } from "@components/feature/auth/signup/steps-container/container";
+import { CustomButton } from "../custom-button";
+
+import * as S from "./styles";
+
+export const CustomStepButton = ({
+  itemIndex,
+  isLastStep = false,
+  isNextDisabled = false,
+  onNextClick,
+}: any): JSX.Element => {
+  const dispatch = useDispatch();
+  const { STEPS } = useStepsContainer();
+  const isLoading = false;
+
+  const onNext = (): void => {
+    if (isLastStep) {
+      onNextClick();
+    }
+    if (!isLastStep) {
+      const nextStepIndex = STEPS[itemIndex + 1]
+        ? itemIndex + 1
+        : itemIndex + 2;
+      try {
+        onNextClick();
+        dispatch(stateStepsControl.updateSteps(nextStepIndex));
+      } catch {
+        dispatch(stateStepsControl.updateSteps(itemIndex));
+      }
+    }
+  };
+
+  const onBack = (): void => {
+    const prevStepIndex = STEPS[itemIndex - 1] ? itemIndex - 1 : itemIndex - 2;
+    dispatch(stateStepsControl.updateSteps(prevStepIndex));
+  };
+
+  return (
+    <S.ButtonContainer>
+      {itemIndex > 0 && (
+        <CustomButton
+          {...{
+            onClick: onBack,
+            type: "button",
+            color: "primary",
+            content: "< Back",
+          }}
+        />
+      )}
+      <CustomButton
+        {...{
+          onClick: onNext,
+          type: "button",
+          color: "primary",
+          content: "Next >",
+          disabled: isNextDisabled || isLoading,
+        }}
+      />
+    </S.ButtonContainer>
+  );
+};

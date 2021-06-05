@@ -3,20 +3,16 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Form, Formik } from "formik";
-import { CustomButton } from "@components/shared/custom-button";
 import { CustomFeedback } from "@components/shared/custom-feedback";
+import { CustomStepButton } from "@components/shared/custom-step-button";
 
 import { signUpFirstStepValidationScheme } from "./validation";
 import { CustomInput } from "@components/shared/custom-inputs";
 
-const SignUpForm = (): JSX.Element => {
+const SignUpBasic = (): JSX.Element => {
   const step1 = useSelector(
     ({ database }: RootStateOrAny) =>
       database?.init?.auth["sign-up"]?.labels["step-1"]
-  );
-  const buttonContent = useSelector(
-    ({ database }: RootStateOrAny) =>
-      database?.init?.auth["sign-up"]?.buttonTitle
   );
 
   return (
@@ -48,21 +44,17 @@ const SignUpForm = (): JSX.Element => {
                       }}
                     />
                     {(errors[label] || touched[label]) && (
-                      <CustomFeedback
-                        {...{ text: errors[label] }}
-                      ></CustomFeedback>
+                      <CustomFeedback {...{ text: errors[label] }} />
                     )}
                   </div>
                 </section>
               );
             })}
-            <CustomButton
+            <CustomStepButton
               {...{
-                className: "submit-btn",
-                disabled: !isValid,
-                type: "button",
-                content: buttonContent,
-                onClick: handleSubmit,
+                onNextClick: handleSubmit,
+                itemIndex: 0,
+                isNextDisabled: !isValid,
               }}
             />
           </Form>
@@ -76,7 +68,7 @@ const SignUpForm = (): JSX.Element => {
   );
 };
 
-export default SignUpForm;
+export default SignUpBasic;
 
 // const [step, setStep] = useState(1);
 // return (

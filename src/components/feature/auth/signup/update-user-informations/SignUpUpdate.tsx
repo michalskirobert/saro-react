@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 // import { useSelector } from "react-redux";
 
 // import { FORM_HELPER } from "./utils";
@@ -10,7 +10,8 @@
 //   { value: "female", label: "female" },
 // ];
 
-export function SecondStep() {
+const SignUpUpdate = (): JSX.Element => {
+  return <p>kutas</p>;
   // const languagesData = useSelector((state) => state.database.dictionary);
   // const languagesOptions = languagesData.languages?.map((lang) => {
   //   const container = {};
@@ -99,4 +100,6 @@ export function SecondStep() {
   //     </div>
   //   </>
   // );
-}
+};
+
+export { SignUpUpdate as default };

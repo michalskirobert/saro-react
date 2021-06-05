@@ -8,7 +8,15 @@ const Lessons = lazy(() => import("../../pages/public/lessons/Lessons"));
 const Blog = lazy(() => import("../../pages/public/blog/Blog"));
 const Contact = lazy(() => import("../../pages/public/contact"));
 const SignIn = lazy(() => import("@components/feature/auth/login/Login"));
-const SignUp = lazy(() => import("@components/feature/auth/signup/SignUp"));
+const SignUpBasic = lazy(
+  () => import("@components/feature/auth/signup/sign-up-basic/SignUpBasic")
+);
+const SignUpUpdate = lazy(
+  () =>
+    import(
+      "@components/feature/auth/signup/update-user-informations/SignUpUpdate"
+    )
+);
 
 export const PUBLIC_ROUTE = Object.freeze([
   {
@@ -25,9 +33,14 @@ export const PUBLIC_ROUTE = Object.freeze([
     component: SignIn,
   },
   {
-    path: ROUTE_PATHS.SIGN_UP_ROUTE,
+    path: ROUTE_PATHS.SIGN_UP_BASIC_ROUTE,
     exact: true,
-    component: SignUp,
+    component: SignUpBasic,
+  },
+  {
+    path: ROUTE_PATHS.SIGN_UP_UPDATE_ROUTE,
+    exact: true,
+    component: SignUpUpdate,
   },
   {
     path: ROUTE_PATHS.LESSONS_ROUTE,
