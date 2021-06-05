@@ -1,8 +1,8 @@
 import React from "react";
-// import SignUpForm from "./SignUpForm";
+import SignUpForm from "./SignUpForm";
 
-const SignUp = () => {
-  return <section className={"section signup"}>{/* <SignUpForm /> */}</section>;
+const SignUp = (): JSX.Element => {
+  return <SignUpForm />;
 };
 
 export default SignUp;
