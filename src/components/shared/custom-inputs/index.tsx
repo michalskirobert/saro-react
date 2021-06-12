@@ -1,9 +1,6 @@
 import { NCustomItems } from "@namespace/shared";
 import React from "react";
-import {
-  FormGroup,
-  Label,
-} from "reactstrap";
+import { FormGroup, Label } from "reactstrap";
 import * as S from "./styles";
 
 export const CustomInput = ({

@@ -1,24 +1,14 @@
 import * as CONSTANTS from "@utils/constants";
 
 const defaultState = {
-  stateStepsControl: {},
+  steps: 0,
 };
 
 export const stateStepsControlReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case CONSTANTS.STATE_STEPS_CONTROL.FIRST_STEP:
+    case CONSTANTS.STATE_STEPS_CONTROL.UPDATE_STEPS:
       return {
-        stateStepsControl: {
-          ...state,
-          "step-1": action.playload,
-        },
-      };
-    case CONSTANTS.STATE_STEPS_CONTROL.SECOND_STEP:
-      return {
-        stateStepsControl: {
-          ...state,
-          "step-2": action.playload,
-        },
+        steps: action.payload,
       };
     default:
       return state;

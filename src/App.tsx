@@ -24,7 +24,9 @@ const App = () => {
         <Suspense fallback={<DefaultLoader />}>
           <Switch>
             {PUBLIC_ROUTE.map(({ path, component, exact }) => {
-              return <Route key={path} {...{ path, component, exact }} />;
+              return (
+                <Route key={path} {...{ path, component, exact: !!exact }} />
+              );
             })}
             {PRIVATE_ROUTE.map(({ path, component, exact }) => {
               return (

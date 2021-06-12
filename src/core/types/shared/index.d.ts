@@ -15,12 +15,13 @@ export declare namespace NCustomItems {
   };
 
   export type TCustomButton = {
-    className: S;
+    className?: S;
     disabled?: B;
     type: S;
     content: S;
     onClick: () => void;
     variant?: S;
+    iconClass?: S;
   };
 
   export type TCustomSelect = {
