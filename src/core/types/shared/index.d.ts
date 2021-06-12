@@ -20,6 +20,7 @@ export declare namespace NCustomItems {
     type: S;
     content: S;
     onClick: () => void;
+    variant?: S;
   };
 
   export type TCustomSelect = {

@@ -87,15 +87,14 @@ const ManageArticles = (): JSX.Element => {
       )}
       <CustomDataTable
         {...{
-          rows: !!articles.length ? parseDataTable(articles) : [],
+          rows: !!articles.length ? parseDataTable(articles) : [],         
           columns: COLUMNS,
           tableColumnExtensions: [],
           dateColumns: [
             TABLE_COLUMN_PROPERTIES.PUBLISHED,
             TABLE_COLUMN_PROPERTIES.MODIFIED,
           ],
-          checkboxSelection: !!isAll,
-          isGrouping: false,
+          checkboxSelection: !!isAll,          
           isLoading,
           showSelectionColumn: true,
           onRowSelected: (selectedRowId: string[]) =>
@@ -104,6 +103,8 @@ const ManageArticles = (): JSX.Element => {
               : setSelectedRowsId(selectedRowId as string[]),
           initSelection: selectedRowsId,
           isTableTreeView: true,
+          isGrouping: false,
+          showSelectionControls: true,
         }}
       />
     </section>

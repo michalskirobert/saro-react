@@ -8,6 +8,7 @@ export const CustomButton = ({
   type,
   content,
   onClick,
+  variant,
 }: NCustomItems.TCustomButton): JSX.Element => {
   return (
     <S.CustomButton
@@ -16,6 +17,7 @@ export const CustomButton = ({
         type,
         disabled,
         onClick,
+        variant,
       }}
     >
       {content}
