@@ -1,4 +1,4 @@
-export const GENERAL_CONSTANTS = {
+export const GENERAL_CONSTANTS = Object.freeze({
   LANG: "language",
   NEWS: "news",
   ARTICLES: "articles",
@@ -11,9 +11,10 @@ export const GENERAL_CONSTANTS = {
   ID: "id",
   DICTIONARY: "dictionary",
   SIGN_IN_SUCCESS_MESSAGE: "You have successfully logged in",
-  DELETE_REQUEST_MESSAGE: "Are you sure you want to permanently delete selected items?",
+  DELETE_REQUEST_MESSAGE:
+    "Are you sure you want to permanently delete selected items?",
   DELETE_ITEMS_SUCCESS_MESSAGE: "Selected items have been deleted.",
-  NOTHING_TO_DELETE_MESSAGE: "Nothing to delete.",  
+  NOTHING_TO_DELETE_MESSAGE: "Nothing to delete.",
   ADD_NEW_ITEM_SUCCESS_MESSAGE: "New item has been successfully added.",
   UPLOAD_NEW_FILE_SUCCESS_MESSAGE: "File has been successfully uploaded.",
   UPDATE_ITEM_SUCCESS_MESSAGE: "Item has been successfully updated.",
@@ -37,6 +38,7 @@ export const GENERAL_CONSTANTS = {
   NO: "NO",
   SEND: "Send",
   ADD: "Add",
+  IS_LOADING: "IS_LOADING",
   CHANGE_LANGUAGE_TO: {
     EN: "en",
     KO: "ko",
@@ -74,4 +76,4 @@ export const GENERAL_CONSTANTS = {
   B_INFO: "info",
   B_LIGHT: "light",
   B_DARK: "dark",
-};
+});

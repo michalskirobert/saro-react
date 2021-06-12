@@ -2,6 +2,7 @@ import * as CONSTANTS from "@utils/constants";
 
 const defaultState = {
   language: "en",
+  isLoading: false,
 };
 
 export const generalReducer = (state = defaultState, action) => {
@@ -26,11 +27,16 @@ export const generalReducer = (state = defaultState, action) => {
         ...state,
         language: "zh",
       };
-      case CONSTANTS.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.VI:
-        return {
-          ...state,
-          language: "vi",
-        };
+    case CONSTANTS.GENERAL_CONSTANTS.CHANGE_LANGUAGE_TO.VI:
+      return {
+        ...state,
+        language: "vi",
+      };
+    case CONSTANTS.GENERAL_CONSTANTS.IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     default:
       return state;
   }

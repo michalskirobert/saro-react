@@ -1,18 +1,17 @@
 import React, { ReactElement } from "react";
 
-import { useStepsContainer } from "./container";
-import { CustomStepButton } from "@components/shared/custom-step-button";
+// import { CustomStepButton } from "@components/shared/custom-step-button";
 
 export const StepsContainer = (): ReactElement => {
-  const { STEPS } = useStepsContainer();
-
-  return (
-    <CustomStepButton
-      {...{
-        STEPS,
-      }}
-    />
-  );
+  return <p>krycha</p>;
 };
 
 export { StepsContainer as default };
+
+{
+  /* <CustomStepButton
+{...{
+  STEPS,
+}}
+/> */
+}

@@ -12,19 +12,27 @@ export const CustomStepButton = ({
   isLastStep = false,
   isNextDisabled = false,
   onNextClick,
-}: any): JSX.Element => {
+}: {
+  itemIndex: number;
+  isLastStep: boolean;
+  isNextDisabled: boolean;
+  onNextClick: () => void;
+}): JSX.Element => {
   const dispatch = useDispatch();
   const { STEPS } = useStepsContainer();
   const isLoading = false;
 
+  console.log({ STEPS });
+
   const onNext = (): void => {
     if (isLastStep) {
       onNextClick();
+
+      console.log(STEPS[itemIndex], STEPS[itemIndex + 1]);
     }
     if (!isLastStep) {
-      const nextStepIndex = STEPS[itemIndex + 1]
-        ? itemIndex + 1
-        : itemIndex + 2;
+      console.log(STEPS[itemIndex], STEPS[itemIndex + 1]);
+      const nextStepIndex = STEPS[itemIndex + 1];
       try {
         onNextClick();
         dispatch(stateStepsControl.updateSteps(nextStepIndex));
@@ -34,8 +42,10 @@ export const CustomStepButton = ({
     }
   };
 
+  console.log(STEPS[itemIndex], STEPS[itemIndex + 1]);
+
   const onBack = (): void => {
-    const prevStepIndex = STEPS[itemIndex - 1] ? itemIndex - 1 : itemIndex - 2;
+    const prevStepIndex = STEPS[itemIndex - 1];
     dispatch(stateStepsControl.updateSteps(prevStepIndex));
   };
 

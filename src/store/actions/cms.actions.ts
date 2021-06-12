@@ -11,13 +11,10 @@ const updateRequest = () => (dispatch: Dispatch) =>
   dispatch({ type: CMS_CONSTANTS.UPDATE_REQUEST });
 const updateFailure = () => (dispatch: Dispatch) =>
   dispatch({ type: CMS_CONSTANTS.UPDATE_FAILURE });
-
 const uploadImageRequest = () => (dispatch: Dispatch) =>
   dispatch({ type: UPLOAD_CONSTANTS.UPLOAD_IMAGE_REQUEST });
-
 const uploadImageSuccess = () => (dispatch: Dispatch) =>
   dispatch({ type: UPLOAD_CONSTANTS.UPLOAD_IMAGE_SUCCESS });
-
 const uploadImageFailure = () => (dispatch: Dispatch) =>
   dispatch({ type: UPLOAD_CONSTANTS.UPLOAD_IMAGE_FAILURE });
 
