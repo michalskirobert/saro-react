@@ -41,27 +41,22 @@ const SignUpBasic = (): JSX.Element => {
                 index: number
               ) => {
                 return (
-                  <section
-                    key={index}
-                    {...{ className: "sign-up-form step-1" }}
-                  >
-                    <div className={"form-control"}>
-                      <CustomInput
-                        {...{
-                          label,
-                          invalid: errors[label],
-                          id: label,
-                          placeholder,
-                          type,
-                          value: values[label],
-                          onChange: handleChange,
-                        }}
-                      />
-                      {(errors[label] || touched[label]) && (
-                        <CustomFeedback {...{ text: errors[label] }} />
-                      )}
-                    </div>
-                  </section>
+                  <div className={"form-control"} key={index}>
+                    <CustomInput
+                      {...{
+                        label,
+                        invalid: errors[label],
+                        id: label,
+                        placeholder,
+                        type,
+                        value: values[label],
+                        onChange: handleChange,
+                      }}
+                    />
+                    {(errors[label] || touched[label]) && (
+                      <CustomFeedback {...{ text: errors[label] }} />
+                    )}
+                  </div>
                 );
               }
             )}
