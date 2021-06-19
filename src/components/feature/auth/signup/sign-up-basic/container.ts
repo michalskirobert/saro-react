@@ -8,12 +8,13 @@ import { toast } from "react-toastify";
 
 export const useSingUpBasicContainer = (): any => {
   const dispatch = useDispatch();
-  const createAccount = async ({ email, password }) => {
+  const createAccount = async (email, password) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password);
       await dispatch(stateStepsControl.updateSteps(1));
     } catch (error) {
-      toast.error(error);
+      await dispatch(stateStepsControl.updateSteps(0));
+      toast.error(error.message);
     }
   };
   return { createAccount };

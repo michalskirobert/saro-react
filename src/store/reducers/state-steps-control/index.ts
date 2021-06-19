@@ -1,7 +1,7 @@
 import * as CONSTANTS from "@utils/constants";
 
 const defaultState = {
-  steps: 0,
+  steps: 1,
 };
 
 export const stateStepsControlReducer = (state = defaultState, action) => {

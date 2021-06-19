@@ -22,16 +22,11 @@ export const CustomStepButton = ({
   const { STEPS } = useStepsContainer();
   const isLoading = false;
 
-  console.log({ STEPS });
-
   const onNext = (): void => {
     if (isLastStep) {
       onNextClick();
-
-      console.log(STEPS[itemIndex], STEPS[itemIndex + 1]);
     }
     if (!isLastStep) {
-      console.log(STEPS[itemIndex], STEPS[itemIndex + 1]);
       const nextStepIndex = STEPS[itemIndex + 1];
       try {
         onNextClick();
@@ -41,8 +36,6 @@ export const CustomStepButton = ({
       }
     }
   };
-
-  console.log(STEPS[itemIndex], STEPS[itemIndex + 1]);
 
   const onBack = (): void => {
     const prevStepIndex = STEPS[itemIndex - 1];

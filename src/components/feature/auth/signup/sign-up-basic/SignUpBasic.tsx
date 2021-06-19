@@ -7,9 +7,9 @@ import { CustomFeedback } from "@components/shared/custom-feedback";
 import { CustomStepButton } from "@components/shared/custom-step-button";
 import { useSingUpBasicContainer } from "./container";
 
-// import { signUpFirstStepValidationScheme } from "./validation";
+import { signUpFirstStepValidationScheme } from "./validation";
 import { CustomInput } from "@components/shared/custom-inputs";
-// import { FORM_HELPER } from "../utils";
+import { FORM_HELPER } from "../utils";
 
 const SignUpBasic = (): JSX.Element => {
   const step1 = useSelector(
@@ -25,8 +25,13 @@ const SignUpBasic = (): JSX.Element => {
           initialValues: {},
           validateOnChange: true,
           validateOnMount: true,
-          // validationSchema: signUpFirstStepValidationScheme,
-          onSubmit: (values) => createAccount(values),
+          validationSchema: signUpFirstStepValidationScheme,
+          onSubmit: (values) => {
+            createAccount(
+              values[FORM_HELPER.EMAIL],
+              values[FORM_HELPER.PASSWORD]
+            );
+          },
         }}
       >
         {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
