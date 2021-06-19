@@ -1,14 +1,27 @@
 import React, { ReactElement, Suspense } from "react";
+import { RootStateOrAny, useSelector } from "react-redux";
 
-export const CustomStepsComponent = ({ STEPS, type }): ReactElement => {
+import { useStepsContainer } from "./steps-container/container";
+
+import { DefaultLoader } from "@components/shared/custom-loadings";
+
+export const CustomStepsComponent = (): ReactElement => {
+  const currentStep = useSelector(
+    (state: RootStateOrAny) => state?.stateStepsControl?.steps
+  );
+
+  const { STEPS } = useStepsContainer();
+
   return (
     <div>
       <div className={"divider-upper"} />
       {currentStep !== undefined && (
-        <Suspense fallback={<CustomLoader {...{ type }} />}>
+        <Suspense fallback={<DefaultLoader />}>
           {STEPS[currentStep]?.component}
         </Suspense>
       )}
     </div>
   );
 };
+
+export default CustomStepsComponent;

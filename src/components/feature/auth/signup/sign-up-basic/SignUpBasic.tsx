@@ -7,9 +7,9 @@ import { CustomFeedback } from "@components/shared/custom-feedback";
 import { CustomStepButton } from "@components/shared/custom-step-button";
 import { useSingUpBasicContainer } from "./container";
 
-// import { signUpFirstStepValidationScheme } from "./validation";
+import { signUpFirstStepValidationScheme } from "./validation";
 import { CustomInput } from "@components/shared/custom-inputs";
-// import { FORM_HELPER } from "../utils";
+import { FORM_HELPER } from "../utils";
 
 const SignUpBasic = (): JSX.Element => {
   const step1 = useSelector(
@@ -25,8 +25,13 @@ const SignUpBasic = (): JSX.Element => {
           initialValues: {},
           validateOnChange: true,
           validateOnMount: true,
-          // validationSchema: signUpFirstStepValidationScheme,
-          onSubmit: (values) => createAccount(values),
+          validationSchema: signUpFirstStepValidationScheme,
+          onSubmit: (values) => {
+            createAccount(
+              values[FORM_HELPER.EMAIL],
+              values[FORM_HELPER.PASSWORD]
+            );
+          },
         }}
       >
         {({ values, errors, isValid, touched, handleChange, handleSubmit }) => (
@@ -41,27 +46,22 @@ const SignUpBasic = (): JSX.Element => {
                 index: number
               ) => {
                 return (
-                  <section
-                    key={index}
-                    {...{ className: "sign-up-form step-1" }}
-                  >
-                    <div className={"form-control"}>
-                      <CustomInput
-                        {...{
-                          label,
-                          invalid: errors[label],
-                          id: label,
-                          placeholder,
-                          type,
-                          value: values[label],
-                          onChange: handleChange,
-                        }}
-                      />
-                      {(errors[label] || touched[label]) && (
-                        <CustomFeedback {...{ text: errors[label] }} />
-                      )}
-                    </div>
-                  </section>
+                  <div className={"form-control"} key={index}>
+                    <CustomInput
+                      {...{
+                        label,
+                        invalid: errors[label],
+                        id: label,
+                        placeholder,
+                        type,
+                        value: values[label],
+                        onChange: handleChange,
+                      }}
+                    />
+                    {(errors[label] || touched[label]) && (
+                      <CustomFeedback {...{ text: errors[label] }} />
+                    )}
+                  </div>
                 );
               }
             )}
@@ -85,68 +85,3 @@ const SignUpBasic = (): JSX.Element => {
 };
 
 export default SignUpBasic;
-
-// const [step, setStep] = useState(1);
-// return (
-//   <Formik
-//     {...{
-//       initialValues: {},
-//       validateOnChange: true,
-//       validateOnMount: true,
-//       validationSchema: signUpValidationScheme,
-//       onSubmit: (values) => console.log(values),
-//     }}
-//   >
-//     {({
-//       values,
-//       errors,
-//       isValid,
-//       handleChange,
-//       handleSubmit,
-//       touched,
-//       setFieldValue,
-//     }) => (
-//       <>
-//         {step !== 1 && (
-//           <button
-//             className={"arrow-back-icon back"}
-//             type={"button"}
-//             onClick={() => setStep(step - 1)}
-//           >
-//             <ArrowBack />
-//           </button>
-//         )}
-//         <h2>Sign Up</h2>
-//         {step === 1 && (
-//           <FirstStep
-//             handleChange={handleChange}
-//             values={values}
-//             errors={errors}
-//             touched={touched}
-//           />
-//         )}
-//         {step === 2 && (
-//           <SecondStep
-//             setFieldValue={setFieldValue}
-//             handleChange={handleChange}
-//             values={values}
-//             errors={errors}
-//             touched={touched}
-//           />
-//         )}
-//         <button
-//           type={"submit"}
-//           tabIndex={"4"}
-//           onClick={handleSubmit}
-//           disabled={isValid}
-//         >
-//           {step === 2 ? "Sign Up" : "Next"}
-//         </button>
-//         <div className={"auth-control"}>
-//           <p style={{ display: "inline" }}>Do you have an account?</p>
-//           <Link to={"/sign-in"}>Log-in</Link>
-//         </div>
-//       </>
-//     )}
-//   </Formik>
-// );

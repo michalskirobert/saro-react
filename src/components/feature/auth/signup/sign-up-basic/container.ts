@@ -1,14 +1,21 @@
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+
 import { auth } from "@components/feature/firebase";
 
+import { stateStepsControl } from "@actions/index";
+
+import { toast } from "react-toastify";
+
 export const useSingUpBasicContainer = (): any => {
-  const createAccount = async ({ email, password }) => {
-    console.log("next clicked");
-    // try {
-    //   await auth.createUserWithEmailAndPassword(email, password);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  const dispatch = useDispatch();
+  const createAccount = async (email, password) => {
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      await dispatch(stateStepsControl.updateSteps(1));
+    } catch (error) {
+      await dispatch(stateStepsControl.updateSteps(0));
+      toast.error(error.message);
+    }
   };
   return { createAccount };
 };
