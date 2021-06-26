@@ -22,6 +22,7 @@ export const ROUTE_PATHS: Record<string, string> = Object.freeze({
   TRANSLATE_ROUTE: "/panel/translate",
   TRANSLATE_FOOTER_ROUTE: "/panel/translate/footer",
   ERROR: "*",
+  NOT_AUTH_PAGE: "/not-authorized"
 });
 
 export const QUERY_PARAMS = {};

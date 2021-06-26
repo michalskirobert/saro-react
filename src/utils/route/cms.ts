@@ -4,31 +4,35 @@ import { ROUTE_PATHS } from "@utils/constants";
 
 const Panel = lazy(() => import("../../pages/special/panel/AdminPanel"));
 const AdminEdit = lazy(() => import("../../pages/special/edit/Edit"));
-const AdminAddArticle = lazy(() =>
-  import("../../pages/special/add/AddArticle")
+const AdminAddArticle = lazy(
+  () => import("../../pages/special/add/AddArticle")
 );
 const AdminAddEvents = lazy(() => import("../../pages/special/add/AddEvents"));
 const AdminAddNews = lazy(() => import("../../pages/special/add/AddNews"));
-const AdminTranslate = lazy(() =>
-  import("../../pages/special/edit/AdminTranslate")
+const AdminTranslate = lazy(
+  () => import("../../pages/special/edit/AdminTranslate")
 );
-const AdminTranslateFooter = lazy(() =>
-  import("../../pages/special/panel/translate/TranslateFooter")
+const AdminTranslateFooter = lazy(
+  () => import("../../pages/special/panel/translate/TranslateFooter")
 );
-const AdminManageArticles = lazy(() =>
-  import("../../pages/special/panel/manage/ManageArticles")
+const AdminManageArticles = lazy(
+  () => import("../../pages/special/panel/manage/ManageArticles")
 );
-const AdminManageNews = lazy(() =>
-  import("../../pages/special/panel/manage/ManageNews")
+const AdminManageNews = lazy(
+  () => import("../../pages/special/panel/manage/ManageNews")
 );
-const AdminManageEvents = lazy(() =>
-  import("../../pages/special/panel/manage/ManageEvents")
+const AdminManageEvents = lazy(
+  () => import("../../pages/special/panel/manage/ManageEvents")
 );
-const AdminManageUsers = lazy(() =>
-  import("../../pages/special/panel/manage/ManageUsers")
+const AdminManageUsers = lazy(
+  () => import("../../pages/special/panel/manage/ManageUsers")
 );
 
-export const SARO_ROUTE = Object.freeze([
+export const SARO_ROUTE: readonly {
+  path: string;
+  exact?: boolean | undefined;
+  component: React.LazyExoticComponent<() => JSX.Element>;
+}[] = Object.freeze([
   {
     path: ROUTE_PATHS.PANEL_ROUTE,
     component: Panel,
