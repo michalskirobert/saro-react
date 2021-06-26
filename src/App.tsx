@@ -1,5 +1,6 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
@@ -13,14 +14,15 @@ import { useInitialService } from "./core/service";
 
 import * as C from "@utils/constants";
 
-const NotFound = lazy(() => import("./pages/public/404/Error"));
-
 const App = () => {
   useInitialService();
+  const isAuthorizedUser = window.location.pathname.includes(C.ROUTE_PATHS.NOT_AUTH_PAGE);
+  const history = createBrowserHistory();
+
   return (
-    <Router>
+    <Router {...{history}}>
       <Unlisten>
-        <Nav />
+       {!isAuthorizedUser && <Nav />}
         <Suspense fallback={<DefaultLoader />}>
           <Switch>
             {PUBLIC_ROUTE.map(({ path, component, exact }) => {
@@ -36,10 +38,9 @@ const App = () => {
             {SARO_ROUTE.map(({ path, component, exact }) => {
               return <SaroRoute key={path} {...{ path, component, exact }} />;
             })}
-            <Route {...{ path: C.ROUTE_PATHS.ERROR, component: NotFound }} />
           </Switch>
         </Suspense>
-        <Footer />
+      {!isAuthorizedUser &&  <Footer />}
       </Unlisten>
     </Router>
   );

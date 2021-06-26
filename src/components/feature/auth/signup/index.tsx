@@ -14,7 +14,6 @@ export const CustomStepsComponent = (): ReactElement => {
 
   return (
     <div>
-      <div className={"divider-upper"} />
       {currentStep !== undefined && (
         <Suspense fallback={<DefaultLoader />}>
           {STEPS[currentStep]?.component}
