@@ -55,7 +55,7 @@ export const useNavContainer = (): NNav.TNavContainer => {
         item?.status?.includes(+user?.status)
       );
     } else {
-      return nav.filter(
+      return nav?.filter(
         (item: NReducers.TNav) =>
           !item?.action && item?.status?.includes(+user?.status)
       );

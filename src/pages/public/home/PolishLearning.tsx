@@ -4,7 +4,7 @@ import uuid from "react-uuid";
 
 const PolsihLearning = () => {
   const homepageData = useSelector(
-    ({ database }: any) => database.init.pages.homepage
+    ({ database }: any) => database?.init?.pages?.homepage
   );
 
   return (
