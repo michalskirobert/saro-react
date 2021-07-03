@@ -1,0 +1,26 @@
+.section.not-found-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    max-width: 650px;
+    margin: 50px auto;
+    padding: 3%;
+
+    img {
+        width: 50%;
+        max-width: 650px;
+        min-width: 100px;
+    }
+    h2 {
+        margin: 30px auto;
+    }
+    p {
+        text-align: center;
+        max-width: 300px;
+        .bold {
+            font-weight: bold;
+        }
+    }
+}
