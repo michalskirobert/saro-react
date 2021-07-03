@@ -1,18 +1,22 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+// import { RootStateOrAny, useSelector } from "react-redux";
+import { Redirect, Route} from "react-router-dom";
 
 export const SaroRoute = ({ component: Component, ...rest }) => {
-  const currentUser = true;
+  // const location = useLocation();
+  // const currentPath = location.pathname;
+  // const nav  = useSelector(({ database }: RootStateOrAny) => database.init.nav);
+
   return (
     <Route
       {...rest}
       render={(props) => {
-        return currentUser ? (
+        return true ? (
           <Component {...props} />
         ) : (
           <Redirect to={"/sign-in"} />
         );
       }}
-    ></Route>
+    />
   );
 };

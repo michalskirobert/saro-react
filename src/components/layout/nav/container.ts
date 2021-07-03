@@ -51,7 +51,7 @@ export const useNavContainer = (): NNav.TNavContainer => {
 
   const filterNavData = (): NReducers.TNav[] => {
     if (user?.status === 0) {
-      return nav.filter((item: NReducers.TNav) =>
+      return nav?.filter((item: NReducers.TNav) =>
         item?.status?.includes(+user?.status)
       );
     } else {

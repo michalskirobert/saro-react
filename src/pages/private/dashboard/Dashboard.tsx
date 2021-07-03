@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import { auth } from "@components/feature/firebase";
 
-const Dashboard = () => {
+const Dashboard = (): JSX.Element => {
   const { currentUser } = useSelector(({ currentUser }: any) => currentUser);
 
   if (currentUser?.role === "saro-crew") <Redirect to={"/panel"} />;

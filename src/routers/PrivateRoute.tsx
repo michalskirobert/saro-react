@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, ...rest }): JSX.Element => {
-  const user = useSelector((state) => (state as any).currentUser);
+  const user = useSelector(({currentUser}: any) => currentUser);
   return (
     <Route
       {...rest}
