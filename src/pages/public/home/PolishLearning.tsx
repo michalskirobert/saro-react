@@ -10,9 +10,9 @@ const PolsihLearning = () => {
   return (
     <section {...{ className: "section__Polish__Learning" }}>
       <div {...{ className: "polish__Learning__info" }}>
-        {homepageData?.map(({ sections }) => {
-          return sections?.map(({ linkTitle, header, details }) => {
-            return (
+        {homepageData?.map(({ sections }) =>
+          sections?.map(
+            ({ linkTitle, header, details }) =>
               linkTitle && (
                 <section {...{ key: uuid() }}>
                   <h2 {...{ className: "title" }}>{header}</h2>
@@ -20,9 +20,8 @@ const PolsihLearning = () => {
                   <button {...{ className: "btn find-out-btn" }}></button>
                 </section>
               )
-            );
-          });
-        })}
+          )
+        )}
       </div>
     </section>
   );

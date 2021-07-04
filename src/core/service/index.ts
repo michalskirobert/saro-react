@@ -13,8 +13,10 @@ import * as C from "@utils/constants";
 export const useInitialService = () => {
   const dispatch = useDispatch();
   const { language }: { language: string } = useSelector(
-    ({ general }: RootStateOrAny) => general?.language
+    ({ general }: RootStateOrAny) => general
   );
+
+  console.log(language);
 
   const getDictionary = async (): Promise<void> => {
     try {

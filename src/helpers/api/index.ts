@@ -1,2 +1,2 @@
-export const SaroApi = 'https://saro-dev-backend.netlify.app/';
-export const PORT = '8888';
+export const SaroApi = "https://saro-api.netlify.app";
+export const PORT = "8888";

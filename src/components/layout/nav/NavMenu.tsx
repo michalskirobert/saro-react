@@ -10,14 +10,10 @@ import { useNavContainer } from "./container";
 import * as S from "./style";
 
 const NavMenu = ({ isNavOpen, toggleNav }): JSX.Element => {
-  const {
-    filteredNavData,
-    toggleAccordion,
-    collapse,
-    innerCollapse,
-  } = useNavContainer();
+  const { filteredNavData, toggleAccordion, collapse, innerCollapse } =
+    useNavContainer();
   const { isLoading } = useSelector(({ database }: RootStateOrAny) => database);
-
+  console.log(filteredNavData);
   return (
     <>
       <section {...{ className: `nav-container ${isNavOpen && "active"}` }}>
@@ -25,7 +21,7 @@ const NavMenu = ({ isNavOpen, toggleNav }): JSX.Element => {
         {filteredNavData?.map(({ title, path, content }, index: number) => {
           return content ? (
             <Card {...{ key: index }}>
-              <CardHeader onClick={()=>toggleAccordion(index as number)}>
+              <CardHeader onClick={() => toggleAccordion(index as number)}>
                 <FaAngleLeft {...{ className: "arrow" }} /> {title}
               </CardHeader>
               <Collapse {...{ isOpen: collapse === index }}>
@@ -34,7 +30,7 @@ const NavMenu = ({ isNavOpen, toggleNav }): JSX.Element => {
                     return subcontent ? (
                       <Card key={index}>
                         <CardHeader
-                          onClick={()=>toggleAccordion(index as number, true)}                          
+                          onClick={() => toggleAccordion(index as number, true)}
                         >
                           <FaAngleLeft className={"arrow inner-arrow"} />{" "}
                           {title}
