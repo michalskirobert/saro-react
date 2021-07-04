@@ -14,7 +14,7 @@ import { useInitialService } from "./core/service";
 
 import * as C from "@utils/constants";
 
-const App = () => {
+const App = (): JSX.Element => {
   useInitialService();
   const isAuthorizedUser = window.location.pathname.includes(C.ROUTE_PATHS.NOT_AUTH_PAGE);
   const history = createBrowserHistory();

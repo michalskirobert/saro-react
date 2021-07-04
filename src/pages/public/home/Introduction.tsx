@@ -5,7 +5,7 @@ import uuid4 from "react-uuid";
 
 const Introduction = () => {
   const homepageData = useSelector(
-    ({database}: any) => database.init.pages.homepage
+    ({database}: any) => database?.init?.pages?.homepage
   );
 
   return (

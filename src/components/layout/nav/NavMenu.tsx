@@ -22,7 +22,7 @@ const NavMenu = ({ isNavOpen, toggleNav }): JSX.Element => {
     <>
       <section {...{ className: `nav-container ${isNavOpen && "active"}` }}>
         {isLoading && <DefaultLoader />}
-        {filteredNavData.map(({ title, path, content }, index: number) => {
+        {filteredNavData?.map(({ title, path, content }, index: number) => {
           return content ? (
             <Card {...{ key: index }}>
               <CardHeader onClick={()=>toggleAccordion(index as number)}>

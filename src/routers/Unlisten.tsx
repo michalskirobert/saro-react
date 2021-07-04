@@ -12,9 +12,7 @@ const Unlisten = ({ history, children }: any): JSX.Element => {
       window.scrollTo(0, 0);
       dispatch(alertActions.clear());
     });
-    return () => {
-      unlisten();
-    };
+    return () => unlisten();
     // eslint-disable-next-line
   }, [history]);
 

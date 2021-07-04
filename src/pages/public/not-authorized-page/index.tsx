@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import {Button} from 'reactstrap';
+import ErrorImage from '@assets/images/components/errors/403.svg';
 
 const NotAuthorizedPage = (): JSX.Element => {
   const [timeoutRedirecting, setTimeoutRedirecting] = useState<number>(10);
@@ -30,10 +32,12 @@ const NotAuthorizedPage = (): JSX.Element => {
   }, []);
 
   return (
-    <>
-      <p>Chuj w dupe nie masz uprawnień {timeoutRedirecting}</p>
-      <button onClick={goBackToMainPage}>Zapraszam, wypierdalać</button>
-    </>
+    <section className={"section not-authorized-error"}>
+      <img src={ErrorImage} alt={"403 not authorized"} />
+      <h2>You are not authorized</h2>
+      <p>You will be automatically redirected to homepage in <span className={"bold"}>{timeoutRedirecting} seconds.</span></p>
+      <Button color={"link"} onClick={goBackToMainPage}>Go to homepage</Button>
+    </section>
   );
 };
 

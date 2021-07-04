@@ -1,49 +1,45 @@
 import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
+
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 
 import { fetchActions, userActions } from "@actions/index";
 
-import { auth, db, firestore } from "@components/feature/firebase";
+import { auth, firestore } from "@components/feature/firebase";
+
+import { ConfigAppService } from "./service";
 
 import * as C from "@utils/constants";
 
 export const useInitialService = () => {
   const dispatch = useDispatch();
-  const language = useSelector(
+  const { language }: { language: string } = useSelector(
     ({ general }: RootStateOrAny) => general?.language
   );
-  // const currentPath = useLocation().pathname.split("/");
-  // const currentPage = currentPath[currentPath.length - 1] || "";
 
-  const getDictionary = async () => {
+  const getDictionary = async (): Promise<void> => {
     try {
       dispatch(fetchActions.getDictionaryRequest);
-      db.ref(`/${C.GENERAL_CONSTANTS.DICTIONARY}`).on(
-        "value",
-        (querySnapShot) => {
-          dispatch(fetchActions.getDictionarySucces(querySnapShot.val()));
-        }
-      );
+      const initConfigApp = await ConfigAppService.getInitConfigApp();
+      fetchActions.getDictionarySucces(initConfigApp);
+      console.log(initConfigApp);
     } catch {
       dispatch(fetchActions.getDictionaryFailure());
     }
   };
 
-  const getDataHandler = async () => {
+  const getDataHandler = async (): Promise<void> => {
     try {
-      dispatch(fetchActions.getDatabaseRequest);
-      db.ref(`/${C.GENERAL_CONSTANTS.LANG}`)
-        .child(language)
-        .on("value", (querySnapShot) => {
-          dispatch(fetchActions.getDatabaseSucces(querySnapShot.val()));
-        });
+      dispatch(fetchActions.getDatabaseRequest());
+      const databaseInitConfigApp = await ConfigAppService.getDictionariesApp(
+        language
+      );
+      dispatch(fetchActions.getDatabaseSucces(databaseInitConfigApp));
     } catch {
       dispatch(fetchActions.getDatabaseFailure());
     }
   };
 
-  const initialDataHandler = async () => {
+  const initialDataHandler = async (): Promise<void> => {
     await getDictionary();
     await getDataHandler();
   };
@@ -73,6 +69,5 @@ export const useInitialService = () => {
     getDataHandler,
     initialDataHandler,
     language,
-    // currentPage,
   };
 };
