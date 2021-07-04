@@ -13,7 +13,6 @@ const NavMenu = ({ isNavOpen, toggleNav }): JSX.Element => {
   const { filteredNavData, toggleAccordion, collapse, innerCollapse } =
     useNavContainer();
   const { isLoading } = useSelector(({ database }: RootStateOrAny) => database);
-  console.log(filteredNavData);
   return (
     <>
       <section {...{ className: `nav-container ${isNavOpen && "active"}` }}>
