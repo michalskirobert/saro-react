@@ -8,7 +8,9 @@ import { NReducers } from "@namespace/reducers";
 
 export const useNavContainer = (): NNav.TNavContainer => {
   const user = useSelector(({ currentUser }: RootStateOrAny) => currentUser);
-  const nav = useSelector(({ database }: RootStateOrAny) => database?.init.nav);
+  const nav = useSelector(
+    ({ database }: RootStateOrAny) => database?.dictionary?.nav
+  );
   const { name: userName, isLogged: userIsLogged } = useSelector(
     ({ currentUser }: RootStateOrAny) => currentUser
   );
@@ -21,11 +23,10 @@ export const useNavContainer = (): NNav.TNavContainer => {
     setIsNavOpen(!isNavOpen);
   };
 
-  const toggleAccordion = (index: number, inner?: boolean): void => 
+  const toggleAccordion = (index: number, inner?: boolean): void =>
     inner
       ? setInnerCollapse(innerCollapse === Number(index) ? -1 : Number(index))
-      : setCollapse(collapse === Number(index) ? -1 : Number(index));  
-
+      : setCollapse(collapse === Number(index) ? -1 : Number(index));
 
   useEffect(() => {
     let prevPosition = window.pageYOffset;

@@ -6,6 +6,7 @@ export const ConfigAppService = {
     await axios
       .get(`${SaroApi}/${lang}/dictionaries`)
       .then((resp) => resp.data),
+
   getInitConfigApp: async (): Promise<any> =>
     await axios.get(`${SaroApi}/init`).then((resp) => resp.data),
 };

@@ -16,34 +16,29 @@ export const useInitialService = () => {
     ({ general }: RootStateOrAny) => general
   );
 
-  console.log(language);
-
   const getDictionary = async (): Promise<void> => {
     try {
-      dispatch(fetchActions.getDictionaryRequest);
-      const initConfigApp = await ConfigAppService.getInitConfigApp();
-      fetchActions.getDictionarySucces(initConfigApp);
-      console.log(initConfigApp);
+      dispatch(fetchActions.getDictionaryRequest());
+      const dictionaries = await ConfigAppService.getDictionariesApp(language);
+      dispatch(fetchActions.getDictionarySucces(dictionaries));
     } catch {
       dispatch(fetchActions.getDictionaryFailure());
     }
   };
 
-  const getDataHandler = async (): Promise<void> => {
+  const getInitConfigApp = async (): Promise<void> => {
     try {
-      dispatch(fetchActions.getDatabaseRequest());
-      const databaseInitConfigApp = await ConfigAppService.getDictionariesApp(
-        language
-      );
-      dispatch(fetchActions.getDatabaseSucces(databaseInitConfigApp));
+      dispatch(fetchActions.getInitConfigAppRequest());
+      const initConfigApp = await ConfigAppService.getInitConfigApp();
+      dispatch(fetchActions.getInitConfigAppSucces(initConfigApp));
     } catch {
-      dispatch(fetchActions.getDatabaseFailure());
+      dispatch(fetchActions.getInitConfigAppFailure());
     }
   };
 
   const initialDataHandler = async (): Promise<void> => {
     await getDictionary();
-    await getDataHandler();
+    await getInitConfigApp();
   };
 
   useEffect(() => {
@@ -68,7 +63,7 @@ export const useInitialService = () => {
 
   return {
     getDictionary,
-    getDataHandler,
+    getInitConfigApp,
     initialDataHandler,
     language,
   };

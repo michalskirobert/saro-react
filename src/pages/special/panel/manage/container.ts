@@ -50,7 +50,7 @@ export const useManageContainer = (): NCMS.TManageContainer => {
             ({ category }) => category === arrayUniqueByKey[source].category
           )
           .map((item) => ({
-            ...item,   
+            ...item,
             category: "",
           })),
       };

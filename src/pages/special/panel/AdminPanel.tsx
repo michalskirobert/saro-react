@@ -9,17 +9,19 @@ import { DefaultLoader } from "@components/shared/custom-loadings/DefaultLoader"
 import * as S from "./style";
 
 const AdminPanel = (): JSX.Element => {
-  const nav = useSelector(({ database }: RootStateOrAny) => database?.init?.nav[0]?.content);
-  const { isLoading } = useSelector(({ currentUser }:RootStateOrAny) => currentUser);
+  const nav = useSelector(
+    ({ database }: RootStateOrAny) => database?.dictionary?.nav[0]?.content
+  );
+  const { isLoading } = useSelector(
+    ({ currentUser }: RootStateOrAny) => currentUser
+  );
 
   return (
     <section className={"section saro-panel"}>
       <h1>Saro CMS 1.0.0</h1>
       <h2>
         Welcome
-        <S.Span>
-          {auth?.currentUser?.displayName ?? " Saro-crew"}
-        </S.Span>
+        <S.Span>{auth?.currentUser?.displayName ?? " Saro-crew"}</S.Span>
       </h2>
       {isLoading && <DefaultLoader />}
       <CardGroup>

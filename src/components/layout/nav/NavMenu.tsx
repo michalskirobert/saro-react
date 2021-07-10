@@ -12,7 +12,9 @@ import * as S from "./style";
 const NavMenu = ({ isNavOpen, toggleNav }): JSX.Element => {
   const { filteredNavData, toggleAccordion, collapse, innerCollapse } =
     useNavContainer();
-  const { isLoading } = useSelector(({ database }: RootStateOrAny) => database);
+  const { isLoading }: { isLoading: boolean } = useSelector(
+    ({ database }: RootStateOrAny) => database
+  );
   return (
     <>
       <section {...{ className: `nav-container ${isNavOpen && "active"}` }}>

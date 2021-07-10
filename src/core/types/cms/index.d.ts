@@ -31,6 +31,10 @@ export declare namespace NCMS {
     deleteImage: (file: S) => Promise<void>;
   };
 
+  export type TCMSContainer = {
+    getEvents: (page: number, size: number, lang: string) => Promise<void>;
+  };
+
   export type TManageContainer = {
     isEditable: (selectedRowId: S) => boolean;
     news: TNews[];
@@ -80,6 +84,11 @@ export declare namespace NCMS {
   };
 
   export type TEvents = {
+    item: TEventItem;
+    totalCount: number;
+  };
+
+  export type TEventItem = {
     title: S;
     subtitle: S;
     city: S;

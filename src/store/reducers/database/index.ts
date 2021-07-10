@@ -111,18 +111,18 @@ export const database = (state = initialState, action) => {
         errorContent: "Ooops, we couldn't load our crew :/",
       };
 
-    case CONSTANTS.FETCH_CONSTANTS.GET_DATABASE_REQUEST:
+    case CONSTANTS.FETCH_CONSTANTS.GET_INIT_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
-    case CONSTANTS.FETCH_CONSTANTS.GET_DATABASE_SUCCESS:
+    case CONSTANTS.FETCH_CONSTANTS.GET_INIT_SUCCESS:
       return {
         ...state,
         isLoading: false,
         init: action.payload,
       };
-    case CONSTANTS.FETCH_CONSTANTS.GET_DATABASE_FAILURE:
+    case CONSTANTS.FETCH_CONSTANTS.GET_INIT_FAILURE:
       return {
         ...state,
         isLoading: false,

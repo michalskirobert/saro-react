@@ -4,6 +4,7 @@ import { CustomTableCell } from "./custom-table-cell";
 import { CustomLoadingBlocker } from "@components/shared/custom-loadings/LoadingBlocker";
 
 import {
+  CustomPaging,
   CustomTreeData,
   FilteringState,
   GroupingState,
@@ -38,6 +39,7 @@ import { NDefaultReactTypes } from "@namespace/react-types";
 
 export const CustomDataTable = ({
   rows,
+  totalCount,
   columns,
   isGrouping,
   tableColumnExtensions,
@@ -51,13 +53,14 @@ export const CustomDataTable = ({
   isFixTable = false,
   isTableTreeView = false,
   showSelectionControls = false,
+  onChangePage,
 }: any): JSX.Element => {
   const [savedSelection, setSelection] = useState<NDefaultReactTypes.TText[]>(
     []
   );
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
-  const [pageSizes] = useState([5, 25, 50]);
+  const [pageSize, setPageSize] = useState(10);
+  const [pageSizes] = useState([10, 20, 50]);
 
   const resizedColumns = columns.map(({ name }) => ({
     columnName: name,
@@ -107,6 +110,11 @@ export const CustomDataTable = ({
     }
   }, [initSelection]);
 
+  useEffect(() => {
+    if (onChangePage) {
+      onChangePage(currentPage + 1, pageSize);
+    }
+  }, [currentPage, pageSize]);
   return (
     <CustomLoadingBlocker {...{ isLoading }}>
       <S.TableCard>
@@ -142,6 +150,7 @@ export const CustomDataTable = ({
           <IntegratedPaging />
           <IntegratedFiltering />
           {dateColumns?.length && <DateTypeProvider for={dateColumns} />}
+          {!!onChangePage && <CustomPaging {...{ totalCount }} />}
 
           {isTableTreeView && <TreeDataState />}
           {isTableTreeView && <CustomTreeData {...{ getChildRows }} />}

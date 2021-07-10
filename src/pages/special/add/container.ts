@@ -18,13 +18,13 @@ export const useAddContainer = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const currentPathname: string[] = location.pathname.split("/");
-  const currentPage: string = currentPathname[currentPathname.length - 1];
+  const currentPathname = location.pathname.split("/");
+  const currentPage = currentPathname[currentPathname.length - 1];
 
-  const { language: lang } = useSelector(
+  const { language: lang }: { language: string } = useSelector(
     ({ general }: RootStateOrAny) => general
   );
-  const { crew, isLoading } = useSelector(
+  const { crew, isLoading }: { crew: any[]; isLoading: boolean } = useSelector(
     ({ database }: RootStateOrAny) => database
   );
   const { status } = useSelector(
@@ -35,11 +35,8 @@ export const useAddContainer = () => {
   const [image, setImage] = useState<string>("");
   const [images, setImages] = useState<string[]>([]);
 
-  const addNewItem = async (
-    id: string,
-    values: NCMS.TDefaultBodyValue
-  ) => {
-    return await firestore
+  const addNewItem = async (id: string, values: NCMS.TDefaultBodyValue) =>
+    await firestore
       .collection(CONSTANTS.GENERAL_CONSTANTS.LANG)
       .doc(lang)
       .collection(currentPage)
@@ -53,9 +50,10 @@ export const useAddContainer = () => {
         modified: CONSTANTS.GENERAL_CONSTANTS.NOT_APPLICABLE_MESSAGE,
         id,
       });
-  };
 
-  const handleSubmit = async (values: NCMS.TDefaultBodyValue): Promise<void> => {
+  const handleSubmit = async (
+    values: NCMS.TDefaultBodyValue
+  ): Promise<void> => {
     try {
       dispatch(cmsActions.addNewItemRequest());
       await addNewItem(uuidv4(), values);
@@ -76,7 +74,7 @@ export const useAddContainer = () => {
       const fileRef = storage.ref(`/images/${currentPage}/${file?.name}`);
       await fileRef.put(file);
       multiple
-        ? setImages([...images, String(fileRef.getDownloadURL())])     
+        ? setImages([...images, String(fileRef.getDownloadURL())])
         : setImage(String(fileRef.getDownloadURL()));
       dispatch(cmsActions.uploadImageSuccess());
       toast.success(
@@ -91,8 +89,8 @@ export const useAddContainer = () => {
   const imageChangeHandler = async (
     event: React.SyntheticEvent<EventTarget>,
     multiple?: boolean
-  ): Promise<void> => { 
-    const files: any[] = Array.from((event.target as any).files); 
+  ): Promise<void> => {
+    const files: any[] = Array.from((event.target as any).files);
     if (!files) {
       multiple ? setImages([]) : setImage("");
       toast.error(CONSTANTS.GENERAL_CONSTANTS.FAILURE_MESSAGE);
@@ -115,7 +113,6 @@ export const useAddContainer = () => {
       uploadImage(file, multiple);
     });
   };
-
 
   const deleteImage = async (file: string): Promise<void> => {
     try {

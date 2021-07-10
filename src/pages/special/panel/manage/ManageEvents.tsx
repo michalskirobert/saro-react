@@ -30,6 +30,7 @@ const ManageEvents = () => {
     selectedRowsId,
     isLoading,
   } = useManageContainer();
+  const { onChangePage } = use;
 
   return (
     <section className={"section saro-panel"}>
@@ -83,7 +84,8 @@ const ManageEvents = () => {
       )}
       <CustomDataTable
         {...{
-          rows: !!events.length ? events : [],
+          rows: events.items || [],
+          totalCount: events.totalCount,
           columns: COLUMNS,
           tableColumnExtensions: [],
           dateColumns: [
@@ -100,6 +102,8 @@ const ManageEvents = () => {
               : setSelectedRowsId(selectedRowId as string[]),
           initSelection: selectedRowsId,
           isTableTreeView: false,
+          onChangePage: (page: number, pageSize: number): void =>
+            onChangePage(page, pageSize),
         }}
       />
     </section>

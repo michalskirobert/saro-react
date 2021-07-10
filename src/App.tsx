@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
 
 import { PrivateRoute } from "./routers/PrivateRoute";
 import { SaroRoute } from "./routers/SaroRoute";
@@ -12,23 +12,25 @@ import { PRIVATE_ROUTE, PUBLIC_ROUTE, SARO_ROUTE } from "@utils/route";
 
 import { useInitialService } from "./core/service";
 
+const NotFound = lazy(() => import("./pages/public/404/Error"));
+
 import * as C from "@utils/constants";
 
 const App = (): JSX.Element => {
   useInitialService();
-  const isAuthorizedUser = window.location.pathname.includes(C.ROUTE_PATHS.NOT_AUTH_PAGE);
+  const isAuthorizedUser = window.location.pathname.includes(
+    C.ROUTE_PATHS.NOT_AUTH_PAGE
+  );
   const history = createBrowserHistory();
 
   return (
-    <Router {...{history}}>
+    <Router {...{ history }}>
       <Unlisten>
-       {!isAuthorizedUser && <Nav />}
+        {!isAuthorizedUser && <Nav />}
         <Suspense fallback={<DefaultLoader />}>
           <Switch>
             {PUBLIC_ROUTE.map(({ path, component, exact }) => {
-              return (
-                <Route key={path} {...{ path, component, exact: !!exact }} />
-              );
+              return <Route key={path} {...{ path, component, exact }} />;
             })}
             {PRIVATE_ROUTE.map(({ path, component, exact }) => {
               return (
@@ -38,9 +40,10 @@ const App = (): JSX.Element => {
             {SARO_ROUTE.map(({ path, component, exact }) => {
               return <SaroRoute key={path} {...{ path, component, exact }} />;
             })}
+            <Route {...{ component: NotFound, path: "*", exact: true }} />
           </Switch>
         </Suspense>
-      {!isAuthorizedUser &&  <Footer />}
+        {!isAuthorizedUser && <Footer />}
       </Unlisten>
     </Router>
   );

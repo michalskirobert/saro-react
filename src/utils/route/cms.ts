@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 import { ROUTE_PATHS } from "@utils/constants";
 
-const Panel = lazy(() => import("../../pages/special/panel/AdminPanel"));
+const AdminPanel = lazy(() => import("../../pages/special/panel/AdminPanel"));
 const AdminEdit = lazy(() => import("../../pages/special/edit/Edit"));
 const AdminAddArticle = lazy(
   () => import("../../pages/special/add/AddArticle")
@@ -35,7 +35,7 @@ export const SARO_ROUTE: readonly {
 }[] = Object.freeze([
   {
     path: ROUTE_PATHS.PANEL_ROUTE,
-    component: Panel,
+    component: AdminPanel,
     exact: true,
   },
   {
@@ -45,7 +45,6 @@ export const SARO_ROUTE: readonly {
   {
     path: ROUTE_PATHS.ADD_NEW_ARTICLES_ROUTE,
     component: AdminAddArticle,
-    exact: true,
   },
   {
     path: ROUTE_PATHS.ADD_NEW_EVENTS_ROUTE,

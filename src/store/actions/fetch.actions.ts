@@ -38,20 +38,20 @@ const getCrewSuccess = (payload) => (dispatch: Dispatch) =>
 const getCrewFailure = () => (dispatch: Dispatch) =>
   dispatch({ type: C.FETCH_CONSTANTS.GET_CREW_FAILURE });
 
-const getDatabaseRequest = () => (dispatch: Dispatch) =>
+const getInitConfigAppRequest = () => (dispatch: Dispatch) =>
   dispatch({
-    type: C.FETCH_CONSTANTS.GET_DATABASE_REQUEST,
+    type: C.FETCH_CONSTANTS.GET_INIT_REQUEST,
   });
 
-const getDatabaseSucces = (payload) => (dispatch: Dispatch) =>
+const getInitConfigAppSucces = (payload) => (dispatch: Dispatch) =>
   dispatch({
-    type: C.FETCH_CONSTANTS.GET_DATABASE_SUCCESS,
+    type: C.FETCH_CONSTANTS.GET_INIT_SUCCESS,
     payload,
   });
 
-const getDatabaseFailure = () => (dispatch: Dispatch) =>
+const getInitConfigAppFailure = () => (dispatch: Dispatch) =>
   dispatch({
-    type: C.FETCH_CONSTANTS.GET_DATABASE_FAILURE,
+    type: C.FETCH_CONSTANTS.GET_INIT_FAILURE,
   });
 
 const getDictionaryRequest = () => (dispatch: Dispatch) =>
@@ -83,9 +83,9 @@ export const fetchActions = {
   getCrewRequest,
   getCrewSuccess,
   getCrewFailure,
-  getDatabaseRequest,
-  getDatabaseSucces,
-  getDatabaseFailure,
+  getInitConfigAppRequest,
+  getInitConfigAppSucces,
+  getInitConfigAppFailure,
   getDictionaryRequest,
   getDictionarySucces,
   getDictionaryFailure,

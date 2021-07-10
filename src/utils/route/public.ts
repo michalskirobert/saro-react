@@ -8,13 +8,18 @@ const Lessons = lazy(() => import("../../pages/public/lessons/Lessons"));
 const Blog = lazy(() => import("../../pages/public/blog/Blog"));
 const Contact = lazy(() => import("../../pages/public/contact"));
 const SignIn = lazy(() => import("@components/feature/auth/login/Login"));
-const NotAuthorizedPage = lazy(() => import("../../pages/public/not-authorized-page"));
+const NotAuthorizedPage = lazy(
+  () => import("../../pages/public/not-authorized-page")
+);
 const CustomStepsComponent = lazy(
   () => import("@components/feature/auth/signup/index")
 );
-const NotFound = lazy(() => import("../../pages/public/404/Error"));
 
-export const PUBLIC_ROUTE: readonly {path: string, exact?: boolean, component: React.LazyExoticComponent<() => JSX.Element>}[] = Object.freeze([
+export const PUBLIC_ROUTE: readonly {
+  path: string;
+  exact?: boolean;
+  component: React.LazyExoticComponent<() => JSX.Element>;
+}[] = Object.freeze([
   {
     path: ROUTE_PATHS.HOME_ROUTE,
     exact: true,
@@ -48,8 +53,4 @@ export const PUBLIC_ROUTE: readonly {path: string, exact?: boolean, component: R
     path: ROUTE_PATHS.NOT_AUTH_PAGE,
     component: NotAuthorizedPage,
   },
-  {
-    path: "*",
-    component: NotFound
-  }
 ]);
