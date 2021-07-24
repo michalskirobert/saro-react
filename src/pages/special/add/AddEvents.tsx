@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, FormText } from "reactstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
 import { Form, Formik } from "formik";
-import { addEventsValidationScheme } from "./validation";
+// import { addEventsValidationScheme } from "./validation";
 
 import { CustomSelect } from "@components/shared/custom-select";
 import { CustomInput } from "@components/shared/custom-inputs";
@@ -21,7 +21,6 @@ import {
 
 import * as S from "./styles";
 
-
 const cities = [
   {
     city: "Warsaw",
@@ -33,29 +32,27 @@ const cities = [
 
 const AddEvents = (): JSX.Element => {
   const {
-    status,
     handleSubmit,
     crew,
     image,
     deleteImage,
     imageChangeHandler,
-    isLoading,
+    // isLoading,
   } = useAddContainer();
 
   return (
     <Formik
       {...{
         initialValues: {},
-        validateOnChange: true,
-        validateOnMount: true,
-        validationSchema: addEventsValidationScheme,
+        // validateOnChange: true,
+        // validateOnMount: true,
         onSubmit: (values) => handleSubmit(values as NCMS.TDefaultBodyValue),
       }}
     >
       {({
         values,
         errors,
-        isValid,
+        // isValid,
         touched,
         handleChange,
         handleSubmit,
@@ -118,7 +115,7 @@ const AddEvents = (): JSX.Element => {
                 )}
               </div>
 
-              <div className={"form-control"}>               
+              <div className={"form-control"}>
                 <CustomSelect
                   {...{
                     labelText: C.CMS_LABELS.CITY,
@@ -255,17 +252,19 @@ const AddEvents = (): JSX.Element => {
                 )}
               </div>
 
-              <div className={"form-control"}>          
+              <div className={"form-control"}>
                 <CustomSelect
                   {...{
                     labelText: C.CMS_LABELS.LANG,
                     name: FORMIK_HELPER.LANGUAGE,
                     placeholder: CMS_INPUT_PLACEHOLDERS.LANGUAGE,
                     invalid: !!errors[FORMIK_HELPER.LANGUAGE],
-                    options: C.GENERAL_CONSTANTS.LANGUAGES.map(({label, lang}) => ({
-                      label,
-                      value: lang,
-                    })),
+                    options: C.GENERAL_CONSTANTS.LANGUAGES.map(
+                      ({ label, lang }) => ({
+                        label,
+                        value: lang,
+                      })
+                    ),
                     onChange: setFieldValue,
                   }}
                 />
@@ -276,13 +275,13 @@ const AddEvents = (): JSX.Element => {
                   </FormText>
                 )}
               </div>
-              <div className={"form-control"}>           
+              <div className={"form-control"}>
                 <CustomSelect
                   {...{
                     labelText: C.CMS_LABELS.CREW,
                     name: FORMIK_HELPER.CREW,
                     invalid: !!errors[FORMIK_HELPER.CREW],
-                    isDisabled: status < 50,
+                    // isDisabled: status < 50,
                     placeholder: CMS_INPUT_PLACEHOLDERS.CREW,
                     options: crew.map(({ name, surname }) => ({
                       label: `${name} ${surname}`,
@@ -300,19 +299,19 @@ const AddEvents = (): JSX.Element => {
               </div>
               <div className={"form-control form-info"}>
                 <div className={"form-group"}>
-                <label htmlFor={FORMIK_HELPER.EDITOR}>
-                  {C.CMS_LABELS.CONTENT}
-                </label>
-                <textarea
-                  {...{
-                    id: FORMIK_HELPER.EDITOR,
-                    placeholder: CMS_INPUT_PLACEHOLDERS.EDITOR,
-                    value: values[FORMIK_HELPER.EDITOR],
-                    onChange: handleChange,
-                    cols: 30,
-                    rows: 10,
-                  }}
-                />
+                  <label htmlFor={FORMIK_HELPER.EDITOR}>
+                    {C.CMS_LABELS.CONTENT}
+                  </label>
+                  <textarea
+                    {...{
+                      id: FORMIK_HELPER.EDITOR,
+                      placeholder: CMS_INPUT_PLACEHOLDERS.EDITOR,
+                      value: values[FORMIK_HELPER.EDITOR],
+                      onChange: handleChange,
+                      cols: 30,
+                      rows: 10,
+                    }}
+                  />
                 </div>
                 {(errors[FORMIK_HELPER.EDITOR] ||
                   touched[FORMIK_HELPER.EDITOR]) && (
@@ -327,7 +326,7 @@ const AddEvents = (): JSX.Element => {
               {...{
                 className: "submit-btn",
                 type: CMS_INPUT_TYPES.SUBMIT,
-                disabled: !image || isLoading || !isValid,
+                // disabled: !image || isLoading || !isValid,
                 onClick: handleSubmit,
                 content: C.GENERAL_CONSTANTS.ADD,
               }}

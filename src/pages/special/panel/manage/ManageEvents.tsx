@@ -14,6 +14,7 @@ import {
 
 import * as C from "@utils/constants";
 import * as S from "../style";
+import { useCMSContainer } from "./../../container";
 
 const ManageEvents = () => {
   const {
@@ -30,7 +31,7 @@ const ManageEvents = () => {
     selectedRowsId,
     isLoading,
   } = useManageContainer();
-  const { onChangePage } = use;
+  const { onChangePage } = useCMSContainer();
 
   return (
     <section className={"section saro-panel"}>
@@ -84,8 +85,8 @@ const ManageEvents = () => {
       )}
       <CustomDataTable
         {...{
-          rows: events.items || [],
-          totalCount: events.totalCount,
+          rows: events?.items || [],
+          totalCount: events?.totalCount,
           columns: COLUMNS,
           tableColumnExtensions: [],
           dateColumns: [

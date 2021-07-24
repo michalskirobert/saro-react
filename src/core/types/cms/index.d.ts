@@ -38,7 +38,7 @@ export declare namespace NCMS {
   export type TManageContainer = {
     isEditable: (selectedRowId: S) => boolean;
     news: TNews[];
-    events: TEvents[];
+    events: TEvents;
     articles: TArticles[];
     selectedRowsId: S[];
     setSelectedRowsId: React.Dispatch<React.SetStateAction<S[]>>;
@@ -84,7 +84,7 @@ export declare namespace NCMS {
   };
 
   export type TEvents = {
-    item: TEventItem;
+    items: TEventItem[];
     totalCount: number;
   };
 

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
@@ -12,7 +12,7 @@ import { PRIVATE_ROUTE, PUBLIC_ROUTE, SARO_ROUTE } from "@utils/route";
 
 import { useInitialService } from "./core/service";
 
-const NotFound = lazy(() => import("./pages/public/404/Error"));
+// const NotFound = lazy(() => import("./pages/public/404/Error"));
 
 import * as C from "@utils/constants";
 
@@ -40,7 +40,7 @@ const App = (): JSX.Element => {
             {SARO_ROUTE.map(({ path, component, exact }) => {
               return <SaroRoute key={path} {...{ path, component, exact }} />;
             })}
-            <Route {...{ component: NotFound, path: "*", exact: true }} />
+            {/* <Route {...{ component: NotFound, path: "*", exact: true }} /> */}
           </Switch>
         </Suspense>
         {!isAuthorizedUser && <Footer />}

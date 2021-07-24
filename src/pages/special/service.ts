@@ -15,4 +15,21 @@ export const CMSConfigService = {
       .get<NCMS.TEvents>(`${SaroApi}/${lang}/events?${queryParams}`)
       .then((resp) => resp.data);
   },
+
+  updateEvents: async (
+    id: string | number,
+    body: Partial<NCMS.TEventItem>,
+    lang: string
+  ): Promise<NCMS.TEvents> =>
+    await axios
+      .put<NCMS.TEvents>(`${SaroApi}/${lang}/events/${id}`, body)
+      .then((resp) => resp.data),
+
+  addEvents: async (
+    body: Partial<NCMS.TEventItem>,
+    lang: string
+  ): Promise<NCMS.TEvents> =>
+    await axios
+      .post<NCMS.TEvents>(`${SaroApi}/${lang}/events`, body)
+      .then((resp) => resp.data),
 };
